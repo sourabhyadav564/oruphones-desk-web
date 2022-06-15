@@ -5,8 +5,9 @@ import "../styles/react-slick/react-slick.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { ApplicationContext } from "../context/ApplicationContext";
 import { useRouter } from "next/router";
+import { RecoilRoot } from "recoil";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
@@ -15,9 +16,11 @@ export default function MyApp({ Component, pageProps }) {
       <>
         <AuthProvider>
           <ApplicationContext>
-            <Header />
-            <Component {...pageProps} />
-            <Footer />
+            <RecoilRoot>
+              <Header />
+              <Component {...pageProps} />
+              <Footer />
+            </RecoilRoot>
           </ApplicationContext>
           <ToastContainer
             position="bottom-center"

@@ -3,7 +3,7 @@ import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
 import { useState, useEffect, useCallback } from "react";
 import { numberWithCommas } from "../../utils/util";
 import IconLabelValue from "./IconLableValue";
-import AppDownloadPopup  from "../Popup/AppDownloadPopup";
+import AppDownloadPopup from "../Popup/AppDownloadPopup";
 import ActivateListingPopup from "../Popup/ActivateListingPopup";
 import * as Axios from "../../api/axios";
 import ActivatePauseListing from "../Popup/ActivatePauseListingPopup";
@@ -13,8 +13,8 @@ import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import Cookies from "js-cookie";
 
-
 function ProfileListingTile({ data, fromMyFav, setProducts }) {
+  console.log("data from favourite", data);
   const router = useRouter();
   const [frontImagePath, setFrontImagePath] = useState();
   const [openAppDownload, setOpenAppDownload] = useState(false);
@@ -54,9 +54,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
     setOpenActivatePausePopup(true);
   }
 
- 
-
-  function uploadPhotos(){
+  function uploadPhotos() {
     router.push(`/sell/edit/${data?.listingId}`);
   }
 
@@ -64,9 +62,9 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
     <div className="grid grid-cols-8 rounded border p-3 hover:shadow relative">
       <div className="absolute top-1 left-0 z-10 px-3">
         {data?.verified ? (
-          <VerifiedIcon width={69} height={29}/>
+          <VerifiedIcon width={69} height={29} />
         ) : (
-          <UnVerifiedIcon width={69} height={29}/>
+          <UnVerifiedIcon width={69} height={29} />
         )}
       </div>
       <div className="col-span-3 flex">
@@ -75,7 +73,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
             <img
               src={frontImagePath}
               alt={data?.marketingName}
-              style={{ width: "auto", height: "100%" ,objectFit:"contain"}}
+              style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
           </div>
         )}
@@ -85,7 +83,17 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
             <img
               src={data?.defaultImage?.fullImage || data?.imagePath}
               alt={data?.marketingName}
-              style={{ width: "auto", height: "100%",objectFit:"contain" }}
+              style={{ width: "auto", height: "100%", objectFit: "contain" }}
+            />
+          </div>
+        )}
+
+        {data?.images && (
+          <div className="flex justify-center w-32 h-24 pr-4">
+            <img
+              src={data?.defaultImage?.fullImage || data?.imagePath}
+              alt={data?.marketingName}
+              style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
           </div>
         )}
@@ -119,46 +127,52 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           value={data?.listingDate === null ? "--" : data?.listingDate}
         />
       </div>
-        <div className="flex flex-col justify-between items-end pr-2">
-          {/* <Image src={chartIcon} width={15} height={15} alt="Chart Icon" className="cursor-pointer" /> */}
-            <div
-              className="listing-tile dropdown inline-block relative"
-              onClick={(e) => e.preventDefault()}
-            >
-              <BiDotsVerticalRounded size={22}></BiDotsVerticalRounded>
-              <div className="dropdown-menu absolute hidden pt-1">
-                <div className="w-24 text-left border rounded bg-white">
-                  {data?.status === "Active" && <span
-                    className="rounded-t hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap"
-                    onClick={handlePauseLIsting}
-                  >
-                    Pause
-                  </span>}
-                  <Link href={`/sell/edit/${data?.listingId}`}>
-                    <span className="hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap">
-                      Edit
-                    </span>
-                  </Link>
-                  <span
-                    className="rounded-b hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap"
-                    onClick={()=>setDeletePopup(true)}
-                  >
-                    Delete
-                  </span>
-                </div>
-              </div>
-            </div>
-          {(data?.status === "Active" && data?.verified && !(data?.deviceImagesAvailable)) ? (
-            <Link href="#">
-              <a
-                className="text-xs cursor-pointer self-end min-w-max"
-                style={{ color: "#00A483" }}
-                onClick={() => uploadPhotos()}
+      <div className="flex flex-col justify-between items-end pr-2">
+        {/* <Image src={chartIcon} width={15} height={15} alt="Chart Icon" className="cursor-pointer" /> */}
+        <div
+          className="listing-tile dropdown inline-block relative"
+          onClick={(e) => e.preventDefault()}
+        >
+          <BiDotsVerticalRounded size={22}></BiDotsVerticalRounded>
+          <div className="dropdown-menu absolute hidden pt-1">
+            <div className="w-24 text-left border rounded bg-white">
+              {data?.status === "Active" && (
+                <span
+                  className="rounded-t hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap"
+                  onClick={handlePauseLIsting}
+                >
+                  Pause
+                </span>
+              )}
+              <Link href={`/sell/edit/${data?.listingId}`}>
+                <span className="hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap">
+                  Edit
+                </span>
+              </Link>
+              <span
+                className="rounded-b hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap"
+                onClick={() => setDeletePopup(true)}
               >
-                UPLOAD PHOTOS
-              </a>
-            </Link>
-          ) : (data?.status === "Active" && !data?.verified && (
+                Delete
+              </span>
+            </div>
+          </div>
+        </div>
+        {data?.status === "Active" &&
+        data?.verified &&
+        !data?.deviceImagesAvailable ? (
+          <Link href="#">
+            <a
+              className="text-xs cursor-pointer self-end min-w-max"
+              style={{ color: "#00A483" }}
+              onClick={() => uploadPhotos()}
+            >
+              UPLOAD PHOTOS
+            </a>
+          </Link>
+        ) : (
+          data?.status === "Active" &&
+          !data?.verified && (
             <Link href="#">
               <a
                 className="text-xs cursor-pointer self-end"
@@ -168,19 +182,20 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 VERIFY NOW
               </a>
             </Link>
-          ))}
-          {data?.status === "Paused" && !data?.verified && (
-            <Link href="#">
-              <p
-                className="text-xs cursor-pointer self-end"
-                style={{ color: "#00A483" }}
-                onClick={handleActivateClick}
-              >
-                <a>ACTIVATE NOW</a>
-              </p>
-            </Link>
-          )}
-        </div>
+          )
+        )}
+        {data?.status === "Paused" && !data?.verified && (
+          <Link href="#">
+            <p
+              className="text-xs cursor-pointer self-end"
+              style={{ color: "#00A483" }}
+              onClick={handleActivateClick}
+            >
+              <a>ACTIVATE NOW</a>
+            </p>
+          </Link>
+        )}
+      </div>
       <AppDownloadPopup open={openAppDownload} setOpen={setOpenAppDownload} />
       <ActivateListingPopup
         open={openActivatePopup}

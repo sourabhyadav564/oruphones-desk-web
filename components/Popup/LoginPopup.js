@@ -36,7 +36,7 @@ function LoginPopup({ open, setOpen, redirect }) {
     const value = mobNumber && mobNumber[1];
     if (value && value.length === 10) {
       const response = await Axios.signUp(value);
-      setIsVerifyStep(response.status === "SUCCESS");
+      setIsVerifyStep(response?.status === "SUCCESS");
       // inputRef.current.setCustomValidity("");
     } else {
       // inputRef.current.checkValidity();

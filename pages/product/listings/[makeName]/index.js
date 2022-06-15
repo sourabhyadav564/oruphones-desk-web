@@ -10,6 +10,12 @@ import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 
+import {
+  otherVendorDataState,
+  // otherVandorListingIdState,
+} from "../../../../atoms/globalState";
+import { useRecoilState } from "recoil";
+
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -28,6 +34,9 @@ function BrandPage() {
   const [applySort, setApplySort] = useState();
   const { getSearchLocation } = useContext(AppContext);
 
+  const [product, setProductsData] = useRecoilState(otherVendorDataState);
+  console.log("product from make page----->", product);
+
   useEffect(() => {
     if (makeName) {
       Axios.getListingbyMake(
@@ -36,8 +45,19 @@ function BrandPage() {
         Cookies.get("userUniqueId")
       ).then((response) => {
         console.log("GetListingbyMake --> ", response?.dataObject);
-        setProducts(response?.dataObject?.otherListings);
-        setBestDeal(response?.dataObject?.bestDeals);
+        // setProducts(response?.dataObject?.otherListings);
+        // setBestDeal(response?.dataObject?.bestDeals);
+        if (response?.dataObject?.otherListings.length > -1) {
+          setProducts((response && response?.dataObject?.otherListings) || []);
+          setProductsData(
+            (response && response?.dataObject?.otherListings) || []
+          );
+        }
+        if (response?.dataObject?.bestDeals.length > -1) {
+          setBestDeal((response && response?.dataObject?.bestDeals) || []);
+          setProductsData((response && response?.dataObject?.bestDeals) || []);
+        }
+
         setLoading(false);
       });
     }
@@ -125,12 +145,19 @@ function BrandPage() {
         <div className="grid grid-cols-3 gap-4">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
             sortingProducts?.map((product, index) => (
-              <ProductCard
+              <div
                 key={index}
-                data={product}
-                prodLink
-                setProducts={setProducts}
-              />
+                onClick={() => {
+                  // setListingId(item.listingId);
+                  setProductsData(products);
+                }}
+              >
+                <ProductCard
+                  data={product}
+                  prodLink
+                  setProducts={setProducts}
+                />
+              </div>
             ))
           ) : (
             <div className="col-span-3 h-96 items-center flex justify-center ">

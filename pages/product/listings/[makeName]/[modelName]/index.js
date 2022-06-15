@@ -9,6 +9,12 @@ import * as Axios from "../../../../../api/axios";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 
+import {
+  otherVendorDataState,
+  // otherVandorListingIdState,
+} from "../../../../../atoms/globalState";
+import { useRecoilState } from "recoil";
+
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -30,12 +36,27 @@ const Products = () => {
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
 
+  const [product, setProductsData] = useRecoilState(otherVendorDataState);
+  console.log("product from make page----->", product);
+
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const data = await Axios.fetchByMarketingName(getSearchLocation, modelName, Cookies.get("userUniqueId"));
-      setProducts(data?.dataObject?.otherListings);
-      setBestDeals(data?.dataObject?.bestDeals);
+      const data = await Axios.fetchByMarketingName(
+        getSearchLocation,
+        modelName,
+        Cookies.get("userUniqueId")
+      );
+      if (data?.dataObject?.otherListings.length > -1) {
+        setProducts((data && data?.dataObject?.otherListings) || []);
+        setProductsData(
+          (data && data?.dataObject?.otherListings) || []
+        );
+      }
+      if (data?.dataObject?.bestDeals.length > -1) {
+        setBestDeals((data && data?.dataObject?.bestDeals) || []);
+        setProductsData((data && data?.dataObject?.bestDeals) || []);
+      }
       setLoading(false);
       console.log("Products --> Data ", data.dataObject);
     };
@@ -46,7 +67,15 @@ const Products = () => {
   }, [modelName, getSearchLocation]);
 
   useEffect(() => {
-    const { brand, condition,  color, storage, warranty, verification, priceRange } = applyFilter;
+    const {
+      brand,
+      condition,
+      color,
+      storage,
+      warranty,
+      verification,
+      priceRange,
+    } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       let payLoad = {
         listingLocation: getSearchLocation,
@@ -59,31 +88,33 @@ const Products = () => {
         payLoad.maxsellingPrice = priceRange.max;
       }
       if (condition?.length > 0) {
-        payLoad.deviceCondition = condition.includes("all") ? []:condition;
+        payLoad.deviceCondition = condition.includes("all") ? [] : condition;
       }
       if (storage?.length > 0) {
-        payLoad.deviceStorage = storage.includes("all") ? []:storage;
+        payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
       if (color?.length > 0) {
-        payLoad.color = color.includes("all") ? []:color;
+        payLoad.color = color.includes("all") ? [] : color;
       }
       if (warranty?.length > 0) {
-        payLoad.warenty = warranty.includes("all") ? []:warranty;
+        payLoad.warenty = warranty.includes("all") ? [] : warranty;
       }
       if (verification?.length > 0) {
-        payLoad.verified = verification.includes("all") ? []:"verified";
+        payLoad.verified = verification.includes("all") ? [] : "verified";
       }
-      console.log("MODEL FILTER PAYLOAD ",payLoad);
+      console.log("MODEL FILTER PAYLOAD ", payLoad);
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then((response) => {
-        console.log("searchFilter ", response?.dataObject);
-        // if (verification?.length > 0) {
-        //   payLoad.verification = verification;
-        // }
-        setProducts(response?.dataObject?.otherListings);
-        setBestDeals([]);
-        setLoading(false);
-      });
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
+        (response) => {
+          console.log("searchFilter ", response?.dataObject);
+          // if (verification?.length > 0) {
+          //   payLoad.verification = verification;
+          // }
+          setProducts(response?.dataObject?.otherListings);
+          setBestDeals([]);
+          setLoading(false);
+        }
+      );
     }
   }, [applyFilter]);
 
@@ -92,21 +123,49 @@ const Products = () => {
   return (
     <main className="container py-4">
       <h1 className="sr-only">{modelName} Page</h1>
-      <Filter listingsCount={sortingProducts?.length + bestDeals?.length} setApplySort={setApplySort} setApplyFilter={setApplyFilter}>
+      <Filter
+        listingsCount={sortingProducts?.length + bestDeals?.length}
+        setApplySort={setApplySort}
+        setApplyFilter={setApplyFilter}
+      >
         {!isLoading && bestDeals && bestDeals.length > 0 && (
           <div className="mb-4">
-            <Carousel {...settings} key={bestDeals.length > 0 ? bestDeals[0] : -1}>
+            <Carousel
+              {...settings}
+              key={bestDeals.length > 0 ? bestDeals[0] : -1}
+            >
               {bestDeals.map((items, index) => (
-                <BestDealsCard key={index} data={items} setProducts={setBestDeals} className="bestDealCarousel" />
+                <BestDealsCard
+                  key={index}
+                  data={items}
+                  setProducts={setBestDeals}
+                  className="bestDealCarousel"
+                />
               ))}
             </Carousel>
           </div>
         )}
         <div className="grid grid-cols-3 gap-4">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => <ProductCard key={index} data={product} setProducts={setProducts} prodLink />)
+            sortingProducts?.map((product, index) => (
+              <div
+                key={index}
+                onClick={() => {
+                  // setListingId(item.listingId);
+                  setProductsData(products);
+                }}
+              >
+                <ProductCard
+                  data={product}
+                  prodLink
+                  setProducts={setProducts}
+                />
+              </div>
+            ))
           ) : (
-            <div className="col-span-3 h-96 items-center flex justify-center ">{isLoading ? "Loading..." : "No match found"}</div>
+            <div className="col-span-3 h-96 items-center flex justify-center ">
+              {isLoading ? "Loading..." : "No match found"}
+            </div>
           )}
         </div>
       </Filter>
@@ -118,11 +177,15 @@ function getSortedProducts(applySort, products) {
   var sortedProducts = products ? [...products] : [];
   if (applySort && applySort === "Price: Low to High") {
     sortedProducts.sort((a, b) => {
-      return numberFromString(a.listingPrice) - numberFromString(b.listingPrice);
+      return (
+        numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
+      );
     });
   } else if (applySort && applySort === "Price: High to Low") {
     sortedProducts.sort((a, b) => {
-      return numberFromString(b.listingPrice) - numberFromString(a.listingPrice);
+      return (
+        numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
+      );
     });
   } else if (applySort && applySort === "Newest First") {
     sortedProducts.sort((a, b) => {

@@ -171,7 +171,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     const { name, files } = e.target;
     if (files && files.length) {
       let data = new FormData();
-      data.append("file", e.target.files[0]);
+      data.append("image", e.target.files[0]);
       const data1 = await Axios.uploadImage(
         data,
         panelName,

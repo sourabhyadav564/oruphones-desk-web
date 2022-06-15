@@ -5,6 +5,8 @@ import { FaRupeeSign } from "react-icons/fa";
 import { numberWithCommas } from "../../utils/util";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
+import Logo from "@/assets/home_logo.svg"
+
 
 function ProductCard({ data, prodLink, setProducts }) {
   return (
@@ -25,7 +27,7 @@ function ProductCard({ data, prodLink, setProducts }) {
           </div>
           <div className="flex justify-center mb-2">
             <Image
-              src={data?.imagePath || "/"}
+              src={data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo || "/"}
               alt={data?.name}
               width={150}
               height={150}

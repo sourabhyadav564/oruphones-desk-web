@@ -53,6 +53,7 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
     { value: "Like New", label: "Like New" },
     { value: "Excellent", label: "Excellent" },
     { value: "Good", label: "Good" },
+    { value: "Fair", label: "Fair" },
   ];
 
   const handleChange = (e) => {
@@ -98,13 +99,15 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
 
   useEffect(() => {
     let payload = {
-      charger: charger,
+      charger: charger === "Y" ? "Y" : "N",
       deviceCondition: deviceCondition,
-      devicestorage: storage,
-      earPhones: headphone1,
+      devicestorage: storage?.split('/')[0],
+      earPhones: headphone1 === "Y" ? "Y" : "N",
       make: make,
       marketingName: marketingName,
-      originalBox: originalBox1,
+      originalBox: originalBox1 === "Y" ? "Y" : "N",
+      warrantyPeriod: "more",
+      verified: "no"
     };
     const fetchData = async () => {
       const getRecommandedPrice = await Axios.getRecommandedPrice(payload);
@@ -124,9 +127,14 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
 
   useEffect(() => {
     let payload = {
-      deviceStorage: storage,
+      deviceStorage: storage?.split('/')[0],
       make: make,
       marketingName: marketingName,
+      deviceCondition: deviceCondition,
+      warrantyPeriod: "more",
+      hasCharger: charger === "Y" ? "Y" : "N",
+      hasEarphone: headphone1 === "Y" ? "Y" : "N",
+      hasOriginalBox: originalBox1 === "Y" ? "Y" : "N",
     };
     if (make !== null && marketingName !== null && storage !== null) {
       Axios.getExternalSellSourceData(payload).then((response) => {
@@ -134,14 +142,14 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         setGetExternalSellerData(response?.dataObject);
       });
     }
-  }, [make, marketingName, storage]);
+  }, [make, marketingName, storage, deviceCondition, charger, headphone1, originalBox1]);
 
   const handleImageChange = async (e, index) => {
     let panelName = index === 0 ? "front" : index === 1 ? "back" : index - 1;
     const { name, files } = e.target;
     if (files && files.length) {
       let data = new FormData();
-      data.append("file", e.target.files[0]);
+      data.append("image", e.target.files[0]);
       const data1 = await Axios.uploadImage(data, panelName, storage, make, marketingName, Cookies.get("userUniqueId"));
       console.log("UPLOAD IMAGE ", data1?.dataObject);
       setImages((prev) =>

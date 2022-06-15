@@ -10,6 +10,7 @@ import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 
 function FavListingTile({ data, setProducts }) {
+  console.log("data from favourite", data);
   const [frontImagePath, setFrontImagePath] = useState();
   const frontImage = data?.images?.filter((img) => {
     if (img?.panel === "front") {
@@ -68,6 +69,16 @@ function FavListingTile({ data, setProducts }) {
         )}
 
         {!data?.images && (
+          <div className="flex justify-center w-32 h-24">
+            <img
+              src={data?.defaultImage?.fullImage || data?.imagePath}
+              alt={data?.marketingName}
+              style={{ width: "auto", height: "100%" }}
+            />
+          </div>
+        )}
+
+        {data?.images && (
           <div className="flex justify-center w-32 h-24">
             <img
               src={data?.defaultImage?.fullImage || data?.imagePath}

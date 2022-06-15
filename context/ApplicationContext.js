@@ -15,8 +15,8 @@ export const ApplicationContext = ({ children }) => {
     console.log("ApplicationContext getUserProfile ", Cookies.get("mobileNumber"));
     const fetchUserProfileData = async () => {
       const userProfile = await Axios.getUserProfile("91", Cookies.get("mobileNumber"));
-      console.log("userProfile -> ", userProfile.dataObject);
-      setUserInfo(userProfile.dataObject);
+      console.log("userProfile -> ", userProfile?.dataObject);
+      setUserInfo(userProfile?.dataObject);
     };
     fetchUserProfileData();
   }, [userLogged, refresh]);

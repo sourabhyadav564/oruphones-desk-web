@@ -11,7 +11,12 @@ export async function getAboutUsConent() {
 
 export function getSearchResults(q) {
   const API_ENDPOINT = BASE_URL + "/cscglobal/search";
-  return Axios.get(API_ENDPOINT, { params: { userInputText: q } }, DEFAULT_HEADER).then(
+  return Axios.post(
+    API_ENDPOINT,
+    // { params: { userInputText: q } },
+    {userInputText: q},
+    DEFAULT_HEADER
+  ).then(
     (response) => {
       return response.data;
     },
@@ -47,7 +52,9 @@ export function fetchMenuItems() {
 }
 
 export function signUp(mobileNumber) {
-  return Axios.post(BASE_URL + "/login/otp/generate?countryCode=91&mobileNumber=" + mobileNumber).then(
+  return Axios.post(
+    BASE_URL + "/login/otp/generate?countryCode=91&mobileNumber=" + mobileNumber
+  ).then(
     (response) => {
       return response.data;
     },
@@ -58,7 +65,13 @@ export function signUp(mobileNumber) {
 }
 
 export function otpValidate(data) {
-  return Axios.post(BASE_URL + "/login/otp/validate?countryCode=91&mobileNumber=" + data.mobile.split("-")[1] + "&otp=" + data.otp).then(
+  return Axios.post(
+    BASE_URL +
+      "/login/otp/validate?countryCode=91&mobileNumber=" +
+      data.mobile.split("-")[1] +
+      "&otp=" +
+      data.otp
+  ).then(
     (response) => {
       return response.data;
     },
@@ -94,7 +107,13 @@ export function fetchTopsellingmodels() {
 
 export function fetchByMarketingName(location, marketingName, userUniqueId) {
   const API_ENDPOINT =
-    BASE_URL + "/home/listbymarketingname?location=" + location + "&marketingName=" + marketingName + "&userUniqueId=" + userUniqueId;
+    BASE_URL +
+    "/home/listbymarketingname?location=" +
+    location +
+    "&marketingName=" +
+    marketingName +
+    "&userUniqueId=" +
+    userUniqueId;
   console.log("fetchByMarketingName URL ", API_ENDPOINT);
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -131,7 +150,14 @@ export function fetchMakeModelList() {
 }
 
 export function getListingbyMake(location, makeName, userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/home/listingsbymake?listingLocation=` + location + `&make=` + makeName + `&userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL +
+    `/home/listingsbymake?listingLocation=` +
+    location +
+    `&make=` +
+    makeName +
+    `&userUniqueId=` +
+    userUniqueId;
   console.log("getListingbyMake URL ", API_ENDPOINT);
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -179,7 +205,14 @@ export function addUserProfileLocation(payload) {
   );
 }
 
-export function uploadImage(deviceImage, panelName, storage, make, marketingName, userUniqueId) {
+export function uploadImage(
+  deviceImage,
+  panelName,
+  storage,
+  make,
+  marketingName,
+  userUniqueId
+) {
   //const API_ENDPOINT = BASE_URL+`/device/uploadimage`;
   const API_ENDPOINT =
     BASE_URL +
@@ -228,7 +261,8 @@ export function saveUpdatedDeviceInfo(payLoad) {
 }
 
 export function fetchUserListings(userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/device/listings?userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL + `/device/listings?userUniqueId=` + userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -252,7 +286,12 @@ export function getRecommandedPrice(data) {
 }
 
 export function getListedDeviceInfo(listingid, userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/device/listing/detail?listingid=` + listingid + `&userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL +
+    `/device/listing/detail?listingid=` +
+    listingid +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -265,7 +304,11 @@ export function getListedDeviceInfo(listingid, userUniqueId) {
 
 export function deteleListedDevice(deletePayload) {
   const API_ENDPOINT = BASE_URL + `/device/listing/delete`;
-  return Axios.post(API_ENDPOINT, JSON.stringify(deletePayload), DEFAULT_HEADER).then(
+  return Axios.post(
+    API_ENDPOINT,
+    JSON.stringify(deletePayload),
+    DEFAULT_HEADER
+  ).then(
     (response) => {
       return response.data;
     },
@@ -277,7 +320,11 @@ export function deteleListedDevice(deletePayload) {
 
 export function activeListedDevice(deletePayload) {
   const API_ENDPOINT = BASE_URL + `/device/listing/activate`;
-  return Axios.post(API_ENDPOINT, JSON.stringify(deletePayload), DEFAULT_HEADER).then(
+  return Axios.post(
+    API_ENDPOINT,
+    JSON.stringify(deletePayload),
+    DEFAULT_HEADER
+  ).then(
     (response) => {
       return response.data;
     },
@@ -312,7 +359,12 @@ export function getGlobalCities() {
 }
 
 export function getUserProfile(countryCode, mobileNumber) {
-  const API_ENDPOINT = BASE_URL + `/login/user/details?countryCode=` + countryCode + `&mobileNumber=` + mobileNumber;
+  const API_ENDPOINT =
+    BASE_URL +
+    `/login/user/details?countryCode=` +
+    countryCode +
+    `&mobileNumber=` +
+    mobileNumber;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -359,8 +411,15 @@ export function updateAddress(payload) {
   );
 }
 
-export function detailWithUserInfo(isOtherVendor, listingid,userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/device/listing/detailwithuserinfo?isOtherVendor=` + isOtherVendor + "&listingid=" + listingid+`&userUniqueId=`+userUniqueId;
+export function detailWithUserInfo(isOtherVendor, listingid, userUniqueId) {
+  const API_ENDPOINT =
+    BASE_URL +
+    `/device/listing/detailwithuserinfo?isOtherVendor=` +
+    isOtherVendor +
+    "&listingid=" +
+    listingid +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.post(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -372,7 +431,12 @@ export function detailWithUserInfo(isOtherVendor, listingid,userUniqueId) {
 }
 
 export function fetchSellerMobileNumber(listingid, userUniqueid) {
-  const API_ENDPOINT = BASE_URL + `/device/listing/user/mobilenumber?listingId=` + listingid + `&userUniqueId=` + userUniqueid;
+  const API_ENDPOINT =
+    BASE_URL +
+    `/device/listing/user/mobilenumber?listingId=` +
+    listingid +
+    `&userUniqueId=` +
+    userUniqueid;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -384,8 +448,20 @@ export function fetchSellerMobileNumber(listingid, userUniqueid) {
 }
 
 export function bestDealNearByYou(location, userUniqueId) {
-  console.log("bestDealNearByYou --> ", BASE_URL + `/home/listings/best/nearme?location=` + location + `&userUniqueId=` + userUniqueId);
-  const API_ENDPOINT = BASE_URL + `/home/listings/best/nearme?location=` + location + `&userUniqueId=` + userUniqueId;
+  console.log(
+    "bestDealNearByYou --> ",
+    BASE_URL +
+      `/home/listings/best/nearme?location=` +
+      location +
+      `&userUniqueId=` +
+      userUniqueId
+  );
+  const API_ENDPOINT =
+    BASE_URL +
+    `/home/listings/best/nearme?location=` +
+    location +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -398,7 +474,15 @@ export function bestDealNearByYou(location, userUniqueId) {
 
 export function shopByPriceRange(endPrice, location, startPrice, listingid) {
   const API_ENDPOINT =
-    BASE_URL + `/home/shopbyprice/listmodel?end=` + endPrice + `&listingLocation=` + location + `&start=` + startPrice + `&userUniqueId=` + listingid;
+    BASE_URL +
+    `/home/shopbyprice/listmodel?end=` +
+    endPrice +
+    `&listingLocation=` +
+    location +
+    `&start=` +
+    startPrice +
+    `&userUniqueId=` +
+    listingid;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -422,7 +506,12 @@ export function addFavotie(payload) {
 }
 
 export function removeFavotie(listingId, userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/favorite/deactivate?listingId=` + listingId + `&userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL +
+    `/favorite/deactivate?listingId=` +
+    listingId +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.post(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -434,7 +523,12 @@ export function removeFavotie(listingId, userUniqueId) {
 }
 
 export function bestDealNearYouAll(location, userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/device/listings/best/nearall?userLocation=` + location + `&userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL +
+    `/device/listings/best/nearall?userLocation=` +
+    location +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -446,7 +540,8 @@ export function bestDealNearYouAll(location, userUniqueId) {
 }
 
 export function fetchMyFavorites(userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -458,7 +553,8 @@ export function fetchMyFavorites(userUniqueId) {
 }
 
 export function fetchSimilarProducts(payLoad, userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/home/listings/search?userUniqueId=` + userUniqueId;
+  const API_ENDPOINT =
+    BASE_URL + `/home/listings/search?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -469,10 +565,13 @@ export function fetchSimilarProducts(payLoad, userUniqueId) {
   );
 }
 
-
-export function sendverification(listingid,userUniqueId) {
+export function sendverification(listingid, userUniqueId) {
   const API_ENDPOINT =
-    BASE_URL + `/device/listing/sendverification?listingId=`+listingid+`&userUniqueId=`+userUniqueId;
+    BASE_URL +
+    `/device/listing/sendverification?listingId=` +
+    listingid +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -483,11 +582,10 @@ export function sendverification(listingid,userUniqueId) {
   );
 }
 
-
-export function searchFilter(payLoad,userUniqueId) {
+export function searchFilter(payLoad, userUniqueId) {
   const API_ENDPOINT =
-    BASE_URL + `/home/listings/search?userUniqueId=`+userUniqueId;
-  return Axios.post(API_ENDPOINT,payLoad, DEFAULT_HEADER).then(
+    BASE_URL + `/home/listings/search?userUniqueId=` + userUniqueId;
+  return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
     },
@@ -497,10 +595,8 @@ export function searchFilter(payLoad,userUniqueId) {
   );
 }
 
-
 export function fetchWebLinkByShareId(shareId) {
-  const API_ENDPOINT =
-    BASE_URL + `/global/share/weblink?shareId=`+shareId;
+  const API_ENDPOINT = BASE_URL + `/global/share/weblink?shareId=` + shareId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -512,9 +608,8 @@ export function fetchWebLinkByShareId(shareId) {
 }
 
 export function getTinyUrl() {
-  const API_ENDPOINT =
-    BASE_URL + `/global/tinyurl`;
-    console.log("getTinyUrl ",API_ENDPOINT);
+  const API_ENDPOINT = BASE_URL + `/global/tinyurl`;
+  console.log("getTinyUrl ", API_ENDPOINT);
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -526,9 +621,8 @@ export function getTinyUrl() {
 }
 
 export function getExternalSellSourceData(payLoad) {
-  const API_ENDPOINT =
-    BASE_URL + `/device/price/externalsellsource`;
-  return Axios.post(API_ENDPOINT,payLoad, DEFAULT_HEADER).then(
+  const API_ENDPOINT = BASE_URL + `/device/price/externalsellsource`;
+  return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
     },
@@ -538,10 +632,8 @@ export function getExternalSellSourceData(payLoad) {
   );
 }
 
-
 export function infoTemplates() {
-  const API_ENDPOINT =
-    BASE_URL + `/global/getinfotemplates`;
+  const API_ENDPOINT = BASE_URL + `/global/getinfotemplates`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -553,8 +645,7 @@ export function infoTemplates() {
 }
 
 export function getMenu() {
-  const API_ENDPOINT =
-    BASE_URL + `/master/menu`;
+  const API_ENDPOINT = BASE_URL + `/master/menu`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -565,11 +656,12 @@ export function getMenu() {
   );
 }
 
-
-export function uploadUserProfilePic(userProfilePicData,userUniqueId) {
+export function uploadUserProfilePic(userProfilePicData, userUniqueId) {
   const API_ENDPOINT =
-    BASE_URL + `/device/uploadimage?deviceFace=profilePic&userUniqueId=`+userUniqueId;
-  return Axios.post(API_ENDPOINT,userProfilePicData, MULTIPART_HEADER).then(
+    BASE_URL +
+    `/device/uploadimage?deviceFace=profilePic&userUniqueId=` +
+    userUniqueId;
+  return Axios.post(API_ENDPOINT, userProfilePicData, MULTIPART_HEADER).then(
     (response) => {
       return response.data;
     },
@@ -579,46 +671,49 @@ export function uploadUserProfilePic(userProfilePicData,userUniqueId) {
   );
 }
 
-
-export function prepareShareLink(listingId,userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/global/share/link?listingId=`+listingId+`&userUniqueId=`+userUniqueId;
+export function prepareShareLink(listingId, userUniqueId) {
+  const API_ENDPOINT =
+    BASE_URL +
+    `/global/share/link?listingId=` +
+    listingId +
+    `&userUniqueId=` +
+    userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
-  (response) => {
-    return response.data;
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+    (response) => {
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
 
 export function getAllNotificationByUserd(userUniqueId) {
-  const API_ENDPOINT = BASE_URL + `/notification/byUserId/`+userUniqueId;
+  const API_ENDPOINT = BASE_URL + `/notification/byUserId/` + userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
-  (response) => {
-    return response.data;
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+    (response) => {
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
 
 export function markAsRead(notificationId) {
-  const API_ENDPOINT = BASE_URL + `/notification/read/`+notificationId;
+  const API_ENDPOINT = BASE_URL + `/notification/read/` + notificationId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
-  (response) => {
-    return response.data;
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+    (response) => {
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
 
 export function addsubscription(email) {
-  const API_ENDPOINT =
-    BASE_URL + `/global/addsubscription?email=`+email;
+  const API_ENDPOINT = BASE_URL + `/global/addsubscription?email=` + email;
   return Axios.post(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -628,6 +723,3 @@ export function addsubscription(email) {
     }
   );
 }
-
-
-

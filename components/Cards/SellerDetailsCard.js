@@ -137,7 +137,7 @@ const OtherSeller = ({ data }) => {
   console.log("OTHER ", data);
   return (
     <>
-    {data.map((item, index) => (
+    {data?.map((item, index) => (
     <div
       className="my-1 rounded p-2 flex justify-between flex-shrink-0 shadow-sm"
       key={index}

@@ -38,6 +38,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   console.log("1", data?.images)
   console.log("2", data?.imagePath)
   console.log("3", data?.defaultImage)
+  console.log("4", data?.vendorLogo)
 
   return (
     <Fragment>
@@ -55,14 +56,18 @@ function ProductDetailsCard({ data, openFullImage }) {
             <ImageSlider
               openFullImage={openFullImage}
               images={
-                data?.images ||
+                (data?.images?.length && data?.images) ||
                 (data?.imagePath && {
                   fullImage: data?.imagePath,
                   thumbImage: data?.imagePath,
                 }) ||
-                (data?.defaultImage && {
-                  fullImage: data?.defaultImage,
-                  thumbImage: data?.defaultImage,
+                (data?.defaultImage.fullImage && {
+                  fullImage: data?.defaultImage?.fullImage,
+                  thumbImage: data?.defaultImage?.fullImage,
+                }) ||
+                (data?.vendorLogo && {
+                  fullImage: data?.vendorLogo,
+                  thumbImage: data?.vendorLogo,
                 })
               }
             />
