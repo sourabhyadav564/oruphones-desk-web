@@ -1,0 +1,50 @@
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import UserProfile from "../../components/User/UserProfile";
+import * as Axios from "../../api/axios";
+import FavListingTile from "@/components/User/FavListingTile";
+import Cookies from "js-cookie";
+
+function Favorites() {
+  const [myFavList, setMyFavList] = useState();
+
+  useEffect(() => {
+    Axios.fetchMyFavorites(Cookies.get("userUniqueId")).then(
+      (response) => {
+        setMyFavList(response?.dataObject);
+      }
+    );
+  }, []);
+
+  return (
+    <UserProfile>
+      <div className="px-4 py-3">
+        <h1 className="text-lg py-2"> My Favorites </h1>
+        <div className="flex flex-col space-y-4 my-4">
+          {myFavList && myFavList.length > 0 ?
+            myFavList.map((item, index) => (
+              <Link  key={index}
+                href={{
+                  pathname: `/product/listings/${item.make}/${
+                    item?.marketingName
+                  }/${item?.listingId}`,
+                  query:{isOtherVendor: "N" },
+                }}
+              >
+                <a>
+                  <FavListingTile
+                    data={{ ...item, favourite: true }}
+                    key={index}
+                    fromMyFav={true}
+                    setProducts={setMyFavList}
+                  />
+                </a>
+              </Link>
+            )) : <div className="flex h-60 items-center justify-center">Not Found Favourites</div>}
+        </div>
+      </div>
+    </UserProfile>
+  );
+}
+
+export default Favorites;

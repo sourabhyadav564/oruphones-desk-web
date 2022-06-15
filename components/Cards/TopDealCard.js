@@ -1,0 +1,48 @@
+import Image from "next/image";
+import Link from "next/link";
+import { BiRupee } from "react-icons/bi";
+import { numberWithCommas } from "../../utils/util";
+import VerifiedIcon from "../VerifiedIcon";
+import AddFav from "../AddFav";
+
+function TopDealCard({ data, setProducts, prodLink }) {
+  if (data?.name?.toLowerCase().includes("all")) {
+    return (
+      <Link href={`/product/listings/bestdealnearyou`}>
+        <a className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
+          <p className="block text-m-green">{"Show All"}</p>
+        </a>
+      </Link>
+    );
+  }
+  return (
+    <Link
+      href={{
+        pathname: `/product/listings/${data.make}/${data?.marketingName}/${prodLink ? data?.listingId : ""}`,
+        query: prodLink && { isOtherVendor: data?.isOtherVendor },
+      }}
+    >
+      <a className="flex flex-col pt-6 relative w-full h-full rounded-md shadow hover:shadow-md py-1 px-3 text-gray-900 bg-m-white">
+        <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
+          <span className="h-6">{data?.verified && <VerifiedIcon width={60} height={29} />}</span>
+          <AddFav data={data} setProducts={setProducts} />
+        </div>
+        <div className="flex justify-center">
+          {data?.imagePath && <Image src={data?.imagePath} alt={data?.name} width={"150"} height={"150"} objectFit="contain" />}
+        </div>
+        <div className="pb-2 w-full">
+          <h1 className="text-lg sm:text-base flex-1 sm:py-1 truncate w-full font-semibold text-m-grey-2">{data?.marketingName}</h1>
+          <p className="font-bold flex items-center -ml-1 text-base text-m-grey-1">
+            {data?.listingPrice && <BiRupee />} {numberWithCommas(data?.listingPrice || "")}
+          </p>
+          <div className="flex justify-between pt-1 text-xs w-full text-m-grey-2">
+            <span>{data?.listingLocation}</span>
+            <span>{data?.listingDate}</span>
+          </div>
+        </div>
+      </a>
+    </Link>
+  );
+}
+
+export default TopDealCard;

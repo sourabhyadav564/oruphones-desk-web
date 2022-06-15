@@ -1,0 +1,94 @@
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Link from "next/link";
+import { useContext, useEffect } from "react";
+import UserProfileIcon from "../../assets/user-profile-icon.png";
+
+import AppContext from '@/context/ApplicationContext';
+import AuthContext from '@/context/AuthContext';
+import { useState } from "react";
+import * as Axios from "../../api/axios";
+import Cookies from "js-cookie";
+
+function UserProfile({ children, className }) {
+
+  const {userInfo , setUserInfo } = useContext(AppContext);
+  const {logout} = useContext(AuthContext);
+  const [inputImage, setInputImage] = useState(userInfo?.userdetails?.profilePicPath || UserProfileIcon);
+
+  const authUserData = { name: userInfo?.userdetails?.userName};
+  useEffect(() => {
+    setInputImage(userInfo?.userdetails?.profilePicPath || UserProfileIcon)
+  }, [userInfo])
+
+  function handleChange(e){
+    let data = new FormData();
+    data.append("file", e.target.files[0]);
+    Axios.uploadUserProfilePic(data,Cookies.get("userUniqueId")).then((response)=>{
+      console.log("UPLOAD IMAGE RES ",response?.dataObject);
+      if(response?.status === "SUCCESS"){
+        let payload = {
+          "profilePicPath": response?.dataObject?.imagePath,
+          "profileThumbnailPath": response?.dataObject?.thumbnailImagePath,
+          "mobileNumber":Cookies.get("mobileNumber"),
+          "userUniqueId": Cookies.get("userUniqueId")
+        }
+        
+        console.log("updateUserDetails payload -> ", payload);
+        Axios.updateUserDetails(payload).then(
+          (res) => {
+            console.log("updateUserDetails -> ", res);
+            if(res?.status === "SUCCESS"){
+              userInfo.userdetails = {...userInfo.userdetails, profilePicPath : res?.dataObject?.userdetails.profilePicPath};
+              setInputImage(res?.dataObject?.userdetails.profilePicPath);
+            }
+          }
+        )
+      }
+    })
+  }
+
+  return (
+    <main className="min-h-screen">
+      <section className="relative h-40 mb-20 bg-green-1">
+        <div className="container absolute h-32 bottom-0 -translate-x-1/2 translate-y-1/2 left-1/2">
+          <div className="flex w-full h-full">
+            <div className="w-28 h-28 p-1 bg-white rounded-full">
+                <label htmlFor="IMG" className="block w-full h-full relative rounded-full">
+                  <Image src={inputImage || UserProfileIcon } layout="fill" objectFit="contain" priority className="rounded-full"/>
+                </label>
+                   <input className="hidden" type="file" id="IMG" accept="image/*" onChange={(e)=>(handleChange(e))}/>
+            </div>
+            <p className="text-m-white my-2.5 ml-10" style={{ fontSize: 32 }}>
+              <span className="font-light"> Welcome </span> <span className="font-bold"> {authUserData?.name} </span>
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className={`container grid grid-cols-4 py-4 gap-4 ${className || ""}`}>
+        <div className="bg-white shadow rounded text-black-60 p-4 flex flex-col h-96">
+          <p className="py-2 px-4 uppercase"> Account </p>
+          <NavListItem text="My Profile" link="/user/profile" />
+          <NavListItem text="My Listings" link="/user/listings" />
+          <NavListItem text="My Favorites" link="/user/favorites" />
+          {/* add logout function */}
+          <NavListItem text="Logout" link="/" onClick={()=>{logout();
+                    setUserInfo();
+                  }}/>
+        </div>
+        <div className="col-span-3 bg-white shadow rounded">{children}</div>
+      </section>
+    </main>
+  );
+}
+
+export default UserProfile;
+
+const NavListItem = ({ text, link , onClick}) => {
+  const router = useRouter();
+  return (
+    <Link href={link} passHref>
+      <a className={`px-4 py-2 my-1 hover:bg-gray-100 rounded text-black-60 ${router.pathname == link && "bg-gray-100"}`} onClick={onClick}>{text}</a>
+    </Link>
+  );
+};

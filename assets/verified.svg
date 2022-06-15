@@ -1,0 +1,7 @@
+<svg id="Group_21" data-name="Group 21" xmlns="http://www.w3.org/2000/svg" width="59.967" height="29.388" viewBox="0 0 59.967 29.388">
+  <path id="Union_2" data-name="Union 2" d="M9.81,26.486A5.562,5.562,0,0,1,2.9,19.579a5.562,5.562,0,0,1,0-9.769A5.562,5.562,0,0,1,9.809,2.9a5.562,5.562,0,0,1,9.769,0,5.564,5.564,0,0,1,6.807,3.452H52.025a7.943,7.943,0,1,1,0,15.885H26.606a5.561,5.561,0,0,1-7.029,4.247,5.561,5.561,0,0,1-9.768,0Z" transform="translate(0 0)" fill="#46b648"/>
+  <g id="check" transform="translate(10.013 11.12)">
+    <path id="Path_42" data-name="Path 42" d="M17.233,10.939a.877.877,0,1,1,1.252,1.227L13.819,18a.877.877,0,0,1-1.262.023L9.466,14.928A.877.877,0,1,1,10.7,13.69l2.447,2.446,4.058-5.171a.276.276,0,0,1,.023-.025Z" transform="translate(-9.182 -10.676)" fill="#fff"/>
+  </g>
+  <text id="Verified" transform="translate(25.408 16.796)" fill="#fff" font-size="7" font-family="OpenSans-SemiboldItalic, Open Sans" font-weight="600" font-style="italic"><tspan x="0" y="0">VERIFIED</tspan></text>
+</svg>
