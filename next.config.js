@@ -12,7 +12,7 @@ module.exports = {
               "/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/",
           },
         ],
-        destination: "https://m.oruphones.com/:path*",
+        destination: "https://oru-phones-mobile-web.vercel.app/:path*",
         permanent: false,
       },
     ];
