@@ -2,16 +2,12 @@
 // add Content Security Policy directives using a template string.
 
 const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self';
-  child-src example.com;
-  style-src 'self' example.com;
-  font-src 'self';  
+upgrade-insecure-requests
 `;
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
+    value: ContentSecurityPolicy
   },
 ];
 module.exports = {
