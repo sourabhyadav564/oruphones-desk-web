@@ -1,15 +1,3 @@
-// Before defining your Security Headers
-// add Content Security Policy directives using a template string.
-
-const ContentSecurityPolicy = `
-upgrade-insecure-requests
-`;
-const securityHeaders = [
-  {
-    key: "Content-Security-Policy",
-    value: ContentSecurityPolicy
-  },
-];
 module.exports = {
   reactStrictMode: true,
   async redirects() {
@@ -29,15 +17,6 @@ module.exports = {
       },
     ];
   },
-  async headers() {
-    return [
-      {
-        // Apply these headers to all routes in your application.
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
   images: {
     domains: [
       "zenrodevimages.s3.us-west-2.amazonaws.com",
@@ -47,7 +26,7 @@ module.exports = {
       "mobiruecom.s3.us-west-2.amazonaws.com",
       "zenroecom.s3.us-west-2.amazonaws.com",
       "zenrodeviceimages.s3-us-west-2.amazonaws.com",
-      "demo-bucket-c2c-001.s3.amazonaws.com",
+      "demo-bucket-c2c-001.s3.amazonaws.com"
     ],
   },
 };
