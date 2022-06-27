@@ -6,7 +6,7 @@ import testfail from "../../assets/testFail.png";
 import pass from "../../assets/pass1.png";
 
 function DeviceVerificationReport({ open, setOpen, data }) {
-  console.log("data ", data);
+  console.log("data from device verification", data);
   return (
     <Modal open={open} setOpen={setOpen} title={"Device Verification Report"}>
       <div className="grid grid-cols-5 device_verification_report">
@@ -22,7 +22,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
           <div className="flex-1 py-4">
             <Image
               src={
-                (data?.images && data?.images[0]?.fullImage) || data?.imagePath
+                (data?.images && data?.images[0]?.fullImage) || data?.imagePath || data?.defaultImage?.fullImage
               }
               // layout="responsive"
               width={250}

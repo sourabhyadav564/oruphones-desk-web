@@ -40,6 +40,8 @@ function ProductDetailsCard({ data, openFullImage }) {
   console.log("3", data?.defaultImage)
   console.log("4", data?.vendorLogo)
 
+  console.log("5", accessoriesList)
+
   return (
     <Fragment>
       <div className="grid grid-cols-3 p-2 relative ">
@@ -125,7 +127,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 />
               }
               <LabelAndValue label="Listed on" value={data?.listingDate || "--"} labelTextSize />
-              {<LabelAndValue label="Accessories" value={accessoriesList.join(", ")} labelTextSize />}
+              {<LabelAndValue label="Accessories" value={accessoriesList.join(", ") || "--"} labelTextSize />}
               {data?.verified && (
                 <LabelAndValue label="Report" value={"Device Verification Report"} showDeviceReport={() => setOpenDeviceReport(true)} labelTextSize />
               )}

@@ -13,14 +13,19 @@ function LocationPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
   const [citiesResponse, setCitiesResponse] = useState([]);
   const [searchLocationID, setSearchLocationID] = useState();
-  const cityInfo = [];
+  // const [selectedCity, setSelectedCity] = useState();
+  let cityInfo = [];
   const selectedCity = useRef();
+
+  console.log("selectedCity", selectedCity);
 
   const { userInfo, setCities, setUserInfo, setSearchLocation } = useContext(AppContext);
 
+  console.log("userInfo from popup", userInfo);
+
   const handleCityChange = (city) => {
     selectedCity.current = city;
-    if (Cookies.get("userUniqueId") !== undefined) {
+    // if (Cookies.get("userUniqueId") !== undefined) {
       cityInfo = citiesResponse.filter((item) => item.city === city);
       // console.log("cityInfo", cityInfo);
       let payLoad = {
@@ -33,18 +38,20 @@ function LocationPopup({ open, setOpen }) {
       Axios.updateAddress(payLoad).then((res) => {
         console.log("updateAddress RES -> ", res);
         Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-          setUserInfo(resp.dataObject);
+          // setUserInfo(resp?.dataObject);
+          console.log("userProfile -> ", resp?.dataObject);
         });
       });
-    } else {
+    // } else {
       setSearchLocation(selectedCity.current);
-    }
+      localStorage.setItem("usedLocation", selectedCity.current);
+    // }
     setOpen(false);
   };
 
   useEffect(() => {
     let searchID = searchLocationID;
-    let searchLocId = userInfo?.address?.filter((items) => {
+    let searchLocId = userInfo?.userdetails?.address?.filter((items) => {
       return items.addressType === "SearchLocation";
     });
     if (searchLocId) {
@@ -53,7 +60,7 @@ function LocationPopup({ open, setOpen }) {
     console.log("setSearchLocationID ", searchID);
     setSearchLocationID(searchID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo?.address]);
+  }, [userInfo?.userdetails?.address]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -108,8 +115,9 @@ function LocationPopup({ open, setOpen }) {
                   <div className="w-full">
                     <Select
                       onChange={(e) => {
-                        setSelectedCity(e.value);
+                        handleCityChange(e.value);
                       }}
+                      ref={selectedCity}
                       options={
                         citiesResponse &&
                         citiesResponse

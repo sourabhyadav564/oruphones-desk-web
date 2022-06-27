@@ -22,7 +22,7 @@ import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 
 function ProductDetails({ listingInfo }) {
-  const [simliarProducts, setSimliarProducts] = useState([]);
+  let [simliarProducts, setSimliarProducts] = useState([]);
   const { getSearchLocation } = useContext(AppContext);
   const [openImageFullView, setOpenImageFullView] = useState(false);
 
@@ -82,6 +82,10 @@ function ProductDetails({ listingInfo }) {
   }, [listingInfo]);
 
   console.log("listingInfo", listingInfo);
+
+  simliarProducts = simliarProducts.filter((item) => {
+    return item.listingId != otherVendorData[0]?.listingId || listingInfo?.listingId
+  })
 
   return (
     <main className="container my-6">

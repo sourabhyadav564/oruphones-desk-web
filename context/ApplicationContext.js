@@ -22,18 +22,19 @@ export const ApplicationContext = ({ children }) => {
   }, [userLogged, refresh]);
 
   useEffect(() => {
-    //console.log("userInfo --> ",userInfo);
-    const searchLoc = userInfo?.address?.filter((items) => {
-      return items.addressType === "SearchLocation";
-    });
-    console.log("LOCATION --> ", getSearchLocation, searchLoc);
-    setSearchLocation(() => {
-      if (searchLoc && searchLoc.length >= 1) {
-        return searchLoc[0].city;
-      } else {
-        return "India";
-      }
-    });
+    console.log("userInfo --> ",userInfo);
+    // const searchLoc = userInfo?.userdetails?.address?.filter((items) => {
+    //   return items.addressType === "SearchLocation";
+    // });
+    // console.log("LOCATION --> ", getSearchLocation, searchLoc);
+    // setSearchLocation(() => {
+    //   if (searchLoc && searchLoc.length >= 1) {
+    //     return searchLoc[0].city;
+    //   } else {
+    //     return "India";
+    //   }
+    // });
+    localStorage.getItem("usedLocation");
   }, [userInfo]);
 
   return (

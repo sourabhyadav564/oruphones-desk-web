@@ -13,12 +13,25 @@ import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import Cookies from "js-cookie";
 
-function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }) {
-  const { cities, userInfo, getSearchLocation, setRefresh } = useContext(AppContext);
-  const userSelectedCity = (getSearchLocation === "India") ? "Select...":getSearchLocation;
+function AddEditListing({
+  data,
+  isFromEdit,
+  brandsList,
+  openPopup,
+  openTCPopup,
+}) {
+  const { cities, userInfo, getSearchLocation, setRefresh } =
+    useContext(AppContext);
+  const userSelectedCity =
+    getSearchLocation === "India" ? "Select..." : getSearchLocation;
   const [totalCities, setTotalCities] = useState([cities]);
   const [selectedCity, setSelectedCity] = useState(userSelectedCity);
-  const initialState = [{ name: "image-1" }, { name: "image-2" }, { name: "image-3" }, { name: "image-4" }];
+  const initialState = [
+    { name: "image-1" },
+    { name: "image-2" },
+    { name: "image-3" },
+    { name: "image-4" },
+  ];
   const [images, setImages] = useState(initialState);
   //console.log("DATA -> ", brandsList);
   const [makeOptions, setMakeOptions] = useState(brandsList);
@@ -44,6 +57,7 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
   const [storageRequired, setStorageRequired] = useState("");
   const [deviceConditionRequired, setDeviceConditionRequired] = useState("");
   const [sellValueRequired, setSellValueRequired] = useState("");
+  const [nameValueRequired, setNameValueRequired] = useState("");
   const [locationRequired, setLocationRequired] = useState("");
   const [getExternalSellerData, setGetExternalSellerData] = useState([]);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
@@ -82,7 +96,9 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
   }, [make]);
 
   useEffect(() => {
-    let modelData = modelOptions.filter((item) => item.marketingname === marketingName);
+    let modelData = modelOptions.filter(
+      (item) => item.marketingname === marketingName
+    );
     if (modelData && modelData.length > 0) {
       setColorAndStorageOption(modelData[0]);
     }
@@ -101,13 +117,13 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
     let payload = {
       charger: charger === "Y" ? "Y" : "N",
       deviceCondition: deviceCondition,
-      devicestorage: storage?.split('/')[0],
+      devicestorage: storage?.split("/")[0],
       earPhones: headphone1 === "Y" ? "Y" : "N",
       make: make,
       marketingName: marketingName,
       originalBox: originalBox1 === "Y" ? "Y" : "N",
       warrantyPeriod: "more",
-      verified: "no"
+      verified: "no",
     };
     const fetchData = async () => {
       const getRecommandedPrice = await Axios.getRecommandedPrice(payload);
@@ -123,11 +139,19 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
     ) {
       fetchData();
     }
-  }, [make, marketingName, storage, deviceCondition, charger, headphone1, originalBox1]);
+  }, [
+    make,
+    marketingName,
+    storage,
+    deviceCondition,
+    charger,
+    headphone1,
+    originalBox1,
+  ]);
 
   useEffect(() => {
     let payload = {
-      deviceStorage: storage?.split('/')[0],
+      deviceStorage: storage?.split("/")[0],
       make: make,
       marketingName: marketingName,
       deviceCondition: deviceCondition,
@@ -142,7 +166,15 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         setGetExternalSellerData(response?.dataObject);
       });
     }
-  }, [make, marketingName, storage, deviceCondition, charger, headphone1, originalBox1]);
+  }, [
+    make,
+    marketingName,
+    storage,
+    deviceCondition,
+    charger,
+    headphone1,
+    originalBox1,
+  ]);
 
   const handleImageChange = async (e, index) => {
     let panelName = index === 0 ? "front" : index === 1 ? "back" : index - 1;
@@ -150,7 +182,14 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
     if (files && files.length) {
       let data = new FormData();
       data.append("image", e.target.files[0]);
-      const data1 = await Axios.uploadImage(data, panelName, storage, make, marketingName, Cookies.get("userUniqueId"));
+      const data1 = await Axios.uploadImage(
+        data,
+        panelName,
+        storage,
+        make,
+        marketingName,
+        Cookies.get("userUniqueId")
+      );
       console.log("UPLOAD IMAGE ", data1?.dataObject);
       setImages((prev) =>
         prev.map((item) => {
@@ -186,9 +225,23 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
     e.preventDefault();
     var sellValueTag = document.querySelector("#sellValue");
     var sellValue = sellValueTag.value;
-    console.log("sellValue ", sellValue);
+    // console.log("sellValue ", sellValue);
 
-    if (make === null || marketingName === null || storage === null || deviceCondition === null || (sellValue && sellValue < 1000)) {
+    var inputNameTag = document.querySelector("#inputName");
+    var inputName = inputNameTag.value;
+
+    if (
+      selectedCity === undefined ||
+      selectedCity === "" ||
+      selectedCity === "India" ||
+      make === null ||
+      marketingName === null ||
+      storage === null ||
+      deviceCondition === null ||
+      !sellValue ||
+      (sellValue && sellValue < 1000) ||
+      !inputName
+    ) {
       if (make === null) {
         window.scroll(0, 0);
         setMakeRequired("border-red");
@@ -205,19 +258,32 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         window.scroll(0, 0);
         setDeviceConditionRequired("border-red");
       }
-      if (selectedCity === 'India' || selectedCity === "" || selectedCity === null || selectedCity === 'Select...') {
+      if (
+        selectedCity === "India" ||
+        selectedCity === "" ||
+        selectedCity === null ||
+        selectedCity === "Select..."
+      ) {
         window.scroll(0, 0);
         setLocationRequired("border-red");
       }
       if (!sellValue || sellValue < 1000) {
         setSellValueRequired("border-red");
       }
+      if (!inputName || inputName === "") {
+        setNameValueRequired("border-red");
+      }
     } else if (Cookies.get("userUniqueId") === undefined) {
       setShowLoginPopup(true);
     } else {
       const imgList = [];
       images.map((item) => {
-        if (item.imagePath !== undefined && item.imagePath !== "" && item.panel !== undefined && item.thumbnailImagePath !== undefined) {
+        if (
+          item.imagePath !== undefined &&
+          item.imagePath !== "" &&
+          item.panel !== undefined &&
+          item.thumbnailImagePath !== undefined
+        ) {
           imgList.push(item);
         }
       });
@@ -227,7 +293,14 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         charger: charger,
         color: color,
         deviceCondition: deviceCondition,
-        deviceStorage: storage,
+        deviceStorage: storage.toString().split("/")[0].toString().trim(),
+        deviceRam: storage
+          .toString()
+          .split("/")[1]
+          .toString()
+          .replace(/GB/g, " GB")
+          .replace(/RAM/, "")
+          .trim(),
         deviceUniqueId: "",
         earphone: headphone1,
         images: imgList.map((item) => {
@@ -246,9 +319,12 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         originalbox: originalBox1,
         platform: make === "Apple" ? "iOS" : "Android",
         userUniqueId: Cookies.get("userUniqueId"),
+        model: marketingName,
       };
       console.log("SAVE LISTING PAYLOAD ", payload);
-      const saveSellNowDeviceInfoRes = await Axios.saveSellNowDeviceInfo(payload);
+      const saveSellNowDeviceInfoRes = await Axios.saveSellNowDeviceInfo(
+        payload
+      );
       setRefresh((prev) => !prev);
       console.log("saveSellNowDeviceInfoRes ", saveSellNowDeviceInfoRes);
       openPopup();
@@ -279,11 +355,19 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
                 return { label: item.make, value: item.make };
               })}
             ></Select>
-            {makeRequired && <p className="text-sm whitespace-nowrap cursor-pointer text-red">Please select this field</p>}
+            {makeRequired && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
           </span>
           <span>
             <Select
-              value={marketingName === null ? "Select.." : { label: marketingName, value: marketingName }}
+              value={
+                marketingName === null
+                  ? "Select.."
+                  : { label: marketingName, value: marketingName }
+              }
               labelName="Model*"
               disabled={isFromEdit}
               className={marketingNameRequired}
@@ -297,11 +381,19 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
                 return { label: item.marketingname, value: item.marketingname };
               })}
             ></Select>
-            {marketingNameRequired && <p className="text-sm whitespace-nowrap cursor-pointer text-red">Please select this field</p>}
+            {marketingNameRequired && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
           </span>
           <span>
             <Select
-              value={storage === null ? "Select.." : { label: storage, value: storage }}
+              value={
+                storage === null
+                  ? "Select.."
+                  : { label: storage, value: storage }
+              }
               labelName="Storage*"
               disabled={isFromEdit}
               className={storageRequired}
@@ -315,11 +407,17 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
                 return { label: item, value: item };
               })}
             ></Select>
-            {storageRequired && <p className="text-sm whitespace-nowrap cursor-pointer text-red">Please select this field</p>}
+            {storageRequired && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
           </span>
           <span>
             <Select
-              value={color === null ? "Select.." : { label: color, value: color }}
+              value={
+                color === null ? "Select.." : { label: color, value: color }
+              }
               labelName="Color"
               disabled={isFromEdit}
               onChange={(e) => {
@@ -343,7 +441,11 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
                 }}
                 options={deviceConditionCheck}
               ></Select>
-              {deviceConditionRequired && <p className="text-sm whitespace-nowrap cursor-pointer text-red">Please select this field</p>}
+              {deviceConditionRequired && (
+                <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                  Please select this field
+                </p>
+              )}
             </span>
             <span>
               <p
@@ -356,32 +458,48 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
           </div>
           <span />
           <div className="grid gap-8">
-            <Input
-              inputClass={"w-full"}
-              defaultValue={userInfo?.userdetails?.userName || ""}
-              placeholder="Enter seller name ex: Ram, Mega Traders etc"
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              maxLength="30"
-            >
-              Name
-            </Input>
+            <div className="relative">
+              <Input
+                id="inputName"
+                inputClass={"w-full"}
+                defaultValue={userInfo?.userdetails?.userName || ""}
+                placeholder="Enter seller name ex: Ram, Mega Traders etc"
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setNameValueRequired("");
+                }}
+                type="text"
+                maxLength="30"
+                errorClass={`border ${nameValueRequired}`}
+              >
+                Name
+              </Input>
+              {nameValueRequired && (
+                <span className="text-red text-sm absolute -bottom-6">
+                  Please enter your name first
+                </span>
+              )}
+            </div>
             <span>
-            <Select
-              labelName="Location*"
-              placeholder={selectedCity}
-              className={locationRequired}
-              onChange={(e) => {
-                setSelectedCity(e.value);
-              }}
-              onFocus={(e) => {
-                setLocationRequired("");
-              }}
-              options={totalCities.map((item) => {
-                return { label: item, value: item };
-              })}
-            ></Select>
-            {locationRequired && <p className="text-sm whitespace-nowrap cursor-pointer text-red">Please select this field</p>}
+              <Select
+                labelName="Location*"
+                placeholder={selectedCity}
+                className={`${locationRequired} mt-4`}
+                onChange={(e) => {
+                  setSelectedCity(e.value);
+                }}
+                onFocus={(e) => {
+                  setLocationRequired("");
+                }}
+                options={totalCities.map((item) => {
+                  return { label: item, value: item };
+                })}
+              ></Select>
+              {locationRequired && (
+                <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                  Please select this field
+                </p>
+              )}
             </span>
           </div>
         </div>
@@ -391,7 +509,16 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         <div className="col-span-2 grid grid-cols-4 gap-4 relative">
           {images.map((item, index) => (
             <div key={index} className="flex flex-col gap-y-1">
-              <span style={{ color: "#00000099" }}> {index === 0 ? "Front Panel" : index === 1 ? "Back Panel" : <>&nbsp;</>} </span>
+              <span style={{ color: "#00000099" }}>
+                {" "}
+                {index === 0 ? (
+                  "Front Panel"
+                ) : index === 1 ? (
+                  "Back Panel"
+                ) : (
+                  <>&nbsp;</>
+                )}{" "}
+              </span>
               <ImageInput
                 type="file"
                 key={item?.name}
@@ -406,7 +533,15 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
           {images && images.length < 8 && (
             <span
               className="absolute -bottom-6 text-sm right-0 text-m-green cursor-pointer"
-              onClick={() => setImages((prev) => [...prev, { name: "image-5" }, { name: "image-6" }, { name: "image-7" }, { name: "image-8" }])}
+              onClick={() =>
+                setImages((prev) => [
+                  ...prev,
+                  { name: "image-5" },
+                  { name: "image-6" },
+                  { name: "image-7" },
+                  { name: "image-8" },
+                ])
+              }
             >
               + Add more
             </span>
@@ -460,13 +595,18 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
                 Enter your sell price
               </Input>
 
-              {sellValueRequired && <span className="text-red text-sm absolute">Enter price more than 1000</span>}
+              {sellValueRequired && (
+                <span className="text-red text-sm absolute">
+                  Enter price more than 1000
+                </span>
+              )}
             </div>
             <div className="text-sm bg-gray-1f text-m-grey-1 py-2 justify-evenly items-center flex flex-col w-full rounded rounded-l-none">
               <span>Recommended Price</span>
               {(leastSellingprice && (
                 <p className="font-bold text-base">
-                  {"₹ " + numberWithCommas(leastSellingprice)} - {numberWithCommas(maxsellingprice)}
+                  {"₹ " + numberWithCommas(leastSellingprice)} -{" "}
+                  {numberWithCommas(maxsellingprice)}
                 </p>
               )) || <p>--</p>}
             </div>
@@ -474,22 +614,34 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
         </div>
         <div />
         {getExternalSellerData && getExternalSellerData.length > 0 && (
-          <p className="mt-6 mb-4 ml-0.5 font-semibold" style={{ color: "#707070" }}>
+          <p
+            className="mt-6 mb-4 ml-0.5 font-semibold"
+            style={{ color: "#707070" }}
+          >
             Check prices from other buyers:
           </p>
         )}
         {getExternalSellerData && getExternalSellerData.length > 0 && (
           <div className="grid border rounded max-w-sm">
             {getExternalSellerData.map((items, index) => (
-              <div className="grid grid-cols-2 px-4 py-2 gap-4 text-xs text-m-grey-2" key={index}>
+              <div
+                className="grid grid-cols-2 px-4 py-2 gap-4 text-xs text-m-grey-2"
+                key={index}
+              >
                 <div className="flex flex-col space-1">
                   <span>You will get</span>
-                  <p className="font-semibold text-2xl text-m-grey-1 h-9">{"₹" + numberWithCommas(items.externalSourcePrice)}</p>
+                  <p className="font-semibold text-2xl text-m-grey-1 h-9">
+                    {"₹" + numberWithCommas(items.externalSourcePrice)}
+                  </p>
                 </div>
                 <div className="flex flex-col space-y-1">
                   <span>Buyer</span>
                   <div className="w-full h-full">
-                    <img src={items.externalSourceImage} alt={items.externalSourceName} style={{ height: 33, width: "auto" }} />
+                    <img
+                      src={items.externalSourceImage}
+                      alt={items.externalSourceName}
+                      style={{ height: 33, width: "auto" }}
+                    />
                   </div>
                 </div>
               </div>
@@ -504,7 +656,11 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
             onChange={handleChange}
             className="border-gray-300 rounded text-m-green focus:ring-transparent"
           />
-          <label className="ml-2 underline cursor-pointer" style={{ color: "#00000099" }} onClick={() => openTCPopup()}>
+          <label
+            className="ml-2 underline cursor-pointer"
+            style={{ color: "#00000099" }}
+            onClick={() => openTCPopup()}
+          >
             Accept terms and conditions
           </label>
         </div>
@@ -517,8 +673,16 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
           </button>
         </div>
       </form>
-      <ConditionInfoPopup open={openConditionInfoPopup} setOpen={setConditionInfoPopup} data={data} />
-      <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} redirect={false} />
+      <ConditionInfoPopup
+        open={openConditionInfoPopup}
+        setOpen={setConditionInfoPopup}
+        data={data}
+      />
+      <LoginPopup
+        open={showLoginPopup}
+        setOpen={setShowLoginPopup}
+        redirect={false}
+      />
     </div>
   );
 }
@@ -526,11 +690,22 @@ function AddEditListing({ data, isFromEdit, brandsList, openPopup, openTCPopup }
 export default AddEditListing;
 
 const Checkbox = ({ src, text, onClick, checked }) => (
-  <div className={`border rounded px-6 py-4 relative ${checked === "Y" && "bg-gray-ef"}`}>
+  <div
+    className={`border rounded px-6 py-4 relative ${
+      checked === "Y" && "bg-gray-ef"
+    }`}
+  >
     <div className="relative w-14 h-14 mx-auto">
       <Image src={src} layout="fill" alt="checkbox" />
     </div>
-    <input type="checkbox" className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0" onClick={onClick} />
-    <span className="text-xs mt-2 text-center block text-m-grey-1"> {text} </span>
+    <input
+      type="checkbox"
+      className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0"
+      onClick={onClick}
+    />
+    <span className="text-xs mt-2 text-center block text-m-grey-1">
+      {" "}
+      {text}{" "}
+    </span>
   </div>
 );

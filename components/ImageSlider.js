@@ -3,8 +3,12 @@ import Image from "next/image";
 import Slider from "react-slick";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
-const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => <BiChevronLeft {...rest} className={`prev ${className}`} />;
-const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => <BiChevronRight {...rest} className={`next ${className}`} />;
+const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
+  <BiChevronLeft {...rest} className={`prev ${className}`} />
+);
+const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
+  <BiChevronRight {...rest} className={`next ${className}`} />
+);
 
 function ImageSlider({ images, openFullImage }) {
   const [nav1, setNav1] = useState(null);
@@ -43,7 +47,11 @@ function ImageSlider({ images, openFullImage }) {
   return (
     <React.Fragment>
       {Array.isArray(images) && images && (
-        <Slider {...settingsMain} asNavFor={nav2} ref={(slider) => setSlider1(slider)}>
+        <Slider
+          {...settingsMain}
+          asNavFor={nav2}
+          ref={(slider) => setSlider1(slider)}
+        >
           {images
             .filter((i) => i.fullImage)
             .map((img, index) => (
@@ -63,7 +71,11 @@ function ImageSlider({ images, openFullImage }) {
         </Slider>
       )}
       {!Array.isArray(images) && images && (
-        <Slider {...settingsMain} asNavFor={nav2} ref={(slider) => setSlider1(slider)}>
+        <Slider
+          {...settingsMain}
+          asNavFor={nav2}
+          ref={(slider) => setSlider1(slider)}
+        >
           <Fragment>
             <Image
               priority
@@ -79,19 +91,39 @@ function ImageSlider({ images, openFullImage }) {
       )}
       <div className="thumbnail-slider-wrap">
         {Array.isArray(images) && images && (
-          <Slider {...settingsThumbs} asNavFor={nav1} ref={(slider) => setSlider2(slider)}>
+          <Slider
+            {...settingsThumbs}
+            asNavFor={nav1}
+            ref={(slider) => setSlider2(slider)}
+          >
             {images
               .filter((i) => i.fullImage)
               .map((img, index) => (
                 <Fragment key={index}>
-                  <Image src={img?.thumbImage || img.fullImage} width={"100%"} height={"100%"} layout="responsive" objectFit="contain" />
+                  <Image
+                    src={img?.thumbImage || img.fullImage}
+                    width={"100%"}
+                    height={"100%"}
+                    layout="responsive"
+                    objectFit="contain"
+                  />
                 </Fragment>
               ))}
           </Slider>
         )}
         {!Array.isArray(images) && images && (
-          <Slider {...settingsThumbs} asNavFor={nav1} ref={(slider) => setSlider2(slider)}>
-            <Image src={images?.thumbImage} width={"100%"} height={"100%"} layout="responsive" objectFit="contain" />
+          <Slider
+            {...settingsThumbs}
+            asNavFor={nav1}
+            ref={(slider) => setSlider2(slider)}
+          >
+            <Image
+              src={images?.thumbImage || images?.fullImage}
+              width={"100%"}
+              height={"100%"}
+              layout="responsive"
+              objectFit="contain"
+            />
           </Slider>
         )}
       </div>
