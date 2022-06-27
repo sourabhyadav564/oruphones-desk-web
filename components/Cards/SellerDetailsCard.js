@@ -35,7 +35,11 @@ function SellerDetailsCard({ data }) {
     }
   };
 
+  console.log("seller listing id", data?.listingId);
+  console.log("seller userUniqueId id", data?.userUniqueId);
+
   useEffect(() => {
+    setShowNumber(false);
     if (
       !(data?.isOtherVendor === "Y") &&
       Cookies.get("userUniqueId") !== undefined
@@ -46,7 +50,7 @@ function SellerDetailsCard({ data }) {
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
       });
     }
-  }, []);
+  }, [data]);
 
   console.log("contactSellerMobileNumber", contactSellerMobileNumber);
 
@@ -73,7 +77,7 @@ function SellerDetailsCard({ data }) {
               {data?.listingLocation}
             </span>
             <button
-              onClick={handleClick}
+              onClick={() => handleClick()}
               className={`${
                 !showNumber ? "bg-m-green text-white" : "text-m-green"
               } text-base border border-m-green font-semibold w-full uppercase px-4 py-2 my-4 rounded`}
