@@ -234,6 +234,7 @@ function AddEditListing({
       selectedCity === undefined ||
       selectedCity === "" ||
       selectedCity === "India" ||
+      selectedCity === "Select..." ||
       make === null ||
       marketingName === null ||
       storage === null ||
