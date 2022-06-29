@@ -33,7 +33,7 @@ function Listings() {
           // userListings && userListings.sort((a, b) => b.date - a.date) && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
             userListings && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
               <Link href={`/user/listings/${item.listingId}`} key={index} passHref>
-                <a>
+                <a href="">
                   <ProfileListingTile data={item} />
                 </a>
               </Link>

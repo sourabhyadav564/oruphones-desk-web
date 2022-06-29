@@ -17,6 +17,7 @@ function AppDownloadPopup({ open, setOpen }) {
       setQrValue(response?.dataObject.tinyurl);
     });
   }, []);
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -87,21 +88,21 @@ function AppDownloadPopup({ open, setOpen }) {
                   </li>
                 </ul>
                 <div className="flex space-x-4 justify-start items-center">
-                  <QRCode
+                  {/* <QRCode
                     id="qr-gen"
                     value={qrValue}
                     size={130}
                     level={"H"}
                     includeMargin={true}
-                  />
-                  <div className="flex flex-col justify-end pl-4">
+                  /> */}
+                  {/* <div className="flex flex-col justify-end pl-4">
                     <Link href={qrValue}>
                       <a className="w-32 h-8 bg-app-store bg-no-repeat bg-contain"></a>
                     </Link>
                     <Link href={qrValue}>
                       <a className="w-32 mt-4 h-8 bg-play-store bg-no-repeat bg-contain"></a>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

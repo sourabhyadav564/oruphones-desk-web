@@ -1,7 +1,14 @@
-function Title({ text }) {
+import { FaMapMarkerAlt } from "react-icons/bi";
+
+function Title({ text, location, onClick }) {
   return (
-    <h1 className="text-center my-4 font-semibold" style={{ fontSize: 21, color: "#212121" }}>
+    <h1
+      className="text-center my-4 font-semibold"
+      style={{ fontSize: 21, color: "#212121" }}
+    >
       {text}
+      <span>{"  "}</span>
+      <span className="cursor-pointer text-[#00a483]" onClick={onClick}>{location}</span>
     </h1>
   );
 }

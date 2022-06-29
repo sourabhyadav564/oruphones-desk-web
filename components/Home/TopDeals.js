@@ -4,6 +4,7 @@ import TopDealCard from "../Cards/TopDealCard";
 import Title from "../Title";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
+import LocationPopup from "../Popup/LocationPopup";
 
 // const settings = {
 //   dots: false,
@@ -16,6 +17,7 @@ import Cookies from "js-cookie";
 function TopDeals({ location }) {
   // const [loc, setLoc] = useState("Best Deals Near You (" + location + ")");
   const [bestDeals, setBeatDeals] = useState();
+  const [openLocationPopup, setOpenLocationPopup] = useState(false);
 
   // console.log(bestDeals);
 
@@ -33,7 +35,7 @@ function TopDeals({ location }) {
 
   return (
     <section className="container top_deals px-4">
-      <Title text={`Best Deals Near You (${location})`} />
+      <Title text={`Best Deals Near You`} onClick={() => setOpenLocationPopup(true)} location={`(${location})`}/>
       {bestDeals && bestDeals?.length > 1 ? (
         <div className="grid grid-cols-5 gap-4 py-4">
           {bestDeals && bestDeals.slice(0, 19).map((item, index) => <TopDealCard key={index} prodLink data={item} setProducts={setBeatDeals} />)}
@@ -42,6 +44,7 @@ function TopDeals({ location }) {
       ) : (
         <div className="text-center">Sorry, there are no best deals near you</div>
       )}
+      <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
     </section>
   );
 }

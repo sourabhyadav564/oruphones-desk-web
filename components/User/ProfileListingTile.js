@@ -54,6 +54,10 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
     setOpenActivatePausePopup(true);
   }
 
+  function handleVerifyListing() {
+    setOpenAppDownload(true);
+  }
+
   function uploadPhotos() {
     router.push(`/sell/edit/${data?.listingId}`);
   }
@@ -174,13 +178,13 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           data?.status === "Active" &&
           !data?.verified && (
             <Link href="#">
-              <a
+              <p
                 className="text-xs cursor-pointer self-end"
                 style={{ color: "#00A483" }}
-                onClick={() => setOpenAppDownload(true)}
+                onClick={handleVerifyListing}
               >
-                VERIFY NOW
-              </a>
+                <a>VERIFY NOW</a>
+              </p>
             </Link>
           )
         )}
