@@ -83,7 +83,7 @@ function ProductDetails({ listingInfo }) {
 
   console.log("listingInfo", listingInfo);
 
-  simliarProducts = simliarProducts.filter((item) => {
+  simliarProducts = simliarProducts?.filter((item) => {
     return item.listingId != otherVendorData[0]?.listingId || listingInfo?.listingId
   })
 
