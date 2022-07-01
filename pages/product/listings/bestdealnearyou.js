@@ -36,10 +36,16 @@ function Bestdealnearyou() {
 
   useEffect(() => {
     if (getSearchLocation) {
-      Axios.bestDealNearYouAll(getSearchLocation, Cookies.get("userUniqueId")).then((response) => {
+      Axios.bestDealNearYouAll(
+        getSearchLocation,
+        Cookies.get("userUniqueId")
+      ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         setBestDeal(response?.dataObject?.bestDeals);
-        setProductsData([...response?.dataObject?.otherListings, ...response?.dataObject?.bestDeals]);
+        setProductsData([
+          ...response?.dataObject?.otherListings,
+          ...response?.dataObject?.bestDeals,
+        ]);
         setLoading(false);
       });
     }
@@ -48,11 +54,20 @@ function Bestdealnearyou() {
 
   useEffect(() => {
     console.log("SBP ", applyFilter);
-    const { brand, condition, color, storage, warranty, verification, priceRange } = applyFilter;
+    const {
+      brand,
+      condition,
+      color,
+      storage,
+      warranty,
+      verification,
+      priceRange,
+    } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       let payLoad = {
         listingLocation: getSearchLocation,
         reqPage: "BBNM",
+        make: [],
         color: [],
         deviceCondition: [],
         deviceStorage: [],
@@ -61,39 +76,41 @@ function Bestdealnearyou() {
         verified: "",
       };
       if (brand?.length > 0) {
-        payLoad.make = brand.includes("all") ? []:brand;;
+        payLoad.make = brand.includes("all") ? [] : brand;
       }
       if (priceRange && priceRange.min && priceRange.max) {
         payLoad.minsellingPrice = priceRange.min;
         payLoad.maxsellingPrice = priceRange.max;
       }
       if (condition?.length > 0) {
-        payLoad.deviceCondition = condition.includes("all") ? []:condition;
+        payLoad.deviceCondition = condition.includes("all") ? [] : condition;
       }
       if (storage?.length > 0) {
-        payLoad.deviceStorage = storage.includes("all") ? []:storage;
+        payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
       if (color?.length > 0) {
-        payLoad.color = color.includes("all") ? []:color;
+        payLoad.color = color.includes("all") ? [] : color;
       }
       if (warranty?.length > 0) {
-        payLoad.warenty = warranty.includes("all") ? []:warranty;
+        payLoad.warenty = warranty.includes("all") ? [] : warranty;
       }
       if (verification?.length > 0) {
-        payLoad.verified = verification.includes("all") ? []:"verified";
+        payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
       console.log(" BDNY SEARCH FILTER PAYLOAD -->  ", payLoad);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then((response) => {
-        console.log("searchFilter ", response?.dataObject);
-        // if (verification?.length > 0) {
-        //   payLoad.verification = verification;
-        // }
-        setProducts(response?.dataObject?.otherListings);
-        // setBestDeal([]);
-        setBestDeal(response?.dataObject?.bestDeals);
-        setLoading(false);
-      });
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
+        (response) => {
+          console.log("searchFilter ", response?.dataObject);
+          // if (verification?.length > 0) {
+          //   payLoad.verification = verification;
+          // }
+          setProducts(response?.dataObject?.otherListings);
+          // setBestDeal([]);
+          setBestDeal(response?.dataObject?.bestDeals);
+          setLoading(false);
+        }
+      );
     }
   }, [applyFilter]);
 
@@ -102,7 +119,11 @@ function Bestdealnearyou() {
   return (
     <main className="container py-4">
       <h1 className="sr-only">Best Deal Near You Page</h1>
-      <Filter listingsCount={sortingProducts?.length + bestDeal?.length} setApplySort={setApplySort} setApplyFilter={setApplyFilter}>
+      <Filter
+        listingsCount={sortingProducts?.length + bestDeal?.length}
+        setApplySort={setApplySort}
+        setApplyFilter={setApplyFilter}
+      >
         {!isLoading && bestDeal && bestDeal.length > 0 && (
           <Carousel {...settings} className="bestDealCarousel">
             {bestDeal.map((items, index) => (
@@ -112,9 +133,18 @@ function Bestdealnearyou() {
         )}
         <div className="grid grid-cols-3 gap-4 mt-4">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => <ProductCard key={index} data={product} prodLink setProducts={setProducts} />)
+            sortingProducts?.map((product, index) => (
+              <ProductCard
+                key={index}
+                data={product}
+                prodLink
+                setProducts={setProducts}
+              />
+            ))
           ) : (
-            <div className="col-span-3 h-96 items-center flex justify-center ">{isLoading ? "Loading..." : "No match found"}</div>
+            <div className="col-span-3 h-96 items-center flex justify-center ">
+              {isLoading ? "Loading..." : "No match found"}
+            </div>
           )}
         </div>
       </Filter>
@@ -126,19 +156,31 @@ function getSortedProducts(applySort, products) {
   var sortedProducts = products ? [...products] : [];
   if (applySort && applySort === "Price: Low to High") {
     sortedProducts.sort((a, b) => {
-      return numberFromString(a.listingPrice) - numberFromString(b.listingPrice);
+      return (
+        numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
+      );
     });
   } else if (applySort && applySort === "Price: High to Low") {
     sortedProducts.sort((a, b) => {
-      return numberFromString(b.listingPrice) - numberFromString(a.listingPrice);
+      return (
+        numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
+      );
     });
   } else if (applySort && applySort === "Newest First") {
     sortedProducts.sort((a, b) => {
-      return (a.updatedAt && b.updatedAt) && stringToDate(b.updatedAt) - stringToDate(a.updatedAt);
+      return (
+        a.updatedAt &&
+        b.updatedAt &&
+        stringToDate(b.updatedAt) - stringToDate(a.updatedAt)
+      );
     });
   } else if (applySort && applySort === "Oldest First") {
     sortedProducts.sort((a, b) => {
-      return (a.updatedAt && b.updatedAt) && stringToDate(a.updatedAt) - stringToDate(b.updatedAt);
+      return (
+        a.updatedAt &&
+        b.updatedAt &&
+        stringToDate(a.updatedAt) - stringToDate(b.updatedAt)
+      );
     });
   }
   console.log("--> sortedProducts ", sortedProducts);
