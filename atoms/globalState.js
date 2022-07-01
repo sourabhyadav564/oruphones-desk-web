@@ -1,8 +1,12 @@
 import { atom, selector } from 'recoil'
+import { recoilPersist } from 'recoil-persist'
+
+const { persistAtom } = recoilPersist()
 
 export const otherVendorDataState = atom({
     key: "otherVendorDataState",
     default: [],
+    effects_UNSTABLE: [persistAtom],
 })
 
 export const otherVandorDataSelector = selector({

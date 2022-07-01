@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function numberWithCommas(x) {
   // return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   return x;
@@ -8,7 +10,9 @@ export function numberFromString(x) {
 }
 
 export const stringToDate = (dateString) => {
-  const [day, month, year] = dateString.split("/");
+  console.log("--> stringToDate ", dateString);
+  let new_data_string = moment(dateString).format('L');
+  const [day, month, year] = new_data_string?.split("/");
   return new Date([month, day, year].join("/"));
 };
 

@@ -49,9 +49,7 @@ const Products = () => {
       );
       if (data?.dataObject?.otherListings.length > -1) {
         setProducts((data && data?.dataObject?.otherListings) || []);
-        setProductsData(
-          (data && data?.dataObject?.otherListings) || []
-        );
+        setProductsData((data && data?.dataObject?.otherListings) || []);
       }
       if (data?.dataObject?.bestDeals.length > -1) {
         setBestDeals((data && data?.dataObject?.bestDeals) || []);
@@ -77,11 +75,22 @@ const Products = () => {
       priceRange,
     } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else {
+        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+      }
       let payLoad = {
         listingLocation: getSearchLocation,
         make: brand?.length > 0 ? brand : [makeName],
         marketingName: [modelName],
         reqPage: "TSM",
+        color: [],
+        deviceCondition: [],
+        deviceStorage: [],
+        maxsellingPrice: 200000,
+        minsellingPrice: 0,
+        verified: "",
       };
       if (priceRange && priceRange.min && priceRange.max) {
         payLoad.minsellingPrice = priceRange.min;
@@ -111,7 +120,8 @@ const Products = () => {
           //   payLoad.verification = verification;
           // }
           setProducts(response?.dataObject?.otherListings);
-          setBestDeals([]);
+          // setBestDeals([]);
+          setBestDeals(response?.dataObject?.bestDeals);
           setLoading(false);
         }
       );
@@ -189,11 +199,11 @@ function getSortedProducts(applySort, products) {
     });
   } else if (applySort && applySort === "Newest First") {
     sortedProducts.sort((a, b) => {
-      return stringToDate(b.modifiedDate) - stringToDate(a.modifiedDate);
+      return (a.updatedAt && b.updatedAt) && stringToDate(b.updatedAt) - stringToDate(a.updatedAt);
     });
   } else if (applySort && applySort === "Oldest First") {
     sortedProducts.sort((a, b) => {
-      return stringToDate(a.modifiedDate) - stringToDate(b.modifiedDate);
+      return (a.updatedAt && b.updatedAt) && stringToDate(a.updatedAt) - stringToDate(b.updatedAt);
     });
   }
   console.log("--> sortedProducts ", sortedProducts);

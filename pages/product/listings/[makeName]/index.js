@@ -26,7 +26,7 @@ const settings = {
 
 function BrandPage() {
   const router = useRouter();
-  const { makeName } = router.query;
+  let { makeName } = router.query;
   const [products, setProducts] = useState([]);
   const [bestDeal, setBestDeal] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -76,10 +76,21 @@ function BrandPage() {
       priceRange,
     } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else {
+        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+      }
       let payLoad = {
         listingLocation: getSearchLocation,
         make: brand?.length > 0 ? brand : [makeName],
         reqPage: "BRAND",
+        color: [],
+        deviceCondition: [],
+        deviceStorage: [],
+        maxsellingPrice: 200000,
+        minsellingPrice: 0,
+        verified: "",
       };
       if (priceRange && priceRange.min && priceRange.max) {
         payLoad.minsellingPrice = priceRange.min;
@@ -106,7 +117,8 @@ function BrandPage() {
         (response) => {
           console.log("searchFilter ", response?.dataObject);
           setProducts(response?.dataObject?.otherListings);
-          setBestDeal([]);
+          // setBestDeal([]);
+          setBestDeal(response?.dataObject?.bestDeals);
           setLoading(false);
         }
       );
@@ -186,11 +198,11 @@ function getSortedProducts(applySort, products) {
     });
   } else if (applySort && applySort === "Newest First") {
     sortedProducts.sort((a, b) => {
-      return stringToDate(b.modifiedDate) - stringToDate(a.modifiedDate);
+      return (a.updatedAt && b.updatedAt) && stringToDate(b.updatedAt) - stringToDate(a.updatedAt);
     });
   } else if (applySort && applySort === "Oldest First") {
     sortedProducts.sort((a, b) => {
-      return stringToDate(a.modifiedDate) - stringToDate(b.modifiedDate);
+      return (a.updatedAt && b.updatedAt) && stringToDate(a.updatedAt) - stringToDate(b.updatedAt);
     });
   }
   console.log("--> sortedProducts ", sortedProducts);

@@ -144,26 +144,26 @@ const OtherSeller = ({ data }) => {
   console.log("OTHER ", data);
   return (
     <>
-    {data?.map((item, index) => (
+    {/* {data?.map((item, index) => ( */}
     <div
       className="my-1 rounded p-2 flex justify-between flex-shrink-0 shadow-sm"
-      key={index}
+      // key={index}
       style={{ border: "1px solid #EFEFEF" }}
     >
       <div className="flex flex-col">
         <span className="text-xs text-m-grey-2">Price</span>
-        {item.externalSourcePrice && (
+        {data.externalSourcePrice && (
           <span className="text-2xl text-m-grey-1 h-9 font-semibold flex items-center -ml-1">
-            <BiRupee /> {numberWithCommas(item.externalSourcePrice)}
+            <BiRupee /> {numberWithCommas(data.externalSourcePrice)}
           </span>
         )}
       </div>
       <div className="flex flex-col justify-center items-start">
         <span className="text-xs text-m-grey-2">Seller</span>
         <span className="my-1 w-28">
-          {item.externalSourceImage && (
+          {data.externalSourceImage && (
             <img
-              src={item.externalSourceImage}
+              src={data.externalSourceImage}
               alt={data.externalSourceName || "seller"}
               // width={120}
               // height={32}
@@ -174,7 +174,7 @@ const OtherSeller = ({ data }) => {
         </span>
       </div>
     </div>
-        ))}
+        {/* ))} */}
     </>
   );
 };
