@@ -5,7 +5,8 @@ import { FaRupeeSign } from "react-icons/fa";
 import { numberWithCommas } from "../../utils/util";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
-import Logo from "@/assets/home_logo.svg"
+// import Logo from "@/assets/home_logo.svg"
+import Logo from "@/assets/oru_phones_logo.png"
 
 
 function ProductCard({ data, prodLink, setProducts }) {
