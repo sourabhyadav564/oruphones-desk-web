@@ -36,7 +36,7 @@ function ProductDetails({ listingInfo }) {
   const listingId = router.query.productID;
   console.log("listingId ---->", listingId);
 
-  const otherVendorData = [];
+  let otherVendorData = [];
 
   productData.filter((item) => {
     if (item.listingId === listingId) {
@@ -72,12 +72,6 @@ function ProductDetails({ listingInfo }) {
           return items.listingId != listingInfo.listingId;
         })
       );
-      setProductsData(
-        response &&
-          response?.dataObject?.otherListings?.filter((items) => {
-            return items.listingId != listingInfo.listingId;
-          }) || []
-      );
     });
   }, [listingInfo]);
 
@@ -86,6 +80,8 @@ function ProductDetails({ listingInfo }) {
   simliarProducts = simliarProducts?.filter((item) => {
     return item.listingId != otherVendorData[0]?.listingId || listingInfo?.listingId
   })
+
+  console.log("simliarProducts", simliarProducts);
 
   return (
     <main className="container my-6">
@@ -108,7 +104,16 @@ function ProductDetails({ listingInfo }) {
           >
             Similar Products
           </h1>
-          <div className="grid grid-cols-4 gap-6 mt-5">
+          <div className="grid grid-cols-4 gap-6 mt-5"
+          onClick={() => {
+            setProductsData(
+              simliarProducts.length > 0 &&
+              simliarProducts?.filter((items) => {
+                  return items.listingId != listingInfo.listingId;
+                }) || []
+            );
+          }}
+          >
             {simliarProducts && simliarProducts.length > 0 ? (
               simliarProducts?.map((product, index) => (
                 <ProductCard

@@ -47,16 +47,18 @@ const Products = () => {
         modelName,
         Cookies.get("userUniqueId")
       );
+      console.log("Products --> Data ", data.dataObject);
       if (data?.dataObject?.otherListings.length > -1) {
+        console.log("Products1", true)
         setProducts((data && data?.dataObject?.otherListings) || []);
         setProductsData((data && data?.dataObject?.otherListings) || []);
       }
       if (data?.dataObject?.bestDeals.length > -1) {
+        console.log("Products2", true)
         setBestDeals((data && data?.dataObject?.bestDeals) || []);
         setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
       setLoading(false);
-      console.log("Products --> Data ", data.dataObject);
     };
     if (modelName) {
       fetchData();
