@@ -29,3 +29,17 @@ export const otherVandorDataSelector = selector({
 //         return data
 //     }
 // })
+
+export const topLoadingBarState = atom({
+    key: "topLoadingBarState",
+    default: 0,
+    // effects_UNSTABLE: [persistAtom],
+})
+
+export const topLoadingBarSelector = selector({
+    key: "topLoadingBarSelector",
+    get: ({get}) => {
+        const data = get(topLoadingBarState)
+        return data
+    },
+})

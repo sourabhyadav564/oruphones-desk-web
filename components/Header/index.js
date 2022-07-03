@@ -13,13 +13,39 @@ import SearchBar from "./SearchBar";
 import SellNowBtn from "./SellNowBtn";
 import LocationPicker from "./LocationPicker";
 
+// Loading bar configuration
+import LoadingBar from "react-top-loading-bar";
+
+import {
+  topLoadingBarSelector,
+} from "../../atoms/globalState";
+
+// import {
+//   topLoadingBarState,
+// } from "../../atoms/globalState";
+
+// import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+
 function Header({ menuItems }) {
   const [isOpen, setIsOpen] = useState(false);
   const [openLocationPopup, setOpenLocationPopup] = useState(false);
   const { getSearchLocation } = useContext(AppContext);
 
+  // const [progress, setProgress] = useState(100)
+  // const [progress, setProgress] = useRecoilState(topLoadingBarState);
+  const progress_number = useRecoilValue(topLoadingBarSelector);
+
   return (
     <header>
+      <LoadingBar
+        color="#00a483"
+        shadow={true}
+        waitingTime={1000}
+        height={3}
+        progress={progress_number}
+        // onLoaderFinished={() => setProgress(0)}
+      />
       <div className="container bg-m-white sm:bg-m-grey flex items-center h-16 ">
         <Link href="/">
           <a className="w-36 h-9 mr-4 lg:mr-8 block relative">
@@ -37,7 +63,9 @@ function Header({ menuItems }) {
               <BiCurrentLocation className="h-5 w-5" />
             </span>
             <div className="flex-1 flex h-full w-full items-center border border-l-0 rounded rounded-l-none pr-2 bg-white border-m-grey-5">
-              <span className="flex-1 text-center px-4">{getSearchLocation}</span>
+              <span className="flex-1 text-center px-4">
+                {getSearchLocation}
+              </span>
               <BiChevronDown className="h-5 w-5" />
             </div>
           </div>
@@ -72,13 +100,37 @@ function Header({ menuItems }) {
 export default Header;
 
 const OpenIcon = () => (
-  <svg className="block h-6 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+  <svg
+    className="block h-6 w-7"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M4 6h16M4 12h16M4 18h16"
+    />
   </svg>
 );
 
 const CloseIcon = () => (
-  <svg className="block h-6 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+  <svg
+    className="block h-6 w-7"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M6 18L18 6M6 6l12 12"
+    />
   </svg>
 );
