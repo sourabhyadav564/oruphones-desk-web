@@ -52,6 +52,7 @@ const useFilterOptions = () => {
   const fetchApi = () => {
     getShowSerchFilters().then(
       (res) => {
+        console.log(res?.data);
         if (res?.status === "SUCCESS") {
           let tempFilters = filterOptions.map((item) => {
             if (item.id === "brand") {
@@ -79,7 +80,7 @@ const useFilterOptions = () => {
                 ...item,
                 options: [
                   { value: "all", label: "All", checked: false },
-                  ...res?.dataObject?.Condition.map((items) => {
+                  ...res?.dataObject?.Conditions.map((items) => {
                     return { value: items, label: items, checked: false };
                   }),
                 ],
