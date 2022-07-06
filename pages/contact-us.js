@@ -1,7 +1,55 @@
 import Input from "@/components/Form/Input";
 import TextArea from "@/components/Form/TextArea";
+import { useState } from "react";
+import { contactUs } from "api/axios";
+import { toast } from "react-toastify";
 
 function contactUS() {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [mobile, setMobile] = useState();
+  const [message, setMessage] = useState();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let payload = {
+      name,
+      email,
+      mobile,
+      message,
+    };
+    if (
+      name != "" &&
+      name != undefined &&
+      email != "" &&
+      email != undefined &&
+      message != "" &&
+      message != undefined &&
+      mobile != "" &&
+      mobile != undefined
+    ) {
+      contactUs(payload).then((response) => {
+        toast.info(response?.reason, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        window.location.reload();
+      });
+    } else {
+      if (name == undefined) {
+        setName("");
+      }
+      if (email == undefined) {
+        setEmail("");
+      }
+      if (message == undefined) {
+        setMessage("");
+      }
+      if (mobile == undefined) {
+        setMobile("");
+      }
+    }
+  }
+
   return (
     <main className="container my-4">
       <section className="bg-m-green-dark h-52 p-8 flex items-center rounded-md">
@@ -16,16 +64,72 @@ function contactUS() {
           <p className="text-xl text-black-20 mb-4">contact@oruphones.com</p>
         </div>
         <div className="col-span-2 bg-white rounded border grid grid-cols-2 gap-6 px-8 pt-12 pb-6">
-          <Input> Name </Input>
-          <Input> Email ID </Input>
-          <Input> Mobile No </Input>
+          <div className="flex flex-col">
+            <Input
+              type="text"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            >
+              {" "}
+              Name{" "}
+            </Input>
+            {name == "" && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <Input
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            >
+              {" "}
+              Email ID{" "}
+            </Input>
+            {email == "" && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <Input
+              type="number"
+              onChange={(e) => {
+                setMobile(e.target.value);
+              }}
+            >
+              {" "}
+              Mobile No{" "}
+            </Input>
+            {mobile == "" && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
+          </div>
           <span />
-          <div className="col-span-2">
-            <TextArea type="text" name="message">
+          <div className="col-span-2 flex flex-col">
+            <TextArea
+              type="text"
+              name="message"
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            >
               Message
             </TextArea>
+            {message == "" && (
+              <p className="text-sm whitespace-nowrap cursor-pointer text-red">
+                Please select this field
+              </p>
+            )}
           </div>
-          <div className="col-span-2 flex justify-end">
+          <div className="col-span-2 flex justify-end" onClick={handleSubmit}>
             <button className="bg-m-green w-52 px-4 py-2 rounded text-white">
               {" "}
               Submit{" "}
@@ -38,3 +142,21 @@ function contactUS() {
 }
 
 export default contactUS;
+
+{
+  /* <Input
+                id="inputName"
+                inputClass={"w-full"}
+                defaultValue={userInfo?.userdetails?.userName || ""}
+                placeholder="Enter seller name ex: Ram, Mega Traders etc"
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setNameValueRequired("");
+                }}
+                type="text"
+                maxLength="30"
+                errorClass={`border ${nameValueRequired}`}
+              >
+                Name
+              </Input> */
+}

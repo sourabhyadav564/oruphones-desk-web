@@ -723,3 +723,15 @@ export function addsubscription(email) {
     }
   );
 }
+
+export function contactUs(payLoad) {
+  const API_ENDPOINT = BASE_URL + `/global/contactus`;
+  return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
+    (response) => {
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
