@@ -51,7 +51,7 @@ function LoginPopup({ open, setOpen, redirect }) {
         <Fragment>
           <div className="container max-w-xl grid place-items-center">
             <div>
-              <Image src={home_logo} alt="Mobiru" width={200} height={40} />
+              <Image src={home_logo} alt="ORUPhones" width={200} height={40} />
             </div>
             <form
               onSubmit={handleSubmit}

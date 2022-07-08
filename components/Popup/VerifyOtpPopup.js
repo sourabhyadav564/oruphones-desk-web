@@ -100,7 +100,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   return (
     <div className="container max-w-xl grid place-items-center">
       <div>
-        <Image src={home_logo} alt="Mobiru" width={160} height={40} />
+        <Image src={home_logo} alt="ORUPhones" width={160} height={40} />
       </div>
       <form onSubmit={handleSubmit} className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96">
         <h2 className="text-2xl font-extrabold text-center" style={{ color: "#007B63" }}>

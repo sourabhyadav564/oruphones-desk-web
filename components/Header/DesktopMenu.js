@@ -38,7 +38,7 @@ const menus = [
   //   name: "Shop by Grade",
   //   options: [],
   // },
-  { name: "Blog", href: "https://www.mobiruindia.com/blogs" },
+  { name: "Blog", href: "https://www.oruphones.com/blog" },
 ];
 
 function DesktopMenu({ menuItems }) {

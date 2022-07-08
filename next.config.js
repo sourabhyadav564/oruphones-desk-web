@@ -23,6 +23,7 @@ module.exports = {
       "zenrodevimages.s3-us-west-2.amazonaws.com",
       "zenrodeviceimages.s3.us-west-2.amazonaws.com",
       "www.mobiruindia.com",
+      "www.oruphones.com",
       "mobiruecom.s3.us-west-2.amazonaws.com",
       "zenroecom.s3.us-west-2.amazonaws.com",
       "zenrodeviceimages.s3-us-west-2.amazonaws.com",

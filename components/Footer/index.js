@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="flex items-center gap-x-4 mt-4 ">
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.facebook.com/mobiruindia"
+                href="https://www.facebook.com/oruphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://twitter.com/mobiruindia"
+                href="https://twitter.com/oruphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -69,7 +69,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.instagram.com/mobiruindia/"
+                href="https://www.instagram.com/oruphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -87,7 +87,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.linkedin.com/company/mobiruindia"
+                href="https://www.linkedin.com/company/oruphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
