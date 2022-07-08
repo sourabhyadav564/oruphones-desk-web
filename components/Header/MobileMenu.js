@@ -37,7 +37,7 @@ function MobileMenu({ isOpen }) {
             <Item>Shop by Brand</Item>
             <Item>Shop by Grade</Item>
             <Item>Blogs</Item>
-            <Item>Mobiru App</Item>
+            <Item>ORU App</Item>
           </div>
         </div>
       )}
