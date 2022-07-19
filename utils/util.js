@@ -5,6 +5,22 @@ export function numberWithCommas(x) {
   return x;
 }
 
+export const ENV = {
+  PRODUCTION: {
+    KEY: 'production',
+    URL: 'https://api.oruphones.com',
+  },
+  DEVELOPMENT: {
+    KEY: 'development',
+    URL: 'https://api.oruphones.com',
+  },
+  LOCAL: {
+    KEY: 'local',
+    URL: 'https://new-test-application-001.herokuapp.com',
+  },
+  MENULISTSECRETKEY: 'DSJDGJLGFJLGADUEJMBNBDSHULFBFNBHJGXY',
+};
+
 export function numberFromString(x) {
   return x?.replace(/[^0-9]/g, "");
 }

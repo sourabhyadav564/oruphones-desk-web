@@ -77,7 +77,7 @@ function AddEditListing({
   };
 
   useEffect(() => {
-    var totalCities1 = cities.map((items) => {
+    var totalCities1 = cities?.map((items) => {
       return items.city;
     });
     setTotalCities(totalCities1);
@@ -492,7 +492,7 @@ function AddEditListing({
                 onFocus={(e) => {
                   setLocationRequired("");
                 }}
-                options={totalCities.map((item) => {
+                options={totalCities?.map((item) => {
                   return { label: item, value: item };
                 })}
               ></Select>

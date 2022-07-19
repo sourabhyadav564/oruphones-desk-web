@@ -8,11 +8,11 @@ import AppContext from "@/context/ApplicationContext";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 
-import {
-  otherVendorDataState,
-  // otherVandorListingIdState,
-} from "../../../atoms/globalState";
-import { useRecoilState } from "recoil";
+// import {
+//   otherVendorDataState,
+//   // otherVandorListingIdState,
+// } from "../../../atoms/globalState";
+// import { useRecoilState } from "recoil";
 
 const settings = {
   slidesToShow: 1,
@@ -31,8 +31,8 @@ function Bestdealnearyou() {
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
 
-  const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  console.log("product from make best deal near you page----->", product);
+  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
+  // console.log("product from make best deal near you page----->", product);
 
   useEffect(() => {
     if (getSearchLocation) {
@@ -42,10 +42,10 @@ function Bestdealnearyou() {
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         setBestDeal(response?.dataObject?.bestDeals);
-        setProductsData([
-          ...response?.dataObject?.otherListings,
-          ...response?.dataObject?.bestDeals,
-        ]);
+        // setProductsData([
+        //   ...response?.dataObject?.otherListings,
+        //   ...response?.dataObject?.bestDeals,
+        // ]);
         setLoading(false);
       });
     }

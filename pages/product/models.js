@@ -3,6 +3,7 @@ import TopSellingCard from "../../components/Cards/TopSellingCard";
 import Filter from "../../components/Filter";
 
 import * as Axios from "../../api/axios";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 function AllModels() {
   const [applyFilter, setApplyFilter] = useState({});
@@ -20,7 +21,9 @@ function AllModels() {
   function getFilteredValues() {
     const tempProducts = topsellingmodels;
     if (applyFilter && applyFilter.brand && applyFilter.brand.length > 0) {
-      tempProducts = tempProducts.filter((items) => applyFilter.brand.includes(items.make));
+      tempProducts = tempProducts.filter((items) =>
+        applyFilter.brand.includes(items.make)
+      );
     }
     // if (applyFilter && applyFilter.condition && applyFilter.condition.length > 0) {
     //   tempProducts = tempProducts.filter((items) => applyFilter.condition.includes(items.deviceCondition));
@@ -38,11 +41,21 @@ function AllModels() {
           ))}
         </div>
       </Filter> */}
+      {topsellingmodels && topsellingmodels.length > 0 ? (
         <div className="grid grid-cols-4 gap-4 mt-4">
-          {topsellingmodels.map((product, index) => (
+          {topsellingmodels?.map((product, index) => (
             <TopSellingCard key={`${index}-${product?.make}`} data={product} />
           ))}
         </div>
+      ) : (
+        <div className="grid grid-cols-4 gap-4">
+          {Array(8)
+            .fill()
+            .map((_, index) => (
+              <ProductSkeletonCard />
+            ))}
+        </div>
+      )}
     </main>
   );
 }

@@ -17,6 +17,7 @@ class MyDocument extends Document {
         <body className="font-open-sans bg-m-grey">
           <Main />
           <NextScript />
+          <script src="/restrict.js" />
         </body>
       </Html>
     );

@@ -109,7 +109,8 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       console.log(id, Cookies.get("userUniqueId"));
       const getListedDeviceInfo = await Axios.getListedDeviceInfo(
         id,
-        Cookies.get("userUniqueId")
+        Cookies.get("userUniqueId"),
+        Cookies.get("sessionId")
       );
       if (getListedDeviceInfo) {
         console.log(

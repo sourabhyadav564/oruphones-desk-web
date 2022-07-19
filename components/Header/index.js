@@ -14,18 +14,18 @@ import SellNowBtn from "./SellNowBtn";
 import LocationPicker from "./LocationPicker";
 
 // Loading bar configuration
-import LoadingBar from "react-top-loading-bar";
+// import LoadingBar from "react-top-loading-bar";
 
-import {
-  topLoadingBarSelector,
-} from "../../atoms/globalState";
+// import {
+//   topLoadingBarSelector,
+// } from "../../atoms/globalState";
 
 // import {
 //   topLoadingBarState,
 // } from "../../atoms/globalState";
 
 // import { useRecoilState } from "recoil";
-import { useRecoilValue } from "recoil";
+// import { useRecoilValue } from "recoil";
 
 function Header({ menuItems }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,18 +34,18 @@ function Header({ menuItems }) {
 
   // const [progress, setProgress] = useState(100)
   // const [progress, setProgress] = useRecoilState(topLoadingBarState);
-  const progress_number = useRecoilValue(topLoadingBarSelector);
+  // const progress_number = useRecoilValue(topLoadingBarSelector);
 
   return (
     <header>
-      <LoadingBar
+      {/* <LoadingBar
         color="#00a483"
         shadow={true}
         waitingTime={1000}
         height={3}
         progress={progress_number}
         // onLoaderFinished={() => setProgress(0)}
-      />
+      /> */}
       <div className="container bg-m-white sm:bg-m-grey flex items-center h-16 ">
         <Link href="/">
           <a className="w-36 h-9 mr-4 lg:mr-8 block relative">

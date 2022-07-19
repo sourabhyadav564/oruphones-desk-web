@@ -6,19 +6,20 @@ import * as Axios from "../../../../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import FullImageView from "@/components/FullImageView";
 import Cookies from "js-cookie";
+import Logo from "@/assets/oru_phones_logo.png";
 
-import {
-  otherVandorDataSelector,
-  // otherVandorListingIdSelector,
-} from "../../../../../atoms/globalState";
+// import {
+//   otherVandorDataSelector,
+//   // otherVandorListingIdSelector,
+// } from "../../../../../atoms/globalState";
 
-import {
-  otherVendorDataState,
-  // otherVandorListingIdState,
-} from "../../../../../atoms/globalState";
-import { useRecoilState } from "recoil";
+// import {
+//   otherVendorDataState,
+//   // otherVandorListingIdState,
+// } from "../../../../../atoms/globalState";
+// import { useRecoilState } from "recoil";
 
-import { useRecoilValue } from "recoil";
+// import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 
 function ProductDetails({ listingInfo }) {
@@ -26,33 +27,31 @@ function ProductDetails({ listingInfo }) {
   const { getSearchLocation } = useContext(AppContext);
   const [openImageFullView, setOpenImageFullView] = useState(false);
 
-  const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  console.log("product from productID page----->", product);
+  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
+  // console.log("product from productID page----->", product);
 
-  const productData = useRecoilValue(otherVandorDataSelector);
-  console.log("productData ---->", productData);
+  // const productData = useRecoilValue(otherVandorDataSelector);
+  // console.log("productData ---->", productData);
 
-  const router = useRouter();
-  const listingId = router.query.productID;
-  console.log("listingId ---->", listingId);
+  // const router = useRouter();
+  // const listingId = router.query.productID;
+  // console.log("listingId ---->", listingId);
 
-  let otherVendorData = [];
+  // let otherVendorData = [];
 
-  productData.filter((item) => {
-    if (item.listingId === listingId) {
-      otherVendorData.push(item);
-    }
-  });
+  // productData.filter((item) => {
+  //   if (item.listingId === listingId) {
+  //     otherVendorData.push(item);
+  //   }
+  // });
 
-  console.log("otherVendorData ---->", otherVendorData);
+  // console.log("otherVendorData ---->", otherVendorData);
 
   useEffect(() => {
     let payLoad = {
       listingLocation: getSearchLocation,
-      make: [listingInfo.make || otherVendorData[0]?.make],
-      marketingName: [
-        listingInfo.marketingName || otherVendorData[0]?.marketingName,
-      ],
+      make: [listingInfo.make],
+      marketingName: [listingInfo.marketingName],
       reqPage: "TSM",
       color: [],
       deviceCondition: [],
@@ -78,8 +77,8 @@ function ProductDetails({ listingInfo }) {
   console.log("listingInfo", listingInfo);
 
   simliarProducts = simliarProducts?.filter((item) => {
-    return item.listingId != otherVendorData[0]?.listingId || listingInfo?.listingId
-  })
+    return item.listingId != listingInfo?.listingId;
+  });
 
   console.log("simliarProducts", simliarProducts);
 
@@ -89,13 +88,13 @@ function ProductDetails({ listingInfo }) {
       <section className="grid grid-cols-4 gap-4">
         <div className="bg-white col-span-3 shadow rounded p-6">
           <ProductDetailsCard
-            key={otherVendorData[0]?.listingId || listingInfo?.listingId}
-            data={otherVendorData[0] || listingInfo}
+            key={listingInfo?.listingId}
+            data={listingInfo}
             openFullImage={() => setOpenImageFullView(true)}
           />
         </div>
         <div className="bg-white shadow rounded">
-          <SellerDetailsCard data={otherVendorData[0] || listingInfo} />
+          <SellerDetailsCard data={listingInfo} />
         </div>
         <div className="col-span-4">
           <h1
@@ -104,15 +103,16 @@ function ProductDetails({ listingInfo }) {
           >
             Similar Products
           </h1>
-          <div className="grid grid-cols-4 gap-6 mt-5"
-          onClick={() => {
-            setProductsData(
-              simliarProducts.length > 0 &&
-              simliarProducts?.filter((items) => {
-                  return items.listingId != listingInfo.listingId;
-                }) || []
-            );
-          }}
+          <div
+            className="grid grid-cols-4 gap-6 mt-5"
+            // onClick={() => {
+            //   setProductsData(
+            //     simliarProducts.length > 0 &&
+            //     simliarProducts?.filter((items) => {
+            //         return items.listingId != listingInfo.listingId;
+            //       }) || []
+            //   );
+            // }}
           >
             {simliarProducts && simliarProducts.length > 0 ? (
               simliarProducts?.map((product, index) => (
@@ -136,24 +136,20 @@ function ProductDetails({ listingInfo }) {
         close={() => setOpenImageFullView(false)}
         images={
           (listingInfo?.images?.length && listingInfo?.images) ||
-          (otherVendorData[0]?.images.length && otherVendorData[0].images) ||
-          listingInfo?.defaultImage ||
+          // listingInfo?.defaultImage ||
+          (listingInfo?.defaultImage?.fullImage && [
+            { fullImage: listingInfo?.defaultImage?.fullImage },
+          ]) ||
           (listingInfo?.imagePath && [
             {
               fullImage: listingInfo?.imagePath,
               thumbImage: listingInfo?.imagePath,
             },
           ]) ||
-          (otherVendorData[0]?.imagePath && [
+          (listingInfo?.vendorLogo && [
             {
-              fullImage: otherVendorData[0]?.imagePath,
-              thumbImage: otherVendorData[0]?.imagePath,
-            },
-          ]) ||
-          (otherVendorData[0]?.vendorLogo && [
-            {
-              fullImage: otherVendorData[0]?.vendorLogo,
-              thumbImage: otherVendorData[0]?.vendorLogo,
+              fullImage: Logo?.src,
+              thumbImage: Logo?.src,
             },
           ])
         }
@@ -165,14 +161,18 @@ function ProductDetails({ listingInfo }) {
 export default ProductDetails;
 
 export async function getServerSideProps({ req, res, query }) {
-  const { userUniqueId } = req.cookies;
-  console.log("fetchSimilarProducts userUniqueId", userUniqueId);
+  const { userUniqueId, sessionId } = req.cookies;
+  // console.log("userUniqueId", userUniqueId);
+  // console.log("sessionId", sessionId);
+  // console.log("productID", query.productID);
+  // console.log("isOtherVendor", query.isOtherVendor);
   const listingInfo = await Axios.detailWithUserInfo(
     query.isOtherVendor,
     query.productID,
-    userUniqueId || "Guest"
+    userUniqueId || "Guest",
+    sessionId || ""
   );
-  console.log("fetchSimilarProducts listingInfo", listingInfo);
+  console.log("detailWithUserInfo listingInfo", listingInfo);
   return {
     props: { listingInfo: listingInfo?.dataObject || [] },
   };

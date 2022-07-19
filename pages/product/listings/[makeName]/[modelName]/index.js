@@ -9,11 +9,11 @@ import * as Axios from "../../../../../api/axios";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 
-import {
-  otherVendorDataState,
-  // otherVandorListingIdState,
-} from "../../../../../atoms/globalState";
-import { useRecoilState } from "recoil";
+// import {
+//   otherVendorDataState,
+//   // otherVandorListingIdState,
+// } from "../../../../../atoms/globalState";
+// import { useRecoilState } from "recoil";
 
 const settings = {
   slidesToShow: 1,
@@ -36,8 +36,8 @@ const Products = () => {
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
 
-  const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  console.log("product from make page----->", product);
+  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
+  // console.log("product from make page----->", product);
 
   useEffect(() => {
     setLoading(true);
@@ -51,12 +51,12 @@ const Products = () => {
       if (data?.dataObject?.otherListings.length > -1) {
         console.log("Products1", true)
         setProducts((data && data?.dataObject?.otherListings) || []);
-        setProductsData((data && data?.dataObject?.otherListings) || []);
+        // setProductsData((data && data?.dataObject?.otherListings) || []);
       }
       if (data?.dataObject?.bestDeals.length > -1) {
         console.log("Products2", true)
         setBestDeals((data && data?.dataObject?.bestDeals) || []);
-        setProductsData((data && data?.dataObject?.bestDeals) || []);
+        // setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
       setLoading(false);
     };
@@ -164,7 +164,7 @@ const Products = () => {
                 key={index}
                 onClick={() => {
                   // setListingId(item.listingId);
-                  setProductsData(products);
+                  // setProductsData(products);
                 }}
               >
                 <ProductCard

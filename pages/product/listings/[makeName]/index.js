@@ -10,11 +10,11 @@ import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 
-import {
-  otherVendorDataState,
-  // otherVandorListingIdState,
-} from "../../../../atoms/globalState";
-import { useRecoilState } from "recoil";
+// import {
+//   otherVendorDataState,
+//   // otherVandorListingIdState,
+// } from "../../../../atoms/globalState";
+// import { useRecoilState } from "recoil";
 
 const settings = {
   slidesToShow: 1,
@@ -34,8 +34,8 @@ function BrandPage() {
   const [applySort, setApplySort] = useState();
   const { getSearchLocation } = useContext(AppContext);
 
-  const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  console.log("product from make page----->", product);
+  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
+  // console.log("product from make page----->", product);
 
   useEffect(() => {
     if (makeName) {
@@ -49,13 +49,13 @@ function BrandPage() {
         // setBestDeal(response?.dataObject?.bestDeals);
         if (response?.dataObject?.otherListings.length > -1) {
           setProducts((response && response?.dataObject?.otherListings) || []);
-          setProductsData(
-            (response && response?.dataObject?.otherListings) || []
-          );
+          // setProductsData(
+          //   (response && response?.dataObject?.otherListings) || []
+          // );
         }
         if (response?.dataObject?.bestDeals.length > -1) {
           setBestDeal((response && response?.dataObject?.bestDeals) || []);
-          setProductsData((response && response?.dataObject?.bestDeals) || []);
+          // setProductsData((response && response?.dataObject?.bestDeals) || []);
         }
 
         setLoading(false);
@@ -161,7 +161,7 @@ function BrandPage() {
                 key={index}
                 onClick={() => {
                   // setListingId(item.listingId);
-                  setProductsData(products);
+                  // setProductsData(products);
                 }}
               >
                 <ProductCard

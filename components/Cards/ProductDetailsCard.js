@@ -14,13 +14,17 @@ import Cookies from "js-cookie";
 import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import ShareIcon from "../ShareIcon";
+import Logo from "@/assets/oru_phones_logo.png";
 
 function ProductDetailsCard({ data, openFullImage }) {
   console.log("ProductDetailsCard ", data);
   const [openDeviceReport, setOpenDeviceReport] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
-  const [openRequestVerificationSuccessPopup, setRequestVerificationSuccessPopup] = useState(false);
+  const [
+    openRequestVerificationSuccessPopup,
+    setRequestVerificationSuccessPopup,
+  ] = useState(false);
   const [deviceListingInfo, setDeviceListingInfo] = useState(data);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
@@ -35,12 +39,12 @@ function ProductDetailsCard({ data, openFullImage }) {
     accessoriesList.push("Earphones");
   }
 
-  console.log("1", data?.images)
-  console.log("2", data?.imagePath)
-  console.log("3", data?.defaultImage)
-  console.log("4", data?.vendorLogo)
+  console.log("1", data?.images);
+  console.log("2", data?.imagePath);
+  console.log("3", data?.defaultImage);
+  console.log("4", data?.vendorLogo);
 
-  console.log("5", accessoriesList)
+  console.log("5", accessoriesList);
 
   return (
     <Fragment>
@@ -49,7 +53,10 @@ function ProductDetailsCard({ data, openFullImage }) {
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
               <ShareIcon data={deviceListingInfo} width={16} height={16} />
-              <AddFav data={deviceListingInfo} setProducts={setDeviceListingInfo} />
+              <AddFav
+                data={deviceListingInfo}
+                setProducts={setDeviceListingInfo}
+              />
             </Fragment>
           )}
         </div>
@@ -68,8 +75,10 @@ function ProductDetailsCard({ data, openFullImage }) {
                   thumbImage: data?.defaultImage?.fullImage,
                 }) ||
                 (data?.vendorLogo && {
-                  fullImage: data?.vendorLogo,
-                  thumbImage: data?.vendorLogo,
+                  // fullImage: data?.vendorLogo,
+                  // thumbImage: data?.vendorLogo,
+                  fullImage: Logo,
+                  thumbImage: Logo,
                 })
               }
             />
@@ -77,16 +86,29 @@ function ProductDetailsCard({ data, openFullImage }) {
         </div>
         <div className="col-span-2">
           <div className="mb-3 px-2">
-            <h1 className="capitalize text-2xl font-semibold text-black-20">{data?.marketingName}</h1>
+            <h1 className="capitalize text-2xl font-semibold text-black-20">
+              {data?.marketingName}
+            </h1>
             <h2 className="capitalize text-2xl font-semibold text-black-20">
-              ({data?.color} {data?.deviceStorage}){data?.deviceRam && <span>({data?.deviceRam + " RAM"})</span>}
+              ({data?.color} {data?.deviceStorage})
+              {data?.deviceRam && <span>({data?.deviceRam + " RAM"})</span>}
             </h2>
             {(!(data?.isOtherVendor === "Y") && (
-              <div className="my-2">{data?.verified ? <VerifiedIcon height={42} width={86} /> : <UnVerifiedIcon height={42} width={86} />}</div>
+              <div className="my-2">
+                {data?.verified ? (
+                  <VerifiedIcon height={42} width={86} />
+                ) : (
+                  <UnVerifiedIcon height={42} width={86} />
+                )}
+              </div>
             )) || <span className="h-5 block"></span>}
             <p className="block text-base text-m-grey-2">List price</p>
-            <p className="font-semibold flex items-center -ml-1 text-m-grey-1" style={{ fontSize: 42 }}>
-              {data?.listingPrice && <BiRupee />} {numberWithCommas(data?.listingPrice || "")}
+            <p
+              className="font-semibold flex items-center -ml-1 text-m-grey-1"
+              style={{ fontSize: 42 }}
+            >
+              {data?.listingPrice && <BiRupee />}{" "}
+              {numberWithCommas(data?.listingPrice || "")}
             </p>
           </div>
           {data?.isOtherVendor === "Y" ? (
@@ -97,10 +119,22 @@ function ProductDetailsCard({ data, openFullImage }) {
                 labelTextSize
                 showConditionInfoPopup={() => setConditionInfoPopup(true)}
               />
-              <LabelAndValue label="Listed on" value={data?.listingDate || "--"} labelTextSize />
-              <LabelAndValue label="Storage" value={data?.deviceStorage || "--"} labelTextSize />
+              <LabelAndValue
+                label="Listed on"
+                value={data?.listingDate || "--"}
+                labelTextSize
+              />
+              <LabelAndValue
+                label="Storage"
+                value={data?.deviceStorage || "--"}
+                labelTextSize
+              />
               <span></span>
-              <LabelAndValue label="Color" value={data?.color || "--"} labelTextSize />
+              <LabelAndValue
+                label="Color"
+                value={data?.color || "--"}
+                labelTextSize
+              />
               <span />
             </div>
           ) : (
@@ -111,35 +145,76 @@ function ProductDetailsCard({ data, openFullImage }) {
                 showConditionInfoPopup={() => setConditionInfoPopup(true)}
                 labelTextSize
               />
-              {<LabelAndValue label="Warranty" value={data?.warranty || "--"} />}
+              {
+                <LabelAndValue
+                  label="Warranty"
+                  value={data?.warranty || "--"}
+                />
+              }
               <LabelAndValue label="Color" value={data?.color || "--"} />
-              <LabelAndValue label="Storage" value={data?.deviceStorage || "--"} />
+              <LabelAndValue
+                label="Storage"
+                value={data?.deviceStorage || "--"}
+              />
               {
                 <LabelAndValue
                   label="Verified on"
                   value={data?.verifiedDate || "Request Verification"}
                   showInfoPopup={() => setOpenInfo(true)}
                   showRequestVerificationSuccessPopup={() => {
-                    Cookies.get("userUniqueId") === undefined ? setShowLoginPopup(true) : setRequestVerificationSuccessPopup(true);
+                    Cookies.get("userUniqueId") === undefined
+                      ? setShowLoginPopup(true)
+                      : setRequestVerificationSuccessPopup(true);
                   }}
                   textAsLink={data?.verifiedDate != null ? false : true}
                   labelTextSize
                 />
               }
-              <LabelAndValue label="Listed on" value={data?.listingDate || "--"} labelTextSize />
-              {<LabelAndValue label="Accessories" value={accessoriesList.join(", ") || "--"} labelTextSize />}
+              <LabelAndValue
+                label="Listed on"
+                value={data?.listingDate || "--"}
+                labelTextSize
+              />
+              {
+                <LabelAndValue
+                  label="Accessories"
+                  value={accessoriesList.join(", ") || "--"}
+                  labelTextSize
+                />
+              }
               {data?.verified && (
-                <LabelAndValue label="Report" value={"Device Verification Report"} showDeviceReport={() => setOpenDeviceReport(true)} labelTextSize />
+                <LabelAndValue
+                  label="Report"
+                  value={"Device Verification Report"}
+                  showDeviceReport={() => setOpenDeviceReport(true)}
+                  labelTextSize
+                />
               )}
             </div>
           )}
         </div>
       </div>
-      <DeviceVerificationReport open={openDeviceReport} setOpen={setOpenDeviceReport} data={data} />
-      <ConditionInfoPopup open={openConditionInfoPopup} setOpen={setConditionInfoPopup} data={data} />
+      <DeviceVerificationReport
+        open={openDeviceReport}
+        setOpen={setOpenDeviceReport}
+        data={data}
+      />
+      <ConditionInfoPopup
+        open={openConditionInfoPopup}
+        setOpen={setConditionInfoPopup}
+        data={data}
+      />
       <VerifiedInfoPopup open={openInfo} setOpen={setOpenInfo} />
-      <RequestVerificationSuccessPopup open={openRequestVerificationSuccessPopup} setOpen={setRequestVerificationSuccessPopup} data={data} />
-      <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} redirect={false} />
+      <RequestVerificationSuccessPopup
+        open={openRequestVerificationSuccessPopup}
+        setOpen={setRequestVerificationSuccessPopup}
+        data={data}
+      />
+      <LoginPopup
+        open={showLoginPopup}
+        setOpen={setShowLoginPopup}
+        redirect={false}
+      />
     </Fragment>
   );
 }

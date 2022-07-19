@@ -4,10 +4,18 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  <BiChevronLeft {...rest} className={`fullimage_prev prev ${className}`} size={32} />
+  <BiChevronLeft
+    {...rest}
+    className={`fullimage_prev prev ${className}`}
+    size={32}
+  />
 );
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  <BiChevronRight {...rest} className={`fullimage_next  next ${className}`} size={32} />
+  <BiChevronRight
+    {...rest}
+    className={`fullimage_next  next ${className}`}
+    size={32}
+  />
 );
 
 function FullImageView({ open, close, images }) {
@@ -16,8 +24,8 @@ function FullImageView({ open, close, images }) {
     return null;
   }
 
-  if(!Array.isArray(images)){
-    images = [images]
+  if (!Array.isArray(images)) {
+    images = [images];
   }
 
   return (
@@ -38,14 +46,24 @@ function FullImageView({ open, close, images }) {
                 temp = index + 1;
               }
             });
-            return <span style={{ color: "white" }}>{images?.length === 1 ? `1 / 1 ` : `${temp} / ${images?.length}`}</span>;
+            return (
+              <span style={{ color: "white" }}>
+                {images?.length === 1
+                  ? `1 / 1 `
+                  : `${temp} / ${images?.length}`}
+              </span>
+            );
           }}
         >
           {images
             .filter((i) => i.fullImage)
             .map((img, index) => (
               <div key={index} className={styles.image_wrapper}>
-                <img src={img?.fullImage} alt={index} style={{ maxWidth: "80%", maxHeight: "70vh" }} />
+                <img
+                  src={img?.fullImage}
+                  alt={index}
+                  style={{ maxWidth: "80%", maxHeight: "70vh" }}
+                />
               </div>
             ))}
         </Slider>

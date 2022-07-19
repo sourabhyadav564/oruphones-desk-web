@@ -79,7 +79,7 @@ export default Aboutus;
 //     const body = doc.querySelector("body");
 //     htmlText = body.innerHTML;
 //   } catch (err) {
-//     console.log("getAboutUsConent error", err);
+//     console.log("getAboutUsContent error", err);
 //     return {
 //       props: {
 //         error: true,

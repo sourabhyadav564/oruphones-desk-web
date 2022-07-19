@@ -11,7 +11,11 @@ function AddListing({ brandsList }) {
   return (
     <main className="container grid grid-cols-3 gap-4 my-8">
       <div className="col-span-2 bg-white rounded shadow">
-        <AddListingForm brandsList={brandsList} openPopup={() => setOpen(true)}  openTCPopup={() => setOpenTCPopup(true)}/>
+        <AddListingForm
+          brandsList={brandsList}
+          openPopup={() => setOpen(true)}
+          openTCPopup={() => setOpenTCPopup(true)}
+        />
       </div>
       <div className="bg-white rounded rounded-t-lg shadow">
         <GuideToSell />
