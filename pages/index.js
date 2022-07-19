@@ -17,16 +17,12 @@ import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import SkeletonCard from "@/components/Cards/SkeletonCard";
 
 export default function Home({ brandsList, fetchTopsellingmodels, sessionId }) {
   const router = useRouter();
   const { locale } = router;
   const t = locale === "en" ? en : null;
   const { getSearchLocation } = useContext(AppContext);
-
-  const [brandsList, setBrandsList] = useState([]);
-  const [fetchTopsellingmodels, setFetchTopsellingmodels] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("sessionId", sessionId);
