@@ -26,8 +26,14 @@ function AddListing({ brandsList }) {
   );
 }
 
-export async function getServerSideProps() {
-  const brandsList = await Axios.fetchMakeModelList();
+export async function getServerSideProps({ req, res, query }) {
+  const { userUniqueId, sessionId } = req.cookies;
+  console.log("userUniqueId", userUniqueId);
+  console.log("sessionId", sessionId);
+  const brandsList = await Axios.fetchMakeModelList(
+    userUniqueId || "Guest",
+    sessionId || ""
+  );
   //console.log("makeModelLists ",brandsList);
   return {
     props: { brandsList: brandsList?.dataObject || [] },

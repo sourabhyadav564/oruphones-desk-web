@@ -84,23 +84,9 @@ export function getSearchResults(q) {
   );
 }
 
-export function fetchBrands(userUniqueId, sessionId) {
-  headers = {...headers, eventName: "GET_ALL_BRANDS", userUniqueId: userUniqueId, sessionId:sessionId};
+export function fetchBrands() {
+  headers = {...headers, eventName: "GET_ALL_BRANDS"}
   const DEFAULT_HEADER = { headers: { ...headers } };
-  // const DEFAULT_HEADER = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     srcFrom: "Desktop Web",
-  //     eventName: "NA",
-  //     userUniqueId: userUniqueId,
-  //     sessionId: sessionId,
-  //     devicePlatform: "Desktop Web",
-  //     location:
-  //       typeof window !== "undefined"
-  //         ? localStorage.getItem("usedLocation")
-  //         : "",
-  //   },
-  // };
   const API_ENDPOINT = BASE_URL + "/master/brands";
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -229,9 +215,23 @@ export function fetchByMakeList(makeName) {
   );
 }
 
-export function fetchMakeModelList() {
-  headers = {...headers, eventName: `GET_ALL_BRANDS`};
+export function fetchMakeModelList(userUniqueId, sessionId) {
+  headers = {...headers, eventName: "GET_MAKE_MODEL_LIST", userUniqueId: userUniqueId, sessionId:sessionId};
   const DEFAULT_HEADER = { headers: { ...headers } };
+  // const DEFAULT_HEADER = {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     srcFrom: "Mobile Web",
+  //     eventName: "NA",
+  //     userUniqueId: userUniqueId,
+  //     sessionId: sessionId,
+  //     devicePlatform: "Mobile Web",
+  //     location:
+  //       typeof window !== "undefined"
+  //         ? localStorage.getItem("usedLocation")
+  //         : "",
+  //   },
+  // };
   console.log("default header for makemodel", DEFAULT_HEADER);
   const API_ENDPOINT = BASE_URL + "/master/makemodellist";
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
