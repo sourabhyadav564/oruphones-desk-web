@@ -39,12 +39,9 @@ function ProductDetailsCard({ data, openFullImage }) {
     accessoriesList.push("Earphones");
   }
 
-  console.log("1", data?.images);
-  console.log("2", data?.imagePath);
-  console.log("3", data?.defaultImage);
-  console.log("4", data?.vendorLogo);
 
-  console.log("5", accessoriesList);
+
+  console.log("deviceListingInfo", deviceListingInfo);
 
   return (
     <Fragment>

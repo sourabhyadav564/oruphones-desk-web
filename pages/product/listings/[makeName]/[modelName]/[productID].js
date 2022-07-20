@@ -74,8 +74,6 @@ function ProductDetails({ listingInfo }) {
     });
   }, [listingInfo]);
 
-  console.log("listingInfo", listingInfo);
-
   simliarProducts = simliarProducts?.filter((item) => {
     return item.listingId != listingInfo?.listingId;
   });
@@ -172,7 +170,6 @@ export async function getServerSideProps({ req, res, query }) {
     userUniqueId || "Guest",
     sessionId || ""
   );
-  console.log("detailWithUserInfo listingInfo", listingInfo);
   return {
     props: { listingInfo: listingInfo?.dataObject || [] },
   };

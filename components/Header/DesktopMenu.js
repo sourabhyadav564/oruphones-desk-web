@@ -14,19 +14,19 @@ const menus = [
   {
     name: "IPhones",
     options: [],
-    make:"apple",
+    make: "apple",
     chlink: "/product/listings/apple",
   },
   {
     name: "Samsung Phones",
     options: [],
-    make:"samsung",
+    make: "samsung",
     chlink: "/product/listings/samsung",
   },
   {
     name: "OnePlus Phones",
     options: [],
-    make:"oneplus",
+    make: "oneplus",
     chlink: "/product/listings/oneplus",
   },
   {
@@ -102,15 +102,21 @@ function DesktopMenu({ menuItems }) {
   return (
     <nav className="bg-m-green ">
       <Popover.Group className="relative container hidden lg:flex items-center justify-between h-12 uppercase text-m-white">
-        {menus.map((item) =>
+        {menus.map((item, index) =>
           item && item.options ? (
             <Popover key={item.name}>
               {({ open, close }) => (
                 <>
-                  <Popover.Button className={`${open ? "" : "text-opacity-90"}text-white uppercase`}>
-                    <span> {item.name} </span>
+                  <Popover.Button
+                    className={`${
+                      open ? "" : "text-opacity-90"
+                    }text-white uppercase`}
+                  >
+                    <Link key={index} href={{ pathname: item.chlink }}>
+                      <span> {item.name} </span>
+                    </Link>
                   </Popover.Button>
-                  <Transition
+                  {/* <Transition
                     as={Fragment}
                     enter="transition ease-out duration-50"
                     enterFrom="opacity-50 translate-y-1"
@@ -188,7 +194,7 @@ function DesktopMenu({ menuItems }) {
                         </div>
                       </div>
                     </Popover.Panel>
-                  </Transition>
+                  </Transition> */}
                 </>
               )}
             </Popover>

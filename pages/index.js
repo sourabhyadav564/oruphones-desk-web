@@ -52,20 +52,14 @@ export async function getServerSideProps({ req, res, query }) {
   const { userUniqueId, sessionId } = req.cookies;
   console.log("userUniqueId", userUniqueId);
   console.log("sessionId", sessionId);
-  const brandsList = await Axios.fetchBrands(
-    userUniqueId || "Guest",
-    sessionId || ""
-  );
-  const fetchTopsellingmodels = await Axios.fetchTopsellingmodels(
-    userUniqueId || "Guest",
-    sessionId || ""
-  );
+  const brandsList = await Axios.fetchBrands();
+  const fetchTopsellingmodels = await Axios.fetchTopsellingmodels();
   // const fetchShopByPrice = await Axios.fetchShopByPrice();
   let sessionID;
   if (sessionId) {
     sessionID = sessionId;
   } else {
-    const session = await getSessionId();
+    const session = await Axios.getSessionId();
     sessionID = session?.dataObject?.sessionId;
   }
 

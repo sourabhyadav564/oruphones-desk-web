@@ -50,6 +50,7 @@ function AddFav({ data, setProducts, ...rest }) {
             setShowLoginPopup(true);
           }}
           {...rest}
+          className="hover:cursor-pointer"
         >
           <path
             id="hearts"
@@ -75,6 +76,7 @@ function AddFav({ data, setProducts, ...rest }) {
         handleFavoties(data);
       }}
       {...rest}
+      className="hover:cursor-pointer"
     >
       <path
         id="hearts"

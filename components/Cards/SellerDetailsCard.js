@@ -15,7 +15,7 @@ function SellerDetailsCard({ data }) {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [openRequestVerificationPopup, setRequestVerificationPopup] =
     useState(false);
-  const [otherSeller, setOtherSeller] = useState(data?.externalSource);
+  const [otherSeller, setOtherSeller] = useState([]);
   const [
     openRequestVerificationSuccessPopup,
     setOpenRequestVerificationSuccessPopup,
@@ -50,6 +50,7 @@ function SellerDetailsCard({ data }) {
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
       });
     }
+    setOtherSeller(data?.externalSource);
   }, [data]);
 
   console.log("contactSellerMobileNumber", contactSellerMobileNumber);

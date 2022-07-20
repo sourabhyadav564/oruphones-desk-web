@@ -36,6 +36,7 @@ function sharePopupInfo(url,content){
         e.preventDefault();
         shareListingInfo(data);
       }}
+      className="hover:cursor-pointer"
     >
       <path
         id="share"
