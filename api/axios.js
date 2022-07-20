@@ -716,9 +716,10 @@ export function bestDealNearYouAll(location, userUniqueId) {
 export function fetchMyFavorites(userUniqueId) {
   headers = {...headers, eventName: "FETCH_FAVORITE_LIST"}
   const DEFAULT_HEADER = { headers: { ...headers } };
+  console.log("default header", DEFAULT_HEADER);
   const API_ENDPOINT =
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
-  return Axios.post(API_ENDPOINT, DEFAULT_HEADER).then(
+  return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
     },
