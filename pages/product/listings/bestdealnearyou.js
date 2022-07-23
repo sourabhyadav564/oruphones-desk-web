@@ -7,6 +7,7 @@ import ProductCard from "@/components/Cards/ProductCard";
 import AppContext from "@/context/ApplicationContext";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 // import {
 //   otherVendorDataState,
@@ -30,30 +31,77 @@ function Bestdealnearyou() {
   const { getSearchLocation } = useContext(AppContext);
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
+  let [pageNumber, setPageNumber] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+  const router = useRouter();
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  // console.log("product from make best deal near you page----->", product);
 
-  useEffect(() => {
+  const loadData = () => {
     if (getSearchLocation) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
-        Cookies.get("userUniqueId")
+        Cookies.get("userUniqueId"),
+        pageNumber
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         setBestDeal(response?.dataObject?.bestDeals);
+        setTotalProducts(response?.dataObject?.totalProducts);
         // setProductsData([
         //   ...response?.dataObject?.otherListings,
         //   ...response?.dataObject?.bestDeals,
         // ]);
         setLoading(false);
+        setPageNumber(pageNumber + 1);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  };
+
+  const loadMoreData = () => {
+    setIsLoadingMore(true);
+    if (getSearchLocation) {
+      Axios.bestDealNearYouAll(
+        getSearchLocation,
+        Cookies.get("userUniqueId"),
+        pageNumber
+      ).then((response) => {
+        setProducts((products) => [
+          ...products,
+          ...response?.dataObject?.otherListings,
+        ]);
+        // setBestDeal(bestDeals => [...bestDeals, ...response?.dataObject?.bestDeals]);
+        // setTotalProducts(response?.dataObject?.totalProducts);
+        // setProductsData([
+        //   ...response?.dataObject?.otherListings,
+        //   ...response?.dataObject?.bestDeals,
+        // ]);
+        setLoading(false);
+        setPageNumber(pageNumber + 1);
+        setIsLoadingMore(false);
+      });
+    }
+  };
+
+  const handelScroll = (e) => {
+    // console.log("top", e.target.documentElement.scrollTop);
+    // console.log("win", window.innerHeight);
+    // console.log("height", e.target.documentElement.scrollHeight);
+
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >
+      e.target.documentElement.scrollHeight 
+    ) {
+      loadMoreData();
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+    window.addEventListener("scroll", handelScroll);
   }, [getSearchLocation]);
 
   useEffect(() => {
-    console.log("SBP ", applyFilter);
     const {
       brand,
       condition,
@@ -98,10 +146,8 @@ function Bestdealnearyou() {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      console.log(" BDNY SEARCH FILTER PAYLOAD -->  ", payLoad);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId", pageNumber) || "Guest", pageNumber).then(
         (response) => {
-          console.log("searchFilter ", response?.dataObject);
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;
           // }
@@ -131,6 +177,9 @@ function Bestdealnearyou() {
             ))}
           </Carousel>
         )}
+        <h4 className="font-semibold text-lg opacity-50">
+          Total Products ({totalProducts})
+        </h4>
         <div className="grid grid-cols-3 gap-4 mt-4">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
             sortingProducts?.map((product, index) => (
@@ -147,6 +196,11 @@ function Bestdealnearyou() {
             </div>
           )}
         </div>
+        {isLoadingMore && (
+          <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
+            <span>Fetching more products...</span>
+          </div>
+        )}
       </Filter>
     </main>
   );
@@ -183,7 +237,6 @@ function getSortedProducts(applySort, products) {
       );
     });
   }
-  console.log("--> sortedProducts ", sortedProducts);
   return sortedProducts;
 }
 export default Bestdealnearyou;

@@ -37,7 +37,6 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await Axios.otpValidate(formData);
-    console.log("otpValidate ", response);
     if (response.status === "SUCCESS" && response.reason === "OTP validated") {
       setOpen(false);
 
@@ -47,8 +46,6 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
       };
 
       const resData = await Axios.getUserUniqueId(payload);
-      console.log("getUserUniqueId resData ", resData?.dataObject?.userUniqueId);
-      console.log("get resData ", resData?.dataObject);
 
       if (resData.status === "SUCCESS" || (resData.status === "FAIL" && resData.reason === "User Already Available")) {
         if (resData.status === "SUCCESS") {
@@ -81,7 +78,6 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
       userUniqueId: data,
     };
 
-    console.log("locationPayload  ", locationPayload);
     const addUserSearchLocationResponse = await Axios.addUserSearchLocation(locationPayload);
     const addUserProfileLocationResponse = await Axios.addUserProfileLocation(locationPayload);
   };
@@ -89,7 +85,6 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   const otpResend = async () => {
     const resendResponse = await Axios.signUp(formData.mobile.split("-")[1]);
     if (resendResponse.status === "SUCCESS") {
-      console.log(resendResponse, resentOTP);
       setSeconds(30);
       setResentOTP(false);
     }
@@ -100,7 +95,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   return (
     <div className="container max-w-xl grid place-items-center">
       <div>
-        <Image src={home_logo} alt="ORUPhones" width={160} height={40} />
+        <Image src={home_logo} alt="ORU Phones" width={160} height={40} />
       </div>
       <form onSubmit={handleSubmit} className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96">
         <h2 className="text-2xl font-extrabold text-center" style={{ color: "#007B63" }}>

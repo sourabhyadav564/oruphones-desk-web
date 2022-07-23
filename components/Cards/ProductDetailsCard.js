@@ -17,7 +17,6 @@ import ShareIcon from "../ShareIcon";
 import Logo from "@/assets/oru_phones_logo.png";
 
 function ProductDetailsCard({ data, openFullImage }) {
-  console.log("ProductDetailsCard ", data);
   const [openDeviceReport, setOpenDeviceReport] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
@@ -41,7 +40,6 @@ function ProductDetailsCard({ data, openFullImage }) {
 
 
 
-  console.log("deviceListingInfo", deviceListingInfo);
 
   return (
     <Fragment>
@@ -84,11 +82,13 @@ function ProductDetailsCard({ data, openFullImage }) {
         <div className="col-span-2">
           <div className="mb-3 px-2">
             <h1 className="capitalize text-2xl font-semibold text-black-20">
-              {data?.marketingName}
+              {data?.marketingName} ({data?.deviceCondition})
             </h1>
             <h2 className="capitalize text-2xl font-semibold text-black-20">
-              ({data?.color} {data?.deviceStorage})
-              {data?.deviceRam && <span>({data?.deviceRam + " RAM"})</span>}
+              {/* ({data?.color} {data?.deviceStorage})
+              {data?.deviceRam && <span>({data?.deviceRam + " RAM"})</span>} */}
+              ({data?.color}, {data?.deviceRam + " RAM"}, 
+              {data?.deviceRam && <span>{data?.deviceStorage + " Storage"})</span>}
             </h2>
             {(!(data?.isOtherVendor === "Y") && (
               <div className="my-2">
@@ -152,6 +152,10 @@ function ProductDetailsCard({ data, openFullImage }) {
               <LabelAndValue
                 label="Storage"
                 value={data?.deviceStorage || "--"}
+              />
+              <LabelAndValue
+                label="RAM"
+                value={data?.deviceRam || "--"}
               />
               {
                 <LabelAndValue

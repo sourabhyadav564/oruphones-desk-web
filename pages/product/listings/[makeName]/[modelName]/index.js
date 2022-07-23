@@ -35,34 +35,88 @@ const Products = () => {
   const [isLoading, setLoading] = useState(true);
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
+  let [pageNumber, setPageNumber] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  // console.log("product from make page----->", product);
 
-  useEffect(() => {
+  const loadData = () => {
     setLoading(true);
     const fetchData = async () => {
       const data = await Axios.fetchByMarketingName(
         getSearchLocation,
         modelName,
-        Cookies.get("userUniqueId")
+        Cookies.get("userUniqueId"),
+        pageNumber
       );
-      console.log("Products --> Data ", data.dataObject);
       if (data?.dataObject?.otherListings.length > -1) {
-        console.log("Products1", true)
         setProducts((data && data?.dataObject?.otherListings) || []);
         // setProductsData((data && data?.dataObject?.otherListings) || []);
       }
       if (data?.dataObject?.bestDeals.length > -1) {
-        console.log("Products2", true)
         setBestDeals((data && data?.dataObject?.bestDeals) || []);
         // setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
+      if (data?.dataObject?.totalProducts > -1) {
+        setTotalProducts(
+          (data && data?.dataObject?.totalProducts) || 0
+        );
+      }
       setLoading(false);
+      setPageNumber(pageNumber + 1);
     };
     if (modelName) {
       fetchData();
     }
+  };
+
+  const loadMoreData = () => {
+    setLoading(true);
+    setIsLoadingMore(true);
+    const fetchData = async () => {
+      const data = await Axios.fetchByMarketingName(
+        getSearchLocation,
+        modelName,
+        Cookies.get("userUniqueId"),
+        pageNumber
+      );
+      if (data?.dataObject?.otherListings.length > -1) {
+        setProducts((products) => [
+          ...products,
+          ...data?.dataObject?.otherListings,
+        ]);
+        // setProductsData((data && data?.dataObject?.otherListings) || []);
+      }
+      // if (data?.dataObject?.bestDeals.length > -1) {
+      //   setBestDeals((data && data?.dataObject?.bestDeals) || []);
+      //   // setProductsData((data && data?.dataObject?.bestDeals) || []);
+      // }
+      setLoading(false);
+      setPageNumber(pageNumber + 1);
+      setIsLoadingMore(false);
+    };
+    if (modelName) {
+      fetchData();
+    }
+  };
+
+  const handelScroll = (e) => {
+    // console.log("top", e.target.documentElement.scrollTop);
+    // console.log("win", window.innerHeight);
+    // console.log("height", e.target.documentElement.scrollHeight);
+
+    if (
+      totalProducts >= 20 && window.innerHeight + e.target.documentElement.scrollTop + 1 >
+      e.target.documentElement.scrollHeight
+    ) {
+      loadMoreData();
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+    window.addEventListener("scroll", handelScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modelName, getSearchLocation]);
 
@@ -113,11 +167,9 @@ const Products = () => {
       if (verification?.length > 0) {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
-      console.log("MODEL FILTER PAYLOAD ", payLoad);
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
         (response) => {
-          console.log("searchFilter ", response?.dataObject);
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;
           // }
@@ -157,6 +209,9 @@ const Products = () => {
             </Carousel>
           </div>
         )}
+         <h4 className="font-semibold text-lg opacity-50">
+          Total Products ({totalProducts})
+        </h4>
         <div className="grid grid-cols-3 gap-4">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
             sortingProducts?.map((product, index) => (
@@ -180,6 +235,15 @@ const Products = () => {
             </div>
           )}
         </div>
+        {isLoadingMore ? (
+          <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
+            <span>Fetching more products...</span>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
+            <span>No more products to load</span>
+          </div>
+        )}
       </Filter>
     </main>
   );
@@ -201,14 +265,21 @@ function getSortedProducts(applySort, products) {
     });
   } else if (applySort && applySort === "Newest First") {
     sortedProducts.sort((a, b) => {
-      return (a.updatedAt && b.updatedAt) && stringToDate(b.updatedAt) - stringToDate(a.updatedAt);
+      return (
+        a.updatedAt &&
+        b.updatedAt &&
+        stringToDate(b.updatedAt) - stringToDate(a.updatedAt)
+      );
     });
   } else if (applySort && applySort === "Oldest First") {
     sortedProducts.sort((a, b) => {
-      return (a.updatedAt && b.updatedAt) && stringToDate(a.updatedAt) - stringToDate(b.updatedAt);
+      return (
+        a.updatedAt &&
+        b.updatedAt &&
+        stringToDate(a.updatedAt) - stringToDate(b.updatedAt)
+      );
     });
   }
-  console.log("--> sortedProducts ", sortedProducts);
   return sortedProducts;
 }
 

@@ -4,6 +4,7 @@ import Filter from "../../components/Filter";
 
 import * as Axios from "../../api/axios";
 import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
+import Link from "next/link";
 
 function AllModels() {
   const [applyFilter, setApplyFilter] = useState({});
@@ -46,13 +47,20 @@ function AllModels() {
           {topsellingmodels?.map((product, index) => (
             <TopSellingCard key={`${index}-${product?.make}`} data={product} />
           ))}
+          <Link href={`/product/listings/bestdealnearyou`} passHref>
+            <a>
+              <div className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
+                <p className="block text-m-green">{"Show All"}</p>
+              </div>
+            </a>
+          </Link>
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-4">
           {Array(8)
             .fill()
             .map((_, index) => (
-              <ProductSkeletonCard />
+              <ProductSkeletonCard popular/>
             ))}
         </div>
       )}

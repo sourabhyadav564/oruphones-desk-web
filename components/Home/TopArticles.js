@@ -13,19 +13,31 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function TopArticles() {
+export default function TopArticles({articles}) {
+
+  console.log("articles", articles);
   return (
     <section className="container top_articles mb-6">
       <Title text="Top Articles" />
       <Carousel {...settings}>
-        {data.map((item) => (
+        {/* {data.map((item) => (
           <ArticleCard
             key={item}
             title="Refurbished iPhone 11 Tips and Tricks for Scoring the Best Deal"
             // src="https://www.mobiruindia.com/blog/wp-content/uploads/2021/03/1.jpg"
             src={image}
           />
+        ))} */}
+
+         {articles.map((item) => (
+          <ArticleCard
+            key={item}
+            title={item.post_title}
+            src={item.post_image}
+            href={item.guid}
+          />
         ))}
+        
         <ArticleCard viewAll />
       </Carousel>
     </section>

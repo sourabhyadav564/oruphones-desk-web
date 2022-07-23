@@ -18,13 +18,10 @@ function Aboutus() {
   }, []);
 
   async function callStaticPages() {
-    // /console.log("-->");
     // let staticDataPath;
     // try {
     //   const response = await infoTemplates();
-    //   console.log("--> res ", response);
     //   staticDataPath = response?.dataObject;
-    //   console.log("--> staticDataPath ", staticDataPath);
     // } catch (error) {
     //   console.log(error);
     // }
@@ -46,7 +43,7 @@ function Aboutus() {
 
   return (
     <main className="container my-8">
-      <section className="bg-m-green-dark h-52 py-8 px-12 flex items-center shadow rounded-md mb-4">
+      <section className="bg-m-green h-52 py-8 px-12 flex items-center shadow rounded-md mb-4">
         <h1 className="text-6xl font-light text-m-grey-5"> About Us </h1>
       </section>
       {parse(htmlText1)}

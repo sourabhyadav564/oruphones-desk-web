@@ -11,9 +11,7 @@ function ListingDetials() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(listingID, Cookies.get("userUniqueId"));
       const getListedDeviceInfo = await Axios.getListedDeviceInfo(listingID, Cookies.get("userUniqueId"));
-      console.log("getListedDeviceInfo ", getListedDeviceInfo);
       setListedDeviceInfo(getListedDeviceInfo?.dataObject);
     };
     if (listingID !== undefined && listingID !== null && listingID !== "") {
@@ -39,7 +37,6 @@ function ListingDetials() {
 }
 
 // export async function getServerSideProps() {
-//   console.log("getServerSideProps")
 //   const brandsList = await Axios.fetchBrands();
 //   const fetchShopByPrice = await Axios.fetchShopByPrice();
 //   const fetchTopsellingmodels = await Axios.fetchTopsellingmodels();

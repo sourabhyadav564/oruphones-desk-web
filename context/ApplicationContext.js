@@ -12,21 +12,17 @@ export const ApplicationContext = ({ children }) => {
   const [getSearchLocation, setSearchLocation] = useState("India");
 
   useEffect(() => {
-    console.log("ApplicationContext getUserProfile ", Cookies.get("mobileNumber"));
     const fetchUserProfileData = async () => {
       const userProfile = await Axios.getUserProfile("91", Cookies.get("mobileNumber"));
-      console.log("userProfile -> ", userProfile?.dataObject);
       setUserInfo(userProfile?.dataObject);
     };
     fetchUserProfileData();
   }, [userLogged, refresh]);
 
   useEffect(() => {
-    console.log("userInfo --> ",userInfo);
     // const searchLoc = userInfo?.userdetails?.address?.filter((items) => {
     //   return items.addressType === "SearchLocation";
     // });
-    // console.log("LOCATION --> ", getSearchLocation, searchLoc);
     // setSearchLocation(() => {
     //   if (searchLoc && searchLoc.length >= 1) {
     //     return searchLoc[0].city;

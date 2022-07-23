@@ -25,11 +25,8 @@ function Profile() {
       userUniqueId: Cookies.get("userUniqueId"),
     };
 
-    console.log("updateUserDetails payload -> ", payload);
     Axios.updateUserDetails(payload).then((res) => {
-      console.log("updateUserDetails -> ", res);
       Axios.getUserProfile("91", mobileNumber?.current).then((resp) => {
-        console.log("userProfile -> ", resp.dataObject.userdetails);
         setUserInfo(resp.dataObject);
         toast.info("Profile information saved successfully", {
           position: toast.POSITION.TOP_CENTER,

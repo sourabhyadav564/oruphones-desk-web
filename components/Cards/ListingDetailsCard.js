@@ -26,7 +26,6 @@ function ListingDetailsCard({ data }) {
   const [openDeletePopup, setDeletePopup] = useState(false);
   const [openAppDownload, setOpenAppDownload] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
-  //console.log("--------------> ",data?.defaultImage);
 
   const accessoriesList = [];
   if (data?.originalbox === "Y") {
@@ -46,7 +45,6 @@ function ListingDetailsCard({ data }) {
     };
     const fetchData = async () => {
       const activeListedDevice = await Axios.activeListedDevice(payload);
-      console.log("activeListedDevice -> ", activeListedDevice);
       if (activeListedDevice.status === "SUCCESS") {
         setOpenActivatePopup(true);
       }

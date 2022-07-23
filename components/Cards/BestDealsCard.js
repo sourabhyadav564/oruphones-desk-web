@@ -8,7 +8,6 @@ import VerifiedIcon from "../VerifiedIcon";
 import { BiChevronRight } from "react-icons/bi";
 
 function BestDealsCard({ data, setProducts }) {
-  console.log("data from best deal cards", data);
   return (
     <div
       className="bg-white rounded-lg py-2 text-m-grey-2 mb-6"

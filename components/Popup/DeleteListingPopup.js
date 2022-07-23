@@ -23,7 +23,6 @@ function DeleteListingPopup({ open, setOpen, data }) {
     };
     const fetchData = async () => {
       const deteleListedDevice = await Axios.deteleListedDevice(payload);
-      console.log("DELETE RECORD -> ", deteleListedDevice.status);
       if (deteleListedDevice.status === "SUCCESS") {
         setOpen(false);
         router.reload();

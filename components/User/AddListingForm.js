@@ -33,7 +33,6 @@ function AddEditListing({
     { name: "image-4" },
   ];
   const [images, setImages] = useState(initialState);
-  //console.log("DATA -> ", brandsList);
   const [makeOptions, setMakeOptions] = useState(brandsList);
   const [modelOptions, setModelOptions] = useState([]);
   const [colorAndStorageOption, setColorAndStorageOption] = useState([]);
@@ -63,12 +62,17 @@ function AddEditListing({
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
+  useEffect(() => {
+    setMakeOptions(brandsList);
+  }, [brandsList]);
+
   const deviceConditionCheck = [
     { value: "Like New", label: "Like New" },
     { value: "Excellent", label: "Excellent" },
     { value: "Good", label: "Good" },
     { value: "Fair", label: "Fair" },
   ];
+
 
   const handleChange = (e) => {
     const { name, type } = e.target;
@@ -91,6 +95,7 @@ function AddEditListing({
       setmarketingName(null);
       setStorage(null);
       setColor(null);
+      setDeviceCondition(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [make]);
@@ -101,6 +106,9 @@ function AddEditListing({
     );
     if (modelData && modelData.length > 0) {
       setColorAndStorageOption(modelData[0]);
+      setStorage(null);
+      setColor(null);
+      setDeviceCondition(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketingName]);
@@ -162,7 +170,6 @@ function AddEditListing({
     };
     if (make !== null && marketingName !== null && storage !== null) {
       Axios.getExternalSellSourceData(payload).then((response) => {
-        console.log("getExternalSellSourceData ", response?.dataObject);
         setGetExternalSellerData(response?.dataObject);
       });
     }
@@ -190,7 +197,6 @@ function AddEditListing({
         marketingName,
         Cookies.get("userUniqueId")
       );
-      console.log("UPLOAD IMAGE ", data1?.dataObject);
       setImages((prev) =>
         prev.map((item) => {
           return item.name === name
@@ -225,7 +231,6 @@ function AddEditListing({
     e.preventDefault();
     var sellValueTag = document.querySelector("#sellValue");
     var sellValue = sellValueTag.value;
-    // console.log("sellValue ", sellValue);
 
     var inputNameTag = document.querySelector("#inputName");
     var inputName = inputNameTag.value;
@@ -288,7 +293,6 @@ function AddEditListing({
           imgList.push(item);
         }
       });
-      console.log("imgList", imgList);
 
       let payload = {
         charger: charger,
@@ -322,12 +326,10 @@ function AddEditListing({
         userUniqueId: Cookies.get("userUniqueId"),
         model: marketingName,
       };
-      console.log("SAVE LISTING PAYLOAD ", payload);
       const saveSellNowDeviceInfoRes = await Axios.saveSellNowDeviceInfo(
         payload
       );
       setRefresh((prev) => !prev);
-      console.log("saveSellNowDeviceInfoRes ", saveSellNowDeviceInfoRes);
       openPopup();
     }
   };
@@ -694,14 +696,14 @@ const Checkbox = ({ src, text, onClick, checked }) => (
   <div
     className={`border rounded px-6 py-4 relative ${
       checked === "Y" && "bg-gray-ef"
-    }`}
+    } hover:cursor-pointer`}
   >
     <div className="relative w-14 h-14 mx-auto">
       <Image src={src} layout="fill" alt="checkbox" />
     </div>
     <input
       type="checkbox"
-      className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0"
+      className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0 hover:cusror-pointer"
       onClick={onClick}
     />
     <span className="text-xs mt-2 text-center block text-m-grey-1">

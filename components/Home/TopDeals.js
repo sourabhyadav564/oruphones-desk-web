@@ -20,6 +20,7 @@ function TopDeals({ location }) {
   // const [loc, setLoc] = useState("Best Deals Near You (" + location + ")");
   const [bestDeals, setBeatDeals] = useState();
   const [openLocationPopup, setOpenLocationPopup] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
 
   // console.log(bestDeals);
 
@@ -28,7 +29,8 @@ function TopDeals({ location }) {
     const fetchNestDealsNearByMe = async () => {
       await Axios.bestDealNearByYou(
         location,
-        Cookies.get("userUniqueId") || "Guest"
+        Cookies.get("userUniqueId") || "Guest",
+        pageNumber
       ).then((response) => {
         setBeatDeals(response?.dataObject?.bestDeals || []);
       });
@@ -36,7 +38,7 @@ function TopDeals({ location }) {
     if (location != undefined) {
       fetchNestDealsNearByMe();
     }
-  }, [location]);
+  }, [location, pageNumber]);
 
   return (
     <section className="container top_deals px-4">

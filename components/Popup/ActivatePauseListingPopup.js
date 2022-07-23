@@ -20,11 +20,9 @@ function ActivatePauseListingPopup({ open, setOpen, data }) {
         listingId: data,
         userUniqueId: Cookies.get("userUniqueId"),
       };
-      console.log("PAUSE LISTING payLoad ", payLoad);
 
       const fetchData = async () => {
         const pauseListingDevice = await Axios.pauseListingDevice(payLoad);
-        console.log("PAUSE LISTING RES ", pauseListingDevice);
         if (pauseListingDevice.status === "SUCCESS") {
           //router.push('/user/listings');
           router.reload();

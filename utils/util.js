@@ -26,7 +26,6 @@ export function numberFromString(x) {
 }
 
 export const stringToDate = (dateString) => {
-  console.log("--> stringToDate ", dateString);
   let new_data_string = moment(dateString).format('L');
   const [day, month, year] = new_data_string?.split("/");
   return new Date([month, day, year].join("/"));

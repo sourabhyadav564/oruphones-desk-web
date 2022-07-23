@@ -5,7 +5,7 @@ const settings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow: 5.2,
   slidesToScroll: 1,
 };
 

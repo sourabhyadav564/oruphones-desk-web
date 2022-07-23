@@ -5,7 +5,8 @@ import { BiCurrentLocation, BiChevronDown } from "react-icons/bi";
 
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import home_logo from "../../assets/home_logo.svg";
+// import home_logo from "../../assets/home_logo.svg";
+import home_logo from "../../assets/logo_square.svg";
 import LoginOrProfile from "./LoginOrProfile";
 import LocationPopup from "../Popup/LocationPopup";
 import AppContext from "@/context/ApplicationContext";
@@ -49,13 +50,13 @@ function Header({ menuItems }) {
       <div className="container bg-m-white sm:bg-m-grey flex items-center h-16 ">
         <Link href="/">
           <a className="w-36 h-9 mr-4 lg:mr-8 block relative">
-            <Image src={home_logo} alt="ORUPhones" layout="fill" priority />
+            <Image src={home_logo} alt="ORU Phones" layout="fill" priority />
           </a>
         </Link>
         <div className="hidden sm:flex justify-center mx-auto flex-1 text-sm">
           <SearchBar />
           <div
-            className="md:mx-4 hidden flex-shrink-0 md:flex justify-center items-center text-gray-600 "
+            className="hover:cursor-pointer md:mx-4 hidden flex-shrink-0 md:flex justify-center items-center text-gray-600 "
             style={{ minWidth: 175, boxShadow: "0px 2px 3px #00000008" }}
             onClick={() => setOpenLocationPopup(true)}
           >

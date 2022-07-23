@@ -6,7 +6,6 @@ import testfail from "../../assets/testFail.png";
 import pass from "../../assets/pass1.png";
 
 function DeviceVerificationReport({ open, setOpen, data }) {
-  console.log("data from device verification", data);
   return (
     <Modal open={open} setOpen={setOpen} title={"Device Verification Report"}>
       <div className="grid grid-cols-5 device_verification_report">
@@ -105,7 +104,6 @@ const TestListItem = ({ testName, testStatus }) => {
 };
 
 const QuestionnaireResults = ({ question, result, childQuestions, index }) => {
-  console.log("childQuestions ", childQuestions?.length);
   return (
     <div className="w-full py-1">
       <p>

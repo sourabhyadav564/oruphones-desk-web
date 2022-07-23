@@ -52,14 +52,14 @@ function contactUS() {
 
   return (
     <main className="container my-4">
-      <section className="bg-m-green-dark h-52 p-8 flex items-center rounded-md">
+      <section className="bg-m-green h-52 p-8 flex items-center rounded-md">
         <h1 className="text-6xl font-light text-m-grey-5"> Contact Us </h1>
       </section>
       <section className="my-6 grid grid-cols-3 gap-4 ">
         <div className="bg-white rounded p-4 border">
           <h2 className="text-black-20 font-bold my-2">Connect with us</h2>
-          <span className="text-black-60">Give us a call</span>
-          <p className="text-xl text-black-20 mb-4"> +91 999 123 1234 </p>
+          {/* <span className="text-black-60">Give us a call</span>
+          <p className="text-xl text-black-20 mb-4"> +91 999 123 1234 </p> */}
           <span className="text-black-60">Send us an email</span>
           <p className="text-xl text-black-20 mb-4">contact@oruphones.com</p>
         </div>

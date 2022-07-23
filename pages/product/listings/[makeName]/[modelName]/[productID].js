@@ -27,15 +27,16 @@ function ProductDetails({ listingInfo }) {
   const { getSearchLocation } = useContext(AppContext);
   const [openImageFullView, setOpenImageFullView] = useState(false);
 
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  // console.log("product from productID page----->", product);
 
   // const productData = useRecoilValue(otherVandorDataSelector);
-  // console.log("productData ---->", productData);
 
   // const router = useRouter();
   // const listingId = router.query.productID;
-  // console.log("listingId ---->", listingId);
 
   // let otherVendorData = [];
 
@@ -45,9 +46,7 @@ function ProductDetails({ listingInfo }) {
   //   }
   // });
 
-  // console.log("otherVendorData ---->", otherVendorData);
-
-  useEffect(() => {
+  const loadData = () => {
     let payLoad = {
       listingLocation: getSearchLocation,
       make: [listingInfo.make],
@@ -60,25 +59,72 @@ function ProductDetails({ listingInfo }) {
       minsellingPrice: 0,
       verified: "",
     };
-    console.log("fetchSimilarProducts payload", payLoad);
     Axios.fetchSimilarProducts(
       payLoad,
-      Cookies.get("userUniqueId") || "Guest"
+      Cookies.get("userUniqueId") || "Guest",
+      pageNumber
     ).then((response) => {
-      console.log("fetchSimilarProducts ", response);
       setSimliarProducts(
         response?.dataObject?.otherListings?.filter((items) => {
           return items.listingId != listingInfo.listingId;
         })
-      );
+        );
+        setTotalProducts(response?.dataObject?.totalProducts);
+        setPageNumber(pageNumber + 1);
+        console.log("pageNumber from initial", pageNumber);
     });
+  };
+
+  const loadMoreData = () => {
+    setIsLoadingMore(true);
+    let payLoad = {
+      listingLocation: getSearchLocation,
+      make: [listingInfo.make],
+      marketingName: [listingInfo.marketingName],
+      reqPage: "TSM",
+      color: [],
+      deviceCondition: [],
+      deviceStorage: [],
+      maxsellingPrice: 200000,
+      minsellingPrice: 0,
+      verified: "",
+    };
+    console.log("pageNumber from loadMore", pageNumber);
+    Axios.fetchSimilarProducts(
+      payLoad,
+      Cookies.get("userUniqueId") || "Guest",
+      pageNumber
+    ).then((response) => {
+      let data = response?.dataObject?.otherListings?.filter((items) => {
+        return items.listingId != listingInfo.listingId;
+      })
+      setSimliarProducts((products) => [...products, ...data]);
+      setPageNumber(pageNumber + 1);
+      setIsLoadingMore(false);
+    });
+  };
+
+  const handelScroll = (e) => {
+    // console.log("top", e.target.documentElement.scrollTop);
+    // console.log("win", window.innerHeight);
+    // console.log("height", e.target.documentElement.scrollHeight);
+
+    if (
+      totalProducts >= 20 && window.innerHeight + e.target.documentElement.scrollTop + 1 >
+      e.target.documentElement.scrollHeight
+    ) {
+      loadMoreData();
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+    window.addEventListener("scroll", handelScroll);
   }, [listingInfo]);
 
   simliarProducts = simliarProducts?.filter((item) => {
     return item.listingId != listingInfo?.listingId;
   });
-
-  console.log("simliarProducts", simliarProducts);
 
   return (
     <main className="container my-6">
@@ -99,7 +145,7 @@ function ProductDetails({ listingInfo }) {
             className="text-m-black font-semibold my-3"
             style={{ fontSize: 21 }}
           >
-            Similar Products
+            Similar Products ({simliarProducts?.length})
           </h1>
           <div
             className="grid grid-cols-4 gap-6 mt-5"
@@ -127,6 +173,11 @@ function ProductDetails({ listingInfo }) {
               </div>
             )}
           </div>
+          {isLoadingMore && (
+            <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
+              <span>Fetching more products...</span>
+            </div>
+          )}
         </div>
       </section>
       <FullImageView
@@ -160,10 +211,6 @@ export default ProductDetails;
 
 export async function getServerSideProps({ req, res, query }) {
   const { userUniqueId, sessionId } = req.cookies;
-  // console.log("userUniqueId", userUniqueId);
-  // console.log("sessionId", sessionId);
-  // console.log("productID", query.productID);
-  // console.log("isOtherVendor", query.isOtherVendor);
   const listingInfo = await Axios.detailWithUserInfo(
     query.isOtherVendor,
     query.productID,

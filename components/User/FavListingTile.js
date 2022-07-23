@@ -10,7 +10,6 @@ import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 
 function FavListingTile({ data, setProducts }) {
-  console.log("data from favourite", data);
   const [frontImagePath, setFrontImagePath] = useState();
   const frontImage = data?.images?.filter((img) => {
     if (img?.panel === "front") {

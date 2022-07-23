@@ -14,7 +14,6 @@ import UnVerifiedIcon from "../UnVerifiedIcon";
 import Cookies from "js-cookie";
 
 function ProfileListingTile({ data, fromMyFav, setProducts }) {
-  console.log("data from favourite", data);
   const router = useRouter();
   const [frontImagePath, setFrontImagePath] = useState();
   const [openAppDownload, setOpenAppDownload] = useState(false);
@@ -42,7 +41,6 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
     };
     const fetchData = async () => {
       const activeListedDevice = await Axios.activeListedDevice(payload);
-      console.log("activeListedDevice -> ", activeListedDevice);
       if (activeListedDevice.status === "SUCCESS") {
         setOpenActivatePopup(true);
       }

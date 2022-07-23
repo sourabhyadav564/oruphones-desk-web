@@ -23,7 +23,6 @@ const Pricerange = () => {
   // use loaction of auth user or default location
   const router = useRouter();
   const { min,max } = router.query;
-  console.log("Pricerange", min, max);
   const [bestDeal, setBestDeal] = useState();
   const [otherListings, setOtherListings] = useState([]);
   const { getSearchLocation } = useContext(AppContext);
@@ -73,9 +72,7 @@ const Pricerange = () => {
         payLoad.verified = verification.includes("all") ? []:"verified";
       }
       setLoading(true);
-      console.log("*******SEARCH FILTER PAYLOAD ******* ",payLoad)
       Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then((response) => {
-        console.log("searchFilter ", response?.dataObject);
         // if (verification?.length > 0) {
         //   payLoad.verification = verification;
         // }
@@ -130,7 +127,6 @@ function getSortedProducts(applySort, otherListings) {
       return stringToDate(a.modifiedDate) - stringToDate(b.modifiedDate);
     });
   }
-  console.log("--> sortedProducts ", sortedProducts);
   return sortedProducts;
 }
 

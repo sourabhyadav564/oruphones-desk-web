@@ -34,6 +34,11 @@ const menus = [
     options: [],
     chlink: "/brands",
   },
+  {
+    name: "Best Deals",
+    options: [],
+    chlink: "/product/listings/bestdealnearyou",
+  },
   // {
   //   name: "Shop by Grade",
   //   options: [],

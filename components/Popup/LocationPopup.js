@@ -17,34 +17,29 @@ function LocationPopup({ open, setOpen }) {
   let cityInfo = [];
   const selectedCity = useRef();
 
-  console.log("selectedCity", selectedCity);
-
-  const { userInfo, setCities, setUserInfo, setSearchLocation } = useContext(AppContext);
-
-  console.log("userInfo from popup", userInfo);
+  const { userInfo, setCities, setUserInfo, setSearchLocation } =
+    useContext(AppContext);
 
   const handleCityChange = (city) => {
     selectedCity.current = city;
     // if (Cookies.get("userUniqueId") !== undefined) {
-      cityInfo = citiesResponse.filter((item) => item.city === city);
-      // console.log("cityInfo", cityInfo);
-      let payLoad = {
-        city: selectedCity.current,
-        country: cityInfo[0].country,
-        state: cityInfo[0].state,
-        locationId: searchLocationID,
-        userUniqueId: Cookies.get("userUniqueId"),
-      };
-      Axios.updateAddress(payLoad).then((res) => {
-        console.log("updateAddress RES -> ", res);
-        Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-          // setUserInfo(resp?.dataObject);
-          console.log("userProfile -> ", resp?.dataObject);
-        });
+    cityInfo = citiesResponse.filter((item) => item.city === city);
+    let payLoad = {
+      city: selectedCity.current,
+      country: cityInfo[0].country,
+      state: cityInfo[0].state,
+      locationId: searchLocationID,
+      userUniqueId: Cookies.get("userUniqueId"),
+    };
+    Axios.updateAddress(payLoad).then((res) => {
+      Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
+        // setUserInfo(resp?.dataObject);
+        console.log("userProfile -> ", resp?.dataObject);
       });
+    });
     // } else {
-      setSearchLocation(selectedCity.current);
-      localStorage.setItem("usedLocation", selectedCity.current);
+    setSearchLocation(selectedCity.current);
+    localStorage.setItem("usedLocation", selectedCity.current);
     // }
     setOpen(false);
   };
@@ -57,29 +52,41 @@ function LocationPopup({ open, setOpen }) {
     if (searchLocId) {
       searchID = searchLocId[0]?.locationId;
     }
-    console.log("setSearchLocationID ", searchID);
     setSearchLocationID(searchID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo?.userdetails?.address]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const citiesResponse = await Axios.getGlobalCities();
-        setCitiesResponse(citiesResponse.dataObject);
-        setCities(citiesResponse.dataObject);
-      } catch (err) {
-        console.error(err);
-        setCities([]);
-      }
-    };
-    fetchData();
+    if (JSON.parse(localStorage.getItem("cities"))?.length > 0) {
+      setCitiesResponse(JSON.parse(localStorage.getItem("cities")));
+      setCities(JSON.parse(localStorage.getItem("cities")));
+      console.log("from local")
+    } else {
+      console.log("from api");
+      const fetchData = async () => {
+        try {
+          const citiesResponse = await Axios.getGlobalCities();
+          setCitiesResponse(citiesResponse?.dataObject);
+          setCities(citiesResponse?.dataObject);
+          localStorage.setItem("cities", JSON.stringify(citiesResponse?.dataObject));
+        } catch (err) {
+          console.error(err);
+          setCities([]);
+        }
+      };
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="fixed z-20 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
+      <Dialog
+        as="div"
+        className="fixed z-20 inset-0 overflow-y-auto"
+        initialFocus={cancelButtonRef}
+        onClose={setOpen}
+      >
         <div className="flex items-center justify-center min-h-screen ">
           <Transition.Child
             as={Fragment}
@@ -92,7 +99,10 @@ function LocationPopup({ open, setOpen }) {
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
           </Transition.Child>
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+          <span
+            className="hidden sm:inline-block sm:align-middle sm:h-screen"
+            aria-hidden="true"
+          >
             &#8203;
           </span>
           <Transition.Child
@@ -104,11 +114,20 @@ function LocationPopup({ open, setOpen }) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-50"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
-              <div className="pt-3 px-6 flex flex-col items-start relative bg-gray-50" style={{ height: 235 }}>
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-[800px]">
+              <div
+                className="pt-3 px-6 flex flex-col items-start relative bg-gray-50"
+                style={{ height: 235 }}
+              >
                 <div className="flex justify-between items-center absolute top-2 left-4 right-4 z-50">
-                  <span className="text-black-20 text-lg capitalize"> Location </span>
-                  <GrClose onClick={() => setOpen(false)} className="cursor-pointer" />
+                  <span className="text-black-20 text-lg capitalize">
+                    {" "}
+                    Location{" "}
+                  </span>
+                  <GrClose
+                    onClick={() => setOpen(false)}
+                    className="cursor-pointer"
+                  />
                 </div>
                 <Image src={bgImage} layout="fill" />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
@@ -140,14 +159,23 @@ function LocationPopup({ open, setOpen }) {
                       // .slice(0, 9)
                       .map((items) => (
                         <div
-                          className={`border rounded px-0 py-3 ${selectedCity.current === items.city && "border-m-green"}`}
+                          className={`border rounded px-0 py-3 ${
+                            selectedCity.current === items.city &&
+                            "border-m-green"
+                          }`}
                           key={items.city}
                           onClick={() => handleCityChange(items.city)}
                         >
                           <div className="relative w-14 h-14 mx-auto">
-                            <Image src={items.imgpath} alt="hyderabad" layout="fill" />
+                            <Image
+                              src={items.imgpath}
+                              alt="hyderabad"
+                              layout="fill"
+                            />
                           </div>
-                          <span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">{items.city}</span>
+                          <span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">
+                            {items.city}
+                          </span>
                         </div>
                       ))}
                 </div>

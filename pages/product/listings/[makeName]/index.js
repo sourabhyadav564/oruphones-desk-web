@@ -33,18 +33,20 @@ function BrandPage() {
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
   const { getSearchLocation } = useContext(AppContext);
+  let [pageNumber, setPageNumber] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  // console.log("product from make page----->", product);
 
-  useEffect(() => {
+  const loadData = () => {
     if (makeName) {
       Axios.getListingbyMake(
         getSearchLocation,
         makeName,
-        Cookies.get("userUniqueId")
+        Cookies.get("userUniqueId"),
+        pageNumber
       ).then((response) => {
-        console.log("GetListingbyMake --> ", response?.dataObject);
         // setProducts(response?.dataObject?.otherListings);
         // setBestDeal(response?.dataObject?.bestDeals);
         if (response?.dataObject?.otherListings.length > -1) {
@@ -57,15 +59,71 @@ function BrandPage() {
           setBestDeal((response && response?.dataObject?.bestDeals) || []);
           // setProductsData((response && response?.dataObject?.bestDeals) || []);
         }
+        if (response?.dataObject?.totalProducts > -1) {
+          setTotalProducts(
+            (response && response?.dataObject?.totalProducts) || 0
+          );
+        }
 
         setLoading(false);
+        setPageNumber(pageNumber + 1);
       });
     }
+  };
+
+
+  const loadMoreData = () => {
+    setIsLoadingMore(true);
+    if (makeName) {
+      Axios.getListingbyMake(
+        getSearchLocation,
+        makeName,
+        Cookies.get("userUniqueId"),
+        pageNumber
+      ).then((response) => {
+        // setProducts(response?.dataObject?.otherListings);
+        // setBestDeal(response?.dataObject?.bestDeals);
+        if (response?.dataObject?.otherListings.length > -1) {
+          setProducts((products) => [
+            ...products,
+            ...response?.dataObject?.otherListings,
+          ]);
+          // setProductsData(
+          //   (response && response?.dataObject?.otherListings) || []
+          // );
+        }
+        // if (response?.dataObject?.bestDeals.length > -1) {
+        //   setBestDeal((response && response?.dataObject?.bestDeals) || []);
+        //   // setProductsData((response && response?.dataObject?.bestDeals) || []);
+        // }
+
+        setLoading(false);
+        setPageNumber(pageNumber + 1);
+        setIsLoadingMore(false);
+      });
+    }
+  };
+
+  const handelScroll = (e) => {
+    // console.log("top", e.target.documentElement.scrollTop);
+    // console.log("win", window.innerHeight);
+    // console.log("height", e.target.documentElement.scrollHeight);
+
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >
+      e.target.documentElement.scrollHeight
+    ) {
+      loadMoreData();
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+    window.addEventListener("scroll", handelScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [makeName, getSearchLocation]);
 
   useEffect(() => {
-    console.log("BRAND ", applyFilter);
     const {
       brand,
       condition,
@@ -112,10 +170,8 @@ function BrandPage() {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      console.log("MAKE applyFilter payload--> ", payLoad);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
         (response) => {
-          console.log("searchFilter ", response?.dataObject);
           setProducts(response?.dataObject?.otherListings);
           // setBestDeal([]);
           setBestDeal(response?.dataObject?.bestDeals);
@@ -154,6 +210,9 @@ function BrandPage() {
             </Carousel>
           </div>
         )}
+        <h4 className="font-semibold text-lg opacity-50">
+          Total Products ({totalProducts})
+        </h4>
         <div className="grid grid-cols-3 gap-4">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
             sortingProducts?.map((product, index) => (
@@ -177,6 +236,11 @@ function BrandPage() {
             </div>
           )}
         </div>
+        {isLoadingMore && (
+          <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
+            <span>Fetching more products...</span>
+          </div>
+        )}
       </Filter>
     </main>
   );
@@ -198,14 +262,21 @@ function getSortedProducts(applySort, products) {
     });
   } else if (applySort && applySort === "Newest First") {
     sortedProducts.sort((a, b) => {
-      return (a.updatedAt && b.updatedAt) && stringToDate(b.updatedAt) - stringToDate(a.updatedAt);
+      return (
+        a.updatedAt &&
+        b.updatedAt &&
+        stringToDate(b.updatedAt) - stringToDate(a.updatedAt)
+      );
     });
   } else if (applySort && applySort === "Oldest First") {
     sortedProducts.sort((a, b) => {
-      return (a.updatedAt && b.updatedAt) && stringToDate(a.updatedAt) - stringToDate(b.updatedAt);
+      return (
+        a.updatedAt &&
+        b.updatedAt &&
+        stringToDate(a.updatedAt) - stringToDate(b.updatedAt)
+      );
     });
   }
-  console.log("--> sortedProducts ", sortedProducts);
   return sortedProducts;
 }
 

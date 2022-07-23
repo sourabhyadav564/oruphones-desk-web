@@ -12,6 +12,7 @@ export default function NewsLetter() {
       toast.info(response?.reason, {
         position: toast.POSITION.TOP_CENTER,
       });
+      window.location.reload();
     })
   }
 

@@ -20,18 +20,10 @@ function LocationPicker() {
   });
   const { userInfo, setUserInfo, setSearchLocation } = useContext(AppContext);
 
-  console.log("location from picker", location);
-  // console.log("user from picker", user);
-  // console.log("authenticated from picker", authenticated);
-  // location.loaded && location.city && location.city.length > 0
-  console.log("1", location.loaded);
-  console.log("2", location.city);
-  console.log("3", location.city.length);
 
   const onSuccess = async (location) => {
     let lat = location.coords.latitude;
     let lng = location.coords.longitude;
-    console.log(lat, lng);
     Geocode.setApiKey("AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w");
 
     Geocode.setLanguage("en");
@@ -78,7 +70,6 @@ function LocationPicker() {
 
   useEffect(() => {
     const initialState = localStorage.getItem("usedLocation");
-    console.log("initialState : ", initialState);
     if (!initialState || initialState == null) {
       handleNearme();
     } else {
@@ -103,11 +94,8 @@ function LocationPicker() {
           locationId: searchID,
           userUniqueId: Cookies.get("userUniqueId"),
         };
-        console.log("updateAddress -> payLoad", payLoad);
         Axios.updateAddress(payLoad).then((res) => {
-          console.log("updateAddress RES -> ", res);
           Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-            console.log("userProfile -> ", resp.dataObject.userdetails);
             setUserInfo(resp.dataObject);
           });
         });

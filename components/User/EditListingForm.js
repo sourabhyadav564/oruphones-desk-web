@@ -33,14 +33,15 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
   const [originalBox1, setOriginalBox1] = useState("N");
   const [sellPrice, setSellPrice] = useState("");
   const [leastSellingprice, setLeastSellingprice] = useState("0000");
+  const [getExternalSellerData, setGetExternalSellerData] = useState([]);
   const [maxsellingprice, setMaxsellingprice] = useState("0000");
+
   const [listedDeviceInfo, setListedDeviceInfo] = useState();
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({ termsAndCondition: true });
   const [disableSubmitButton, setDisableSubmitButton] = useState(true);
   const [deviceColors, setDeviceColors] = useState();
 
   function listedDeviceImages(data, setImages) {
-    console.log("listedDeviceImages ", data);
     let initialState;
 
     if (data?.images && data.images.length === 1) {
@@ -83,8 +84,13 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     { value: "Good", label: "Good" },
   ];
 
+  const handleChange = (e) => {
+    const { name, type } = e.target;
+    const value = type === "checkbox" ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [name]: value });
+  };
+
   useEffect(() => {
-    console.log(numberFromString(sellPrice));
     if (numberFromString(sellPrice) >= 1000) {
       setDisableSubmitButton(false);
     } else {
@@ -106,17 +112,12 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(id, Cookies.get("userUniqueId"));
       const getListedDeviceInfo = await Axios.getListedDeviceInfo(
         id,
         Cookies.get("userUniqueId"),
         Cookies.get("sessionId")
       );
       if (getListedDeviceInfo) {
-        console.log(
-          "EditListing -> Device Info ",
-          getListedDeviceInfo.dataObject
-        );
         setListedDeviceInfo(getListedDeviceInfo?.dataObject);
         if (getListedDeviceInfo?.dataObject.images !== null) {
           // setImages(getListedDeviceInfo?.dataObject.images);
@@ -129,12 +130,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
         setOriginalBox1(getListedDeviceInfo?.dataObject.originalbox);
         setDeviceCondition(getListedDeviceInfo?.dataObject.deviceCondition);
         setSellPrice(getListedDeviceInfo?.dataObject.listingPrice);
-        console.log(
-          "ACCESSORIES ",
-          getListedDeviceInfo?.dataObject.charger,
-          getListedDeviceInfo?.dataObject.originalbox,
-          getListedDeviceInfo?.dataObject.deviceCondition
-        );
       }
     };
     if (id !== null && Cookies.get("userUniqueId") !== undefined) {
@@ -149,15 +144,15 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       devicestorage: listedDeviceInfo?.deviceStorage,
       make: listedDeviceInfo?.make,
       marketingName: listedDeviceInfo?.marketingName,
-      originalBox: originalBox1,
-      charger: charger1,
-      earPhones: headphone1,
+      originalBox: originalBox1 === "Y" ? "Y" : "N",
+      charger: charger1 === "Y" ? "Y" : "N",
+      earPhones: headphone1 === "Y" ? "Y" : "N",
+      warrantyPeriod: "more",
+      verified: "no",
     };
 
-    console.log("payload ", payload);
     const fetchData = async () => {
       const getRecommandedPrice = await Axios.getRecommandedPrice(payload);
-      console.log("getRecommandedPrice response --> ", getRecommandedPrice);
       setLeastSellingprice(getRecommandedPrice.dataObject.leastSellingprice);
       setMaxsellingprice(getRecommandedPrice.dataObject.maxsellingprice);
     };
@@ -166,6 +161,32 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deviceCondition, charger1, headphone1, originalBox1]);
+
+  useEffect(() => {
+    let payload = {
+      deviceStorage: listedDeviceInfo?.deviceStorage,
+      make: listedDeviceInfo?.make,
+      marketingName: listedDeviceInfo?.marketingName,
+      deviceCondition: deviceCondition,
+      warrantyPeriod: "more",
+      hasCharger: charger1 === "Y" ? "Y" : "N",
+      hasEarphone: headphone1 === "Y" ? "Y" : "N",
+      hasOriginalBox: originalBox1 === "Y" ? "Y" : "N",
+    };
+    if (deviceCondition != null) {
+      Axios.getExternalSellSourceData(payload).then((response) => {
+        setGetExternalSellerData(response?.dataObject);
+      });
+    }
+  }, [
+    make,
+    marketingName,
+    storage,
+    deviceCondition,
+    charger1,
+    headphone1,
+    originalBox1,
+  ]);
 
   const handleImageChange = async (e, index) => {
     let panelName = index === 0 ? "front" : index === 1 ? "back" : index - 1;
@@ -181,10 +202,8 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
         listedDeviceInfo?.marketingName,
         Cookies.get("userUniqueId")
       );
-      console.log("UPLOAD IMAGE ", data1?.dataObject);
 
       const tempImages = [...images];
-      console.log("tempImages ", index, tempImages);
 
       tempImages[index] = {
         ...tempImages[index],
@@ -205,15 +224,13 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
   const clearImage = (e, index) => {
     e.preventDefault();
     const tempImages = [...images];
-    console.log("tempImages ", index, tempImages);
     tempImages[index] = { ...tempImages[index], thumbImage: "", fullImage: "" };
     setImages(tempImages);
   };
 
   const handleSubmit = async (e) => {
-    console.log("EDITLISTING ", images);
     e.preventDefault();
-    // console.log("submit form", name, make, marketingName, storage, color, deviceFunctional, deviceCondition, charging1, headphone1, originalBox1);
+
     const imgList = [];
     images.map((item) => {
       if (
@@ -225,7 +242,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
         imgList.push(item);
       }
     });
-    console.log("imgList", imgList);
 
     let payload = {
       listingId: id,
@@ -253,9 +269,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       recommendedPriceRange: leastSellingprice + "-" + maxsellingprice,
       userUniqueId: Cookies.get("userUniqueId"),
     };
-    console.log("EDIT Listing PAYLOAD ", payload);
     const saveUpdatedDeviceInfoRes = await Axios.saveUpdatedDeviceInfo(payload);
-    console.log("saveUpdatedDeviceInfoRes ", saveUpdatedDeviceInfoRes);
     setRefresh((prev) => !prev);
     openPopup();
   };
@@ -431,12 +445,18 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
           )}
           <div className="col-span-2 text-sm bg-gray-100 py-2 justify-evenly items-center flex flex-col w-full rounded">
             <span>Recommended Price</span>
-            <p className="font-bold text-base">
+            {/* <p className="font-bold text-base">
               {"₹" + numberWithCommas(leastSellingprice)} -{" "}
               {"₹" + numberWithCommas(maxsellingprice)}
-            </p>
+            </p> */}
+            {(leastSellingprice && (
+              <p className="font-bold text-base">
+                {"₹ " + numberWithCommas(leastSellingprice)} -{" "}
+                {numberWithCommas(maxsellingprice)}
+              </p>
+            )) || <p>--</p>}
           </div>
-          <div className="col-span-3 grid grid-cols-2 px-4 py-2 gap-4 text-xs rounded border">
+          {/* <div className="col-span-3 grid grid-cols-2 px-4 py-2 gap-4 text-xs rounded border">
             <div className="flex flex-col space-y-1">
               <span> Buyer</span>
               <div className="relative w-full h-full">
@@ -449,7 +469,58 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 {numberWithCommas("22900")}
               </p>
             </div>
+          </div> */}
+        </div>
+        {getExternalSellerData && getExternalSellerData.length > 0 && (
+          <p
+            className="mt-6 mb-4 ml-0.5 font-semibold"
+            style={{ color: "#707070" }}
+          >
+            Check prices from other buyers:
+          </p>
+        )}
+        {getExternalSellerData && getExternalSellerData.length > 0 && (
+          <div className="grid border rounded max-w-sm">
+            {getExternalSellerData.map((items, index) => (
+              <div
+                className="grid grid-cols-2 px-4 py-2 gap-4 text-xs text-m-grey-2"
+                key={index}
+              >
+                <div className="flex flex-col space-1">
+                  <span>You will get</span>
+                  <p className="font-semibold text-2xl text-m-grey-1 h-9">
+                    {"₹" + numberWithCommas(items.externalSourcePrice)}
+                  </p>
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <span>Buyer</span>
+                  <div className="w-full h-full">
+                    <img
+                      src={items.externalSourceImage}
+                      alt={items.externalSourceName}
+                      style={{ height: 33, width: "auto" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
+        )}
+        <div className="flex mt-8 items-center">
+          <input
+            type="checkbox"
+            name="termsAndCondition"
+            defaultChecked={formData?.termsAndCondition || false}
+            onChange={handleChange}
+            className="border-gray-300 rounded text-m-green focus:ring-transparent"
+          />
+          <label
+            className="ml-2 underline cursor-pointer"
+            style={{ color: "#00000099" }}
+            onClick={() => openTCPopup()}
+          >
+            Accept terms and conditions
+          </label>
         </div>
         <div className="w-1/2 mt-10 ">
           <button
@@ -468,7 +539,9 @@ export default EditListingForm;
 
 const Checkbox = ({ src, text, onClick, isChecked }) => (
   <div
-    className={`border rounded px-6 py-4 relative ${isChecked && "bg-gray-ef"}`}
+    className={`border rounded px-6 py-4 relative ${
+      isChecked && "bg-gray-ef"
+    } hover:cursor-pointer`}
   >
     <div className="relative w-14 h-14 mx-auto">
       <Image src={src} layout="fill" alt="buyer" />
@@ -476,7 +549,7 @@ const Checkbox = ({ src, text, onClick, isChecked }) => (
     <input
       type="checkbox"
       defaultChecked={isChecked}
-      className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0"
+      className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0 hover:cusror-pointer"
       onClick={onClick}
     />
     <span className="text-xs mt-2 text-center block"> {text} </span>

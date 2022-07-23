@@ -16,7 +16,6 @@ function ImageSlider({ images, openFullImage }) {
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
 
-  console.log("images is", images);
 
   useEffect(() => {
     setNav1(slider1);

@@ -12,13 +12,10 @@ function VerifiedInfoPopup({ open, setOpen }) {
   }, []);
 
   async function callStaticPages() {
-    // /console.log("-->");
     // let staticDataPath;
     // try {
     //   const response = await infoTemplates();
-    //   console.log("--> res ", response);
     //   staticDataPath = response?.dataObject;
-    //   console.log("--> staticDataPath ", staticDataPath);
     // } catch (error) {
     //   console.log(error);
     // }

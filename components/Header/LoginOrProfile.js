@@ -23,7 +23,6 @@ function LoginOrProfile() {
     }
     return () => {};
   });
-  //console.log("isUserAuthenticated",userAuthenticated);
 
   return (
     <React.Fragment>

@@ -9,7 +9,6 @@ import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccess
 import Cookies from "js-cookie";
 
 function SellerDetailsCard({ data }) {
-  console.log("SellerDetailsCard ", data);
   const [showNumber, setShowNumber] = useState(false);
   const [contactSellerMobileNumber, setContactSellerMobileNumber] = useState("Loading...");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -35,8 +34,6 @@ function SellerDetailsCard({ data }) {
     }
   };
 
-  console.log("seller listing id", data?.listingId);
-  console.log("seller userUniqueId id", data?.userUniqueId);
 
   useEffect(() => {
     setShowNumber(false);
@@ -45,7 +42,6 @@ function SellerDetailsCard({ data }) {
       Cookies.get("userUniqueId") !== undefined
     ) {
       Axios.fetchSellerMobileNumber(data?.listingId, data?.userUniqueId).then((response) => {
-        console.log("user detail res ---> ", response)
         // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
       });
@@ -53,7 +49,6 @@ function SellerDetailsCard({ data }) {
     setOtherSeller(data?.externalSource);
   }, [data]);
 
-  console.log("contactSellerMobileNumber", contactSellerMobileNumber);
 
   const openSellerWebSite = (e) => {
     if (Cookies.get("userUniqueId") === undefined) {

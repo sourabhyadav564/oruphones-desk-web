@@ -25,7 +25,6 @@ function UserProfile({ children, className }) {
     let data = new FormData();
     data.append("file", e.target.files[0]);
     Axios.uploadUserProfilePic(data,Cookies.get("userUniqueId")).then((response)=>{
-      console.log("UPLOAD IMAGE RES ",response?.dataObject);
       if(response?.status === "SUCCESS"){
         let payload = {
           "profilePicPath": response?.dataObject?.imagePath,
@@ -34,10 +33,8 @@ function UserProfile({ children, className }) {
           "userUniqueId": Cookies.get("userUniqueId")
         }
         
-        console.log("updateUserDetails payload -> ", payload);
         Axios.updateUserDetails(payload).then(
           (res) => {
-            console.log("updateUserDetails -> ", res);
             if(res?.status === "SUCCESS"){
               userInfo.userdetails = {...userInfo.userdetails, profilePicPath : res?.dataObject?.userdetails.profilePicPath};
               setInputImage(res?.dataObject?.userdetails.profilePicPath);
@@ -50,7 +47,8 @@ function UserProfile({ children, className }) {
 
   return (
     <main className="min-h-screen">
-      <section className="relative h-40 mb-20 bg-green-1">
+      <hr />
+      <section className="relative h-40 mb-20 bg-m-green">
         <div className="container absolute h-32 bottom-0 -translate-x-1/2 translate-y-1/2 left-1/2">
           <div className="flex w-full h-full">
             <div className="w-28 h-28 p-1 bg-white rounded-full">

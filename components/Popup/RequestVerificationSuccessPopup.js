@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 
 function RequestVerificationSuccessPopup({ open, setOpen, data }) {
   useEffect(() => {
-    // console.log("RequestVerificationSuccessPopup ", open, " ",);
     const requestVerificarion = async () => {
       await Axios.sendverification(
         data?.listingId,

@@ -19,7 +19,6 @@ const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
 );
 
 function FullImageView({ open, close, images }) {
-  console.log("FullImageView images", images);
   if (!open) {
     return null;
   }

@@ -22,13 +22,10 @@ function AddFav({ data, setProducts, ...rest }) {
       userUniqueId: Cookies.get("userUniqueId") || "Guest",
     };
     const addFavorite = async () => {
-      console.log("Add Favotites payload ", payLoad);
       const addFav = await Axios.addFavotie(payLoad);
-      console.log("addFav RES", addFav);
     };
     const removeFavorite = async () => {
       const removeFav = await Axios.removeFavotie(data.listingId, Cookies.get("userUniqueId") || "Guest");
-      console.log("removeFav RES", removeFav);
     };
     if (data.favourite) {
       removeFavorite();

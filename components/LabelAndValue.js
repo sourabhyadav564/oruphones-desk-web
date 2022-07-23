@@ -6,6 +6,7 @@ import calendar2 from "../assets/calendar-2.png";
 import calendar3 from "../assets/calendar-3.png";
 import color from "../assets/color.png";
 import storage from "../assets/storage.png";
+import ram from "../assets/ram.png";
 import { BsInfoCircle } from "react-icons/bs";
 
 function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showConditionInfoPopup, textAsLink,showRequestVerificationSuccessPopup, labelTextSize}) {
@@ -20,6 +21,8 @@ function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showCond
               <Image src={color} alt="COLOR" width={15} height={15} objectFit="contain" />
             ) : label.toUpperCase().includes("STORAGE") ? (
               <Image src={storage} alt="STORAGE" width={15} height={15} objectFit="contain" />
+            ) : label.toUpperCase().includes("RAM") ? (
+              <Image src={ram} alt="RAM" width={15} height={15} objectFit="contain" />
             ) : label.toUpperCase().includes("ACCESSORIES") ? (
               <Image src={box} alt="ACCESSORIES" width={15} height={15} objectFit="contain" />
             ) : label.toUpperCase().includes("WARRANTY") ? (

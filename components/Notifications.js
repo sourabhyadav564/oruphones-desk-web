@@ -59,7 +59,6 @@ export default function Notifications() {
   }
 
   function makeNotificationAsRead(data) {
-    console.log("makeNotificationAsRead data.isUnRead -> ", data.isUnRead);
     if (data?.isUnRead === 0) {
       markAsRead(data?.notificationId).then((response) =>
         console.log("makeNotificationAsRead -> ", response.reason)
@@ -123,7 +122,7 @@ const NotificationsItem = ({ text, timestamp, onClick, isUnRead }) => (
       className="w-12 h-12 rounded-2xl flex-shrink-0 mr-4 flex justify-center items-center"
       style={{ background: "#EFEFEF" }}
     >
-      <Image src={mob} width={30} height={30} alt="ORUPhones" />
+      <Image src={mob} width={30} height={30} alt="ORU Phones" />
     </div>
     <div>
       <p className="text-sm text-m-grey-1 break-words"> {text} </p>

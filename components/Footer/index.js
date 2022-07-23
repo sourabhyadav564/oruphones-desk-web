@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="mx-auto bg-m-green-dark py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
+    <footer className="mx-auto bg-m-green py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">
         <div className="flex flex-col">
           <h1 className="font-bold">Customer Service</h1>
@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col">
           <h1 className=" font-bold">Links</h1>
-          <Link href="/blog">
+          <Link href="https://www.oruphones.com/blog/">
             <a className="hover:pl-2 delay-75 mt-4 max-w-max">Blog</a>
           </Link>
           <Link href="/about-us">
@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="flex items-center gap-x-4 mt-4 ">
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.facebook.com/oruphones"
+                // href="https://www.facebook.com/oruphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://twitter.com/oruphones"
+                // href="https://twitter.com/oruphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -69,7 +69,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.instagram.com/oruphones/"
+                // href="https://www.instagram.com/oruphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -78,7 +78,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.pinterest.com/refurbishedphonedeals/"
+                // href="https://www.pinterest.com/refurbishedphonedeals/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -87,7 +87,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.linkedin.com/company/oruphones"
+                // href="https://www.linkedin.com/company/oruphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -96,7 +96,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.youtube.com/channel/UCf05rmUN5_t2KzgmjQtvXKg/"
+                // href="https://www.youtube.com/channel/UCf05rmUN5_t2KzgmjQtvXKg/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
