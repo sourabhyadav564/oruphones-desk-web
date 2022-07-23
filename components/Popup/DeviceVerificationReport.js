@@ -72,7 +72,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
                 return (
                   <TestListItem
                     key={index}
-                    testName={items.commandName}
+                    testName={items.displayName}
                     testStatus={items.testStatus}
                   />
                 );
