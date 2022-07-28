@@ -122,7 +122,7 @@ const NotificationsItem = ({ text, timestamp, onClick, isUnRead }) => (
       className="w-12 h-12 rounded-2xl flex-shrink-0 mr-4 flex justify-center items-center"
       style={{ background: "#EFEFEF" }}
     >
-      <Image src={mob} width={30} height={30} alt="ORU Phones" />
+      <Image src={mob} width={30} height={30} alt="ORUphones" />
     </div>
     <div>
       <p className="text-sm text-m-grey-1 break-words"> {text} </p>

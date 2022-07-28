@@ -38,9 +38,6 @@ function ProductDetailsCard({ data, openFullImage }) {
     accessoriesList.push("Earphones");
   }
 
-
-
-
   return (
     <Fragment>
       <div className="grid grid-cols-3 p-2 relative ">
@@ -87,8 +84,11 @@ function ProductDetailsCard({ data, openFullImage }) {
             <h2 className="capitalize text-2xl font-semibold text-black-20">
               {/* ({data?.color} {data?.deviceStorage})
               {data?.deviceRam && <span>({data?.deviceRam + " RAM"})</span>} */}
-              ({data?.color}, {data?.deviceRam + " RAM"}, 
-              {data?.deviceRam && <span>{data?.deviceStorage + " Storage"})</span>}
+              ({data?.color && `${data?.color}, `}
+              {data?.deviceRam && data?.deviceRam + " RAM, "}
+              {data?.deviceStorage && (
+                <span>{data?.deviceStorage + " Storage"})</span>
+              )}
             </h2>
             {(!(data?.isOtherVendor === "Y") && (
               <div className="my-2">
@@ -153,10 +153,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 label="Storage"
                 value={data?.deviceStorage || "--"}
               />
-              <LabelAndValue
-                label="RAM"
-                value={data?.deviceRam || "--"}
-              />
+              <LabelAndValue label="RAM" value={data?.deviceRam || "--"} />
               {
                 <LabelAndValue
                   label="Verified on"

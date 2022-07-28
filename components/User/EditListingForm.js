@@ -142,6 +142,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     let payload = {
       deviceCondition: deviceCondition,
       devicestorage: listedDeviceInfo?.deviceStorage,
+      deviceRam: listedDeviceInfo?.deviceRam,
       make: listedDeviceInfo?.make,
       marketingName: listedDeviceInfo?.marketingName,
       originalBox: originalBox1 === "Y" ? "Y" : "N",

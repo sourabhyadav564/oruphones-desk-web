@@ -15,7 +15,6 @@ const settings = {
 
 export default function TopArticles({articles}) {
 
-  console.log("articles", articles);
   return (
     <section className="container top_articles mb-6">
       <Title text="Top Articles" />

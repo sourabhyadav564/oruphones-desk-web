@@ -20,9 +20,9 @@ export default function Home({
   brandsList,
   fetchTopsellingmodels,
   sessionId,
-  // fetchTopArticles,
+  fetchTopArticles,
   // fetchShopByPrice
-  makeModelLists,
+  // makeModelLists,
 }) {
   const router = useRouter();
   const { locale } = router;
@@ -31,10 +31,13 @@ export default function Home({
 
   const [brands, setBrands] = useState([]);
   const [topsellingmodels, setTopsellingmodels] = useState([]);
+  const [topArticles, setTopArticles] = useState([]);
 
-  useEffect(() => {
+  useEffect( async () => {
     Cookies.set("sessionId", sessionId);
     localStorage.setItem("sessionId", sessionId);
+
+    const make_models = Cookies.get("make_models")
 
     if (brandsList.length === 0) {
       setBrands(JSON.parse(localStorage.getItem("brands")));
@@ -50,13 +53,36 @@ export default function Home({
       Cookies.set("top_models", true);
       setTopsellingmodels(fetchTopsellingmodels);
     }
-    if (makeModelLists.length === 0) {
+
+    if (fetchTopArticles.length === 0) {
+      setTopArticles(JSON.parse(localStorage.getItem("top_articles")));
+    } else {
+      localStorage.setItem("top_articles", JSON.stringify(fetchTopArticles));
+      Cookies.set("top_articles", true);
+      setTopArticles(fetchTopArticles);
+    }
+
+    // if (makeModelLists.length === 0) {
+    //   // setBrands(JSON.parse(localStorage.getItem("make_models")));
+    //   console.log("makeModelLists from local");
+    // } else {
+    //   localStorage.setItem("make_models", JSON.stringify(makeModelLists));
+    //   Cookies.set("make_models", true);
+    //   // setBrands(brandsList);
+    // }
+
+    if (make_models) {
       // setBrands(JSON.parse(localStorage.getItem("make_models")));
       console.log("makeModelLists from local");
     } else {
+      const data = await Axios.fetchMakeModelList(
+        Cookies.get("userUniqueId") || "Guest",
+        Cookies.get("sessionId") || ""
+      );
+      let makeModelLists = data?.dataObject;
       localStorage.setItem("make_models", JSON.stringify(makeModelLists));
       Cookies.set("make_models", true);
-      // setBrands(brandsList);
+      //   // setBrands(brandsList);
     }
   }, []);
 
@@ -71,6 +97,7 @@ export default function Home({
       <TopDeals location={getSearchLocation} />
       {/* <ShopByPrice fetchShopByPrice={fetchShopByPrice}/> */}
       {/* <TopArticles articles={fetchTopArticles}/> */}
+      <TopArticles articles={topArticles}/>
       <DownloadApp />
       <HomeContent />
       <NewsLetter />
@@ -79,8 +106,7 @@ export default function Home({
 }
 
 export async function getServerSideProps({ req, res, query }) {
-  // console.log("getServerSideProps");
-  const { userUniqueId, sessionId, brands, top_models, make_models } =
+  const { userUniqueId, sessionId, brands, top_models, make_models, top_articles } =
     req.cookies;
   // const brandsList = await Axios.fetchBrands();
   // const fetchTopsellingmodels = await Axios.fetchTopsellingmodels();
@@ -110,23 +136,25 @@ export async function getServerSideProps({ req, res, query }) {
     fetchTopsellingmodels = data?.dataObject;
   }
 
-  let makeModelLists;
-  if (make_models) {
-    makeModelLists = [];
+  // let makeModelLists;
+  // if (make_models) {
+  //   makeModelLists = [];
+  // } else {
+  //   const data = await Axios.fetchMakeModelList(
+  //     userUniqueId || "Guest",
+  //     sessionId || ""
+  //   );
+  //   makeModelLists = data?.dataObject;
+  // }
+   
+  let fetchTopArticles;
+  if (top_articles) {
+    fetchTopArticles = [];
   } else {
-    const data = await Axios.fetchMakeModelList(
-      userUniqueId || "Guest",
-      sessionId || ""
-    );
-    makeModelLists = data?.dataObject;
+    const data = await Axios.fetchTopArticles();
+    fetchTopArticles = data?.dataObject;
   }
 
-  console.log(
-    "getServerSideProps",
-    brandsList,
-    fetchTopsellingmodels,
-    makeModelLists
-  );
   // return {
   //   props: {
   //     brandsList: brandsList?.dataObject || [],
@@ -142,7 +170,8 @@ export async function getServerSideProps({ req, res, query }) {
       //fetchShopByPrice:fetchShopByPrice?.dataObject || [],
       fetchTopsellingmodels: fetchTopsellingmodels || [],
       sessionId: sessionID,
-      makeModelLists: makeModelLists || [],
+      // makeModelLists: makeModelLists || [],
+      fetchTopArticles: fetchTopArticles || [],
     },
   };
 }

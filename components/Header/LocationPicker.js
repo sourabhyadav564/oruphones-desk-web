@@ -94,11 +94,11 @@ function LocationPicker() {
           locationId: searchID,
           userUniqueId: Cookies.get("userUniqueId"),
         };
-        Axios.updateAddress(payLoad).then((res) => {
-          Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-            setUserInfo(resp.dataObject);
-          });
-        });
+        // Axios.updateAddress(payLoad).then((res) => {
+        //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
+        //     setUserInfo(resp.dataObject);
+        //   });
+        // });
       }
       setSearchLocation(location.city);
       localStorage.setItem("usedLocation", location.city);

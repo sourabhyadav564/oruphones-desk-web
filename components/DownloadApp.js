@@ -17,17 +17,17 @@ function DownloadApp() {
       <div className="flex flex-col sm:flex-row justify-between items-center p-4 pt-12 sm:p-12 bg-bg-mask-1 bg-no-repeat bg-cover sm:bg-center bg-m-green text-white rounded-md">
         <div className="px-8">
           <h1 className="pb-4 font-light" style={{ fontSize: 42 }}>
-            Download ORU Phones app
+            Download ORUphones app
           </h1>
           <p style={{ fontSize: 21 }}>
             Want to get the best price for your mobile or want to get a mobile
-            at your best price, ORU Phones app is the one stop solution.
+            at your best price, ORUphones app is the one stop solution.
           </p>
         </div>
         <div className="flex space-x-5 pt-4 sm:pt-0 justify-start">
           <div className="bg-white flex flex-col justify-center px-2 rounded-lg">
             <p className="text-black text-sm text-center pt-2">
-              Scan & Download ORU Phones app now
+              Scan & Download ORUphones app now
             </p>
             <QRCode
               id="qr-gen"

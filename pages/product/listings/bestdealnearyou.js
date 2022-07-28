@@ -146,7 +146,7 @@ function Bestdealnearyou() {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId", pageNumber) || "Guest", pageNumber).then(
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
         (response) => {
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;

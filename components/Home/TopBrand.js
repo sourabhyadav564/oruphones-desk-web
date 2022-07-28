@@ -12,7 +12,6 @@ const settings = {
 };
 
 function TopBrand({ brandsList }) {
-  console.log("brandsList", brandsList);
   brandsList = brandsList.sort((list1, list2) => list2.isPopular - list1.isPopular);
   brandsList = brandsList.sort((list1, list2) => parseInt(list1.displayOrder) - parseInt(list2.displayOrder));
   var _bList = brandsList.slice(0, 8);

@@ -50,7 +50,7 @@ function Header({ menuItems }) {
       <div className="container bg-m-white sm:bg-m-grey flex items-center h-16 ">
         <Link href="/">
           <a className="w-36 h-9 mr-4 lg:mr-8 block relative">
-            <Image src={home_logo} alt="ORU Phones" layout="fill" priority />
+            <Image src={home_logo} alt="ORUphones" layout="fill" priority />
           </a>
         </Link>
         <div className="hidden sm:flex justify-center mx-auto flex-1 text-sm">

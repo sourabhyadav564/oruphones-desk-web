@@ -7,7 +7,6 @@ function SellNowBtn() {
   const router = useRouter();
 
   const handleClick = () => {
-    console.log("The link was clicked.");
     router.push("/sell/add");
     // if (localStorage.getItem("isUserLogged") === "true") {
     //     router.push("/sell/add");

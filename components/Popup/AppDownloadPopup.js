@@ -65,7 +65,7 @@ function AppDownloadPopup({ open, setOpen }) {
                   <li>
                     Interact directly with the buyers and sellers of latest
                     mobile phones and save yourself the extra commission on
-                    ORU Phones app.
+                    ORUphones app.
                   </li>
                   <li>
                     Get a detailed diagnosis of your device and a suitable price
@@ -77,12 +77,12 @@ function AppDownloadPopup({ open, setOpen }) {
                   </li>
                   <li>
                     Scan the QR code or follow the link to download the
-                    ORU Phones app on the phone you want to sell.
+                    ORUphones app on the phone you want to sell.
                   </li>
                   <li>
                     Wondering how to transfer your data from your old phone
                     before selling it? We&apos;ve got you covered here. The
-                    ORU Phones app also allows you to get access to FREE data
+                    ORUphones app also allows you to get access to FREE data
                     transfer feature. Now don&apos;t get missed on transferring
                     your content from your old phone to a new phone.
                   </li>

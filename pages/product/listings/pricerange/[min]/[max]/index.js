@@ -43,7 +43,6 @@ const Pricerange = () => {
   }, [min,max,getSearchLocation])
 
   useEffect(() => {
-    console.log("SBP ",applyFilter);
     const { brand, condition, color, storage, warranty, verification,minPrice, maxPrice} = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       let payLoad = {

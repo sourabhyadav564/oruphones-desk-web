@@ -28,7 +28,7 @@ const sellStepsData = [
     heading: "Device verification",
     description: (
       <span>
-        Download ORU Phones App on the same device, complete verification of the
+        Download ORUphones App on the same device, complete verification of the
         device and get verified.
       </span>
     ),
@@ -83,7 +83,7 @@ const BuyStepsData = [
     heading: "Verify Your Purchase",
     description: (
       <span>
-        Meet the seller, go to the ORU Phones app on your mobile, fill your
+        Meet the seller, go to the ORUphones app on your mobile, fill your
         credentials and verify the device.
       </span>
     ),

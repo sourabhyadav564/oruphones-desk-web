@@ -31,12 +31,12 @@ function LocationPopup({ open, setOpen }) {
       locationId: searchLocationID,
       userUniqueId: Cookies.get("userUniqueId"),
     };
-    Axios.updateAddress(payLoad).then((res) => {
-      Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-        // setUserInfo(resp?.dataObject);
-        console.log("userProfile -> ", resp?.dataObject);
-      });
-    });
+    // Axios.updateAddress(payLoad).then((res) => {
+    //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
+    //     // setUserInfo(resp?.dataObject);
+    //     console.log("userProfile -> ", resp?.dataObject);
+    //   });
+    // });
     // } else {
     setSearchLocation(selectedCity.current);
     localStorage.setItem("usedLocation", selectedCity.current);
@@ -60,9 +60,7 @@ function LocationPopup({ open, setOpen }) {
     if (JSON.parse(localStorage.getItem("cities"))?.length > 0) {
       setCitiesResponse(JSON.parse(localStorage.getItem("cities")));
       setCities(JSON.parse(localStorage.getItem("cities")));
-      console.log("from local")
     } else {
-      console.log("from api");
       const fetchData = async () => {
         try {
           const citiesResponse = await Axios.getGlobalCities();

@@ -42,7 +42,6 @@ const Products = () => {
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   const loadData = () => {
-    setLoading(true);
     const fetchData = async () => {
       const data = await Axios.fetchByMarketingName(
         getSearchLocation,
@@ -59,9 +58,7 @@ const Products = () => {
         // setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
       if (data?.dataObject?.totalProducts > -1) {
-        setTotalProducts(
-          (data && data?.dataObject?.totalProducts) || 0
-        );
+        setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
       }
       setLoading(false);
       setPageNumber(pageNumber + 1);
@@ -72,7 +69,6 @@ const Products = () => {
   };
 
   const loadMoreData = () => {
-    setLoading(true);
     setIsLoadingMore(true);
     const fetchData = async () => {
       const data = await Axios.fetchByMarketingName(
@@ -107,8 +103,9 @@ const Products = () => {
     // console.log("height", e.target.documentElement.scrollHeight);
 
     if (
-      totalProducts >= 20 && window.innerHeight + e.target.documentElement.scrollTop + 1 >
-      e.target.documentElement.scrollHeight
+      totalProducts >= 20 &&
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >
+        e.target.documentElement.scrollHeight
     ) {
       loadMoreData();
     }
@@ -168,17 +165,19 @@ const Products = () => {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
-        (response) => {
-          // if (verification?.length > 0) {
-          //   payLoad.verification = verification;
-          // }
-          setProducts(response?.dataObject?.otherListings);
-          // setBestDeals([]);
-          setBestDeals(response?.dataObject?.bestDeals);
-          setLoading(false);
-        }
-      );
+      Axios.searchFilter(
+        payLoad,
+        Cookies.get("userUniqueId") || "Guest",
+        pageNumber
+      ).then((response) => {
+        // if (verification?.length > 0) {
+        //   payLoad.verification = verification;
+        // }
+        setProducts(response?.dataObject?.otherListings);
+        // setBestDeals([]);
+        setBestDeals(response?.dataObject?.bestDeals);
+        setLoading(false);
+      });
     }
   }, [applyFilter]);
 
@@ -209,7 +208,7 @@ const Products = () => {
             </Carousel>
           </div>
         )}
-         <h4 className="font-semibold text-lg opacity-50">
+        <h4 className="font-semibold text-lg opacity-50">
           Total Products ({totalProducts})
         </h4>
         <div className="grid grid-cols-3 gap-4">

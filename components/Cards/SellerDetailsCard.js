@@ -137,7 +137,6 @@ function SellerDetailsCard({ data }) {
 export default SellerDetailsCard;
 
 const OtherSeller = ({ data }) => {
-  console.log("OTHER ", data);
   return (
     <>
     {/* {data?.map((item, index) => ( */}

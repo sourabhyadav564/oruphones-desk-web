@@ -126,6 +126,13 @@ function AddEditListing({
       charger: charger === "Y" ? "Y" : "N",
       deviceCondition: deviceCondition,
       devicestorage: storage?.split("/")[0],
+      deviceRam: storage
+          ?.toString()
+          .split("/")[1]
+          .toString()
+          .replace(/GB/g, " GB")
+          .replace(/RAM/, "")
+          .trim(),
       earPhones: headphone1 === "Y" ? "Y" : "N",
       make: make,
       marketingName: marketingName,
@@ -160,6 +167,13 @@ function AddEditListing({
   useEffect(() => {
     let payload = {
       deviceStorage: storage?.split("/")[0],
+      deviceRam: storage
+          ?.toString()
+          .split("/")[1]
+          .toString()
+          .replace(/GB/g, " GB")
+          .replace(/RAM/, "")
+          .trim(),
       make: make,
       marketingName: marketingName,
       deviceCondition: deviceCondition,
