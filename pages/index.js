@@ -90,8 +90,8 @@ export default function Home({
     <main>
       <Hero />
       <StepsSection />
-      {/* <TopBrand brandsList={brandsList} />
-      <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
+      {/* <TopBrand brandsList={brandsList} /> */}
+      {/* <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
       <TopBrand brandsList={brands} />
       <TopSellingModels fetchTopsellingmodels={topsellingmodels} />
       <TopDeals location={getSearchLocation} />

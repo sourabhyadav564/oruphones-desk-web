@@ -25,7 +25,7 @@ html {
 .content h1 {
   font-size: 21px;
   margin: 1rem 0;
-  @apply text-green-600;
+  @apply text-[#2c2f44];
 }
 .content h2 {
   font-size: 16px;

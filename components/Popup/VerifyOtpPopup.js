@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import home_logo from "../../assets/home_logo.svg";
+// import home_logo from "../../assets/home_logo.svg";
+import home_logo from "../../assets/logo_square.svg";
 import * as Axios from "../../api/axios";
 import Router from "next/router";
 import AuthContext from "../../context/AuthContext";
@@ -98,7 +99,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
         <Image src={home_logo} alt="ORUphones" width={160} height={40} />
       </div>
       <form onSubmit={handleSubmit} className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96">
-        <h2 className="text-2xl font-extrabold text-center" style={{ color: "#007B63" }}>
+        <h2 className="text-2xl font-extrabold text-center" style={{ color: "#2c2f44" }}>
           Verify Mobile No
         </h2>
         <p className="text-sm text-m-grey-1"> Please enter the 4 digit verification code sent to your mobile number {formData?.mobile} via SMS. </p>

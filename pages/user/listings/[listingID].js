@@ -11,7 +11,7 @@ function ListingDetials() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const getListedDeviceInfo = await Axios.getListedDeviceInfo(listingID, Cookies.get("userUniqueId"));
+      const getListedDeviceInfo = await Axios.getListedDeviceInfo(listingID, Cookies.get("userUniqueId"), Cookies.get("sessionId") || localStorage.getItem("sessionId"));
       setListedDeviceInfo(getListedDeviceInfo?.dataObject);
     };
     if (listingID !== undefined && listingID !== null && listingID !== "") {

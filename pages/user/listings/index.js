@@ -14,7 +14,8 @@ function Listings() {
   useEffect(() => {
     const fetchData = async () => {
       const fetchUserListings = await Axios.fetchUserListings(
-        Cookies.get("userUniqueId")
+        Cookies.get("userUniqueId"),
+        Cookies.get("sessionId") || localStorage.getItem("sessionId")
       );
       setUserListing(fetchUserListings?.dataObject);
     };
@@ -26,49 +27,51 @@ function Listings() {
   }, []);
 
   return (
-    <UserProfile>
-      <UserListingTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <div className="flex flex-col space-y-4 px-4 my-4">
-        {currentTab === 0
-          ? // userListings && userListings.sort((a, b) => b.date - a.date) && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
-            userListings &&
-            userListings
-              .filter((item) => {
-                if (item.status === "Active") {
-                  return item;
-                }
-              })
-              .map((item, index) => (
-                <Link
-                  href={`/user/listings/${item.listingId}`}
-                  key={index}
-                  passHref
-                >
-                  <a href="">
-                    <ProfileListingTile data={item} />
-                  </a>
-                </Link>
-              ))
-          : userListings &&
-            userListings
-              .filter((item) => {
-                if (item.status === "Paused" || item.status === "InActive") {
-                  return item;
-                }
-              })
-              .map((item, index) => (
-                <Link
-                  href={`/user/listings/${item.listingId}`}
-                  key={index}
-                  passHref
-                >
-                  <a>
-                    <ProfileListingTile data={item} />
-                  </a>
-                </Link>
-              ))}
-      </div>
-    </UserProfile>
+    <>
+      <UserProfile>
+        <UserListingTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        <div className="flex flex-col space-y-4 px-4 my-4">
+          {currentTab === 0
+            ? // userListings && userListings.sort((a, b) => b.date - a.date) && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
+              userListings &&
+              userListings
+                .filter((item) => {
+                  if (item.status === "Active") {
+                    return item;
+                  }
+                })
+                .map((item, index) => (
+                  <Link
+                    href={`/user/listings/${item.listingId}`}
+                    key={index}
+                    passHref
+                  >
+                    <a href="">
+                      <ProfileListingTile data={item} />
+                    </a>
+                  </Link>
+                ))
+            : userListings &&
+              userListings
+                .filter((item) => {
+                  if (item.status === "Paused" || item.status === "InActive") {
+                    return item;
+                  }
+                })
+                .map((item, index) => (
+                  <Link
+                    href={`/user/listings/${item.listingId}`}
+                    key={index}
+                    passHref
+                  >
+                    <a>
+                      <ProfileListingTile data={item} />
+                    </a>
+                  </Link>
+                ))}
+        </div>
+      </UserProfile>
+    </>
   );
 }
 

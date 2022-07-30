@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { MdNotificationsNone } from "react-icons/md";
 import router from "next/router";
-import mob from "@/assets/notification.png";
+// import mob from "@/assets/notification.png";
+import mob from "@/assets/logo_square.svg";
 import { getAllNotificationByUserd, markAsRead } from "api/axios";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 import Cookies from "js-cookie";
@@ -61,7 +62,7 @@ export default function Notifications() {
   function makeNotificationAsRead(data) {
     if (data?.isUnRead === 0) {
       markAsRead(data?.notificationId).then((response) =>
-        console.log("makeNotificationAsRead -> ", response.reason)
+        console.log("makeNotificationAsRead -> ", response?.reason)
       );
     }
   }
@@ -113,7 +114,7 @@ export default function Notifications() {
 
 const NotificationsItem = ({ text, timestamp, onClick, isUnRead }) => (
   <div
-    className={`flex w-full border-b border-white py-2 px-4 ${
+    className={`hover:cursor-pointer flex w-full border-b border-white py-2 px-4 ${
       isUnRead ? "bg-gray-100" : ""
     }`}
     onClick={onClick}

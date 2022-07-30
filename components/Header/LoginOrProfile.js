@@ -46,6 +46,7 @@ function LoginOrProfile() {
                   <NavListItem text="My Profile" link="/user/profile" />
                   <NavListItem text="My Listings" link="/user/listings" />
                   <NavListItem text="My Favorites" link="/user/favorites" />
+                  <NavListItem text="ORU Services" link="/user/services" />
                   {/* Add logout function */}
                   <NavListItem
                     text="Logout"

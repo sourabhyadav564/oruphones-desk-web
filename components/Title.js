@@ -4,11 +4,11 @@ function Title({ text, location, onClick }) {
   return (
     <h1
       className="text-center my-4 font-semibold"
-      style={{ fontSize: 21, color: "#212121" }}
+      style={{ fontSize: 21, color: "#2c2f44" }}
     >
       {text}
       <span>{"  "}</span>
-      <span className="cursor-pointer text-[#00a483]" onClick={onClick}>{location}</span>
+      <span className="cursor-pointer text-[#2c2f44]" onClick={onClick}>{location}</span>
     </h1>
   );
 }

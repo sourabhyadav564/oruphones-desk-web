@@ -711,6 +711,7 @@ const Checkbox = ({ src, text, onClick, checked }) => (
     className={`border rounded px-6 py-4 relative ${
       checked === "Y" && "bg-gray-ef"
     } hover:cursor-pointer`}
+    onClick={onClick}
   >
     <div className="relative w-14 h-14 mx-auto">
       <Image src={src} layout="fill" alt="checkbox" />
@@ -718,7 +719,8 @@ const Checkbox = ({ src, text, onClick, checked }) => (
     <input
       type="checkbox"
       className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0 hover:cusror-pointer"
-      onClick={onClick}
+      // onClick={onClick}
+      readOnly
     />
     <span className="text-xs mt-2 text-center block text-m-grey-1">
       {" "}

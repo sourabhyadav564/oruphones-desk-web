@@ -1,34 +1,8 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
 
-// let sessionId = "";
-// if (typeof window !== "undefined") {
-//   localStorage.getItem("sessionId");
-// } else if (Cookies.get("sessionId") != "undefined") {
-//   sessionId = Cookies.get("sessionId");
-// } else {
-//   sessionId = "";
-// }
-
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL + "/api/v1";
-// const DEFAULT_HEADER = { headers: { "Content-Type": "application/json" } };
-// let DEFAULT_HEADER = {
-//   headers: {
-//     "Content-Type": "application/json",
-//     srcFrom: "Desktop Web",
-//     eventName: "NA",
-//     userUniqueId: Cookies.get("userUniqueId")
-//       ? Cookies.get("userUniqueId")
-//       : "Guest",
-//     sessionId:
-//       typeof window !== "undefined"
-//         ? localStorage.getItem("sessionId")
-//         : Cookies.get("sessionId") || "",
-//     devicePlatform: "Desktop Web",
-//     location:
-//       typeof window !== "undefined" ? localStorage.getItem("usedLocation") : "",
-//   },
-// };
+
 let headers = {
   "Content-Type": "application/json",
   srcFrom: "Desktop Web",
@@ -44,6 +18,7 @@ let headers = {
   location:
     typeof window !== "undefined" ? localStorage.getItem("usedLocation") : "",
 };
+
 const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
 
 export async function getAboutUsContent() {
@@ -231,20 +206,6 @@ export function fetchMakeModelList(userUniqueId, sessionId) {
     sessionId: sessionId,
   };
   const DEFAULT_HEADER = { headers: { ...headers } };
-  // const DEFAULT_HEADER = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     srcFrom: "Mobile Web",
-  //     eventName: "NA",
-  //     userUniqueId: userUniqueId,
-  //     sessionId: sessionId,
-  //     devicePlatform: "Mobile Web",
-  //     location:
-  //       typeof window !== "undefined"
-  //         ? localStorage.getItem("usedLocation")
-  //         : "",
-  //   },
-  // };
   const API_ENDPOINT = BASE_URL + "/master/makemodellist";
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -380,8 +341,8 @@ export function saveUpdatedDeviceInfo(payLoad) {
   );
 }
 
-export function fetchUserListings(userUniqueId) {
-  headers = { ...headers, eventName: "MYLISTINGS_VIEW_LISTING" };
+export function fetchUserListings(userUniqueId, sessionId) {
+  headers = { ...headers, eventName: "MYLISTINGS_VIEW_LISTING", userUniqueId: userUniqueId, sessionId: sessionId };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL + `/device/listings?userUniqueId=` + userUniqueId;
@@ -417,26 +378,14 @@ export function getListedDeviceInfo(listingid, userUniqueId, sessionId) {
     sessionId: sessionId,
   };
   const DEFAULT_HEADER = { headers: { ...headers } };
-  // const DEFAULT_HEADER = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     srcFrom: "Desktop Web",
-  //     eventName: "NA",
-  //     userUniqueId: userUniqueId,
-  //     sessionId: sessionId,
-  //     devicePlatform: "Desktop Web",
-  //     location:
-  //       typeof window !== "undefined"
-  //         ? localStorage.getItem("usedLocation")
-  //         : "",
-  //   },
-  // };
+
   const API_ENDPOINT =
     BASE_URL +
     `/device/listing/detail?listingid=` +
     listingid +
     `&userUniqueId=` +
     userUniqueId;
+    console.log("default header", DEFAULT_HEADER);
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;

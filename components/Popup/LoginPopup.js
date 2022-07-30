@@ -1,6 +1,7 @@
 import Modal from ".";
 import Image from "next/image";
-import home_logo from "../../assets/home_logo.svg";
+// import home_logo from "../../assets/home_logo.svg";
+import home_logo from "../../assets/logo_square.svg";
 import { Fragment, useState, useEffect, useContext, useRef } from "react";
 import TermAndConditionPopup from "./TermAndConditionPopup";
 import VerifyOtpPopup from "./VerifyOtpPopup";
@@ -59,7 +60,7 @@ function LoginPopup({ open, setOpen, redirect }) {
             >
               <h2
                 className="text-2xl font-extrabold py-5 text-center"
-                style={{ color: "#007B63" }}
+                style={{ color: "#2c2f44" }}
               >
                 Sign In
               </h2>

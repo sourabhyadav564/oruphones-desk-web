@@ -70,7 +70,12 @@ function ListingDetailsCard({ data }) {
           <div className="mb-3 px-2">
             <h1 className="capitalize text-2xl font-semibold text-black-20">{data?.marketingName}</h1>
             <h2 className="capitalize text-2xl font-semibold text-black-20">
-              ({data?.color}, {data?.deviceStorage})
+              {/* ({data?.color}, {data?.deviceStorage}) */}
+              ({data?.color && `${data?.color}, `}
+              {data?.deviceRam && data?.deviceRam + " RAM, "}
+              {data?.deviceStorage && (
+                <span>{data?.deviceStorage + " Storage"})</span>
+              )}
             </h2>
             {data?.verified ? <VerifiedIcon width={86} height={46} /> : <UnVerifiedIcon width={86} height={46} />}
             <label className="block text-base text-m-grey-2">List price</label>

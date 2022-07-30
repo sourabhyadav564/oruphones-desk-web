@@ -2,7 +2,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
-import UserProfileIcon from "../../assets/user-profile-icon.png";
+// import UserProfileIcon from "../../assets/user-profile-icon.png";
+import UserProfileIcon from "../../assets/profile.svg";
 
 import AppContext from '@/context/ApplicationContext';
 import AuthContext from '@/context/AuthContext';
@@ -53,7 +54,7 @@ function UserProfile({ children, className }) {
           <div className="flex w-full h-full">
             <div className="w-28 h-28 p-1 bg-white rounded-full">
                 <label htmlFor="IMG" className="block w-full h-full relative rounded-full">
-                  <Image src={inputImage || UserProfileIcon } layout="fill" objectFit="contain" priority className="rounded-full"/>
+                  <Image src={inputImage || UserProfileIcon } layout="fill" objectFit="contain" priority className="hover:cursor-pointer"/>
                 </label>
                    <input className="hidden" type="file" id="IMG" accept="image/*" onChange={(e)=>(handleChange(e))}/>
             </div>
@@ -69,6 +70,7 @@ function UserProfile({ children, className }) {
           <NavListItem text="My Profile" link="/user/profile" />
           <NavListItem text="My Listings" link="/user/listings" />
           <NavListItem text="My Favorites" link="/user/favorites" />
+          <NavListItem text="ORU Services" link="/user/services" />
           {/* add logout function */}
           <NavListItem text="Logout" link="/" onClick={()=>{logout();
                     setUserInfo();
