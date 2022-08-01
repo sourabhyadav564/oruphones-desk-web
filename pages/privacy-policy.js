@@ -4,6 +4,8 @@ import Error from "next/error";
 import { infoTemplates } from "api/axios";
 import fetchStaticHTML from "api/fetchStaticHtml";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import { metaTags } from "@/utils/constant";
 
 // function PrivacyPolicy({ htmlText, error }) {
 //   if (error) {
@@ -42,6 +44,14 @@ function PrivacyPolicy() {
   }
 
   return (
+    <>
+     <Helmet>
+        <title>{metaTags.PRIVACY.title}</title>
+        <meta name="description" content={metaTags.PRIVACY.description} />
+        {/* <meta property="og:url" content={window.location.href} /> */}
+        <meta property="og:title" content={metaTags.PRIVACY.title} />
+        <meta property="og:description" content={metaTags.PRIVACY.description} />
+      </Helmet>
     <main className="container my-8">
       <section className="p-6 mt-12 mb-6 text-black-20 text-center">
         <h1 className="font-bold text-2xl uppercase">
@@ -51,6 +61,7 @@ function PrivacyPolicy() {
       </section>
       {parse(htmlText1)}
     </main>
+    </>
   );
 }
 

@@ -4,13 +4,14 @@ import Error from "next/error";
 import { infoTemplates } from "api/axios";
 import fetchStaticHTML from "api/fetchStaticHtml";
 import { useEffect, useState } from "react";
+import { metaTags } from "@/utils/constant";
+import { Helmet } from "react-helmet";
 
 // function Aboutus({ htmlText, error }) {
 //   if (error) {
 //     return <Error statusCode={404} />;
 //   }
 function Aboutus() {
-
   const [htmlText1, setHtmlText1] = useState("");
 
   useEffect(() => {
@@ -42,12 +43,21 @@ function Aboutus() {
   }
 
   return (
-    <main className="container my-8">
-      <section className="bg-m-green h-52 py-8 px-12 flex items-center shadow rounded-md mb-4">
-        <h1 className="text-6xl font-light text-m-grey-5"> About Us </h1>
-      </section>
-      {parse(htmlText1)}
-    </main>
+    <>
+      <Helmet>
+        <title>{metaTags.ABOUT_US.title}</title>
+        <meta name="description" content={metaTags.ABOUT_US.description} />
+        {/* <meta property="og:url" content={window.location.href} /> */}
+        <meta property="og:title" content={metaTags.ABOUT_US.title} />
+        <meta property="og:description" content={metaTags.ABOUT_US.description} />
+      </Helmet>
+      <main className="container my-8">
+        <section className="bg-m-green h-52 py-8 px-12 flex items-center shadow rounded-md mb-4">
+          <h1 className="text-6xl font-light text-m-grey-5"> About Us </h1>
+        </section>
+        {parse(htmlText1)}
+      </main>
+    </>
   );
 }
 

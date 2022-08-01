@@ -1,7 +1,8 @@
 export const servicesData = [
   {
     title: "Data Transfer to other devices",
-    description: "can transfer the existing data (Photos, videos, contacts, apps, settings etc) to another device",
+    description:
+      "can transfer the existing data (Photos, videos, contacts, apps, settings etc) to another device",
     imgSrc: require("@/assets/services/data-transfer.png"),
   },
   {
@@ -36,12 +37,110 @@ export const servicesData = [
   },
   {
     title: "Alerts",
-    description: "Users can choose to be notified if any exciting offers are available",
+    description:
+      "Users can choose to be notified if any exciting offers are available",
     imgSrc: require("@/assets/services/alerts.png"),
   },
   {
     title: "Tips & Tricks",
-    description: "A help section where users can find out about any useful tips to enhance their mobile.",
+    description:
+      "A help section where users can find out about any useful tips to enhance their mobile.",
     imgSrc: require("@/assets/services/tips-tricks.png"),
   },
 ];
+
+export const metaTags = {
+  HOME: {
+    title: "Buy and Sell Phone Online | Used Phones | Refurbished Phones",
+    description:
+      "Are you looking for a platform to sell my phone to trusted buyers? Do you want to buy second hand mobile for the best deal? ORUphones is the best option in India to buy and sell phone online.",
+  },
+  ABOUT_US: {
+    title: "Know More About ORUphones | Buy and Sell Old Phone Online",
+    description:
+      "Do you want a trusted platform to buy and sell old phone online? Know more about ORUphones and understand how we work. We promise nothing but the best deal on every transaction.",
+  },
+  CONTACT_US: {
+    title: "Contact Us | ORUphones",
+    description:
+      "Do you want the best deal on every to buy sell phone transactions online? Contact us today for more information and our list of trusted vendors.",
+  },
+  FAQ: {
+    title: "Frequently Asked Questions (FAQ) | ORUphones",
+    description:
+      "Are you wondering how ORUphoness deals with second hand mobile buy and sell transactions? Refer to the FAQ section to find out. We answer all your queries related to buyer and seller verification and payment.",
+  },
+  PRIVACY: {
+    title: "Privacy Policy | ORUphones",
+    description:
+      "ORUphones observes strict privacy policies across all its pages. When you enter your personal details on ORUphones, you acknowledge the privacy policies. We offer 100% privacy.",
+  },
+  TERMS_CONDITIONS: {
+    title: "Terms and Conditions | ORUphones",
+    description:
+      "Before you buy and sell phone online india through ORUphones, check the terms and conditions carefully. We adhere to strict local laws. Read the clause before you access the platform.",
+  },
+  SELL: {
+    title:
+      "Sell Old Phone | Sell Used Phone Online | Best Site to Sell Phone in India",
+    description:
+      "Are you planning to sell old phone? The Phone Bazaar offers the best trade-in value when you sell used phone online in India. Compare prices on our website for the best value.",
+  },
+  BRANDS: {
+    title: "Buy & Sell Old iPhone, Samsung, Google, OnePlus, OPPO Phones Online",
+    description:
+      "Buy and Sell Used iPhone, Samsung, Google, OnePlus, OPPO, Honor, Realme, Vivo Mobile Phones Online in India at best prices. Visit us today and get the best deal on All major Brands.",
+  },
+  APPLE: {
+    title: "Buy and Sell Iphone | Sell My Iphone | ORUphones",
+    description: "Are you looking for a website to sell my iPhone for the best deal? Buy and sell iPhone online with ORUphones and get the best offers from trusted vendors only.",
+  },
+  SAMSUNG: {
+    title: "Buy and Sell Samsung Phone | Samsung Old Phone Sell | ORUphones",
+    description: "Buy and sell Samsung phone online with ORUphones and get the best deal. Before you sell my Samsung phone, check ORUphones Samsung Brand page and find out all available models and their current resale value.",
+  },
+  XIAOMI: {
+    title: "Buy and Sell MI Mobile Phone | Mi Mobile Online Sell | ORUphones",
+    description: "ORUphones brings you the highest value sell offer on MI Mobile Sell. Now, get the highest cash payment from verified buyers on every Xiaomi Mobile Sell.",
+  },
+  GOOGLE: {
+    title: "Buy and Sell Google Phone | Best Deal Guarantee | ORUphones",
+    description: "Do you want to buy and sell Google phone at price higher than market value? ORUphones guarantees the best deal on every transaction.",
+  },
+  ONEPLUS: {
+    title: "Buy and Sell OnePlus Phone Online | Best Value Guarantee | ORUphones",
+    description: "Where can I buy and sell OnePlus phone online for the best value? ORUphones offers dream come true deals on every online transaction. We guarantee the best value on second hand mobile deals.",
+  },
+  OPPO: {
+    title: "Buy and Sell Oppo Phone | Oppo Mobile Sell | ORUphones",
+    description: "ORUphones brings the best opportunity to buy and sell OPPO phone online. Now, you can compare deals every time you buy and sell a phone online through us.",
+  },
+  HONOR: {
+    title: "Buy and Sell Honor Phone | Honor Mobile Sell | ORUphones",
+    description: "ORUphones promises authentic transactions when you buy and sell Honor Phone online with us. All our vendors are verified. We verify your mobile condition before initiating a deal.",
+  },
+  REALME: {
+    title: "Buy and Sell Realme Phone | Realme Top Selling Mobile | ORUphones",
+    description: "Do you want to buy and sell Realme phone online through ORUphones? List your phone with us before you check offers and initiate a transaction. We grade your phone before displaying it on our platform.",
+  },
+  VIVO: {
+    title: "Buy and Sell Vivo Phone | Vivo Top Selling Mobile | ORUphones",
+    description: "ORUphones offers the best deal on second hand mobiles in India. If you want to buy and sell Vivo phone at the guaranteed best price, visit our Vivo Brand Page to compare prices.",
+  },
+  NOKIA: {
+    title: "Buy and Sell Old Nokia Mobile Phones | ORUphones",
+    description: "ORUphones offers a list of verified used Nokia mobiles on our brand page. Compare the resale values online to buy and sell old Nokia mobile phone today!",
+  },
+  ASUS: {
+    title: "Buy and Sell Asus Mobile | Asus Mobile Selling Website India",
+    description: "Do you want to buy and sell Asus Phone at the best deal? With ORUphones second-hand verified mobile listing, the best deal is only one click away. Visit us to buy or sell today.",
+  },
+  BLACKBERRY: {
+    title: "Buy and Sell Blackberry Mobile | Old Phone Gets a Good Value",
+    description: "Do you want to buy and sell Blackberry mobile online? ORUphones is the online mobile reselling platform in India that offers great value for your old mobile.",
+  },
+  LENOVO: {
+    title: "Buy and Sell Lenovo Phone | Top Selling Lenovo Mobiles",
+    description: "Do you want to buy and sell Lenovo Phone online with ORUphones? ORUphones mandates listing your mobile online on the brand page. We verify the mobile condition before displaying the model on our page.",
+  }
+};

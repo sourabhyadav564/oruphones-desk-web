@@ -15,6 +15,8 @@ import * as Axios from "../api/axios";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
+import { Helmet } from "react-helmet";
+import { metaTags } from "@/utils/constant";
 
 export default function Home({
   brandsList,
@@ -33,11 +35,11 @@ export default function Home({
   const [topsellingmodels, setTopsellingmodels] = useState([]);
   const [topArticles, setTopArticles] = useState([]);
 
-  useEffect( async () => {
+  useEffect(async () => {
     Cookies.set("sessionId", sessionId);
     localStorage.setItem("sessionId", sessionId);
 
-    const make_models = Cookies.get("make_models")
+    const make_models = Cookies.get("make_models");
 
     if (brandsList.length === 0) {
       setBrands(JSON.parse(localStorage.getItem("brands")));
@@ -87,27 +89,42 @@ export default function Home({
   }, []);
 
   return (
-    <main>
-      <Hero />
-      <StepsSection />
-      {/* <TopBrand brandsList={brandsList} /> */}
-      {/* <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
-      <TopBrand brandsList={brands} />
-      <TopSellingModels fetchTopsellingmodels={topsellingmodels} />
-      <TopDeals location={getSearchLocation} />
-      {/* <ShopByPrice fetchShopByPrice={fetchShopByPrice}/> */}
-      {/* <TopArticles articles={fetchTopArticles}/> */}
-      <TopArticles articles={topArticles}/>
-      <DownloadApp />
-      <HomeContent />
-      <NewsLetter />
-    </main>
+    <>
+      <Helmet>
+        <title>{metaTags.HOME.title}</title>
+        <meta name="description" content={metaTags.HOME.description} />
+        {/* <meta property="og:url" content={window.location.href} /> */}
+        <meta property="og:title" content={metaTags.HOME.title} />
+        <meta property="og:description" content={metaTags.HOME.description} />
+      </Helmet>
+      <main>
+        <Hero />
+        <StepsSection />
+        {/* <TopBrand brandsList={brandsList} /> */}
+        {/* <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
+        <TopBrand brandsList={brands} />
+        <TopSellingModels fetchTopsellingmodels={topsellingmodels} />
+        <TopDeals location={getSearchLocation} />
+        {/* <ShopByPrice fetchShopByPrice={fetchShopByPrice}/> */}
+        {/* <TopArticles articles={fetchTopArticles}/> */}
+        <TopArticles articles={topArticles} />
+        <DownloadApp />
+        <HomeContent />
+        <NewsLetter />
+      </main>
+    </>
   );
 }
 
 export async function getServerSideProps({ req, res, query }) {
-  const { userUniqueId, sessionId, brands, top_models, make_models, top_articles } =
-    req.cookies;
+  const {
+    userUniqueId,
+    sessionId,
+    brands,
+    top_models,
+    make_models,
+    top_articles,
+  } = req.cookies;
   // const brandsList = await Axios.fetchBrands();
   // const fetchTopsellingmodels = await Axios.fetchTopsellingmodels();
   // const fetchShopByPrice = await Axios.fetchShopByPrice();
@@ -146,7 +163,7 @@ export async function getServerSideProps({ req, res, query }) {
   //   );
   //   makeModelLists = data?.dataObject;
   // }
-   
+
   let fetchTopArticles;
   if (top_articles) {
     fetchTopArticles = [];

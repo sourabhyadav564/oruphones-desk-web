@@ -9,6 +9,8 @@ import AppContext from "@/context/ApplicationContext";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
+import { Helmet } from "react-helmet";
+import { metaTags } from "@/utils/constant";
 
 // import {
 //   otherVendorDataState,
@@ -36,6 +38,9 @@ function BrandPage() {
   let [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  const [title, setTitle] = useState(metaTags.BRANDS.title);
+  const [description, setDescription] = useState(metaTags.BRANDS.description);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
@@ -70,7 +75,6 @@ function BrandPage() {
       });
     }
   };
-
 
   const loadMoreData = () => {
     setIsLoadingMore(true);
@@ -170,79 +174,151 @@ function BrandPage() {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
-        (response) => {
-          setProducts(response?.dataObject?.otherListings);
-          // setBestDeal([]);
-          setBestDeal(response?.dataObject?.bestDeals);
-          setLoading(false);
-        }
-      );
+      Axios.searchFilter(
+        payLoad,
+        Cookies.get("userUniqueId") || "Guest",
+        pageNumber
+      ).then((response) => {
+        setProducts(response?.dataObject?.otherListings);
+        // setBestDeal([]);
+        setBestDeal(response?.dataObject?.bestDeals);
+        setLoading(false);
+      });
     }
   }, [applyFilter]);
 
   // const sortingProducts = useMemo(() => getSortedProducts(applySort, products), [applySort, products]);
   const sortingProducts = getSortedProducts(applySort, products);
 
+  useEffect(() => {
+    switch (makeName) {
+      case "apple":
+        setTitle(metaTags.APPLE.title);
+        setDescription(metaTags.APPLE.description);
+        break;
+      case "samsung":
+        setTitle(metaTags.SAMSUNG.title);
+        setDescription(metaTags.SAMSUNG.description);
+        break;
+      case "oppo":
+        setTitle(metaTags.OPPO.title);
+        setDescription(metaTags.OPPO.description);
+        break;
+      case "oneplus":
+        setTitle(metaTags.ONEPLUS.title);
+        setDescription(metaTags.ONEPLUS.description);
+        break;
+      case "xiaomi":
+        setTitle(metaTags.XIAOMI.title);
+        setDescription(metaTags.XIAOMI.description);
+        break;
+      case "vivo":
+        setTitle(metaTags.VIVO.title);
+        setDescription(metaTags.VIVO.description);
+        break;
+      case "realme":
+        setTitle(metaTags.REALME.title);
+        setDescription(metaTags.REALME.description);
+        break;
+      case "lenovo":
+        setTitle(metaTags.LENOVO.title);
+        setDescription(metaTags.LENOVO.description);
+        break;
+      case "nokia":
+        setTitle(metaTags.NOKIA.title);
+        setDescription(metaTags.NOKIA.description);
+        break;
+      case "google":
+        setTitle(metaTags.GOOGLE.title);
+        setDescription(metaTags.GOOGLE.description);
+        break;
+      case "honor":
+        setTitle(metaTags.HONOR.title);
+        setDescription(metaTags.HONOR.description);
+        break;
+      case "asus":
+        setTitle(metaTags.ASUS.title);
+        setDescription(metaTags.ASUS.description);
+        break;
+      case "blackberry":
+        setTitle(metaTags.BLACKBERRY.title);
+        setDescription(metaTags.BLACKBERRY.description);
+        break;
+      default:
+        setTitle(metaTags.BRANDS.title);
+        setDescription(metaTags.BRANDS.description);
+        break;
+    }
+  }, [makeName]);
+
   return (
-    <main className="container py-4">
-      <h1 className="sr-only">{makeName} Page</h1>
-      <Filter
-        listingsCount={sortingProducts?.length + bestDeal?.length}
-        setApplySort={setApplySort}
-        setApplyFilter={setApplyFilter}
-        makeName={makeName}
-      >
-        {!isLoading && bestDeal && bestDeal.length > 0 && (
-          <div className="mb-4">
-            <Carousel
-              {...settings}
-              key={bestDeal.length > 0 ? bestDeal[0] : -1}
-              className="bestDealCarousel"
-            >
-              {bestDeal.map((items, index) => (
-                <BestDealsCard
-                  key={index}
-                  data={items}
-                  setProducts={setBestDeal}
-                />
-              ))}
-            </Carousel>
-          </div>
-        )}
-        <h4 className="font-semibold text-lg opacity-50">
-          Total Products ({totalProducts})
-        </h4>
-        <div className="grid grid-cols-3 gap-4">
-          {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => (
-              <div
-                key={index}
-                onClick={() => {
-                  // setListingId(item.listingId);
-                  // setProductsData(products);
-                }}
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        {/* <meta property="og:url" content={window.location.href} /> */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+      </Helmet>
+      <main className="container py-4">
+        <h1 className="sr-only">{makeName} Page</h1>
+        <Filter
+          listingsCount={sortingProducts?.length + bestDeal?.length}
+          setApplySort={setApplySort}
+          setApplyFilter={setApplyFilter}
+          makeName={makeName}
+        >
+          {!isLoading && bestDeal && bestDeal.length > 0 && (
+            <div className="mb-4">
+              <Carousel
+                {...settings}
+                key={bestDeal.length > 0 ? bestDeal[0] : -1}
+                className="bestDealCarousel"
               >
-                <ProductCard
-                  data={product}
-                  prodLink
-                  setProducts={setProducts}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="col-span-3 h-96 items-center flex justify-center ">
-              {isLoading ? "Loading..." : <NoMatch />}
+                {bestDeal.map((items, index) => (
+                  <BestDealsCard
+                    key={index}
+                    data={items}
+                    setProducts={setBestDeal}
+                  />
+                ))}
+              </Carousel>
             </div>
           )}
-        </div>
-        {isLoadingMore && (
-          <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
-            <span>Fetching more products...</span>
+          <h4 className="font-semibold text-lg opacity-50">
+            Total Products ({totalProducts})
+          </h4>
+          <div className="grid grid-cols-3 gap-4">
+            {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
+              sortingProducts?.map((product, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    // setListingId(item.listingId);
+                    // setProductsData(products);
+                  }}
+                >
+                  <ProductCard
+                    data={product}
+                    prodLink
+                    setProducts={setProducts}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="col-span-3 h-96 items-center flex justify-center ">
+                {isLoading ? "Loading..." : <NoMatch />}
+              </div>
+            )}
           </div>
-        )}
-      </Filter>
-    </main>
+          {isLoadingMore && (
+            <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
+              <span>Fetching more products...</span>
+            </div>
+          )}
+        </Filter>
+      </main>
+    </>
   );
 }
 

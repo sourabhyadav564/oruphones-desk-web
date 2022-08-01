@@ -28,7 +28,7 @@ export default function TopArticles({articles}) {
           />
         ))} */}
 
-         {articles.map((item) => (
+         {articles?.map((item) => (
           <ArticleCard
             key={item}
             title={item.post_title}

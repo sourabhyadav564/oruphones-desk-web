@@ -6,13 +6,14 @@ import fetchStaticHTML from "api/fetchStaticHtml";
 import faqImg from "@/assets/faq.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { metaTags } from "@/utils/constant";
+import { Helmet } from "react-helmet";
 
 // function faq({ htmlText, error }) {
 //   if (error) {
 //     return <Error statusCode={404} />;
 //   }
 function faq() {
-
   const [htmlText1, setHtmlText1] = useState("");
 
   useEffect(() => {
@@ -44,15 +45,27 @@ function faq() {
   }
 
   return (
-    <main className="container my-8">
-      <section className="bg-white h-52 py-8 pl-12 rounded-md mb-4 flex justify-center" style={{ boxShadow: "0px 2px 3px #0000000A" }}>
-        <div className="flex items-center w-10/12 justify-between">
-          <h1 className="text-8xl text-m-green font-bold"> F.A.Q </h1>
-          <Image src={faqImg} width={230} height={163} />
-        </div>
-      </section>
-      {parse(htmlText1)}
-    </main>
+    <>
+      <Helmet>
+        <title>{metaTags.FAQ.title}</title>
+        <meta name="description" content={metaTags.FAQ.description} />
+        {/* <meta property="og:url" content={window.location.href} /> */}
+        <meta property="og:title" content={metaTags.FAQ.title} />
+        <meta property="og:description" content={metaTags.FAQ.description} />
+      </Helmet>
+      <main className="container my-8">
+        <section
+          className="bg-white h-52 py-8 pl-12 rounded-md mb-4 flex justify-center"
+          style={{ boxShadow: "0px 2px 3px #0000000A" }}
+        >
+          <div className="flex items-center w-10/12 justify-between">
+            <h1 className="text-8xl text-m-green font-bold"> F.A.Q </h1>
+            <Image src={faqImg} width={230} height={163} />
+          </div>
+        </section>
+        {parse(htmlText1)}
+      </main>
+    </>
   );
 }
 

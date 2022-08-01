@@ -10,16 +10,46 @@ let headers = {
   userUniqueId: Cookies.get("userUniqueId")
     ? Cookies.get("userUniqueId")
     : "Guest",
-  sessionId:
-    typeof window !== "undefined"
-      ? localStorage.getItem("sessionId")
-      : Cookies.get("sessionId") || "",
+  // sessionId:
+  //   typeof window !== "undefined"
+  //     ? localStorage.getItem("sessionId")
+  //     : Cookies.get("sessionId") || "",
   devicePlatform: "Desktop Web",
   location:
     typeof window !== "undefined" ? localStorage.getItem("usedLocation") : "",
 };
 
 const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
+
+const validateSession = () => {
+  let sessionId;
+  if (!Cookies.get("sessionId") && Cookies.get("sessionId") != undefined) {
+    console.log("first");
+    sessionId = Cookies.get("sessionId");
+    return sessionId;
+  }
+
+  const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
+  headers = { ...headers, eventName: "NA" };
+  const DEFAULT_HEADER = { headers: { ...headers } };
+  return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
+    (response) => {
+      console.log("second");
+      console.log("newSessionId", response.data?.dataObject?.sessionId);
+      Cookies.set("sessionId", response.data?.dataObject?.sessionId);
+      return response.data?.dataObject?.sessionId;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+};
+
+
+
+// Axios.defaults.headers.common["Authorization"] =
+//   "Bearer " + Cookies.get("sessionId") || 1234;
+// Axios.defaults.headers.common["sessionId"] = validateSession();
 
 export async function getAboutUsContent() {
   const url = `${BASE_URL}/web/aboutus.html`;
@@ -230,6 +260,7 @@ export function getListingbyMake(location, makeName, userUniqueId, pageNumber) {
     userUniqueId +
     `&pageNumber=` +
     pageNumber;
+
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -342,7 +373,12 @@ export function saveUpdatedDeviceInfo(payLoad) {
 }
 
 export function fetchUserListings(userUniqueId, sessionId) {
-  headers = { ...headers, eventName: "MYLISTINGS_VIEW_LISTING", userUniqueId: userUniqueId, sessionId: sessionId };
+  headers = {
+    ...headers,
+    eventName: "MYLISTINGS_VIEW_LISTING",
+    userUniqueId: userUniqueId,
+    sessionId: sessionId,
+  };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL + `/device/listings?userUniqueId=` + userUniqueId;
@@ -385,7 +421,7 @@ export function getListedDeviceInfo(listingid, userUniqueId, sessionId) {
     listingid +
     `&userUniqueId=` +
     userUniqueId;
-    console.log("default header", DEFAULT_HEADER);
+  console.log("default header", DEFAULT_HEADER);
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -700,7 +736,11 @@ export function fetchSimilarProducts(payLoad, userUniqueId, pageNumber) {
   headers = { ...headers, eventName: "FETCH_SIMILAR_PRODUCTS" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
-    BASE_URL + `/home/listings/search?userUniqueId=` + userUniqueId + `&pageNumber=` + pageNumber;
+    BASE_URL +
+    `/home/listings/search?userUniqueId=` +
+    userUniqueId +
+    `&pageNumber=` +
+    pageNumber;
   return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
