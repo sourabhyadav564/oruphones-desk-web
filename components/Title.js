@@ -8,7 +8,7 @@ function Title({ text, location, onClick }) {
     >
       {text}
       <span>{"  "}</span>
-      <span className="cursor-pointer text-[#2c2f44]" onClick={onClick}>{location}</span>
+      <span className="cursor-pointer underline" onClick={onClick}>{location}</span>
     </h1>
   );
 }

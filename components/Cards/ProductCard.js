@@ -10,7 +10,6 @@ import Logo from "@/assets/oru_phones_logo.png"
 
 
 function ProductCard({ data, prodLink, setProducts }) {
-  console.log("data", data);
   return (
     <Link
       href={{

@@ -15,7 +15,7 @@ function BrandCard({ data }) {
     data.imagePath && (
       <Link href={{ pathname: `/product/listings/${data?.make?.toLowerCase()}`}}>
         <a className="rounded-md shadow hover:shadow-md px-10 py-4 sm:px-4 bg-m-white flex justify-center relative">
-          <Image src={data?.imagePath} alt={data?.make} height={135} width={135} objectFit="contain" />
+          <Image src={data?.imagePath} alt={data?.make} height={80} width={80} objectFit="contain" />
         </a>
       </Link>
     )

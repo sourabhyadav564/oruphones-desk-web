@@ -99,7 +99,7 @@ export default function Home({
       </Helmet>
       <main>
         <Hero />
-        <StepsSection />
+        {/* <StepsSection /> */}
         {/* <TopBrand brandsList={brandsList} /> */}
         {/* <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
         <TopBrand brandsList={brands} />

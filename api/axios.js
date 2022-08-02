@@ -10,10 +10,10 @@ let headers = {
   userUniqueId: Cookies.get("userUniqueId")
     ? Cookies.get("userUniqueId")
     : "Guest",
-  // sessionId:
-  //   typeof window !== "undefined"
-  //     ? localStorage.getItem("sessionId")
-  //     : Cookies.get("sessionId") || "",
+  sessionId:
+    typeof window !== "undefined"
+      ? localStorage.getItem("sessionId")
+      : Cookies.get("sessionId") || "",
   devicePlatform: "Desktop Web",
   location:
     typeof window !== "undefined" ? localStorage.getItem("usedLocation") : "",
@@ -21,40 +21,43 @@ let headers = {
 
 const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
 
-const validateSession = () => {
-  let sessionId;
-  if (!Cookies.get("sessionId") && Cookies.get("sessionId") != undefined) {
-    console.log("first");
-    sessionId = Cookies.get("sessionId");
-    return sessionId;
+Axios.interceptors.request.use(
+  async (request) => {
+    // console.log("request", request);
+    return request;
+  },
+  (err) => {
+    // console.log("err", err);
+    return Promise.reject(err);
   }
+);
 
-  const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
-  headers = { ...headers, eventName: "NA" };
-  const DEFAULT_HEADER = { headers: { ...headers } };
-  return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
-    (response) => {
-      console.log("second");
-      console.log("newSessionId", response.data?.dataObject?.sessionId);
-      Cookies.set("sessionId", response.data?.dataObject?.sessionId);
-      return response.data?.dataObject?.sessionId;
-    },
-    (err) => {
-      console.log(err);
+Axios.interceptors.response.use(
+  async (response) => {
+    // console.log("response", response);
+    // console.log("response", response?.data?.status);
+    if (response?.data?.status === "SESSION_INVALID") {
+      headers = { ...headers, eventName: "NA" };
+      const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
+      const result = await Axios.get(API_ENDPOINT, { headers: { ...headers } });
+      // console.log("response from session id", result);
+      // console.log(
+      //   "response from session id",
+      //   result?.data?.dataObject?.sessionId
+      // );
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sessionId", result?.data?.dataObject?.sessionId);
+      }
+      Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
+      // console.log("response.config", response.config);
     }
-  );
-};
-
-
-
-// Axios.defaults.headers.common["Authorization"] =
-//   "Bearer " + Cookies.get("sessionId") || 1234;
-// Axios.defaults.headers.common["sessionId"] = validateSession();
-
-export async function getAboutUsContent() {
-  const url = `${BASE_URL}/web/aboutus.html`;
-  return await Axios.get(url);
-}
+    return response;
+  },
+  async (error) => {
+    // console.log("error", error);
+    return Promise.reject(error);
+  }
+);
 
 export function getSessionId() {
   headers = { ...headers, eventName: "NA" };
@@ -68,6 +71,11 @@ export function getSessionId() {
       console.log(err);
     }
   );
+}
+
+export async function getAboutUsContent() {
+  const url = `${BASE_URL}/web/aboutus.html`;
+  return await Axios.get(url);
 }
 
 export function getSearchResults(q) {

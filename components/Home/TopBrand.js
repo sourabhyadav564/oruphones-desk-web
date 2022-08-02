@@ -7,7 +7,7 @@ const settings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 6.2,
+  slidesToShow: 7.2,
   slidesToScroll: 1,
 };
 
@@ -17,8 +17,8 @@ function TopBrand({ brandsList }) {
   var _bList = brandsList.slice(0, 8);
   // console.log(_bList);
   return (
-    <section className="container top_brand">
-      <Title text="Top Brands" />
+    <section className="container top_brand pt-4">
+      <Title text="Buy Top Brands" />
       <Carousel {...settings}>
         {_bList && _bList.map((item) => <BrandCard key={item.make} data={item} />)}
         <BrandCard data={{ make: "Show all" }} />
