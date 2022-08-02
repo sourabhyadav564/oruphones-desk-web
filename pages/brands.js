@@ -7,34 +7,34 @@ import { Helmet } from "react-helmet";
 import { metaTags } from "@/utils/constant";
 
 function brands({ brandsList }) {
-  const [brands, setBrands] = useState([]);
+  // const [brands, setBrands] = useState([]);
 
-  useEffect(() => {
-    if (brandsList.length === 0) {
-      setBrands(JSON.parse(localStorage.getItem("brands")));
-    }
-    if (brandsList.length > 0) {
-      localStorage.setItem("brands", JSON.stringify(brandsList));
-      Cookies.set("brands", true);
-      setBrands(brandsList);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (brandsList.length === 0) {
+  //     setBrands(JSON.parse(localStorage.getItem("brands")));
+  //   }
+  //   if (brandsList.length > 0) {
+  //     localStorage.setItem("brands", JSON.stringify(brandsList));
+  //     Cookies.set("brands", true);
+  //     setBrands(brandsList);
+  //   }
+  // }, []);
 
-  brandsList = brands?.sort(
-    (list1, list2) => list2.isPopular - list1.isPopular
-  );
-  brandsList = brands?.sort(
-    (list1, list2) =>
-      parseInt(list1.displayOrder) - parseInt(list2.displayOrder)
-  );
-
-  // brandsList = brandsList.sort(
+  // brandsList = brands?.sort(
   //   (list1, list2) => list2.isPopular - list1.isPopular
   // );
-  // brandsList = brandsList.sort(
+  // brandsList = brands?.sort(
   //   (list1, list2) =>
   //     parseInt(list1.displayOrder) - parseInt(list2.displayOrder)
   // );
+
+  brandsList = brandsList.sort(
+    (list1, list2) => list2.isPopular - list1.isPopular
+  );
+  brandsList = brandsList.sort(
+    (list1, list2) =>
+      parseInt(list1.displayOrder) - parseInt(list2.displayOrder)
+  );
   return (
     <>
      <Helmet>
@@ -60,19 +60,19 @@ function brands({ brandsList }) {
 
 export async function getServerSideProps({ req, res, query }) {
   const { brands } = req.cookies;
-  // const brandsList = await Axios.fetchBrands();
+  const brandsList = await Axios.fetchBrands();
 
-  let brandsList;
-  if (brands) {
-    brandsList = [];
-  } else {
-    const data = await Axios.fetchBrands();
-    brandsList = data?.dataObject;
-  }
+  // let brandsList;
+  // if (brands) {
+  //   brandsList = [];
+  // } else {
+  //   const data = await Axios.fetchBrands();
+  //   brandsList = data?.dataObject;
+  // }
 
   return {
-    // props: { brandsList: brandsList?.dataObject || [] },
-    props: { brandsList: brandsList || [] },
+    props: { brandsList: brandsList?.dataObject || [] },
+    // props: { brandsList: brandsList || [] },
   };
 }
 

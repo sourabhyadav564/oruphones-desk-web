@@ -60,8 +60,8 @@ export default function Hero() {
           // priority
           // width="100%"
           // height="90%"
-          layout="responsive"
-          objectFit="contain"
+          // layout="responsive"
+          // objectFit="contain"
         />
         <Image
           src={banner_two}
@@ -69,8 +69,8 @@ export default function Hero() {
           // priority
           // width="100%"
           // height="90%"
-          layout="responsive"
-          objectFit="contain"
+          // layout="responsive"
+          // objectFit="contain"
         />
       </Carousel>
     </section>
