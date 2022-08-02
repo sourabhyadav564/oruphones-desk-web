@@ -57,7 +57,10 @@ function LocationPopup({ open, setOpen }) {
   }, [userInfo?.userdetails?.address]);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("cities"))?.length > 0) {
+    if (
+      localStorage.getItem("cities") != undefined &&
+      JSON.parse(localStorage.getItem("cities"))?.length > 0
+    ) {
       setCitiesResponse(JSON.parse(localStorage.getItem("cities")));
       setCities(JSON.parse(localStorage.getItem("cities")));
     } else {
@@ -66,7 +69,10 @@ function LocationPopup({ open, setOpen }) {
           const citiesResponse = await Axios.getGlobalCities();
           setCitiesResponse(citiesResponse?.dataObject);
           setCities(citiesResponse?.dataObject);
-          localStorage.setItem("cities", JSON.stringify(citiesResponse?.dataObject));
+          localStorage.setItem(
+            "cities",
+            JSON.stringify(citiesResponse?.dataObject)
+          );
         } catch (err) {
           console.error(err);
           setCities([]);
