@@ -32,7 +32,7 @@ function TopDeals({ location }) {
         Cookies.get("userUniqueId") || "Guest",
         pageNumber
       ).then((response) => {
-        setBeatDeals(response?.dataObject?.bestDeals || []);
+        setBeatDeals([...response?.dataObject?.bestDeals, ...response?.dataObject?.otherListings] || []);
       });
     };
     if (location != undefined) {
@@ -51,7 +51,7 @@ function TopDeals({ location }) {
         <div className="grid grid-cols-5 gap-4 py-4">
           {bestDeals &&
             bestDeals
-              .slice(0, 19)
+              .slice(0, 20)
               .map((item, index) => (
                 <TopDealCard
                   key={index}

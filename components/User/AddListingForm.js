@@ -12,6 +12,10 @@ import AppContext from "@/context/ApplicationContext";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import Cookies from "js-cookie";
+import { deviceConditionQuestion } from "@/utils/constant";
+import { deviceConditionQuestionUpdated } from "@/utils/constant";
+import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
+import DeviceConditionCard from "../Condition/DeviceConditionCard";
 
 function AddEditListing({
   data,
@@ -61,6 +65,9 @@ function AddEditListing({
   const [getExternalSellerData, setGetExternalSellerData] = useState([]);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [conditionResults, setConditionResults] = useState({});
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     setMakeOptions(brandsList);
@@ -72,7 +79,6 @@ function AddEditListing({
     { value: "Good", label: "Good" },
     { value: "Fair", label: "Fair" },
   ];
-
 
   const handleChange = (e) => {
     const { name, type } = e.target;
@@ -127,12 +133,12 @@ function AddEditListing({
       deviceCondition: deviceCondition,
       devicestorage: storage?.split("/")[0],
       deviceRam: storage
-          ?.toString()
-          .split("/")[1]
-          .toString()
-          .replace(/GB/g, " GB")
-          .replace(/RAM/, "")
-          .trim(),
+        ?.toString()
+        .split("/")[1]
+        .toString()
+        .replace(/GB/g, " GB")
+        .replace(/RAM/, "")
+        .trim(),
       earPhones: headphone1 === "Y" ? "Y" : "N",
       make: make,
       marketingName: marketingName,
@@ -168,12 +174,12 @@ function AddEditListing({
     let payload = {
       deviceStorage: storage?.split("/")[0],
       deviceRam: storage
-          ?.toString()
-          .split("/")[1]
-          .toString()
-          .replace(/GB/g, " GB")
-          .replace(/RAM/, "")
-          .trim(),
+        ?.toString()
+        .split("/")[1]
+        .toString()
+        .replace(/GB/g, " GB")
+        .replace(/RAM/, "")
+        .trim(),
       make: make,
       marketingName: marketingName,
       deviceCondition: deviceCondition,
@@ -348,6 +354,35 @@ function AddEditListing({
     }
   };
 
+  const calculateDeviceCondition = () => {
+    if (conditionResults[0].toString() == "No") {
+      setDeviceCondition("Needs Repair");
+    } else if (
+      conditionResults[1].toString().includes("Has significant scratches") ||
+      conditionResults[2].toString().includes("Has significant scratches")
+    ) {
+      setDeviceCondition("Fair");
+    } else if (
+      conditionResults[1].toString().includes("Up to 5") ||
+      conditionResults[2].toString().includes("Up to 5")
+    ) {
+      setDeviceCondition("Good");
+    } else if (
+      conditionResults[1].toString().includes("Up to 2") ||
+      conditionResults[2].toString().includes("Up to 2")
+    ) {
+      setDeviceCondition("Excellent");
+    } else if (
+      conditionResults[1].toString().includes("No scratch") ||
+      conditionResults[2].toString().includes("No scratch")
+    ) {
+      setDeviceCondition("Like New");
+    } else {
+      setDeviceCondition("Good");
+    }
+    setShow(true);
+  };
+
   return (
     <div className="p-8">
       <h1 className="mb-8">Sell Your Phone</h1>
@@ -445,8 +480,9 @@ function AddEditListing({
               })}
             ></Select>
           </span>
-          <div>
-            <span>
+          {!show ? (
+            <div className="col-span-2">
+              {/* <span>
               <Select
                 labelName="Device Condition*"
                 className={deviceConditionRequired}
@@ -471,9 +507,90 @@ function AddEditListing({
               >
                 What&apos;s this?
               </p>
-            </span>
-          </div>
-          <span />
+            </span> */}
+              <div>
+                <h3 className="">
+                  {deviceConditionQuestion[questionIndex]?.title}
+                </h3>
+                {deviceConditionQuestion[questionIndex]?.options?.map(
+                  (item, index) => (
+                    <div
+                      onClick={() => {
+                        setConditionResults((prev) => {
+                          return {
+                            ...prev,
+                            [questionIndex]: item?.title,
+                            // {
+                            //   ...prev[questionIndex],
+                            //   [index]: true,
+                            // },
+                          };
+                        });
+                      }}
+                      key={index}
+                    >
+                      <ConditionOptionLarge
+                        title={item?.title}
+                        options={item?.options}
+                        conditionResults={conditionResults}
+                        questionIndex={questionIndex}
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="flex items-center justify-between">
+                <p
+                  onClick={() =>
+                    setQuestionIndex(questionIndex > 0 ? questionIndex - 1 : 0)
+                  }
+                  className={`${
+                    questionIndex > 0 && "hover:cursor-pointer"
+                  } p-2 flex justify-end items-center ${
+                    !questionIndex > 0 && "opacity-50"
+                  }`}
+                >
+                  <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
+                    Back
+                  </span>
+                </p>
+                <p
+                  onClick={() => {
+                    setQuestionIndex(
+                      questionIndex < deviceConditionQuestion.length - 1
+                        ? questionIndex + 1
+                        : deviceConditionQuestion.length - 1
+                    );
+                    questionIndex == deviceConditionQuestion.length - 1 &&
+                      calculateDeviceCondition();
+                  }}
+                  className={`hover:cursor-pointer p-2 flex justify-end items-center`}
+                >
+                  <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
+                    {questionIndex == deviceConditionQuestion.length - 1
+                      ? "Done"
+                      : "Next"}
+                  </span>
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="col-span-2">
+              <DeviceConditionCard
+                condition={deviceCondition}
+                answer={conditionResults}
+              />
+              <span>
+                <p
+                  className="mt-2 text-sm whitespace-nowrap underline cursor-pointer text-m-green"
+                  onClick={() => setConditionInfoPopup(true)}
+                >
+                  What&apos;s this?
+                </p>
+              </span>
+            </div>
+          )}
+          {/* <span /> */}
           <div className="grid gap-8">
             <div className="relative">
               <Input

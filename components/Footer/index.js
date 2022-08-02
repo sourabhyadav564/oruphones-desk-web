@@ -29,7 +29,7 @@ const Footer = () => {
         <div className="flex flex-col">
           <h1 className=" font-bold">Links</h1>
           <Link href="https://www.oruphones.com/blog/">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max">Blog</a>
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max" target="_blank">Blog</a>
           </Link>
           <Link href="/about-us">
             <a className="hover:pl-2 delay-75 mt-4 max-w-max">About Us</a>
@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="flex items-center gap-x-4 mt-4 ">
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                // href="https://www.facebook.com/oruphones"
+                href="https://www.facebook.com/ORUphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                // href="https://twitter.com/oruphones"
+                href="https://twitter.com/ORUPhones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -69,7 +69,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                // href="https://www.instagram.com/oruphones/"
+                href="https://www.instagram.com/ORUphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -78,7 +78,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                // href="https://www.pinterest.com/refurbishedphonedeals/"
+                href="https://www.pinterest.com/ORUphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -87,7 +87,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                // href="https://www.linkedin.com/company/oruphones"
+                href="https://www.linkedin.com/company/oruphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -96,7 +96,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                // href="https://www.youtube.com/channel/UCf05rmUN5_t2KzgmjQtvXKg/"
+                href="https://www.youtube.com/channel/UCJTgZUz7jkMCECYVO1uFE6A"
                 target="_blank"
                 rel="noopener noreferrer"
               >

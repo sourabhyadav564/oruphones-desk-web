@@ -10,13 +10,13 @@ import * as Axios from "../../api/axios";
 
 function AppDownloadPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
-  const [qrValue, setQrValue] = useState();
+  // const [qrValue, setQrValue] = useState();
 
-  useEffect(() => {
-    Axios.getTinyUrl().then((response) => {
-      setQrValue(response?.dataObject.tinyurl);
-    });
-  }, []);
+  // useEffect(() => {
+  //   Axios.getTinyUrl().then((response) => {
+  //     setQrValue(response?.dataObject.tinyurl);
+  //   });
+  // }, []);
   
   return (
     <Transition.Root show={open} as={Fragment}>

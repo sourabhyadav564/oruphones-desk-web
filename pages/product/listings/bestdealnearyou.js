@@ -83,22 +83,8 @@ function Bestdealnearyou() {
     }
   };
 
-  const handelScroll = (e) => {
-    // console.log("top", e.target.documentElement.scrollTop);
-    // console.log("win", window.innerHeight);
-    // console.log("height", e.target.documentElement.scrollHeight);
-
-    if (
-      window.innerHeight + e.target.documentElement.scrollTop + 1 >
-      e.target.documentElement.scrollHeight 
-    ) {
-      loadMoreData();
-    }
-  };
-
   useEffect(() => {
     loadData();
-    window.addEventListener("scroll", handelScroll);
   }, [getSearchLocation]);
 
   useEffect(() => {
@@ -146,17 +132,19 @@ function Bestdealnearyou() {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
-        (response) => {
-          // if (verification?.length > 0) {
-          //   payLoad.verification = verification;
-          // }
-          setProducts(response?.dataObject?.otherListings);
-          // setBestDeal([]);
-          setBestDeal(response?.dataObject?.bestDeals);
-          setLoading(false);
-        }
-      );
+      Axios.searchFilter(
+        payLoad,
+        Cookies.get("userUniqueId") || "Guest",
+        pageNumber
+      ).then((response) => {
+        // if (verification?.length > 0) {
+        //   payLoad.verification = verification;
+        // }
+        setProducts(response?.dataObject?.otherListings);
+        // setBestDeal([]);
+        setBestDeal(response?.dataObject?.bestDeals);
+        setLoading(false);
+      });
     }
   }, [applyFilter]);
 
@@ -196,10 +184,14 @@ function Bestdealnearyou() {
             </div>
           )}
         </div>
-        {isLoadingMore && (
-          <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
-            <span>Fetching more products...</span>
-          </div>
+        {!isLoading && sortingProducts && sortingProducts.length > 0 && (
+          <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+          onClick={loadMoreData}
+          >
+            <p className="block text-m-green font-semibold">
+              {isLoadingMore ? "Fetching more products..." : "Load More"}
+            </p>
+          </span>
         )}
       </Filter>
     </main>
