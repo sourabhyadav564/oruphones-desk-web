@@ -4,15 +4,14 @@ import Error from "next/error";
 import { infoTemplates } from "api/axios";
 import fetchStaticHTML from "api/fetchStaticHtml";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import { metaTags } from "@/utils/constant";
+import Head from "next/head";
 
 // function PrivacyPolicy({ htmlText, error }) {
 //   if (error) {
 //     return <Error statusCode={404} />;
 //   }
 function PrivacyPolicy() {
-
   const [htmlText1, setHtmlText1] = useState("");
 
   useEffect(() => {
@@ -45,22 +44,24 @@ function PrivacyPolicy() {
 
   return (
     <>
-     <Helmet>
+      <Head>
         <title>{metaTags.PRIVACY.title}</title>
         <meta name="description" content={metaTags.PRIVACY.description} />
-        {/* <meta property="og:url" content={window.location.href} /> */}
         <meta property="og:title" content={metaTags.PRIVACY.title} />
-        <meta property="og:description" content={metaTags.PRIVACY.description} />
-      </Helmet>
-    <main className="container my-8">
-      <section className="p-6 mt-12 mb-6 text-black-20 text-center">
-        <h1 className="font-bold text-2xl uppercase">
-          Mobilicis India Private Limited
-        </h1>
-        <p>Privacy Policy of www.oruphones.com</p>
-      </section>
-      {parse(htmlText1)}
-    </main>
+        <meta
+          property="og:description"
+          content={metaTags.PRIVACY.description}
+        />
+      </Head>
+      <main className="container my-8">
+        <section className="p-6 mt-12 mb-6 text-black-20 text-center">
+          <h1 className="font-bold text-2xl uppercase">
+            Mobilicis India Private Limited
+          </h1>
+          <p>Privacy Policy of www.oruphones.com</p>
+        </section>
+        {parse(htmlText1)}
+      </main>
     </>
   );
 }

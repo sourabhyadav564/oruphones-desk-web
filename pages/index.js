@@ -15,8 +15,8 @@ import * as Axios from "../api/axios";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
-import { Helmet } from "react-helmet";
 import { metaTags } from "@/utils/constant";
+import Head from "next/head";
 
 export default function Home({
   brandsList,
@@ -90,13 +90,12 @@ export default function Home({
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{metaTags.HOME.title}</title>
         <meta name="description" content={metaTags.HOME.description} />
-        {/* <meta property="og:url" content={window.location.href} /> */}
         <meta property="og:title" content={metaTags.HOME.title} />
         <meta property="og:description" content={metaTags.HOME.description} />
-      </Helmet>
+      </Head>
       <main>
         <Hero />
         {/* <StepsSection /> */}

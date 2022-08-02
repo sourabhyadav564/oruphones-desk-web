@@ -9,8 +9,8 @@ import AppContext from "@/context/ApplicationContext";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
-import { Helmet } from "react-helmet";
 import { metaTags } from "@/utils/constant";
+import Head from "next/head";
 
 // import {
 //   otherVendorDataState,
@@ -253,13 +253,12 @@ function BrandPage() {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        {/* <meta property="og:url" content={window.location.href} /> */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-      </Helmet>
+      </Head>
       <main className="container py-4">
         <h1 className="sr-only">{makeName} Page</h1>
         <Filter

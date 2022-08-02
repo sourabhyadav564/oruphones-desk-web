@@ -21,43 +21,43 @@ let headers = {
 
 const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
 
-// Axios.interceptors.request.use(
-//   async (request) => {
-//     // console.log("request", request);
-//     return request;
-//   },
-//   (err) => {
-//     // console.log("err", err);
-//     return Promise.reject(err);
-//   }
-// );
+Axios.interceptors.request.use(
+  async (request) => {
+    // console.log("request", request);
+    return request;
+  },
+  (err) => {
+    // console.log("err", err);
+    return Promise.reject(err);
+  }
+);
 
-// Axios.interceptors.response.use(
-//   async (response) => {
-//     // console.log("response", response);
-//     // console.log("response", response?.data?.status);
-//     if (response?.data?.status === "SESSION_INVALID") {
-//       headers = { ...headers, eventName: "NA" };
-//       const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
-//       const result = await Axios.get(API_ENDPOINT, { headers: { ...headers } });
-//       // console.log("response from session id", result);
-//       // console.log(
-//       //   "response from session id",
-//       //   result?.data?.dataObject?.sessionId
-//       // );
-//       if (typeof window !== "undefined") {
-//         localStorage.setItem("sessionId", result?.data?.dataObject?.sessionId);
-//       }
-//       Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
-//       // console.log("response.config", response.config);
-//     }
-//     return response;
-//   },
-//   async (error) => {
-//     // console.log("error", error);
-//     return Promise.reject(error);
-//   }
-// );
+Axios.interceptors.response.use(
+  async (response) => {
+    // console.log("response", response);
+    // console.log("response", response?.data?.status);
+    if (response?.data?.status === "SESSION_INVALID") {
+      headers = { ...headers, eventName: "NA" };
+      const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
+      const result = await Axios.get(API_ENDPOINT, { headers: { ...headers } });
+      // console.log("response from session id", result);
+      // console.log(
+      //   "response from session id",
+      //   result?.data?.dataObject?.sessionId
+      // );
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sessionId", result?.data?.dataObject?.sessionId);
+      }
+      Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
+      // console.log("response.config", response.config);
+    }
+    return response;
+  },
+  async (error) => {
+    // console.log("error", error);
+    return Promise.reject(error);
+  }
+);
 
 export function getSessionId() {
   headers = { ...headers, eventName: "NA" };

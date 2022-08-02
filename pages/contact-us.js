@@ -3,8 +3,8 @@ import TextArea from "@/components/Form/TextArea";
 import { useState } from "react";
 import { contactUs } from "api/axios";
 import { toast } from "react-toastify";
-import { Helmet } from "react-helmet";
 import { metaTags } from "@/utils/constant";
+import Head from "next/head";
 
 function contactUS() {
   const [name, setName] = useState();
@@ -54,16 +54,15 @@ function contactUS() {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{metaTags.CONTACT_US.title}</title>
         <meta name="description" content={metaTags.CONTACT_US.description} />
-        {/* <meta property="og:url" content={window.location.href} /> */}
         <meta property="og:title" content={metaTags.CONTACT_US.title} />
         <meta
           property="og:description"
           content={metaTags.CONTACT_US.description}
         />
-      </Helmet>
+      </Head>
       <main className="container my-4">
         <section className="bg-m-green h-52 p-8 flex items-center rounded-md">
           <h1 className="text-6xl font-light text-m-grey-5"> Contact Us </h1>

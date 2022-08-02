@@ -5,8 +5,8 @@ import Error from "next/error";
 import { Fragment, useEffect, useState } from "react";
 import { infoTemplates } from "api/axios";
 import fetchStaticHTML from "api/fetchStaticHtml";
-import { Helmet } from "react-helmet";
 import { metaTags } from "@/utils/constant";
+import Head from "next/head";
 
 // function Termscondition({ htmlText, error }) {
 // if (error) {
@@ -45,19 +45,18 @@ function Termscondition() {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{metaTags.TERMS_CONDITIONS.title}</title>
         <meta
           name="description"
           content={metaTags.TERMS_CONDITIONS.description}
         />
-        {/* <meta property="og:url" content={window.location.href} /> */}
         <meta property="og:title" content={metaTags.TERMS_CONDITIONS.title} />
         <meta
           property="og:description"
           content={metaTags.TERMS_CONDITIONS.description}
         />
-      </Helmet>
+      </Head>
       <main className="container my-8">
         <section className="mt-12 flex flex-col items-center mb-8 text-m-black">
           <h1 className="uppercase  font-bold" style={{ fontSize: 28 }}>

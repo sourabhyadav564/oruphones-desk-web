@@ -13,9 +13,11 @@ export const ApplicationContext = ({ children }) => {
 
   useEffect(() => {
     const fetchUserProfileData = async () => {
-      const userProfile = await Axios.getUserProfile("91", Cookies.get("mobileNumber"));
-      setUserInfo(userProfile?.dataObject);
-    };
+      if (Cookies.get("mobileNumber") !== undefined) {
+        const userProfile = await Axios.getUserProfile("91", Cookies.get("mobileNumber"));
+        setUserInfo(userProfile?.dataObject);
+      };
+    }
     fetchUserProfileData();
   }, [userLogged, refresh]);
 

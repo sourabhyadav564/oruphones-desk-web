@@ -7,7 +7,7 @@ import faqImg from "@/assets/faq.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { metaTags } from "@/utils/constant";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 
 // function faq({ htmlText, error }) {
 //   if (error) {
@@ -46,13 +46,12 @@ function faq() {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{metaTags.FAQ.title}</title>
         <meta name="description" content={metaTags.FAQ.description} />
-        {/* <meta property="og:url" content={window.location.href} /> */}
         <meta property="og:title" content={metaTags.FAQ.title} />
         <meta property="og:description" content={metaTags.FAQ.description} />
-      </Helmet>
+      </Head>
       <main className="container my-8">
         <section
           className="bg-white h-52 py-8 pl-12 rounded-md mb-4 flex justify-center"
