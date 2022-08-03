@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import bgImage from "@/assets/app_download.png";
 import { GrClose } from "react-icons/gr";
-import QRCode from "qrcode.react";
+// import QRCode from "qrcode.react";
 import { useState, useEffect } from "react";
 import * as Axios from "../../api/axios";
 

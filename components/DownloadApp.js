@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import QRCode from "qrcode.react";
+// import QRCode from "qrcode.react";
 import { useState } from "react";
 import * as Axios from "../api/axios";
 

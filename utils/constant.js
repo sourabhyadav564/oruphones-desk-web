@@ -275,4 +275,89 @@ export const deviceConditionQuestion = [
   },
 ];
 
-
+export const deviceConditionResult = [
+  {
+    title: "Like New",
+    subtitle:
+      "(Like brand-new condition.  Suitable for gifting.  Also referred to as “Open Box” or “Unboxed” by others)",
+    description:
+      "Device you are getting in this category should be equivalent to a brand-new set. The mobile must be in “as good as new” condition and should have a very good performance. The software, the specs, everything is no less than a new device!",
+    head: "What should you expect from a “Like New” condition device:",
+    par: [
+      "Turns on perfectly and all features working 100%",
+      "Battery health at least 80%",
+      "No scratches, no cracks and no dents on the screen and back",
+      "Display in perfect condition (without any discoloration, dead pixels or touch problems)",
+      "Housing without any scratches, cracks or dents",
+      "Device fully unlocked (not jailbroken or rooted)",
+      "Most likely it comes with brand warranty or sellers’ warranty",
+      "You might get original accessories with this device (Box, charger etc.)",
+    ],
+    note: "We recommend buyers to verify the device using ORUphones app before making your purchase. You can either raise a “verification request” to seller or verify the device by yourself at the time of purchase",
+  },
+  {
+    title: "Excellent",
+    subtitle: "(Still suitable for gifting)",
+    description:
+      "Device you are getting in this category should be excellent in condition. No hardware and software damage with a very good performance. This mobile will carry out all the tasks efficiently and without any lag. The mobile justifies its value in various aspects of the day-to-day tasks.",
+    head: "What should you expect from a “Excellent” condition device:",
+    par: [
+      "Turns on perfectly and all features working 100%",
+      "Battery health at least 80%",
+      "No cracks and no dents on the screen and back",
+      "May have minor scratches on the screen or the back only visible if you hold the product closer than arm's length",
+      "Display in perfect condition (without any discoloration, dead pixels or touch problems)",
+      "Housing may have scratches, but no cracks or dents",
+      "Device fully unlocked (not jailbroken or rooted)",
+    ],
+  },
+  {
+    title: "Good",
+    subtitle: "(Moderately used device in a 100% working condition)",
+    description:
+      "Device you are getting in this category should be in good condition. These are moderately used devices and fully functional. The mobile has taken all sorts of software and hardware workloads and has been working pretty good in a broad aspect.",
+    head: "What should you expect from a “Good” condition device:",
+    par: [
+      "Turns on perfectly and all features working 100%",
+      "Battery health at least 80%",
+      "No cracks on the screen and back",
+      "May have scratches on the screen or the back visible even if you hold the product at arm's length",
+      "Display in good condition (may have light discoloration, but no dead pixels or touch problems)",
+      "Housing can have scratches, but cannot be bent or cracked",
+      "Device fully unlocked (not jailbroken or rooted)",
+    ],
+  },
+  {
+    title: "Fair",
+    subtitle: "(Heavily used device. 100% working condition)",
+    description:
+      "Device you are getting in this category has been heavily used.  Still device should be 100% functional",
+    head: "What should you expect from a “Fair” condition device:",
+    par: [
+      "The device must have all of its components (no missing parts)",
+      "Device may have minor software problems",
+      "Battery health might be less than 80%",
+      "Screen and/or back might have any type of scratches, dents but NO cracks",
+      "Display may have discoloration but should be fully functional",
+      "Housing can have scratches and small dents, but cannot be bent or cracked",
+      "Device fully unlocked (not jailbroken or rooted)",
+    ],
+  },
+  {
+    title: "Needs Repair",
+    subtitle: "",
+    description:
+      "As name suggests, these devices can be fully functional with some repair work. This could be a good bargain where you can get a device at dirt cheap price and repair it,  to turn this into a  fully functional excellent condition smartphone.\nDevices you are getting in this category have been heavily used and may have missing parts, cracked screen/back or software/hardware problems including Power-on issues.",
+    head: "What should you expect from a “Needs Repair” condition device:",
+    par: [
+      "The device may have missing parts",
+      "may not power on",
+      "may have software problems",
+      "Battery health might be less than 80%",
+      "One or more features might not be working properly, such as cameras, connectivity, speakers and others",
+      "Screen and/or back might have any type of scratches, dents or cracks",
+      "Display can be faulty (may have discoloration, dead pixels or not be functional)",
+      "Housing can have scratches and dents or cracked",
+    ],
+  },
+];

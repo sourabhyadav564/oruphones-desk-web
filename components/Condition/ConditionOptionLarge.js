@@ -21,8 +21,8 @@ const ConditionOptionLarge = ({
         options.length > 0 &&
         conditionResults?.[questionIndex] == title &&
         options.map((option, index) => (
-          <div className="flex items-center space-x-3 p-1" key={index}>
-            <BsInfoCircle className="text-xs" />
+          <div className="flex items-center space-x-3 p-1 ml-5" key={index}>
+            <BsInfoCircle className="text-[10px]" />
             <h1>{option}</h1>
           </div>
         ))}

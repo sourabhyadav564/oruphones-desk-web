@@ -4,9 +4,12 @@ import Input from "../Form/Input";
 import { useState, useEffect, useContext } from "react";
 import ImageInput from "../Form/ImageInput";
 import { numberWithCommas, numberFromString } from "../../utils/util";
-import charging from "../../assets/charging-station.png";
-import headphone from "../../assets/headphones.png";
-import originalBox from "../../assets/original-box.png";
+// import charging from "../../assets/charging-station.png";
+// import headphone from "../../assets/headphones.png";
+// import originalBox from "../../assets/original-box.png";
+import charging from "../../assets/charging-station.svg";
+import headphone from "../../assets/headphones.svg";
+import originalBox from "../../assets/original-box.svg";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
@@ -49,6 +52,8 @@ function AddEditListing({
   const [charger, setCharger] = useState("N");
   const [headphone1, setHeadphone1] = useState("N");
   const [originalBox1, setOriginalBox1] = useState("N");
+  const [warranty, setWarranty] = useState("more");
+  const [showWarranty, setShowWarranty] = useState("N");
   const [sellPrice, setSellPrice] = useState(null);
   const [leastSellingprice, setLeastSellingprice] = useState("");
   const [maxsellingprice, setMaxsellingprice] = useState("");
@@ -68,6 +73,7 @@ function AddEditListing({
   const [conditionResults, setConditionResults] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
   const [show, setShow] = useState(false);
+  console.log("headphone1", headphone1);
 
   useEffect(() => {
     setMakeOptions(brandsList);
@@ -78,6 +84,13 @@ function AddEditListing({
     { value: "Excellent", label: "Excellent" },
     { value: "Good", label: "Good" },
     { value: "Fair", label: "Fair" },
+  ];
+
+  const deviceWarrantyCheck = [
+    { value: "zero", label: "0-3 Months Ago" },
+    { value: "four", label: "4-6 Months Ago" },
+    { value: "seven", label: "7-11 Months Ago" },
+    { value: "more", label: "More Than 11 Months Ago" },
   ];
 
   const handleChange = (e) => {
@@ -143,7 +156,7 @@ function AddEditListing({
       make: make,
       marketingName: marketingName,
       originalBox: originalBox1 === "Y" ? "Y" : "N",
-      warrantyPeriod: "more",
+      warranty: warranty,
       verified: "no",
     };
     const fetchData = async () => {
@@ -201,6 +214,7 @@ function AddEditListing({
     charger,
     headphone1,
     originalBox1,
+    warranty,
   ]);
 
   const handleImageChange = async (e, index) => {
@@ -342,6 +356,7 @@ function AddEditListing({
         make: make,
         marketingName: marketingName,
         originalbox: originalBox1,
+        warranty: warranty,
         platform: make === "Apple" ? "iOS" : "Android",
         userUniqueId: Cookies.get("userUniqueId"),
         model: marketingName,
@@ -556,15 +571,20 @@ function AddEditListing({
                 </p>
                 <p
                   onClick={() => {
-                    setQuestionIndex(
-                      questionIndex < deviceConditionQuestion.length - 1
-                        ? questionIndex + 1
-                        : deviceConditionQuestion.length - 1
-                    );
+                    questionIndex in conditionResults &&
+                      setQuestionIndex(
+                        questionIndex < deviceConditionQuestion.length - 1
+                          ? questionIndex + 1
+                          : deviceConditionQuestion.length - 1
+                      );
                     questionIndex == deviceConditionQuestion.length - 1 &&
                       calculateDeviceCondition();
                   }}
-                  className={`hover:cursor-pointer p-2 flex justify-end items-center`}
+                  className={`${
+                    !(questionIndex in conditionResults)
+                      ? "opacity-50"
+                      : "hover:cursor-pointer"
+                  } p-2 flex justify-end items-center`}
                 >
                   <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
                     {questionIndex == deviceConditionQuestion.length - 1
@@ -709,7 +729,31 @@ function AddEditListing({
               e.target.checked ? setOriginalBox1("Y") : setOriginalBox1("N");
             }}
           />
+          <Checkbox
+            src={originalBox}
+            text="Original Bill"
+            checked={warranty}
+            onClick={(e) => {
+              e.target.checked ? setShowWarranty("Y") : setShowWarranty("N");
+              setWarranty("more");
+            }}
+          />
         </div>
+        {showWarranty === "Y" && (
+          <div className="my-5 grid grid-cols-2 gap-5">
+            {deviceWarrantyCheck.map((item, index) => (
+              <div
+                key={index}
+                className={`${
+                  warranty == item?.value ? "bg-gray-200" : "bg-white"
+                } py-3 px-5 rounded-md hover:cursor-pointer hover:bg-gray-200 active:bg-gray-300 duration-300 border-2 border-gray-200 flex items-center justify-center`}
+                onClick={() => setWarranty(item.value)}
+              >
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="grid grid-cols-7 relaive gap-4 ">
           <div className="col-span-4 flex ">
             <div className="w-96 relative">

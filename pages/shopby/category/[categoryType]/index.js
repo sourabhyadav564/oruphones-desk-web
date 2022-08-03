@@ -12,12 +12,6 @@ import NoMatch from "@/components/NoMatch";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
 
-// import {
-//   otherVendorDataState,
-//   // otherVandorListingIdState,
-// } from "../../../../atoms/globalState";
-// import { useRecoilState } from "recoil";
-
 const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -26,9 +20,9 @@ const settings = {
   infinite: false,
 };
 
-function BrandPage() {
+function CategoryPage() {
   const router = useRouter();
-  let { makeName } = router.query;
+  let { categoryType } = router.query;
   const [products, setProducts] = useState([]);
   const [bestDeal, setBestDeal] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -42,27 +36,19 @@ function BrandPage() {
   const [title, setTitle] = useState(metaTags.BRANDS.title);
   const [description, setDescription] = useState(metaTags.BRANDS.description);
 
-  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-
   const loadData = () => {
-    if (makeName) {
-      Axios.getListingbyMake(
+    if (categoryType) {
+      Axios.shopByCategory(
         getSearchLocation,
-        makeName,
+        categoryType,
         Cookies.get("userUniqueId"),
         pageNumber
       ).then((response) => {
-        // setProducts(response?.dataObject?.otherListings);
-        // setBestDeal(response?.dataObject?.bestDeals);
         if (response?.dataObject?.otherListings.length > -1) {
           setProducts((response && response?.dataObject?.otherListings) || []);
-          // setProductsData(
-          //   (response && response?.dataObject?.otherListings) || []
-          // );
         }
         if (response?.dataObject?.bestDeals.length > -1) {
           setBestDeal((response && response?.dataObject?.bestDeals) || []);
-          // setProductsData((response && response?.dataObject?.bestDeals) || []);
         }
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
@@ -78,29 +64,19 @@ function BrandPage() {
 
   const loadMoreData = () => {
     setIsLoadingMore(true);
-    if (makeName) {
-      Axios.getListingbyMake(
+    if (categoryType) {
+      Axios.shopByCategory(
         getSearchLocation,
-        makeName,
+        categoryType,
         Cookies.get("userUniqueId"),
         pageNumber
       ).then((response) => {
-        // setProducts(response?.dataObject?.otherListings);
-        // setBestDeal(response?.dataObject?.bestDeals);
         if (response?.dataObject?.otherListings.length > -1) {
           setProducts((products) => [
             ...products,
             ...response?.dataObject?.otherListings,
           ]);
-          // setProductsData(
-          //   (response && response?.dataObject?.otherListings) || []
-          // );
         }
-        // if (response?.dataObject?.bestDeals.length > -1) {
-        //   setBestDeal((response && response?.dataObject?.bestDeals) || []);
-        //   // setProductsData((response && response?.dataObject?.bestDeals) || []);
-        // }
-
         setLoading(false);
         setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
@@ -110,11 +86,10 @@ function BrandPage() {
 
   useEffect(() => {
     loadData();
-  }, [makeName, getSearchLocation]);
+  }, [categoryType, getSearchLocation]);
 
   useEffect(() => {
     const {
-      brand,
       condition,
       color,
       storage,
@@ -123,14 +98,10 @@ function BrandPage() {
       priceRange,
     } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
-      }
       let payLoad = {
         listingLocation: getSearchLocation,
-        make: brand?.length > 0 ? brand : [makeName],
+        make: [],
+        marketingName: [],
         reqPage: "BRAND",
         color: [],
         deviceCondition: [],
@@ -173,10 +144,11 @@ function BrandPage() {
   }, [applyFilter]);
 
   // const sortingProducts = useMemo(() => getSortedProducts(applySort, products), [applySort, products]);
+
   const sortingProducts = getSortedProducts(applySort, products);
 
   useEffect(() => {
-    switch (makeName) {
+    switch (categoryType) {
       case "apple":
         setTitle(metaTags.APPLE.title);
         setDescription(metaTags.APPLE.description);
@@ -234,7 +206,7 @@ function BrandPage() {
         setDescription(metaTags.BRANDS.description);
         break;
     }
-  }, [makeName]);
+  }, [categoryType]);
 
   return (
     <>
@@ -245,12 +217,12 @@ function BrandPage() {
         <meta property="og:description" content={description} />
       </Head>
       <main className="container py-4">
-        <h1 className="sr-only">{makeName} Page</h1>
+        <h1 className="sr-only">{categoryType} Page</h1>
         <Filter
           listingsCount={sortingProducts?.length + bestDeal?.length}
           setApplySort={setApplySort}
           setApplyFilter={setApplyFilter}
-          makeName={makeName}
+          //   makeName={makeName}
         >
           {!isLoading && bestDeal && bestDeal.length > 0 && (
             <div className="mb-4">
@@ -347,4 +319,4 @@ function getSortedProducts(applySort, products) {
   return sortedProducts;
 }
 
-export default BrandPage;
+export default CategoryPage;

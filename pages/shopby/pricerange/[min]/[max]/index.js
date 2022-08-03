@@ -4,7 +4,7 @@ import Carousel from "@/components/Carousel";
 import Filter from "@/components/Filter";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import * as Axios from "../../../../../../api/axios";
+import * as Axios from "../../../../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import { useContext } from "react";
 import { numberFromString, stringToDate } from "@/utils/util";
@@ -29,22 +29,54 @@ const Pricerange = () => {
   const [applyFilter, setApplyFilter] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [applySort, setApplySort] = useState();
+  let [pageNumber, setPageNumber] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  useEffect(() => {
+  const loadData = () => {
     const fetchData = async () => {
       const priceRange = await Axios.shopByPriceRange(
-        max === "above" ? "200000" : max,
+        // max === "above" ? "200000" : max,
+        max,
         getSearchLocation,
         min,
-        Cookies.get("userUniqueId") || "Guest"
+        Cookies.get("userUniqueId") || "Guest",
+        pageNumber
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings(priceRange?.dataObject?.otherListings);
       setLoading(false);
+      setPageNumber(pageNumber + 1);
     };
     if (min != undefined && max != undefined) {
       fetchData();
     }
+  };
+
+  const loadMoreData = () => {
+    setIsLoadingMore(true);
+    const fetchData = async () => {
+      const priceRange = await Axios.shopByPriceRange(
+        // max === "above" ? "200000" : max,
+        max,
+        getSearchLocation,
+        min,
+        Cookies.get("userUniqueId") || "Guest",
+        pageNumber
+      );
+      setBestDeal(priceRange?.dataObject?.bestDeals);
+      setOtherListings(priceRange?.dataObject?.otherListings);
+      setLoading(false);
+      setPageNumber(pageNumber + 1);
+      setIsLoadingMore(false);
+    };
+    if (min != undefined && max != undefined) {
+      fetchData();
+    }
+  };
+
+  useEffect(() => {
+    loadData();
   }, [min, max, getSearchLocation]);
 
   useEffect(() => {
@@ -61,7 +93,8 @@ const Pricerange = () => {
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       let payLoad = {
         listingLocation: getSearchLocation,
-        maxsellingPrice: max === "above" ? "200000" : max,
+        // maxsellingPrice: max === "above" ? "200000" : max,
+        maxsellingPrice: max,
         minsellingPrice: min,
         reqPage: "SBYP",
       };
@@ -116,6 +149,9 @@ const Pricerange = () => {
             ))}
           </Carousel>
         )}
+        <h4 className="font-semibold text-lg opacity-50">
+          Total Products ({totalProducts})
+        </h4>
         <div className="grid grid-cols-3 gap-4 mt-3">
           {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
             sortingProducts?.map((product, index) => (
@@ -132,6 +168,18 @@ const Pricerange = () => {
             </div>
           )}
         </div>
+        {!isLoading && sortingProducts && sortingProducts.length > 0 && (
+          <span
+            className={`${
+              isLoadingMore ? "w-[250px]" : "w-[150px]"
+            } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+            onClick={loadMoreData}
+          >
+            <p className="block text-m-green font-semibold">
+              {isLoadingMore ? "Fetching more products..." : "Load More"}
+            </p>
+          </span>
+        )}
       </Filter>
     </main>
   );

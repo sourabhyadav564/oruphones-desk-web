@@ -579,20 +579,6 @@ export function detailWithUserInfo(
     listingid +
     `&userUniqueId=` +
     userUniqueId;
-  // const DEFAULT_HEADER = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     srcFrom: "Desktop Web",
-  //     eventName: "NA",
-  //     userUniqueId: userUniqueId,
-  //     sessionId: sessionId,
-  //     devicePlatform: "Desktop Web",
-  //     location:
-  //       typeof window !== "undefined"
-  //         ? localStorage.getItem("usedLocation")
-  //         : "",
-  //   },
-  // };
   headers = {
     ...headers,
     eventName: "PRODUCT_DETAIL_WITH_SELLER_DETAIL",
@@ -650,7 +636,15 @@ export function bestDealNearByYou(location, userUniqueId, pageNumber) {
   );
 }
 
-export function shopByPriceRange(endPrice, location, startPrice, listingid) {
+export function shopByPriceRange(
+  endPrice,
+  location,
+  startPrice,
+  listingid,
+  pageNumber
+) {
+  headers = { ...headers, eventName: "GET_BEST_DEALS" };
+  const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL +
     `/home/shopbyprice/listmodel?end=` +
@@ -660,7 +654,9 @@ export function shopByPriceRange(endPrice, location, startPrice, listingid) {
     `&start=` +
     startPrice +
     `&userUniqueId=` +
-    listingid;
+    listingid +
+    `&pageNumber=` +
+    pageNumber;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -957,6 +953,29 @@ export function fetchTopArticles() {
   headers = { ...headers, eventName: "FETCH_TOP_ARTICLES" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + "/wordpress/blogs/info";
+  return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
+    (response) => {
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export function shopByCategory(location, category, userUniqueId, pageNumber) {
+  const API_ENDPOINT =
+    BASE_URL +
+    `/home/listings/category?location=` +
+    location +
+    `&category=` +
+    category +
+    `&pageNumber=` +
+    pageNumber +
+    `&userUniqueId=` +
+    userUniqueId;
+  headers = { ...headers, eventName: "FETCH_TOP_ARTICLES" };
+  const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;

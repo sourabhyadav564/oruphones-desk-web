@@ -17,6 +17,7 @@ import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
+import ShowBy from "@/components/Home/ShopBy";
 
 export default function Home({
   brandsList,
@@ -102,7 +103,8 @@ export default function Home({
         {/* <TopBrand brandsList={brandsList} /> */}
         {/* <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
         <TopBrand brandsList={brands} />
-        <TopSellingModels fetchTopsellingmodels={topsellingmodels} />
+        {/* <TopSellingModels fetchTopsellingmodels={topsellingmodels} /> */}
+        <ShowBy />
         <TopDeals location={getSearchLocation} />
         {/* <ShopByPrice fetchShopByPrice={fetchShopByPrice}/> */}
         {/* <TopArticles articles={fetchTopArticles}/> */}
