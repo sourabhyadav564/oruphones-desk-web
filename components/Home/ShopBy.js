@@ -2,7 +2,7 @@ import React from "react";
 import CategoryCards from "../Cards/CategoryCards";
 import Carousel from "../Carousel";
 import Title from "../Title";
-import bestSelling from "../../assets/cards/bestSelling.png";
+import bestSelling from "../../assets/cards/bestselling.png";
 import likeNew from "../../assets/cards/like_new.png";
 import verified from "../../assets/cards/verified.png";
 import warranty from "../../assets/cards/warranty.png";
@@ -12,7 +12,7 @@ const data = [
     id: 1,
     text: "Bestselling Mobiles",
     imagePath: bestSelling,
-    urlPath: "bestselling",
+    urlPath: "Bestselling",
   },
   {
     id: 3,

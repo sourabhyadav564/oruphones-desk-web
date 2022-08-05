@@ -8,10 +8,12 @@ import Loader from "@/components/Loader/Loader";
 
 function Favorites() {
   const [myFavList, setMyFavList] = useState();
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     Axios.fetchMyFavorites(Cookies.get("userUniqueId")).then((response) => {
       setMyFavList(response?.dataObject);
+      setLoading(false);
     });
   }, []);
 
@@ -20,7 +22,8 @@ function Favorites() {
       <div className="px-4 py-3">
         <h1 className="text-lg py-2"> My Favorites </h1>
         <div className="flex flex-col space-y-4 my-4">
-          {myFavList && myFavList.length > 0 ? (
+          {myFavList &&
+            myFavList.length > 0 &&
             myFavList.map((item, index) => (
               <Link
                 key={index}
@@ -38,13 +41,15 @@ function Favorites() {
                   />
                 </a>
               </Link>
-            ))
-          ) : (
+            ))}
+
+          {isLoading && (
             <div className="flex h-60 items-center justify-center">
               <Loader />
               Please wait, while we are fetching your favorites...
             </div>
           )}
+
           {myFavList?.length === 0 && (
             <div className="flex h-60 items-center justify-center">
               Favourites Not Found

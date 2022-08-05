@@ -19,7 +19,7 @@ let headers = {
     typeof window !== "undefined" ? localStorage.getItem("usedLocation") : "",
 };
 
-const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
+// const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
 
 Axios.interceptors.request.use(
   async (request) => {
@@ -342,6 +342,12 @@ export function uploadImage(
     marketingName +
     `&userUniqueId=` +
     userUniqueId;
+    headers = {
+      ...headers,
+      eventName: "ADDLISTING_UPLOAD_PHOTOS_SUCCESS",
+      "Content-Type": "multipart/form-data",
+    };
+    const MULTIPART_HEADER = { headers: { ...headers } };
   return Axios.post(API_ENDPOINT, deviceImage, MULTIPART_HEADER).then(
     (response) => {
       return response.data;
@@ -690,7 +696,7 @@ export function removeFavotie(listingId, userUniqueId) {
     listingId +
     `&userUniqueId=` +
     userUniqueId;
-  return Axios.post(API_ENDPOINT, DEFAULT_HEADER).then(
+  return Axios.post(API_ENDPOINT, {} , DEFAULT_HEADER).then(
     (response) => {
       return response.data;
     },
@@ -864,6 +870,12 @@ export function uploadUserProfilePic(userProfilePicData, userUniqueId) {
     BASE_URL +
     `/device/uploadimage?deviceFace=profilePic&userUniqueId=` +
     userUniqueId;
+  headers = {
+    ...headers,
+    eventName: "PRODUCTINFO_SHARE_SELECTED",
+    "Content-Type": "multipart/form-data",
+  };
+  const MULTIPART_HEADER = { headers: { ...headers } };
   return Axios.post(API_ENDPOINT, userProfilePicData, MULTIPART_HEADER).then(
     (response) => {
       return response.data;

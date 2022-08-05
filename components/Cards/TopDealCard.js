@@ -59,7 +59,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
             {data?.marketingName}
           </h1>
           <p className="font-bold flex items-center -ml-1 text-base text-m-grey-1">
-            {data?.listingPrice && <BiRupee />}{" "}
+            {/* {data?.listingPrice && <BiRupee />}{" "} */}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
           <div className="flex justify-between pt-1 text-xs w-full text-m-grey-2">

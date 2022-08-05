@@ -32,11 +32,12 @@ function CategoryPage() {
   let [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   const [title, setTitle] = useState(metaTags.BRANDS.title);
   const [description, setDescription] = useState(metaTags.BRANDS.description);
 
-  const loadData = () => {
+  const loadData = (intialPage) => {
     if (categoryType) {
       Axios.shopByCategory(
         getSearchLocation,
@@ -57,35 +58,44 @@ function CategoryPage() {
         }
 
         setLoading(false);
-        setPageNumber(pageNumber + 1);
+        // setPageNumber(pageNumber + 1);
       });
     }
   };
 
   const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
     setIsLoadingMore(true);
     if (categoryType) {
       Axios.shopByCategory(
         getSearchLocation,
         categoryType,
         Cookies.get("userUniqueId"),
-        pageNumber
+        newPages
       ).then((response) => {
-        if (response?.dataObject?.otherListings.length > -1) {
+        if (response?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [
             ...products,
             ...response?.dataObject?.otherListings,
           ]);
         }
+
+        if (response?.dataObject?.otherListings.length == 0) {
+          setIsFinished(true);
+        }
+
         setLoading(false);
-        setPageNumber(pageNumber + 1);
+        // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
     }
   };
 
   useEffect(() => {
-    loadData();
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
   }, [categoryType, getSearchLocation]);
 
   useEffect(() => {
@@ -267,7 +277,7 @@ function CategoryPage() {
               </div>
             )}
           </div>
-          {!isLoading && sortingProducts && sortingProducts.length > 0 && (
+          {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished === false  && (
             <span
               className={`${
                 isLoadingMore ? "w-[250px]" : "w-[150px]"

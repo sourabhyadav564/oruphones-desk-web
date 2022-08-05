@@ -65,15 +65,6 @@ export default function Home({
       setTopArticles(fetchTopArticles);
     }
 
-    // if (makeModelLists.length === 0) {
-    //   // setBrands(JSON.parse(localStorage.getItem("make_models")));
-    //   console.log("makeModelLists from local");
-    // } else {
-    //   localStorage.setItem("make_models", JSON.stringify(makeModelLists));
-    //   Cookies.set("make_models", true);
-    //   // setBrands(brandsList);
-    // }
-
     if (make_models) {
       // setBrands(JSON.parse(localStorage.getItem("make_models")));
       console.log("makeModelLists from local");
@@ -83,8 +74,10 @@ export default function Home({
         Cookies.get("sessionId") || ""
       );
       let makeModelLists = data?.dataObject;
-      localStorage.setItem("make_models", JSON.stringify(makeModelLists));
-      Cookies.set("make_models", true);
+      if (makeModelLists) {
+        localStorage.setItem("make_models", JSON.stringify(makeModelLists));
+        Cookies.set("make_models", true);
+      }
       //   // setBrands(brandsList);
     }
   }, []);
@@ -153,17 +146,6 @@ export async function getServerSideProps({ req, res, query }) {
     const data = await Axios.fetchTopsellingmodels();
     fetchTopsellingmodels = data?.dataObject;
   }
-
-  // let makeModelLists;
-  // if (make_models) {
-  //   makeModelLists = [];
-  // } else {
-  //   const data = await Axios.fetchMakeModelList(
-  //     userUniqueId || "Guest",
-  //     sessionId || ""
-  //   );
-  //   makeModelLists = data?.dataObject;
-  // }
 
   let fetchTopArticles;
   if (top_articles) {

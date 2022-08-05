@@ -38,16 +38,17 @@ const Products = () => {
   let [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
-  const loadData = () => {
+  const loadData = (intialPage) => {
     const fetchData = async () => {
       const data = await Axios.fetchByMarketingName(
         getSearchLocation,
         modelName,
         Cookies.get("userUniqueId"),
-        pageNumber
+        intialPage
       );
       if (data?.dataObject?.otherListings.length > -1) {
         setProducts((data && data?.dataObject?.otherListings) || []);
@@ -61,7 +62,7 @@ const Products = () => {
         setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
       }
       setLoading(false);
-      setPageNumber(pageNumber + 1);
+      // setPageNumber(pageNumber + 1);
     };
     if (modelName) {
       fetchData();
@@ -69,27 +70,34 @@ const Products = () => {
   };
 
   const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
     setIsLoadingMore(true);
     const fetchData = async () => {
       const data = await Axios.fetchByMarketingName(
         getSearchLocation,
         modelName,
         Cookies.get("userUniqueId"),
-        pageNumber
+        newPages
       );
-      if (data?.dataObject?.otherListings.length > -1) {
+      if (data?.dataObject?.otherListings.length > 0) {
         setProducts((products) => [
           ...products,
           ...data?.dataObject?.otherListings,
         ]);
         // setProductsData((data && data?.dataObject?.otherListings) || []);
       }
+
+      if (data?.dataObject?.otherListings.length == 0) {
+        setIsFinished(true);
+      }
+
       // if (data?.dataObject?.bestDeals.length > -1) {
       //   setBestDeals((data && data?.dataObject?.bestDeals) || []);
       //   // setProductsData((data && data?.dataObject?.bestDeals) || []);
       // }
       setLoading(false);
-      setPageNumber(pageNumber + 1);
+      // setPageNumber(pageNumber + 1);
       setIsLoadingMore(false);
     };
     if (modelName) {
@@ -98,7 +106,9 @@ const Products = () => {
   };
 
   useEffect(() => {
-    loadData();
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
   }, [modelName, getSearchLocation]);
 
   useEffect(() => {
@@ -165,6 +175,8 @@ const Products = () => {
     }
   }, [applyFilter]);
 
+  console.log("isFinished", isFinished);
+
   const sortingProducts = getSortedProducts(applySort, products);
 
   return (
@@ -218,15 +230,21 @@ const Products = () => {
             </div>
           )}
         </div>
-        {!isLoading && sortingProducts && sortingProducts.length > 0 && (
-          <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-          onClick={loadMoreData}
-          >
-            <p className="block text-m-green font-semibold">
-              {isLoadingMore ? "Fetching more products..." : "Load More"}
-            </p>
-          </span>
-        )}
+        {!isLoading &&
+          sortingProducts &&
+          sortingProducts.length > 0 &&
+          isFinished == false && (
+            <span
+              className={`${
+                isLoadingMore ? "w-[250px]" : "w-[150px]"
+              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+              onClick={loadMoreData}
+            >
+              <p className="block text-m-green font-semibold">
+                {isLoadingMore ? "Fetching more products..." : "Load More"}
+              </p>
+            </span>
+          )}
       </Filter>
     </main>
   );

@@ -20,25 +20,71 @@ function TopDeals({ location }) {
   // const [loc, setLoc] = useState("Best Deals Near You (" + location + ")");
   const [bestDeals, setBeatDeals] = useState();
   const [openLocationPopup, setOpenLocationPopup] = useState(false);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [isLoading, setLoading] = useState(true);
+  let [pageNumber, setPageNumber] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   // console.log(bestDeals);
 
-  useEffect(() => {
-    // setLoc("Best Deals Near You (" + location + ")");
+  const loadData = (initialPage) => {
     const fetchNestDealsNearByMe = async () => {
       await Axios.bestDealNearByYou(
         location,
         Cookies.get("userUniqueId") || "Guest",
-        pageNumber
+        initialPage
       ).then((response) => {
-        setBeatDeals([...response?.dataObject?.bestDeals, ...response?.dataObject?.otherListings] || []);
+        setBeatDeals(
+          [
+            ...response?.dataObject?.bestDeals,
+            ...response?.dataObject?.otherListings,
+          ] || []
+        );
+        setLoading(false);
       });
     };
     if (location != undefined) {
       fetchNestDealsNearByMe();
     }
-  }, [location, pageNumber]);
+  };
+
+  const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
+    setIsLoadingMore(true);
+    const fetchNestDealsNearByMe = async () => {
+      await Axios.bestDealNearByYou(
+        location,
+        Cookies.get("userUniqueId") || "Guest",
+        newPages
+      ).then((response) => {
+        setBeatDeals(
+          (products) =>
+            [
+              ...products,
+              ...response?.dataObject?.otherListings,
+            ] || []
+        );
+
+        if (response?.dataObject?.otherListings.length == 0) {
+          setIsFinished(true);
+        }
+
+        setLoading(false);
+        // setPageNumber(pageNumber + 1);
+        setIsLoadingMore(false);
+      });
+    };
+    if (location != undefined) {
+      fetchNestDealsNearByMe();
+    }
+  };
+
+  useEffect(() => {
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
+  }, [location]);
 
   return (
     <section className="container top_deals px-4">
@@ -51,7 +97,7 @@ function TopDeals({ location }) {
         <div className="grid grid-cols-5 gap-4 py-4">
           {bestDeals &&
             bestDeals
-              .slice(0, 20)
+              // .slice(0, 20)
               .map((item, index) => (
                 <TopDealCard
                   key={index}
@@ -60,7 +106,7 @@ function TopDeals({ location }) {
                   setProducts={setBeatDeals}
                 />
               ))}
-          {bestDeals && bestDeals.length > 0 && (
+          {isFinished && (
             <TopDealCard data={{ name: "show all" }} />
           )}
         </div>
@@ -71,6 +117,18 @@ function TopDeals({ location }) {
             Please wait, while we are fetching data for you...{" "}
           </div>
         </div>
+      )}
+      {!isLoading && isFinished === false && (
+        <span
+          className={`${
+            isLoadingMore ? "w-[250px]" : "w-[150px]"
+          } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer`}
+          onClick={loadMoreData}
+        >
+          <p className="block text-m-green font-semibold">
+            {isLoadingMore ? "Fetching more products..." : "Load More"}
+          </p>
+        </span>
       )}
       <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
     </section>

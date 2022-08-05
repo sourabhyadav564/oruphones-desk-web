@@ -34,16 +34,17 @@ function Bestdealnearyou() {
   let [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   const router = useRouter();
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
-  const loadData = () => {
+  const loadData = (intialPage) => {
     if (getSearchLocation) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),
-        pageNumber
+        intialPage
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         setBestDeal(response?.dataObject?.bestDeals);
@@ -53,23 +54,29 @@ function Bestdealnearyou() {
         //   ...response?.dataObject?.bestDeals,
         // ]);
         setLoading(false);
-        setPageNumber(pageNumber + 1);
       });
     }
   };
 
   const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
     setIsLoadingMore(true);
     if (getSearchLocation) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),
-        pageNumber
+        newPages
       ).then((response) => {
         setProducts((products) => [
           ...products,
           ...response?.dataObject?.otherListings,
         ]);
+
+        
+        if (response?.dataObject?.otherListings.length == 0) {
+          setIsFinished(true);
+        }
         // setBestDeal(bestDeals => [...bestDeals, ...response?.dataObject?.bestDeals]);
         // setTotalProducts(response?.dataObject?.totalProducts);
         // setProductsData([
@@ -77,14 +84,16 @@ function Bestdealnearyou() {
         //   ...response?.dataObject?.bestDeals,
         // ]);
         setLoading(false);
-        setPageNumber(pageNumber + 1);
+        // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
     }
   };
 
   useEffect(() => {
-    loadData();
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
   }, [getSearchLocation]);
 
   useEffect(() => {
@@ -184,7 +193,7 @@ function Bestdealnearyou() {
             </div>
           )}
         </div>
-        {!isLoading && sortingProducts && sortingProducts.length > 0 && (
+        {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished == false (
           <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
           onClick={loadMoreData}
           >

@@ -7,6 +7,7 @@ import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 
 function AddListing({ brandsList }) {
+  console.log("brandList", brandsList);
 
   const [brands, setBrands] = useState([]);
 

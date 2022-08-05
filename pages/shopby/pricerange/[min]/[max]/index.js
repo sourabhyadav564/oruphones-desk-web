@@ -32,8 +32,9 @@ const Pricerange = () => {
   let [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
-  const loadData = () => {
+  const loadData = (intialPage) => {
     const fetchData = async () => {
       const priceRange = await Axios.shopByPriceRange(
         // max === "above" ? "200000" : max,
@@ -41,12 +42,12 @@ const Pricerange = () => {
         getSearchLocation,
         min,
         Cookies.get("userUniqueId") || "Guest",
-        pageNumber
+        intialPage
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings(priceRange?.dataObject?.otherListings);
       setLoading(false);
-      setPageNumber(pageNumber + 1);
+      // setPageNumber(pageNumber + 1);
     };
     if (min != undefined && max != undefined) {
       fetchData();
@@ -54,6 +55,8 @@ const Pricerange = () => {
   };
 
   const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
     setIsLoadingMore(true);
     const fetchData = async () => {
       const priceRange = await Axios.shopByPriceRange(
@@ -62,12 +65,19 @@ const Pricerange = () => {
         getSearchLocation,
         min,
         Cookies.get("userUniqueId") || "Guest",
-        pageNumber
+        newPages
       );
-      setBestDeal(priceRange?.dataObject?.bestDeals);
-      setOtherListings(priceRange?.dataObject?.otherListings);
+      // setBestDeal(priceRange?.dataObject?.bestDeals);
+      setOtherListings((products) => [
+        ...products,
+        ...priceRange?.dataObject?.otherListings,
+      ]);
+
+      if (priceRange?.dataObject?.otherListings.length == 0) {
+        setIsFinished(true);
+      }
       setLoading(false);
-      setPageNumber(pageNumber + 1);
+      // setPageNumber(pageNumber + 1);
       setIsLoadingMore(false);
     };
     if (min != undefined && max != undefined) {
@@ -76,7 +86,9 @@ const Pricerange = () => {
   };
 
   useEffect(() => {
-    loadData();
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
   }, [min, max, getSearchLocation]);
 
   useEffect(() => {
@@ -168,18 +180,21 @@ const Pricerange = () => {
             </div>
           )}
         </div>
-        {!isLoading && sortingProducts && sortingProducts.length > 0 && (
-          <span
-            className={`${
-              isLoadingMore ? "w-[250px]" : "w-[150px]"
-            } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-            onClick={loadMoreData}
-          >
-            <p className="block text-m-green font-semibold">
-              {isLoadingMore ? "Fetching more products..." : "Load More"}
-            </p>
-          </span>
-        )}
+        {!isLoading &&
+          sortingProducts &&
+          sortingProducts.length > 0 &&
+          isFinished == false && (
+            <span
+              className={`${
+                isLoadingMore ? "w-[250px]" : "w-[150px]"
+              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+              onClick={loadMoreData}
+            >
+              <p className="block text-m-green font-semibold">
+                {isLoadingMore ? "Fetching more products..." : "Load More"}
+              </p>
+            </span>
+          )}
       </Filter>
     </main>
   );

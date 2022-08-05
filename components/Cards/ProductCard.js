@@ -50,11 +50,13 @@ function ProductCard({ data, prodLink, setProducts }) {
               </div>
             </div>
             <p className="font-semibold flex items-center text-lg text-m-grey-1">
-              {data?.listingPrice && <FaRupeeSign size={16} />} {numberWithCommas(data?.listingPrice || "")}
+              {/* {data?.listingPrice && <FaRupeeSign size={16} />}  */}
+              {numberWithCommas(data?.listingPrice || "")}
             </p>
             <div className="justify-self-end flex justify-between pt-1 text-xs w-full uppercase">
               <span>{data?.listingLocation}</span>
-              <span>{data?.modifiedDate}</span>
+              {/* <span>{data?.modifiedDate}</span> */}
+              <span>{data?.listingDate}</span>
             </div>
           </div>
         </div>

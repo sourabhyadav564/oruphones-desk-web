@@ -30,6 +30,7 @@ function ProductDetails({ listingInfo }) {
   const [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
@@ -46,7 +47,7 @@ function ProductDetails({ listingInfo }) {
   //   }
   // });
 
-  const loadData = () => {
+  const loadData = (intialPage) => {
     let payLoad = {
       listingLocation: getSearchLocation,
       make: [listingInfo.make],
@@ -62,7 +63,7 @@ function ProductDetails({ listingInfo }) {
     Axios.fetchSimilarProducts(
       payLoad,
       Cookies.get("userUniqueId") || "Guest",
-      pageNumber
+      intialPage
     ).then((response) => {
       setSimliarProducts(
         response?.dataObject?.otherListings?.filter((items) => {
@@ -70,12 +71,14 @@ function ProductDetails({ listingInfo }) {
         })
         );
         setTotalProducts(response?.dataObject?.totalProducts);
-        setPageNumber(pageNumber + 1);
+        // setPageNumber(pageNumber + 1);
         console.log("pageNumber from initial", pageNumber);
     });
   };
 
   const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
     setIsLoadingMore(true);
     let payLoad = {
       listingLocation: getSearchLocation,
@@ -89,7 +92,7 @@ function ProductDetails({ listingInfo }) {
       minsellingPrice: 0,
       verified: "",
     };
-    console.log("pageNumber from loadMore", pageNumber);
+    console.log("pageNumber from loadMore", newPages);
     Axios.fetchSimilarProducts(
       payLoad,
       Cookies.get("userUniqueId") || "Guest",
@@ -99,13 +102,20 @@ function ProductDetails({ listingInfo }) {
         return items.listingId != listingInfo.listingId;
       })
       setSimliarProducts((products) => [...products, ...data]);
-      setPageNumber(pageNumber + 1);
+
+      
+      if (response?.dataObject?.otherListings.length == 0) {
+        setIsFinished(true);
+      }
+      // setPageNumber(pageNumber + 1);
       setIsLoadingMore(false);
     });
   };
 
   useEffect(() => {
-    loadData();
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
   }, [listingInfo]);
 
   simliarProducts = simliarProducts?.filter((item) => {
@@ -131,7 +141,7 @@ function ProductDetails({ listingInfo }) {
             className="text-m-black font-semibold my-3"
             style={{ fontSize: 21 }}
           >
-            Similar Products ({simliarProducts?.length})
+            Similar Products ({simliarProducts?.length || 0})
           </h1>
           <div
             className="grid grid-cols-4 gap-6 mt-5"
@@ -164,7 +174,7 @@ function ProductDetails({ listingInfo }) {
               <span>Fetching more products...</span>
             </div>
           )} */}
-          {simliarProducts && simliarProducts.length > 0 && (
+          {simliarProducts && simliarProducts.length > 0 && isFinished == false && (
           <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
           onClick={loadMoreData}
           >

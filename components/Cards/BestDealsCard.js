@@ -57,7 +57,7 @@ function BestDealsCard({ data, setProducts }) {
             className="font-semibold flex items-center -ml-1"
             style={{ fontSize: 30, color: "#4E4E4E" }}
           >
-            {data?.listingPrice && <FaRupeeSign size={24} />}{" "}
+            {/* {data?.listingPrice && <FaRupeeSign size={24} />}{" "} */}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
         </div>

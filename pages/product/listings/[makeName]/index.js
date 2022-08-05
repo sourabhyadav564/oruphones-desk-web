@@ -38,19 +38,20 @@ function BrandPage() {
   let [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   const [title, setTitle] = useState(metaTags.BRANDS.title);
   const [description, setDescription] = useState(metaTags.BRANDS.description);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
-  const loadData = () => {
+  const loadData = (intialPage) => {
     if (makeName) {
       Axios.getListingbyMake(
         getSearchLocation,
         makeName,
-        Cookies.get("userUniqueId"),
-        pageNumber
+        Cookies.get("userUniqueId") || "Guest",
+        intialPage
       ).then((response) => {
         // setProducts(response?.dataObject?.otherListings);
         // setBestDeal(response?.dataObject?.bestDeals);
@@ -71,23 +72,24 @@ function BrandPage() {
         }
 
         setLoading(false);
-        setPageNumber(pageNumber + 1);
       });
     }
   };
 
   const loadMoreData = () => {
+    let newPages = pageNumber + 1;
+    setPageNumber(newPages);
     setIsLoadingMore(true);
     if (makeName) {
       Axios.getListingbyMake(
         getSearchLocation,
         makeName,
         Cookies.get("userUniqueId"),
-        pageNumber
+        newPages
       ).then((response) => {
         // setProducts(response?.dataObject?.otherListings);
         // setBestDeal(response?.dataObject?.bestDeals);
-        if (response?.dataObject?.otherListings.length > -1) {
+        if (response?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [
             ...products,
             ...response?.dataObject?.otherListings,
@@ -96,20 +98,26 @@ function BrandPage() {
           //   (response && response?.dataObject?.otherListings) || []
           // );
         }
+
+        if (response?.dataObject?.otherListings.length == 0) {
+          setIsFinished(true);
+        }
         // if (response?.dataObject?.bestDeals.length > -1) {
         //   setBestDeal((response && response?.dataObject?.bestDeals) || []);
         //   // setProductsData((response && response?.dataObject?.bestDeals) || []);
         // }
 
         setLoading(false);
-        setPageNumber(pageNumber + 1);
+        // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
     }
   };
 
   useEffect(() => {
-    loadData();
+    let intialPage = 0;
+    setPageNumber(intialPage);
+    loadData(intialPage);
   }, [makeName, getSearchLocation]);
 
   useEffect(() => {
@@ -295,7 +303,7 @@ function BrandPage() {
               </div>
             )}
           </div>
-          {!isLoading && sortingProducts && sortingProducts.length > 0 && (
+          {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished === false && (
             <span
               className={`${
                 isLoadingMore ? "w-[250px]" : "w-[150px]"

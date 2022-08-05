@@ -115,6 +115,9 @@ function AddEditListing({
       setStorage(null);
       setColor(null);
       setDeviceCondition(null);
+      setShow(false);
+      setConditionResults({});
+      setQuestionIndex(0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [make]);
@@ -128,6 +131,9 @@ function AddEditListing({
       setStorage(null);
       setColor(null);
       setDeviceCondition(null);
+      setShow(false);
+      setConditionResults({});
+      setQuestionIndex(0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketingName]);
@@ -156,7 +162,7 @@ function AddEditListing({
       make: make,
       marketingName: marketingName,
       originalBox: originalBox1 === "Y" ? "Y" : "N",
-      warranty: warranty,
+      warrantyPeriod: warranty,
       verified: "no",
     };
     const fetchData = async () => {
@@ -181,6 +187,7 @@ function AddEditListing({
     charger,
     headphone1,
     originalBox1,
+    warranty,
   ]);
 
   useEffect(() => {
@@ -196,7 +203,7 @@ function AddEditListing({
       make: make,
       marketingName: marketingName,
       deviceCondition: deviceCondition,
-      warrantyPeriod: "more",
+      warrantyPeriod: warranty,
       hasCharger: charger === "Y" ? "Y" : "N",
       hasEarphone: headphone1 === "Y" ? "Y" : "N",
       hasOriginalBox: originalBox1 === "Y" ? "Y" : "N",
@@ -418,7 +425,7 @@ function AddEditListing({
               onChange={(e) => {
                 setMake(e.value);
               }}
-              options={makeOptions.map((item) => {
+              options={makeOptions?.map((item) => {
                 return { label: item.make, value: item.make };
               })}
             ></Select>
@@ -444,7 +451,7 @@ function AddEditListing({
               onChange={(e) => {
                 setmarketingName(e.value);
               }}
-              options={modelOptions.map((item) => {
+              options={modelOptions?.map((item) => {
                 return { label: item.marketingname, value: item.marketingname };
               })}
             ></Select>
@@ -661,7 +668,7 @@ function AddEditListing({
           Upload Photos
         </p>
         <div className="col-span-2 grid grid-cols-4 gap-4 relative">
-          {images.map((item, index) => (
+          {images?.map((item, index) => (
             <div key={index} className="flex flex-col gap-y-1">
               <span style={{ color: "#00000099" }}>
                 {" "}
@@ -732,7 +739,7 @@ function AddEditListing({
           <Checkbox
             src={originalBox}
             text="Original Bill"
-            checked={warranty}
+            checked={showWarranty}
             onClick={(e) => {
               e.target.checked ? setShowWarranty("Y") : setShowWarranty("N");
               setWarranty("more");
@@ -741,7 +748,7 @@ function AddEditListing({
         </div>
         {showWarranty === "Y" && (
           <div className="my-5 grid grid-cols-2 gap-5">
-            {deviceWarrantyCheck.map((item, index) => (
+            {deviceWarrantyCheck?.map((item, index) => (
               <div
                 key={index}
                 className={`${
@@ -801,7 +808,7 @@ function AddEditListing({
         )}
         {getExternalSellerData && getExternalSellerData.length > 0 && (
           <div className="grid border rounded max-w-sm">
-            {getExternalSellerData.map((items, index) => (
+            {getExternalSellerData?.map((items, index) => (
               <div
                 className="grid grid-cols-2 px-4 py-2 gap-4 text-xs text-m-grey-2"
                 key={index}

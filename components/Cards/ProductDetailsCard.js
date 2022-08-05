@@ -93,9 +93,29 @@ function ProductDetailsCard({ data, openFullImage }) {
             {(!(data?.isOtherVendor === "Y") && (
               <div className="my-2">
                 {data?.verified ? (
-                  <VerifiedIcon height={42} width={86} />
+                  <div>
+                    <VerifiedIcon height={42} width={86} />
+                    <div className="hover:cursor-pointer text-blue-600 text-sm underline hover:text-blue-800">
+                      <span onClick={() => setOpenDeviceReport(true)}>
+                        {"Device Verification Report"}
+                      </span>
+                    </div>
+                  </div>
                 ) : (
-                  <UnVerifiedIcon height={42} width={86} />
+                  <div>
+                    <UnVerifiedIcon height={42} width={86} />
+                    <div className="hover:cursor-pointer text-blue-600 text-sm underline hover:text-blue-800">
+                      <span
+                        onClick={() => {
+                          Cookies.get("userUniqueId") === undefined
+                            ? setShowLoginPopup(true)
+                            : setRequestVerificationSuccessPopup(true);
+                        }}
+                      >
+                        {"Request Verification"}
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
             )) || <span className="h-5 block"></span>}
@@ -126,13 +146,14 @@ function ProductDetailsCard({ data, openFullImage }) {
                 value={data?.deviceStorage || "--"}
                 labelTextSize
               />
-              <span></span>
+              <LabelAndValue label="RAM" value={data?.deviceRam || "--"} labelTextSize/>
+              {/* <span></span> */}
               <LabelAndValue
                 label="Color"
                 value={data?.color || "--"}
                 labelTextSize
               />
-              <span />
+              {/* <span /> */}
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-x-8 gap-y-2 px-2">

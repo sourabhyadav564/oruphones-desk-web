@@ -46,8 +46,8 @@ const CategoryCards = ({ data, priceRange }) => {
     return (
       <div>
         <div className="rounded-md shadow hover:shadow-md px-10 py-4 sm:px-4 bg-m-white grid grid-cols-2 gap-5">
-          {priceRangeData.map((item) => (
-            <Link href={`/shopby/pricerange/${item.min}/${item.max}`}>
+          {priceRangeData.map((item, index) => (
+            <Link href={`/shopby/pricerange/${item.min}/${item.max}`} key={index}>
               <p className="bg-gray-200 flex flex-col items-center justify center p-2 rounded-md hover:cursor-pointer hover:bg-gray-300 active:bg-gray-400 duration-300">
                 {item.bracket}{" "}
                 <span className="font-semibold">{item.text}</span>
@@ -63,9 +63,9 @@ const CategoryCards = ({ data, priceRange }) => {
       <Link
         href={{
           pathname:
-            data?.urlPath === "bestselling"
+            data?.urlPath === "Bestselling"
               ? "/product/models"
-              : `/shopby/category/${data?.urlPath}`,
+              : `/shopby/category/${data?.urlPath?.toLowerCase()}`,
         }}
       >
         <a className="rounded-md shadow hover:shadow-md px-10 py-4 sm:px-4 bg-m-white flex flex-col items-center justify-center relative">
