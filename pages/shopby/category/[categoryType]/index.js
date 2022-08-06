@@ -43,7 +43,7 @@ function CategoryPage() {
         getSearchLocation,
         categoryType,
         Cookies.get("userUniqueId"),
-        pageNumber
+        intialPage
       ).then((response) => {
         if (response?.dataObject?.otherListings.length > -1) {
           setProducts((response && response?.dataObject?.otherListings) || []);
@@ -99,14 +99,8 @@ function CategoryPage() {
   }, [categoryType, getSearchLocation]);
 
   useEffect(() => {
-    const {
-      condition,
-      color,
-      storage,
-      warranty,
-      verification,
-      priceRange,
-    } = applyFilter;
+    const { condition, color, storage, warranty, verification, priceRange } =
+      applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       let payLoad = {
         listingLocation: getSearchLocation,
@@ -277,18 +271,21 @@ function CategoryPage() {
               </div>
             )}
           </div>
-          {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished === false  && (
-            <span
-              className={`${
-                isLoadingMore ? "w-[250px]" : "w-[150px]"
-              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-              onClick={loadMoreData}
-            >
-              <p className="block text-m-green font-semibold">
-                {isLoadingMore ? "Fetching more products..." : "Load More"}
-              </p>
-            </span>
-          )}
+          {!isLoading &&
+            sortingProducts &&
+            sortingProducts.length > 0 &&
+            isFinished === false && (
+              <span
+                className={`${
+                  isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                onClick={loadMoreData}
+              >
+                <p className="block text-m-green font-semibold">
+                  {isLoadingMore ? "Fetching more products..." : "Load More"}
+                </p>
+              </span>
+            )}
         </Filter>
       </main>
     </>

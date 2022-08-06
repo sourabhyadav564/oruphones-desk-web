@@ -69,10 +69,10 @@ function ProductDetails({ listingInfo }) {
         response?.dataObject?.otherListings?.filter((items) => {
           return items.listingId != listingInfo.listingId;
         })
-        );
-        setTotalProducts(response?.dataObject?.totalProducts);
-        // setPageNumber(pageNumber + 1);
-        console.log("pageNumber from initial", pageNumber);
+      );
+      setTotalProducts(response?.dataObject?.totalProducts);
+      // setPageNumber(pageNumber + 1);
+      console.log("pageNumber from initial", pageNumber);
     });
   };
 
@@ -100,10 +100,9 @@ function ProductDetails({ listingInfo }) {
     ).then((response) => {
       let data = response?.dataObject?.otherListings?.filter((items) => {
         return items.listingId != listingInfo.listingId;
-      })
+      });
       setSimliarProducts((products) => [...products, ...data]);
 
-      
       if (response?.dataObject?.otherListings.length == 0) {
         setIsFinished(true);
       }
@@ -174,15 +173,20 @@ function ProductDetails({ listingInfo }) {
               <span>Fetching more products...</span>
             </div>
           )} */}
-          {simliarProducts && simliarProducts.length > 0 && isFinished == false && (
-          <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-          onClick={loadMoreData}
-          >
-            <p className="block text-m-green font-semibold">
-              {isLoadingMore ? "Fetching more products..." : "Load More"}
-            </p>
-          </span>
-        )}
+          {simliarProducts &&
+            simliarProducts.length > 0 &&
+            isFinished == false && (
+              <span
+                className={`${
+                  isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                onClick={loadMoreData}
+              >
+                <p className="block text-m-green font-semibold">
+                  {isLoadingMore ? "Fetching more products..." : "Load More"}
+                </p>
+              </span>
+            )}
         </div>
       </section>
       <FullImageView
