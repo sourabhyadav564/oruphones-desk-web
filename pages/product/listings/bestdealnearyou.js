@@ -193,7 +193,7 @@ function Bestdealnearyou() {
             </div>
           )}
         </div>
-        {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished == false (
+        {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished == false && (
           <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
           onClick={loadMoreData}
           >

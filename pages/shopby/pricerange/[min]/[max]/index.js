@@ -109,6 +109,11 @@ const Pricerange = () => {
         maxsellingPrice: max,
         minsellingPrice: min,
         reqPage: "SBYP",
+        make: [],
+        color: [],
+        deviceCondition: [],
+        deviceStorage: [],
+        verified: "",
       };
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
@@ -130,7 +135,7 @@ const Pricerange = () => {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
         (response) => {
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;
