@@ -53,7 +53,7 @@ function Profile() {
             Name
           </Input>
           <span className="block" />
-          <Input type="tel" name="mobile" value={mobileNumber?.current || ""} disabled>
+          <Input type="tel" name="mobile" value={`+91 ${mobileNumber?.current}` || ""} disabled>
             Mobile No
           </Input>
           <Input

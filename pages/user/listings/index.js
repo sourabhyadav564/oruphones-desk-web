@@ -6,10 +6,13 @@ import UserProfile from "../../../components/User/UserProfile";
 import * as Axios from "../../../api/axios";
 import router from "next/router";
 import Cookies from "js-cookie";
+import Loader from "@/components/Loader/Loader";
 
 function Listings() {
   const [currentTab, setCurrentTab] = useState(0);
   const [userListings, setUserListing] = useState([]);
+
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +21,7 @@ function Listings() {
         Cookies.get("sessionId") || localStorage.getItem("sessionId")
       );
       setUserListing(fetchUserListings?.dataObject);
+      setLoading(false);
     };
     if (Cookies.get("userUniqueId") !== undefined) {
       fetchData();
@@ -69,6 +73,19 @@ function Listings() {
                     </a>
                   </Link>
                 ))}
+
+          {isLoading && (
+            <div className="flex h-60 items-center justify-center">
+              <Loader />
+              Please wait, while we are fetching your listings...
+            </div>
+          )}
+
+          {userListings?.length == 0 && (
+            <div className="flex h-60 items-center justify-center">
+              Listings Not Found
+            </div>
+          )}
         </div>
       </UserProfile>
     </>

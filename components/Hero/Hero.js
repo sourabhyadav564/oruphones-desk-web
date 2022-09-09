@@ -5,7 +5,10 @@ import bg from "../../assets/bg_buy_step.png";
 import homepage_banner from "../../assets/homepage_banner.png";
 import banner_one from "../../assets/banner_1.png";
 import banner_two from "../../assets/banner_2.png";
+import banner_three from "../../assets/banner_3.png";
 import Carousel from "../Carousel";
+import QRCode from "qrcode.react";
+import { useState } from "react";
 
 const tutorialSteps = {
   id: 0,
@@ -17,6 +20,14 @@ const tutorialSteps = {
 };
 
 export default function Hero() {
+  const [qrValue1, setQrValue1] = useState(
+    "https://apps.apple.com/in/app/oruphones/id1629378420"
+  );
+
+  const [qrValue2, setQrValue2] = useState(
+    "https://play.google.com/store/apps/details?id=com.oruphones.oru"
+  );
+
   return (
     // <section className="min-h-80 mb-4 bg-sell-step bg-no-repeat bg-cover">
     //   <div className="container h-full flex flex-col md:flex-row items-center justify-between space-x-16">
@@ -52,7 +63,7 @@ export default function Hero() {
     //     </div>
     //   </div>
     // </section>
-    <section className="container pt-4">
+    <section className="pt-4">
       <Carousel>
         <Image
           src={banner_one}
@@ -72,6 +83,17 @@ export default function Hero() {
           // layout="responsive"
           // objectFit="contain"
         />
+        <div className="">
+          <Image
+            src={banner_three}
+            alt="BannerImage"
+            priority
+            // width="100%"
+            // height="90%"
+            // layout="responsive"
+            // objectFit="contain"
+          />
+        </div>
       </Carousel>
     </section>
   );

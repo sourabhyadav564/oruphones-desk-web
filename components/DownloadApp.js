@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-// import QRCode from "qrcode.react";
+import QRCode from "qrcode.react";
 import { useState } from "react";
 import * as Axios from "../api/axios";
 
 function DownloadApp() {
-  // const [qrValue, setQrValue] = useState();
+  const [qrValue1, setQrValue1] = useState(
+    "https://apps.apple.com/in/app/oruphones/id1629378420"
+  );
+
+  const [qrValue2, setQrValue2] = useState("https://play.google.com/store/apps/details?id=com.oruphones.oru");
 
   // useEffect(() => {
   //   Axios.getTinyUrl().then((response) => {
@@ -25,26 +29,33 @@ function DownloadApp() {
           </p>
         </div>
         <div className="flex space-x-5 pt-4 sm:pt-0 justify-start">
-          <div className="bg-white flex flex-col justify-center px-2 rounded-lg">
-            <p className="text-black text-sm text-center pt-2">
+          <div className="flex flex-col justify-end">
+            {/* <p className="text-black text-sm text-center pt-2">
               Scan & Download ORUphones app now
-            </p>
-            {/* <QRCode
+            </p> */}
+            <QRCode
               id="qr-gen"
-              value={qrValue || ""}
+              value={qrValue1 || ""}
               size={130}
               level={"H"}
               includeMargin={true}
-            /> */}
-          </div>
-          {/* <div className="flex flex-col justify-end">
-            <a target={"_blank"} rel="noreferrer" href={qrValue}>
-              <p className="w-32 h-10 bg-app-store bg-no-repeat bg-contain" />
+            />
+            <a target={"_blank"} rel="noreferrer" href={qrValue1}>
+              <p className="w-32 mt-4 h-10 bg-app-store bg-no-repeat bg-contain" />
             </a>
-            <a target={"_blank"} rel="noreferrer" href={qrValue}>
+          </div>
+          <div className="flex flex-col justify-end">
+            <QRCode
+              id="qr-gen"
+              value={qrValue2 || ""}
+              size={130}
+              level={"H"}
+              includeMargin={true}
+            />
+            <a target={"_blank"} rel="noreferrer" href={qrValue2}>
               <p className="w-32 mt-4 h-10 bg-play-store bg-no-repeat bg-contain" />
             </a>
-          </div> */}
+          </div>
         </div>
       </div>
     </section>

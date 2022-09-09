@@ -144,8 +144,8 @@ function LocationPopup({ open, setOpen }) {
                       options={
                         citiesResponse &&
                         citiesResponse
-                          .filter((item) => item.displayWithImage === "0")
-                          .map((items) => {
+                          ?.filter((item) => item.displayWithImage === "0")
+                          ?.map((items) => {
                             return { label: items.city, value: items.city };
                           })
                       }

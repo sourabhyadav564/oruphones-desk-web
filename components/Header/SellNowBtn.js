@@ -19,10 +19,10 @@ function SellNowBtn() {
       <button
       style={{
         boxShadow: "0px 0px 20px #00A48333",
-        border: "1px solid #00AC8A",
+        // border: "1px solid #00AC8A",
         borderRadius: "4px",
       }}
-        className="py-2  bg-m-green hover:bg-green-700 px-4 text-m-white  hover:shadow uppercase"
+        className="py-2  bg-m-green hover:bg-white hover:text-m-green  px-4 text-m-white  hover:shadow uppercase duration-300"
         onClick={() => handleClick()}
       >
         + SELL NOW

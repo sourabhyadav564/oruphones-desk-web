@@ -4,20 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import bgImage from "@/assets/app_download.png";
 import { GrClose } from "react-icons/gr";
-// import QRCode from "qrcode.react";
+import QRCode from "qrcode.react";
 import { useState, useEffect } from "react";
 import * as Axios from "../../api/axios";
 
 function AppDownloadPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
-  // const [qrValue, setQrValue] = useState();
+  const [qrValue1, setQrValue1] = useState(
+    "https://apps.apple.com/in/app/oruphones/id1629378420"
+  );
+
+  const [qrValue2, setQrValue2] = useState(
+    "https://play.google.com/store/apps/details?id=com.oruphones.oru"
+  );
 
   // useEffect(() => {
   //   Axios.getTinyUrl().then((response) => {
   //     setQrValue(response?.dataObject.tinyurl);
   //   });
   // }, []);
-  
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -88,21 +94,30 @@ function AppDownloadPopup({ open, setOpen }) {
                   </li>
                 </ul>
                 <div className="flex space-x-4 justify-start items-center">
-                  {/* <QRCode
-                    id="qr-gen"
-                    value={qrValue}
-                    size={130}
-                    level={"H"}
-                    includeMargin={true}
-                  /> */}
-                  {/* <div className="flex flex-col justify-end pl-4">
-                    <Link href={qrValue}>
-                      <a className="w-32 h-8 bg-app-store bg-no-repeat bg-contain"></a>
+                  <div className="flex flex-col items-center justify-center pl-4">
+                    <QRCode
+                      id="qr-gen"
+                      value={qrValue1}
+                      size={130}
+                      level={"H"}
+                      includeMargin={true}
+                    />
+                    <Link href={qrValue1}>
+                      <a className="w-32 h-10 bg-app-store bg-contain"></a>
                     </Link>
-                    <Link href={qrValue}>
-                      <a className="w-32 mt-4 h-8 bg-play-store bg-no-repeat bg-contain"></a>
+                  </div>
+                  <div className="flex flex-col items-center justify-center pl-4">
+                    <QRCode
+                      id="qr-gen"
+                      value={qrValue2}
+                      size={130}
+                      level={"H"}
+                      includeMargin={true}
+                    />
+                    <Link href={qrValue2}>
+                      <a className="w-32 h-10 bg-play-store bg-contain"></a>
                     </Link>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>

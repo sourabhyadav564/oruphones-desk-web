@@ -57,13 +57,13 @@ export default function Home({
       setTopsellingmodels(fetchTopsellingmodels);
     }
 
-    if (fetchTopArticles.length === 0) {
-      setTopArticles(JSON.parse(localStorage.getItem("top_articles")));
-    } else {
-      localStorage.setItem("top_articles", JSON.stringify(fetchTopArticles));
-      Cookies.set("top_articles", true);
-      setTopArticles(fetchTopArticles);
-    }
+    // if (fetchTopArticles.length === 0) {
+    //   setTopArticles(JSON.parse(localStorage.getItem("top_articles")));
+    // } else {
+    //   localStorage.setItem("top_articles", JSON.stringify(fetchTopArticles));
+    //   Cookies.set("top_articles", true);
+    //   setTopArticles(fetchTopArticles);
+    // }
 
     if (make_models) {
       // setBrands(JSON.parse(localStorage.getItem("make_models")));
@@ -101,7 +101,7 @@ export default function Home({
         <TopDeals location={getSearchLocation} />
         {/* <ShopByPrice fetchShopByPrice={fetchShopByPrice}/> */}
         {/* <TopArticles articles={fetchTopArticles}/> */}
-        <TopArticles articles={topArticles} />
+        {/* <TopArticles articles={topArticles} /> */}
         <DownloadApp />
         <HomeContent />
         <NewsLetter />
@@ -147,13 +147,13 @@ export async function getServerSideProps({ req, res, query }) {
     fetchTopsellingmodels = data?.dataObject;
   }
 
-  let fetchTopArticles;
-  if (top_articles) {
-    fetchTopArticles = [];
-  } else {
-    const data = await Axios.fetchTopArticles();
-    fetchTopArticles = data?.dataObject;
-  }
+  // let fetchTopArticles;
+  // if (top_articles) {
+  //   fetchTopArticles = [];
+  // } else {
+  //   const data = await Axios.fetchTopArticles();
+  //   fetchTopArticles = data?.dataObject;
+  // }
 
   // return {
   //   props: {
@@ -171,7 +171,7 @@ export async function getServerSideProps({ req, res, query }) {
       fetchTopsellingmodels: fetchTopsellingmodels || [],
       sessionId: sessionID,
       // makeModelLists: makeModelLists || [],
-      fetchTopArticles: fetchTopArticles || [],
+      // fetchTopArticles: fetchTopArticles || [],
     },
   };
 }
