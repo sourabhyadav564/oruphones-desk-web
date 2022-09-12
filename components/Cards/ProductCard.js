@@ -13,7 +13,7 @@ function ProductCard({ data, prodLink, setProducts }) {
   return (
     <Link
       href={{
-        pathname: `/product/listings/${data.make}/${data?.marketingName}/${prodLink ? data?.listingId : ""}`,
+        pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${prodLink ? data?.listingId : ""}`,
         query: prodLink && { isOtherVendor: data?.isOtherVendor },
       }}
     >
@@ -24,7 +24,7 @@ function ProductCard({ data, prodLink, setProducts }) {
         >
           <div className="flex items-center justify-between" style={{ padding: "10px 5px 5px 0" }}>
             <div className="h-9">{data?.verified && <VerifiedIcon width={74} height={36} />}</div>
-            {!(data?.isOtherVendor === "Y") && <AddFav data={data} setProducts={setProducts} height={18} width={18}/>}
+            {!(data?.isOtherVendor === "Y") && <AddFav data={data} setProducts={setProducts} height={18} width={18} />}
           </div>
           <div className="flex justify-center mb-2">
             <Image

@@ -131,7 +131,7 @@ const ListItem = ({ make, makeLink, marketingName, children, clicked }) => {
     );
   }
   return (
-    <Link href={makeLink ? `/product/listings/${make}/` : `/product/listings/${make}/${marketingName}`}>
+    <Link href={makeLink ? `/product/buy-old-refurbished-used-mobiles/${make}/` : `/product/buy-old-refurbished-used-mobiles/${make}/${marketingName}`}>
       <a className="px-6 py-3 block border-b last:border-0 capitalize" onClick={clicked}>
         {marketingName || make}
       </a>

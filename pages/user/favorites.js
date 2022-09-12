@@ -28,7 +28,7 @@ function Favorites() {
               <Link
                 key={index}
                 href={{
-                  pathname: `/product/listings/${item.make}/${item?.marketingName}/${item?.listingId}`,
+                  pathname: `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
                   query: { isOtherVendor: "N" },
                 }}
               >

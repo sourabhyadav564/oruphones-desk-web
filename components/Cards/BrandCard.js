@@ -13,7 +13,7 @@ function BrandCard({ data }) {
   }
   return (
     data.imagePath && (
-      <Link href={{ pathname: `/product/listings/${data?.make?.toLowerCase()}`}}>
+      <Link href={{ pathname: `/product/buy-old-refurbished-used-mobiles/${data?.make?.toLowerCase()}` }}>
         <a className="rounded-md shadow hover:shadow-md px-10 py-4 sm:px-4 bg-m-white flex justify-center relative">
           <Image src={data?.imagePath} alt={data?.make} height={80} width={80} objectFit="contain" />
         </a>

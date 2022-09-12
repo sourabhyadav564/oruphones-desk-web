@@ -17,7 +17,7 @@ function TopSellingCard({ data }) {
   }
 
   return (
-    <Link href={`/product/listings/${data.make}/${data.marketingName}`}>
+    <Link href={`/product/buy-old-refurbished-used-mobiles/${data.make}/${data.marketingName}`}>
       <a>
         <div className="grid grid-cols-1 rounded-md shadow hover:shadow-md p-4 pb-2 bg-m-white">
           <div className="grid grid-cols-1">

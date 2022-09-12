@@ -1,23 +1,23 @@
 import * as Axios from "../../../api/axios";
 
-function Share(){
-     return(<></>);
+function Share() {
+  return (<></>);
 }
 
 export default Share;
 
 
-export async function getServerSideProps({query }) {
-  try{
+export async function getServerSideProps({ query }) {
+  try {
     const listingInfo = await Axios.fetchWebLinkByShareId(query.lid);
     return {
       redirect: {
-        destination: `/product/listings/${listingInfo?.dataObject.make}/${listingInfo?.dataObject.marketingName}/${listingInfo?.dataObject.listingId}?isOtherVendor=N`,
+        destination: `/product/buy-old-refurbished-used-mobiles/${listingInfo?.dataObject.make}/${listingInfo?.dataObject.marketingName}/${listingInfo?.dataObject.listingId}?isOtherVendor=N`,
         permanent: false,
       },
       props: {},
     };
-  }catch(error){
+  } catch (error) {
     return {
       redirect: {
         destination: `/`,
@@ -25,6 +25,5 @@ export async function getServerSideProps({query }) {
       },
     };
   }
-    
-  }
-  
+
+}

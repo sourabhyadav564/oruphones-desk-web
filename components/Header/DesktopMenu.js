@@ -15,19 +15,19 @@ const menus = [
     name: "IPhones",
     options: [],
     make: "apple",
-    chlink: "/product/listings/apple",
+    chlink: "/product/buy-old-refurbished-used-mobiles/apple",
   },
   {
     name: "Samsung Phones",
     options: [],
     make: "samsung",
-    chlink: "/product/listings/samsung",
+    chlink: "/product/buy-old-refurbished-used-mobiles/samsung",
   },
   {
     name: "OnePlus Phones",
     options: [],
     make: "oneplus",
-    chlink: "/product/listings/oneplus",
+    chlink: "/product/buy-old-refurbished-used-mobiles/oneplus",
   },
   {
     name: "Shop by Brand",
@@ -37,7 +37,7 @@ const menus = [
   {
     name: "Best Deals",
     options: [],
-    chlink: "/product/listings/bestdealnearyou",
+    chlink: "/product/buy-old-refurbished-used-mobiles/bestdealnearyou",
   },
   // {
   //   name: "Shop by Grade",
@@ -113,9 +113,8 @@ function DesktopMenu({ menuItems }) {
               {({ open, close }) => (
                 <>
                   <Popover.Button
-                    className={`${
-                      open ? "" : "text-opacity-90"
-                    }text-white uppercase`}
+                    className={`${open ? "" : "text-opacity-90"
+                      }text-white uppercase`}
                   >
                     <Link key={index} href={{ pathname: item.chlink }}>
                       <span> {item.name} </span>

@@ -103,7 +103,7 @@ function ListingDetailsCard({ data }) {
         <div className="flex flex-col justify-between">
           <div className="flex justify-end">
             <p className="cursor-pointer self-end uppercase font-semibold mr-6 text-m-green">
-              <Link href={`/sell/edit/${data?.listingId}`} passHref>
+              <Link href={`/sell-old-refurbished-used-mobiles/edit/${data?.listingId}`} passHref>
                 <a> Edit Listing </a>
               </Link>
             </p>

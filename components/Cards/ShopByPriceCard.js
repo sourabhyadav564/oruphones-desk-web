@@ -5,7 +5,7 @@ import { BiRupee } from "react-icons/bi";
 function ShopByPriceCard({ src, min, max }) {
   if (max && max.toString().toLowerCase().includes("above")) {
     return (
-      <Link href={`/product/listings/pricerange/${min}/${max}`}>
+      <Link href={`/product/buy-old-refurbished-used-mobiles/pricerange/${min}/${max}`}>
         <a className="w-full h-full py-2 rounded-md shadow hover:shadow-md flex flex-col items-center bg-m-white">
           <div>
             <Image src={src} alt={`${min}-${max}`} width={150} height={150} />
@@ -22,7 +22,7 @@ function ShopByPriceCard({ src, min, max }) {
     );
   }
   return (
-    <Link href={`/product/listings/pricerange/${min}/${max}`}>
+    <Link href={`/product/buy-old-refurbished-used-mobiles/pricerange/${min}/${max}`}>
       <a className="w-full h-full py-2 rounded-md shadow hover:shadow-md flex flex-col items-center bg-m-white">
         <div>
           <Image src={src} alt={`${min}-${max}`} width={150} height={150} />

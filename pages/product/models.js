@@ -47,7 +47,7 @@ function AllModels() {
           {topsellingmodels?.map((product, index) => (
             <TopSellingCard key={`${index}-${product?.make}`} data={product} />
           ))}
-          <Link href={`/product/listings/bestdealnearyou`} passHref>
+          <Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`} passHref>
             <a>
               <div className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
                 <p className="block text-m-green">{"Show All"}</p>
@@ -60,7 +60,7 @@ function AllModels() {
           {Array(8)
             .fill()
             .map((_, index) => (
-              <ProductSkeletonCard popular/>
+              <ProductSkeletonCard popular />
             ))}
         </div>
       )}

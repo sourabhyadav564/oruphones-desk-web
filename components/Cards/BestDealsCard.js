@@ -83,7 +83,7 @@ function BestDealsCard({ data, setProducts }) {
           )}
           <Link
             href={{
-              pathname: `/product/listings/${data.make}/${data?.marketingName}/${data?.listingId}`,
+              pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`,
               query: { isOtherVendor: data?.isOtherVendor },
             }}
             passHref
