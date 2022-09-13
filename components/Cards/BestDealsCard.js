@@ -6,6 +6,7 @@ import LabelAndValue from "../LabelAndValue";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
 import { BiChevronRight } from "react-icons/bi";
+import SoldOut from "@/assets/soldout.png"
 
 function BestDealsCard({ data, setProducts }) {
   return (
@@ -44,9 +45,12 @@ function BestDealsCard({ data, setProducts }) {
             {data?.marketingName}
           </h1>
           <div className="my-2">
-            {data?.verified ? (
-              <VerifiedIcon height={"36"} width={"75"} />
-            ) : (
+            {data?.verified ? <VerifiedIcon width={60} height={29} /> : data?.status === "Sold_Out" ? <Image
+              src={SoldOut}
+              width={"50"}
+              height={"30"}
+              objectFit="contain"
+            /> : (
               <span className="h-9 block" />
             )}
           </div>

@@ -10,6 +10,7 @@ import { numberWithCommas, numberFromString } from "../../utils/util";
 import charging from "../../assets/charging-station.svg";
 import headphone from "../../assets/headphones.svg";
 import originalBox from "../../assets/original-box.svg";
+import originalBill from "../../assets/original-bill.png";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
@@ -242,11 +243,11 @@ function AddEditListing({
         prev.map((item) => {
           return item.name === name
             ? {
-                ...item,
-                thumbnailImagePath: data1?.dataObject?.thumbnailImagePath,
-                imagePath: data1?.dataObject?.imagePath,
-                panel: index === 0 ? "front" : index === 1 ? "back" : index - 1,
-              }
+              ...item,
+              thumbnailImagePath: data1?.dataObject?.thumbnailImagePath,
+              imagePath: data1?.dataObject?.imagePath,
+              panel: index === 0 ? "front" : index === 1 ? "back" : index - 1,
+            }
             : item;
         })
       );
@@ -566,11 +567,9 @@ function AddEditListing({
                   onClick={() =>
                     setQuestionIndex(questionIndex > 0 ? questionIndex - 1 : 0)
                   }
-                  className={`${
-                    questionIndex > 0 && "hover:cursor-pointer"
-                  } p-2 flex justify-end items-center ${
-                    !questionIndex > 0 && "opacity-50"
-                  }`}
+                  className={`${questionIndex > 0 && "hover:cursor-pointer"
+                    } p-2 flex justify-end items-center ${!questionIndex > 0 && "opacity-50"
+                    }`}
                 >
                   <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
                     Back
@@ -587,11 +586,10 @@ function AddEditListing({
                     questionIndex == deviceConditionQuestion.length - 1 &&
                       calculateDeviceCondition();
                   }}
-                  className={`${
-                    !(questionIndex in conditionResults)
-                      ? "opacity-50"
-                      : "hover:cursor-pointer"
-                  } p-2 flex justify-end items-center`}
+                  className={`${!(questionIndex in conditionResults)
+                    ? "opacity-50"
+                    : "hover:cursor-pointer"
+                    } p-2 flex justify-end items-center`}
                 >
                   <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
                     {questionIndex == deviceConditionQuestion.length - 1
@@ -737,7 +735,7 @@ function AddEditListing({
             }}
           />
           <Checkbox
-            src={originalBox}
+            src={originalBill}
             text="Original Bill"
             checked={showWarranty}
             onClick={(e) => {
@@ -751,9 +749,8 @@ function AddEditListing({
             {deviceWarrantyCheck?.map((item, index) => (
               <div
                 key={index}
-                className={`${
-                  warranty == item?.value ? "bg-gray-200" : "bg-white"
-                } py-3 px-5 rounded-md hover:cursor-pointer hover:bg-gray-200 active:bg-gray-300 duration-300 border-2 border-gray-200 flex items-center justify-center`}
+                className={`${warranty == item?.value ? "bg-gray-200" : "bg-white"
+                  } py-3 px-5 rounded-md hover:cursor-pointer hover:bg-gray-200 active:bg-gray-300 duration-300 border-2 border-gray-200 flex items-center justify-center`}
                 onClick={() => setWarranty(item.value)}
               >
                 <span>{item.label}</span>
@@ -876,9 +873,8 @@ export default AddEditListing;
 
 const Checkbox = ({ src, text, onClick, checked }) => (
   <div
-    className={`border rounded px-6 py-4 relative ${
-      checked === "Y" && "bg-gray-ef"
-    } hover:cursor-pointer`}
+    className={`border rounded px-6 py-4 relative ${checked === "Y" && "bg-gray-ef"
+      } hover:cursor-pointer`}
     onClick={onClick}
   >
     <div className="relative w-14 h-14 mx-auto">
@@ -887,7 +883,7 @@ const Checkbox = ({ src, text, onClick, checked }) => (
     <input
       type="checkbox"
       className="absolute top-2 left-2 rounded focus:ring-0 focus:ring-offset-0 hover:cusror-pointer"
-      // onClick={onClick}
+      onClick={onClick}
       readOnly
     />
     <span className="text-xs mt-2 text-center block text-m-grey-1">

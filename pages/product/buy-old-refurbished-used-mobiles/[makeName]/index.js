@@ -143,6 +143,7 @@ function BrandPage() {
         color: [],
         deviceCondition: [],
         deviceStorage: [],
+        deviceRam: [],
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
@@ -305,9 +306,8 @@ function BrandPage() {
           </div>
           {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished === false && (
             <span
-              className={`${
-                isLoadingMore ? "w-[250px]" : "w-[150px]"
-              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+              className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
               onClick={loadMoreData}
             >
               <p className="block text-m-green font-semibold">

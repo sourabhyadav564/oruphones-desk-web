@@ -110,6 +110,7 @@ function CategoryPage() {
         color: [],
         deviceCondition: [],
         deviceStorage: [],
+        deviceRam: [],
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",

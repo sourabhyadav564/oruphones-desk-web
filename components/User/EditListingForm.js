@@ -7,6 +7,7 @@ import { numberWithCommas, numberFromString } from "../../utils/util";
 import charging from "../../assets/charging-station.png";
 import headphone from "../../assets/headphones.png";
 import originalBox from "../../assets/original-box.png";
+import originalBill from "../../assets/original-bill.png";
 import amazon from "../../assets/amazon_renewed.png";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
@@ -154,8 +155,8 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
 
     const fetchData = async () => {
       const getRecommandedPrice = await Axios.getRecommandedPrice(payload);
-      setLeastSellingprice(getRecommandedPrice.dataObject.leastSellingprice);
-      setMaxsellingprice(getRecommandedPrice.dataObject.maxsellingprice);
+      setLeastSellingprice(getRecommandedPrice?.dataObject?.leastSellingprice);
+      setMaxsellingprice(getRecommandedPrice?.dataObject?.maxsellingprice);
     };
     if (deviceCondition != null) {
       fetchData();
@@ -297,14 +298,31 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               setmarketingName(e.value);
             }}
           ></Input>
-          <Input
+          {/* <Input
             value={listedDeviceInfo?.deviceStorage}
             labelName="Storage"
             disabled
             onChange={(e) => {
               setStorage(e.value);
             }}
-          ></Input>
+          ></Input> */}
+          {data?.verified ? (
+            <Input value={data?.deviceStorage} disabled>
+              Storage
+            </Input>
+          ) : (
+            <Select
+              labelName="Storage*"
+              placeholder={data?.deviceStorage}
+              onChange={(e) => {
+                setStorage(e.value);
+              }}
+              value={listedDeviceInfo?.deviceStorage}
+              options={deviceStorages?.map((item) => {
+                return { label: item, value: item };
+              })}
+            />
+          )}
           <Select
             placeholder={listedDeviceInfo?.color}
             value={color === null ? "Select.." : { label: color, value: color }}
@@ -404,6 +422,16 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               <Checkbox
                 src={originalBox}
                 text="Original Box"
+                onClick={(e) => {
+                  e.target.checked
+                    ? setOriginalBox1("Y")
+                    : setOriginalBox1("N");
+                }}
+                isChecked={listedDeviceInfo?.originalbox === "Y"}
+              />
+              <Checkbox
+                src={originalBill}
+                text="Original Bill"
                 onClick={(e) => {
                   e.target.checked
                     ? setOriginalBox1("Y")
@@ -540,9 +568,8 @@ export default EditListingForm;
 
 const Checkbox = ({ src, text, onClick, isChecked }) => (
   <div
-    className={`border rounded px-6 py-4 relative ${
-      isChecked && "bg-gray-ef"
-    } hover:cursor-pointer`}
+    className={`border rounded px-6 py-4 relative ${isChecked && "bg-gray-ef"
+      } hover:cursor-pointer`}
   >
     <div className="relative w-14 h-14 mx-auto">
       <Image src={src} layout="fill" alt="buyer" />

@@ -5,6 +5,7 @@ import { numberWithCommas } from "../../utils/util";
 import VerifiedIcon from "../VerifiedIcon";
 import AddFav from "../AddFav";
 import Logo from "@/assets/oru_phones_logo.png"
+import SoldOut from "@/assets/soldout.png"
 
 function TopDealCard({ data, setProducts, prodLink }) {
   if (data?.name?.toLowerCase().includes("all")) {
@@ -28,7 +29,12 @@ function TopDealCard({ data, setProducts, prodLink }) {
         {data?.isOtherVendor === "N" && (
           <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
             <span className="h-6">
-              {data?.verified && <VerifiedIcon width={60} height={29} />}
+              {data?.verified ? <VerifiedIcon width={60} height={29} /> : data?.status === "Sold_Out" && <Image
+                src={SoldOut}
+                width={"50"}
+                height={"50"}
+                objectFit="contain"
+              />}
             </span>
             <AddFav data={data} setProducts={setProducts} />
           </div>
