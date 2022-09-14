@@ -56,9 +56,11 @@ function ProductDetails({ listingInfo }) {
       color: [],
       deviceCondition: [],
       deviceStorage: [],
+      deviceRam: [],
       maxsellingPrice: 200000,
       minsellingPrice: 0,
       verified: "",
+      warenty: []
     };
     Axios.fetchSimilarProducts(
       payLoad,
@@ -88,9 +90,11 @@ function ProductDetails({ listingInfo }) {
       color: [],
       deviceCondition: [],
       deviceStorage: [],
+      deviceRam: [],
       maxsellingPrice: 200000,
       minsellingPrice: 0,
       verified: "",
+      warenty: []
     };
     console.log("pageNumber from loadMore", newPages);
     Axios.fetchSimilarProducts(
@@ -144,14 +148,14 @@ function ProductDetails({ listingInfo }) {
           </h1>
           <div
             className="grid grid-cols-4 gap-6 mt-5"
-            // onClick={() => {
-            //   setProductsData(
-            //     simliarProducts.length > 0 &&
-            //     simliarProducts?.filter((items) => {
-            //         return items.listingId != listingInfo.listingId;
-            //       }) || []
-            //   );
-            // }}
+          // onClick={() => {
+          //   setProductsData(
+          //     simliarProducts.length > 0 &&
+          //     simliarProducts?.filter((items) => {
+          //         return items.listingId != listingInfo.listingId;
+          //       }) || []
+          //   );
+          // }}
           >
             {simliarProducts && simliarProducts.length > 0 ? (
               simliarProducts?.map((product, index) => (
@@ -177,9 +181,8 @@ function ProductDetails({ listingInfo }) {
             simliarProducts.length > 0 &&
             isFinished == false && (
               <span
-                className={`${
-                  isLoadingMore ? "w-[250px]" : "w-[150px]"
-                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
+                  } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
                 onClick={loadMoreData}
               >
                 <p className="block text-m-green font-semibold">

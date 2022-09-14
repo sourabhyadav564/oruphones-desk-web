@@ -4,10 +4,12 @@ import calendar1 from "../../assets/calendar-3.png";
 import testpass from "../../assets/testpass.png";
 import testfail from "../../assets/testFail.png";
 import pass from "../../assets/pass1.png";
+import { deviceConditionQuestion } from "@/utils/constant";
+import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
 
 function DeviceVerificationReport({ open, setOpen, data }) {
   return (
-    <Modal open={open} setOpen={setOpen} title={"Device Verification Report"}>
+    <Modal open={open} setOpen={setOpen} title={"Device Report"}>
       <div className="grid grid-cols-5 device_verification_report">
         <div className="flex flex-col px-6 col-span-2">
           <div>
@@ -50,7 +52,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
           className="flex flex-col border-l-2 col-span-3 overflow-y-auto max-w-lg"
           style={{ maxHeight: 480 }}
         >
-          {data?.questionnaireResults &&
+          {/* {data?.questionnaireResults &&
             data?.questionnaireResults?.length > 0 && (
               <div className="border-b-2 pb-4 px-8">
                 {data?.questionnaireResults.map((items, index) => {
@@ -65,7 +67,36 @@ function DeviceVerificationReport({ open, setOpen, data }) {
                   );
                 })}
               </div>
+            )} */}
+          <div className="">
+            {data && data?.cosmetic && (
+              <h2 className="text-gray-20 font-semibold mb-3">
+                Device Cosmetic Report
+              </h2>
             )}
+            {data && data?.cosmetic && (
+              <div>
+                {deviceConditionQuestion.map((item, index) => (
+                  <div>
+                    <span className="text-lg font-semibold text-black">{item?.title}</span>
+                    <ConditionOptionLarge
+                      title={data?.cosmetic[index]}
+                      options={item?.options[0]?.options}
+                      conditionResults={data?.cosmetic}
+                      questionIndex={index}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {data?.verified && (
+            <div className="text-gray-20 font-semibold mb-3">
+              <span>
+                Device Verification Report
+              </span>
+            </div>
+          )}
           <div className="px-8">
             {data?.functionalTestResults &&
               data?.functionalTestResults.map((items, index) => {
