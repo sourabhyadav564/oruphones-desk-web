@@ -97,7 +97,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                     <VerifiedIcon height={42} width={86} />
                     <div className="hover:cursor-pointer text-blue-600 text-sm underline hover:text-blue-800">
                       <span onClick={() => setOpenDeviceReport(true)}>
-                        {"Device Verification Report"}
+                        {"Device Report"}
                       </span>
                     </div>
                   </div>
@@ -146,7 +146,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 value={data?.deviceStorage || "--"}
                 labelTextSize
               />
-              <LabelAndValue label="RAM" value={data?.deviceRam || "--"} labelTextSize/>
+              <LabelAndValue label="RAM" value={data?.deviceRam || "--"} labelTextSize />
               {/* <span></span> */}
               <LabelAndValue
                 label="Color"
@@ -201,10 +201,10 @@ function ProductDetailsCard({ data, openFullImage }) {
                   labelTextSize
                 />
               }
-              {data?.verified && (
+              {(data?.cosmetic || data?.verified) && (
                 <LabelAndValue
                   label="Report"
-                  value={"Device Verification Report"}
+                  value={"Device Report"}
                   showDeviceReport={() => setOpenDeviceReport(true)}
                   labelTextSize
                 />

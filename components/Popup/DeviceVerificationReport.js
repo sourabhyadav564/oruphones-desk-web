@@ -70,7 +70,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
             )} */}
           <div className="">
             {data && data?.cosmetic && (
-              <h2 className="text-gray-20 font-semibold mb-3">
+              <h2 className="text-gray-20 font-bold mb-3">
                 Device Cosmetic Report
               </h2>
             )}
@@ -91,7 +91,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
             )}
           </div>
           {data?.verified && (
-            <div className="text-gray-20 font-semibold mb-3">
+            <div className="text-gray-20 font-bold mb-3">
               <span>
                 Device Verification Report
               </span>
