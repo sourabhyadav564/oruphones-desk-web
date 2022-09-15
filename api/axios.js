@@ -49,6 +49,7 @@ Axios.interceptors.response.use(
         localStorage.setItem("sessionId", result?.data?.dataObject?.sessionId);
       }
       Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
+      window.location.reload();
       // console.log("response.config", response.config);
     }
     return response;
@@ -128,8 +129,8 @@ export function signUp(mobileNumber) {
   const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.post(
     BASE_URL +
-      "/login/otp/generate?countryCode=91&mobileNumber=" +
-      mobileNumber,
+    "/login/otp/generate?countryCode=91&mobileNumber=" +
+    mobileNumber,
     {},
     DEFAULT_HEADER
   ).then(
@@ -147,10 +148,10 @@ export function otpValidate(data) {
   const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.post(
     BASE_URL +
-      "/login/otp/validate?countryCode=91&mobileNumber=" +
-      data.mobile.split("-")[1] +
-      "&otp=" +
-      data.otp,
+    "/login/otp/validate?countryCode=91&mobileNumber=" +
+    data.mobile.split("-")[1] +
+    "&otp=" +
+    data.otp,
     {},
     DEFAULT_HEADER
   ).then(
@@ -211,7 +212,7 @@ export function fetchByMarketingName(
     "&userUniqueId=" +
     userUniqueId +
     "&pageNumber=" +
-    pageNumber;
+    pageNumber + `&sortBy=NewestFirst`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -267,7 +268,7 @@ export function getListingbyMake(location, makeName, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber;
+    pageNumber + `&sortBy=NewestFirst`;
 
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -342,12 +343,12 @@ export function uploadImage(
     marketingName +
     `&userUniqueId=` +
     userUniqueId;
-    headers = {
-      ...headers,
-      eventName: "ADDLISTING_UPLOAD_PHOTOS_SUCCESS",
-      "Content-Type": "multipart/form-data",
-    };
-    const MULTIPART_HEADER = { headers: { ...headers } };
+  headers = {
+    ...headers,
+    eventName: "ADDLISTING_UPLOAD_PHOTOS_SUCCESS",
+    "Content-Type": "multipart/form-data",
+  };
+  const MULTIPART_HEADER = { headers: { ...headers } };
   return Axios.post(API_ENDPOINT, deviceImage, MULTIPART_HEADER).then(
     (response) => {
       return response.data;
@@ -631,7 +632,7 @@ export function bestDealNearByYou(location, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber;
+    pageNumber + `&sortBy=NewestFirst`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -696,7 +697,7 @@ export function removeFavotie(listingId, userUniqueId) {
     listingId +
     `&userUniqueId=` +
     userUniqueId;
-  return Axios.post(API_ENDPOINT, {} , DEFAULT_HEADER).then(
+  return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
     },
@@ -716,7 +717,7 @@ export function bestDealNearYouAll(location, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber;
+    pageNumber + `&sortBy=NewestFirst`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
