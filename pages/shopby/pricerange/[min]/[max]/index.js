@@ -46,7 +46,7 @@ const Pricerange = () => {
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings(priceRange?.dataObject?.otherListings);
-      setTotalProducts(priceRange?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+      setTotalProducts(priceRange?.dataObject?.totalProducts - priceRange?.dataObject?.bestDeals.length);
       setLoading(false);
       // setPageNumber(pageNumber + 1);
     };
@@ -77,9 +77,9 @@ const Pricerange = () => {
       if (priceRange?.dataObject?.otherListings.length == 0) {
         setIsFinished(true);
       }
-      if (response?.dataObject?.totalProducts > -1) {
+      if (priceRange?.dataObject?.totalProducts > -1) {
         setTotalProducts(
-          (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+          (priceRange && priceRange?.dataObject?.totalProducts - priceRange?.dataObject?.bestDeals.length) || 0
         );
       }
       setLoading(false);
@@ -116,6 +116,7 @@ const Pricerange = () => {
         minsellingPrice: min,
         reqPage: "SBYP",
         make: [],
+        marketingName: [],
         color: [],
         deviceRam: [],
         deviceCondition: [],
@@ -149,7 +150,8 @@ const Pricerange = () => {
           //   payLoad.verification = verification;
           // }
           setOtherListings(response?.dataObject?.otherListings);
-          setBestDeal([]);
+          setBestDeal(response?.dataObject?.bestDeals);
+          setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
           setLoading(false);
         }
       );
@@ -194,7 +196,7 @@ const Pricerange = () => {
           )}
         </div>
         {!isLoading &&
-          isFinished == false && products.length != totalProducts && (
+          isFinished == false && otherListings.length != totalProducts && (
             <span
               className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
                 } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
