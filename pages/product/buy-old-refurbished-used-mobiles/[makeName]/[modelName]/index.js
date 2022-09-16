@@ -48,7 +48,8 @@ const Products = () => {
         getSearchLocation,
         modelName,
         Cookies.get("userUniqueId"),
-        intialPage
+        intialPage,
+        applySort
       );
       if (data?.dataObject?.otherListings.length > -1) {
         setProducts((data && data?.dataObject?.otherListings) || []);
@@ -59,7 +60,7 @@ const Products = () => {
         // setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
       if (data?.dataObject?.totalProducts > -1) {
-        setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
+        setTotalProducts((data && data?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0);
       }
       setLoading(false);
       // setPageNumber(pageNumber + 1);
@@ -78,7 +79,8 @@ const Products = () => {
         getSearchLocation,
         modelName,
         Cookies.get("userUniqueId"),
-        newPages
+        newPages,
+        applySort
       );
       if (data?.dataObject?.otherListings.length > 0) {
         setProducts((products) => [
@@ -90,6 +92,12 @@ const Products = () => {
 
       if (data?.dataObject?.otherListings.length == 0) {
         setIsFinished(true);
+      }
+
+      if (response?.dataObject?.totalProducts > -1) {
+        setTotalProducts(
+          (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+        );
       }
 
       // if (data?.dataObject?.bestDeals.length > -1) {
@@ -109,7 +117,7 @@ const Products = () => {
     let intialPage = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [modelName, getSearchLocation]);
+  }, [modelName, getSearchLocation, applySort]);
 
   useEffect(() => {
     const {
@@ -139,6 +147,7 @@ const Products = () => {
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
+        warenty: []
       };
       if (priceRange && priceRange.min && priceRange.max) {
         payLoad.minsellingPrice = priceRange.min;
@@ -170,6 +179,7 @@ const Products = () => {
         // }
         setProducts(response?.dataObject?.otherListings);
         // setBestDeals([]);
+        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
         setBestDeals(response?.dataObject?.bestDeals);
         setLoading(false);
       });
@@ -232,13 +242,10 @@ const Products = () => {
           )}
         </div>
         {!isLoading &&
-          sortingProducts &&
-          sortingProducts.length > 0 &&
-          isFinished == false && (
+          isFinished == false && products.length != totalProducts && (
             <span
-              className={`${
-                isLoadingMore ? "w-[250px]" : "w-[150px]"
-              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+              className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
               onClick={loadMoreData}
             >
               <p className="block text-m-green font-semibold">

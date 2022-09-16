@@ -196,7 +196,8 @@ export function fetchByMarketingName(
   location,
   marketingName,
   userUniqueId,
-  pageNumber
+  pageNumber,
+  sortBy
 ) {
   headers = {
     ...headers,
@@ -212,7 +213,7 @@ export function fetchByMarketingName(
     "&userUniqueId=" +
     userUniqueId +
     "&pageNumber=" +
-    pageNumber + `&sortBy=NewestFirst`;
+    pageNumber + `&sortBy=` + sortBy;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -256,7 +257,7 @@ export function fetchMakeModelList(userUniqueId, sessionId) {
   );
 }
 
-export function getListingbyMake(location, makeName, userUniqueId, pageNumber) {
+export function getListingbyMake(location, makeName, userUniqueId, pageNumber, sortBy) {
   headers = { ...headers, eventName: `BRAND_SELECTED ${makeName}` };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
@@ -268,7 +269,7 @@ export function getListingbyMake(location, makeName, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber + `&sortBy=NewestFirst`;
+    pageNumber + `&sortBy=` + sortBy;
 
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -632,7 +633,7 @@ export function bestDealNearByYou(location, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber + `&sortBy=NewestFirst`;
+    pageNumber + `&sortBy=`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -707,7 +708,7 @@ export function removeFavotie(listingId, userUniqueId) {
   );
 }
 
-export function bestDealNearYouAll(location, userUniqueId, pageNumber) {
+export function bestDealNearYouAll(location, userUniqueId, pageNumber, sortBy) {
   headers = { ...headers, eventName: "HOME_BESTDEAL_VIEW_ALL" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
@@ -717,7 +718,7 @@ export function bestDealNearYouAll(location, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber + `&sortBy=NewestFirst`;
+    pageNumber + `&sortBy=` + sortBy;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;

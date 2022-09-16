@@ -46,6 +46,7 @@ const Pricerange = () => {
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings(priceRange?.dataObject?.otherListings);
+      setTotalProducts(priceRange?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
       setLoading(false);
       // setPageNumber(pageNumber + 1);
     };
@@ -75,6 +76,11 @@ const Pricerange = () => {
 
       if (priceRange?.dataObject?.otherListings.length == 0) {
         setIsFinished(true);
+      }
+      if (response?.dataObject?.totalProducts > -1) {
+        setTotalProducts(
+          (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+        );
       }
       setLoading(false);
       // setPageNumber(pageNumber + 1);
@@ -115,6 +121,7 @@ const Pricerange = () => {
         deviceCondition: [],
         deviceStorage: [],
         verified: "",
+        warenty: [],
       };
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
@@ -187,9 +194,7 @@ const Pricerange = () => {
           )}
         </div>
         {!isLoading &&
-          sortingProducts &&
-          sortingProducts.length > 0 &&
-          isFinished == false && (
+          isFinished == false && products.length != totalProducts && (
             <span
               className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
                 } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}

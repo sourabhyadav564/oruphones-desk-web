@@ -44,11 +44,12 @@ function Bestdealnearyou() {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),
-        intialPage
+        intialPage,
+        applySort
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         setBestDeal(response?.dataObject?.bestDeals);
-        setTotalProducts(response?.dataObject?.totalProducts);
+        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
         // setProductsData([
         //   ...response?.dataObject?.otherListings,
         //   ...response?.dataObject?.bestDeals,
@@ -66,14 +67,15 @@ function Bestdealnearyou() {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),
-        newPages
+        newPages,
+        applySort
       ).then((response) => {
         setProducts((products) => [
           ...products,
           ...response?.dataObject?.otherListings,
         ]);
 
-        
+
         if (response?.dataObject?.otherListings.length == 0) {
           setIsFinished(true);
         }
@@ -83,6 +85,11 @@ function Bestdealnearyou() {
         //   ...response?.dataObject?.otherListings,
         //   ...response?.dataObject?.bestDeals,
         // ]);
+        if (response?.dataObject?.totalProducts > -1) {
+          setTotalProducts(
+            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+          );
+        }
         setLoading(false);
         // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
@@ -94,7 +101,7 @@ function Bestdealnearyou() {
     let intialPage = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [getSearchLocation]);
+  }, [getSearchLocation, applySort]);
 
   useEffect(() => {
     const {
@@ -118,6 +125,7 @@ function Bestdealnearyou() {
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
+        warenty: []
       };
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
@@ -152,6 +160,7 @@ function Bestdealnearyou() {
         // }
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
+        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
         setBestDeal(response?.dataObject?.bestDeals);
         setLoading(false);
       });
@@ -194,9 +203,9 @@ function Bestdealnearyou() {
             </div>
           )}
         </div>
-        {!isLoading && sortingProducts && sortingProducts.length > 0 && isFinished == false && (
+        {!isLoading && isFinished == false && products.length != totalProducts && (
           <span className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-          onClick={loadMoreData}
+            onClick={loadMoreData}
           >
             <p className="block text-m-green font-semibold">
               {isLoadingMore ? "Fetching more products..." : "Load More"}

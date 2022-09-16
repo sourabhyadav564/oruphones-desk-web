@@ -38,7 +38,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
       {({ open }) => (
         <Fragment>
           <h3 className="-my-3 flow-root">
-            <Disclosure.Button className="py-3  w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500">
+            <Disclosure.Button className="py-3  w-full flex items-center justify-between text-sm text-gray-900 hover:text-gray-500">
               <p className="font-medium text-gray-900 flex items-center">{optionObj?.name}
               {openPopup && <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e)=>{e.stopPropagation();e.preventDefault(); openPopup()}} />}
               </p>

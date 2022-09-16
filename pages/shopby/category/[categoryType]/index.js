@@ -53,7 +53,7 @@ function CategoryPage() {
         }
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
-            (response && response?.dataObject?.totalProducts) || 0
+            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
           );
         }
 
@@ -85,6 +85,12 @@ function CategoryPage() {
           setIsFinished(true);
         }
 
+        if (response?.dataObject?.totalProducts > -1) {
+          setTotalProducts(
+            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+          );
+        }
+
         setLoading(false);
         // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
@@ -114,6 +120,7 @@ function CategoryPage() {
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
+        warenty: []
       };
       if (priceRange && priceRange.min && priceRange.max) {
         payLoad.minsellingPrice = priceRange.min;
@@ -142,6 +149,7 @@ function CategoryPage() {
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
+        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
         setBestDeal(response?.dataObject?.bestDeals);
         setLoading(false);
       });
@@ -227,7 +235,7 @@ function CategoryPage() {
           listingsCount={sortingProducts?.length + bestDeal?.length}
           setApplySort={setApplySort}
           setApplyFilter={setApplyFilter}
-          //   makeName={makeName}
+        //   makeName={makeName}
         >
           {!isLoading && bestDeal && bestDeal.length > 0 && (
             <div className="mb-4">
@@ -273,13 +281,10 @@ function CategoryPage() {
             )}
           </div>
           {!isLoading &&
-            sortingProducts &&
-            sortingProducts.length > 0 &&
-            isFinished === false && (
+            isFinished === false && products?.length != totalProducts && (
               <span
-                className={`${
-                  isLoadingMore ? "w-[250px]" : "w-[150px]"
-                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
+                  } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
                 onClick={loadMoreData}
               >
                 <p className="block text-m-green font-semibold">

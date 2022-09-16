@@ -1,14 +1,17 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition, Dialog } from "@headlessui/react";
 import { AiOutlineClose } from "react-icons/ai";
 import { GrFormDown, GrFormFilter } from "react-icons/gr";
 import DesktopFilter from "./DesktopFilter";
+import { useRouter } from "next/router";
 
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
 
 export default function Sort({ sortOptions, setApplySort, setFilters }) {
+  const router = useRouter();
+  // console.log("router", router);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   function handleOnChange(data) {
     setApplySort(data.name);
@@ -17,9 +20,17 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
     });
   }
 
+  useEffect(() => {
+    sortOptions?.map((items) => {
+      return items.name === "Featured" ? (items.current = true) : (items.current = false);
+    });
+    setApplySort("Featured");
+  }, [router.pathname]);
+
+  // console.log({ sortOptions, setApplySort, setFilters });
   return (
     <Fragment>
-      <div className="relative z-10 flex items-baseline justify-end py-4">
+      <div className="relative z-50 flex items-baseline justify-end py-4">
         <div className="flex items-center">
           <Menu as="div" className="relative inline-block text-left ">
             <div>
