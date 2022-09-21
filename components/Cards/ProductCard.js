@@ -43,7 +43,7 @@ function ProductCard({ data, prodLink, setProducts }) {
           <div className="flex flex-col items-baseline pb-2 text-m-grey-2 flex-wrap w-full">
             <h1 className="text-base flex-1 sm:py-1 truncate w-full">{data?.marketingName}</h1>
 
-            <div className="flex text-xs space-x-2">
+            <div className="flex w-full justify-between text-xs">
               {data?.deviceStorage && (
                 <div className="py-1">
                   <span>{data?.deviceStorage}</span>

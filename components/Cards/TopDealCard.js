@@ -63,6 +63,17 @@ function TopDealCard({ data, setProducts, prodLink }) {
           <h1 className="text-lg sm:text-base flex-1 sm:py-1 truncate w-full font-semibold text-m-grey-2">
             {data?.marketingName}
           </h1>
+          <div className="flex justify-between text-xs">
+            {data?.deviceStorage && (
+              <div className="py-1">
+                <span>{data?.deviceStorage}</span>
+              </div>
+            )}
+            <div className="py-1">
+              <span>Condition : </span>
+              <span>{data?.deviceCondition || "--"}</span>
+            </div>
+          </div>
           <p className="font-bold flex items-center -ml-1 text-base text-m-grey-1">
             {/* {data?.listingPrice && <BiRupee />}{" "} */}
             {numberWithCommas(data?.listingPrice || "")}
