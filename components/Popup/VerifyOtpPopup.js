@@ -46,25 +46,44 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
         mobileNumber: formData.mobile.split("-")[1],
       };
 
-      const resData = await Axios.getUserUniqueId(payload);
+      // const resData = await Axios.getUserUniqueId(payload);
 
-      if (resData.status === "SUCCESS" || (resData.status === "FAIL" && resData.reason === "User Already Available")) {
-        if (resData.status === "SUCCESS") {
-          addUserSearchandProfileLocations(resData.dataObject.userUniqueId);
-        }
-        Cookies.set("userUniqueId", resData.dataObject.userUniqueId);
-        Cookies.set("mobileNumber", resData.dataObject.userdetails.mobileNumber);
-        setUserUniqueId(resData.dataObject.userUniqueId);
+      // if (
+      //   resData.status === "SUCCESS" ||
+      //   (resData.status === "FAIL" &&
+      //     resData.reason === "User Already Available")
+      // ) {
+      //   if (resData.status === "SUCCESS") {
+      //     addUserSearchandProfileLocations(resData.dataObject.userUniqueId);
+      //   }
+      //   Cookies.set("userUniqueId", resData.dataObject.userUniqueId);
+      //   Cookies.set(
+      //     "mobileNumber",
+      //     resData.dataObject.userdetails.mobileNumber
+      //   );
+      //   setUserUniqueId(resData.dataObject.userUniqueId);
 
-        if (redirect !== undefined && redirect === false) {
-          setOpen(false);
-        } else {
-          Router.push(`/`);
-        }
-        setUserLogged(true);
+      //   if (redirect !== undefined && redirect === false) {
+      //     setOpen(false);
+      //   } else {
+      //     Router.push(`/`);
+      //   }
+      //   setUserLogged(true);
+      // } else {
+      //   setError(true);
+      // }
+      // Cookies.set("userUniqueId", resData.dataObject.userUniqueId);
+      Cookies.set("userUniqueId", response.dataObject.userUniqueId);
+      Cookies.set("mobileNumber", response.dataObject.mobileNumber);
+      // setUserUniqueId(resData.dataObject.userUniqueId);
+      setUserUniqueId(response.dataObject.userUniqueId);
+
+      if (redirect !== undefined && redirect === false) {
+        setOpen(false);
       } else {
-        setError(true);
+        Router.push(`/`);
       }
+      setUserLogged(true);
     } else {
       setError(true);
     }
@@ -79,8 +98,12 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
       userUniqueId: data,
     };
 
-    const addUserSearchLocationResponse = await Axios.addUserSearchLocation(locationPayload);
-    const addUserProfileLocationResponse = await Axios.addUserProfileLocation(locationPayload);
+    const addUserSearchLocationResponse = await Axios.addUserSearchLocation(
+      locationPayload
+    );
+    const addUserProfileLocationResponse = await Axios.addUserProfileLocation(
+      locationPayload
+    );
   };
 
   const otpResend = async () => {
@@ -98,11 +121,21 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
       <div>
         <Image src={home_logo} alt="ORUphones" width={160} height={40} />
       </div>
-      <form onSubmit={handleSubmit} className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96">
-        <h2 className="text-2xl font-extrabold text-center" style={{ color: "#2c2f44" }}>
+      <form
+        onSubmit={handleSubmit}
+        className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96"
+      >
+        <h2
+          className="text-2xl font-extrabold text-center"
+          style={{ color: "#2c2f44" }}
+        >
           Verify Mobile No
         </h2>
-        <p className="text-sm text-m-grey-1"> Please enter the 4 digit verification code sent to your mobile number {formData?.mobile} via SMS. </p>
+        <p className="text-sm text-m-grey-1">
+          {" "}
+          Please enter the 4 digit verification code sent to your mobile number{" "}
+          {formData?.mobile} via SMS.{" "}
+        </p>
 
         <div className="outline relative w-full focus:outline-none">
           <input
@@ -113,13 +146,19 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
             required
             title="4 digits code"
             className={`text-center block p-4 w-full rounded appearance-none border-1  bg-transparent ${
-              error ? "ring-2 ring-red-600 focus:ring-2 focus:ring-red-600" : "ring-0 focus:ring-0"
+              error
+                ? "ring-2 ring-red-600 focus:ring-2 focus:ring-red-600"
+                : "ring-0 focus:ring-0"
             }`}
             style={{ border: "1px solid #0000001F", color: "#00000099" }}
             value={formData?.otp || ""}
             onChange={handleChange}
           />
-          <label htmlFor="mobile" className="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0" style={{ color: "#00000099" }}>
+          <label
+            htmlFor="mobile"
+            className="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0"
+            style={{ color: "#00000099" }}
+          >
             OTP
           </label>
           {error && (
@@ -130,15 +169,22 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
         </div>
         <div className="flex justify-center items-center">
           {!resentOTP ? (
-            <label className="ml-2 text-m-grey-2">Resend OTP in 0:{seconds} Sec </label>
+            <label className="ml-2 text-m-grey-2">
+              Resend OTP in 0:{seconds} Sec{" "}
+            </label>
           ) : (
-            <label className="ml-2 text-m-green cursor-pointer" onClick={otpResend}>
+            <label
+              className="ml-2 text-m-green cursor-pointer"
+              onClick={otpResend}
+            >
               RESEND OTP
             </label>
           )}
         </div>
 
-        <button className="w-full bg-m-green p-4 text-white rounded block">VERIFY</button>
+        <button className="w-full bg-m-green p-4 text-white rounded block">
+          VERIFY
+        </button>
       </form>
     </div>
   );
