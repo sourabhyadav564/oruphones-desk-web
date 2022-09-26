@@ -39,10 +39,11 @@ const menus = [
     options: [],
     chlink: "/product/buy-old-refurbished-used-mobiles/bestdealnearyou",
   },
-  // {
-  //   name: "Shop by Grade",
-  //   options: [],
-  // },
+  {
+    name: "ORU Services",
+    options: [],
+    chlink: "/services",
+  },
   { name: "Blog", href: "https://www.oruphones.com/blog" },
 ];
 

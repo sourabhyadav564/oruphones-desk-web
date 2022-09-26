@@ -368,6 +368,7 @@ function AddEditListing({
         platform: make === "Apple" ? "iOS" : "Android",
         userUniqueId: Cookies.get("userUniqueId"),
         model: marketingName,
+        cosmetic: conditionResults,
       };
       const saveSellNowDeviceInfoRes = await Axios.saveSellNowDeviceInfo(
         payload

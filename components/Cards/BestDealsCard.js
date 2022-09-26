@@ -105,6 +105,7 @@ function BestDealsCard({ data, setProducts }) {
           />
           <LabelAndValue label="Warranty" value={data?.warranty || "--"} />
           <LabelAndValue label="Storage" value={data?.deviceStorage || "--"} />
+          <LabelAndValue label="RAM" value={data?.deviceRam || "--"} />
           {data?.isOtherVendor === "N" && (
             <LabelAndValue
               label="Verified on"
@@ -112,7 +113,7 @@ function BestDealsCard({ data, setProducts }) {
             />
           )}
           <LabelAndValue label="Color" value={data?.color || "--"} />
-          {data?.isOtherVendor === "N" && (
+          {(
             <LabelAndValue
               label="Listed on"
               value={data?.listingDate || "--"}

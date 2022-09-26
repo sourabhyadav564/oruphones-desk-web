@@ -147,6 +147,8 @@ function ProductDetailsCard({ data, openFullImage }) {
                 labelTextSize
               />
               <LabelAndValue label="RAM" value={data?.deviceRam || "--"} labelTextSize />
+              <LabelAndValue label="Brand Warranty" value={"Not Applicable"} labelTextSize />
+              <LabelAndValue label="Seller Warranty" value={data?.warranty || "--"} labelTextSize />
               {/* <span></span> */}
               <LabelAndValue
                 label="Color"

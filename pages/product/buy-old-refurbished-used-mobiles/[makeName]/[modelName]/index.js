@@ -52,15 +52,15 @@ const Products = () => {
         applySort
       );
       if (data?.dataObject?.otherListings.length > -1) {
-        setProducts((data && data?.dataObject?.otherListings) || []);
+        setProducts((data && data?.dataObject?.otherListings));
         // setProductsData((data && data?.dataObject?.otherListings) || []);
       }
       if (data?.dataObject?.bestDeals.length > -1) {
-        setBestDeals((data && data?.dataObject?.bestDeals) || []);
+        setBestDeals((data && data?.dataObject?.bestDeals));
         // setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
       if (data?.dataObject?.totalProducts > -1) {
-        setTotalProducts((data && data?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0);
+        setTotalProducts((data && data?.dataObject?.totalProducts - data?.dataObject?.bestDeals.length) || 0);
       }
       setLoading(false);
       // setPageNumber(pageNumber + 1);
@@ -94,9 +94,9 @@ const Products = () => {
         setIsFinished(true);
       }
 
-      if (response?.dataObject?.totalProducts > -1) {
+      if (data?.dataObject?.totalProducts > -1) {
         setTotalProducts(
-          (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+          (data && data?.dataObject?.totalProducts - data?.dataObject?.bestDeals.length) || 0
         );
       }
 
