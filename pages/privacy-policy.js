@@ -30,7 +30,8 @@ function PrivacyPolicy() {
     var htmlText;
     try {
       // const { serverUrl, templateUrls } = staticDataPath;
-      const res = await fetchStaticHTML("/privacy-policy.html");
+      // const res = await fetchStaticHTML("/privacy-policy.html");
+      const res = await fetchStaticHTML("/new_privacy_policy.html");
       // const res = await fetchStaticHTML(serverUrl + templateUrls.VERIFICATION);
       const html = res.data;
       const doc = nodeParser(html);
