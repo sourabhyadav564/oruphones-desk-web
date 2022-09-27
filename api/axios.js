@@ -344,7 +344,7 @@ export function uploadImage(
     marketingName +
     `&userUniqueId=` +
     userUniqueId;
-  headers = {
+  var headers = {
     ...headers,
     eventName: "ADDLISTING_UPLOAD_PHOTOS_SUCCESS",
     "Content-Type": "multipart/form-data",

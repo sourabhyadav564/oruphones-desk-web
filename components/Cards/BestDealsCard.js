@@ -45,12 +45,12 @@ function BestDealsCard({ data, setProducts }) {
             {data?.marketingName}
           </h1>
           <div className="my-2">
-            {data?.verified ? <VerifiedIcon width={60} height={29} /> : data?.status === "Sold_Out" ? <Image
+            {data?.status === "Sold_Out" ? <Image
               src={SoldOut}
               width={"50"}
               height={"30"}
               objectFit="contain"
-            /> : (
+            /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
               <span className="h-9 block" />
             )}
           </div>

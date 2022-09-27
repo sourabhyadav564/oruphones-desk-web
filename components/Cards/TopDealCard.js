@@ -29,12 +29,14 @@ function TopDealCard({ data, setProducts, prodLink }) {
         {data?.isOtherVendor === "N" && (
           <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
             <span className="h-6">
-              {data?.verified ? <VerifiedIcon width={60} height={29} /> : data?.status === "Sold_Out" && <Image
+              {data?.status === "Sold_Out" ? <Image
                 src={SoldOut}
                 width={"50"}
-                height={"50"}
+                height={"30"}
                 objectFit="contain"
-              />}
+              /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
+                <span className="h-9 block" />
+              )}
             </span>
             <AddFav data={data} setProducts={setProducts} />
           </div>

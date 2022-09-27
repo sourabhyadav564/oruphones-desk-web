@@ -23,12 +23,14 @@ function ProductCard({ data, prodLink, setProducts }) {
           style={{ boxShadow: "0px 2px 3px #0000000A", padding: " 0 10px" }}
         >
           <div className="flex items-center justify-between" style={{ padding: "10px 5px 5px 0" }}>
-            <div className="h-9">{data?.verified ? <VerifiedIcon width={60} height={29} /> : data?.status === "Sold_Out" && <Image
+            <div className="h-9">{data?.status === "Sold_Out" ? <Image
               src={SoldOut}
               width={"50"}
-              height={"50"}
+              height={"30"}
               objectFit="contain"
-            />}</div>
+            /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
+              <span className="h-9 block" />
+            )}</div>
             {!(data?.isOtherVendor === "Y") && <AddFav data={data} setProducts={setProducts} height={18} width={18} />}
           </div>
           <div className="flex justify-center mb-2">
