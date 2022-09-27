@@ -344,12 +344,12 @@ export function uploadImage(
     marketingName +
     `&userUniqueId=` +
     userUniqueId;
-  var headers = {
+  var header = {
     ...headers,
     eventName: "ADDLISTING_UPLOAD_PHOTOS_SUCCESS",
     "Content-Type": "multipart/form-data",
   };
-  const MULTIPART_HEADER = { headers: { ...headers } };
+  const MULTIPART_HEADER = { headers: { ...header } };
   return Axios.post(API_ENDPOINT, deviceImage, MULTIPART_HEADER).then(
     (response) => {
       return response.data;

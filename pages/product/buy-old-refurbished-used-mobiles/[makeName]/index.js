@@ -68,7 +68,10 @@ function BrandPage() {
         }
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
-            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+            (response &&
+              response?.dataObject?.totalProducts -
+                response?.dataObject?.bestDeals.length) ||
+              0
           );
         }
 
@@ -98,7 +101,10 @@ function BrandPage() {
           ]);
           if (response?.dataObject?.totalProducts > -1) {
             setTotalProducts(
-              (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+              (response &&
+                response?.dataObject?.totalProducts -
+                  response?.dataObject?.bestDeals.length) ||
+                0
             );
           }
           // setProductsData(
@@ -154,7 +160,7 @@ function BrandPage() {
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
-        warenty: []
+        warenty: [],
       };
       if (priceRange && priceRange.min && priceRange.max) {
         payLoad.minsellingPrice = priceRange.min;
@@ -183,7 +189,10 @@ function BrandPage() {
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
-        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+        setTotalProducts(
+          response?.dataObject?.totalProducts -
+            response?.dataObject?.bestDeals.length
+        );
         setBestDeal(response?.dataObject?.bestDeals);
         setLoading(false);
       });
@@ -313,17 +322,20 @@ function BrandPage() {
               </div>
             )}
           </div>
-          {!isLoading && isFinished === false && products.length != totalProducts && (
-            <span
-              className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
+          {!isLoading &&
+            isFinished === false &&
+            products.length != totalProducts && (
+              <span
+                className={`${
+                  isLoadingMore ? "w-[250px]" : "w-[150px]"
                 } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-              onClick={loadMoreData}
-            >
-              <p className="block text-m-green font-semibold">
-                {isLoadingMore ? "Fetching more products..." : "Load More"}
-              </p>
-            </span>
-          )}
+                onClick={loadMoreData}
+              >
+                <p className="block text-m-green font-semibold">
+                  {isLoadingMore ? "Fetching more products..." : "Load More"}
+                </p>
+              </span>
+            )}
         </Filter>
       </main>
     </>
