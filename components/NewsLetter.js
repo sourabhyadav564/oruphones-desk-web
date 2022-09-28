@@ -6,9 +6,9 @@ export default function NewsLetter() {
 
   const [email, setEmail] = useState();
 
-  function subscribeNewsletter(e){
+  function subscribeNewsletter(e) {
     e.preventDefault();
-    addsubscription(email).then((response)=>{
+    addsubscription(email).then((response) => {
       toast.info(response?.reason, {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -17,7 +17,7 @@ export default function NewsLetter() {
   }
 
   return (
-    <section className="bg-m-black text-white py-16">
+    <section className="bg-m-green text-white pt-16">
       <div className="container flex items-center md:justify-around flex-col md:flex-row ">
         <p className="text-2xl text-center">Sign up for newsletter</p>
         <form className="flex max-w-md flex-1 mt-8 md:mt-0" onSubmit={subscribeNewsletter}>
@@ -28,7 +28,7 @@ export default function NewsLetter() {
             className="w-full flex-1 px-4 py-3 rounded-none rounded-l-md text-black"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit" className="btn bg-m-green hover:bg-green-600 hover:text-m-white rounded-none rounded-r-md">
+          <button type="submit" className="btn bg-m-black hover:bg-green-600 hover:text-m-white rounded-none rounded-r-md">
             Subscribe
           </button>
         </form>

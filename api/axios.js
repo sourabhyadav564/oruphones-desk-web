@@ -649,7 +649,8 @@ export function shopByPriceRange(
   location,
   startPrice,
   listingid,
-  pageNumber
+  pageNumber,
+  sortBy
 ) {
   headers = { ...headers, eventName: "GET_BEST_DEALS" };
   const DEFAULT_HEADER = { headers: { ...headers } };
@@ -664,7 +665,7 @@ export function shopByPriceRange(
     `&userUniqueId=` +
     listingid +
     `&pageNumber=` +
-    pageNumber;
+    pageNumber + `&sortBy=` + sortBy;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -977,7 +978,7 @@ export function fetchTopArticles() {
   );
 }
 
-export function shopByCategory(location, category, userUniqueId, pageNumber) {
+export function shopByCategory(location, category, userUniqueId, pageNumber, sortBy) {
   const API_ENDPOINT =
     BASE_URL +
     `/home/listings/category?location=` +
@@ -987,7 +988,7 @@ export function shopByCategory(location, category, userUniqueId, pageNumber) {
     `&pageNumber=` +
     pageNumber +
     `&userUniqueId=` +
-    userUniqueId;
+    userUniqueId + `&sortBy=` + sortBy;
   headers = { ...headers, eventName: "FETCH_TOP_ARTICLES" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(

@@ -43,7 +43,8 @@ function CategoryPage() {
         getSearchLocation,
         categoryType,
         Cookies.get("userUniqueId"),
-        intialPage
+        intialPage,
+        applySort
       ).then((response) => {
         if (response?.dataObject?.otherListings.length > -1) {
           setProducts((response && response?.dataObject?.otherListings) || []);
@@ -53,7 +54,7 @@ function CategoryPage() {
         }
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
-            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+            (response && response?.dataObject?.totalProducts) || 0
           );
         }
 
@@ -72,7 +73,8 @@ function CategoryPage() {
         getSearchLocation,
         categoryType,
         Cookies.get("userUniqueId"),
-        newPages
+        newPages,
+        applySort
       ).then((response) => {
         if (response?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [
@@ -87,7 +89,7 @@ function CategoryPage() {
 
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
-            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+            (response && response?.dataObject?.totalProducts) || 0
           );
         }
 
@@ -102,7 +104,7 @@ function CategoryPage() {
     let intialPage = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [categoryType, getSearchLocation]);
+  }, [categoryType, getSearchLocation, applySort]);
 
   useEffect(() => {
     const { condition, color, storage, warranty, verification, priceRange } =
@@ -149,7 +151,7 @@ function CategoryPage() {
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
-        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+        setTotalProducts(response?.dataObject?.totalProducts);
         setBestDeal(response?.dataObject?.bestDeals);
         setLoading(false);
       });
@@ -158,7 +160,7 @@ function CategoryPage() {
 
   // const sortingProducts = useMemo(() => getSortedProducts(applySort, products), [applySort, products]);
 
-  const sortingProducts = getSortedProducts(applySort, products);
+  // const sortingProducts = getSortedProducts(applySort, products);
 
   useEffect(() => {
     switch (categoryType) {
@@ -232,7 +234,7 @@ function CategoryPage() {
       <main className="container py-4">
         <h1 className="sr-only">{categoryType} Page</h1>
         <Filter
-          listingsCount={sortingProducts?.length + bestDeal?.length}
+          listingsCount={products?.length + bestDeal?.length}
           setApplySort={setApplySort}
           setApplyFilter={setApplyFilter}
         //   makeName={makeName}
@@ -258,8 +260,9 @@ function CategoryPage() {
             Total Products ({totalProducts})
           </h4>
           <div className="grid grid-cols-3 gap-4">
-            {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-              sortingProducts?.map((product, index) => (
+            {!isLoading &&
+            isFinished == false && bestDeal.length != totalProducts ? (
+            bestDeal?.map((product, index) => (
                 <div
                   key={index}
                   onClick={() => {
@@ -300,13 +303,13 @@ function CategoryPage() {
 
 function getSortedProducts(applySort, products) {
   var sortedProducts = products ? [...products] : [];
-  if (applySort && applySort === "Price: Low to High") {
+  if (applySort && applySort === "Price - Low to High") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
       );
     });
-  } else if (applySort && applySort === "Price: High to Low") {
+  } else if (applySort && applySort === "Price - High to Low") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(b.listingPrice) - numberFromString(a.listingPrice)

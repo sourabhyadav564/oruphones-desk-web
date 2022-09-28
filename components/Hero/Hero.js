@@ -63,35 +63,35 @@ export default function Hero() {
     //     </div>
     //   </div>
     // </section>
-    <section className="pt-4">
+    <section className="flex-grow border-t border-gray-400">
       <Carousel>
         <Image
           src={banner_one}
           alt="BannerImage"
           priority
-          // width="100%"
-          // height="90%"
-          // layout="responsive"
-          // objectFit="contain"
+        // width="100%"
+        // height="90%"
+        // layout="responsive"
+        // objectFit="contain"
         />
         <Image
           src={banner_two}
           alt="BannerImage"
           priority
-          // width="100%"
-          // height="90%"
-          // layout="responsive"
-          // objectFit="contain"
+        // width="100%"
+        // height="90%"
+        // layout="responsive"
+        // objectFit="contain"
         />
         <div className="">
           <Image
             src={banner_three}
             alt="BannerImage"
             priority
-            // width="100%"
-            // height="90%"
-            // layout="responsive"
-            // objectFit="contain"
+          // width="100%"
+          // height="90%"
+          // layout="responsive"
+          // objectFit="contain"
           />
         </div>
       </Carousel>

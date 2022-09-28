@@ -36,7 +36,8 @@ const Pricerange = () => {
         max === "above" ? "200000" : max,
         getSearchLocation,
         min,
-        Cookies.get("userUniqueId") || "Guest"
+        Cookies.get("userUniqueId") || "Guest",
+        applySort
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings(priceRange?.dataObject?.otherListings);
@@ -98,7 +99,7 @@ const Pricerange = () => {
     }
   }, [applyFilter]);
 
-  const sortingProducts = getSortedProducts(applySort, otherListings);
+  // const sortingProducts = getSortedProducts(applySort, otherListings);
 
   return (
     <main className="container py-4">
@@ -117,8 +118,9 @@ const Pricerange = () => {
           </Carousel>
         )}
         <div className="grid grid-cols-3 gap-4 mt-3">
-          {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => (
+          {!isLoading &&
+            isFinished == false && bestDeal.length != totalProducts ? (
+            bestDeal?.map((product, index) => (
               <ProductCard
                 key={index}
                 data={product}
@@ -145,7 +147,7 @@ function getSortedProducts(applySort, otherListings) {
         numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
       );
     });
-  } else if (applySort && applySort === "Price: High to Low") {
+  } else if (applySort && applySort === "Price - High to Low") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(b.listingPrice) - numberFromString(a.listingPrice)

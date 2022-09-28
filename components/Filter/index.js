@@ -4,8 +4,8 @@ import DesktopFilter from "./DesktopFilter";
 import useFilterOptions from "hooks/useFilterOptions";
 
 const sortOptions = [
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Price - Low to High", href: "#", current: false },
+  { name: "Price - High to Low", href: "#", current: false },
   { name: "Newest First", href: "#", current: false },
   { name: "Oldest First", href: "#", current: false },
   { name: "Featured", href: "#", current: true },

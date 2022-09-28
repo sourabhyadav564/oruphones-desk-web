@@ -10,7 +10,47 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="mx-auto bg-m-green py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
+    <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
+      <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center">
+        <p className='text-white'>
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Samsung Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            iPhone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            OnePlus Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Asus Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Xiaomi Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Oppo Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell LG
+            Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Realme Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Poco Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            IQOO Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Sony Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Coolpad Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Google Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Honor Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Infinix Phone</a> |
+          {/* <!-- <a href="https://oruphones.com/sell/add">Sell Leeco Phone</a> | --> */}
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Tecno Phone</a> |
+          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
+            Vivo Phone</a>
+
+        </p>
+      </div></div>
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">
         <div className="flex flex-col">
           <h1 className="font-bold">Customer Service</h1>

@@ -69,9 +69,8 @@ function BrandPage() {
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
             (response &&
-              response?.dataObject?.totalProducts -
-                response?.dataObject?.bestDeals.length) ||
-              0
+              response?.dataObject?.totalProducts) ||
+            0
           );
         }
 
@@ -102,9 +101,8 @@ function BrandPage() {
           if (response?.dataObject?.totalProducts > -1) {
             setTotalProducts(
               (response &&
-                response?.dataObject?.totalProducts -
-                  response?.dataObject?.bestDeals.length) ||
-                0
+                response?.dataObject?.totalProducts) ||
+              0
             );
           }
           // setProductsData(
@@ -190,8 +188,7 @@ function BrandPage() {
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
         setTotalProducts(
-          response?.dataObject?.totalProducts -
-            response?.dataObject?.bestDeals.length
+          response?.dataObject?.totalProducts
         );
         setBestDeal(response?.dataObject?.bestDeals);
         setLoading(false);
@@ -200,7 +197,7 @@ function BrandPage() {
   }, [applyFilter]);
 
   // const sortingProducts = useMemo(() => getSortedProducts(applySort, products), [applySort, products]);
-  const sortingProducts = getSortedProducts(applySort, products);
+  // const sortingProducts = getSortedProducts(applySort, products);
 
   useEffect(() => {
     switch (makeName) {
@@ -274,7 +271,7 @@ function BrandPage() {
       <main className="container py-4">
         <h1 className="sr-only">{makeName} Page</h1>
         <Filter
-          listingsCount={sortingProducts?.length + bestDeal?.length}
+          listingsCount={products?.length + bestDeal?.length}
           setApplySort={setApplySort}
           setApplyFilter={setApplyFilter}
           makeName={makeName}
@@ -300,8 +297,9 @@ function BrandPage() {
             Total Products ({totalProducts})
           </h4>
           <div className="grid grid-cols-3 gap-4">
-            {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-              sortingProducts?.map((product, index) => (
+            {!isLoading &&
+              isFinished == false && products.length != totalProducts ? (
+              products?.map((product, index) => (
                 <div
                   key={index}
                   onClick={() => {
@@ -326,9 +324,8 @@ function BrandPage() {
             isFinished === false &&
             products.length != totalProducts && (
               <span
-                className={`${
-                  isLoadingMore ? "w-[250px]" : "w-[150px]"
-                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
+                  } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
                 onClick={loadMoreData}
               >
                 <p className="block text-m-green font-semibold">
@@ -344,13 +341,13 @@ function BrandPage() {
 
 function getSortedProducts(applySort, products) {
   var sortedProducts = products ? [...products] : [];
-  if (applySort && applySort === "Price: Low to High") {
+  if (applySort && applySort === "Price Low to High") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
       );
     });
-  } else if (applySort && applySort === "Price: High to Low") {
+  } else if (applySort && applySort === "Price - High to Low") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(b.listingPrice) - numberFromString(a.listingPrice)

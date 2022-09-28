@@ -60,7 +60,7 @@ const Products = () => {
         // setProductsData((data && data?.dataObject?.bestDeals) || []);
       }
       if (data?.dataObject?.totalProducts > -1) {
-        setTotalProducts((data && data?.dataObject?.totalProducts - data?.dataObject?.bestDeals.length) || 0);
+        setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
       }
       setLoading(false);
       // setPageNumber(pageNumber + 1);
@@ -96,7 +96,7 @@ const Products = () => {
 
       if (data?.dataObject?.totalProducts > -1) {
         setTotalProducts(
-          (data && data?.dataObject?.totalProducts - data?.dataObject?.bestDeals.length) || 0
+          (data && data?.dataObject?.totalProducts) || 0
         );
       }
 
@@ -179,7 +179,7 @@ const Products = () => {
         // }
         setProducts(response?.dataObject?.otherListings);
         // setBestDeals([]);
-        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+        setTotalProducts(response?.dataObject?.totalProducts);
         setBestDeals(response?.dataObject?.bestDeals);
         setLoading(false);
       });
@@ -266,7 +266,7 @@ function getSortedProducts(applySort, products) {
         numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
       );
     });
-  } else if (applySort && applySort === "Price: High to Low") {
+  } else if (applySort && applySort === "Price - High to Low") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(b.listingPrice) - numberFromString(a.listingPrice)

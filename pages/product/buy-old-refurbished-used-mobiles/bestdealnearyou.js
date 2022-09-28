@@ -49,7 +49,7 @@ function Bestdealnearyou() {
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
         setBestDeal(response?.dataObject?.bestDeals);
-        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+        setTotalProducts(response?.dataObject?.totalProducts);
         // setProductsData([
         //   ...response?.dataObject?.otherListings,
         //   ...response?.dataObject?.bestDeals,
@@ -87,7 +87,7 @@ function Bestdealnearyou() {
         // ]);
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
-            (response && response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length) || 0
+            (response && response?.dataObject?.totalProducts) || 0
           );
         }
         setLoading(false);
@@ -160,20 +160,20 @@ function Bestdealnearyou() {
         // }
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
-        setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+        setTotalProducts(response?.dataObject?.totalProducts);
         setBestDeal(response?.dataObject?.bestDeals);
         setLoading(false);
       });
     }
   }, [applyFilter]);
 
-  const sortingProducts = getSortedProducts(applySort, products);
+  // const sortingProducts = getSortedProducts(applySort, products);
 
   return (
     <main className="container py-4">
       <h1 className="sr-only">Best Deal Near You Page</h1>
       <Filter
-        listingsCount={sortingProducts?.length + bestDeal?.length}
+        listingsCount={products?.length + bestDeal?.length}
         setApplySort={setApplySort}
         setApplyFilter={setApplyFilter}
       >
@@ -188,8 +188,9 @@ function Bestdealnearyou() {
           Total Products ({totalProducts})
         </h4>
         <div className="grid grid-cols-3 gap-4 mt-4">
-          {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => (
+          {!isLoading &&
+            isFinished == false && products.length != totalProducts ? (
+            products?.map((product, index) => (
               <ProductCard
                 key={index}
                 data={product}
@@ -225,7 +226,7 @@ function getSortedProducts(applySort, products) {
         numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
       );
     });
-  } else if (applySort && applySort === "Price: High to Low") {
+  } else if (applySort && applySort === "Price - High to Low") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(b.listingPrice) - numberFromString(a.listingPrice)

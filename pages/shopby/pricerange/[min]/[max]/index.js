@@ -42,11 +42,12 @@ const Pricerange = () => {
         getSearchLocation,
         min,
         Cookies.get("userUniqueId") || "Guest",
-        intialPage
+        intialPage,
+        applySort
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings(priceRange?.dataObject?.otherListings);
-      setTotalProducts(priceRange?.dataObject?.totalProducts - priceRange?.dataObject?.bestDeals.length);
+      setTotalProducts(priceRange?.dataObject?.totalProducts);
       setLoading(false);
       // setPageNumber(pageNumber + 1);
     };
@@ -66,7 +67,8 @@ const Pricerange = () => {
         getSearchLocation,
         min,
         Cookies.get("userUniqueId") || "Guest",
-        newPages
+        newPages,
+        applySort
       );
       // setBestDeal(priceRange?.dataObject?.bestDeals);
       setOtherListings((products) => [
@@ -79,7 +81,7 @@ const Pricerange = () => {
       }
       if (priceRange?.dataObject?.totalProducts > -1) {
         setTotalProducts(
-          (priceRange && priceRange?.dataObject?.totalProducts - priceRange?.dataObject?.bestDeals.length) || 0
+          (priceRange && priceRange?.dataObject?.totalProducts) || 0
         );
       }
       setLoading(false);
@@ -95,7 +97,7 @@ const Pricerange = () => {
     let intialPage = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [min, max, getSearchLocation]);
+  }, [min, max, getSearchLocation, applySort]);
 
   useEffect(() => {
     const {
@@ -151,14 +153,14 @@ const Pricerange = () => {
           // }
           setOtherListings(response?.dataObject?.otherListings);
           setBestDeal(response?.dataObject?.bestDeals);
-          setTotalProducts(response?.dataObject?.totalProducts - response?.dataObject?.bestDeals.length);
+          setTotalProducts(response?.dataObject?.totalProducts);
           setLoading(false);
         }
       );
     }
   }, [applyFilter]);
 
-  const sortingProducts = getSortedProducts(applySort, otherListings);
+  // const sortingProducts = getSortedProducts(applySort, otherListings);
 
   return (
     <main className="container py-4">
@@ -180,8 +182,9 @@ const Pricerange = () => {
           Total Products ({totalProducts})
         </h4>
         <div className="grid grid-cols-3 gap-4 mt-3">
-          {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => (
+          {!isLoading &&
+            isFinished == false && bestDeal.length != totalProducts ? (
+            bestDeal?.map((product, index) => (
               <ProductCard
                 key={index}
                 data={product}
@@ -220,7 +223,7 @@ function getSortedProducts(applySort, otherListings) {
         numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
       );
     });
-  } else if (applySort && applySort === "Price: High to Low") {
+  } else if (applySort && applySort === "Price - High to Low") {
     sortedProducts.sort((a, b) => {
       return (
         numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
