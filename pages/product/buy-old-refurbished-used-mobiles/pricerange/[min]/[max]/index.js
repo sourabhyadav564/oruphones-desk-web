@@ -25,6 +25,7 @@ const Pricerange = () => {
   const { min, max } = router.query;
   const [bestDeal, setBestDeal] = useState();
   const [otherListings, setOtherListings] = useState([]);
+  const [totalProducts, setTotalProducts] = useState([]);
   const { getSearchLocation } = useContext(AppContext);
   const [applyFilter, setApplyFilter] = useState({});
   const [isLoading, setLoading] = useState(true);
@@ -40,6 +41,7 @@ const Pricerange = () => {
         applySort
       );
       setBestDeal(priceRange?.dataObject?.bestDeals);
+      setTotalProducts(priceRange?.dataObject?.totalProducts);
       setOtherListings(priceRange?.dataObject?.otherListings);
       setLoading(false);
     };
@@ -92,6 +94,7 @@ const Pricerange = () => {
           //   payLoad.verification = verification;
           // }
           setOtherListings(response?.dataObject?.otherListings);
+          setTotalProducts(response?.dataObject?.totalProducts);
           setBestDeal([]);
           setLoading(false);
         }
@@ -119,8 +122,8 @@ const Pricerange = () => {
         )}
         <div className="grid grid-cols-3 gap-4 mt-3">
           {!isLoading &&
-            isFinished == false && bestDeal.length != totalProducts ? (
-            bestDeal?.map((product, index) => (
+            isFinished == false && otherListings.length != totalProducts ? (
+            otherListings?.map((product, index) => (
               <ProductCard
                 key={index}
                 data={product}

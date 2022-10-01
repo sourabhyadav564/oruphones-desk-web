@@ -261,8 +261,8 @@ function CategoryPage() {
           </h4>
           <div className="grid grid-cols-3 gap-4">
             {!isLoading &&
-            isFinished == false && bestDeal.length != totalProducts ? (
-            bestDeal?.map((product, index) => (
+              isFinished == false && products.length != totalProducts ? (
+              products?.map((product, index) => (
                 <div
                   key={index}
                   onClick={() => {

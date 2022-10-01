@@ -8,6 +8,9 @@ import bgImage from "@/assets/location/bg.png";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
+import Geocode from "react-geocode";
+import { getCityFromResponse } from "@/utils/util";
+import { BiCurrentLocation } from "react-icons/bi";
 
 function LocationPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
@@ -43,6 +46,103 @@ function LocationPopup({ open, setOpen }) {
     // }
     setOpen(false);
   };
+
+  const [currentLocation, setCurrentLocation] = useState(false);
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  const [location, setLocation] = useState({
+    loaded: false,
+    city: "",
+  });
+
+  const onSuccess = async (location) => {
+    let lat = location.coords.latitude;
+    let lng = location.coords.longitude;
+    Geocode.setApiKey("AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w");
+
+    Geocode.setLanguage("en");
+    // Geocode.setRegion("es");
+    // Geocode.setLocationType("ROOFTOP");
+    Geocode.enableDebug();
+    // Get address from latitude & longitude.
+    Geocode.fromLatLng(lat, lng).then(
+      (response) => {
+        let address = response?.plus_code?.compound_code;
+        address = getCityFromResponse(address);
+        setLocation({
+          loaded: true,
+          city: address,
+        });
+      },
+      (error) => {
+        console.error(error);
+        setLocation({
+          loaded: true,
+          city: "India",
+        });
+      }
+    );
+  };
+
+  const onError = (error) => {
+    // alert(error.message);
+    setLocation({
+      loaded: true,
+      city: "India",
+    });
+  };
+
+  const handleNearme = async () => {
+    if (!("geolocation" in navigator)) {
+      onError({
+        code: 0,
+        message: "Geolocation not supported",
+      });
+    }
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+  };
+
+  // useEffect(() => {
+  //   const initialState = localStorage.getItem("usedLocation");
+  //   if (!initialState || initialState == null) {
+  //     handleNearme();
+  //   } else {
+  //     setSearchLocation(initialState);
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (location.loaded && location.city && location.city.length > 0) {
+      if (Cookies.get("userUniqueId") !== undefined) {
+        let searchID = 0;
+        let searchLocId = userInfo?.address?.filter((items) => {
+          return items.addressType === "SearchLocation";
+        });
+        if (searchLocId) {
+          searchID = searchLocId[0]?.locationId;
+        }
+        let payLoad = {
+          city: location.city,
+          country: "India",
+          state: "",
+          locationId: searchID,
+          userUniqueId: Cookies.get("userUniqueId"),
+        };
+        // Axios.updateAddress(payLoad).then((res) => {
+        //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
+        //     setUserInfo(resp.dataObject);
+        //   });
+        // });
+      }
+      setSearchLocation(location.city);
+      localStorage.setItem("usedLocation", location.city);
+    }
+  }, [location]);
 
   useEffect(() => {
     let searchID = searchLocationID;
@@ -123,7 +223,7 @@ function LocationPopup({ open, setOpen }) {
                 className="pt-3 px-6 flex flex-col items-start relative bg-gray-50"
                 style={{ height: 235 }}
               >
-                <div className="flex justify-between items-center absolute top-2 left-4 right-4 z-50">
+                <div className="flex justify-between items-center absolute top-2 left-4 right-4 z-40">
                   <span className="text-black-20 text-lg capitalize">
                     {" "}
                     Location{" "}
@@ -135,21 +235,27 @@ function LocationPopup({ open, setOpen }) {
                 </div>
                 <Image src={bgImage} layout="fill" />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
-                  <div className="w-full">
-                    <Select
-                      onChange={(e) => {
-                        handleCityChange(e.value);
-                      }}
-                      ref={selectedCity}
-                      options={
-                        citiesResponse &&
-                        citiesResponse
-                          ?.filter((item) => item.displayWithImage === "0")
-                          ?.map((items) => {
-                            return { label: items.city, value: items.city };
-                          })
-                      }
-                    ></Select>
+                  <div className="flex flex-row w-72 justify-center items-center">
+                    <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
+                      onClick={() => { handleNearme; setOpen(false) }}>
+                      <BiCurrentLocation size={22} />
+                    </div>
+                    <div className="w-full">
+                      <Select
+                        onChange={(e) => {
+                          handleCityChange(e.value);
+                        }}
+                        ref={selectedCity}
+                        options={
+                          citiesResponse &&
+                          citiesResponse
+                            ?.filter((item) => item.displayWithImage === "0")
+                            ?.map((items) => {
+                              return { label: items.city, value: items.city };
+                            })
+                        }
+                      ></Select>
+                    </div>
                   </div>
                   <span className="my-5 block text-m-grey-1">or</span>
                   <p className="text-lg text-black-20"> Pick from below </p>
@@ -163,10 +269,9 @@ function LocationPopup({ open, setOpen }) {
                       // .slice(0, 9)
                       .map((items) => (
                         <div
-                          className={`border rounded px-0 py-3 ${
-                            selectedCity.current === items.city &&
+                          className={`border rounded px-0 py-3 ${selectedCity.current === items.city &&
                             "border-m-green"
-                          }`}
+                            }`}
                           key={items.city}
                           onClick={() => handleCityChange(items.city)}
                         >

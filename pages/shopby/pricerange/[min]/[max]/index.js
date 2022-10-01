@@ -183,8 +183,8 @@ const Pricerange = () => {
         </h4>
         <div className="grid grid-cols-3 gap-4 mt-3">
           {!isLoading &&
-            isFinished == false && bestDeal.length != totalProducts ? (
-            bestDeal?.map((product, index) => (
+            isFinished == false && otherListings.length != totalProducts ? (
+            otherListings?.map((product, index) => (
               <ProductCard
                 key={index}
                 data={product}

@@ -20,6 +20,9 @@ import { deviceConditionQuestion } from "@/utils/constant";
 import { deviceConditionQuestionUpdated } from "@/utils/constant";
 import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
 import DeviceConditionCard from "../Condition/DeviceConditionCard";
+import Geocode from "react-geocode";
+import { getCityFromResponse } from "@/utils/util";
+import { BiCurrentLocation } from "react-icons/bi";
 
 function AddEditListing({
   data,
@@ -31,7 +34,7 @@ function AddEditListing({
   const { cities, userInfo, getSearchLocation, setRefresh } =
     useContext(AppContext);
   const userSelectedCity =
-    getSearchLocation === "India" ? "Select..." : getSearchLocation;
+    getSearchLocation !== "India" ? selectedCity : "Select...";
   const [totalCities, setTotalCities] = useState([cities]);
   const [selectedCity, setSelectedCity] = useState(userSelectedCity);
   const initialState = [
@@ -74,6 +77,7 @@ function AddEditListing({
   const [conditionResults, setConditionResults] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
   const [show, setShow] = useState(false);
+  const { setCities, setUserInfo, setSearchLocation } = useContext(AppContext);
   console.log("headphone1", headphone1);
 
   useEffect(() => {
@@ -268,6 +272,105 @@ function AddEditListing({
   // const handleFocus = async (e) => {
   //   alert("FOCUS");
   // }
+
+  const [currentLocation, setCurrentLocation] = useState(false);
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  const [location, setLocation] = useState({
+    loaded: false,
+    city: "",
+  });
+
+  const onSuccess = async (location) => {
+    let lat = location.coords.latitude;
+    let lng = location.coords.longitude;
+    Geocode.setApiKey("AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w");
+
+    Geocode.setLanguage("en");
+    // Geocode.setRegion("es");
+    // Geocode.setLocationType("ROOFTOP");
+    Geocode.enableDebug();
+    // Get address from latitude & longitude.
+    Geocode.fromLatLng(lat, lng).then(
+      (response) => {
+        let address = response?.plus_code?.compound_code;
+        address = getCityFromResponse(address);
+        setLocation({
+          loaded: true,
+          city: address,
+        });
+        setSelectedCity(address);
+      },
+      (error) => {
+        console.error(error);
+        setLocation({
+          loaded: true,
+          city: "India",
+        });
+      }
+    );
+  };
+
+  const onError = (error) => {
+    // alert(error.message);
+    setLocation({
+      loaded: true,
+      city: "India",
+    });
+  };
+
+  const handleNearme = async () => {
+    if (!("geolocation" in navigator)) {
+      onError({
+        code: 0,
+        message: "Geolocation not supported",
+      });
+    }
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+  };
+
+  // useEffect(() => {
+  //   const initialState = localStorage.getItem("usedLocation");
+  //   if (!initialState || initialState == null) {
+  //     handleNearme();
+  //   } else {
+  //     setSearchLocation(initialState);
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (location.loaded && location.city && location.city.length > 0) {
+      if (Cookies.get("userUniqueId") !== undefined) {
+        let searchID = 0;
+        let searchLocId = userInfo?.address?.filter((items) => {
+          return items.addressType === "SearchLocation";
+        });
+        if (searchLocId) {
+          searchID = searchLocId[0]?.locationId;
+        }
+        let payLoad = {
+          city: location.city,
+          country: "India",
+          state: "",
+          locationId: searchID,
+          userUniqueId: Cookies.get("userUniqueId"),
+        };
+        // Axios.updateAddress(payLoad).then((res) => {
+        //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
+        //     setUserInfo(resp.dataObject);
+        //   });
+        // });
+      }
+      setSearchLocation(location.city);
+      setSelectedCity(location.city);
+      localStorage.setItem("usedLocation", location.city);
+    }
+  }, [location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -641,20 +744,28 @@ function AddEditListing({
               )}
             </div>
             <span>
-              <Select
-                labelName="Location*"
-                placeholder={selectedCity}
-                className={`${locationRequired} mt-4`}
-                onChange={(e) => {
-                  setSelectedCity(e.value);
-                }}
-                onFocus={(e) => {
-                  setLocationRequired("");
-                }}
-                options={totalCities?.map((item) => {
-                  return { label: item, value: item };
-                })}
-              ></Select>
+              <div className="flex flex-row w-full justify-center items-center mt-4">
+                <Select
+                  labelName="Location*"
+                  placeholder={selectedCity}
+                  className={`${locationRequired}`}
+                  value={selectedCity}
+                  onChange={(e) => {
+                    setSelectedCity(e.value);
+                  }}
+                  onFocus={(e) => {
+                    setLocationRequired("");
+                  }}
+                  options={totalCities?.map((item) => {
+                    return { label: item, value: item };
+                  })}
+                ></Select>
+                <div className="h-14 w-16 bg-gray-200 rounded-r-lg inline-flex justify-center items-center hover:cursor-pointer"
+                  onClick={handleNearme}
+                >
+                  <BiCurrentLocation size={24} />
+                </div>
+              </div>
               {locationRequired && (
                 <p className="text-sm whitespace-nowrap cursor-pointer text-red">
                   Please select this field
