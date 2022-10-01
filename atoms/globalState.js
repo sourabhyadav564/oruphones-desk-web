@@ -30,6 +30,20 @@ export const otherVandorDataSelector = selector({
 //     }
 // })
 
+export const addListingBrandState = atom({
+    key: "addListingBrandState",
+    default: "",
+    effects_UNSTABLE: [persistAtom],
+  });
+  
+  export const addListingBrandSelector = selector({
+    key: "addListingBrandSelector",
+    get: ({ get }) => {
+      const data = get(addListingBrandState);
+      return data;
+    },
+  });
+
 export const topLoadingBarState = atom({
     key: "topLoadingBarState",
     default: 0,

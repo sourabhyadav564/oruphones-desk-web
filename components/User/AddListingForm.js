@@ -23,6 +23,10 @@ import DeviceConditionCard from "../Condition/DeviceConditionCard";
 import Geocode from "react-geocode";
 import { getCityFromResponse } from "@/utils/util";
 import { BiCurrentLocation } from "react-icons/bi";
+import {
+  addListingBrandSelector,
+} from "../../atoms/globalState";
+import { useRecoilValue } from "recoil";
 
 function AddEditListing({
   data,
@@ -43,6 +47,7 @@ function AddEditListing({
     { name: "image-3" },
     { name: "image-4" },
   ];
+  const brandName = useRecoilValue(addListingBrandSelector);
   const [images, setImages] = useState(initialState);
   const [makeOptions, setMakeOptions] = useState(brandsList);
   const [modelOptions, setModelOptions] = useState([]);
@@ -78,10 +83,15 @@ function AddEditListing({
   const [questionIndex, setQuestionIndex] = useState(0);
   const [show, setShow] = useState(false);
   const { setCities, setUserInfo, setSearchLocation } = useContext(AppContext);
+
   console.log("headphone1", headphone1);
+  console.log("brandName", brandName);
 
   useEffect(() => {
     setMakeOptions(brandsList);
+    setTimeout(() => {
+      setMake(brandName);
+    }, 500);
   }, [brandsList]);
 
   const deviceConditionCheck = [
@@ -113,9 +123,12 @@ function AddEditListing({
   }, [cities]);
 
   useEffect(() => {
+    console.log("make", make);
+    console.log("brandName", brandName);
     let makeData = makeOptions.filter((item) => item.make === make);
+    console.log("makeData", makeData);
     if (makeData && makeData.length > 0) {
-      setModelOptions((makeData && makeData[0]?.models) || []);
+      setModelOptions((makeData && makeData[0]?.models));
       setmarketingName(null);
       setStorage(null);
       setColor(null);

@@ -8,47 +8,182 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 
+import {
+  addListingBrandState,
+} from "../../atoms/globalState";
+import { useRecoilState } from "recoil";
+
 const Footer = () => {
+  const [addListingBrand, setAddListingBrand] = useRecoilState(addListingBrandState);
+  // console.log("addListingBrand", addListingBrand);
+  const brandData = [
+    {
+      id: 1,
+      prefill: "Samsung",
+      name: "Samsung",
+    },
+    {
+      id: 2,
+      prefill: "Apple",
+      name: "Apple",
+    },
+    {
+      id: 3,
+      prefill: "OnePlus",
+      name: "OnePlus",
+    },
+    {
+      id: 4,
+      prefill: "Asus",
+      name: "Asus",
+    },
+    {
+      id: 5,
+      prefill: "Xiaomi",
+      name: "Xiaomi",
+    },
+    {
+      id: 6,
+      prefill: "Oppo",
+      name: "Oppo",
+    },
+    {
+      id: 7,
+      prefill: "LG",
+      name: "LG",
+    },
+    {
+      id: 8,
+      prefill: "Realme",
+      name: "Realme",
+    },
+    {
+      id: 9,
+      prefill: "Xiaomi",
+      name: "Poco",
+    },
+    {
+      id: 10,
+      prefill: "Vivo",
+      name: "IQOO",
+    },
+    {
+      id: 11,
+      prefill: "Sony",
+      name: "Sony",
+    },
+    {
+      id: 12,
+      prefill: "Google",
+      name: "Google",
+    },
+    {
+      id: 13,
+      prefill: "Honor",
+      name: "Honor",
+    },
+    {
+      id: 14,
+      prefill: "Infinix",
+      name: "Infinix",
+    },
+    {
+      id: 15,
+      prefill: "Tecno",
+      name: "Tecno",
+    },
+    {
+      id: 16,
+      prefill: "vivo",
+      name: "Vivo",
+    },
+    {
+      id: 17,
+      prefill: "Micromax",
+      name: "Micromax",
+    },
+    {
+      id: 18,
+      prefill: "Nokia",
+      name: "Nokia",
+    },
+    {
+      id: 19,
+      prefill: "Lenovo",
+      name: "Lenovo",
+    },
+    {
+      id: 20,
+      prefill: "Motorola",
+      name: "Motorola",
+    },
+    {
+      id: 21,
+      prefill: "HTC",
+      name: "HTC",
+    },
+    {
+      id: 22,
+      prefill: "Blackberry",
+      name: "Blackberry",
+    },
+    {
+      id: 23,
+      prefill: "Panasonic",
+      name: "Panasonic",
+
+    },
+    {
+      id: 24,
+      prefill: "Gionee",
+      name: "Gionee",
+    },
+    {
+      id: 25,
+      prefill: "Karbonn",
+      name: "Karbonn",
+    },
+    {
+      id: 26,
+      prefill: "Lava",
+      name: "Lava",
+    },
+    {
+      id: 27,
+      prefill: "Intex",
+      name: "Intex",
+    },
+    {
+      id: 28,
+      prefill: "Meizu",
+      name: "Meizu",
+    },
+    {
+      id: 29,
+      prefill: "Huawei",
+      name: "Huawei",
+    },
+    {
+      id: 30,
+      prefill: "ZTE",
+      name: "ZTE",
+    },
+    {
+      id: 31,
+      prefill: "Alcatel",
+      name: "Alcatel",
+    },
+  ];
+
   return (
     <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
       <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center">
         <p className='text-white'>
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Samsung Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            iPhone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            OnePlus Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Asus Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Xiaomi Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Oppo Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell LG
-            Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Realme Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Poco Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            IQOO Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Sony Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Coolpad Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Google Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Honor Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Infinix Phone</a> |
-          {/* <!-- <a href="https://oruphones.com/sell/add">Sell Leeco Phone</a> | --> */}
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Tecno Phone</a> |
-          <a className="hover:underline" href="https://oruphones.com/sell-old-refurbished-used-mobiles/add">Sell
-            Vivo Phone</a>
-
+          {brandData && brandData.map((brand, index) => (
+            <a className="hover:underline" href="/sell-old-refurbished-used-mobiles/add"
+              onClick={() => setAddListingBrand(brand.prefill)}>Sell
+              {" "}{brand.name} Phone | </a>
+          ))}
         </p>
       </div></div>
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">
