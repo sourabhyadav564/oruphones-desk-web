@@ -6,8 +6,12 @@ import testfail from "../../assets/testFail.png";
 import pass from "../../assets/pass1.png";
 import { deviceConditionQuestion } from "@/utils/constant";
 import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
+import { useState } from "react";
 
 function DeviceVerificationReport({ open, setOpen, data }) {
+  const setDate = data?.verifiedDate ? data?.verifiedDate : data?.listingDate;
+  const setDateName = data?.verifiedDate ? "Verified on : " : "Listed On : ";
+
   return (
     <Modal open={open} setOpen={setOpen} title={"Device Report"}>
       <div className="grid grid-cols-5 device_verification_report">
@@ -42,9 +46,9 @@ function DeviceVerificationReport({ open, setOpen, data }) {
                 alt={data?.marketingName}
               />
             </span>
-            <span className="text-xs mr-2"> Verified on : </span>
+            <span className="text-xs mr-2">{setDateName}</span>
             <span className="text-lg">
-              {data?.verifiedDate || "23/10/2021"}
+              {setDate}
             </span>
           </div>
         </div>

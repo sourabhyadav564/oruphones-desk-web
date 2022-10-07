@@ -27,7 +27,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
     >
       <a className="flex flex-col pt-6 relative w-full h-full rounded-md shadow hover:shadow-md py-1 px-3 text-gray-900 bg-m-white">
         {data?.isOtherVendor === "N" && (
-          <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
+          <div className="flex z-10 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
             <span className="h-6">
               {data?.status === "Sold_Out" ? <Image
                 src={SoldOut}
