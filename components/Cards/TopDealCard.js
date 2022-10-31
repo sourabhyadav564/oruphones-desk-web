@@ -25,7 +25,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
         query: prodLink && { isOtherVendor: data?.isOtherVendor },
       }}
     >
-      <a className="flex flex-col pt-6 relative w-full h-full shadow drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white">
+      <a className="flex flex-col pt-6 relative w-full h-full drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white shadow-lg">
         {data?.isOtherVendor === "N" && (
           <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
             <span className="h-6">
@@ -63,15 +63,26 @@ function TopDealCard({ data, setProducts, prodLink }) {
           {/* <h1 className="text-lg sm:text-base flex-1 sm:py-1 truncate w-full font-semibold text-m-grey-2">
             {data?.marketingName}
           </h1> */}
-          <p className="font-bold flex items-center w-[74px]  -ml-1 text-lg opacity-100 text-m-blue-1">
-            {data?.listingPrice && <BiRupee />}{" "}
+          <p className="font-bold flex items-center w-[74px] text-[18px] -ml-1 text-lg opacity-100 text-m-blue-1 font-Roboto-Bold">
+            {data?.listingPrice && <BiRupee size={20} />}{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
-          <h1 className=" sm:text-base flex-1 w-full font-normal opacity-100 text-black-1">
+          <h1 className=" text-regularFontSize flex-1 w-full opacity-100 text-black-1 font-Roboto-Light">
             {data?.marketingName}
           </h1>
 
-          <div className="flex justify-between pt-1 text-[6px] opacity-100 h-2 w-full text-m-grey-2">
+          <div className="flex justify-between pt-1 pb-4 text-smallFontSize opacity-100 h-2 w-full text-m-grey-2 font-Roboto-Light">
+            {data?.deviceStorage && (
+              <div>
+                <span>{data?.deviceStorage}</span>
+              </div>
+            )}
+            <div>
+              <span>Condition : </span>
+              <span>{data?.deviceCondition || "--"}</span>
+            </div>
+          </div>
+          <div className="flex justify-between pt-1 pb-2 text-xsFontSize opacity-100 h-2 w-full text-m-grey-2 font-Roboto-Light">
             <span>{data?.listingLocation}</span>
             <span>{data?.listingDate}</span>
           </div>

@@ -27,7 +27,7 @@ function SellNowBtn() {
 
 
         }}
-        className=" bg-m-yellow-1  py-1 w-20 h-8 rounded-md border-2  border-m-yellow-1 text-m-green-1 text-xs self-center items-center font-semibold "
+        className=" bg-m-yellow-1  py-1 w-20 h-8 rounded-md border-2  border-m-yellow-1 text-m-green-1 text-smallFontSize self-center items-center font-Roboto-Semibold "
         onClick={() => handleClick()}
       >
         Sell Now

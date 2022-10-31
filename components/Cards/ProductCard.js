@@ -42,10 +42,14 @@ function ProductCard({ data, prodLink, setProducts }) {
               objectFit="contain"
             />
           </div>
+          <p className="font-semibold flex items-center text-m-grey-1 font-Roboto-Bold text-xlFontSize">
+            {data?.listingPrice && <FaRupeeSign size={16} />}
+            {numberWithCommas(data?.listingPrice || "")}
+          </p>
           <div className="flex flex-col items-baseline pb-2 text-m-grey-2 flex-wrap w-full">
-            <h1 className="text-base flex-1 sm:py-1 truncate w-full">{data?.marketingName}</h1>
+            <h1 className="text-base flex-1 sm:py-1 truncate w-full font-Roboto-Regular text-regularFontSize">{data?.marketingName}</h1>
 
-            <div className="flex w-full justify-between text-xs">
+            <div className="flex w-full justify-between font-Roboto-Light text-smallFontSize">
               {data?.deviceStorage && (
                 <div className="py-1">
                   <span>{data?.deviceStorage}</span>
@@ -56,11 +60,7 @@ function ProductCard({ data, prodLink, setProducts }) {
                 <span>{data?.deviceCondition || "--"}</span>
               </div>
             </div>
-            <p className="font-semibold flex items-center text-lg text-m-grey-1">
-              {/* {data?.listingPrice && <FaRupeeSign size={16} />}  */}
-              {numberWithCommas(data?.listingPrice || "")}
-            </p>
-            <div className="justify-self-end flex justify-between pt-1 text-xs w-full uppercase">
+            <div className="justify-self-end flex justify-between pt-1 w-full uppercase font-Roboto-Light text-xsFontSize">
               <span>{data?.listingLocation}</span>
               {/* <span>{data?.modifiedDate}</span> */}
               <span>{data?.listingDate}</span>

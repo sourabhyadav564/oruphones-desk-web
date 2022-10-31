@@ -19,10 +19,10 @@ function TopBrand({ brandsList }) {
   return (
     <>
       <div className="bg-m-grey pt-[54px]   pb-[57px]">
-        <section className="container top_brand px-24 pt-0 gap-6 grid grid-cols-7 pb-4">
+        <section className="container top_brand px-20 pt-0 gap-6 grid grid-cols-7 pb-4 text-xlFontSize font-Roboto-Regular">
           <Title text="Top Brands" />
         </section>
-        <section className="container bg-m-grey top_brand px-24  gap-6 grid grid-cols-7  ">
+        <section className="container bg-m-grey top_brand px-20 gap-6 grid grid-cols-7  ">
           {/* <Carousel {...settings}> */}
           {_bList && _bList.map((item) => <BrandCard key={item.make} data={item} />)}
           <BrandCard data={{ make: "Show all" }} />

@@ -76,7 +76,8 @@ const CategoryCards = ({ data, priceRange }) => {
             width={70}
             objectFit="contain"
           />
-          <span>{data.text}</span>
+          <span
+            className="text-xs2FontSize">{data.text}</span>
         </a>
       </Link>
     )

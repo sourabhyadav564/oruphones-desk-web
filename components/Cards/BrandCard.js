@@ -6,7 +6,7 @@ function BrandCard({ data }) {
     return (
       <Link href={`/brands`}>
         <a className="w-36 h-[91px] rounded opacity-100 bg-no-repeat p-4 bg-m-white flex justify-center  items-center">
-          <p className="block text-m-grey-2 font-normal text-lg w-[89px] h-7">View All &gt;</p>
+          <p className="block text-m-grey-2 font-Roboto-Regular text-regularFontSize w-[89px] pl-2.5 h-5">View All &gt;</p>
         </a>
       </Link>
     );

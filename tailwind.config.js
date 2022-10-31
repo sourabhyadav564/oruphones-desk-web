@@ -3,7 +3,23 @@ module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      'Roboto-Bold': ['Roboto-Bold'],
+      'Roboto-Semibold': ['Roboto-Semibold'],
+      'Roboto-Light': ['Roboto-Light'],
+      'Roboto-Regular': ['Roboto-Regular'],
+      'Roboto-Regularitalic': ['Roboto-Regularitalic'],
+      'Roboto-Medium': ['Roboto-Medium']
+    },
     extend: {
+      fontSize: {
+        xl2FontSize: '20px',
+        xlFontSize: '18px',
+        regularFontSize: '16px',
+        smallFontSize: '12px',
+        xs2FontSize: '10px',
+        xsFontSize: '8px',
+      },
       colors: {
         red: {
           DEFAULT: "#FF0000",

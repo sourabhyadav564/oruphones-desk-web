@@ -64,7 +64,7 @@ export default function Hero() {
     //     </div>
     //   </div>
     // </section>
-    <section className="flex-grow  w-full h-[480px] px-0 ">
+    <section className="flex-grow  w-full h-[360px] px-0 ">
       {/* <Carousel> */}
 
       <Image

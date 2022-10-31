@@ -30,7 +30,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
   // console.log({ sortOptions, setApplySort, setFilters });
   return (
     <Fragment>
-      <div className="relative z-50 flex items-baseline justify-end py-4">
+      <div className="relative z-40 flex items-baseline justify-end py-4">
         <div className="flex items-center">
           <Menu as="div" className="relative inline-block text-left ">
             <div>

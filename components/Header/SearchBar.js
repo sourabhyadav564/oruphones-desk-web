@@ -80,7 +80,7 @@ function SearchBar() {
             placeholder="Search on ORUphones"
             onChange={handleChange}
             value={input}
-            className={`px-4 pt-4 py-5 h-8 w-full bg-m-white-1 text-xs rounded bg-no-repeat ${searchResults && "rounded-b-none"}`}
+            className={`px-4 pt-3 py-3 h-8 w-full bg-m-white-1 text-smallFontSize font-Roboto-Regular rounded bg-no-repeat ${searchResults && "rounded-b-none"}`}
             style={{ boxShadow: "0px 2px 3px #0000000A" }}
           />
         </div>

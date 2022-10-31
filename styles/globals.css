@@ -176,3 +176,44 @@ input::-webkit-outer-spin-button {
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
+/* import font family */
+/* for bold */
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: local('Roboto-Bold'), url('../assets/fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+/* semibold font */
+@font-face {
+  font-family: 'Roboto-Semibold';
+  src: local('Roboto-Semibold'), url('../assets/fonts/Roboto-Semibold.ttf') format('truetype');
+}
+
+
+/* light font */
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Roboto-Light'), url('../assets/fonts/Roboto-Light.ttf') format('truetype');
+}
+
+
+/* regular font */
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: local('Roboto-Regular'), url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+
+/* regular italic font */
+@font-face {
+  font-family: 'Roboto-Regularitalic';
+  src: local('Roboto-Regularitalic'), url('../assets/fonts/Roboto-Italic.ttf') format('truetype');
+}
+
+
+/* medium font */
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: local('Roboto-Medium'), url('../assets/fonts/Roboto-Medium.ttf') format('truetype');
+}

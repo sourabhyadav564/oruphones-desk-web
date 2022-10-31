@@ -12,10 +12,12 @@ import {
   addListingBrandState,
 } from "../../atoms/globalState";
 import { useRecoilState } from "recoil";
+import AppDownloadPopup from "../Popup/AppDownloadPopup";
+import { useState } from "react";
 
 const Footer = () => {
   const [addListingBrand, setAddListingBrand] = useRecoilState(addListingBrandState);
-  // console.log("addListingBrand", addListingBrand);
+  const [openAppDownload, setOpenAppDownload] = useState(false);
   const brandData = [
     {
       id: 1,
@@ -180,9 +182,11 @@ const Footer = () => {
       <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center">
         <p className='text-white'>
           {brandData && brandData.map((brand, index) => (
-            <a className="hover:underline" href="/sell-old-refurbished-used-mobiles/add"
-              onClick={() => setAddListingBrand(brand.prefill)}>Sell
-              {" "}{brand.name} Phone | </a>
+            <a className="hover:underline"
+              // href="/sell-old-refurbished-used-mobiles/add"
+              // onClick={() => setAddListingBrand(brand.prefill)}>
+              onClick={() => setOpenAppDownload(true)}>
+              Sell {" "}{brand.name} Phone | </a>
           ))}
         </p>
       </div></div>
@@ -281,6 +285,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <AppDownloadPopup open={openAppDownload} setOpen={setOpenAppDownload} />
     </footer>
   );
 };

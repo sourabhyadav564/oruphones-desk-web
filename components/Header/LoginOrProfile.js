@@ -25,7 +25,7 @@ function LoginOrProfile() {
   });
 
   return (
-    <React.Fragment>
+    <React.Fragment className="z-50">
       {userAuthenticated ? (
         <div className="flex space-x-4 items-center h-full w-20">
           <Notifications />
@@ -64,7 +64,7 @@ function LoginOrProfile() {
       ) : (
         <React.Fragment>
           <button
-            className="cursor-pointer w-20 h-8 border border-solid border-m-green-1 rounded-md  self-center  text-m-green-1 text-xs font-normal  "
+            className="cursor-pointer w-20 h-8 border border-solid border-m-green-1 rounded-md  self-center  text-m-green-1 font-Roboto-Regular text-smallFontSize"
             onClick={() => setShowLogin(true)}
           >
             Log In
