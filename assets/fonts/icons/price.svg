@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Outline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:4.5637;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#000000;stroke-width:4.0351;stroke-linecap:round;stroke-linejoin:round;}
+	.st2{fill:none;stroke:#000000;stroke-width:4.5638;stroke-linecap:round;stroke-linejoin:round;}
+	.st3{font-family:'MyriadPro-Regular';}
+	.st4{font-size:92.6568px;}
+</style>
+<g>
+	<path class="st0" d="M332.6,210.4v-45.3v-25c0-10.2-7.6-18.5-16.9-18.5h-98.2h-45.8c-9.3,0-16.9,8.3-16.9,18.5v25v238.3v26.7
+		c0,0,0,0,0,0c0,10.2,7.6,18.5,16.9,18.5h144h0c9.3,0,16.9-8.3,16.9-18.5v-26.7V368"/>
+	<line class="st0" x1="154.9" y1="165.1" x2="332.6" y2="165.1"/>
+	<line class="st0" x1="220" y1="142.5" x2="250.1" y2="142.5"/>
+	<line class="st0" x1="266" y1="142.5" x2="267.6" y2="142.5"/>
+	<line class="st0" x1="154.9" y1="403.4" x2="332.6" y2="403.4"/>
+	<line class="st0" x1="229.5" y1="426" x2="258" y2="426"/>
+</g>
+<polygon class="st1" points="394.5,236.6 394.5,368 288.2,368 288.2,236.6 322,210.4 360.7,210.4 "/>
+<circle class="st2" cx="341.4" cy="231.1" r="6.9"/>
+<text transform="matrix(1 0 0 1 320.4987 334.9043)" class="st3 st4">$</text>
+</svg>

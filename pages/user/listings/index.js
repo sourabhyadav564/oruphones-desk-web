@@ -37,42 +37,44 @@ function Listings() {
         <div className="flex flex-col space-y-4 px-4 my-4">
           {currentTab === 0
             ? // userListings && userListings.sort((a, b) => b.date - a.date) && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
-              userListings &&
-              userListings
-                .filter((item) => {
-                  if (item.status === "Active") {
-                    return item;
-                  }
-                })
-                .map((item, index) => (
-                  <Link
-                    href={`/user/listings/${item.listingId}`}
-                    key={index}
-                    passHref
+            userListings &&
+            userListings
+              .filter((item) => {
+                if (item.status === "Active") {
+                  return item;
+                }
+              })
+              .map((item, index) => (
+                <div
+                // href={`/user/listings/${item.listingId}`}
+                // key={index}
+                // passHref
+                >
+                  <a
+                  //  href=""
                   >
-                    <a href="">
-                      <ProfileListingTile data={item} />
-                    </a>
-                  </Link>
-                ))
+                    <ProfileListingTile data={item} />
+                  </a>
+                </div>
+              ))
             : userListings &&
-              userListings
-                .filter((item) => {
-                  if (item.status === "Paused" || item.status === "InActive") {
-                    return item;
-                  }
-                })
-                .map((item, index) => (
-                  <Link
-                    href={`/user/listings/${item.listingId}`}
-                    key={index}
-                    passHref
-                  >
-                    <a>
-                      <ProfileListingTile data={item} />
-                    </a>
-                  </Link>
-                ))}
+            userListings
+              .filter((item) => {
+                if (item.status === "Paused" || item.status === "InActive") {
+                  return item;
+                }
+              })
+              .map((item, index) => (
+                <Link
+                  href={`/user/listings/${item.listingId}`}
+                  key={index}
+                  passHref
+                >
+                  <a>
+                    <ProfileListingTile data={item} />
+                  </a>
+                </Link>
+              ))}
 
           {isLoading && (
             <div className="flex h-60 items-center justify-center">

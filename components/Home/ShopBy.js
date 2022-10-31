@@ -10,25 +10,25 @@ import warranty from "../../assets/cards/warranty.png";
 const data = [
   {
     id: 1,
-    text: "Bestselling Mobiles",
+    text: "Best Selling",
     imagePath: bestSelling,
     urlPath: "Bestselling",
   },
   {
     id: 3,
-    text: "Verified Mobiles",
+    text: "Verified Phones",
     imagePath: verified,
     urlPath: "Verified",
   },
   {
     id: 2,
-    text: "Like New Mobiles",
+    text: "Like New Phones",
     imagePath: likeNew,
     urlPath: "Like New",
   },
   {
     id: 4,
-    text: "Warranty Mobiles",
+    text: "Warranty Phones",
     imagePath: warranty,
     urlPath: "Warranty",
   },
@@ -44,14 +44,18 @@ const settings = {
 
 function ShowBy() {
   return (
-    <section className="container top_brand pt-4">
-      <Title text="Shop By" />
-      <Carousel {...settings}>
-        {data &&
-          data.map((item, index) => <CategoryCards key={index} data={item} />)}
-        <CategoryCards priceRange />
-      </Carousel>
-    </section>
+    <>
+      <div className="bg-m-grey">
+        <section className="container top_brand px-24 pt-[57px] pb-[44px]">
+          <Title text="Shop By Categories" />
+          <Carousel {...settings}>
+            {data &&
+              data.map((item, index) => <CategoryCards key={index} data={item} />)}
+            <CategoryCards priceRange />
+          </Carousel>
+        </section>
+      </div>
+    </>
   );
 }
 

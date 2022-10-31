@@ -1,13 +1,17 @@
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import LoginPopup from "../Popup/LoginPopup";
+import AppDownloadPopup from "../Popup/AppDownloadPopup";
 
 function SellNowBtn() {
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const router = useRouter();
+  const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);
+  // const [showLoginPopup, setShowLoginPopup] = useState(false);
+  // const router = useRouter();
 
   const handleClick = () => {
-    router.push("/sell-old-refurbished-used-mobiles/add");
+    setShowAppDownloadPopup(true);
+
+    //  router.push("/sell-old-refurbished-used-mobiles/add");
     // if (localStorage.getItem("isUserLogged") === "true") {
     //     router.push("/sell/add");
     // } else {
@@ -20,14 +24,16 @@ function SellNowBtn() {
         style={{
           boxShadow: "0px 0px 20px #00A48333",
           // border: "1px solid #00AC8A",
-          borderRadius: "4px",
+
+
         }}
-        className="py-2  bg-m-green hover:bg-white hover:text-m-green  px-4 text-m-white  hover:shadow uppercase duration-300"
+        className=" bg-m-yellow-1  py-1 w-20 h-8 rounded-md border-2  border-m-yellow-1 text-m-green-1 text-xs self-center items-center font-semibold "
         onClick={() => handleClick()}
       >
-        + SELL NOW
+        Sell Now
       </button>
-      <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} />
+      {/* <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} /> */}
+      <AppDownloadPopup open={showAppDownloadPopup} setOpen={setShowAppDownloadPopup} />
     </Fragment>
   );
 }

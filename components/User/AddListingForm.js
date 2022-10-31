@@ -84,9 +84,6 @@ function AddEditListing({
   const [show, setShow] = useState(false);
   const { setCities, setUserInfo, setSearchLocation } = useContext(AppContext);
 
-  console.log("headphone1", headphone1);
-  console.log("brandName", brandName);
-
   useEffect(() => {
     setMakeOptions(brandsList);
     setTimeout(() => {
@@ -123,10 +120,7 @@ function AddEditListing({
   }, [cities]);
 
   useEffect(() => {
-    console.log("make", make);
-    console.log("brandName", brandName);
     let makeData = makeOptions.filter((item) => item.make === make);
-    console.log("makeData", makeData);
     if (makeData && makeData.length > 0) {
       setModelOptions((makeData && makeData[0]?.models));
       setmarketingName(null);
@@ -497,6 +491,7 @@ function AddEditListing({
   const calculateDeviceCondition = () => {
     if (conditionResults[0].toString() == "No") {
       setDeviceCondition("Needs Repair");
+      setShow(true);
     } else if (
       conditionResults[1].toString().includes("Has significant scratches") ||
       conditionResults[2].toString().includes("Has significant scratches")
@@ -530,14 +525,14 @@ function AddEditListing({
         <div className="grid grid-cols-2 gap-8 ">
           <span>
             <Select
-              labelName="Brand*"
+              // labelName="Brand*"
               //placeholder=""
               className={makeRequired}
               onFocus={(e) => {
                 setMakeRequired("");
               }}
               required
-              value={make === null ? "Select.." : { label: make, value: make }}
+              value={make === null ? "Select..." : { label: make, value: make }}
               //value={data?.make}
               disabled={isFromEdit}
               onChange={(e) => {
@@ -700,6 +695,7 @@ function AddEditListing({
                           ? questionIndex + 1
                           : deviceConditionQuestion.length - 1
                       );
+                    questionIndex == 0 && conditionResults[0]?.toString() == "No" && calculateDeviceCondition();
                     questionIndex == deviceConditionQuestion.length - 1 &&
                       calculateDeviceCondition();
                   }}
@@ -709,7 +705,7 @@ function AddEditListing({
                     } p-2 flex justify-end items-center`}
                 >
                   <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
-                    {questionIndex == deviceConditionQuestion.length - 1
+                    {(questionIndex == deviceConditionQuestion.length - 1 || conditionResults[0]?.toString() == "No")
                       ? "Done"
                       : "Next"}
                   </span>

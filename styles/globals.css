@@ -22,44 +22,51 @@ html {
   opacity: 1;
   @apply pt-3 pb-4 px-6 rounded-md bg-white;
 }
+
 .content h1 {
   font-size: 21px;
   margin: 1rem 0;
-  @apply text-[#2c2f44];
+  @apply text-black-1 font-bold text-xl;
 }
+
 .content h2 {
   font-size: 16px;
   margin: 0.5rem 0;
-  @apply font-bold text-m-grey-1;
+  @apply font-medium text-lg h-5 text-black-1;
 }
+
 .content h3 {
   font-size: 16px;
   margin: 0.5rem 0;
-  @apply font-bold text-m-grey-1;
-}
-.content p {
-  @apply text-base font-normal pb-2 text-m-grey-1;
+  @apply font-medium text-xs text-black-1;
 }
 
-.outline input:focus-within ~ label,
-.outline input:not(:placeholder-shown) ~ label,
-.outline *:focus-within ~ label,
-.outline *:not(:placeholder-shown) ~ label,
-.outline select:focus-within ~ label,
-.outline select:not(:placeholder-shown) ~ label,
-.outline textarea:focus-within ~ label,
-.outline textarea:not(:placeholder-shown) ~ label {
+.content p {
+  @apply text-xs font-normal pt-4 text-black-1 pb-2;
+}
+
+.outline input:focus-within~label,
+.outline input:not(:placeholder-shown)~label,
+.outline *:focus-within~label,
+.outline *:not(:placeholder-shown)~label,
+.outline select:focus-within~label,
+.outline select:not(:placeholder-shown)~label,
+.outline textarea:focus-within~label,
+.outline textarea:not(:placeholder-shown)~label {
   @apply transform scale-75 -translate-y-4 z-0 ml-3 px-1 py-0;
 }
+
 .react-select__input,
 .react-select__input:focus {
   border: none !important;
   box-shadow: none !important;
 }
+
 input:focus {
   outline: none !important;
   box-shadow: none;
 }
+
 /* width */
 .custom-scroll *::-webkit-scrollbar,
 .seller-info *::-webkit-scrollbar {
@@ -109,6 +116,7 @@ input:focus {
   margin-right: -0.25rem;
   margin-left: -0.5rem;
 }
+
 .top_brand .prev,
 .top_selling .prev,
 .top_deals .prev,
@@ -116,6 +124,7 @@ input:focus {
 .top_articles .prev {
   left: 5px;
 }
+
 .top_brand .next,
 .top_selling .next,
 .top_deals .next,
@@ -131,6 +140,7 @@ input:focus {
 .top_articles .slick-slide div {
   height: 100%;
 }
+
 .top_brand .slick-track,
 .top_selling .slick-track,
 .top_deals .slick-track,
@@ -139,6 +149,7 @@ input:focus {
   margin-left: 0;
   margin-right: 0;
 }
+
 /* End Home Page */
 
 .bestDealCarousel .prev,
@@ -152,6 +163,7 @@ input:focus {
   background: rgb(112, 108, 108);
   font-size: 32px;
 }
+
 .fullimage_next:hover,
 .fullimage_prev:hover {
   background-color: #f0ebeb0a !important;
@@ -160,6 +172,7 @@ input:focus {
 input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
+
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }

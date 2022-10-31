@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BiCurrentLocation, BiChevronDown } from "react-icons/bi";
-import { getCityFromResponse } from "@/utils/util";
+
 import DesktopMenu from "./DesktopMenu";
 import Geocode from "react-geocode";
 import MobileMenu from "./MobileMenu";
@@ -147,34 +147,38 @@ function Header({ menuItems }) {
         progress={progress_number}
         // onLoaderFinished={() => setProgress(0)}
       /> */}
-      <div className="container bg-m-white sm:bg-m-grey flex items-center h-16 ">
+      <div className=" container w-full h-16 bg-m-white bg-no-repeat  flex items-center opacity-100 px-0 py-0 ">
+
         <Link href="/">
-          <a className="w-36 h-9 mr-4 lg:mr-8 block relative">
+          <a className="h-9 w-[75px] px-44 pr-0 py-[14px] mr-4 lg:mr-8 block relative">
             <Image src={home_logo} alt="ORUphones" layout="fill" priority />
           </a>
         </Link>
-        <div className="hidden sm:flex justify-center mx-auto flex-1 text-sm">
+        <div className="hidden sm:flex  justify-center mx-12 flex-1 text-sm">
           <SearchBar />
-          <div
+
+          {/* <div
             className="hover:cursor-pointer md:mx-4 hidden flex-shrink-0 md:flex justify-center items-center text-gray-600 "
             style={{ minWidth: 175, boxShadow: "0px 2px 3px #00000008" }}
-            onClick={handleNearme}>
-            <div className="h-full w-10 bg-gray-200 rounded-l inline-flex justify-center items-center">
+            onClick={() => setOpenLocationPopup(true)}
+          >
+            <span className="h-full w-10 bg-gray-200 rounded-l inline-flex justify-center items-center">
               <BiCurrentLocation className="h-5 w-5" />
-            </div>
-            <div className="flex-1 flex h-full w-full items-center border border-l-0 rounded rounded-l-none pr-2 bg-white border-m-grey-5"
-              onClick={() => setOpenLocationPopup(true)} >
-              <span className="flex-1 text-center px-4" >
+            </span>
+            <div className="flex-1 flex h-full w-full items-center border border-l-0 rounded rounded-l-none pr-2 bg-white border-m-grey-5">
+              <span className="flex-1 text-center px-4">
                 {getSearchLocation}
               </span>
               <BiChevronDown className="h-5 w-5" />
             </div>
-          </div>
+          </div> */}
+
         </div>
 
-        <div className="hidden lg:flex items-center space-x-3 flex-shrink-0 text-sm">
-          <LoginOrProfile />
+        <div className="hidden lg:flex  space-x-2 flex-shrink-0 text-sm">
           <SellNowBtn />
+          <LoginOrProfile />
+
         </div>
         {/* Mobile Toggler */}
         <div className="-mr-1 sm:mr-2 flex lg:hidden w-16 justify-end ml-auto">
@@ -193,7 +197,7 @@ function Header({ menuItems }) {
       <DesktopMenu menuItems={menuItems} />
       <MobileMenu isOpen={isOpen} />
       <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
-      <LocationPicker currentLocation={setCurrentLocation} />
+      <LocationPicker />
     </header>
   );
 }

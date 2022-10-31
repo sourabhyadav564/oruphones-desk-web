@@ -17,7 +17,7 @@ function DownloadApp() {
   // }, []);
 
   return (
-    <section className="container mt-10">
+    <section className="w-full">
       <div className="flex flex-col sm:flex-row justify-between items-center p-4 pt-12 sm:p-12 bg-bg-mask-1 bg-no-repeat bg-cover sm:bg-center bg-m-green text-white rounded-md">
         <div className="px-8">
           <h1 className="pb-4 font-light" style={{ fontSize: 42 }}>

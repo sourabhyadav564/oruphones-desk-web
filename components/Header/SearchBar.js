@@ -8,6 +8,7 @@ import { BiSearch } from "react-icons/bi";
 function SearchBar() {
   const [searchResults, setSearchResults] = useState();
   const [input, setInput] = useState("");
+  const [brands, setBrands] = useState([]);
   const ref = useRef();
 
   useEffect(() => {
@@ -31,6 +32,7 @@ function SearchBar() {
   }, [input]);
 
   useEffect(() => {
+    setBrands(JSON.parse(localStorage.getItem("brands")));
     const checkIfClickedOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
         setSearchResults();
@@ -51,16 +53,37 @@ function SearchBar() {
     }
   };
 
+  // if (brandsList.length === 0) {
+  // setBrands(JSON.parse(localStorage.getItem("brands")));
+  // } else {
+  //   localStorage.setItem("brands", JSON.stringify(brandsList));
+  //   Cookies.set("brands", true);
+  //   setBrands(brandsList);
+  // }
+
   return (
     <Fragment>
-      <div className="flex-1 relative custom-scroll" ref={ref}>
-        <input
-          placeholder="Search with make and model"
-          onChange={handleChange}
-          value={input}
-          className={`py-2 px-4 w-full bg-white text-gray-800 focus:outline-none rounded ${searchResults && "rounded-b-none"}`}
-          style={{ boxShadow: "0px 2px 3px #0000000A" }}
-        />
+      <div className="flex-1 relative custom-scroll h-8" ref={ref}>
+        <div className="flex w-[715px] rounded bg-m-white-1 ">
+          {/* <select className="w-[104px] pr-6 py-1 h-10 rounded border-none m-auto  items-center text-m-green-1 font-normal bg-[#D9D9D9] text-xs" >
+            {brands.map((brand, index) => (
+              <option key={index} value={brand.make}
+                onClick={
+                  <Link href={{ pathname: `/product/buy-old-refurbished-used-mobiles/${brand?.make?.toLowerCase()}` }}>
+                  </Link>
+                }>
+                {brand.make}
+              </option>
+            ))}
+          </select> */}
+          <input
+            placeholder="Search on ORUphones"
+            onChange={handleChange}
+            value={input}
+            className={`px-4 pt-4 py-5 h-8 w-full bg-m-white-1 text-xs rounded bg-no-repeat ${searchResults && "rounded-b-none"}`}
+            style={{ boxShadow: "0px 2px 3px #0000000A" }}
+          />
+        </div>
         {searchResults && (
           <div
             className="absolute z-20 left-0 right-0 rounded-b-lg  bg-white overflow-y-auto text-black"
@@ -112,8 +135,8 @@ function SearchBar() {
               )}
           </div>
         )}
-        <div className="absolute right-2 top-0 bottom-0 flex items-center pr-2">
-          <BiSearch className="text-m-green " size={20} />
+        <div className="absolute right-[10px]  top-0 bottom-0 flex items-center px-4 ">
+          <BiSearch className="text-black-1" size={20} />
         </div>
       </div>
     </Fragment>

@@ -6,18 +6,24 @@ module.exports = {
     extend: {
       colors: {
         red: {
-          DEFAULT : "#FF0000",
+          DEFAULT: "#FF0000",
         },
         "m-green": "#2c2f44",
+        "m-green-1": "#2C2F45",
         "m-black": "#212121",
         "m-grey": "#F9F9F9",
         "m-white": "#FFFFFF",
+        "m-white-1": "#F2F2F2",
         "m-yellow": "#F7941D",
+        "m-yellow-1": "#F9C414",
         "m-grey-1": "#4E4E4E",
         "m-grey-2": "#707070",
         "m-grey-3": "#0000000A",
         "m-grey-4": "#00000008",
         "m-grey-5": "#EAEAEA",
+        "m-grey-6": "#00000029",
+        "m-grey-7": "#727272",
+        "m-grey-8": "#F3F3F3",
         "m-green-dark": "#00634F",
         "gray-nurse": "#e7ece7",
         "gray-1": "#CCCCCC",
@@ -30,6 +36,8 @@ module.exports = {
         "yellow-1": "#FBB215",
         "gray-1f": "#0000001F",
         "gray-ef": "#EFEFEF",
+        "m-blue": "#0006A5",
+        "m-blue-1": "#000944"
       },
       backgroundImage: {
         "sell-step": "url('../assets/bg_buy_step.png')",
@@ -41,6 +49,9 @@ module.exports = {
         "app-store": "url('../assets/app_store.svg')",
         "play-store": "url('../assets/play_store.png')",
         "bg-mask-1": "url('../assets/bg_mask_1.svg')",
+      },
+      spacing: {
+        "4rem": "4px, 4px, 4px,4px",
       },
       fontFamily: {
         "open-sans": '"Open Sans", Helvetica, Arial, sans-serif',

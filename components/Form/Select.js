@@ -5,8 +5,8 @@ function MySelect({ name, labelName, className, ...rest }) {
   const customStyles = {
     control: (base) => ({
       ...base,
-      height: 52,
-      minHeight: 52,
+      height: 35,
+      minHeight: 35,
       outline: "none !important",
       border: "0 !important",
       color: "#00000099",
@@ -14,9 +14,9 @@ function MySelect({ name, labelName, className, ...rest }) {
     }),
   };
   return (
-    <div style={{borderWidth : 1.5}} className={`outline outline-none relative w-full focus:outline-none focus:ring-0 rounded  ${className || " border-gray-1f "}`}>
+    <div style={{ borderWidth: 1.5 }} className={`outline outline-none relative w-full focus:outline-none focus:ring-0 rounded bg-gray ${className || " border-gray-1f "}`}>
       <Select name={name} styles={customStyles} {...rest} instanceId={labelName || name} classNamePrefix="react-select" />
-      <label htmlFor={name} className="absolute top-0 text-lg bg-white p-1 z-1 duration-300 origin-0" style={{ color: "#00000099" }}>
+      <label htmlFor={name} className="absolute top-0 text-lg bg-[#D2D2D2] p-1 z-1 duration-300 origin-0" style={{ color: "#0000009" }}>
         {labelName}
       </label>
     </div>

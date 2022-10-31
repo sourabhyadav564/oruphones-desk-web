@@ -244,7 +244,7 @@ const Footer = () => {
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
-                href="https://www.instagram.com/oruphones_/?igshid=YmMyMTA2M2Y%3D"
+                href="https://www.instagram.com/oruphones/?igshid=YmMyMTA2M2Y%3D"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -1,6 +1,6 @@
 import React from "react";
 import BrandCard from "../Cards/BrandCard";
-import Carousel from "../Carousel";
+// import Carousel from "../Carousel";
 import Title from "../Title";
 
 const settings = {
@@ -14,16 +14,22 @@ const settings = {
 function TopBrand({ brandsList }) {
   brandsList = brandsList?.sort((list1, list2) => list2.isPopular - list1.isPopular);
   brandsList = brandsList?.sort((list1, list2) => parseInt(list1.displayOrder) - parseInt(list2.displayOrder));
-  var _bList = brandsList?.slice(0, 8);
+  var _bList = brandsList?.slice(0, 13);
   // console.log(_bList);
   return (
-    <section className="container top_brand pt-4">
-      <Title text="Buy Top Brands" />
-      <Carousel {...settings}>
-        {_bList && _bList.map((item) => <BrandCard key={item.make} data={item} />)}
-        <BrandCard data={{ make: "Show all" }} />
-      </Carousel>
-    </section>
+    <>
+      <div className="bg-m-grey pt-[54px]   pb-[57px]">
+        <section className="container top_brand px-24 pt-0 gap-6 grid grid-cols-7 pb-4">
+          <Title text="Top Brands" />
+        </section>
+        <section className="container bg-m-grey top_brand px-24  gap-6 grid grid-cols-7  ">
+          {/* <Carousel {...settings}> */}
+          {_bList && _bList.map((item) => <BrandCard key={item.make} data={item} />)}
+          <BrandCard data={{ make: "Show all" }} />
+          {/* </Carousel> */}
+        </section>
+      </div>
+    </>
   );
 }
 

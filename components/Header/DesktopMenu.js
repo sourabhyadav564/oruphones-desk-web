@@ -1,9 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import Image from "next/image";
 import * as Axios from "../../api/axios";
+import LocationPopup from "../Popup/LocationPopup";
+import Title from "../Title";
+import { useContext } from "react";
+import AppContext from "@/context/ApplicationContext";
+import { GrLocation } from "react-icons/gr";
 
 const menus = [
   {
@@ -12,43 +17,40 @@ const menus = [
     chlink: "/product/models",
   },
   {
-    name: "IPhones",
+    name: "Apple",
     options: [],
     make: "apple",
     chlink: "/product/buy-old-refurbished-used-mobiles/apple",
   },
   {
-    name: "Samsung Phones",
+    name: "Samsung",
     options: [],
     make: "samsung",
     chlink: "/product/buy-old-refurbished-used-mobiles/samsung",
   },
   {
-    name: "OnePlus Phones",
+    name: "OnePlus",
     options: [],
     make: "oneplus",
     chlink: "/product/buy-old-refurbished-used-mobiles/oneplus",
   },
-  {
-    name: "Shop by Brand",
-    options: [],
-    chlink: "/brands",
-  },
+  { name: "Blog", href: "https://www.oruphones.com/blog" },
   {
     name: "Best Deals",
     options: [],
     chlink: "/product/buy-old-refurbished-used-mobiles/bestdealnearyou",
   },
-  {
-    name: "ORU Services",
-    options: [],
-    chlink: "/services",
-  },
-  { name: "Blog", href: "https://www.oruphones.com/blog" },
+  // {
+  //   name: "Shop by Grade",
+  //   options: [],
+  // },
+
 ];
 
 function DesktopMenu({ menuItems }) {
   let menusResponse = [];
+  const [openLocationPopup, setOpenLocationPopup] = useState(false);
+  const { getSearchLocation } = useContext(AppContext);
 
   // const [toggle, setToggle] = useState(false)
 
@@ -106,8 +108,18 @@ function DesktopMenu({ menuItems }) {
   // }, []);
 
   return (
-    <nav className="bg-m-green ">
-      <Popover.Group className="relative container hidden lg:flex items-center justify-between h-12 uppercase text-m-white">
+    <nav className="px-0 h-9 bg-m-green-1 bg-no-repeat flex flex-row justify-between">
+      <span
+        className="text-white px-52 flex flex-row justify-start">
+        {/* <GrLocation /> */}
+        <Title
+          onClick={() => setOpenLocationPopup(true)}
+          location={`${getSearchLocation} ${getSearchLocation != "India" ? " ,India" : ""}`}
+          color={"white"}
+          fontsize={"xs"}
+        />
+      </span>
+      <span><Popover.Group className=" container hidden  lg:flex items-center  pt-[7px] text-xs font-light m-auto  justify-end text-m-white pr-40">
         {menus.map((item, index) =>
           item && item.options ? (
             <Popover key={item.name}>
@@ -115,7 +127,7 @@ function DesktopMenu({ menuItems }) {
                 <>
                   <Popover.Button
                     className={`${open ? "" : "text-opacity-90"
-                      }text-white uppercase`}
+                      }text-m-white px-5 opacity-100 font-light `}
                   >
                     <Link key={index} href={{ pathname: item.chlink }}>
                       <span> {item.name} </span>
@@ -210,6 +222,8 @@ function DesktopMenu({ menuItems }) {
           )
         )}
       </Popover.Group>
+      </span>
+      <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
     </nav>
   );
 }

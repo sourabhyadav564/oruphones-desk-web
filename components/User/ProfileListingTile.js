@@ -57,11 +57,12 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
   }
 
   function uploadPhotos() {
-    router.push(`/sell-old-refurbished-used-mobiles/edit/${data?.listingId}`);
+    // router.push(`/sell-old-refurbished-used-mobiles/edit/${data?.listingId}`);
   }
 
   return (
-    <div className="grid grid-cols-8 rounded border p-3 hover:shadow relative">
+    <div className="grid grid-cols-8 rounded border p-3 hover:shadow relative"
+      onClick={() => { setOpenAppDownload(true) }}>
       <div className="absolute top-1 left-0 z-10 px-3">
         {data?.verified ? (
           <VerifiedIcon width={69} height={29} />
@@ -131,7 +132,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
       </div>
       <div className="flex flex-col justify-between items-end pr-2">
         {/* <Image src={chartIcon} width={15} height={15} alt="Chart Icon" className="cursor-pointer" /> */}
-        <div
+        {/* <div
           className="listing-tile dropdown inline-block relative"
           onClick={(e) => e.preventDefault()}
         >
@@ -146,11 +147,15 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                   Pause
                 </span>
               )}
-              <Link href={`/sell-old-refurbished-used-mobiles/edit/${data?.listingId}`}>
+              {/* <Link href={`/sell-old-refurbished-used-mobiles/edit/${data?.listingId}`}>
                 <span className="hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap">
                   Edit
                 </span>
-              </Link>
+              </Link> */}
+        {/* <span className="hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap"
+              onClick={() => setOpenAppDownload(true)}>
+                Edit
+              </span>
               <span
                 className="rounded-b hover:bg-gray-100 text-black-60 py-1 px-4 w-full block whitespace-no-wrap"
                 onClick={() => setDeletePopup(true)}
@@ -158,8 +163,8 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 Delete
               </span>
             </div>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         {data?.status === "Active" &&
           data?.verified &&
           !data?.deviceImagesAvailable ? (
@@ -199,20 +204,20 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         )}
       </div>
       <AppDownloadPopup open={openAppDownload} setOpen={setOpenAppDownload} />
-      <ActivateListingPopup
+      {/* <ActivateListingPopup
         open={openActivatePopup}
         setOpen={setOpenActivatePopup}
-      />
-      <ActivatePauseListing
+      /> */}
+      {/* <ActivatePauseListing
         open={openActivatePausePopup}
         setOpen={setOpenActivatePausePopup}
         data={data?.listingId}
-      />
-      <DeleteListingPopup
+      /> */}
+      {/* <DeleteListingPopup
         open={openDeletePopup}
         setOpen={setDeletePopup}
         data={data}
-      />
+      /> */}
     </div>
   );
 }

@@ -21,7 +21,7 @@ function LoginOrProfile() {
     } else {
       setUserAuthenticated(false);
     }
-    return () => {};
+    return () => { };
   });
 
   return (
@@ -63,12 +63,12 @@ function LoginOrProfile() {
         </div>
       ) : (
         <React.Fragment>
-          <p
-            className="cursor-pointer py-2 border border-m-green rounded px-7 text-m-green  uppercase hover:bg-m-green hover:text-m-white"
+          <button
+            className="cursor-pointer w-20 h-8 border border-solid border-m-green-1 rounded-md  self-center  text-m-green-1 text-xs font-normal  "
             onClick={() => setShowLogin(true)}
           >
-            Login
-          </p>
+            Log In
+          </button>
           <LoginPopup open={showLogin} setOpen={setShowLogin} />
         </React.Fragment>
       )}

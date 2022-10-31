@@ -12,6 +12,8 @@ import amazon from "../../assets/amazon_renewed.png";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 import AppContext from "@/context/ApplicationContext";
+import Model2 from "../Popup/Model2";
+import DeviceConditionPopup from "../Popup/DeviceConditionPopup";
 
 function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
   const initialState = [
@@ -41,6 +43,12 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
   const [formData, setFormData] = useState({ termsAndCondition: true });
   const [disableSubmitButton, setDisableSubmitButton] = useState(true);
   const [deviceColors, setDeviceColors] = useState();
+  const [open, setOpen] = useState(false);
+  const [conditionEdit, setConditionEdit] = useState(deviceCondition);
+  const [conditionQuesEdit, setConditionQuesEdit] = useState(listedDeviceInfo?.cosmetic);
+  const [showWarranty, setShowWarranty] = useState("N");
+  const [warranty, setWarranty] = useState("more");
+  const [conditionResults, setConditionResults] = useState({});
 
   function listedDeviceImages(data, setImages) {
     let initialState;
@@ -75,6 +83,13 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     setImages(initialState);
   }
 
+  const deviceWarrantyCheck = [
+    { value: "zero", label: "0-3 Months Ago" },
+    { value: "four", label: "4-6 Months Ago" },
+    { value: "seven", label: "7-11 Months Ago" },
+    { value: "more", label: "More Than 11 Months Ago" },
+  ];
+
   const isDeviceFunctional = [
     { value: "Yes", label: "Yes" },
     { value: "No", label: "No" },
@@ -84,6 +99,11 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     { value: "Like New", label: "Like New" },
     { value: "Good", label: "Good" },
   ];
+
+  useEffect(() => {
+    setDeviceCondition(conditionEdit);
+    setConditionResults(conditionQuesEdit);
+  }, [conditionEdit, conditionResults, open]);
 
   const handleChange = (e) => {
     const { name, type } = e.target;
@@ -129,6 +149,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
         setCharger(getListedDeviceInfo?.dataObject.charger);
         setHeadphone1(getListedDeviceInfo?.dataObject.earphone);
         setOriginalBox1(getListedDeviceInfo?.dataObject.originalbox);
+        setWarranty(getListedDeviceInfo?.dataObject.warranty);
         setDeviceCondition(getListedDeviceInfo?.dataObject.deviceCondition);
         setSellPrice(getListedDeviceInfo?.dataObject.listingPrice);
       }
@@ -149,7 +170,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       originalBox: originalBox1 === "Y" ? "Y" : "N",
       charger: charger1 === "Y" ? "Y" : "N",
       earPhones: headphone1 === "Y" ? "Y" : "N",
-      warrantyPeriod: "more",
+      warrantyPeriod: warranty,
       verified: "no",
     };
 
@@ -162,7 +183,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       fetchData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deviceCondition, charger1, headphone1, originalBox1]);
+  }, [deviceCondition, charger1, headphone1, originalBox1, warranty]);
 
   useEffect(() => {
     let payload = {
@@ -170,7 +191,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       make: listedDeviceInfo?.make,
       marketingName: listedDeviceInfo?.marketingName,
       deviceCondition: deviceCondition,
-      warrantyPeriod: "more",
+      warrantyPeriod: warranty,
       hasCharger: charger1 === "Y" ? "Y" : "N",
       hasEarphone: headphone1 === "Y" ? "Y" : "N",
       hasOriginalBox: originalBox1 === "Y" ? "Y" : "N",
@@ -188,6 +209,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     charger1,
     headphone1,
     originalBox1,
+    warranty
   ]);
 
   const handleImageChange = async (e, index) => {
@@ -306,21 +328,21 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               setStorage(e.value);
             }}
           ></Input> */}
-          {data?.verified ? (
-            <Input value={data?.deviceStorage} disabled>
+          {listedDeviceInfo?.verified ? (
+            <Input value={listedDeviceInfo?.deviceStorage} disabled>
               Storage
             </Input>
           ) : (
             <Select
               labelName="Storage*"
-              placeholder={data?.deviceStorage}
+              placeholder={listedDeviceInfo?.deviceStorage}
               onChange={(e) => {
                 setStorage(e.value);
               }}
               value={listedDeviceInfo?.deviceStorage}
-              options={deviceStorages?.map((item) => {
-                return { label: item, value: item };
-              })}
+            // options={deviceStorages?.map((item) => {
+            //   return { label: item, value: item };
+            // })}
             />
           )}
           <Select
@@ -334,16 +356,25 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               return { label: item, value: item };
             })}
           ></Select>
-          {
-            <Select
-              placeholder={listedDeviceInfo?.deviceCondition}
-              labelName="Device Condition"
-              onChange={(e) => {
-                setDeviceCondition(e.value);
-              }}
-              options={deviceConditionCheck}
-            ></Select>
-          }
+          <>
+            <div
+              className="flex flex-col justify-center items-start px-4 border h-14 rounded-md text-gray-500"
+              open={open}
+              setOpen={setOpen}
+              // placeholder={listedDeviceInfo?.deviceCondition}
+              // labelName="Device Condition"
+              // onChange={(e) => {
+              //   setDeviceCondition(e.value);
+              // }}
+              onClick={() => setOpen(true)}
+            // options={deviceConditionCheck}
+            >
+              {deviceCondition ? deviceCondition : listedDeviceInfo?.deviceCondition}
+              <div className="absolute top-[390px] text-lg bg-white py-1 z-1 duration-300 origin-0 text-[13px]" style={{ color: "#00000099" }}>
+                Device Condition*
+              </div>
+            </div>
+          </>
           <span />
           <Input
             placeholder={listedDeviceInfo?.listedBy}
@@ -432,15 +463,30 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               <Checkbox
                 src={originalBill}
                 text="Original Bill"
+                checked={showWarranty}
                 onClick={(e) => {
-                  e.target.checked
-                    ? setOriginalBox1("Y")
-                    : setOriginalBox1("N");
+                  e.target.checked ? setShowWarranty("Y") : setShowWarranty("N");
+                  console.log("warranty", warranty);
+                  setWarranty((listedDeviceInfo?.warranty != "None" || listedDeviceInfo?.warranty != "" || listedDeviceInfo?.warranty != null) ? listedDeviceInfo?.warranty : "more");
                 }}
-                isChecked={listedDeviceInfo?.originalbox === "Y"}
+                isChecked={listedDeviceInfo?.warranty !== "more"}
               />
             </div>
           )}
+        {showWarranty === "Y" && (
+          <div className="my-5 grid grid-cols-2 gap-5">
+            {deviceWarrantyCheck?.map((item, index) => (
+              <div
+                key={index}
+                className={`${warranty == item?.value ? "bg-gray-200" : "bg-white"
+                  } py-3 px-5 rounded-md hover:cursor-pointer hover:bg-gray-200 active:bg-gray-300 duration-300 border-2 border-gray-200 flex items-center justify-center`}
+                onClick={() => setWarranty(item.value)}
+              >
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="grid grid-cols-7 gap-1">
           {listedDeviceInfo?.listingPrice && (
             <div className="col-span-2">
@@ -560,6 +606,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
           </button>
         </div>
       </form>
+      <DeviceConditionPopup open={open} setOpen={setOpen} setConditionEdit={setConditionEdit} setConditionQuesEdit={setConditionQuesEdit} />
     </div>
   );
 }

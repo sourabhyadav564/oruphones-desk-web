@@ -5,8 +5,8 @@ function BrandCard({ data }) {
   if (data?.make.toLowerCase().includes("show")) {
     return (
       <Link href={`/brands`}>
-        <a className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
-          <p className="block text-m-green">Show All</p>
+        <a className="w-36 h-[91px] rounded opacity-100 bg-no-repeat p-4 bg-m-white flex justify-center  items-center">
+          <p className="block text-m-grey-2 font-normal text-lg w-[89px] h-7">View All &gt;</p>
         </a>
       </Link>
     );
@@ -14,7 +14,7 @@ function BrandCard({ data }) {
   return (
     data.imagePath && (
       <Link href={{ pathname: `/product/buy-old-refurbished-used-mobiles/${data?.make?.toLowerCase()}` }}>
-        <a className="rounded-md shadow hover:shadow-md px-10 py-4 sm:px-4 bg-m-white flex justify-center relative">
+        <a className="bg-no-repeat rounded w-36 h-[91px] px-[349px] sm:px-4 bg-m-white flex justify-center opacity-100 relative">
           <Image src={data?.imagePath} alt={data?.make} height={80} width={80} objectFit="contain" />
         </a>
       </Link>

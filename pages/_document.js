@@ -18,7 +18,7 @@ class MyDocument extends Document {
           ></link>
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
-        <body className="font-open-sans bg-m-grey">
+        <body className="font-open-sans bg-m-white">
           <Main />
           <NextScript />
           <script src="/restrict.js" />

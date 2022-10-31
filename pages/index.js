@@ -97,11 +97,11 @@ export default function Home({
         {/* <TopSellingModels fetchTopsellingmodels={fetchTopsellingmodels} /> */}
         <TopBrand brandsList={brands} />
         {/* <TopSellingModels fetchTopsellingmodels={topsellingmodels} /> */}
-        <ShowBy />
         <TopDeals location={getSearchLocation} />
         {/* <ShopByPrice fetchShopByPrice={fetchShopByPrice}/> */}
         {/* <TopArticles articles={fetchTopArticles}/> */}
         {/* <TopArticles articles={topArticles} /> */}
+        <ShowBy />
         <DownloadApp />
         <HomeContent />
         <NewsLetter />

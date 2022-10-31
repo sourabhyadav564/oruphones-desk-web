@@ -45,10 +45,10 @@ const CategoryCards = ({ data, priceRange }) => {
   if (priceRange) {
     return (
       <div>
-        <div className="rounded-md shadow hover:shadow-md px-10 py-1.5 sm:px-4 bg-m-white grid grid-cols-2 gap-3">
+        <div className="shadow drop-shadow rounded-lg px-1.5 py-1.5 sm:px-1.5 bg-m-white grid grid-cols-2 gap-1">
           {priceRangeData.map((item, index) => (
             <Link href={`/shopby/pricerange/${item.min}/${item.max}`} key={index}>
-              <p className="bg-gray-200 flex flex-col items-center justify-center rounded-md hover:cursor-pointer hover:bg-gray-300 active:bg-gray-400 duration-300 text-sm">
+              <p className="flex flex-col items-center justify-center rounded-md bg-m-grey-8 opacity-100 hover:cursor-pointer font-light text-m-green-1 text-xs">
                 {item.bracket}{" "}
                 <span className="font-semibold">{item.text}</span>
               </p>
@@ -68,7 +68,7 @@ const CategoryCards = ({ data, priceRange }) => {
               : `/shopby/category/${data?.urlPath?.toLowerCase()}`,
         }}
       >
-        <a className="rounded-md shadow hover:shadow-md px-10 py-4 sm:px-4 bg-m-white flex flex-col items-center justify-center relative">
+        <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-4 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
           <Image
             src={data?.imagePath}
             alt={data?.make}

@@ -82,13 +82,14 @@ function DeviceVerificationReport({ open, setOpen, data }) {
               <div>
                 {deviceConditionQuestion.map((item, index) => (
                   <div>
-                    <span className="text-lg font-semibold text-black">{item?.title}</span>
-                    <ConditionOptionLarge
-                      title={data?.cosmetic[index]}
-                      options={item?.options[0]?.options}
-                      conditionResults={data?.cosmetic}
-                      questionIndex={index}
-                    />
+                    <span className="text-lg font-semibold text-black">{data?.cosmetic[index] != undefined && item?.title}</span>
+                    {data?.cosmetic[index] != undefined &&
+                      <ConditionOptionLarge
+                        title={data?.cosmetic[index]}
+                        options={data?.cosmetic[index] && item?.options[0]?.options}
+                        conditionResults={data?.cosmetic}
+                        questionIndex={index}
+                      />}
                   </div>
                 ))}
               </div>

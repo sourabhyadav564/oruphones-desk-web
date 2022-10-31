@@ -11,7 +11,7 @@ export const otherVendorDataState = atom({
 
 export const otherVandorDataSelector = selector({
     key: "otherVandorDataSelector",
-    get: ({get}) => {
+    get: ({ get }) => {
         const data = get(otherVendorDataState)
         return data
     },
@@ -32,17 +32,17 @@ export const otherVandorDataSelector = selector({
 
 export const addListingBrandState = atom({
     key: "addListingBrandState",
-    default: "",
+    default: "Select...",
     effects_UNSTABLE: [persistAtom],
-  });
-  
-  export const addListingBrandSelector = selector({
+});
+
+export const addListingBrandSelector = selector({
     key: "addListingBrandSelector",
     get: ({ get }) => {
-      const data = get(addListingBrandState);
-      return data;
+        const data = get(addListingBrandState);
+        return data;
     },
-  });
+});
 
 export const topLoadingBarState = atom({
     key: "topLoadingBarState",
@@ -52,7 +52,7 @@ export const topLoadingBarState = atom({
 
 export const topLoadingBarSelector = selector({
     key: "topLoadingBarSelector",
-    get: ({get}) => {
+    get: ({ get }) => {
         const data = get(topLoadingBarState)
         return data
     },

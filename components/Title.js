@@ -1,14 +1,14 @@
 import { FaMapMarkerAlt } from "react-icons/bi";
 
-function Title({ text, location, onClick }) {
+function Title({ text, location, onClick, color, fontsize }) {
   return (
     <h1
-      className="text-center my-4 font-semibold"
-      style={{ fontSize: 21, color: "#2c2f44" }}
+      className="text-left text-lg opacity-100  font-medium "
+      style={{ fontSize: 18, letterSpacing: 0, color: "#000000" }}
     >
       {text}
       <span>{"  "}</span>
-      <span className="cursor-pointer underline text-blue-500" onClick={onClick}>{location}</span>
+      <span className={`cursor-pointer text-left text-${fontsize|| 15} opacity-100 underline text-m-${color || "blue"}`} onClick={onClick}>{location}</span>
     </h1>
   );
 }

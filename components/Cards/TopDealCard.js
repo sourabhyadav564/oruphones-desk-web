@@ -11,7 +11,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
   if (data?.name?.toLowerCase().includes("all")) {
     return (
       <Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}>
-        <a className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
+        <a className="w-full h-full rounded-md  shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
           <p className="block text-m-green">{"Show All"}</p>
         </a>
       </Link>
@@ -25,24 +25,22 @@ function TopDealCard({ data, setProducts, prodLink }) {
         query: prodLink && { isOtherVendor: data?.isOtherVendor },
       }}
     >
-      <a className="flex flex-col pt-6 relative w-full h-full rounded-md shadow hover:shadow-md py-1 px-3 text-gray-900 bg-m-white">
+      <a className="flex flex-col pt-6 relative w-full h-full shadow drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white">
         {data?.isOtherVendor === "N" && (
-          <div className="flex z-10 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
+          <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
             <span className="h-6">
-              {data?.status === "Sold_Out" ? <Image
+              {data?.verified ? <VerifiedIcon width={60} height={29} /> : data?.status === "Sold_Out" && <Image
                 src={SoldOut}
                 width={"50"}
-                height={"30"}
+                height={"50"}
                 objectFit="contain"
-              /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
-                <span className="h-9 block" />
-              )}
+              />}
             </span>
             <AddFav data={data} setProducts={setProducts} />
           </div>
         )}
 
-        <div className="flex justify-center">
+        <div className="flex justify-center pb-[17.77px] h-[163.14px] bg-transparent">
           {data?.imagePath ? (
             <Image
               src={data?.imagePath}
@@ -62,25 +60,18 @@ function TopDealCard({ data, setProducts, prodLink }) {
           )}
         </div>
         <div className="pb-2 w-full">
-          <h1 className="text-lg sm:text-base flex-1 sm:py-1 truncate w-full font-semibold text-m-grey-2">
+          {/* <h1 className="text-lg sm:text-base flex-1 sm:py-1 truncate w-full font-semibold text-m-grey-2">
             {data?.marketingName}
-          </h1>
-          <div className="flex justify-between text-xs">
-            {data?.deviceStorage && (
-              <div className="py-1">
-                <span>{data?.deviceStorage}</span>
-              </div>
-            )}
-            <div className="py-1">
-              <span>Condition : </span>
-              <span>{data?.deviceCondition || "--"}</span>
-            </div>
-          </div>
-          <p className="font-bold flex items-center -ml-1 text-base text-m-grey-1">
-            {/* {data?.listingPrice && <BiRupee />}{" "} */}
+          </h1> */}
+          <p className="font-bold flex items-center w-[74px]  -ml-1 text-lg opacity-100 text-m-blue-1">
+            {data?.listingPrice && <BiRupee />}{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
-          <div className="flex justify-between pt-1 text-xs w-full text-m-grey-2">
+          <h1 className=" sm:text-base flex-1 w-full font-normal opacity-100 text-black-1">
+            {data?.marketingName}
+          </h1>
+
+          <div className="flex justify-between pt-1 text-[6px] opacity-100 h-2 w-full text-m-grey-2">
             <span>{data?.listingLocation}</span>
             <span>{data?.listingDate}</span>
           </div>

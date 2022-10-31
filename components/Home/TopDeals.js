@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import LocationPopup from "../Popup/LocationPopup";
 import Loader from "../Loader/Loader";
 import Spinner from "../Loader/Spinner";
+import Link from "next/link";
 
 // const settings = {
 //   dots: false,
@@ -87,17 +88,17 @@ function TopDeals({ location }) {
   }, [location]);
 
   return (
-    <section className="container top_deals px-4">
+    <section className="container pt-[57px] px-20 top_deals">
       <Title
         text={`Best Deals Near You`}
         onClick={() => setOpenLocationPopup(true)}
         location={`(${location})`}
       />
       {bestDeals && bestDeals?.length > 1 ? (
-        <div className="grid grid-cols-5 gap-4 py-4">
+        <div className="grid grid-cols-5 gap-3 py-4">
           {bestDeals &&
             bestDeals
-              // .slice(0, 20)
+              .slice(0, 10)
               .map((item, index) => (
                 <TopDealCard
                   key={index}
@@ -119,16 +120,19 @@ function TopDeals({ location }) {
         </div>
       )}
       {!isLoading && isFinished === false && (
-        <span
-          className={`${
-            isLoadingMore ? "w-[250px]" : "w-[150px]"
-          } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer`}
-          onClick={loadMoreData}
+        <Link
+          className={`${isLoadingMore ? "w-full" : "w-full "
+            }  flex justify-center items-center  hover:cursor-pointer`}
+          // onClick={loadMoreData}
+          href={{
+            pathname: `/product/buy-old-refurbished-used-mobiles/bestdealnearyou`,
+            // query: prodLink && { isOtherVendor: data?.isOtherVendor },
+          }}
         >
-          <p className="block text-m-green font-semibold">
-            {isLoadingMore ? "Fetching more products..." : "Load More"}
+          <p className="flex justify-center w-full items-center font-semibold pb-[61px] text-m-blue underline">
+            {isLoadingMore ? "Fetching more products..." : "View All >"}
           </p>
-        </span>
+        </Link>
       )}
       <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
     </section>

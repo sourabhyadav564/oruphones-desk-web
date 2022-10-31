@@ -6,6 +6,7 @@ import homepage_banner from "../../assets/homepage_banner.png";
 import banner_one from "../../assets/banner_1.png";
 import banner_two from "../../assets/banner_2.png";
 import banner_three from "../../assets/banner_3.png";
+import banner_4 from "../../assets/banner_4.png";
 import Carousel from "../Carousel";
 import QRCode from "qrcode.react";
 import { useState } from "react";
@@ -63,72 +64,48 @@ export default function Hero() {
     //     </div>
     //   </div>
     // </section>
-    <section className="flex-grow border-t border-gray-400">
-      <Carousel>
-        <Link href="/product/buy-old-refurbished-used-mobiles/bestdealnearyou">
-          <a>
-            <Image
-              src={banner_one}
-              alt="BannerImage"
-              priority
-            // width="100%"
-            // height="90%"
-            // layout="responsive"
-            // objectFit="contain"
-            />
-          </a>
-        </Link>
-        <Link href="/sell-old-refurbished-used-mobiles/add">
-          <a>
-            <Image
-              src={banner_two}
-              alt="BannerImage"
-              priority
-            // width="100%"
-            // height="90%"
-            // layout="responsive"
-            // objectFit="contain"
-            />
-          </a>
-        </Link>
-        <div className="relative">
-          <div className="flex space-x-10 pt-4 sm:pt-0 justify-start absolute z-50 right-16 top-10">
-            <div className="flex flex-col justify-end">
-              <QRCode
-                id="qr-gen"
-                value={qrValue1 || ""}
-                size={150}
-                level={"H"}
-                includeMargin={true}
-              />
-              <a target={"_blank"} rel="noreferrer" href={qrValue1}>
-                <p className="w-32 mt-4 h-10 bg-app-store bg-no-repeat bg-contain" />
-              </a>
-            </div>
-            <div className="flex flex-col justify-end">
-              <QRCode
-                id="qr-gen"
-                value={qrValue2 || ""}
-                size={150}
-                level={"H"}
-                includeMargin={true}
-              />
-              <a target={"_blank"} rel="noreferrer" href={qrValue2}>
-                <p className="w-32 mt-4 h-10 bg-play-store bg-no-repeat bg-contain" />
-              </a>
-            </div>
-          </div>
-          <Image
-            src={banner_three}
-            alt="BannerImage"
-            priority
+    <section className="flex-grow  w-full h-[480px] px-0 ">
+      {/* <Carousel> */}
+
+      <Image
+        src={banner_4}
+        alt="BannerImage"
+        priority
+      // width="100%"
+      // height="90%"
+      // layout="responsive"
+      // objectFit="contain"
+      />
+      {/* <Image
+          src={banner_one}
+          alt="BannerImage"
+          priority
           // width="100%"
           // height="90%"
           // layout="responsive"
           // objectFit="contain"
+        /> */}
+      {/* <Image
+          src={banner_two}
+          alt="BannerImage"
+          priority
+          // width="100%"
+          // height="90%"
+          // layout="responsive"
+          // objectFit="contain"
+        /> */}
+      {/* <div className="">
+          <Image
+            src={banner_three}
+            alt="BannerImage"
+            priority
+            // width="100%"
+            // height="90%"
+            // layout="responsive"
+            // objectFit="contain"
           />
-        </div>
-      </Carousel>
+        </div> */}
+      {/* </Carousel> */}
     </section>
   );
 }

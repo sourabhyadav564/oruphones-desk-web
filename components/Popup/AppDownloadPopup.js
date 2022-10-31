@@ -30,7 +30,7 @@ function AppDownloadPopup({ open, setOpen }) {
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={() => { setOpen(false) }}
       >
         <div className="flex items-center justify-center min-h-screen ">
           <Transition.Child
