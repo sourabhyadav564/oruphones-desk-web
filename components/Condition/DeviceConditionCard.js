@@ -53,7 +53,7 @@ export default DeviceConditionCard;
 const CheckPoints = ({ points }) => {
   return (
     <div className="flex items-center space-x-3 space-y-1">
-      <BsInfoCircle className="text-[10px]"/>
+      <BsInfoCircle className="text-[10px]" />
       <p className="text-sm">{points}</p>
     </div>
   );

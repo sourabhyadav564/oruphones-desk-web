@@ -34,7 +34,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
         <div className="flex items-center">
           <Menu as="div" className="relative inline-block text-left ">
             <div>
-              <Menu.Button className="group inline-flex justify-center px-4 py-2 rounded-md bg-white text-sm font-medium text-gray-700 hover:text-gray-900 border">
+              <Menu.Button className="group inline-flex justify-center px-4 py-2 rounded-md bg-white text-sm font-Roboto-Regular text-regularFontSize text-gray-700 hover:text-gray-900 border">
                 {(sortOptions && sortOptions.filter((i) => i.current)[0]?.name) || "Sort"}
                 <GrFormDown className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
               </Menu.Button>
@@ -57,8 +57,8 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
                         <a
                           onClick={(e) => handleOnChange(option)}
                           className={classNames(
-                            option.current ? "font-medium text-gray-900" : "text-gray-500",
-                            active ? "bg-gray-100" : "",
+                            option.current ? "font-Roboto-Medium text-regularFontSize text-gray-900" : "text-gray-500 font-Roboto-Light",
+                            active ? "bg-gray-100 font-Roboto-Medium text-regularFontSize" : "",
                             "block px-4 py-2 text-sm"
                           )}
                         >

@@ -277,7 +277,7 @@ function BrandPage() {
           makeName={makeName}
         >
           {!isLoading && bestDeal && bestDeal.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-4 ">
               <Carousel
                 {...settings}
                 key={bestDeal.length > 0 ? bestDeal[0] : -1}
@@ -293,7 +293,7 @@ function BrandPage() {
               </Carousel>
             </div>
           )}
-          <h4 className="font-semibold text-lg opacity-50">
+          <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
             Total Products ({totalProducts})
           </h4>
           <div className="grid grid-cols-3 gap-4">

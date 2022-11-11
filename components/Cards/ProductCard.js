@@ -19,8 +19,8 @@ function ProductCard({ data, prodLink, setProducts }) {
     >
       <a>
         <div
-          className="w-full h-full rounded-lg hover:drop-shadow-lg py-1 text-gray-900 bg-m-white"
-          style={{ boxShadow: "0px 2px 3px #0000000A", padding: " 0 10px" }}
+          className="w-full h-full rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
+          style={{ boxShadow: "2px 2px 10px #00000029", padding: " 0 10px" }}
         >
           <div className="flex items-center justify-between" style={{ padding: "10px 5px 5px 0" }}>
             <div className="h-9">{data?.status === "Sold_Out" ? <Image

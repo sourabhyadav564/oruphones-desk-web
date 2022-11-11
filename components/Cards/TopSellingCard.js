@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiRupee } from "react-icons/bi";
 import { numberWithCommas } from "../../utils/util";
+import Logo from "@/assets/oru_phones_logo.png"
 
 function TopSellingCard({ data }) {
   if (data?.name?.toLowerCase().includes("all")) {
@@ -19,16 +20,16 @@ function TopSellingCard({ data }) {
   return (
     <Link href={`/product/buy-old-refurbished-used-mobiles/${data.make}/${data.marketingName}`}>
       <a>
-        <div className="grid grid-cols-1 rounded-md shadow hover:shadow-md p-4 pb-2 bg-m-white">
+        <div className="grid grid-cols-1 rounded-md shadow-lg hover:shadow-md p-4 pb-2 bg-m-white">
           <div className="grid grid-cols-1">
             <div className="flex justify-center">
-              <Image src={data?.imagePath || "/"} alt={data?.name} width={150} height={150} objectFit="contain" />
+              <Image src={data?.imagePath || Logo} alt={data?.name} width={150} height={150} objectFit="contain" />
             </div>
             <div className="flex-wrap w-full">
-              <h1 className="text-lg sm:text-base flex-1 sm:py-1 truncate w-full capitalize font-semibold text-m-grey-2">{data?.marketingName}</h1>
+              <h1 className="text-regularFontSize sm:text-base flex-1 sm:py-1 truncate w-full capitalize font-Roboto-Regular text-m-grey-2">{data?.marketingName}</h1>
               <div className="justify-self-end">
-                <p className="text-sm text-m-grey-1">Starting from</p>
-                <p className="font-bold flex items-center -ml-1 text-lg text-m-grey-1">
+                <p className="text-smallFontSize font-Roboto-Light text-m-grey-1">Starting from</p>
+                <p className="font-Roboto-Bold flex items-center -ml-1 text-xlFontSize text-m-green">
                   {(data?.startingFrom && <BiRupee />) || <>&nbsp;</>} {numberWithCommas(data?.startingFrom || "")}
                   {(data?.listingPrice && <BiRupee />) || <>&nbsp;</>} {numberWithCommas(data?.listingPrice || "")}
                 </p>

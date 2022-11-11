@@ -9,6 +9,7 @@ import Title from "../Title";
 import { useContext } from "react";
 import AppContext from "@/context/ApplicationContext";
 import { GrLocation } from "react-icons/gr";
+import { MdLocationOn } from "react-icons/md";
 
 const menus = [
   {
@@ -110,16 +111,16 @@ function DesktopMenu({ menuItems }) {
   return (
     <nav className="px-0 h-9 bg-m-green-1 bg-no-repeat flex flex-row justify-between">
       <span
-        className="text-white px-52 flex flex-row justify-start">
-        {/* <GrLocation /> */}
+        className="text-white mt-0.5 pl-52 flex flex-row justify-start hover:cursor-pointer"
+        onClick={() => setOpenLocationPopup(true)}>
+        <MdLocationOn className="mt-1.5 mr-1 text-[#fffffff]" />
         <Title
-          onClick={() => setOpenLocationPopup(true)}
           location={`${getSearchLocation} ${getSearchLocation != "India" ? " ,India" : ""}`}
           color={"white"}
-          fontsize={"xs"}
+          fontsize={"mediumFontSize"}
         />
       </span>
-      <span><Popover.Group className=" container hidden  lg:flex items-center  pt-[7px] text-xs font-light m-auto  justify-end text-m-white pr-40">
+      <span><Popover.Group className=" container hidden  lg:flex items-center  pt-[7px] text-mediumFontSize font-Roboto-Light m-auto  justify-end text-m-white pr-40">
         {menus.map((item, index) =>
           item && item.options ? (
             <Popover key={item.name}>

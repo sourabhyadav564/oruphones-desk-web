@@ -88,7 +88,7 @@ function TopDeals({ location }) {
   }, [location]);
 
   return (
-    <section className="container pt-[57px] px-20 top_deals">
+    <section className="container pt-[25px] px-20 top_deals">
       <Title
         text={`Best Deals Near You`}
         onClick={() => setOpenLocationPopup(true)}

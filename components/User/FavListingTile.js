@@ -8,6 +8,7 @@ import verifiedIcon from "../../assets/verified.svg";
 import unVerifiedIcon from "../../assets/unverified.svg";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
+import Logo from "@/assets/oru_phones_logo.png"
 
 function FavListingTile({ data, setProducts }) {
   const [frontImagePath, setFrontImagePath] = useState();
@@ -80,7 +81,7 @@ function FavListingTile({ data, setProducts }) {
         {data?.images && (
           <div className="flex justify-center w-32 h-24">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath}
+              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%" }}
             />

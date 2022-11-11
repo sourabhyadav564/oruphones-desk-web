@@ -224,7 +224,7 @@ function LocationPopup({ open, setOpen }) {
                 style={{ height: 235 }}
               >
                 <div className="flex justify-between items-center absolute top-2 left-4 right-4 z-40">
-                  <span className="text-black-20 text-lg capitalize">
+                  <span className="text-black-20 text-xl2FontSize font-Roboto-Semibold capitalize">
                     {" "}
                     Location{" "}
                   </span>
@@ -257,8 +257,8 @@ function LocationPopup({ open, setOpen }) {
                       ></Select>
                     </div>
                   </div>
-                  <span className="my-5 block text-m-grey-1">or</span>
-                  <p className="text-lg text-black-20"> Pick from below </p>
+                  <span className="my-5 block text-m-grey-1 text-xlFontSize font-Roboto-Light">or</span>
+                  <p className="text-lg text-black-20 text-xl2FontSize font-Roboto-Regular"> Pick from below </p>
                 </div>
               </div>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -269,7 +269,7 @@ function LocationPopup({ open, setOpen }) {
                       // .slice(0, 9)
                       .map((items) => (
                         <div
-                          className={`border rounded px-0 py-3 ${selectedCity.current === items.city &&
+                          className={`border rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${selectedCity.current === items.city &&
                             "border-m-green"
                             }`}
                           key={items.city}

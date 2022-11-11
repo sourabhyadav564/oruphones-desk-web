@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import Logo from "@/assets/oru_phones_logo.png"
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
   <BiChevronLeft {...rest} className={`prev ${className}`} />
@@ -57,7 +58,7 @@ function ImageSlider({ images, openFullImage }) {
               <Fragment key={index}>
                 <Image
                   priority
-                  src={img?.fullImage}
+                  src={img?.fullImage || Logo}
                   alt={index}
                   width={"100%"}
                   height={"90%"}
@@ -78,7 +79,7 @@ function ImageSlider({ images, openFullImage }) {
           <Fragment>
             <Image
               priority
-              src={images?.fullImage}
+              src={images?.fullImage || Logo}
               width={"100%"}
               height={"90%"}
               layout="responsive"
@@ -100,7 +101,7 @@ function ImageSlider({ images, openFullImage }) {
               .map((img, index) => (
                 <Fragment key={index}>
                   <Image
-                    src={img?.thumbImage || img.fullImage}
+                    src={img?.thumbImage || img.fullImage || Logo}
                     width={"100%"}
                     height={"100%"}
                     layout="responsive"
@@ -117,7 +118,7 @@ function ImageSlider({ images, openFullImage }) {
             ref={(slider) => setSlider2(slider)}
           >
             <Image
-              src={images?.thumbImage || images?.fullImage}
+              src={images?.thumbImage || images?.fullImage || Logo}
               width={"100%"}
               height={"100%"}
               layout="responsive"

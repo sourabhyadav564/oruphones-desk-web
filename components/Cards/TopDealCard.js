@@ -67,7 +67,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
             {data?.listingPrice && <BiRupee size={20} />}{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
-          <h1 className=" text-regularFontSize flex-1 w-full opacity-100 text-black-1 font-Roboto-Light">
+          <h1 className=" text-regularFontSize flex-1 w-full opacity-100 text-black-1 font-Roboto-Light truncate">
             {data?.marketingName}
           </h1>
 

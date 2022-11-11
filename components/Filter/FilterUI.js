@@ -7,30 +7,30 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
   const handleChange = (e, value) => {
     const { checked } = e.target;
 
-    if(optionObj && optionObj.id === "verification") {
-      if(checked){
-        setter((prev) =>  (prev && [...prev, value]) || [value]);
+    if (optionObj && optionObj.id === "verification") {
+      if (checked) {
+        setter((prev) => (prev && [...prev, value]) || [value]);
       }
       else {
         setter((prev) => prev && prev.length > 0 && prev?.filter((item) => item !== value));
       }
-    }else {
-      if (checked) {
-      if (value === "all") {
-        setter(optionObj?.options.map((i) => i.value));
-      } else {
-        setter((prev) => {
-          return prev?.length + 2 === optionObj?.options.length ? [...prev, value, "all"] : (prev && [...prev, value]) || [value];
-        });
-      }
     } else {
-      if (value === "all") {
-        setter([]);
+      if (checked) {
+        if (value === "all") {
+          setter(optionObj?.options.map((i) => i.value));
+        } else {
+          setter((prev) => {
+            return prev?.length + 2 === optionObj?.options.length ? [...prev, value, "all"] : (prev && [...prev, value]) || [value];
+          });
+        }
       } else {
-        setter((prev) => prev && prev.length > 0 && prev?.filter((item) => item !== value && item !== "all"));
+        if (value === "all") {
+          setter([]);
+        } else {
+          setter((prev) => prev && prev.length > 0 && prev?.filter((item) => item !== value && item !== "all"));
+        }
       }
     }
-  }
   };
 
   return (
@@ -39,8 +39,8 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
         <Fragment>
           <h3 className="-my-3 flow-root">
             <Disclosure.Button className="py-3  w-full flex items-center justify-between text-sm text-gray-900 hover:text-gray-500">
-              <p className="font-medium text-gray-900 flex items-center">{optionObj?.name}
-              {openPopup && <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e)=>{e.stopPropagation();e.preventDefault(); openPopup()}} />}
+              <p className="font-Roboto-Regular text-regularFontSize text-m-green flex items-center">{optionObj?.name}
+                {openPopup && <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />}
               </p>
               <span className="ml-6 flex items-center">
                 {open ? <FiMinus className="h-5 w-5" aria-hidden="true" /> : <FiPlus className="h-5 w-5" aria-hidden="true" />}
@@ -50,7 +50,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
           <Disclosure.Panel className="pt-6">
             <div className="space-y-4">
               {optionObj?.options.map((option, optionIdx) => (
-                <div key={option.value} className="flex items-center">
+                <div key={option.value} className="flex items-center font-Roboto-Light text-smallFontSize">
                   <input
                     id={`filter-${optionObj?.id}-${optionIdx}`}
                     name={`${optionObj?.id}`}

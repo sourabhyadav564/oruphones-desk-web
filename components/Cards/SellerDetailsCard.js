@@ -7,6 +7,7 @@ import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccessPopup";
 import Cookies from "js-cookie";
+import { CgProfile } from "react-icons/cg";
 
 function SellerDetailsCard({ data }) {
   const [showNumber, setShowNumber] = useState(false);
@@ -60,29 +61,38 @@ function SellerDetailsCard({ data }) {
 
   return (
     <div className="seller-info">
-      <div className="p-4 pb-2">
-        <h1 className="text-lg text-black-20 font-semibold capitalize mb-2">
+      <div className="pr-4 py-2">
+        <h1 className="text-mediumFontSize text-black-20 font-Roboto-Light capitalize mb-2">
           Seller Details
         </h1>
+        <div className="pb-4">
+          <div className="bg-gray-600 h-1 border-2"></div>
+        </div>
         {data?.isOtherVendor === "N" || data?.isOtherVendor === null ? (
-          <div>
-            <p className="text-m-grey-2 font-bold leading-4">
-              {data?.listedBy}
-            </p>
-            <span className="text-gray-2 text-sm inline-block">
-              {data?.listingLocation}
+          <div className="flex flex-row justify-start">
+            <CgProfile size={40} />
+            <span className="pl-2">
+              <div className="flex flex-row items-end">
+                <div>
+                  <p className="text-grey2 font-Roboto-Bold text-regularFontSize leading-4">
+                    {data?.listedBy}
+                  </p>
+                  <span className="text-gray-2 font-Roboto-Light text-mediumFontSize text-sm inline-block">
+                    {data?.listingLocation}
+                  </span>
+                </div>
+                <button
+                  onClick={() => handleClick()}
+                  className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
+                    } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end`}
+                >
+                  {showNumber ? contactSellerMobileNumber : "Contact Seller"}
+                </button>
+              </div>
             </span>
-            <button
-              onClick={() => handleClick()}
-              className={`${
-                !showNumber ? "bg-m-green text-white" : "text-m-green"
-              } text-base border border-m-green font-semibold w-full uppercase px-4 py-2 my-4 rounded`}
-            >
-              {showNumber ? contactSellerMobileNumber : "Contact Seller"}
-            </button>
           </div>
         ) : (
-          <div>
+          <div className="flex flex-row">
             {data?.vendorLogo && (
               <Image
                 src={data?.vendorLogo || "/"}
@@ -93,7 +103,7 @@ function SellerDetailsCard({ data }) {
             )}
             <button
               onClick={() => openSellerWebSite(data?.vendorLink)}
-              className="bg-m-green text-base font-semibold text-white w-full uppercase px-4 py-2 my-4 rounded"
+              className="bg-m-green text-base font-semibold text-white w-full uppercase pr-4 mx-4 py-2 my-4 rounded"
             >
               VIEW WEBSITE
             </button>
@@ -101,9 +111,9 @@ function SellerDetailsCard({ data }) {
         )}
       </div>
       {otherSeller && otherSeller.length > 0 && (
-        <div className="px-2">
-          <h1 className="text-lg text-black-20 font-semibold capitalize mb-2">
-            Other Seller
+        <div className="pr-2">
+          <h1 className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">
+            Compare from Other Sellers
           </h1>
           <div className="flex flex-col overflow-y-auto">
             {otherSeller.map((items, index) => (
@@ -139,37 +149,37 @@ export default SellerDetailsCard;
 const OtherSeller = ({ data }) => {
   return (
     <>
-    {/* {data?.map((item, index) => ( */}
-    <div
-      className="my-1 rounded p-2 flex justify-between flex-shrink-0 shadow-sm"
-      // key={index}
-      style={{ border: "1px solid #EFEFEF" }}
-    >
-      <div className="flex flex-col">
-        <span className="text-xs text-m-grey-2">Price</span>
-        {data.externalSourcePrice && (
-          <span className="text-2xl text-m-grey-1 h-9 font-semibold flex items-center -ml-1">
-            <BiRupee /> {numberWithCommas(data.externalSourcePrice)}
+      {/* {data?.map((item, index) => ( */}
+      <div
+        className="my-0.5 p-2 flex justify-between flex-shrink-0 shadow-sm rounded-xl"
+        // key={index}
+        style={{ background: "#EFEFEF" }}
+      >
+        <div className="flex flex-col justify-center items-start">
+          {/* <span className="text-xs text-m-grey-2">Seller</span> */}
+          <span className="my-1 w-28">
+            {data.externalSourceImage && (
+              <img
+                src={data.externalSourceImage}
+                alt={data.externalSourceName || "seller"}
+                // width={120}
+                // height={32}
+                // objectFit="contain"
+                style={{ height: 35, width: "auto" }}
+              />
+            )}
           </span>
-        )}
-      </div>
-      <div className="flex flex-col justify-center items-start">
-        <span className="text-xs text-m-grey-2">Seller</span>
-        <span className="my-1 w-28">
-          {data.externalSourceImage && (
-            <img
-              src={data.externalSourceImage}
-              alt={data.externalSourceName || "seller"}
-              // width={120}
-              // height={32}
-              // objectFit="contain"
-              style={{ height: 33, width: "auto" }}
-            />
+        </div>
+        <div className="flex flex-col items-center justify-center pr-4">
+          {/* <span className="text-xs text-m-grey-2">Price</span> */}
+          {data.externalSourcePrice && (
+            <span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
+              <BiRupee /> {numberWithCommas(data.externalSourcePrice)}
+            </span>
           )}
-        </span>
+        </div>
       </div>
-    </div>
-        {/* ))} */}
+      {/* ))} */}
     </>
   );
 };

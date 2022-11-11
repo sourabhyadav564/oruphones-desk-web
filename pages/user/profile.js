@@ -38,7 +38,7 @@ function Profile() {
   return (
     <UserProfile className="mb-10">
       <div className="px-12 py-4">
-        <h1 className="text-lg py-3"> Profile Information </h1>
+        <h1 className="text-xl2FontSize font-Roboto-Semibold py-3"> Profile Information </h1>
         <form className="mt-4 grid grid-cols-2 gap-8" onSubmit={handleSubmit}>
           <Input
             type="text"
@@ -67,7 +67,7 @@ function Profile() {
             Email ID
           </Input>
           <div className="row-start-4 flex justify-end col-span-2">
-            <button className={`px-12 rounded text-white uppercase py-2 ${saveChange ? "bg-m-green" : "bg-gray-1"} hover:bg-m-green`}>Save</button>
+            <button className={`px-12 rounded text-white text-regularFontSize font-Roboto-Semibold uppercase py-2 ${saveChange ? "bg-m-green" : "bg-gray-1"} hover:bg-m-green`}>Save</button>
           </div>
         </form>
       </div>

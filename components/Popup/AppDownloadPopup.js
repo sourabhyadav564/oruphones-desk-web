@@ -66,8 +66,8 @@ function AppDownloadPopup({ open, setOpen }) {
                 className="cursor-pointer absolute right-3 top-3"
               />
               <div className="z-20 relative px-8 py-4 w-8/12 text-black-20">
-                <h1 className="font-bold mb-4"> Just one more step </h1>
-                <ul className="list-disc text-sm flex flex-col space-y-4 px-4">
+                <h1 className="font-Roboto-Bold text-xl2FontSize mb-4"> Just one more step </h1>
+                <ul className="list-disc text-mediumFontSize font-Roboto-Regular flex flex-col space-y-4 px-4">
                   <li>
                     Interact directly with the buyers and sellers of latest
                     mobile phones and save yourself the extra commission on

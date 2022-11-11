@@ -71,7 +71,7 @@ export default function Home({
     } else {
       const data = await Axios.fetchMakeModelList(
         Cookies.get("userUniqueId") || "Guest",
-        Cookies.get("sessionId") || ""
+        Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") || ""
       );
       let makeModelLists = data?.dataObject;
       if (makeModelLists) {

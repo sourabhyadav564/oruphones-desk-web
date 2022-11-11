@@ -18,8 +18,8 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
 
   return (
     <React.Fragment>
-      <div className="flex justify-between items-center">
-        {listingsCount && listingsCount > 0 ? <h1> {listingsCount && `Total listings (${listingsCount || "..."}) `}</h1> : <span></span>}
+      <div className="flex justify-end items-center">
+        {/* {listingsCount && listingsCount > 0 ? <h1> {listingsCount && `Total listings (${listingsCount || "..."}) `}</h1> : <span></span>} */}
         <Sort sortOptions={sortOptions} setApplySort={setApplySort} filterOptions={filterOptions} />
       </div>
       <section aria-labelledby="products-heading" className="">

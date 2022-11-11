@@ -14,10 +14,17 @@ import {
 import { useRecoilState } from "recoil";
 import AppDownloadPopup from "../Popup/AppDownloadPopup";
 import { useState } from "react";
+import { FiMail } from "react-icons/fi";
 
 const Footer = () => {
   const [addListingBrand, setAddListingBrand] = useRecoilState(addListingBrandState);
   const [openAppDownload, setOpenAppDownload] = useState(false);
+  const [qrValue1, setQrValue1] = useState(
+    "https://apps.apple.com/in/app/oruphones/id1629378420"
+  );
+
+  const [qrValue2, setQrValue2] = useState("https://play.google.com/store/apps/details?id=com.oruphones.oru");
+
   const brandData = [
     {
       id: 1,
@@ -179,7 +186,7 @@ const Footer = () => {
 
   return (
     <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
-      <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center">
+      <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
         <p className='text-white'>
           {brandData && brandData.map((brand, index) => (
             <a className="hover:underline"
@@ -192,49 +199,54 @@ const Footer = () => {
       </div></div>
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">
         <div className="flex flex-col">
-          <h1 className="font-bold">Customer Service</h1>
+          <h1 className="font-Roboto-Semibold text-xlFontSize">Customer Service</h1>
           <Link href="/privacy-policy">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max">Privacy policy</a>
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
           </Link>
           <Link href="/terms">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max">
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
               Terms of service
             </a>
           </Link>
           <Link href="/faq">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max">FAQs</a>
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">FAQs</a>
           </Link>
         </div>
         <div className="flex flex-col">
-          <h1 className=" font-bold">Links</h1>
+          <h1 className="font-Roboto-Semibold text-xlFontSize">Links</h1>
           <Link href="https://www.oruphones.com/blog/">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max" target="_blank">Blog</a>
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
           </Link>
           <Link href="/about-us">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max">About Us</a>
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">About Us</a>
           </Link>
           <Link href="/contact-us">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max">Contact Us</a>
+            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
           </Link>
         </div>
         <div>
           <div className="flex flex-col">
-            <h1 className="font-bold">Email Us</h1>
-            <a
-              href="mailto:contact@oruphones.com?subject = Feedback"
-              className="hover:pl-2 delay-75 mt-4 max-w-max"
-            >
-              contact@oruphones.com
-            </a>
+            <h1 className="font-Roboto-Semibold text-xlFontSize">DOWNLOAD ORUphones App</h1>
+            <div className="flex flex-row">
+              <span target={"_blank"} rel="noreferrer" href={qrValue2}>
+                <p className="w-32 mt-2 mb-2 mr-2 h-10 bg-play-store bg-no-repeat bg-contain" />
+              </span>
+              <span target={"_blank"} rel="noreferrer" href={qrValue1}>
+                <p className="w-32 mt-2 mb-2 ml-2 h-10 bg-app-store bg-no-repeat bg-contain" />
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-x-4 mt-4 ">
+          <div>
+            Follow us on Social Media
+          </div>
+          <div className="flex items-center gap-x-1 mt-4 ">
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
               <a
                 href="https://www.facebook.com/ORUphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaFacebookSquare />
+                <FaFacebookSquare size={25} />
               </a>
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
@@ -243,7 +255,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaTwitterSquare />
+                <FaTwitterSquare size={25} />
               </a>
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
@@ -252,7 +264,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaInstagram />
+                <FaInstagram size={25} />
               </a>
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
@@ -261,7 +273,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaPinterestSquare />
+                <FaPinterestSquare size={25} />
               </a>
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
@@ -270,7 +282,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaLinkedin />
+                <FaLinkedin size={25} />
               </a>
             </div>
             <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
@@ -279,14 +291,23 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYoutube />
+                <FaYoutube size={25} />
+              </a>
+            </div>
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+              <a
+                href="mailto:contact@oruphones.com?subject = Feedback"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FiMail size={25} />
               </a>
             </div>
           </div>
         </div>
       </div>
       <AppDownloadPopup open={openAppDownload} setOpen={setOpenAppDownload} />
-    </footer>
+    </footer >
   );
 };
 

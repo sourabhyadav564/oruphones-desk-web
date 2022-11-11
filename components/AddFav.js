@@ -95,7 +95,7 @@ function AddFav({ data, setProducts, ...rest }) {
     //   />
     // </svg>
     // authenticated ? 
-    (<AiFillHeart
+    (<AiOutlineHeart
       className="hover:cursor-pointer"
       color="#FF0000"
       size='18px'

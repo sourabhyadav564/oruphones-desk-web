@@ -10,12 +10,12 @@ const ConditionOptionLarge = ({
   return (
     <div
       className={`${conditionResults?.[questionIndex] == title && "bg-gray-200"
-        } my-4 hover:cursor-pointer p-2 rounded-md border-2 border-gray-200 active:opacity-50 duration-300 hover:bg-gray-200`}
+        } my-4 hover:cursor-pointer p-2 rounded-md border-2 border-gray-200 active:opacity-50 duration-300 hover:bg-gray-200 font-Roboto-Light text-mediumFontSize`}
     >
-      <div className="flex items-center space-x-3">
+      <span className="flex items-center space-x-3">
         <BsInfoCircle />
         <h1 className="font-semibold">{title}</h1>
-      </div>
+      </span>
       {options &&
         options.length > 0 &&
         conditionResults?.[questionIndex] == title &&

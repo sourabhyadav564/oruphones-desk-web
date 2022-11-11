@@ -129,19 +129,19 @@ function ProductDetails({ listingInfo }) {
     <main className="container my-6">
       <h1 className="sr-only"> Product Details page </h1>
       <section className="grid grid-cols-4 gap-4">
-        <div className="bg-white col-span-3 shadow rounded p-6">
+        <div className="bg-white col-span-5">
           <ProductDetailsCard
             key={listingInfo?.listingId}
             data={listingInfo}
             openFullImage={() => setOpenImageFullView(true)}
           />
         </div>
-        <div className="bg-white shadow rounded">
+        {/* <div className="bg-white shadow rounded">
           <SellerDetailsCard data={listingInfo} />
-        </div>
+        </div> */}
         <div className="col-span-4">
           <h1
-            className="text-m-black font-semibold my-3"
+            className="text-m-black font-Roboto-Light text-regularFontSize my-3"
             style={{ fontSize: 21 }}
           >
             Similar Products ({simliarProducts?.length || 0})
@@ -167,7 +167,7 @@ function ProductDetails({ listingInfo }) {
                 />
               ))
             ) : (
-              <div className="text-center pt-2 col-span-4 h-20">
+              <div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">
                 There are no similar products
               </div>
             )}

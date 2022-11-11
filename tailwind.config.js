@@ -13,9 +13,14 @@ module.exports = {
     },
     extend: {
       fontSize: {
+        xl6FontSize: '40px',
+        xl5FontSize: '30px',
+        xl4FontSize: '25px',
+        xl3FontSize: '24px',
         xl2FontSize: '20px',
         xlFontSize: '18px',
         regularFontSize: '16px',
+        mediumFontSize: '14px',
         smallFontSize: '12px',
         xs2FontSize: '10px',
         xsFontSize: '8px',
@@ -53,7 +58,10 @@ module.exports = {
         "gray-1f": "#0000001F",
         "gray-ef": "#EFEFEF",
         "m-blue": "#0006A5",
-        "m-blue-1": "#000944"
+        "m-blue-1": "#000944",
+        yellow2: "#F9C414",
+        green2: "#4CAF50",
+        grey2: "#878787",
       },
       backgroundImage: {
         "sell-step": "url('../assets/bg_buy_step.png')",

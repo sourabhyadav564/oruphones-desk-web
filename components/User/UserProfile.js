@@ -66,9 +66,8 @@ function UserProfile({ children, className }) {
                   layout="fill"
                   objectFit="contain"
                   priority
-                  className={`hover:cursor-pointer ${
-                    UserProfileIcon && "rounded-full"
-                  }`}
+                  className={`hover:cursor-pointer ${UserProfileIcon && "rounded-full"
+                    }`}
                 />
               </label>
               <input
@@ -80,8 +79,8 @@ function UserProfile({ children, className }) {
               />
             </div>
             <p className="text-m-white my-2.5 ml-10" style={{ fontSize: 32 }}>
-              <span className="font-light"> Welcome </span>{" "}
-              <span className="font-bold"> {authUserData?.name} </span>
+              <span className="font-Roboto-Light text-xl5FontSize"> Welcome </span>{" "}
+              <span className="font-Roboto-Bold text-xl5FontSize"> {authUserData?.name} </span>
             </p>
           </div>
         </div>
@@ -90,7 +89,7 @@ function UserProfile({ children, className }) {
         className={`container grid grid-cols-4 py-4 gap-4 ${className || ""}`}
       >
         <div className="bg-white shadow rounded text-black-60 p-4 flex flex-col h-96">
-          <p className="py-2 px-4 uppercase"> Account </p>
+          <p className="py-2 px-4 uppercase font-Roboto-Regular text-regularFontSize"> Account </p>
           <NavListItem text="My Profile" link="/user/profile" />
           <NavListItem text="My Listings" link="/user/listings" />
           <NavListItem text="My Favorites" link="/user/favorites" />
@@ -118,9 +117,8 @@ const NavListItem = ({ text, link, onClick }) => {
   return (
     <Link href={link} passHref>
       <a
-        className={`px-4 py-2 my-1 hover:bg-gray-100 rounded text-black-60 ${
-          router.pathname == link && "bg-gray-100"
-        }`}
+        className={`px-4 py-2 my-1 font-Roboto-Light text-mediumFontSize hover:bg-gray-100 rounded text-black-60 ${router.pathname == link && "bg-gray-100"
+          }`}
         onClick={onClick}
       >
         {text}
