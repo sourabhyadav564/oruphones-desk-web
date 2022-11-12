@@ -10,6 +10,7 @@ import banner_4 from "../../assets/banner_4.png";
 import Carousel from "../Carousel";
 import QRCode from "qrcode.react";
 import { useState } from "react";
+import AppDownloadPopup from "../Popup/AppDownloadPopup";
 
 const tutorialSteps = {
   id: 0,
@@ -21,6 +22,7 @@ const tutorialSteps = {
 };
 
 export default function Hero() {
+  const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);
   const [qrValue1, setQrValue1] = useState(
     "https://apps.apple.com/in/app/oruphones/id1629378420"
   );
@@ -28,6 +30,10 @@ export default function Hero() {
   const [qrValue2, setQrValue2] = useState(
     "https://play.google.com/store/apps/details?id=com.oruphones.oru"
   );
+
+  const handleClick = () => {
+    setShowAppDownloadPopup(true);
+  };
 
   return (
     // <section className="min-h-80 mb-4 bg-sell-step bg-no-repeat bg-cover">
@@ -68,9 +74,11 @@ export default function Hero() {
       {/* <Carousel> */}
 
       <Image
+        className="hover:cursor-pointer"
         src={banner_4}
         alt="BannerImage"
         priority
+        onClick={() => handleClick()}
       // width="100%"
       // height="90%"
       // layout="responsive"
@@ -106,6 +114,7 @@ export default function Hero() {
           />
         </div> */}
       {/* </Carousel> */}
+      <AppDownloadPopup open={showAppDownloadPopup} setOpen={setShowAppDownloadPopup} />
     </section>
   );
 }

@@ -24,6 +24,11 @@ const initialState = [
   //   options: [],
   // },
   {
+    id: "Ram",
+    name: "Ram(GB)",
+    options: [],
+  },
+  {
     id: "storage",
     name: "Storage(GB)",
     options: [],
@@ -85,17 +90,17 @@ const useFilterOptions = () => {
                 ],
               };
             }
-            // else if (item.id === "color") {
-            //   return {
-            //     ...item,
-            //     options: [
-            //       { value: "all", label: "All", checked: false },
-            //       ...res?.dataObject?.Color.map((items) => {
-            //         return { value: items, label: items, checked: false };
-            //       }),
-            //     ],
-            //   };
-            // } 
+            else if (item.id === "Ram") {
+              return {
+                ...item,
+                options: [
+                  { value: "all", label: "All", checked: false },
+                  ...res?.dataObject?.Ram.map((items) => {
+                    return { value: items, label: items, checked: false };
+                  }),
+                ],
+              };
+            }
             else if (item.id === "warranty") {
               return {
                 ...item,

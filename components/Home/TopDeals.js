@@ -25,6 +25,7 @@ function TopDeals({ location }) {
   let [pageNumber, setPageNumber] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [myFavListings, setMyFavListings] = useState([]);
 
   // console.log(bestDeals);
 
@@ -44,6 +45,12 @@ function TopDeals({ location }) {
         setLoading(false);
       });
     };
+    if (Cookies.get("userUniqueId") != undefined && Cookies.get("userUniqueId") != "" && Cookies.get("userUniqueId") != "Guest") {
+      Axios.fetchMyFavorites(Cookies.get("userUniqueId")).then((res) => {
+        console.log("userUniqueId", res);
+        setMyFavListings(res.dataObject.map((item2) => item2.listingId));
+      });
+    }
     if (location != undefined) {
       fetchNestDealsNearByMe();
     }
@@ -114,7 +121,7 @@ function TopDeals({ location }) {
       ) : (
         <div className="space-y-3">
           <Spinner />
-          <div className="text-center">
+          <div className="text-center text-xlFontSize font-Roboto-Regular">
             Please wait, while we are fetching data for you...{" "}
           </div>
         </div>
@@ -129,7 +136,7 @@ function TopDeals({ location }) {
             // query: prodLink && { isOtherVendor: data?.isOtherVendor },
           }}
         >
-          <p className="flex justify-center w-full items-center font-semibold pb-[61px] text-m-blue underline">
+          <p className="flex justify-center w-full items-center font-semibold p-5 text-m-blue underline hover:cursor-pointer">
             {isLoadingMore ? "Fetching more products..." : "View All >"}
           </p>
         </Link>

@@ -261,7 +261,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             </div>
 
             {data?.isOtherVendor === "Y" ? (
-              <div className="grid grid-cols-3 gap-x-0 gap-y-2 pl-36 pr-24">
+              <div className="grid grid-cols-3 gap-x-0 gap-y-2 pr-24">
                 <LabelAndValue
                   label="Condition"
                   value={data?.deviceCondition || "--"}
@@ -381,7 +381,7 @@ function ProductDetailsCard({ data, openFullImage }) {
               </div>
             )}
           </div>
-          {data?.verified && (
+          {data?.functionalTestResults && (
             <div className="text-gray-20 font-Roboto-Light text-regularFontSize my-3 ">
               <span>
                 Device Verification Report

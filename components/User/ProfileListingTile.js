@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import Cookies from "js-cookie";
+import Logo from "@/assets/oru_phones_logo.png"
 
 function ProfileListingTile({ data, fromMyFav, setProducts }) {
   const router = useRouter();
@@ -75,7 +76,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           <div className="flex justify-center w-32 h-24 pr-4">
             <img
               src={frontImagePath}
-              alt={data?.marketingName}
+              alt={data?.marketingName || Logo}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
           </div>
@@ -84,7 +85,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         {!data?.images && (
           <div className="flex justify-center w-32 h-24 pr-4">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath}
+              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
@@ -94,7 +95,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         {data?.images && (
           <div className="flex justify-center w-32 h-24 pr-4">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath}
+              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
@@ -102,12 +103,12 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         )}
 
         <div>
-          <h1 className="uppercase text-sm font-bold text-m-grey-1 my-1.5">
+          <h1 className="text-mediumFontSize font-Roboto-Semibold text-m-grey-1 my-1.5">
             {" "}
             {data?.marketingName}​{" "}
           </h1>
-          <span className="text-m-grey-2 text-sm">List Price</span>
-          <p className="flex items-center font-bold text-xl text-m-grey-1">
+          {/* <span className="text-m-grey-2 text-sm">List Price</span> */}
+          <p className="flex items-center font-Roboto-Bold text-xl2FontSize text-m-grey-1">
             {data?.listingPrice && <BiRupee className="h-full" />}{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
@@ -130,7 +131,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           value={data?.listingDate === null ? "--" : data?.listingDate}
         />
       </div>
-      <div className="flex flex-col justify-between items-end pr-2">
+      <div className="flex flex-col justify-between items-end pr-2 font-Roboto-Semibold text-smallFontSize">
         {/* <Image src={chartIcon} width={15} height={15} alt="Chart Icon" className="cursor-pointer" /> */}
         {/* <div
           className="listing-tile dropdown inline-block relative"

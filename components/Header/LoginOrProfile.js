@@ -6,9 +6,12 @@ import AuthContext from "@/context/AuthContext";
 import AppContext from "@/context/ApplicationContext";
 import Notifications from "../Notifications";
 import Cookies from "js-cookie";
+import { getAllNotificationByUserd } from "api/axios";
 
 function LoginOrProfile() {
   const [showLogin, setShowLogin] = React.useState(false);
+  const [unreadNotificationsCount, setUnreadNotificationsCount] = useState();
+  const [notifications, setNotifications] = useState();
   const [userAuthenticated, setUserAuthenticated] = useState(false);
 
   const { logout } = useContext(AuthContext);
@@ -24,11 +27,28 @@ function LoginOrProfile() {
     return () => { };
   });
 
+  useEffect(() => {
+    getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
+      setNotifications(response?.dataObject?.notifications);
+      console.log(response?.dataObject);
+      setUnreadNotificationsCount(
+        response?.dataObject?.unReadCount
+      );
+    });
+  }, []);
+
   return (
     <React.Fragment className="z-50">
       {userAuthenticated ? (
-        <div className="flex space-x-4 items-center h-full w-20">
+        <div className="flex space-x-1 items-center h-full w-20">
           <Notifications />
+          {/* <span>
+            {(
+              <span className="absolute mr-16 text-smallFontSize font-Roboto-Semibold text-m-green rounded-full flex items-center justify-center">
+                {unreadNotificationsCount}
+              </span>
+            )}
+          </span> */}
           <div className="relative inline-block group">
             <FaRegUserCircle
               size={30}

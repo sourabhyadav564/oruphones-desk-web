@@ -31,12 +31,12 @@ function LabelAndValue({ label, value }) {
           ) : (
             ""
           )}
-          <span className="text-xs whitespace-nowrap ml-2" style={{ color: "#7E7E7E" }}>
+          <span className="text-smallFontSize font-Roboto-Light whitespace-nowrap ml-2" style={{ color: "#7E7E7E" }}>
             {label}
           </span>
         </div>
         <div className="flex-1 text-black-60">
-          <p className="text-sm whitespace-nowrap">{value}</p>
+          <p className="text-mediumFontSize font-Roboto-Regular whitespace-nowrap">{value}</p>
         </div>
       </div>
     );

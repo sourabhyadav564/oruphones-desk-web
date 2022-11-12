@@ -86,7 +86,7 @@ function BestDealsCard({ data, setProducts }) {
             <div className="flex absolute pt-4">
               {data?.isOtherVendor === "Y" ? (
                 <div className="px-2">
-                  <h2 className="font-semibold text-lg text-black-20">
+                  {/* <h2 className="font-semibold text-lg text-black-20">
                     {" "}
                     Seller Details{" "}
                   </h2>
@@ -98,7 +98,7 @@ function BestDealsCard({ data, setProducts }) {
                       objectFit="contain"
                       alt={data?.marketingName}
                     />
-                  </p>
+                  </p> */}
                 </div>
               ) : (
                 <div />

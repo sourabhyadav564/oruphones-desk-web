@@ -10,11 +10,13 @@ import VerificationFilter from "./VerificationFilter";
 import { useRouter } from "next/router";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
+import RamFilter from "./RamFilter";
 
 const DesktopFilter = ({ setFilters, filterOptions }) => {
   const [selectedBrand, setSelectedBrand] = useState();
   const [selectedCondition, setSelectedCondition] = useState();
   const [selectedColor, setSelectedColor] = useState();
+  const [selectedRam, setSelectedRam] = useState();
   const [selectedStorage, setSelectedStorage] = useState();
   const [selectedWarranty, setSelectedWarranty] = useState();
   const [selectedVerification, setSelectedVerification] = useState();
@@ -37,6 +39,10 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   }, [selectedColor]);
 
   useEffect(() => {
+    setFilters((prev) => ({ ...prev, color: selectedRam?.filter((val) => val !== "all") }));
+  }, [selectedRam]);
+
+  useEffect(() => {
     setFilters((prev) => ({ ...prev, storage: selectedStorage?.filter((val) => val !== "all") }));
   }, [selectedStorage]);
 
@@ -45,12 +51,12 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   }, [selectedWarranty]);
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, verification: selectedVerification?.includes("all")?[]:selectedVerification}));
+    setFilters((prev) => ({ ...prev, verification: selectedVerification?.includes("all") ? [] : selectedVerification }));
   }, [selectedVerification]);
 
   useEffect(() => {
-    if(selectedPriceRange && selectedPriceRange.min && selectedPriceRange.max && selectedPriceRange.min < selectedPriceRange.max){
-      setFilters((prev) => ({ ...prev, priceRange: selectedPriceRange}));
+    if (selectedPriceRange && selectedPriceRange.min && selectedPriceRange.max && selectedPriceRange.min < selectedPriceRange.max) {
+      setFilters((prev) => ({ ...prev, priceRange: selectedPriceRange }));
     }
   }, [selectedPriceRange]);
 
@@ -61,15 +67,17 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
       {filterOptions &&
         filterOptions.map((section) =>
           section?.id === "price" ? (
-            <PriceFilter options={section} key={section?.id} setPriceRange={setSelectedPriceRange} router={router}/>
+            <PriceFilter options={section} key={section?.id} setPriceRange={setSelectedPriceRange} router={router} />
           ) : section?.id === "brand" ? (
             <BrandFilter options={section} key={section?.id} setter={setSelectedBrand} selected={selectedBrand} router={router} />
           ) : section?.id === "condition" ? (
-            <ConditionFilter options={section} key={section?.id} setter={setSelectedCondition} selected={selectedCondition} router={router} openPopup={()=>setOpenConditionPopup(true)}/>
+            <ConditionFilter options={section} key={section?.id} setter={setSelectedCondition} selected={selectedCondition} router={router} openPopup={() => setOpenConditionPopup(true)} />
           ) : section?.id === "color" ? (
             <ColorFilter options={section} key={section?.id} setter={setSelectedColor} selected={selectedColor} router={router} />
           ) : section?.id === "storage" ? (
             <StorageFilter options={section} key={section?.id} setter={setSelectedStorage} selected={selectedStorage} router={router} />
+          ) : section?.id === "Ram" ? (
+            <RamFilter options={section} key={section?.id} setter={setSelectedRam} selected={selectedRam} router={router} />
           ) : section?.id === "warranty" ? (
             <WarrantyFilter options={section} key={section?.id} setter={setSelectedWarranty} selected={selectedWarranty} router={router} />
           ) : section?.id === "verification" ? (
@@ -79,12 +87,12 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
               setter={setSelectedVerification}
               selected={selectedVerification}
               router={router}
-              openPopup={()=>setOpenVerificationPopup(true)}
+              openPopup={() => setOpenVerificationPopup(true)}
             />
           ) : null
         )}
-        <ConditionInfoPopup open={openConditionPopup} setOpen={setOpenConditionPopup} ></ConditionInfoPopup>
-        <VerifiedInfoPopup open={openVerificationPopup} setOpen={setOpenVerificationPopup}></VerifiedInfoPopup>
+      <ConditionInfoPopup open={openConditionPopup} setOpen={setOpenConditionPopup} ></ConditionInfoPopup>
+      <VerifiedInfoPopup open={openVerificationPopup} setOpen={setOpenVerificationPopup}></VerifiedInfoPopup>
     </form>
   );
 };

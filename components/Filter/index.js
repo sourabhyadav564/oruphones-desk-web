@@ -14,8 +14,6 @@ const sortOptions = [
 function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeName }) {
   const { filterOptions } = useFilterOptions();
 
-  // console.log("filterOptions", setApplySort);
-
   return (
     <React.Fragment>
       <div className="flex justify-end items-center">

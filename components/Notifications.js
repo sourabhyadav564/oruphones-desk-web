@@ -19,7 +19,7 @@ export default function Notifications() {
     getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
       setNotifications(response?.dataObject?.notifications);
       setUnreadNotificationsCount(
-        response?.dataObject?.totalCount - response?.dataObject?.readCount
+        response?.dataObject?.unReadCount
       );
     });
 
@@ -40,7 +40,7 @@ export default function Notifications() {
         (response) => {
           setNotifications(response?.dataObject?.notifications);
           setUnreadNotificationsCount(
-            response?.dataObject?.totalCount - response?.dataObject?.readCount
+            response?.dataObject?.unReadCount
           );
         }
       );
@@ -69,26 +69,30 @@ export default function Notifications() {
 
   return (
     <div className="relative inline-block" ref={innerRef}>
-      <div className="relative">
+      <div className="relative ">
         {/* <span className="absolute right-0 top-0">{unreadCount}</span> */}
         <MdNotificationsNone
-          size={30}
-          className="text-m-green cursor-pointer"
+          size={35}
+          className="text-m-green cursor-pointer mx-1"
           onClick={() => setShowNotification((prev) => !prev)}
         />
+        {/* {(
+          <span className="absolute top-1 ml-5 bg-white text-smallFontSize font-Roboto-Semibold text-m-green rounded-full flex items-center justify-center">
+            {unreadNotificationsCount}
+          </span>
+        )} */}
       </div>
 
       <div
-        className={`absolute z-50 transform -translate-x-1/2 left-1/2 bg-transparent custom-scroll ${
-          showNotification ? "block" : "hidden"
-        }`}
+        className={`absolute z-50 transform -translate-x-1/2 left-1/2 bg-transparent custom-scroll ${showNotification ? "block" : "hidden"
+          }`}
       >
         <div className="flex flex-col items-center">
           <div className="w-10 overflow-hidden inline-block">
             <div className="h-7 w-7 relative bg-white rotate-45 transform origin-bottom-left"></div>
           </div>
           <div className="-mt-1 flex flex-col w-96 h-72 overflow-hidden overflow-y-auto rounded-md shadow-md pb-2 border-t-4 border-transparent bg-white">
-            <p className="text-center text-lg pt-4 pb-3 font-semibold text-m-grey-1 h-auto">
+            <p className="text-center text-xlFontSize pt-4 pb-3 font-Roboto-Semibold text-m-grey-1 h-auto">
               Notification
             </p>
             {notifications && notifications.length > 0 ? (
@@ -102,7 +106,7 @@ export default function Notifications() {
                 />
               ))
             ) : (
-              <div>No notifications</div>
+              <div className="text-regularFontSize font-Roboto-Regular">No notifications</div>
             )}
           </div>
         </div>
@@ -114,9 +118,8 @@ export default function Notifications() {
 
 const NotificationsItem = ({ text, timestamp, onClick, isUnRead }) => (
   <div
-    className={`hover:cursor-pointer flex w-full border-b border-white py-2 px-4 ${
-      isUnRead ? "bg-gray-100" : ""
-    }`}
+    className={`hover:cursor-pointer flex w-full border-b border-white py-2 px-4 ${isUnRead ? "bg-gray-100" : ""
+      }`}
     onClick={onClick}
   >
     <div
@@ -126,8 +129,8 @@ const NotificationsItem = ({ text, timestamp, onClick, isUnRead }) => (
       <Image src={mob} width={30} height={30} alt="ORUphones" />
     </div>
     <div>
-      <p className="text-sm text-m-grey-1 break-words"> {text} </p>
-      <span className="text-xs" style={{ color: "#C7C7C7" }}>
+      <p className="text-sm text-m-grey-1 break-words text-mediumFontSize font-Roboto-Light"> {text} </p>
+      <span className="text-smallFontSize font-Roboto-Semibold" style={{ color: "#C7C7C7" }}>
         {timestamp}
       </span>
     </div>

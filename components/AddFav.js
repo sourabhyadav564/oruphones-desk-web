@@ -28,10 +28,11 @@ function AddFav({ data, setProducts, ...rest }) {
     const removeFavorite = async () => {
       const removeFav = await Axios.removeFavotie(data.listingId, Cookies.get("userUniqueId") || "Guest");
     };
+    console.log("data.favourite", data);
     if (data.favourite) {
-      removeFavorite();
+      data?.status == "Active" ? removeFavorite() : toast.warning("This device is sold out");
     } else {
-      addFavorite();
+      data?.status == "Active" ? addFavorite() : toast.warning("This device is sold out");
     }
   }
 
@@ -94,34 +95,34 @@ function AddFav({ data, setProducts, ...rest }) {
     //     fill={data.favourite ? "#FF0000" : "#C7C7C7"}
     //   />
     // </svg>
-    // authenticated ? 
-    (<AiOutlineHeart
-      className="hover:cursor-pointer"
-      color="#FF0000"
-      size='18px'
-      onClick={
-        (e) => {
-          e.preventDefault();
-          // !listings.includes(data.listingId) ? 
-          handleFavoties(data);
-          //  : toast.error("You can't add your own listing to your favorites");
+    Cookies.get("userUniqueId") != undefined && Cookies.get("userUniqueId") != "" && Cookies.get("userUniqueId") != "Guest" && localStorage.getItem("favoriteList") != null && localStorage.getItem("favoriteList").includes(data?.listingId) ?
+      (<AiFillHeart
+        className="hover:cursor-pointer"
+        color="#FF0000"
+        size='18px'
+        onClick={
+          (e) => {
+            e.preventDefault();
+            // !listings.includes(data.listingId) ? 
+            handleFavoties(data);
+            //  : toast.error("You can't add your own listing to your favorites");
+          }
         }
-      }
-    />)
-    //  :
-    //   (<AiOutlineHeart
-    //     className="hover:cursor-pointer"
-    //     color="#FF0000"
-    //     size='18px'
-    //     onClick={
-    //       (e) => {
-    //         e.preventDefault();
-    //         // !listings.includes(data.listingId) ? 
-    //         handleFavoties(data);
-    //         //  : toast.error("You can't add your own listing to your favorites");
-    //       }
-    //     }
-    //   />)
+      />)
+      :
+      (<AiOutlineHeart
+        className="hover:cursor-pointer"
+        color="#FF0000"
+        size='18px'
+        onClick={
+          (e) => {
+            e.preventDefault();
+            // !listings.includes(data.listingId) ? 
+            handleFavoties(data);
+            //  : toast.error("You can't add your own listing to your favorites");
+          }
+        }
+      />)
   );
 }
 

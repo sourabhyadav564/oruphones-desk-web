@@ -9,6 +9,7 @@ import unVerifiedIcon from "../../assets/unverified.svg";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 import Logo from "@/assets/oru_phones_logo.png"
+import { AiFillHeart } from "react-icons/ai";
 
 function FavListingTile({ data, setProducts }) {
   const [frontImagePath, setFrontImagePath] = useState();
@@ -61,7 +62,7 @@ function FavListingTile({ data, setProducts }) {
         {data?.images && frontImagePath && (
           <div className="flex justify-center w-32 h-24">
             <img
-              src={frontImagePath}
+              src={frontImagePath || Logo}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%" }}
             />
@@ -71,7 +72,7 @@ function FavListingTile({ data, setProducts }) {
         {!data?.images && (
           <div className="flex justify-center w-32 h-24">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath}
+              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%" }}
             />
@@ -89,12 +90,12 @@ function FavListingTile({ data, setProducts }) {
         )}
 
         <div>
-          <h1 className="uppercase text-sm font-bold text-m-grey-1 my-1.5">
+          <h1 className="text-mediumFontSize font-Roboto-Semibold text-m-grey-1 my-1.5 truncate">
             {" "}
             {data?.marketingName}​{" "}
           </h1>
-          <span className="text-m-grey-2 text-sm">List Price</span>
-          <p className="flex items-center font-bold text-xl text-m-grey-1">
+          {/* <span className="text-m-grey-2 font-Roboto-Regular text-smallFontSize">List Price</span> */}
+          <p className="flex items-center text-mediumFontSize font-Roboto-Bold text-m-grey-1">
             {data?.listingPrice && <BiRupee className="h-full" />}{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
@@ -118,7 +119,7 @@ function FavListingTile({ data, setProducts }) {
         />
       </div>
       <div className="flex flex-col justify-between items-end pr-2">
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="16"
@@ -134,7 +135,20 @@ function FavListingTile({ data, setProducts }) {
             transform="translate(-0.024)"
             fill={data.favourite ? "#FF0000" : "#C7C7C7"}
           />
-        </svg>
+        </svg> */}
+        <AiFillHeart
+          className="hover:cursor-pointer"
+          color="#FF0000"
+          size='18px'
+          onClick={
+            (e) => {
+              e.preventDefault();
+              // !listings.includes(data.listingId) ? 
+              handleFavoties(data);
+              //  : toast.error("You can't add your own listing to your favorites");
+            }
+          }
+        />
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ function Favorites() {
             ))}
 
           {isLoading && (
-            <div className="flex h-60 items-center justify-center">
+            <div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
               <Loader />
               Please wait, while we are fetching your favorites...
             </div>

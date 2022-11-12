@@ -59,12 +59,12 @@ function LoginPopup({ open, setOpen, redirect }) {
               className="m-16 mt-4 px-6 flex flex-col space-y-4 items-center justify-center w-96"
             >
               <h2
-                className="text-2xl font-extrabold py-5 text-center"
+                className="text-xl3FontSize font-Roboto-Bold py-5 text-center"
                 style={{ color: "#2c2f44" }}
               >
                 Sign In
               </h2>
-              <div className="outline outline-none relative w-full focus:outline-none">
+              <div className="outline outline-none relative w-full focus:outline-none font-Roboto-Semibold text-xlFontSize">
                 <input
                   ref={inputRef}
                   type="text"
@@ -107,7 +107,7 @@ function LoginPopup({ open, setOpen, redirect }) {
                   className="border-gray-300 rounded text-m-green focus:ring-transparent"
                 />
                 <label
-                  className="ml-2 underline cursor-pointer"
+                  className="ml-2 underline cursor-pointer text-regularFontSize font-Roboto-Regular"
                   onClick={() => setOpenTermAndCondPopup(true)}
                 >
                   Accept terms and conditions
@@ -115,7 +115,7 @@ function LoginPopup({ open, setOpen, redirect }) {
               </div>
               <button
                 disabled={!formData?.termsAndCondition}
-                className="w-full bg-m-green p-4 text-white rounded block disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full bg-m-green px-4 py-3 shadow-2xl rounded-lg text-xlFontSize font-Roboto-Regular text-white block disabled:cursor-not-allowed disabled:opacity-50"
               >
                 NEXT
               </button>

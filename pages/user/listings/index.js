@@ -77,14 +77,14 @@ function Listings() {
               ))}
 
           {isLoading && (
-            <div className="flex h-60 items-center justify-center">
+            <div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
               <Loader />
               Please wait, while we are fetching your listings...
             </div>
           )}
 
           {userListings?.length == 0 && (
-            <div className="flex h-60 items-center justify-center">
+            <div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
               Listings Not Found
             </div>
           )}

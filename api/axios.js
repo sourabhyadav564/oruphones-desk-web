@@ -682,6 +682,7 @@ export function addFavotie(payload) {
   const API_ENDPOINT = BASE_URL + `/favorite/add`;
   return Axios.post(API_ENDPOINT, payload, DEFAULT_HEADER).then(
     (response) => {
+      localStorage.setItem("favoriteList", JSON.stringify(response.data.updateList.fav_listings));
       return response.data;
     },
     (err) => {
@@ -701,6 +702,7 @@ export function removeFavotie(listingId, userUniqueId) {
     userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
+      localStorage.setItem("favoriteList", JSON.stringify(response.data.updateList.fav_listings));
       return response.data;
     },
     (err) => {
@@ -737,6 +739,7 @@ export function fetchMyFavorites(userUniqueId) {
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
+      localStorage.setItem("favoriteList", JSON.stringify(response.data.dataObject.map((item) => item.listingId)));
       return response.data;
     },
     (err) => {

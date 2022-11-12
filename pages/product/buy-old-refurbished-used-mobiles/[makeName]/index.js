@@ -185,7 +185,7 @@ function BrandPage() {
         Cookies.get("userUniqueId") || "Guest",
         pageNumber
       ).then((response) => {
-        setProducts(response?.dataObject?.otherListings);
+          setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
         setTotalProducts(
           response?.dataObject?.totalProducts
@@ -298,7 +298,7 @@ function BrandPage() {
           </h4>
           <div className="grid grid-cols-3 gap-4">
             {!isLoading &&
-              isFinished == false && products.length != totalProducts ? (
+              isFinished == false ? (
               products?.map((product, index) => (
                 <div
                   key={index}

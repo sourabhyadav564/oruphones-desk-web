@@ -7,8 +7,8 @@ import AppDownloadPopup from "@/components/Popup/AppDownloadPopup";
 
 function Services() {
 
-    const [openAppDownload, setOpenAppDownload] = useState(false);
-    
+  const [openAppDownload, setOpenAppDownload] = useState(false);
+
   function handleVerifyListing() {
     setOpenAppDownload(true);
   }
@@ -16,8 +16,8 @@ function Services() {
   return (
     <UserProfile>
       <div className="px-4 py-3">
-        <h1 className="text-lg py-2"> ORU Services </h1>
-        <div className="flex flex-col space-y-4 my-4">
+        <h1 className="text-xl2FontSize font-Roboto-Bold py-2"> ORU Services </h1>
+        <div className="flex flex-col space-y-4 my-4 text-xlFontSize font-Roboto-Regular">
           {servicesData && servicesData.length > 0 ? (
             servicesData.map((item, index) => (
               <div
@@ -40,7 +40,7 @@ function Services() {
               </div>
             ))
           ) : (
-            <div className="flex h-60 items-center justify-center">
+            <div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
               <Loader />
               Please wait, while we are fetching our services...
             </div>
