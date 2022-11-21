@@ -682,7 +682,7 @@ export function addFavotie(payload) {
   const API_ENDPOINT = BASE_URL + `/favorite/add`;
   return Axios.post(API_ENDPOINT, payload, DEFAULT_HEADER).then(
     (response) => {
-      localStorage.setItem("favoriteList", JSON.stringify(response.data.updateList.fav_listings));
+      // localStorage.setItem("favoriteList", JSON.stringify(response.data.updateList.fav_listings));
       return response.data;
     },
     (err) => {
@@ -702,7 +702,7 @@ export function removeFavotie(listingId, userUniqueId) {
     userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
-      localStorage.setItem("favoriteList", JSON.stringify(response.data.updateList.fav_listings));
+      // localStorage.setItem("favoriteList", JSON.stringify(response.data.updateList.fav_listings));
       return response.data;
     },
     (err) => {
@@ -739,7 +739,7 @@ export function fetchMyFavorites(userUniqueId) {
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
-      localStorage.setItem("favoriteList", JSON.stringify(response.data.dataObject.map((item) => item.listingId)));
+      localStorage.setItem("favoriteList", response.data.dataObject.map((item) => item.listingId));
       return response.data;
     },
     (err) => {
@@ -786,7 +786,7 @@ export function sendverification(listingid, userUniqueId) {
   );
 }
 
-export function searchFilter(payLoad, userUniqueId, pageNumber) {
+export function searchFilter(payLoad, userUniqueId, pageNumber, sortBy) {
   headers = { ...headers, eventName: "FETCH_SEARCH_LISTINGS" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
@@ -794,7 +794,9 @@ export function searchFilter(payLoad, userUniqueId, pageNumber) {
     `/home/listings/search?userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber;
+    pageNumber +
+    `&sortBy=` +
+    sortBy;
   return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
     (response) => {
       return response.data;

@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import WarrantyPopup from "../Popup/WarrantyPopup";
+import { useState } from "react";
 
 const CategoryCards = ({ data, priceRange }) => {
+  const [openWarrantyPopup, setOpenWarrantyPopup] = useState(false);
   const priceRangeData = [
     {
       id: 1,
@@ -57,6 +60,27 @@ const CategoryCards = ({ data, priceRange }) => {
         </div>
       </div>
     );
+  } else if (data?.urlPath === "Warranty") {
+    return (
+      <>
+        <div
+          onClick={() => setOpenWarrantyPopup(true)}
+        >
+          <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10  sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
+            <Image
+              src={data?.imagePath}
+              alt={data?.make}
+              height={70}
+              width={70}
+              objectFit="contain"
+            />
+            <span
+              className="text-smallFontSize font-Roboto-Regular pt-2">{data.text}</span>
+          </a>
+        </div>
+        <WarrantyPopup open={openWarrantyPopup} data={data} setOpen={setOpenWarrantyPopup} />
+      </>
+    )
   }
   return (
     data.imagePath && (
@@ -65,10 +89,10 @@ const CategoryCards = ({ data, priceRange }) => {
           pathname:
             data?.urlPath === "Bestselling"
               ? "/product/models"
-              : `/shopby/category/${data?.urlPath?.toLowerCase()}`,
+              : data?.urlPath != "Warranty" && `/shopby/category/${data?.urlPath?.toLowerCase()}`,
         }}
       >
-        <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
+        <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative"          >
           <Image
             src={data?.imagePath}
             alt={data?.make}

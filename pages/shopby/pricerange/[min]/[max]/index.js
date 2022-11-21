@@ -33,73 +33,218 @@ const Pricerange = () => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
+  let intialPage = 0;
+  let newPages = 0;
 
   const loadData = (intialPage) => {
-    const fetchData = async () => {
-      const priceRange = await Axios.shopByPriceRange(
-        // max === "above" ? "200000" : max,
-        max,
-        getSearchLocation,
-        min,
-        Cookies.get("userUniqueId") || "Guest",
-        intialPage,
-        applySort
-      );
-      setBestDeal(priceRange?.dataObject?.bestDeals);
-      setOtherListings(priceRange?.dataObject?.otherListings);
-      setTotalProducts(priceRange?.dataObject?.totalProducts);
-      setLoading(false);
-      // setPageNumber(pageNumber + 1);
-    };
-    if (min != undefined && max != undefined) {
-      fetchData();
+    if (!isFilterApplied && !applySort) {
+      const fetchData = async () => {
+        const priceRange = await Axios.shopByPriceRange(
+          // max === "above" ? "200000" : max,
+          max,
+          getSearchLocation,
+          min,
+          Cookies.get("userUniqueId") || "Guest",
+          intialPage,
+          applySort
+        );
+        setBestDeal(priceRange?.dataObject?.bestDeals);
+        setOtherListings(priceRange?.dataObject?.otherListings);
+        setTotalProducts(priceRange?.dataObject?.totalProducts);
+        setLoading(false);
+        // setPageNumber(pageNumber + 1);
+      };
+      if (min != undefined && max != undefined) {
+        fetchData();
+      }
+    } else {
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        warranty,
+        verification,
+        minPrice,
+        maxPrice,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          // maxsellingPrice: max === "above" ? "200000" : max,
+          maxsellingPrice: max,
+          minsellingPrice: min,
+          reqPage: "SBYP",
+          make: [],
+          marketingName: [],
+          color: [],
+          deviceRam: [],
+          deviceCondition: [],
+          deviceStorage: [],
+          verified: "",
+          warenty: [],
+          pageNumber: intialPage,
+        };
+        if (brand?.length > 0) {
+          payLoad.make = brand.includes("all") ? [] : brand;
+        }
+
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (color?.length > 0) {
+          payLoad.color = color.includes("all") ? [] : color;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        setLoading(true);
+        Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", intialPage, applySort).then(
+          (response) => {
+            // if (verification?.length > 0) {
+            //   payLoad.verification = verification;
+            // }
+            setOtherListings(response?.dataObject?.otherListings);
+            setBestDeal(response?.dataObject?.bestDeals);
+            setTotalProducts(response?.dataObject?.totalProducts);
+            setLoading(false);
+          }
+        );
+      }
     }
   };
 
   const loadMoreData = () => {
-    let newPages = pageNumber + 1;
+    newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
-    const fetchData = async () => {
-      const priceRange = await Axios.shopByPriceRange(
-        // max === "above" ? "200000" : max,
-        max,
-        getSearchLocation,
-        min,
-        Cookies.get("userUniqueId") || "Guest",
-        newPages,
-        applySort
-      );
-      // setBestDeal(priceRange?.dataObject?.bestDeals);
-      setOtherListings((products) => [
-        ...products,
-        ...priceRange?.dataObject?.otherListings,
-      ]);
+    if (!isFilterApplied) {
+      const fetchData = async () => {
+        const priceRange = await Axios.shopByPriceRange(
+          // max === "above" ? "200000" : max,
+          max,
+          getSearchLocation,
+          min,
+          Cookies.get("userUniqueId") || "Guest",
+          newPages,
+          applySort
+        );
+        // setBestDeal(priceRange?.dataObject?.bestDeals);
+        setOtherListings((products) => [
+          ...products,
+          ...priceRange?.dataObject?.otherListings,
+        ]);
 
-      if (priceRange?.dataObject?.otherListings.length == 0) {
-        setIsFinished(true);
+        if (priceRange?.dataObject?.otherListings.length == 0) {
+          setIsFinished(true);
+        }
+        if (priceRange?.dataObject?.totalProducts > -1) {
+          setTotalProducts(
+            (priceRange && priceRange?.dataObject?.totalProducts) || 0
+          );
+        }
+        setLoading(false);
+        // setPageNumber(pageNumber + 1);
+        setIsLoadingMore(false);
+      };
+      if (min != undefined && max != undefined) {
+        fetchData();
       }
-      if (priceRange?.dataObject?.totalProducts > -1) {
-        setTotalProducts(
-          (priceRange && priceRange?.dataObject?.totalProducts) || 0
+    } else {
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        warranty,
+        verification,
+        minPrice,
+        maxPrice,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          // maxsellingPrice: max === "above" ? "200000" : max,
+          maxsellingPrice: max,
+          minsellingPrice: min,
+          reqPage: "SBYP",
+          make: [],
+          marketingName: [],
+          color: [],
+          deviceRam: [],
+          deviceCondition: [],
+          deviceStorage: [],
+          verified: "",
+          warenty: [],
+          pageNumber: newPages,
+        };
+        if (brand?.length > 0) {
+          payLoad.make = brand.includes("all") ? [] : brand;
+        }
+
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (color?.length > 0) {
+          payLoad.color = color.includes("all") ? [] : color;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        // setLoading(true);
+        Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", newPages, applySort).then(
+          (response) => {
+            // if (verification?.length > 0) {
+            //   payLoad.verification = verification;
+            // }
+            if (newPages == 0) {
+              setProducts(response?.dataObject?.otherListings);
+            } else {
+              setProducts((products) => [
+                ...products,
+                ...response?.dataObject?.otherListings,
+              ]);
+            }
+            // setBestDeals([]);
+            setTotalProducts(response?.dataObject?.totalProducts);
+            if (newPages == 0) {
+              setBestDeal(response?.dataObject?.bestDeals);
+            } else {
+              setBestDeal((products) => [
+                ...products,
+                ...response?.dataObject?.bestDeals,
+              ]);
+            };
+            setLoading(false);
+            setIsLoadingMore(false);
+          }
         );
       }
-      setLoading(false);
-      // setPageNumber(pageNumber + 1);
-      setIsLoadingMore(false);
-    };
-    if (min != undefined && max != undefined) {
-      fetchData();
     }
   };
 
   useEffect(() => {
-    let intialPage = 0;
+    intialPage = 0;
+    newPages = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [min, max, getSearchLocation, applySort]);
+  }, [min, max, getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
+    setIsFilterApplied(true);
     const {
       brand,
       condition,
@@ -125,6 +270,7 @@ const Pricerange = () => {
         deviceStorage: [],
         verified: "",
         warenty: [],
+        pageNumber: intialPage,
       };
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
@@ -146,7 +292,7 @@ const Pricerange = () => {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", pageNumber).then(
+      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", intialPage, applySort).then(
         (response) => {
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;
@@ -158,7 +304,7 @@ const Pricerange = () => {
         }
       );
     }
-  }, [applyFilter]);
+  }, [applyFilter, applySort]);
 
   // const sortingProducts = getSortedProducts(applySort, otherListings);
 
@@ -183,7 +329,7 @@ const Pricerange = () => {
         </h4>
         <div className="grid grid-cols-3 gap-4 mt-3">
           {!isLoading &&
-            isFinished == false && otherListings.length != totalProducts ? (
+            isFinished == false && otherListings.length > 0 ? (
             otherListings?.map((product, index) => (
               <ProductCard
                 key={index}

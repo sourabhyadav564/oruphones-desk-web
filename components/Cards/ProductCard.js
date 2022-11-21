@@ -35,7 +35,7 @@ function ProductCard({ data, prodLink, setProducts }) {
           </div>
           <div className="flex justify-center mb-2">
             <Image
-              src={data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo || "/"}
+              src={data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo}
               alt={data?.name}
               width={150}
               height={150}

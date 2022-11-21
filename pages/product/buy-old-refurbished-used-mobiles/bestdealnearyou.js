@@ -35,12 +35,14 @@ function Bestdealnearyou() {
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
   const router = useRouter();
+  let intialPage = 0;
+  let newPages = 0;
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   const loadData = (intialPage) => {
-    if (getSearchLocation) {
+    if (getSearchLocation && !isFilterApplied && !applySort) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),
@@ -56,14 +58,78 @@ function Bestdealnearyou() {
         // ]);
         setLoading(false);
       });
+    } else {
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          reqPage: "BBNM",
+          make: [],
+          color: [],
+          deviceCondition: [],
+          deviceStorage: [],
+          deviceRam: [],
+          maxsellingPrice: 200000,
+          minsellingPrice: 0,
+          verified: "",
+          warenty: [],
+          pageNumber: intialPage,
+        };
+        if (brand?.length > 0) {
+          payLoad.make = brand.includes("all") ? [] : brand;
+        }
+        if (priceRange && priceRange.min && priceRange.max) {
+          payLoad.minsellingPrice = priceRange.min;
+          payLoad.maxsellingPrice = priceRange.max;
+        }
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (color?.length > 0) {
+          payLoad.color = color.includes("all") ? [] : color;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        setLoading(true);
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          intialPage,
+          applySort
+        ).then((response) => {
+          // if (verification?.length > 0) {
+          //   payLoad.verification = verification;
+          // }
+          setProducts(response?.dataObject?.otherListings);
+          // setBestDeal([]);
+          setTotalProducts(response?.dataObject?.totalProducts);
+          setBestDeal(response?.dataObject?.bestDeals);
+          setLoading(false);
+        });
+      }
     }
   };
 
   const loadMoreData = () => {
-    let newPages = pageNumber + 1;
+    newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
-    if (getSearchLocation) {
+    if (getSearchLocation && !isFilterApplied) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),
@@ -94,16 +160,97 @@ function Bestdealnearyou() {
         // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
+    } else {
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          reqPage: "BBNM",
+          make: [],
+          color: [],
+          deviceCondition: [],
+          deviceStorage: [],
+          deviceRam: [],
+          maxsellingPrice: 200000,
+          minsellingPrice: 0,
+          verified: "",
+          warenty: [],
+          pageNumber: newPages,
+        };
+        if (brand?.length > 0) {
+          payLoad.make = brand.includes("all") ? [] : brand;
+        }
+        if (priceRange && priceRange.min && priceRange.max) {
+          payLoad.minsellingPrice = priceRange.min;
+          payLoad.maxsellingPrice = priceRange.max;
+        }
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (color?.length > 0) {
+          payLoad.color = color.includes("all") ? [] : color;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        // setLoading(true);
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          newPages,
+          applySort
+        ).then((response) => {
+          // if (verification?.length > 0) {
+          //   payLoad.verification = verification;
+          // }
+          if (newPages == 0) {
+            setProducts(response?.dataObject?.otherListings);
+          } else {
+            setProducts((products) => [
+              ...products,
+              ...response?.dataObject?.otherListings,
+            ]);
+          }
+          // setBestDeals([]);
+          setTotalProducts(response?.dataObject?.totalProducts);
+          if (newPages == 0) {
+            setBestDeal(response?.dataObject?.bestDeals);
+          } else {
+            setBestDeal((products) => [
+              ...products,
+              ...response?.dataObject?.bestDeals,
+            ]);
+          };
+          setLoading(false);
+          setIsLoadingMore(false);
+        });
+      }
     }
   };
 
   useEffect(() => {
-    let intialPage = 0;
+    intialPage = 0;
+    newPages = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [getSearchLocation, applySort]);
+  }, [getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
+    setIsFilterApplied(true);
     const {
       brand,
       condition,
@@ -125,7 +272,8 @@ function Bestdealnearyou() {
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
-        warenty: []
+        warenty: [],
+        pageNumber: intialPage,
       };
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
@@ -153,7 +301,8 @@ function Bestdealnearyou() {
       Axios.searchFilter(
         payLoad,
         Cookies.get("userUniqueId") || "Guest",
-        pageNumber
+        intialPage,
+        applySort
       ).then((response) => {
         // if (verification?.length > 0) {
         //   payLoad.verification = verification;
@@ -165,7 +314,7 @@ function Bestdealnearyou() {
         setLoading(false);
       });
     }
-  }, [applyFilter]);
+  }, [applyFilter, applySort]);
 
   // const sortingProducts = getSortedProducts(applySort, products);
 

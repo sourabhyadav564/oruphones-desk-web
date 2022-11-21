@@ -65,15 +65,15 @@ function Listings() {
                 }
               })
               .map((item, index) => (
-                <Link
-                  href={`/user/listings/${item.listingId}`}
-                  key={index}
-                  passHref
+                <div
+                // href={`/user/listings/${item.listingId}`}
+                // key={index}
+                // passHref
                 >
                   <a>
                     <ProfileListingTile data={item} />
                   </a>
-                </Link>
+                </div>
               ))}
 
           {isLoading && (

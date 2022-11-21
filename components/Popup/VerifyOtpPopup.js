@@ -126,18 +126,18 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
         className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96"
       >
         <h2
-          className="text-2xl font-extrabold text-center"
+          className="text-xl4FontSize font-Roboto-Bold text-center"
           style={{ color: "#2c2f44" }}
         >
           Verify Mobile No
         </h2>
-        <p className="text-sm text-m-grey-1">
+        <p className="text-regularFontSize font-Roboto-Regular text-m-grey-1">
           {" "}
           Please enter the 4 digit verification code sent to your mobile number{" "}
           {formData?.mobile} via SMS.{" "}
         </p>
 
-        <div className="outline relative w-full focus:outline-none">
+        <div className="outline text-mediumFontSize font-Roboto-Light relative w-full focus:outline-none">
           <input
             type="text"
             name="otp"
@@ -145,18 +145,17 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
             // maxLength="6"
             required
             title="4 digits code"
-            className={`text-center block p-4 w-full rounded appearance-none border-1  bg-transparent ${
-              error
-                ? "ring-2 ring-red-600 focus:ring-2 focus:ring-red-600"
-                : "ring-0 focus:ring-0"
-            }`}
+            className={`text-center text-mediumFontSize font-Roboto-Semibold block p-4 w-full rounded appearance-none border-1  bg-transparent ${error
+              ? "ring-2 ring-red-600 focus:ring-2 focus:ring-red-600"
+              : "ring-0 focus:ring-0"
+              }`}
             style={{ border: "1px solid #0000001F", color: "#00000099" }}
             value={formData?.otp || ""}
             onChange={handleChange}
           />
           <label
             htmlFor="mobile"
-            className="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0"
+            className="absolute top-0 text-xlFontSize font-Roboto-Light bg-white px-4 mt-1 -z-1 duration-300 origin-0"
             style={{ color: "#00000099" }}
           >
             OTP
@@ -167,7 +166,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
             </span>
           )}
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center text-xlFontSize font-Roboto-Regular">
           {!resentOTP ? (
             <label className="ml-2 text-m-grey-2">
               Resend OTP in 0:{seconds} Sec{" "}
@@ -182,7 +181,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
           )}
         </div>
 
-        <button className="w-full bg-m-green p-4 text-white rounded block">
+        <button className="w-full bg-m-green p-4 text-white block text-xlFontSize font-Roboto-Regular rounded-lg shadow-2xl">
           VERIFY
         </button>
       </form>

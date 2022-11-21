@@ -23,9 +23,23 @@ function AddFav({ data, setProducts, ...rest }) {
       userUniqueId: Cookies.get("userUniqueId") || "Guest",
     };
     const addFavorite = async () => {
+      let favList = localStorage.getItem("favoriteList");
+      if (favList) {
+        favList = favList.split(",");
+        favList.push(data.listingId);
+        localStorage.setItem("favoriteList", favList);
+      } else {
+        localStorage.setItem("favoriteList", data.listingId);
+      }
       const addFav = await Axios.addFavotie(payLoad);
     };
     const removeFavorite = async () => {
+      let favList = localStorage.getItem("favoriteList");
+      if (favList) {
+        favList = favList.split(",");
+        favList = favList.filter((item) => item !== data.listingId);
+        localStorage.setItem("favoriteList", favList);
+      }
       const removeFav = await Axios.removeFavotie(data.listingId, Cookies.get("userUniqueId") || "Guest");
     };
     console.log("data.favourite", data);

@@ -92,7 +92,7 @@ function LoginPopup({ open, setOpen, redirect }) {
                 />
                 <label
                   htmlFor="mobile"
-                  className="absolute top-0 text-lg bg-white p-4 -z-1 duration-300 origin-0"
+                  className="absolute top-0 text-xlFontSize font-Roboto-Light bg-white px-4 mt-1 -z-1 duration-300 origin-0"
                   style={{ color: "#00000099" }}
                 >
                   Mobile No

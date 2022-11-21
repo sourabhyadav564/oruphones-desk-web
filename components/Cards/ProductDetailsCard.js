@@ -18,6 +18,7 @@ import Logo from "@/assets/oru_phones_logo.png";
 import { BsInfoCircle, BsStar, BsStarFill } from "react-icons/bs";
 import { AiFillExclamationCircle } from "react-icons/ai";
 import { VscPass } from "react-icons/vsc";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import VerificationIcon from "../VerificationIcon";
 import SellerDetailsCard from "./SellerDetailsCard";
 import { deviceConditionQuestion } from "@/utils/constant";
@@ -66,7 +67,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
-        <div className="space-x-4 absolute -right-2 flex items-center justify-content-end -top-2">
+        <div className="space-x-4 relative -right-2 flex items-center justify-end pr-40 -top-2">
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
               <ShareIcon data={deviceListingInfo} width={16} height={16} />
@@ -94,8 +95,8 @@ function ProductDetailsCard({ data, openFullImage }) {
                     thumbImage: data?.defaultImage?.fullImage,
                   }) ||
                   (data?.vendorLogo && {
-                    fullImage: Logo,
-                    thumbImage: Logo,
+                    // fullImage: Logo,
+                    // thumbImage: Logo,
                     fullImage: Logo,
                     thumbImage: Logo,
                   })
@@ -155,7 +156,12 @@ function ProductDetailsCard({ data, openFullImage }) {
                   {data?.listingPrice && <BiRupee />}{" "}
                   {numberWithCommas(data?.listingPrice || "")}
                 </p>
-                <span className="grid grid-cols-2 my-4  rounded-md py-1 px-4 w-[160pr] h-[40pr] opacity-bg-50 text-xs2FontSize" style={{ backgroundColor: "#F3F3F3" }}>
+                <span className="grid grid-cols-2 my-4 hover:cursor-pointer rounded-md py-1 px-4 w-[160pr] h-[40pr] opacity-bg-50 text-xs2FontSize" style={{ backgroundColor: "#F3F3F3" }}
+                  onClick={() => {
+                    setConditionInfoPopup(true);
+                  }
+                  }
+                >
                   <div className="m-auto justify-center">
                     <span
                       className="font-Roboto-Light text-bx opacity-100 text-[#000] flex leading-tight items-center"
@@ -228,7 +234,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                             <BsInfoCircle
                               size={12}
                               className="ml-1"
-                              onClick={() => setOpenVerificationInfo(true)}
+                              onClick={() => setOpenInfo(true)}
                             />
                           </p>
                         </div>
@@ -353,10 +359,10 @@ function ProductDetailsCard({ data, openFullImage }) {
           </div>
         </div>
         <div>
-          <div className="mt-20">
+          <div className="">
             {data && data?.cosmetic && (
               <>
-                <h2 className="text-gray-20 font-Roboto-Light text-regularFontSize mb-3">
+                <h2 className="mt-20 text-gray-20 font-Roboto-Light text-regularFontSize mb-3">
                   Device Cosmetic Report
                 </h2>
                 <div className="pb-4">
@@ -381,7 +387,7 @@ function ProductDetailsCard({ data, openFullImage }) {
               </div>
             )}
           </div>
-          {data?.functionalTestResults && (
+          {data?.functionalTestResults && data?.verified && (
             <div className="text-gray-20 font-Roboto-Light text-regularFontSize my-3 ">
               <span>
                 Device Verification Report
@@ -454,7 +460,7 @@ const TestListItem = ({ testName, testStatus }) => {
       <p className="font-Roboto-Regular text-mediumFontSize">{testName}</p>
       <p className="flex items-center justify-between">
         <span className="mr-3 font-Roboto-Regular text-smallFontSize">{testStatus}</span>{" "}
-        {testStatus === "PASS" ? <VscPass className="text-green2" /> : testfail}
+        {testStatus === "PASS" ? <VscPass className="text-green2" /> : <IoCloseCircleOutline className="text-red" />}
       </p>
     </div>
   );
