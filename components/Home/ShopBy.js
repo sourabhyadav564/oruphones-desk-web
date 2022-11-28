@@ -46,7 +46,7 @@ function ShowBy() {
   return (
     <>
       <div className="bg-m-grey">
-        <section className="container top_brand px-24 pt-[57px] pb-[44px]">
+        <section className="container top_brand px-24 pt-[57px] pb-[44px] font-bold">
           <Title text="Shop By Categories" />
           <Carousel {...settings}>
             {data &&

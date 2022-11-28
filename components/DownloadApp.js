@@ -18,7 +18,7 @@ function DownloadApp() {
 
   return (
     <section className="w-full pt-5">
-      <div className="flex flex-col sm:flex-row justify-between items-center p-4 pt-12 sm:p-12 bg-bg-mask-1 bg-no-repeat bg-cover sm:bg-center bg-m-green text-white rounded-md">
+      <div className="flex flex-col sm:flex-row justify-between items-center p-4 pt-12 sm:p-12 bg-bg-mask-1 bg-no-repeat bg-cover sm:bg-center bg-m-green text-white rounded-md" data-aos="zoom-in">
         <div className="px-8">
           <h1 className="pb-4 font-Roboto-Bold" style={{ fontSize: 40 }}>
             Download ORUphones app

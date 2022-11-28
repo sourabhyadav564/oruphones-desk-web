@@ -92,7 +92,7 @@ const CategoryCards = ({ data, priceRange }) => {
               : data?.urlPath != "Warranty" && `/shopby/category/${data?.urlPath?.toLowerCase()}`,
         }}
       >
-        <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative"          >
+        <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
           <Image
             src={data?.imagePath}
             alt={data?.make}

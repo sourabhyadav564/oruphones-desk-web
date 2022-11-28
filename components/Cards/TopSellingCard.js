@@ -20,7 +20,7 @@ function TopSellingCard({ data }) {
   return (
     <Link href={`/product/buy-old-refurbished-used-mobiles/${data.make}/${data.marketingName}`}>
       <a>
-        <div className="grid grid-cols-1 rounded-md shadow-lg hover:shadow-md p-4 pb-2 bg-m-white">
+        <div className="grid grid-cols-1 rounded-md shadow-lg hover:shadow-md p-4 pb-2 bg-m-white" data-aos="fade-up">
           <div className="grid grid-cols-1">
             <div className="flex justify-center">
               <Image src={data?.imagePath || Logo} alt={data?.name} width={150} height={150} objectFit="contain" />

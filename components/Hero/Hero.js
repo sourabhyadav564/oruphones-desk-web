@@ -74,7 +74,7 @@ export default function Hero() {
       {/* <Carousel> */}
 
       <Image
-        className="hover:cursor-pointer"
+        className="hover:cursor-pointer" data-aos="fade-down"
         src={banner_4}
         alt="BannerImage"
         priority

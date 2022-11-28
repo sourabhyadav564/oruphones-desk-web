@@ -3,8 +3,8 @@ import { FaMapMarkerAlt } from "react-icons/bi";
 function Title({ text, location, onClick, color, fontsize }) {
   return (
     <h1
-      className="text-left font-Roboto-Regular text-regularFontSize"
-      style={{ fontSize: 18, letterSpacing: 0, color: "#000000" }}
+      className="text-center font-Roboto-Regular text-regularFontSize" data-aos="flip-up"
+      style={{ fontSize: 24, letterSpacing: 0, color: "#2C2F45" }}
     >
       {text}
       <span>{"  "}</span>

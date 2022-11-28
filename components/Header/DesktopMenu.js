@@ -109,18 +109,20 @@ function DesktopMenu({ menuItems }) {
   // }, []);
 
   return (
-    <nav className="px-0 h-9 bg-m-green-1 bg-no-repeat flex flex-row justify-between">
+    <nav className="px-0 h-12 bg-m-green-1 bg-no-repeat items-center flex flex-row justify-between" data-aos="fade-down">
       <span
         className="text-white mt-0.5 pl-52 flex flex-row justify-start hover:cursor-pointer"
         onClick={() => setOpenLocationPopup(true)}>
         <MdLocationOn className="mt-1.5 mr-1 text-[#fffffff]" />
-        <Title
+        <span
+          className="text-white font-Roboto-Semibold items-center pt-0.5"
           location={`${getSearchLocation} ${getSearchLocation != "India" ? " ,India" : ""}`}
           color={"white"}
           fontsize={"mediumFontSize"}
-        />
+        >{`${getSearchLocation} ${getSearchLocation != "India" ? " ,India" : ""}`}</span>
       </span>
-      <span><Popover.Group className=" container hidden  lg:flex items-center  pt-[7px] text-mediumFontSize font-Roboto-Light m-auto  justify-end text-m-white pr-40">
+      <span>
+        <Popover.Group className=" container hidden lg:flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
         {menus.map((item, index) =>
           item && item.options ? (
             <Popover key={item.name}>
@@ -128,7 +130,7 @@ function DesktopMenu({ menuItems }) {
                 <>
                   <Popover.Button
                     className={`${open ? "" : "text-opacity-90"
-                      }text-m-white px-5 opacity-100 font-light `}
+                      }text-m-white px-4 opacity-100 font-light `}
                   >
                     <Link key={index} href={{ pathname: item.chlink }}>
                       <span> {item.name} </span>

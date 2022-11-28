@@ -18,9 +18,9 @@ function TopBrand({ brandsList }) {
   // console.log(_bList);
   return (
     <>
-      <div className="bg-m-grey pt-[54px]   pb-[57px]">
-        <section className="container top_brand px-20 pt-0 gap-6 grid grid-cols-7 pb-4 text-xlFontSize font-Roboto-Regular">
-          <Title text="Top Brands" />
+      <div className="bg-m-grey pt-[54px] pb-[57px]">
+        <section className="container px-20 pt-0 gap-6 flex justify-center pb-4 font-Roboto-Semibold text-m-green-1 font-bold text-2xl" data-aos="flip-up">
+          <p>Top Brands</p>
         </section>
         <section className="container bg-m-grey top_brand px-20 gap-6 grid grid-cols-7  ">
           {/* <Carousel {...settings}> */}

@@ -25,7 +25,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
         query: prodLink && { isOtherVendor: data?.isOtherVendor },
       }}
     >
-      <a className="flex flex-col pt-6 relative w-full h-full drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white shadow-lg">
+      <a className="flex flex-col pt-6 relative w-full h-full drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white shadow-lg" data-aos="flip-right" data-aos-duration="2000">
         {data?.isOtherVendor === "N" && (
           <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
             <span className="h-6">

@@ -103,18 +103,20 @@ function BestDealsCard({ data, setProducts }) {
               ) : (
                 <div />
               )}
+              <div className="">
               <Link
                 href={{
                   pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`,
                   query: { isOtherVendor: data?.isOtherVendor },
                 }}
                 passHref
-              >
-                <a className="flex items-center font-Roboto-Semibold self-end py-2 px-4 text bg-m-white text-m-green rounded-lg">
+                >
+                <a className="hover:bg-yellow-500 hover:cursor-pointer duration-500 flex items-center font-Roboto-Semibold self-end py-2 px-4 text bg-m-white text-m-green rounded-lg ">
                   View Deal{" "}
                   <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
                 </a>
               </Link>
+              </div>
             </div>
           </div>
 

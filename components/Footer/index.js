@@ -187,13 +187,13 @@ const Footer = () => {
   return (
     <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
       <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
-        <p className='text-white'>
+        <p className='text-white tracking-[0.15em] leading-8'>
           {brandData && brandData.map((brand, index) => (
-            <a className="hover:underline"
+            <a className="hover:underline hover:cursor-pointer"
               // href="/sell-old-refurbished-used-mobiles/add"
               // onClick={() => setAddListingBrand(brand.prefill)}>
               onClick={() => setOpenAppDownload(true)}>
-              Sell {" "}{brand.name} Phone | </a>
+                    Sell {" "}{brand.name} Phone   {brand.id!=31&& "|"} </a>
           ))}
         </p>
       </div></div>
@@ -201,46 +201,46 @@ const Footer = () => {
         <div className="flex flex-col">
           <h1 className="font-Roboto-Semibold text-xlFontSize">Customer Service</h1>
           <Link href="/privacy-policy">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
+            <a className="hover:scale-150 hover:pl-4 duration-500 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
           </Link>
           <Link href="/terms">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
+            <a className="hover:scale-150 duration-500 hover:pl-4 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
               Terms of service
             </a>
           </Link>
           <Link href="/faq">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">FAQs</a>
+            <a className="hover:scale-150 duration-500 hover:pl-2 mt-4 max-w-max font-Roboto-Light text-regularFontSize">FAQs</a>
           </Link>
         </div>
         <div className="flex flex-col">
           <h1 className="font-Roboto-Semibold text-xlFontSize">Links</h1>
           <Link href="https://www.oruphones.com/blog/">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
+            <a className="hover:scale-150 duration-500 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
           </Link>
           <Link href="/about-us">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">About Us</a>
+            <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">About Us</a>
           </Link>
           <Link href="/contact-us">
-            <a className="hover:pl-2 delay-75 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
+            <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
           </Link>
         </div>
         <div>
           <div className="flex flex-col">
             <h1 className="font-Roboto-Semibold text-xlFontSize">DOWNLOAD ORUphones App</h1>
             <div className="flex flex-row">
-              <span target={"_blank"} rel="noreferrer" href={qrValue2}>
+              <a target={"_blank"} rel="noreferrer" href={qrValue2}>
                 <p className="w-32 mt-2 mb-2 mr-2 h-10 bg-play-store bg-no-repeat bg-contain" />
-              </span>
-              <span target={"_blank"} rel="noreferrer" href={qrValue1}>
+              </a>
+              <a target={"_blank"} rel="noreferrer" href={qrValue1}>
                 <p className="w-32 mt-2 mb-2 ml-2 h-10 bg-app-store bg-no-repeat bg-contain" />
-              </span>
+              </a>
             </div>
           </div>
           <div>
             Follow us on Social Media
           </div>
           <div className="flex items-center gap-x-1 mt-4 ">
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.facebook.com/ORUphones"
                 target="_blank"
@@ -249,7 +249,7 @@ const Footer = () => {
                 <FaFacebookSquare size={25} />
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://twitter.com/ORUPhones"
                 target="_blank"
@@ -258,7 +258,7 @@ const Footer = () => {
                 <FaTwitterSquare size={25} />
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.instagram.com/oruphones/?igshid=YmMyMTA2M2Y%3D"
                 target="_blank"
@@ -267,7 +267,7 @@ const Footer = () => {
                 <FaInstagram size={25} />
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.pinterest.com/ORUphones/"
                 target="_blank"
@@ -276,7 +276,7 @@ const Footer = () => {
                 <FaPinterestSquare size={25} />
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.linkedin.com/company/oruphones/"
                 target="_blank"
@@ -285,7 +285,7 @@ const Footer = () => {
                 <FaLinkedin size={25} />
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.youtube.com/channel/UCJTgZUz7jkMCECYVO1uFE6A"
                 target="_blank"
@@ -294,7 +294,7 @@ const Footer = () => {
                 <FaYoutube size={25} />
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="mailto:contact@oruphones.com?subject = Feedback"
                 target="_blank"

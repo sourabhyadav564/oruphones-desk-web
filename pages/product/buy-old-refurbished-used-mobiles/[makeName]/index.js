@@ -48,7 +48,7 @@ function BrandPage() {
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   const loadData = (intialPage) => {
-    if (makeName && !isFilterApplied && !applySort) {
+    if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
         getSearchLocation,
         makeName,
@@ -79,72 +79,70 @@ function BrandPage() {
         setLoading(false);
       });
     } else {
-      if (applyFilter) {
-        setIsFilterApplied(true);
-        const {
-          brand,
-          condition,
-          color,
-          storage,
-          warranty,
-          verification,
-          priceRange,
-        } = applyFilter;
-        if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
-          if (makeName === "oneplus") {
-            makeName = "OnePlus";
-          } else {
-            makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
-          }
-          let payLoad = {
-            listingLocation: getSearchLocation,
-            make: brand?.length > 0 ? brand : [makeName],
-            reqPage: "BRAND",
-            color: [],
-            deviceCondition: [],
-            deviceStorage: [],
-            deviceRam: [],
-            maxsellingPrice: 200000,
-            minsellingPrice: 0,
-            verified: "",
-            warenty: [],
-            pageNumber: intialPage,
-          };
-          if (priceRange && priceRange.min && priceRange.max) {
-            payLoad.minsellingPrice = priceRange.min;
-            payLoad.maxsellingPrice = priceRange.max;
-          }
-          if (condition?.length > 0) {
-            payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-          }
-          if (storage?.length > 0) {
-            payLoad.deviceStorage = storage.includes("all") ? [] : storage;
-          }
-          if (color?.length > 0) {
-            payLoad.color = color.includes("all") ? [] : color;
-          }
-          if (warranty?.length > 0) {
-            payLoad.warenty = warranty.includes("all") ? [] : warranty;
-          }
-          if (verification?.length > 0) {
-            payLoad.verified = verification.includes("all") ? [] : "verified";
-          }
-          // setLoading(true);
-          Axios.searchFilter(
-            payLoad,
-            Cookies.get("userUniqueId") || "Guest",
-            intialPage,
-            applySort
-          ).then((response) => {
-            setProducts(response?.dataObject?.otherListings);
-            // setBestDeal([]);
-            setTotalProducts(
-              response?.dataObject?.totalProducts
-            );
-            setBestDeal(response?.dataObject?.bestDeals);
-            // setLoading(false);
-          });
+      setIsFilterApplied(true);
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        if (makeName === "oneplus") {
+          makeName = "OnePlus";
+        } else {
+          makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
         }
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          make: brand?.length > 0 ? brand : [makeName],
+          reqPage: "BRAND",
+          color: [],
+          deviceCondition: [],
+          deviceStorage: [],
+          deviceRam: [],
+          maxsellingPrice: 200000,
+          minsellingPrice: 0,
+          verified: "",
+          warenty: [],
+          pageNumber: intialPage,
+        };
+        if (priceRange && priceRange.min && priceRange.max) {
+          payLoad.minsellingPrice = priceRange.min;
+          payLoad.maxsellingPrice = priceRange.max;
+        }
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (color?.length > 0) {
+          payLoad.color = color.includes("all") ? [] : color;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        // setLoading(true);
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          intialPage,
+          applySort
+        ).then((response) => {
+          setProducts(response?.dataObject?.otherListings);
+          // setBestDeal([]);
+          setTotalProducts(
+            response?.dataObject?.totalProducts
+          );
+          setBestDeal(response?.dataObject?.bestDeals);
+          // setLoading(false);
+        });
       }
     }
   };

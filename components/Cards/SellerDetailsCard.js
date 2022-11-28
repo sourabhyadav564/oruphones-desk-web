@@ -84,7 +84,7 @@ function SellerDetailsCard({ data }) {
                 <button
                   onClick={() => handleClick()}
                   className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
-                    } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end`}
+                    } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
                 >
                   {showNumber ? contactSellerMobileNumber : "Contact Seller"}
                 </button>
@@ -103,7 +103,7 @@ function SellerDetailsCard({ data }) {
             )}
             <button
               onClick={() => openSellerWebSite(data?.vendorLink)}
-              className="bg-m-green text-base font-semibold text-white w-full uppercase pr-4 mx-4 py-2 my-4 rounded"
+              className="bg-m-green text-base font-semibold text-white w-full uppercase pr-4 mx-4 py-2 my-4 rounded  hover:bg-white hover:text-m-green-1 duration-500 border border-m-green"
             >
               VIEW WEBSITE
             </button>

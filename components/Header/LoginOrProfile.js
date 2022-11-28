@@ -84,7 +84,7 @@ function LoginOrProfile() {
       ) : (
         <React.Fragment>
           <button
-            className="cursor-pointer w-20 h-8 border border-solid border-m-green-1 rounded-md  self-center  text-m-green-1 font-Roboto-Regular text-smallFontSize"
+            className="cursor-pointer w-20 h-8 border border-solid border-m-green-1 rounded-md  self-center  text-m-green-1 font-Roboto-Regular text-smallFontSize hover:bg-m-green-1 duration-500 hover:border-m-green-1 hover:text-white font-bold hover:scale-110 transition-all"
             onClick={() => setShowLogin(true)}
           >
             Log In

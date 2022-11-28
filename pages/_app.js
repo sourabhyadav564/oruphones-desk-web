@@ -7,10 +7,18 @@ import { ApplicationContext } from "../context/ApplicationContext";
 import { useRouter } from "next/router";
 import { RecoilRoot } from "recoil";
 import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "react-toastify/dist/ReactToastify.css";
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
-
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }
+  , []);
   if (router.pathname != "/i/[someId]") {
     return (
       <>
