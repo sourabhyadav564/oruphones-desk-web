@@ -9,7 +9,7 @@ function BrandFilter({ options, router, ...rest }) {
     optionObj = options;
   }
 
-  return <FilterUI optionObj={optionObj} {...rest} />;
+  return <FiltenpmrUI optionObj={optionObj} {...rest} />;
 }
 
 export default BrandFilter;
