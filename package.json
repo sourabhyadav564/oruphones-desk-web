@@ -1,5 +1,6 @@
 {
   "name": "oru-phones-web",
+  "homepage": ".",
   "cacheDirectories": [
     ".next/cache"
   ],
