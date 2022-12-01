@@ -36,7 +36,7 @@ function DeleteListingPopup({ open, setOpen, data }) {
       <div className="flex flex-col space-y-3 text-base text-m-grey-1">
         <div className="my-6 px-20 flex flex-col space-y-10">
           {/* <Image /> */}
-          <h1 className="mb-2">Are you sure you want to Delete the listing?</h1>
+          <p className="mb-2">Are you sure you want to Delete the listing?</p>
 
           <span>
             <Select

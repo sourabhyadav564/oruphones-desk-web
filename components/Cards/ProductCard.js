@@ -28,6 +28,7 @@ function ProductCard({ data, prodLink, setProducts }) {
               width={"50"}
               height={"30"}
               objectFit="contain"
+              alt={data?.name}
             /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
               <span className="h-9 block" />
             )}</div>
@@ -47,7 +48,7 @@ function ProductCard({ data, prodLink, setProducts }) {
             {numberWithCommas(data?.listingPrice || "")}
           </p>
           <div className="flex flex-col items-baseline pb-2 text-m-grey-2 flex-wrap w-full">
-            <h1 className="text-base flex-1 sm:py-1 truncate w-full font-Roboto-Regular text-regularFontSize">{data?.marketingName}</h1>
+            <p className="text-base flex-1 sm:py-1 truncate w-full font-Roboto-Regular text-regularFontSize">{data?.marketingName}</p>
 
             <div className="flex w-full justify-between font-Roboto-Light text-smallFontSize">
               {data?.deviceStorage && (

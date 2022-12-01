@@ -21,6 +21,7 @@ function BestDealsCard({ data, setProducts }) {
           width={"50"}
           height={"30"}
           objectFit="contain"
+          alt={data?.marketingName}
         /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
           <span className="h-9 block" />
         )}

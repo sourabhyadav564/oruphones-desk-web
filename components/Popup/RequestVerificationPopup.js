@@ -28,7 +28,7 @@ function RequestVerificationPopup({
     <Modal open={open} setOpen={setOpen} title={"This device is unverified"}>
       <div className="flex flex-col space-y-3 text-base text-m-grey-1 max-w-lg">
         <div className="my-6 px-6 flex flex-col space-y-10 text-center">
-          <h1 className="mb-2">
+          <div className="mb-2">
             <p>
               Press Request Verification button to ask the seller to perform
               verification.
@@ -41,7 +41,7 @@ function RequestVerificationPopup({
               This listing will also be added to My Favorites. Press Continue to
               proceed without verification​
             </p>
-          </h1>
+          </div>
         </div>
         <div className="flex space-x-8 justify-end text-white items-center">
           <span

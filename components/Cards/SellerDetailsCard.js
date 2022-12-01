@@ -62,9 +62,9 @@ function SellerDetailsCard({ data }) {
   return (
     <div className="seller-info">
       <div className="pr-4 py-2">
-        <h1 className="text-mediumFontSize text-black-20 font-Roboto-Light capitalize mb-2">
+        <p className="text-mediumFontSize text-black-20 font-Roboto-Light capitalize mb-2">
           Seller Details
-        </h1>
+        </p>
         <div className="pb-4">
           <div className="bg-gray-600 h-1 border-2"></div>
         </div>
@@ -98,6 +98,7 @@ function SellerDetailsCard({ data }) {
                 src={data?.vendorLogo || "/"}
                 width={100}
                 height={50}
+                alt="ORU Compare from Other Sellers"
                 objectFit="contain"
               />
             )}
@@ -112,9 +113,9 @@ function SellerDetailsCard({ data }) {
       </div>
       {otherSeller && otherSeller.length > 0 && (
         <div className="pr-2">
-          <h1 className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">
+          <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">
             Compare from Other Sellers
-          </h1>
+          </p>
           <div className="flex flex-col overflow-y-auto">
             {otherSeller.map((items, index) => (
               <OtherSeller key={index} data={items} />

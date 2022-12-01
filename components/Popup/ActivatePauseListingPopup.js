@@ -37,7 +37,7 @@ function ActivatePauseListingPopup({ open, setOpen, data }) {
     <Modal open={open} setOpen={setOpen} title={"Pause"}>
       <div className="flex flex-col space-y-3 text-base text-m-grey-1">
         <div className="my-6 px-20 flex flex-col space-y-10 items-center">
-          <h1 className="mb-2">Are you sure you want to pause the listing?</h1>
+          <p className="mb-2">Are you sure you want to pause the listing?</p>
         </div>
         <div className="flex space-x-8 justify-end text-white items-center">
           <span

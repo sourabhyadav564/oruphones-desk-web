@@ -64,7 +64,7 @@ function Aboutus() {
             Our vision is to be a trusted marketplace for every user to buy and sell old phones confidently, easily, and for the best price possible.
             We strive to achieve this with a strong base of technology and a dedicated team of professionals who are well-seasoned and understand the needs of the market.
           </div>
-          <h1 className="font-Roboto-Semibold">WHY ORUphones?</h1>
+          <h2 className="font-Roboto-Semibold">WHY ORUphones?</h2>
           <div>
             <div className="font-Roboto-Semibold text-xl2FontSize"> 01. Best Prices</div>
             <div className="font-Roboto-Light text-xlFontSize">The prices of used phones hike as they reach the end-user through multiple people. A few online shops and stores justify these highly inflated prices by tagging the phones as refurbished. But most of these phones are NOT refurbished, but devices with updates installed and screen-guards changed. So, many sellers and users are not likely to get the best deals.

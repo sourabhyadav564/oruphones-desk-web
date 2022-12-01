@@ -520,7 +520,7 @@ function AddEditListing({
 
   return (
     <div className="p-8">
-      <h1 className="mb-8">Sell Your Phone</h1>
+      <p className="mb-8">Sell Your Phone</p>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-8 ">
           <span>

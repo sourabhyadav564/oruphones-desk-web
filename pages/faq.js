@@ -59,7 +59,7 @@ function faq() {
         >
           <div className="flex items-center w-10/12 justify-between">
             <h1 className="text-8xl text-m-green font-bold"> F.A.Q </h1>
-            <Image src={faqImg} width={230} height={163} />
+            <Image src={faqImg} width={230} height={163} alt="ORU faq "/>
           </div>
         </section>
         {/* {parse(htmlText1)} */}

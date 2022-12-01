@@ -4,19 +4,19 @@ import Modal from ".";
 //   return (
 //     <Modal open={open} setOpen={setOpen} title={"Terms & Conditions"}>
 //       <div className="grid grid-cols-1 max-w-xl px-6 text-base text-m-grey-1">
-//         <h1 className=" font-semibold text-sm text-m-green mb-2">1.Terms</h1>
+//         <p className=" font-semibold text-sm text-m-green mb-2">1.Terms</h1>
 //         <p className="text-sm py-2 text-m-grey-1">
 //           Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry`&apos;`s Standard Dummy Text Ever
 //           Since The 1500S, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book It Has Survived Not Only Five
 //           Centuries, But Also The Leap Into Electronic Typesetting, Remaining Essentially Unchanged.
 //         </p>
-//         <h1 className=" font-semibold text-sm text-m-green mb-2">2.User Licenses</h1>
+//         <p className=" font-semibold text-sm text-m-green mb-2">2.User Licenses</h1>
 //         <p className="text-sm py-2 text-m-grey-1">
 //           Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry`&apos;`s Standard Dummy Text Ever
 //           Since The 1500S, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book It Has Survived Not Only Five
 //           Centuries, But Also The Leap Into Electronic Typesetting, Remaining Essentially Unchanged.
 //         </p>
-//         <h1 className="font-semibold text-sm text-m-green mb-2">3.Conditions</h1>
+//         <p className="font-semibold text-sm text-m-green mb-2">3.Conditions</h1>
 //         <p className="text-sm py-2 text-m-grey-1">
 //           Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry`&apos;`s Standard Dummy Text Ever
 //           Since The 1500S, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type Specimen Book It Has Survived Not Only Five
@@ -40,7 +40,7 @@ import { infoTemplates } from "api/axios";
 import fetchStaticHTML from "api/fetchStaticHtml";
 
 function TermsconditionPopup({ open, setOpen }) {
-  const [htmlContent, setHtmlContent] = useState("<h1></h1>");
+  const [htmlContent, setHtmlContent] = useState("<p></h1>");
   useEffect(() => {
     const apiCall = async () => {
       const { htmlText } = await callFetchStaticHTML();
@@ -74,7 +74,7 @@ async function callFetchStaticHTML() {
   } catch (error) {
     console.log(error);
     return {
-      htmlText: "<h1></h1>",
+      htmlText: "<p></h1>",
     };
   }
 
@@ -89,7 +89,7 @@ async function callFetchStaticHTML() {
   } catch (err) {
     console.log("getTC error", err);
     return {
-      htmlText: "<h1></h1>",
+      htmlText: "<p></h1>",
     };
   }
 

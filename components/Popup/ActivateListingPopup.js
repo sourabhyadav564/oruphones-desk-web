@@ -19,7 +19,7 @@ function ActivateListingPopup({ open, setOpen, data }) {
     <Modal open={open} setOpen={setOpen} title={data?.isActive ? "Pause" : "Activate"}>
       <div className="flex flex-col space-y-3 text-base text-m-grey-1">
         <div className="my-6 px-20 flex flex-col space-y-10">
-          <h1 className=" font-bold mb-2">Your listing is now activated</h1>
+          <p className=" font-bold mb-2">Your listing is now activated</p>
         </div>
         <div className="flex space-x-8 justify-end text-white items-center">
 

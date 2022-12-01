@@ -8,7 +8,7 @@ function ListingAddedPopup({ open, setOpen, data }) {
     <Modal open={open} setOpen={setOpen} title={"Success"}>
       <div className="flex flex-col justify-center items-center max-w-xl px-6 text-base text-m-grey-1">
         <Image src={patchCheck} alt="image" height={50} width={50} />
-        <h1 className=" font-bold p-2">Congratulations!</h1>
+        <p className=" font-bold p-2">Congratulations!</p>
         <p className="text-sm px-6 py-2 text-center">
           Your device has been submitted for listing. We recommend that you verify the device in order to sell it quickly.
         </p>

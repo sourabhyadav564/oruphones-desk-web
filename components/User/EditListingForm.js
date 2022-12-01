@@ -300,7 +300,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
 
   return (
     <div className="p-8">
-      <h1 className="mb-8">Edit Listing</h1>
+      <p className="mb-8">Edit Listing</p>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-8 ">
           <Input

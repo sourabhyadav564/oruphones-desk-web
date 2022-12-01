@@ -59,9 +59,9 @@ function Termscondition() {
       </Head>
       <main className="container my-8">
         <section className="mt-12 flex flex-col items-center mb-8 text-m-black">
-          <h1 className="uppercase  font-bold" style={{ fontSize: 28 }}>
+          <p className="uppercase  font-bold" style={{ fontSize: 28 }}>
             Mobilicis India Private Limited
-          </h1>
+          </p>
           {/* <p style={{ fontSize: 20 }}>Terms of service</p> */}
         </section>
         {/* {parse(htmlText1)} */}
@@ -96,7 +96,7 @@ function Termscondition() {
               <li>21.	Officer for Grievance</li>
             </ol>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">1. Acceptance</h1>
+              <p className="font-Roboto-Semibold ">1. Acceptance</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 ORUphones is a brand owned and operated by Mobilicis India Private Limited is company originated in Alwar, Rajasthan. ORUphones and branches and/or affiliates (hereinafter together referred to as "ORUphones") provide a cluster of resources available online, including advertisements (here from collectively referred to as the "Service") on the website https://www.oruphones.com/ and the platform's mobile application and corresponding (collectively to be called the "Platform").
                 The Services and Platforms you use are subject to ORUphones Terms and Conditions (herein called "Terms"). To express the Terms and contexts, expressions like "you" or "your" will be used to mean people who access or use, through either automated or manual means, the Services or the Platform in any style whatsoever inclusive of people browsing through the content of the Platform, posting any content or comment or by responding to some content or advertisement on the Platform. As you use our Service, you agree to observe these Terms. Furthermore, while using a part of our Services, you consent to comply with any applicable guideline posted on the Platform for such Service, which may be updated or changed with time at ORUphones's sole disposition. You understand and acknowledge that you are exclusively responsible for checking and evaluating these Terms each time you access the Platform. In case you have any objection to any condition or terms under these Terms, any subsequent modifications, or any guidelines change, or seem unhappy with ORUphones or its Service by any chance, you have the sole choice of immediately discontinuing the use of ORUphones. ORUphones has the sole discretion of updating these Terms at any suitable time. You might receive notices from ORUphones mentioning modification in the Platform or in the Terms in accordance with Section XXI (I) herein. ORUphones may translate the Terms from English to other preferable languages upon request. You must understand and acknowledge that this language translation of the Terms is solely for your convenience and that the English version of the Terms sets the rule for your relationship with ORUphones. Furthermore, if there is any irregularity between the translated and English versions of the Terms, the English version will govern the Terms.
@@ -104,7 +104,7 @@ function Termscondition() {
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">2. Description of Content Policy and Services</h1>
+              <p className="font-Roboto-Semibold ">2. Description of Content Policy and Services</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 <ol list="none">
                   <li>I. ORUphones is an advanced generation of online classifieds. We behave as a platform that allows our users, who access the Platform in compliance with our Terms, to buy, sell, or offer services and products listed on the Platform. However, you will be able to initiate payment and other forms of transactions through our Platform by using services of third-party vendors where ORUphones will not be involved in anyways in such transactions. As an outcome, and as per the detailed discussion in these Terms, you hereby agree and acknowledge that ORUphones has no involvement or control over such transactions or any element pertaining to such transaction, and therefore, will not be liable to any party connected with such transactions. Usage of the Platform and the Service is completely your responsibility. </li>
@@ -117,7 +117,7 @@ function Termscondition() {
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">3. Conduct</h1>
+              <p className="font-Roboto-Semibold ">3. Conduct</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You hereby agree that you will not post, host, upload, e-mail, publish, display, share, modify, update, store, or transmit any particulars on the Site or any other way that makes the Content available:
               </p>
@@ -164,18 +164,18 @@ function Termscondition() {
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">4. Posting Agents</h1>
+              <p className="font-Roboto-Semibold ">4. Posting Agents</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 The term "Posting Agent" herein cites a third-party service, intermediary, or agent that offers to publish Content to the Service on others' behalf. ORUphones forbids the utilization of Posting Agents indirectly or directly, without the evidence of written permit from ORUphones. Furthermore, Posting Agents are not allowed to publish Content on others' behalf, indirectly or directly, or otherwise have access to the Service for publishing Content on others' behalf, except for those with the evidence of written license or permit from ORUphones.
               </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">5. Service Access</h1>
+              <p className="font-Roboto-Semibold ">5. Service Access</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 ORUphones allows you restricted, non-exclusive, revocable permission to access and utilize the Service for personal usage. This permit provided herein is not inclusive of the following: (a) usage license or access to the Service by Posting Agents; or (b) any aggregation, duplication, collection, display, plagiarized use, or copying of the Service nor any utilization of data mining, spiders, robots, and similar modes of gathering data and tools for extraction for any motive unless ORUphones expressly permits or as otherwise mentioned in these Terms. Nonetheless, the preceding, standard internet search engines and non-trading public records that accumulate information for the exclusive motive of exhibiting hyperlinks to the Service, given they each perform it from a steady IP address or an assortment of IP addresses by the utilization of easily recognizable agent and is compliant with robots.txt file, may get involved in activities presented in (b). On the grounds of this irregularity, a "general purpose internet search engine" is not inclusive of a search engine, website, or other services that excel in listing classifieds, including any classifieds listings subset, like jobs, housing, services, personals, or for sale, or which otherwise offers services for classified ad listing. The license given in this Section allows you to showcase on your website or generate a hyperlink thereunto, independent postings on the Service as long as you use it for non-trading and/or for the purpose of reporting news only (e.g., for using in personal blogs or online media of personal nature). Suppose the complete number of postings of similar nature linked to or displayed on your website outreaches the limits set forth by ORUphones. In that case, your utilization will be considered as infringement of these Terms, unless ORUphones evidently grants you license otherwise. You are also allowed to generate a hyperlink to the Platform home page as long as the link does not represent ORUphones, its affiliates, agents, or employees in a confusing, false, derogatory, misleading, or otherwise any matter that is offensive. Using the Service beyond the authorized scope of access as permitted in these Terms instantly terminates the license or permission given herein. In order to duplicate, copy, use a plagiarized version, aggregate, collect, or display the Service or any Content provided by the Service for purposes other than the ones stated here (commercial purposes included), you must obtain a permit from ORUphones first. </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">6. Infringement Claims Notification</h1>
+              <p className="font-Roboto-Semibold ">6. Infringement Claims Notification</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 ORUphones is not responsible for any infringement or violation of analytical property rights for content published on or transferred through the website or materials advertised on the website by the end-customers or any other third party.</p>
               <p className="font-Roboto-Regular text-regularFontSize">
@@ -187,68 +187,68 @@ function Termscondition() {
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">7. Rights for Intellectual Property</h1>
+              <p className="font-Roboto-Semibold ">7. Rights for Intellectual Property</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You accept and agree that the content on the Platform, apart from the User Content that you are permitted under Section ii(C) of the Terms, inclusive of the restriction less, the software, text, scripts, photos, videos, music, graphics, sounds, reciprocal attributes, and similar ("Materials") and the trademarks, logos, and service marks contained therein ("Marks"), are licensed to or owned to ORUphones, and are subject to trademark and other intellectual property rights under the Indian Laws, international pact, and foreign regulations and/or conventions. The Platform may show certain third-party trademarks with regards to the Services. Using these trademarks may depend on the permits granted to ORUphones by third parties. You shall, under no circumstances, decompile, disassemble, or reverse engineer such copyrights, and nothing here shall be interpreted to allow you any license with regards to such copyrights. Materials present on the Platform are given to you AS IS for your knowledge and usage of personal nature only and may not be utilized, transmitted, copied, displayed, distributed, sold, reproduced, licensed, broadcast, or otherwise exploited for any other reasons whatsoever without any advance written agreement with the respective owners. ORUphones holds the rights not clearly given herein to the Materials and the Platform. You acknowledge that you shall not engage in the distribution, copying, or use of any of the Materials apart from the expressly licensed herein, inclusive of any distribution, copying, or use of third party Materials acquired from the Platform for any commercial reasons. If you print or download a copy of the Materials for your personal usage, it is mandatory for you to preserve all copyrights and other proprietary documents contained therein. You hereby agree that you shall not disable, circumvent or otherwise interfere with the attributes related to the security of the Platform or attributes that restrict or prevent the copying or utilization of any Materials or impose restrictions on the Materials or Platform usage therein. The laws of copyright or other laws and international pacts and/or conventions provide maximum permitted protection to the Service. The content shown on or through the Service gets copyright protected as a combined work and/or compilation, in accordance with the laws of copyrights, international regulations, and other laws. Any modification, creation of plagiarized works, redistribution, or modification of the Materials, the Platform, or the combined work or collection is expressly restricted. Reproducing or copying the Materials, the Platform, or any part thereof to any other server or place for further redistribution or reproduction is restricted. You further acknowledge that you shall not reproduce, copy, or duplicate Materials or Content from the Service and agree to follow any, and all notices on copyright and other notices exhibited on the Service. You are not allowed to disassemble or decompile, reverse engineer or otherwise try to find any source code present in the Service. Without restricting the aforesaid, you agree not to copy, duplicate, reproduce, resell, exploit, or sell for any commercial reasons, any Service aspect. ORUphones is a trademark registered with the Indian Trademark Office and authorities and in different other administrations.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">8. User Submissions</h1>
+              <p className="font-Roboto-Semibold ">8. User Submissions</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You acknowledge that as you use the Platform, you will be revealed to Content to the Content through different sources and that ORUphones is not liable for the usefulness, accuracy, intellectual property rights, or safety of or in connection to such Content, and you assume and agree to all responsibility for your usage. Furthermore, you acknowledge and understand that you may be revealed to Content that is offensive, inaccurate, objectionable, indecent, libellous, or defamatory, and you agree to renounce, and hereby do waive, any equitable or legal rights or solutions you have or may have against ORUphones with respect thereto.
               </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">9. Indemnity</h1>
+              <p className="font-Roboto-Semibold ">9. Indemnity</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You acknowledge to indemnify, defend, and consider harmless ORUphones, its affiliates, directors, officers, agents, subsidiaries, assigns, successors, employees, suppliers, and service providers, from and against any and all obligations, claims, liabilities, damages, debts, losses, costs, and expenses (inclusive of but not restricted to the fees of attorneys) arising from (i) your access to and use of the Service and/or Platform; (ii) your infringement of any terms of these Terms; (iii) your infringement of the right of any third party, including without any restriction on any trade secret, trademark, copyright, or other privacy or property right; or (iv) any affirmation that your Content led to any damage to a third party. This indemnification and defence commitment will get through modification, expiration, or termination of these Terms and the usage of the Platform and the Service by you.
               </p>
 
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">10. The Policy for No Spam</h1>
+              <p className="font-Roboto-Semibold ">10. The Policy for No Spam</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You recognize and agree that sharing unsought e-mail ads or other unsolicited modes of communications to ORUphones's e-mail addresses or through ORUphones's computer system is clearly forbidden by these Terms. You agree and acknowledge that with time ORUphones may monitor the use of e-mail using automatic software or human monitors to label certain words in connection with scams or spam in e-mails that are shared between users in the ORUphones's e-mail system. Any connection between you and any other user using the features for communication present on the Platform and the Service may be utilized only in lieu of the Terms. Any unlicensed usage of ORUphones's computer system is an infringement of these Terms and some of the laws applicable. The send and his/her agents may be subjected to criminal and civil penalties because of such infringements.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">11. Handling Individuals and Organizations</h1>
+              <p className="font-Roboto-Semibold ">11. Handling Individuals and Organizations</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You agree and acknowledge that ORUphones shall not be responsible for your relationship with any individuals and/or organizations through the Service or on the Platform. This is inclusive of, but is still not restricted to, payment and delivery of services and goods and any other warranties, terms, representations, or conditions related to any communication you may have had with other individuals and/or organizations. These deals happen exclusively between such individuals and/or organizations and you. You acknowledge and agree that ORUphones has no responsibility or liability towards any damage or loss of any type caused as an outcome of any such communications or dealings. If there is any trouble among the users on the Platform or between any third party and participants, you acknowledge and agree that ORUphones is not obligated to get involved in such issues. In case you have an argument with one or more users, you hereby declare ORUphones, its employees, officers, successors, and agents free of any and all claims, damages, and demands (consequential and actual) of every nature or kind, unknown or known, unsuspected and suspected, undisclosed and disclosed, emerging from or in any way connected with such issues and/or our Service.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">13. Restriction and Termination of Service</h1>
+              <p className="font-Roboto-Semibold ">13. Restriction and Termination of Service</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You recognize and agree that ORUphones may set restrictions with time regarding the utilization of the Service, inclusive of, among others, the given number of days that Content will be retained or maintained by the Service, the maximum size and number of e-mail messages, posting or similar Content that teh Content stores or transfers, and the manner and frequency in which you are allowed to access the Platform or the Service. You agree that your account is recognized and connected through your e-mail ID, mobile number, or Facebook account, from which you had registered. Under circumstances where you have multiple accounts linked together through your e-mail ID, contact number, or Facebook account, ORUphones has the sole right to restrict, remove, or delete the copied accounts. You agree and acknowledge that ORUphones does not have any liability or responsibility towards the removal or storage failure of any Content transferred through or maintained by the Service or the Platform. You also agree and acknowledge that ORUphones holds the sole right to modify, discontinue or limit the Service (or any part thereof) at any time with or without prior intimation and that ORUphones shall not be responsible for you or any third party for any such discontinuance, suspension, or modification of the Service. You understand and agree that ORUphones has complete and sole discretion, holds the right (but is not obligated) to deactivate or delete your account, block your IP or e-mail address, or otherwise discontinue your use of or access to the Service (or any part thereof), instantly and without any prior intimation and discard and remove any Content within the Service, on any grounds or no ground at all, including, limitation free, if ORUphones thinks that you have infringed these Terms. Further, you accept that ORUphones shall not be responsible for you or any third party for any conclusion of your access to the Service or the Platform. You also agree that you shall not try to utilize the Service after any such discontinuation of terms.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">14. Warranty Disclaimer</h1>
+              <p className="font-Roboto-Semibold ">14. Warranty Disclaimer</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You clearly agree and acknowledge that using the Service and the Platform is completely at your own risk and that the Service and the Platform are given on an "As Available" or "As Is" basis without any type of warranties. All applicable and indicated warranties, inclusive of, without any restriction, the merchantability warranties, suitability for a certain reason, and non-violation of the Proprietary Rights, are explicitly disclaimed to the whole extent the laws permit. ORUphones, its directors, employees, officers, and agents disclaim all the warranties, portrayals, and implications to the complete extent the law permits in relation with the Platform and your usage thereof. ORUphones makes no representations or warranties about the absoluteness or correctness of the Content on the Platform or any third-party website Content in collection with the Platform and is not responsible or liable for any (i) inaccuracies, mistakes, or errors in the Content, (ii) damage or injury to the property or personal nature whatsoever, because of you accessed and used the Service and the Platform, (iii) any unwarranted access and utilization of our servers and/or any and all personal data and/or financial details stored therein, (iv) any cessation or interruption of transfer to or from the Platform, (v) any viruses, Trojan Horses, bugs or similar may be transferred to or through the Platform by any third-party, and .or (vi) any omissions or errors within the Content or for any type of damage or loss caused because of the utilization of any Content published, transmitted, communicated, e-mailed, or otherwise provided by the Service or the Platform. ORUphones does not guarantee, endorse, assume or warrant liability of any Service or Product offered or advertised by a third party through the Platform or any website hyperlink or displayed in any banner or other form of advertising, and ORUphones will not be involved with or in any way take responsibility of supervising any communication or transactions happening between you and/or any user and/or third-party providers of services and products. You should apply your best discernment and practice caution where suitable when it comes to buying a service or product through any environment or medium.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">15. Liability Limitations</h1>
+              <p className="font-Roboto-Semibold ">15. Liability Limitations</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 Under no circumstances shall ORUphones, its directors, officers, employees or agents, be responsible for special, direct, incidental, indirect, exemplary, or consequential damages (even if ORUphones is aware of the possibility of such impairment) because of any of your utilization of the Service and the Platform, inclusive of, without restriction, whether the impairments happen from the utilization or misuse of the Service or the Platform, from the incapability to utilize the Service or the Platform, or for using the Service or the Platform, or the alteration, modification, interruption, termination, or suspension of the Service or the Platform. Such liability restriction shall be applicable considering the damages caused because of other products or services secured from or displayed regarding the Service or the Platform or any hyperlinks on the Platform, as well as because of any opinion, advice, or information obtained from or displayed regarding the Service or the Platform or any link on the ORUphones website. These restrictions shall be applicable to the whole extent allowed by the Law. You particularly agree and acknowledge that ORUphones shall not be responsible for the submissions by the user or the illegal, offensive, or defamatory conduct of any user or third party and that the hazard of causing damage or harm from the preceding depends entirely on you. ORUphones controls and offers the Platform. ORUphones does not represent or warrant that the Platform is perfect for utilization in other places. Those who use or access the Platform from other administrations do so at their own risk and accord and are liable to comply with the local laws.
               </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">16. Assignment</h1>
+              <p className="font-Roboto-Semibold ">16. Assignment</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 These Terms and any licenses and rights allowed hereunder may not be assigned or transferred by you but may be given by ORUphones without limitation. Any transfer or assignment by you shall be invalid.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">17. Ability to Accept the Service Terms</h1>
+              <p className="font-Roboto-Semibold ">17. Ability to Accept the Service Terms</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 This Platform only intends to serve the purpose of adults and that you have the eligibility of contracting as per the laws applicable. If you are accessing/utilizing this Platform as a spokesperson of any entity/person, you accept that you have the legal authority of representing that entity/person. Minors, i.e., users who are under 18 years of age, only have the right to use the Service and the Platform on the occasion of approval from their legal spokesperson or on the occasion that concerns a deed or an agreement that is usual and justifiable standard in respectful practice and life. You confirm that you are either of a minimum age of 18 years or an independent minor or holds legal guardian's or parent's consent and are completely competent and capable of entering into the terms, obligations, representations, warranties, affirmations, and conditions given by these Terms, and to comply with and abide by these Terms. Under any circumstances, if you confirm that you age more than 13 years, the Platform has not been created to suit children under the age of 13 years.
                 NOTICE FOR CHILDREN UNDER 13 YEARS OF AGE AND THEIR GUARDIANS OR PARENTS
@@ -256,14 +256,14 @@ function Termscondition() {
               </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">18. General Information</h1>
+              <p className="font-Roboto-Semibold ">18. General Information</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 These Terms and other related policies published on the Platform contain the full and sole agreement and understanding between ORUphones and you and control your usage of the Platform and the Service exceeding all prior proposals, negotiations, discussions, agreements, and understandings, between the parties, eighter oral or written. The Indian Laws shall govern the Terms and the relations between ORUphones and you. If you have any claims from ORUphones, they must be submitted to the Indian jurisdiction courts exclusively. However, when you are a customer, it may be that the law for consumers requires the other applicable laws and that a petition might be submitted to another administration. If ORUphones fails to enforce or exercise any provision or right of the Terms shall not authorize a waiver of such provision or right. If the court of suitable jurisdiction finds any Terms under the provision to be invalid (including, without restriction, as there is inconsistency in such provisions with the laws of other jurisdictions) or irrelevant, the parties, however, shall agree that could attempt to the parties' intent effects as shown in the services. Suppose any service or provisions of these Terms are considered unenforceable, illegal, or invalid. In that case, the enforceability, legality, and the validity of the leftover provisions of the Terms shall in no way be impaired or affected. YOU ACKNOWLEDGE THAT ANY ACTION YOU CAUSE AND EMERGING FROM OR REGARDING YOUR USAGE OF THE PLATFORM AND/OR THE SERVICE MUST BEGIN WITHIN A JUSTIFIABLE TIME AND UNDER ANY CIRCUMSTANCES WITHIN A YEAR AFTER THE RESULTS OF THE ACTIONED CAUSES, EXCEPT THAT ORUphones MAY BEGIN ANY SUCH REASON OF ACTION CONCERNING THE STATUTE OF RESTRICTIONS UNDER THE INDIAN LAW. OTHERWISE, SUCH CAUSE OF ACTION IS PROHIBITED PERMANENTLY. These Terms shall familiarize benefit of and be obligatory upon each party's assigns and successors.
               </p>
             </div>
 
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">19. Term Violation and Liquidated Damages</h1>
+              <p className="font-Roboto-Semibold ">19. Term Violation and Liquidated Damages</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 You are requested to report any infringement of Terms that you are aware of by getting in touch with us through the hyperlink at the bottom of ORUphones's homepage at https://www.oruphones.com/. In case you fail to act by ORUphones because of a breach or other does not renounce our authority to act in accordance with the following or similar violation by you or others. You acknowledge and agree that it is often tough or impossible to evaluate if actual impairment cannot be calculated reasonably, then you will be responsible for paying the following to ORUphones as liquidated impairments (or not a penalty):
                 I. If ORUphones puts forward any restriction on the frequency at which you may use the Service, or ends your access to or utilization of the Service, you consent to pay ORUphones an amount for (i) each message you publish in addition to such limits or (ii) for each additional day when you access ORUphones by exceeding your limit, whichever is higher.
@@ -276,7 +276,7 @@ function Termscondition() {
               </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">20. Privacy Policy</h1>
+              <p className="font-Roboto-Semibold ">20. Privacy Policy</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 A. Indian Standards/Act for Personal Data Protection:
                 ORUphones is liable to collect, retain, and use personal data in accordance with the Indian Personal Data Protection Act and thus meet the global standards.
@@ -305,7 +305,7 @@ function Termscondition() {
               </p>
             </div>
             <div className="pt-2">
-              <h1 className="font-Roboto-Semibold ">21. Grievance Office</h1>
+              <p className="font-Roboto-Semibold ">21. Grievance Office</p>
               <p className="font-Roboto-Regular text-regularFontSize">
                 In case you have any complaint regarding the Service or the Platform, you can connect with our grievance officers.
                 <br /> E-mail: contact@oruphones.com

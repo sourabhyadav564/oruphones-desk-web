@@ -14,7 +14,7 @@ const ConditionOptionLarge = ({
     >
       <span className="flex items-center space-x-3">
         <BsInfoCircle />
-        <h1 className="font-semibold">{title}</h1>
+        <p className="font-semibold">{title}</p>
       </span>
       {options &&
         options.length > 0 &&

@@ -3,9 +3,9 @@ const HomeContent = () => {
     <section className="container mb-6">
       <div className="content">
         <div id="why_ORUphones">
-          <h1 className="text-mx font-Roboto-Bold">Why should I use ORUphones?</h1><br />
-          <div className="font-Roboto-Medium text-xlFontSize">Buy & Sell Your Phone at ORUphones </div>
-          <div className="font-Roboto-Light text-mediumFontSize text-left">
+          <div className="text-xl  font-Roboto-Bold">Why should I use ORUphones?</div><br />
+          <h1 className="font-Roboto-Medium text-xl FontSize">Buy & Sell Your Phone at ORUphones </h1>
+          <div className="font-Roboto-Light text-medium FontSize text-left">
             ORUphones is India&apos;s first and unique online marketplace where
             you can buy and sell old phones, refurbished phones and used mobile
             phones for the best deal. Our vision is to be a trusted marketplace

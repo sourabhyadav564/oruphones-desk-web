@@ -108,7 +108,7 @@ export default StepsSection;
 
 const StepComp = ({ title, data }) => (
   <div className="bg-sell-step mb-4 py-4 rounded-md shadow text-center text-gray-600">
-    <h1 className="text-xl pb-6 leading-normal font-semibold"> {title} </h1>
+    <p className="text-xl pb-6 leading-normal font-semibold"> {title} </p>
     <div className="flex items-center md:items-stretch justify-center flex-col md:flex-row gap-y-6">
       {data &&
         data.map((item, index) => (

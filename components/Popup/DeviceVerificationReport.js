@@ -17,9 +17,9 @@ function DeviceVerificationReport({ open, setOpen, data }) {
       <div className="grid grid-cols-5 device_verification_report">
         <div className="flex flex-col px-6 col-span-2">
           <div>
-            <h1 className="text-black-20" style={{ fontSize: 21 }}>
+            <p className="text-black-20" style={{ fontSize: 21 }}>
               {data?.marketingName || "SAMSUNG Galaxy S21 Plus"}
-            </h1>
+            </p>
             <h2 className="text-black-20" style={{ fontSize: 21 }}>
               ({data?.color} {data?.deviceStorage})
             </h2>
@@ -149,13 +149,13 @@ const QuestionnaireResults = ({ question, result, childQuestions, index }) => {
         {childQuestions && childQuestions?.length > 0 ? (
           childQuestions.map((items, index1) => (
             <div key={index1} className="flex items-start pt-2">
-              <img src={pass.src} className="mt-1 mr-2" />
+              <img src={pass.src} alt={items} className="mt-1 mr-2" />
               <p>{items}</p>
             </div>
           ))
         ) : (
           <div className="flex items-start pt-2">
-            <img src={pass.src} className="mt-1 mr-2" />
+            <img src={pass.src} alt={result} className="mt-1 mr-2" />
             <p>{result}</p>
           </div>
         )}

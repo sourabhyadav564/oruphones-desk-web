@@ -34,6 +34,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
                 width={"50"}
                 height={"50"}
                 objectFit="contain"
+                alt={data?.name}
               />}
             </span>
             <AddFav data={data} setProducts={setProducts} />
@@ -67,9 +68,9 @@ function TopDealCard({ data, setProducts, prodLink }) {
             {data?.listingPrice && <BiRupee size={20} />}{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
-          <h1 className=" text-regularFontSize flex-1 w-full opacity-100 text-black-1 font-Roboto-Light truncate">
+          <p className=" text-regularFontSize flex-1 w-full opacity-100 text-black-1 font-Roboto-Light truncate">
             {data?.marketingName}
-          </h1>
+          </p>
 
           <div className="flex justify-between pt-1 pb-4 text-smallFontSize opacity-100 h-2 w-full text-m-grey-2 font-Roboto-Light">
             {data?.deviceStorage && (

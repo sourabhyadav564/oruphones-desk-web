@@ -199,7 +199,7 @@ const Footer = () => {
       </div></div>
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">
         <div className="flex flex-col">
-          <h1 className="font-Roboto-Semibold text-xlFontSize">Customer Service</h1>
+          <p className="font-Roboto-Semibold text-xlFontSize">Customer Service</p>
           <Link href="/privacy-policy">
             <a className="hover:scale-150 hover:pl-4 duration-500 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
           </Link>
@@ -213,7 +213,7 @@ const Footer = () => {
           </Link>
         </div>
         <div className="flex flex-col">
-          <h1 className="font-Roboto-Semibold text-xlFontSize">Links</h1>
+          <p className="font-Roboto-Semibold text-xlFontSize">Links</p>
           <Link href="https://www.oruphones.com/blog/">
             <a className="hover:scale-150 duration-500 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
           </Link>
@@ -226,7 +226,7 @@ const Footer = () => {
         </div>
         <div>
           <div className="flex flex-col">
-            <h1 className="font-Roboto-Semibold text-xlFontSize">DOWNLOAD ORUphones App</h1>
+            <p className="font-Roboto-Semibold text-xlFontSize">DOWNLOAD ORUphones App</p>
             <div className="flex flex-row">
               <a target={"_blank"} rel="noreferrer" href={qrValue2}>
                 <p className="w-32 mt-2 mb-2 mr-2 h-10 bg-play-store bg-no-repeat bg-contain" />

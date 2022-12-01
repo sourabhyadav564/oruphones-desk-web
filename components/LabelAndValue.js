@@ -16,23 +16,23 @@ function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showCond
         <span className="">
           <div className="w-6 h-5 flex items-center pt-4 ">
             {label.toUpperCase().includes("CONDITION") ? (
-              <Image src={condition} alt="CONDITION" width={25} height={25} objectFit="contain" />
+              <Image src={condition} alt="ORU CONDITION" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("COLOR") ? (
-              <Image src={color} alt="COLOR" width={25} height={25} objectFit="contain" />
+              <Image src={color} alt="ORU COLOR" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("STORAGE") ? (
-              <Image src={storage} alt="STORAGE" width={25} height={25} objectFit="contain" />
+              <Image src={storage} alt="ORU STORAGE" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("RAM") ? (
-              <Image src={ram} alt="RAM" width={25} height={25} objectFit="contain" />
+              <Image src={ram} alt="ORU RAM" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("ACCESSORIES") ? (
-              <Image src={box} alt="ACCESSORIES" width={25} height={25} objectFit="contain" />
+              <Image src={box} alt="ORU ACCESSORIES" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("WARRANTY") ? (
-              <Image src={calendar2} alt="WARRANTY" width={25} height={25} objectFit="contain" />
+              <Image src={calendar2} alt="ORU WARRANTY" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("VERIFIED") ? (
-              <Image src={calendar1} alt="VERIFIED" width={25} height={25} objectFit="contain" />
+              <Image src={calendar1} alt="ORU VERIFIED" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("LISTED") ? (
-              <Image src={calendar3} alt="LISTED" width={25} height={25} objectFit="contain" />
+              <Image src={calendar3} alt="ORU LISTED" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("REPORT") ? (
-              <Image src={box} alt="REPORT" width={25} height={25} objectFit="contain" />
+              <Image src={box} alt="ORU REPORT" width={25} height={25} objectFit="contain" />
             ) : (
               ""
             )}

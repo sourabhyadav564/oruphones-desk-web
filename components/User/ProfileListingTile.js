@@ -103,10 +103,10 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         )}
 
         <div>
-          <h1 className="text-mediumFontSize font-Roboto-Semibold text-m-grey-1 my-1.5">
+          <p className="text-mediumFontSize font-Roboto-Semibold text-m-grey-1 my-1.5">
             {" "}
             {data?.marketingName}​{" "}
-          </h1>
+          </p>
           {/* <span className="text-m-grey-2 text-sm">List Price</span> */}
           <p className="flex items-center font-Roboto-Bold text-xl2FontSize text-m-grey-1">
             {data?.listingPrice && <BiRupee className="h-full" />}{" "}

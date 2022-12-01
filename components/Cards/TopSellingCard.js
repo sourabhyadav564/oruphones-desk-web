@@ -26,7 +26,7 @@ function TopSellingCard({ data }) {
               <Image src={data?.imagePath || Logo} alt={data?.name} width={150} height={150} objectFit="contain" />
             </div>
             <div className="flex-wrap w-full">
-              <h1 className="text-regularFontSize sm:text-base flex-1 sm:py-1 truncate w-full capitalize font-Roboto-Regular text-m-grey-2">{data?.marketingName}</h1>
+              <p className="text-regularFontSize sm:text-base flex-1 sm:py-1 truncate w-full capitalize font-Roboto-Regular text-m-grey-2">{data?.marketingName}</p>
               <div className="justify-self-end">
                 <p className="text-smallFontSize font-Roboto-Light text-m-grey-1">Starting from</p>
                 <p className="font-Roboto-Bold flex items-center -ml-1 text-xlFontSize text-m-green">

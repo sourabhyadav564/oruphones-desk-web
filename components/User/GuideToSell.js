@@ -5,7 +5,7 @@ function GuideToSell() {
   return (
     <div>
       <div className="relative w-full h-40">
-        <Image src={howtosellbgImg} layout="fill" />
+        <Image src={howtosellbgImg} alt="ORU devices" layout="fill" />
       </div>
       <div className="px-4 py-6 text-sm">
         <p className="font-semibold capitalize text-m-green py-3">

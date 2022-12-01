@@ -31,6 +31,7 @@ function Services() {
                     width={"48"}
                     height={"30"}
                     objectFit="contain"
+                    alt={item.title}
                   />
                 </div>
                 <div className="flex-1">

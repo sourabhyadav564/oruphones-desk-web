@@ -127,7 +127,7 @@ function ProductDetails({ listingInfo }) {
 
   return (
     <main className="container my-6">
-      <h1 className="sr-only"> Product Details page </h1>
+      <p className="sr-only"> Product Details page </p>
       <section className="grid grid-cols-4 gap-4">
         <div className="bg-white col-span-5">
           <ProductDetailsCard
@@ -140,12 +140,12 @@ function ProductDetails({ listingInfo }) {
           <SellerDetailsCard data={listingInfo} />
         </div> */}
         <div className="col-span-4">
-          <h1
+          <p
             className="text-m-black font-Roboto-Light text-regularFontSize my-3"
             style={{ fontSize: 21 }}
           >
             Similar Products ({simliarProducts?.length || 0})
-          </h1>
+          </p>
           <div
             className="grid grid-cols-4 gap-6 mt-5"
           // onClick={() => {

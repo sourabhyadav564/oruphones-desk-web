@@ -80,6 +80,7 @@ function ImageSlider({ images, openFullImage }) {
             <Image
               priority
               src={images?.fullImage || Logo}
+              alt="ORU slider image"
               width={"100%"}
               height={"90%"}
               layout="responsive"
@@ -106,6 +107,7 @@ function ImageSlider({ images, openFullImage }) {
                     height={"100%"}
                     layout="responsive"
                     objectFit="contain"
+                    alt="oru image slider"
                   />
                 </Fragment>
               ))}
@@ -123,6 +125,7 @@ function ImageSlider({ images, openFullImage }) {
               height={"100%"}
               layout="responsive"
               objectFit="contain"
+              alt="ORU image slider"
             />
           </Slider>
         )}

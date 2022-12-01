@@ -63,6 +63,7 @@ function UserProfile({ children, className }) {
               >
                 <Image
                   src={inputImage || UserProfileIcon}
+                  alt="ORU Account"
                   layout="fill"
                   objectFit="contain"
                   priority

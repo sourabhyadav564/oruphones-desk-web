@@ -68,15 +68,15 @@ function ListingDetailsCard({ data }) {
       <div className="grid grid-cols-3 col-span-3">
         <div className="col-span-2">
           <div className="mb-3 px-2">
-            <h1 className="capitalize text-2xl font-semibold text-black-20">{data?.marketingName}</h1>
-            <h2 className="capitalize text-2xl font-semibold text-black-20">
+            <p className="capitalize text-2xl font-semibold text-black-20">{data?.marketingName}</p>
+            <p className="capitalize text-2xl font-semibold text-black-20">
               {/* ({data?.color}, {data?.deviceStorage}) */}
               ({data?.color && `${data?.color}, `}
               {data?.deviceRam && data?.deviceRam + " RAM, "}
               {data?.deviceStorage && (
                 <span>{data?.deviceStorage + " Storage"})</span>
               )}
-            </h2>
+            </p>
             {data?.verified ? <VerifiedIcon width={86} height={46} /> : <UnVerifiedIcon width={86} height={46} />}
             <label className="block text-base text-m-grey-2">List price</label>
             <p className="font-semibold flex items-center -ml-1 text-m-grey-1" style={{ fontSize: 42 }}>

@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="robots" content="noindex,nofollow" />
+          {/* <meta name="robots" content="noindex,nofollow" /> */}
           {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />  */}
           <link
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
