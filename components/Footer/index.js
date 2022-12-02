@@ -189,7 +189,7 @@ const Footer = () => {
       <div><div className="pl-24 pr-28 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
         <p className='text-white tracking-[0.15em] leading-8'>
           {brandData && brandData.map((brand, index) => (
-            <a className="hover:underline hover:cursor-pointer"
+            <a className="hover:cursor-pointer"
               // href="/sell-old-refurbished-used-mobiles/add"
               // onClick={() => setAddListingBrand(brand.prefill)}>
               onClick={() => setOpenAppDownload(true)}>
