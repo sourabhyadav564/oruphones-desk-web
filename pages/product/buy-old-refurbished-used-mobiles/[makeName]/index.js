@@ -85,6 +85,7 @@ function BrandPage() {
         condition,
         color,
         storage,
+        ram,
         warranty,
         verification,
         priceRange,
@@ -113,6 +114,9 @@ function BrandPage() {
           payLoad.minsellingPrice = priceRange.min;
           payLoad.maxsellingPrice = priceRange.max;
         }
+        // if(ram?.length>0){
+        //   payLoad.deviceRam = ram.includes("all") ? [] : ram;
+        // }
         if (condition?.length > 0) {
           payLoad.deviceCondition = condition.includes("all") ? [] : condition;
         }
