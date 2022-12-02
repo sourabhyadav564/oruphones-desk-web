@@ -43,6 +43,7 @@ function ProductCard({ data, prodLink, setProducts }) {
               objectFit="contain"
             />
           </div>
+          
           <p className="font-semibold flex items-center text-m-grey-1 font-Roboto-Bold text-xlFontSize">
             {data?.listingPrice && <FaRupeeSign size={16} />}
             {numberWithCommas(data?.listingPrice || "")}

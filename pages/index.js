@@ -65,6 +65,7 @@ export default function Home({
     //   setTopArticles(fetchTopArticles);
     // }
 
+
     if (make_models) {
       // setBrands(JSON.parse(localStorage.getItem("make_models")));
       console.log("makeModelLists from local");
