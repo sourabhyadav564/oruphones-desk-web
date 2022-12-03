@@ -7,4 +7,4 @@ function StorageFilter({ options, router, ...rest }) {
   return <FilterUI optionObj={options} {...rest} />;
 }
 
-export default StorageFilter;
+export default StorageFilter; 

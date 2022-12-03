@@ -5,6 +5,11 @@ import { numberWithCommas } from "../../utils/util";
 import Logo from "@/assets/oru_phones_logo.png"
 
 function TopSellingCard({ data }) {
+
+  var type = ["old phone", "used", "refurbished"]
+  const alternate_text = (`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} like new `).toLowerCase()
+  
+  console.log("models : ", alternate_text);
   if (data?.name?.toLowerCase().includes("all")) {
     return (
       <Link href={`/product/models`} passHref>
@@ -23,7 +28,7 @@ function TopSellingCard({ data }) {
         <div className="grid grid-cols-1 rounded-md shadow-lg hover:shadow-md p-4 pb-2 bg-m-white" data-aos="fade-up">
           <div className="grid grid-cols-1">
             <div className="flex justify-center">
-              <Image src={data?.imagePath || Logo} alt={data?.name} width={150} height={150} objectFit="contain" />
+              <Image src={data?.imagePath || Logo} alt={alternate_text} width={150} height={150} objectFit="contain" />
             </div>
             <div className="flex-wrap w-full">
               <p className="text-regularFontSize sm:text-base flex-1 sm:py-1 truncate w-full capitalize font-Roboto-Regular text-m-grey-2">{data?.marketingName}</p>

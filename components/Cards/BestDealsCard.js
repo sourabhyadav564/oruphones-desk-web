@@ -10,7 +10,11 @@ import SoldOut from "@/assets/soldout.png"
 import Logo from "@/assets/oru_phones_logo.png"
 
 function BestDealsCard({ data, setProducts }) {
+
+  var type = ["old phone", "used", "refurbished"]
+  const soldout = (`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase()
   return (
+    
     <div
       className="bg-white h-[300px] rounded-lg py-2 text-m-grey-2 mb-6 bg-gradient-to-l from-m-white to-m-green"
       style={{ boxShadow: "0px 2px 3px #0000000A" }}
@@ -21,7 +25,7 @@ function BestDealsCard({ data, setProducts }) {
           width={"50"}
           height={"30"}
           objectFit="contain"
-          alt={data?.marketingName}
+          alt={soldout}
         /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
           <span className="h-9 block" />
         )}
@@ -131,7 +135,7 @@ function BestDealsCard({ data, setProducts }) {
             height={190}
             src={data?.imagePath || Logo}
             objectFit="contain"
-            alt={data?.marketingName}
+            alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()} 
           />
         </div>
       </div>

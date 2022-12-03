@@ -10,12 +10,12 @@ function BrandCard({ data }) {
         </a>
       </Link>
     );
-  }
+  }  
   return (
     data.imagePath && (
       <Link href={{ pathname: `/product/buy-old-refurbished-used-mobiles/${data?.make?.toLowerCase()}` }}>
         <a className="bg-no-repeat rounded w-36 h-[91px] px-[349px] sm:px-4 bg-m-white flex justify-center opacity-100 relative shadow-md">
-          <Image src={data?.imagePath} alt={data?.make} height={80} width={80} objectFit="contain" />
+          <Image src={data?.imagePath} alt={`buy online refurbished ${data?.make}`} height={80} width={80} objectFit="contain" />
         </a>
       </Link>
     )

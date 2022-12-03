@@ -84,6 +84,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             {(data?.images || data?.defaultImage || data?.imagePath) && (
               <ImageSlider
                 openFullImage={openFullImage}
+                data = {deviceListingInfo}
                 images={
                   (data?.images?.length && data?.images) ||
                   (data?.imagePath && {

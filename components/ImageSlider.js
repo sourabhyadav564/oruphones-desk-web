@@ -11,7 +11,7 @@ const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
   <BiChevronRight {...rest} className={`next ${className}`} />
 );
 
-function ImageSlider({ images, openFullImage }) {
+function ImageSlider({data, images, openFullImage }) {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
@@ -44,6 +44,9 @@ function ImageSlider({ images, openFullImage }) {
     nextArrow: <ArrowRight />,
   };
 
+  var type = ["old phone", "used", "refurbished"]
+  const alternate_text = (`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} `).toLowerCase()
+  
   return (
     <React.Fragment>
       {Array.isArray(images) && images && (
@@ -59,7 +62,7 @@ function ImageSlider({ images, openFullImage }) {
                 <Image
                   priority
                   src={img?.fullImage || Logo}
-                  alt={index}
+                  alt={alternate_text}
                   width={"100%"}
                   height={"90%"}
                   layout="responsive"
@@ -80,7 +83,7 @@ function ImageSlider({ images, openFullImage }) {
             <Image
               priority
               src={images?.fullImage || Logo}
-              alt="ORU slider image"
+              alt={alternate_text}
               width={"100%"}
               height={"90%"}
               layout="responsive"
@@ -107,7 +110,7 @@ function ImageSlider({ images, openFullImage }) {
                     height={"100%"}
                     layout="responsive"
                     objectFit="contain"
-                    alt="oru image slider"
+                    alt={alternate_text}
                   />
                 </Fragment>
               ))}
@@ -125,7 +128,7 @@ function ImageSlider({ images, openFullImage }) {
               height={"100%"}
               layout="responsive"
               objectFit="contain"
-              alt="ORU image slider"
+              alt={alternate_text}
             />
           </Slider>
         )}

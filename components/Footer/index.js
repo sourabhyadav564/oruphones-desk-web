@@ -194,7 +194,7 @@ const Footer = () => {
               // onClick={() => setAddListingBrand(brand.prefill)}>
               onClick={() => setOpenAppDownload(true)}>
                     Sell {" "}{brand.name} Phone   {brand.id!=31&& "|"} </a>
-          ))}
+          ))}          
         </p>
       </div></div>
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">

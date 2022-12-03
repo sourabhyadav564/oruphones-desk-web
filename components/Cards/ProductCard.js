@@ -9,7 +9,12 @@ import VerifiedIcon from "../VerifiedIcon";
 import Logo from "@/assets/oru_phones_logo.png"
 import SoldOut from "@/assets/soldout.png"
 
+
 function ProductCard({ data, prodLink, setProducts }) {
+
+  var type = ["old phone", "used", "refurbished"]
+  const soldout = (` buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase()
+
   return (
     <Link
       href={{
@@ -28,22 +33,22 @@ function ProductCard({ data, prodLink, setProducts }) {
               width={"50"}
               height={"30"}
               objectFit="contain"
-              alt={data?.name}
+              alt={soldout}
             /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
               <span className="h-9 block" />
             )}</div>
             {!(data?.isOtherVendor === "Y") && <AddFav data={data} setProducts={setProducts} height={18} width={18} />}
           </div>
+
           <div className="flex justify-center mb-2">
             <Image
               src={data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo}
-              alt={data?.name}
+              alt={(`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}
               width={150}
               height={150}
               objectFit="contain"
             />
           </div>
-          
           <p className="font-semibold flex items-center text-m-grey-1 font-Roboto-Bold text-xlFontSize">
             {data?.listingPrice && <FaRupeeSign size={16} />}
             {numberWithCommas(data?.listingPrice || "")}
