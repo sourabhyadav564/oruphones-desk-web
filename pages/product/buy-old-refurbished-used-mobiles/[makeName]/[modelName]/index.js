@@ -78,6 +78,7 @@ const Products = () => {
         condition,
         color,
         storage,
+        Ram,
         warranty,
         verification,
         priceRange,
@@ -112,6 +113,9 @@ const Products = () => {
         }
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (Ram?.length > 0) {
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
           payLoad.color = color.includes("all") ? [] : color;
@@ -183,15 +187,18 @@ const Products = () => {
       };
     } else {
       setIsFilterApplied(true);
+      alert("applyfilter" + applyFilter);
       const {
         brand,
         condition,
-        color,
+        // color,
         storage,
+        Ram,
         warranty,
         verification,
         priceRange,
       } = applyFilter;
+      
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
@@ -203,7 +210,7 @@ const Products = () => {
           make: brand?.length > 0 ? brand : [makeName],
           marketingName: [modelName],
           reqPage: "TSM",
-          color: [],
+          // color: [],
           deviceCondition: [],
           deviceStorage: [],
           deviceRam: [],
@@ -222,6 +229,9 @@ const Products = () => {
         }
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (Ram?.length > 0) {  
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
           payLoad.color = color.includes("all") ? [] : color;
@@ -280,6 +290,7 @@ const Products = () => {
       condition,
       color,
       storage,
+      Ram,
       warranty,
       verification,
       priceRange,
@@ -315,6 +326,9 @@ const Products = () => {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
+      if (Ram?.length > 0) {
+        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
+    }
       if (color?.length > 0) {
         payLoad.color = color.includes("all") ? [] : color;
       }

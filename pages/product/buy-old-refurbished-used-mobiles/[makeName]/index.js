@@ -46,7 +46,7 @@ function BrandPage() {
   let newPages = 0;
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-
+console.log("product", applyFilter);
   const loadData = (intialPage) => {
     if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
@@ -83,9 +83,9 @@ function BrandPage() {
       const {
         brand,
         condition,
-        color,
+        // color,
         storage,
-        ram,
+        Ram,
         warranty,
         verification,
         priceRange,
@@ -100,7 +100,7 @@ function BrandPage() {
           listingLocation: getSearchLocation,
           make: brand?.length > 0 ? brand : [makeName],
           reqPage: "BRAND",
-          color: [],
+          // color: [],
           deviceCondition: [],
           deviceStorage: [],
           deviceRam: [],
@@ -123,9 +123,12 @@ function BrandPage() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if (color?.length > 0) {
-          payLoad.color = color.includes("all") ? [] : color;
+        if (Ram?.length > 0) {
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
+        // if (color?.length > 0) {
+        //   payLoad.color = color.includes("all") ? [] : color;
+        // }
         if (warranty?.length > 0) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         }
@@ -197,7 +200,8 @@ function BrandPage() {
     } else {
       if (applyFilter) {
         setIsFilterApplied(true);
-        const { brand, condition, color, storage, warranty, verification, priceRange } = applyFilter;
+        // alert("applyFilter" + applyFilter);
+        const { brand, condition, storage,Ram, warranty, verification, priceRange } = applyFilter;
         if (Object.keys(applyFilter).some(i => applyFilter[i])) {
           if (makeName === "oneplus") {
             makeName = "OnePlus";
@@ -208,7 +212,7 @@ function BrandPage() {
             listingLocation: getSearchLocation,
             make: brand?.length > 0 ? brand : [makeName],
             reqPage: "BRAND",
-            color: [],
+            // color: [],
             deviceCondition: [],
             deviceStorage: [],
             deviceRam: [],
@@ -228,9 +232,12 @@ function BrandPage() {
           if (storage?.length > 0) {
             payLoad.deviceStorage = storage.includes("all") ? [] : storage;
           }
-          if (color?.length > 0) {
-            payLoad.color = color.includes("all") ? [] : color;
+          if(Ram?.length > 0) {
+            payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
           }
+          // if (color?.length > 0) {
+          //   payLoad.color = color.includes("all") ? [] : color;
+          // }
           if (warranty?.length > 0) {
             payLoad.warenty = warranty.includes("all") ? [] : warranty;
           }
@@ -281,7 +288,8 @@ function BrandPage() {
     const {
       brand,
       condition,
-      color,
+      // color,
+      Ram,
       storage,
       warranty,
       verification,
@@ -297,7 +305,7 @@ function BrandPage() {
         listingLocation: getSearchLocation,
         make: brand?.length > 0 ? brand : [makeName],
         reqPage: "BRAND",
-        color: [],
+        // color: [],
         deviceCondition: [],
         deviceStorage: [],
         deviceRam: [],
@@ -317,9 +325,12 @@ function BrandPage() {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if (color?.length > 0) {
-        payLoad.color = color.includes("all") ? [] : color;
+      if(Ram?.length > 0) {
+        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
+      // if (color?.length > 0) {
+      //   payLoad.color = color.includes("all") ? [] : color;
+      // }
       if (warranty?.length > 0) {
         payLoad.warenty = warranty.includes("all") ? [] : warranty;
       }

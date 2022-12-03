@@ -64,7 +64,7 @@ function CategoryPage() {
         // setPageNumber(pageNumber + 1);
       });
     } else {
-      const { brand, condition, color, storage, warranty, verification, priceRange } =
+      const { brand, condition, color, storage,Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
@@ -96,6 +96,9 @@ function CategoryPage() {
         }
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if(Ram?.length > 0){
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
           payLoad.color = color.includes("all") ? [] : color;
@@ -163,7 +166,7 @@ function CategoryPage() {
         setIsLoadingMore(false);
       });
     } else {
-      const { condition, color, storage, warranty, verification, priceRange } =
+      const { condition, color, storage,Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
@@ -189,6 +192,9 @@ function CategoryPage() {
         }
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if(Ram?.length > 0){
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
           payLoad.color = color.includes("all") ? [] : color;
@@ -222,7 +228,7 @@ function CategoryPage() {
   }, [categoryType, getSearchLocation, applySort]);
 
   useEffect(() => {
-    const { brand, condition, color, storage, warranty, verification, priceRange } =
+    const { brand, condition, color, storage,Ram, warranty, verification, priceRange } =
       applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       let payLoad = {
@@ -253,6 +259,9 @@ function CategoryPage() {
       }
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+      }
+      if(Ram?.length > 0){
+        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       if (color?.length > 0) {
         payLoad.color = color.includes("all") ? [] : color;

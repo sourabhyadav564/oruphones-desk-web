@@ -18,7 +18,7 @@ export default function MyApp({ Component, pageProps }) {
       duration: 2000,
     });
   }
-  , []);
+  ,[]);
   if (router.pathname != "/i/[someId]") {
     return (
       <>

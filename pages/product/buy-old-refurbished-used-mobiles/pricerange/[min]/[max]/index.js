@@ -56,6 +56,7 @@ const Pricerange = () => {
       condition,
       color,
       storage,
+      Ram,
       warranty,
       verification,
       minPrice,
@@ -77,6 +78,9 @@ const Pricerange = () => {
       }
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+      }
+      if (Ram?.length > 0) {
+        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       if (color?.length > 0) {
         payLoad.color = color.includes("all") ? [] : color;

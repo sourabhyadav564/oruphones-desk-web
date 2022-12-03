@@ -62,8 +62,9 @@ function Bestdealnearyou() {
       const {
         brand,
         condition,
-        color,
+        // color,
         storage,
+        Ram,
         warranty,
         verification,
         priceRange,
@@ -96,9 +97,12 @@ function Bestdealnearyou() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if (color?.length > 0) {
-          payLoad.color = color.includes("all") ? [] : color;
+        if(Ram?.length > 0) {
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
+        // if (color?.length > 0) {
+        //   payLoad.color = color.includes("all") ? [] : color;
+        // }
         if (warranty?.length > 0) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         }
@@ -164,7 +168,8 @@ function Bestdealnearyou() {
       const {
         brand,
         condition,
-        color,
+        // color,
+        Ram,
         storage,
         warranty,
         verification,
@@ -198,9 +203,12 @@ function Bestdealnearyou() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if (color?.length > 0) {
-          payLoad.color = color.includes("all") ? [] : color;
+        if(Ram?.length > 0) {
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
+        // if (color?.length > 0) {
+        //   payLoad.color = color.includes("all") ? [] : color;
+        // }
         if (warranty?.length > 0) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         }
@@ -254,7 +262,8 @@ function Bestdealnearyou() {
     const {
       brand,
       condition,
-      color,
+      // color,
+      Ram,
       storage,
       warranty,
       verification,
@@ -288,9 +297,12 @@ function Bestdealnearyou() {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if (color?.length > 0) {
-        payLoad.color = color.includes("all") ? [] : color;
+      if(Ram?.length > 0) {
+        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
+      // if (color?.length > 0) {
+      //   payLoad.color = color.includes("all") ? [] : color;
+      // }
       if (warranty?.length > 0) {
         payLoad.warenty = warranty.includes("all") ? [] : warranty;
       }

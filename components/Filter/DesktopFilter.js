@@ -39,7 +39,7 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   }, [selectedColor]);
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, color: selectedRam?.filter((val) => val !== "all") }));
+    setFilters((prev) => ({ ...prev, Ram: selectedRam?.filter((val) => val !== "all") }));
   }, [selectedRam]);
 
   useEffect(() => {
