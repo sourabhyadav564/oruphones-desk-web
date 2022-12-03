@@ -148,6 +148,18 @@ function SellerDetailsCard({ data }) {
 export default SellerDetailsCard;
 
 const OtherSeller = ({ data }) => {
+  // console.log("data : ",data.externalSourceImage);
+  // console.log(
+  //   data.externalSourceImage.replaceAll('https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/',"") , data.externalSourceImage.replace('_logo.png',""));
+  // console.log(data.externalSourceImage);
+  let vendor = data.externalSourceImage.replaceAll('https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/', "")
+  vendor = vendor.replaceAll('_logo.png', "");
+  if (vendor.includes('mbr_')) {
+    vendor = vendor.replaceAll('mbr_', "");
+  }
+  // console.log("vendor", vendor);
+
+
   return (
     <>
       {/* {data?.map((item, index) => ( */}
@@ -162,7 +174,7 @@ const OtherSeller = ({ data }) => {
             {data.externalSourceImage && (
               <img
                 src={data.externalSourceImage}
-                alt={data.externalSourceName || "seller"}
+                alt={vendor}
                 // width={120}
                 // height={32}
                 // objectFit="contain"
