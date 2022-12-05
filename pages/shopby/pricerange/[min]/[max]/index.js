@@ -252,7 +252,6 @@ const Pricerange = () => {
   }, [min, max, getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
-    setIsFilterApplied(true);
     const {
       brand,
       condition,
@@ -309,6 +308,7 @@ const Pricerange = () => {
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;
           // }
+          setIsFilterApplied(true);
           setOtherListings(response?.dataObject?.otherListings);
           setBestDeal(response?.dataObject?.bestDeals);
           setTotalProducts(response?.dataObject?.totalProducts);

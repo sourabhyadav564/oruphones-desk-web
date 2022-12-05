@@ -284,6 +284,7 @@ function CategoryPage() {
         Cookies.get("userUniqueId") || "Guest",
         pageNumber
       ).then((response) => {
+        setIsFilterApplied(true);
         if (newPages == 0) {
           setProducts(response?.dataObject?.otherListings);
         } else {

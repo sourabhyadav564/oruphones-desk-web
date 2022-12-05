@@ -46,7 +46,7 @@ function BrandPage() {
   let newPages = 0;
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-console.log("product", applyFilter);
+  console.log("product", applyFilter);
   const loadData = (intialPage) => {
     if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
@@ -79,7 +79,6 @@ console.log("product", applyFilter);
         setLoading(false);
       });
     } else {
-      setIsFilterApplied(true);
       const {
         brand,
         condition,
@@ -199,9 +198,8 @@ console.log("product", applyFilter);
       });
     } else {
       if (applyFilter) {
-        setIsFilterApplied(true);
         // alert("applyFilter" + applyFilter);
-        const { brand, condition, storage,Ram, warranty, verification, priceRange } = applyFilter;
+        const { brand, condition, storage, Ram, warranty, verification, priceRange } = applyFilter;
         if (Object.keys(applyFilter).some(i => applyFilter[i])) {
           if (makeName === "oneplus") {
             makeName = "OnePlus";
@@ -232,7 +230,7 @@ console.log("product", applyFilter);
           if (storage?.length > 0) {
             payLoad.deviceStorage = storage.includes("all") ? [] : storage;
           }
-          if(Ram?.length > 0) {
+          if (Ram?.length > 0) {
             payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
           }
           // if (color?.length > 0) {
@@ -261,6 +259,7 @@ console.log("product", applyFilter);
               ]);
             }
             // setBestDeals([]);
+            setIsFilterApplied(true);
             setTotalProducts(response?.dataObject?.totalProducts);
             if (newPages == 0) {
               setBestDeal(response?.dataObject?.bestDeals);
@@ -284,7 +283,6 @@ console.log("product", applyFilter);
   }, [makeName, getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
-    setIsFilterApplied(true);
     const {
       brand,
       condition,
@@ -325,7 +323,7 @@ console.log("product", applyFilter);
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if(Ram?.length > 0) {
+      if (Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       // if (color?.length > 0) {
@@ -344,6 +342,7 @@ console.log("product", applyFilter);
         intialPage,
         applySort
       ).then((response) => {
+        setIsFilterApplied(true);
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
         setTotalProducts(

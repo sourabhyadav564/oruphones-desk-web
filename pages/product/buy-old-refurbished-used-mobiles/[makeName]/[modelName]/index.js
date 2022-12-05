@@ -186,8 +186,6 @@ const Products = () => {
         setIsLoadingMore(false);
       };
     } else {
-      setIsFilterApplied(true);
-      alert("applyfilter" + applyFilter);
       const {
         brand,
         condition,
@@ -249,6 +247,7 @@ const Products = () => {
           newPages,
           applySort
         ).then((response) => {
+          setIsFilterApplied(true);
           if (newPages == 0) {
             setProducts(response?.dataObject?.otherListings);
           } else {
@@ -284,7 +283,6 @@ const Products = () => {
   }, [modelName, getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
-    setIsFilterApplied(true);
     const {
       brand,
       condition,
@@ -345,6 +343,7 @@ const Products = () => {
         intialPage,
         applySort
       ).then((response) => {
+        setIsFilterApplied(true);
         // if (verification?.length > 0) {
         //   payLoad.verification = verification;
         // }

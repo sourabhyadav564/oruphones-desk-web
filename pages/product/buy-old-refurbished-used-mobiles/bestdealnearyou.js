@@ -40,7 +40,7 @@ function Bestdealnearyou() {
   let intialPage = 0;
   let newPages = 0;
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-
+  
   const loadData = (intialPage) => {
     if (getSearchLocation && !isFilterApplied && !applySort) {
       Axios.bestDealNearYouAll(
@@ -97,7 +97,7 @@ function Bestdealnearyou() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if(Ram?.length > 0) {
+        if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         // if (color?.length > 0) {
@@ -133,6 +133,7 @@ function Bestdealnearyou() {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
+    // console.log("newPages", getSearchLocation, isFilterApplied);
     if (getSearchLocation && !isFilterApplied) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
@@ -203,7 +204,7 @@ function Bestdealnearyou() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if(Ram?.length > 0) {
+        if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         // if (color?.length > 0) {
@@ -258,7 +259,6 @@ function Bestdealnearyou() {
   }, [getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
-    setIsFilterApplied(true);
     const {
       brand,
       condition,
@@ -297,7 +297,7 @@ function Bestdealnearyou() {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if(Ram?.length > 0) {
+      if (Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       // if (color?.length > 0) {
@@ -319,6 +319,7 @@ function Bestdealnearyou() {
         // if (verification?.length > 0) {
         //   payLoad.verification = verification;
         // }
+        setIsFilterApplied(true);
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
         setTotalProducts(response?.dataObject?.totalProducts);
