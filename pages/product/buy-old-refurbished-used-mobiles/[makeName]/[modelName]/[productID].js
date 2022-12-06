@@ -100,7 +100,7 @@ function ProductDetails({ listingInfo }) {
     Axios.fetchSimilarProducts(
       payLoad,
       Cookies.get("userUniqueId") || "Guest",
-      pageNumber
+      newPages
     ).then((response) => {
       let data = response?.dataObject?.otherListings?.filter((items) => {
         return items.listingId != listingInfo.listingId;
