@@ -35,7 +35,8 @@
     "react-top-loading-bar": "^2.1.0",
     "recoil": "^0.7.3",
     "recoil-persist": "^4.2.0",
-    "sharp": "^0.29.3"
+    "sharp": "^0.29.3",
+    "swiper": "^8.4.5"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.55",

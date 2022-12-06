@@ -238,7 +238,7 @@ export function fetchByMakeList(makeName) {
   );
 }
 
-export function fetchMakeModelList(userUniqueId, sessionId) {
+export async function fetchMakeModelList(userUniqueId, sessionId) {
   headers = {
     ...headers,
     eventName: "GET_MAKE_MODEL_LIST",
@@ -247,13 +247,14 @@ export function fetchMakeModelList(userUniqueId, sessionId) {
   };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + "/master/makemodellist";
-  return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
+  return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
+      localStorage.setItem("MAKE_MODELS", JSON.stringify(response.data.dataObject))
       return response.data;
     },
-    (err) => {
-      console.log(err);
-    }
+    // (err) => {
+    //   console.log(err);
+    // }
   );
 }
 

@@ -11,7 +11,9 @@ import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
-
+import ShopByBrandSection from "@/components/ShopByBrandSection";
+import { useRecoilValue } from "recoil";
+import { makeState } from "atoms/globalState";
 // import {
 //   otherVendorDataState,
 //   // otherVandorListingIdState,
@@ -32,6 +34,8 @@ function BrandPage() {
   const [products, setProducts] = useState([]);
   const [bestDeal, setBestDeal] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [shopbymodel, setshopbymodel] = useState([]);
+  // const { selectedSearchCity, loading } = AppContext;
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
   const { getSearchLocation } = useContext(AppContext);
@@ -44,10 +48,66 @@ function BrandPage() {
   const [description, setDescription] = useState(metaTags.BRANDS.description);
   let intialPage = 0;
   let newPages = 0;
-
+  let brandResult = [];
+  let makeName2 = useRecoilValue(makeState);
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-console.log("product", applyFilter);
-  const loadData = (intialPage) => {
+// console.log("product", applyFilter);
+
+  const loadData = async (intialPage) => {
+
+    const getMakeModel = async () => {
+      brandResult = await Axios.fetchMakeModelList(
+        Cookies.get("userUniqueId") || "Guest",
+        Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : ""
+        // makeName2,
+        // "Y"
+        );
+      };
+    // let makemodel=JSON.parse(localStorage.getItem("make_models")!=undefined?localStorage.getItem("make_models"):
+    // await getMakeModel()
+    // );
+
+    console.log("makeName : ",makeName.charAt(0).toUpperCase()+makeName.slice(1));
+
+    let makemodel ;
+ 
+    if(localStorage.getItem("make_models")!=undefined){
+      makemodel=JSON.parse(localStorage.getItem("make_models"));
+     
+      
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else {
+        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+      }
+
+      
+      makemodel.map((item)=>{
+        if(item.make==makeName){
+          setTitle(item.make);
+          setDescription(item.make);
+          setshopbymodel(item.models);
+        }
+      })
+    }
+    else{
+      await getMakeModel();
+      makemodel= JSON.parse(localStorage.getItem("make_models"));
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else {
+        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+      }
+      
+      makemodel.map((item)=>{
+        if(item.make==makeName){
+          setTitle(item.make);
+          setDescription(item.make);
+          setshopbymodel(item.models);
+        }
+      })
+    }
+
     if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
         getSearchLocation,
@@ -152,7 +212,29 @@ console.log("product", applyFilter);
         });
       }
     }
+
+
+    // const getMakeModel = async()=>{
+    //   console.log("makename2 ",makeName2);
+    //   brandResult = await Axios.fetchMakeModelList(
+    //     Cookies.get("userUniqueId") || "Guest",
+    //     Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : "",
+    //     makeName2,
+    //     "Y"
+    //   );
+    // }
+    // await getMakeModel();
+
+
+    // console.log('brandresult ',brandResult?.dataObject);
+
+    // console.log("result", router.query["makeName"]);
+
+    // setshopbymodel(brandResult?.dataObject);
+    // brandResult = [] ;
   };
+
+
 
   const loadMoreData = () => {
     newPages = pageNumber + 1;
@@ -452,6 +534,23 @@ console.log("product", applyFilter);
               </Carousel>
             </div>
           )}
+
+        {/* <div className="space-y-2 h-[106px] bg-[#EEEEEE] opacity-bg-40 -mx-4 my-2 px-6 pt-1 items-center">
+            <p>Shop By Model</p>
+            <ShopByBrandSection
+              shopbymodeldata={shopbymodel} location={selectedSearchCity}
+            />
+          </div>
+           */}
+            
+          {<div>
+            <p>Shop By Model</p>
+            <ShopByBrandSection
+              shopbymodeldata={shopbymodel} 
+              shopbymakedata={makeName}
+            />
+          </div>}
+
           <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
             Total Products ({totalProducts})
           </h4>
