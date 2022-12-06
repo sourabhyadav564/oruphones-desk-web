@@ -67,7 +67,7 @@ function BrandPage() {
     // await getMakeModel()
     // );
 
-    console.log("makeName : ",makeName.charAt(0).toUpperCase()+makeName.slice(1));
+    console.log("makeName : ",String(makeName).charAt(0).toUpperCase()+String(makeName).slice(1));
 
     let makemodel ;
  
@@ -78,7 +78,7 @@ function BrandPage() {
       if (makeName === "oneplus") {
         makeName = "OnePlus";
       } else {
-        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
       }
 
       
@@ -96,7 +96,7 @@ function BrandPage() {
       if (makeName === "oneplus") {
         makeName = "OnePlus";
       } else {
-        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
       }
       
       makemodel.map((item)=>{
