@@ -542,8 +542,8 @@ function BrandPage() {
           </div>
            */}
             
-          {<div>
-            <p>Shop By Model</p>
+          {<div className="font-Roboto-Semibold text-xlFontSize">
+            <p className="opacity-50">Shop By Model</p>
             <ShopByBrandSection
               shopbymodeldata={shopbymodel} 
               shopbymakedata={makeName}

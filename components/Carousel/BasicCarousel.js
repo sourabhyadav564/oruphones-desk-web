@@ -1,4 +1,4 @@
-import { Swiper } from "swiper/react";
+import { Swiper } from "swiper/react"; 
 import "../../node_modules/swiper/swiper-bundle.css";
 
 function BasicCarousel({ children, ...rest }) {

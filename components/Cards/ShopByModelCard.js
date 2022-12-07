@@ -33,7 +33,7 @@ function ShopByModelCard({data,location, makeLink, make, src, alt, fallBackSrc =
       
   return (
     <div>
-<div className="flex relative mb-6 flex-col items-center justify-center"
+<div className="flex relative my-6 flex-col items-center justify-center"
         // onClick={handleModelClick} 
         onClick={() => window.open(
           makeLink
@@ -48,13 +48,13 @@ function ShopByModelCard({data,location, makeLink, make, src, alt, fallBackSrc =
             src={imageError ? fallBackSrc : src}
             alt={alt}
             onError={() => setImageError(true)}
-            width="34"
-            height="45"
+            width="40"
+            height="55"
           />
         </div>
 
         <div className="m-auto">
-          <p className='font-Roboto-Light text-kx text-[#2C2F45]'>{data}</p>
+          <p className='font-Roboto-Light opacity-100 text-regularFontSize text-[#2C2F45]'>{data}</p>
         </div>
 
       </div>

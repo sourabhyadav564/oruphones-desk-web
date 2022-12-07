@@ -6,8 +6,10 @@ import VerifiedIcon from "../VerifiedIcon";
 import AddFav from "../AddFav";
 import Logo from "@/assets/oru_phones_logo.png"
 import SoldOut from "@/assets/soldout.png"
+import { useState } from "react";
 
 function TopDealCard({ data, setProducts, prodLink }) {
+  const [imageError, setImageError] = useState(false);
   if (data?.name?.toLowerCase().includes("all")) {
     return (
       <Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}>
@@ -44,7 +46,9 @@ function TopDealCard({ data, setProducts, prodLink }) {
         <div className="flex justify-center pb-[17.77px] h-[163.14px] bg-transparent">
           {data?.imagePath ? (
             <Image
-              src={data?.imagePath}
+              src={imageError?Logo: data?.imagePath || Logo}
+              // src={imageError ? Logo : img?.fullImage}
+                onError={()=>setImageError(true)}
               alt={data?.name}
               width={"150"}
               height={"150"}
