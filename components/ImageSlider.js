@@ -16,6 +16,7 @@ function ImageSlider({data, images, openFullImage }) {
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
+  const[imageError,setImageError]=useState(false);
 
 
   useEffect(() => {
@@ -61,7 +62,9 @@ function ImageSlider({data, images, openFullImage }) {
               <Fragment key={index}>
                 <Image
                   priority
-                  src={img?.fullImage || Logo}
+                  // src={img?.fullImage || Logo}
+                  src={imageError ? Logo : img?.fullImage || Logo}
+                  onError={()=>setImageError(true)}
                   alt={alternate_text}
                   width={"100%"}
                   height={"90%"}
@@ -82,7 +85,9 @@ function ImageSlider({data, images, openFullImage }) {
           <Fragment>
             <Image
               priority
-              src={images?.fullImage || Logo}
+              // src={images?.fullImage || Logo}
+              src={imageError ? Logo : images?.fullImage ||Logo}
+              onError={()=>setImageError(true)}
               alt={alternate_text}
               width={"100%"}
               height={"90%"}
@@ -105,7 +110,9 @@ function ImageSlider({data, images, openFullImage }) {
               .map((img, index) => (
                 <Fragment key={index}>
                   <Image
-                    src={img?.thumbImage || img.fullImage || Logo}
+                    src={imageError?Logo : img?.thumbImage || img.fullImage  || Logo}
+                    // src={imageError ? Logo : img?.fullImage}
+                    onError={()=>setImageError(true)}
                     width={"100%"}
                     height={"100%"}
                     layout="responsive"
@@ -123,7 +130,8 @@ function ImageSlider({data, images, openFullImage }) {
             ref={(slider) => setSlider2(slider)}
           >
             <Image
-              src={images?.thumbImage || images?.fullImage || Logo}
+              src={imageError ? Logo : images?.thumbImage || images?.fullImage || Logo}
+              onError={()=>setImageError(true)}
               width={"100%"}
               height={"100%"}
               layout="responsive"

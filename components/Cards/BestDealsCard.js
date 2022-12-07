@@ -8,11 +8,13 @@ import VerifiedIcon from "../VerifiedIcon";
 import { BiChevronRight } from "react-icons/bi";
 import SoldOut from "@/assets/soldout.png"
 import Logo from "@/assets/oru_phones_logo.png"
+import { useState } from "react";
 
 function BestDealsCard({ data, setProducts }) {
 
   var type = ["old phone", "used", "refurbished"]
-  const soldout = (`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase()
+  const soldout = (`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase();
+  const [imageError,setImageError] = useState(false);
   return (
     
     <div
@@ -133,7 +135,9 @@ function BestDealsCard({ data, setProducts }) {
             className="flex rounded-[20px]"
             width={140}
             height={190}
-            src={data?.imagePath || Logo}
+            // src={data?.imagePath || Logo}
+            src={imageError ? Logo : data?.imagePath || Logo}
+            onError={() => setImageError(true)}
             objectFit="contain"
             alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()} 
           />

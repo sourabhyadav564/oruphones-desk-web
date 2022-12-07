@@ -67,7 +67,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
-        <div className="space-x-4 relative -right-2 flex items-center justify-end pr-40 -top-2">
+        <div className="space-x-4 relative -right-2 flex items-center justify-end pr-4 -top-2">
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
               <ShareIcon data={deviceListingInfo} width={16} height={16} />
@@ -79,8 +79,8 @@ function ProductDetailsCard({ data, openFullImage }) {
           )}
         </div>
 
-        <div className="flex flex-col-2">
-          <div className="col-span-1 w-[600px]">
+        <div className="flex flex-col-2 w-full">
+          <div className="col-span-1 w-[600px] pr-4">
             {(data?.images || data?.defaultImage || data?.imagePath) && (
               <ImageSlider
                 openFullImage={openFullImage}
@@ -105,8 +105,8 @@ function ProductDetailsCard({ data, openFullImage }) {
               />
             )}
           </div>
-          <div className="col-span-2 w-[650px]">
-            <div className="mb-3 pr-36">
+          <div className="col-span-2 w-[700px] pl-4">
+            <div className="mb-3 pr-2 ">
               <h1 className="text-xl2FontSize font-Roboto-Bold text-black-20 pl-1">
                 {data?.marketingName} - {data?.deviceStorage}
               </h1>
@@ -263,12 +263,12 @@ function ProductDetailsCard({ data, openFullImage }) {
             <div className="flex font-Roboto-Light text-mediumFontSize text-black ">
               Device Info
             </div>
-            <div className="pr-36 pb-4">
+            <div className="pr-2 pb-4">
               <div className="bg-gray-600 h-1 border-2"></div>
             </div>
 
             {data?.isOtherVendor === "Y" ? (
-              <div className="grid grid-cols-3 gap-x-0 gap-y-2 pr-24">
+              <div className="grid grid-cols-3 gap-x-0 gap-y-2 pr-2">
                 <LabelAndValue
                   label="Condition"
                   value={data?.deviceCondition || "--"}
@@ -295,7 +295,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 />
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-x-0 gap-y-2  pr-24">
+              <div className="grid grid-cols-3 gap-x-0 gap-y-2 pr-2">
                 <LabelAndValue
                   label="Condition"
                   value={data?.deviceCondition || "--"}
@@ -351,10 +351,10 @@ function ProductDetailsCard({ data, openFullImage }) {
                 )} */}
               </div>
             )}
-            <div className="pr-36 py-4 font-Roboto-Light text-smallFontSize">
+            <div className="pr-2 py-4 font-Roboto-Light text-smallFontSize">
               *This phone might be old or refurbished
             </div>
-            <div className="pr-32">
+            <div className="pr-2">
               <SellerDetailsCard data={data} />
             </div>
           </div>

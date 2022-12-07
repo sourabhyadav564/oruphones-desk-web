@@ -69,18 +69,20 @@ function SellerDetailsCard({ data }) {
           <div className="bg-gray-600 h-1 border-2"></div>
         </div>
         {data?.isOtherVendor === "N" || data?.isOtherVendor === null ? (
-          <div className="flex flex-row justify-start">
+          <div className="flex flex-row justify-between">
+            <div className="flex ">
             <CgProfile size={40} />
-            <span className="pl-2">
-              <div className="flex flex-row items-end">
-                <div>
-                  <p className="text-grey2 font-Roboto-Bold text-regularFontSize leading-4">
+            <div className="pt-1">
+                  <p className="pl-2 text-grey2 font-Roboto-Bold text-regularFontSize leading-4">
                     {data?.listedBy}
                   </p>
-                  <span className="text-gray-2 font-Roboto-Light text-mediumFontSize text-sm inline-block">
+                  <span className="pl-2 text-gray-2 font-Roboto-Light text-mediumFontSize text-sm inline-block">
                     {data?.listingLocation}
                   </span>
                 </div>
+            </div>
+            <span className="px-6">
+              <div className="flex flex-row justify-between">
                 <button
                   onClick={() => handleClick()}
                   className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"

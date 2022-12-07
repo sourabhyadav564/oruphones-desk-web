@@ -8,13 +8,14 @@ import VerifiedIcon from "../VerifiedIcon";
 // import Logo from "@/assets/home_logo.svg"
 import Logo from "@/assets/oru_phones_logo.png"
 import SoldOut from "@/assets/soldout.png"
+import { useState } from "react";
 
 
 function ProductCard({ data, prodLink, setProducts }) {
 
   var type = ["old phone", "used", "refurbished"]
   const soldout = (` buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase()
-
+  const [imageError, setImageError] = useState(false);
   return (
     <Link
       href={{
@@ -42,8 +43,10 @@ function ProductCard({ data, prodLink, setProducts }) {
 
           <div className="flex justify-center mb-2">
             <Image
-              src={data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo}
+              src={imageError?Logo: data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo}
               alt={(`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}
+              // src={imageError ? Logo : img?.fullImage}
+              onError={()=>setImageError(true)}
               width={150}
               height={150}
               objectFit="contain"
