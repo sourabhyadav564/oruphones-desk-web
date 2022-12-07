@@ -275,10 +275,12 @@ function CategoryPage() {
       }
       if (verification?.length > 0 && router.query.categoryType != "verified") {
         payLoad.verified = verification.includes("all") ? "" : "verified";
-      } else if (verification?.length == 0 && router.query.categoryType == "verified") {
+      } else
+       if (verification?.length === 0 && router.query.categoryType === "verified") {
         payLoad.verified = "verified";
       }
       setLoading(true);
+
       Axios.searchFilter(
         payLoad,
         Cookies.get("userUniqueId") || "Guest",
