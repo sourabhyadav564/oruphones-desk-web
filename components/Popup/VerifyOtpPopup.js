@@ -80,9 +80,10 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 
       if (redirect !== undefined && redirect === false) {
         setOpen(false);
-      } else {
-        Router.push(`/`);
-      }
+      } 
+      // else {
+      //   Router.push(`/`);
+      // }
       setUserLogged(true);
     } else {
       setError(true);

@@ -91,7 +91,7 @@ function CategoryPage() {
         }
         if (condition?.length > 0 && router.query.categoryType != "like new") {
           payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-        } else if (condition?.length > 0 && router.query.categoryType == "like new") {
+        } else if (router.query.categoryType == "like new") {
           payLoad.deviceCondition = "Like New";
         }
         if (storage?.length > 0) {
@@ -105,14 +105,14 @@ function CategoryPage() {
         }
         if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
-        } else if (warranty?.length == 0 && router.query.categoryType == "brandWarranty") {
+        } else if (router.query.categoryType == "brandWarranty") {
           payLoad.warenty = "Brand Warranty";
-        } else if (warranty?.length == 0 && router.query.categoryType == "sellerWarranty") {
+        } else if (router.query.categoryType == "sellerWarranty") {
           payLoad.warenty = "Seller Warranty";
         }
         if (verification?.length > 0 && router.query.categoryType != "verified") {
           payLoad.verified = verification.includes("all") ? "" : "verified";
-        } else if (verification?.length == 0 && router.query.categoryType == "verified") {
+        } else if (router.query.categoryType == "verified") {
           payLoad.verified = "verified";
         }
         setLoading(true);
@@ -135,6 +135,7 @@ function CategoryPage() {
   const loadMoreData = () => {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
+    console.log("newPages", newPages);
     setIsLoadingMore(true);
     if (categoryType && !isFilterApplied) {
       Axios.shopByCategory(
@@ -166,7 +167,7 @@ function CategoryPage() {
         setIsLoadingMore(false);
       });
     } else {
-      const { condition, color, storage,Ram, warranty, verification, priceRange } =
+      const {brand, condition, color, storage,Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
@@ -183,12 +184,17 @@ function CategoryPage() {
           verified: "",
           warenty: []
         };
+        if (brand?.length > 0) {
+          payLoad.make = brand.includes("all") ? [] : brand;
+        }
         if (priceRange && priceRange.min && priceRange.max) {
           payLoad.minsellingPrice = priceRange.min;
           payLoad.maxsellingPrice = priceRange.max;
         }
-        if (condition?.length > 0) {
+        if (condition?.length > 0 && router.query.categoryType != "like new") {
           payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        } else if (router.query.categoryType == "like new") {
+          payLoad.deviceCondition = "Like New";
         }
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
@@ -199,23 +205,44 @@ function CategoryPage() {
         if (color?.length > 0) {
           payLoad.color = color.includes("all") ? [] : color;
         }
-        if (warranty?.length > 0) {
+        if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        } else if (router.query.categoryType == "brandWarranty") {
+          payLoad.warenty = "Brand Warranty";
+        } else if (router.query.categoryType == "sellerWarranty") {
+          payLoad.warenty = "Seller Warranty";
         }
-        if (verification?.length > 0) {
-          payLoad.verified = verification.includes("all") ? [] : "verified";
+        if (verification?.length > 0 && router.query.categoryType != "verified") {
+          payLoad.verified = verification.includes("all") ? "" : "verified";
+        } else if (router.query.categoryType == "verified") {
+          payLoad.verified = "verified";
         }
-        setLoading(true);
         Axios.searchFilter(
           payLoad,
           Cookies.get("userUniqueId") || "Guest",
           pageNumber
         ).then((response) => {
+          setIsFilterApplied(true);
+        setIsLoadingMore(false);
+        setLoading(false);
+        if (newPages == 0) {
           setProducts(response?.dataObject?.otherListings);
-          // setBestDeal([]);
-          setTotalProducts(response?.dataObject?.totalProducts);
+        } else {
+          setProducts((products) => [
+            ...products,
+            ...response?.dataObject?.otherListings,
+          ]);
+        }
+        // setBestDeals([]);
+        setTotalProducts(response?.dataObject?.totalProducts);
+        if (newPages == 0) {
           setBestDeal(response?.dataObject?.bestDeals);
-          setLoading(false);
+        } else {
+          setBestDeal((products) => [
+            ...products,
+            ...response?.dataObject?.bestDeals,
+          ]);
+        };
         });
       }
     }
@@ -252,9 +279,11 @@ function CategoryPage() {
         payLoad.minsellingPrice = priceRange.min;
         payLoad.maxsellingPrice = priceRange.max;
       }
-      if (condition?.length > 0 && router.query.categoryType != "like new") {
+      console.log("router.query.categoryType", router.query.categoryType);
+      console.log("condition", condition);
+      if ((condition?.length > 0 && router.query.categoryType != "like new")|| (condition?.length > 0 && router.query.categoryType == "like%20new" )) {
         payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-      } else if (condition?.length > 0 && router.query.categoryType == "like new") {
+      } else if (router.query.categoryType == "like new") {
         payLoad.deviceCondition = "Like New";
       }
       if (storage?.length > 0) {
@@ -268,15 +297,15 @@ function CategoryPage() {
       }
       if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
         payLoad.warenty = warranty.includes("all") ? [] : warranty;
-      } else if (warranty?.length == 0 && router.query.categoryType == "brandWarranty") {
+      } else if (router.query.categoryType == "brandWarranty") {
         payLoad.warenty = "Brand Warranty";
-      } else if (warranty?.length == 0 && router.query.categoryType == "sellerWarranty") {
+      } else if (router.query.categoryType == "sellerWarranty") {
         payLoad.warenty = "Seller Warranty";
       }
       if (verification?.length > 0 && router.query.categoryType != "verified") {
         payLoad.verified = verification.includes("all") ? "" : "verified";
       } else
-       if (verification?.length === 0 && router.query.categoryType === "verified") {
+       if (router.query.categoryType === "verified") {
         payLoad.verified = "verified";
       }
       setLoading(true);
@@ -287,6 +316,8 @@ function CategoryPage() {
         pageNumber
       ).then((response) => {
         setIsFilterApplied(true);
+        setIsLoadingMore(false);
+        setLoading(false);
         if (newPages == 0) {
           setProducts(response?.dataObject?.otherListings);
         } else {
@@ -305,8 +336,6 @@ function CategoryPage() {
             ...response?.dataObject?.bestDeals,
           ]);
         };
-        setIsLoadingMore(false);
-        setLoading(false);
       });
     }
   }, [applyFilter, applySort]);

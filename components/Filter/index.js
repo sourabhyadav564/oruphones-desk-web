@@ -111,8 +111,28 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
         : i
     );
   }
+   if(filterOptions && (router.query["makeName"]=="apple" || router.query["makeName"]=="Apple")){
+    tempFilters = filterOptions.map((i) =>
+    i.id =="Ram"
+    ? {
+      ...i,
+      options: [
+        {
+          value:"All",
+          label:"All",
+          disabled: true,
+          checked:true,
+          active: false,
+        }
+      ],
+    }
+    : i
+    );
+  }
+  
+  console.log("filterOptions", router.query["makeName"]);
 
-  console.log("filterOptions", filterOptions);
+  console.log("filterOptions2", tempFilters);
 
   return (
     <React.Fragment>

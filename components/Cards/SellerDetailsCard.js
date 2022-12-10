@@ -8,10 +8,15 @@ import LoginPopup from "../Popup/LoginPopup";
 import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccessPopup";
 import Cookies from "js-cookie";
 import { CgProfile } from "react-icons/cg";
+import { FaGreaterThan } from "react-icons/fa";
 
 function SellerDetailsCard({ data }) {
+  const [productLink, setProductLink] = useState("");
+  const [performAction, setPerformAction] = useState(false);
+  const [performAction2, setPerformAction2] = useState(false);
   const [showNumber, setShowNumber] = useState(false);
-  const [contactSellerMobileNumber, setContactSellerMobileNumber] = useState("Loading...");
+  const [contactSellerMobileNumber, setContactSellerMobileNumber] =
+    useState("Loading...");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [openRequestVerificationPopup, setRequestVerificationPopup] =
     useState(false);
@@ -23,6 +28,7 @@ function SellerDetailsCard({ data }) {
 
   const handleClick = () => {
     if (Cookies.get("userUniqueId") === undefined) {
+      setPerformAction(true);
       setShowLoginPopup(true);
     } else if (data.verified) {
       setShowNumber((prav) => !prav);
@@ -35,25 +41,64 @@ function SellerDetailsCard({ data }) {
     }
   };
 
+  useEffect(() => {
+    // console.log("showLoginPopup", performAction);
+    if (
+      showLoginPopup == false &&
+      performAction == true &&
+      Cookies.get("userUniqueId") !== undefined &&
+      data?.isOtherVendor !== "Y"
+    ) {
+      if (data?.verified) {
+        setShowNumber((prav) => !prav);
+      } else {
+        setRequestVerificationPopup(true);
+      }
+    }
+    if (
+      showLoginPopup == false &&
+      performAction == true &&
+      Cookies.get("userUniqueId") !== undefined &&
+      data?.isOtherVendor === "Y"
+    ) {
+      // setPerformAction2(true);
+      // setProductLink(data?.productLink);
+      openSellerWebSite(data?.vendorLink);
+    }
+
+    // setPerformAction(false);
+  }, [showLoginPopup]);
 
   useEffect(() => {
-    setShowNumber(false);
+    if (
+      showLoginPopup == false &&
+      performAction2 == true &&
+      Cookies.get("userUniqueId") !== undefined
+    ) {
+      openSellerWebSite(productLink);
+    }
+  }, [showLoginPopup]);
+
+  useEffect(() => {
+    // setShowNumber(false);
     if (
       !(data?.isOtherVendor === "Y") &&
       Cookies.get("userUniqueId") !== undefined
     ) {
-      Axios.fetchSellerMobileNumber(data?.listingId, data?.userUniqueId).then((response) => {
-        // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
-        setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
-      });
+      Axios.fetchSellerMobileNumber(data?.listingId, data?.userUniqueId).then(
+        (response) => {
+          // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
+          setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
+        }
+      );
     }
     setOtherSeller(data?.externalSource);
-  }, [data]);
-
+  }, [data, showNumber]);
 
   const openSellerWebSite = (e) => {
     if (Cookies.get("userUniqueId") === undefined) {
       setShowLoginPopup(true);
+      setPerformAction(true);
     } else {
       window.open(e);
     }
@@ -71,22 +116,23 @@ function SellerDetailsCard({ data }) {
         {data?.isOtherVendor === "N" || data?.isOtherVendor === null ? (
           <div className="flex flex-row justify-between">
             <div className="flex ">
-            <CgProfile size={40} />
-            <div className="pt-1">
-                  <p className="pl-2 text-grey2 font-Roboto-Bold text-regularFontSize leading-4">
-                    {data?.listedBy}
-                  </p>
-                  <span className="pl-2 text-gray-2 font-Roboto-Light text-mediumFontSize text-sm inline-block">
-                    {data?.listingLocation}
-                  </span>
-                </div>
+              <CgProfile size={40} />
+              <div className="pt-1">
+                <p className="pl-2 text-grey2 font-Roboto-Bold text-regularFontSize leading-4">
+                  {data?.listedBy}
+                </p>
+                <span className="pl-2 text-gray-2 font-Roboto-Light text-mediumFontSize text-sm inline-block">
+                  {data?.listingLocation}
+                </span>
+              </div>
             </div>
             <span className="px-6">
               <div className="flex flex-row justify-between">
                 <button
                   onClick={() => handleClick()}
-                  className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
-                    } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
+                  className={`${
+                    !showNumber ? "bg-m-green text-white" : "text-m-green"
+                  } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
                 >
                   {showNumber ? contactSellerMobileNumber : "Contact Seller"}
                 </button>
@@ -105,7 +151,9 @@ function SellerDetailsCard({ data }) {
               />
             )}
             <button
-              onClick={() => openSellerWebSite(data?.vendorLink)}
+              onClick={() => {
+                openSellerWebSite(data?.vendorLink);
+              }}
               className="bg-m-green text-base font-semibold text-white w-full uppercase pr-4 mx-4 py-2 my-4 rounded  hover:bg-white hover:text-m-green-1 duration-500 border border-m-green"
             >
               VIEW WEBSITE
@@ -120,7 +168,7 @@ function SellerDetailsCard({ data }) {
           </p>
           <div className="flex flex-col overflow-y-auto">
             {otherSeller.map((items, index) => (
-              <OtherSeller key={index} data={items} />
+              <OtherSeller key={index} data={items} setShowLoginPopup={setShowLoginPopup} setPerformAction2={setPerformAction2} setProductLink={setProductLink} />
             ))}
           </div>
         </div>
@@ -147,29 +195,30 @@ function SellerDetailsCard({ data }) {
   );
 }
 
-export default SellerDetailsCard;
 
-const OtherSeller = ({ data }) => {
+const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }) => {
   // console.log("data : ",data.externalSourceImage);
   // console.log(
   //   data.externalSourceImage.replaceAll('https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/',"") , data.externalSourceImage.replace('_logo.png',""));
   // console.log(data.externalSourceImage);
-  let vendor = data.externalSourceImage.replaceAll('https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/', "")
-  vendor = vendor.replaceAll('_logo.png', "");
-  if (vendor.includes('mbr_')) {
-    vendor = vendor.replaceAll('mbr_', "");
+  let vendor = data.externalSourceImage.replaceAll(
+    "https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/",
+    ""
+  );
+  vendor = vendor.replaceAll("_logo.png", "");
+  if (vendor.includes("mbr_")) {
+    vendor = vendor.replaceAll("mbr_", "");
   }
   // console.log("vendor", vendor);
-
-
+  
   return (
     <>
       {/* {data?.map((item, index) => ( */}
       <div
-        className="my-0.5 p-2 flex justify-between flex-shrink-0 shadow-sm rounded-xl"
+        className="my-0.5 p-2 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
         // key={index}
         style={{ background: "#EFEFEF" }}
-      >
+        >
         <div className="flex flex-col justify-center items-start">
           {/* <span className="text-xs text-m-grey-2">Seller</span> */}
           <span className="my-1 w-28">
@@ -181,15 +230,25 @@ const OtherSeller = ({ data }) => {
                 // height={32}
                 // objectFit="contain"
                 style={{ height: 35, width: "auto" }}
-              />
-            )}
+                />
+                )}
           </span>
         </div>
-        <div className="flex flex-col items-center justify-center pr-4">
+        <div
+          className="flex flex-col items-center justify-center pr-4"
+          onClick={() => {
+            if (Cookies.get("userUniqueId") == undefined) {
+              setShowLoginPopup(true);
+              setProductLink(data?.productLink);
+              setPerformAction2(true);
+            } else window.open("oruphones.com", "_blank");
+          }}
+        >
           {/* <span className="text-xs text-m-grey-2">Price</span> */}
           {data.externalSourcePrice && (
             <span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
-              <BiRupee /> {numberWithCommas(data.externalSourcePrice)}
+              <BiRupee /> {numberWithCommas(data.externalSourcePrice)}{" "}
+              <FaGreaterThan size={13} className="pl-1" />
             </span>
           )}
         </div>
@@ -198,3 +257,5 @@ const OtherSeller = ({ data }) => {
     </>
   );
 };
+
+export default SellerDetailsCard;

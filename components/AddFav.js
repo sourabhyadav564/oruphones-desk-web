@@ -1,11 +1,13 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import * as Axios from "../api/axios";
 import LoginPopup from "./Popup/LoginPopup";
 
 function AddFav({ data, setProducts, ...rest }) {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [performAction, setPerformAction] = useState(false);
   function handleFavoties() {
     setProducts((prevState) => {
       let tempVal;
@@ -49,6 +51,27 @@ function AddFav({ data, setProducts, ...rest }) {
       data?.status == "Active" ? addFavorite() : toast.warning("This device is sold out");
     }
   }
+  useEffect(() => {
+    // let payLoad = {
+    //   listingId: data.listingId,
+    //   userUniqueId: Cookies.get("userUniqueId") || "Guest",
+    // };
+    // const addFavorite = async () => {
+    //   let favList = localStorage.getItem("favoriteList");
+    //   if (favList) {
+    //     favList = favList.split(",");
+    //     favList.push(data.listingId);
+    //     localStorage.setItem("favoriteList", favList);
+    //   } else {
+    //     localStorage.setItem("favoriteList", data.listingId);
+    //   }
+    //   const addFav = await Axios.addFavotie(payLoad);
+    // };
+    if(showLoginPopup==false && performAction==true){
+      // data?.status == "Active" ? addFavorite() : toast.warning("This device is sold out");
+      handleFavoties();
+    }
+  },[showLoginPopup])
 
   if (Cookies.get("userUniqueId") === undefined) {
     return (
@@ -79,11 +102,11 @@ function AddFav({ data, setProducts, ...rest }) {
           onClick={
             (e) => {
               e.preventDefault();
+              setPerformAction(true);
               setShowLoginPopup(true);
             }
           }
         />
-
         <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} />
       </div>
     );
