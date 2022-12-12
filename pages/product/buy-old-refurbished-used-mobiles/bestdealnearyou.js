@@ -97,7 +97,7 @@ function Bestdealnearyou() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if (Ram?.length > 0) {
+        if(Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         // if (color?.length > 0) {
@@ -204,7 +204,7 @@ function Bestdealnearyou() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if (Ram?.length > 0) {
+        if(Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         // if (color?.length > 0) {
@@ -297,7 +297,7 @@ function Bestdealnearyou() {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if (Ram?.length > 0) {
+      if(Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       // if (color?.length > 0) {

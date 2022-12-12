@@ -167,7 +167,7 @@ function CategoryPage() {
         setIsLoadingMore(false);
       });
     } else {
-      const {brand, condition, color, storage,Ram, warranty, verification, priceRange } =
+      const { condition, color, storage,Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {

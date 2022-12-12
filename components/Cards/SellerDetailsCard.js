@@ -241,7 +241,7 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
               setShowLoginPopup(true);
               setProductLink(data?.productLink);
               setPerformAction2(true);
-            } else window.open("oruphones.com", "_blank");
+            } else window.open(data?.productLink, "_blank");
           }}
         >
           {/* <span className="text-xs text-m-grey-2">Price</span> */}

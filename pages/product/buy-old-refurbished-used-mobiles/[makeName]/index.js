@@ -51,63 +51,8 @@ function BrandPage() {
   let brandResult = [];
   let makeName2 = useRecoilValue(makeState);
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-// console.log("product", applyFilter);
-
-  const loadData = async (intialPage) => {
-
-    const getMakeModel = async () => {
-      brandResult = await Axios.fetchMakeModelList(
-        Cookies.get("userUniqueId") || "Guest",
-        Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : ""
-        // makeName2,
-        // "Y"
-        );
-      };
-    // let makemodel=JSON.parse(localStorage.getItem("make_models")!=undefined?localStorage.getItem("make_models"):
-    // await getMakeModel()
-    // );
-
-    console.log("makeName : ",String(makeName).charAt(0).toUpperCase()+String(makeName).slice(1));
-
-    let makemodel ;
- 
-    if(localStorage.getItem("make_models")!=undefined){
-      makemodel=JSON.parse(localStorage.getItem("make_models"));
-     
-      
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
-      }
-
-      
-      makemodel.map((item)=>{
-        if(item.make==makeName){
-          setTitle(item.make);
-          setDescription(item.make);
-          setshopbymodel(item.models);
-        }
-      })
-    }
-    else{
-      await getMakeModel();
-      makemodel= JSON.parse(localStorage.getItem("make_models"));
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
-      }
-      
-      makemodel.map((item)=>{
-        if(item.make==makeName){
-          setTitle(item.make);
-          setDescription(item.make);
-          setshopbymodel(item.models);
-        }
-      })
-    }
-
+console.log("product", applyFilter);
+  const loadData = (intialPage) => {
     if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
         getSearchLocation,
@@ -280,8 +225,9 @@ function BrandPage() {
       });
     } else {
       if (applyFilter) {
+        setIsFilterApplied(true);
         // alert("applyFilter" + applyFilter);
-        const { brand, condition, storage, Ram, warranty, verification, priceRange } = applyFilter;
+        const { brand, condition, storage,Ram, warranty, verification, priceRange } = applyFilter;
         if (Object.keys(applyFilter).some(i => applyFilter[i])) {
           if (makeName === "oneplus") {
             makeName = "OnePlus";
@@ -312,7 +258,7 @@ function BrandPage() {
           if (storage?.length > 0) {
             payLoad.deviceStorage = storage.includes("all") ? [] : storage;
           }
-          if (Ram?.length > 0) {
+          if(Ram?.length > 0) {
             payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
           }
           // if (color?.length > 0) {
@@ -405,7 +351,7 @@ function BrandPage() {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if (Ram?.length > 0) {
+      if(Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       // if (color?.length > 0) {

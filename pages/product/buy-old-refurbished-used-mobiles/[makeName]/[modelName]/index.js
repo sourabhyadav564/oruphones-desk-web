@@ -150,6 +150,7 @@ const Products = () => {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
+    // console.log("isFilterApplied", isFilterApplied);
     if (!isFilterApplied) {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
@@ -159,6 +160,9 @@ const Products = () => {
           newPages,
           applySort
         );
+        setLoading(false);
+        // setPageNumber(pageNumber + 1);
+        setIsLoadingMore(false);
         if (data?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [
             ...products,
@@ -181,11 +185,14 @@ const Products = () => {
         //   setBestDeals((data && data?.dataObject?.bestDeals) || []);
         //   // setProductsData((data && data?.dataObject?.bestDeals) || []);
         // }
-        setLoading(false);
-        // setPageNumber(pageNumber + 1);
-        setIsLoadingMore(false);
+        
       };
+      if (modelName) {
+        fetchData();
+      }
     } else {
+      setIsFilterApplied(true);
+      alert("applyfilter" + applyFilter);
       const {
         brand,
         condition,
@@ -270,9 +277,9 @@ const Products = () => {
         });
       }
     }
-    if (modelName) {
-      fetchData();
-    }
+    // if (modelName) {
+    //   fetchData();
+    // }
   };
 
   useEffect(() => {
