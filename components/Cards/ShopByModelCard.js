@@ -3,37 +3,37 @@ import Image from "next/image";
 import Logo from "@/assets/oru_phones_logo.png";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import {fetchByMarketingName} from "../../api/axios";
+import { fetchByMarketingName } from "../../api/axios";
 
 
 
-function ShopByModelCard({data,location, makeLink, make, src, alt, fallBackSrc = Logo.src}) {
-    const router = useRouter();
-    const [imageError, setImageError] = useState(false);
-    const [loadingState, setLoadingState] = useState(false);
+function ShopByModelCard({ data, location, makeLink, make, src, alt, fallBackSrc = Logo.src }) {
+  const router = useRouter();
+  const [imageError, setImageError] = useState(false);
+  const [loadingState, setLoadingState] = useState(false);
 
 
-    useEffect(() => {
-        setLoadingState(false);
-      }, [router.pathname]);
+  useEffect(() => {
+    setLoadingState(false);
+  }, [router.pathname]);
 
-      const handleModelClick = () => {
-        fetchByMarketingName(
-          location,
-          data,
-          Cookies.get("userUniqueId") || "Guest",
-          0,
-          "Featured"
-        )
-      }
+  const handleModelClick = () => {
+    fetchByMarketingName(
+      location,
+      data,
+      Cookies.get("userUniqueId") || "Guest",
+      0,
+      "Featured"
+    )
+  }
 
-      
-      console.log("shop by models make : ", make)
 
-      
+  console.log("shop by models make : ", make)
+
+
   return (
     <div>
-<div className="flex relative my-6 flex-col items-center justify-center"
+      <div className="flex relative my-6 flex-col items-center justify-center hover:cursor-pointer"
         // onClick={handleModelClick} 
         onClick={() => window.open(
           makeLink

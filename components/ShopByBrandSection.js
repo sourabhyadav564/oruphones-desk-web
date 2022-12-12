@@ -3,7 +3,7 @@ import { SwiperSlide } from "swiper/react";
 import dynamic from "next/dynamic";
 
 import ShopByModelCard from "./Cards/ShopByModelCard";
-import BasicCarousel from "./Carousel/BasicCarousel";
+// import BasicCarousel from "./Carousel/BasicCarousel";
 import Carousel from "./Carousel";
 
 const settings = {
@@ -13,18 +13,18 @@ const settings = {
     arrows: true,
     infinite: false,
     swipeToSlide: true,
-  };
+};
 
-function ShopByBrandSection({ shopbymodeldata,shopbymakedata ,  setProducts, index, location }) {
- 
+function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, index, location }) {
+
     console.log("shop by model data", shopbymodeldata);
 
     return (
         <section className="m-auto items-center">
             <Carousel
                 {...settings}
-                // slidesPerView={3}
-                // spaceBetween={1}
+            // slidesPerView={3}
+            // spaceBetween={1}
             >
                 {shopbymodeldata.map((item) => (
                     <SwiperSlide key={item?.make}>

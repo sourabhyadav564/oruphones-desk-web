@@ -36,7 +36,6 @@ function Bestdealnearyou() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
-  const [imageError,setImageError]= useState(false);
   const router = useRouter();
   let intialPage = 0;
   let newPages = 0;

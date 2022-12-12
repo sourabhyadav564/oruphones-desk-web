@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
-import ShopByBrandSection from "@/components/ShopByBrandSection";
+// import ShopByBrandSection from "@/components/ShopByBrandSection";
 import { useRecoilValue } from "recoil";
 import { makeState } from "atoms/globalState";
 // import {
@@ -542,13 +542,13 @@ function BrandPage() {
           </div>
            */}
             
-          {<div className="font-Roboto-Semibold text-xlFontSize">
+          {/* {<div className="font-Roboto-Semibold text-xlFontSize">
             <p className="opacity-50">Shop By Model</p>
             <ShopByBrandSection
               shopbymodeldata={shopbymodel} 
               shopbymakedata={makeName}
             />
-          </div>}
+          </div>} */}
 
           <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
             Total Products ({totalProducts})
