@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.102" height="44.903" viewBox="0 0 33.102 44.903">
+  <g id="price" transform="translate(-154.45 -121.25)">
+    <g id="Group_26" data-name="Group 26" transform="translate(154.8 121.6)">
+      <path id="Path_25" data-name="Path 25" d="M178.834,133.6v-9.5a2.4,2.4,0,0,0-2.285-2.5H157.085a2.4,2.4,0,0,0-2.285,2.5v39.2h0a2.4,2.4,0,0,0,2.285,2.5H176.55a2.4,2.4,0,0,0,2.285-2.5v-8.394" transform="translate(-154.8 -121.6)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+      <line id="Line_33" data-name="Line 33" x2="24.021" transform="translate(0.014 5.88)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+      <line id="Line_34" data-name="Line 34" x2="4.069" transform="translate(8.814 2.825)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+      <line id="Line_35" data-name="Line 35" x2="0.216" transform="translate(15.032 2.825)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+      <line id="Line_36" data-name="Line 36" x2="24.021" transform="translate(0.014 38.093)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+      <line id="Line_37" data-name="Line 37" x2="3.853" transform="translate(10.098 41.148)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+    </g>
+    <path id="Path_26" data-name="Path 26" d="M302.569,213.942V231.7H288.2V213.942l4.569-3.542H298Z" transform="translate(-115.367 -76.796)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="0.933" cy="0.933" r="0.933" transform="translate(179.091 135.469)" fill="none" stroke="#6b6b6b" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+    <text id="_" data-name="$" transform="translate(177.199 147.916)" fill="#6b6b6b" font-size="10" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">$</tspan></text>
+  </g>
+</svg>

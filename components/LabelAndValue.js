@@ -1,12 +1,20 @@
 import Image from "next/image";
+import condition from "../assets/svgicons/star-dac.svg"
+import warranty from "../assets/svgicons/warranty.svg";
+import color from "../assets/svgicons/color.svg";
+import storage from "../assets/svgicons/micro-sd.svg";
+import ram from "../assets/svgicons/memory.svg";
+import accessories from "../assets/svgicons/charger2.svg";
 import box from "../assets/box.png";
-import condition from "../assets/condition.png";
-import calendar1 from "../assets/calendar-1.png";
-import calendar2 from "../assets/calendar-2.png";
-import calendar3 from "../assets/calendar-3.png";
-import color from "../assets/color.png";
-import storage from "../assets/storage.png";
-import ram from "../assets/ram.png";
+import verified from "../assets/svgicons/quality.svg";
+import listedon from "../assets/svgicons/calendar.svg";
+
+// import calendar1 from "../assets/calendar-1.png";
+// import calendar2 from "../assets/calendar-2.png";
+// import calendar3 from "../assets/calendar-3.png";
+// import color from "../assets/color.png";
+// import storage from "../assets/storage.png";
+// import ram from "../assets/ram.png";
 import { BsInfoCircle } from "react-icons/bs";
 
 function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showConditionInfoPopup, textAsLink, showRequestVerificationSuccessPopup, labelTextSize }) {
@@ -24,13 +32,13 @@ function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showCond
             ) : label.toUpperCase().includes("RAM") ? (
               <Image src={ram} alt="ORU RAM" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("ACCESSORIES") ? (
-              <Image src={box} alt="ORU ACCESSORIES" width={25} height={25} objectFit="contain" />
+              <Image src={accessories} alt="ORU ACCESSORIES" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("WARRANTY") ? (
-              <Image src={calendar2} alt="ORU WARRANTY" width={25} height={25} objectFit="contain" />
+              <Image src={warranty} alt="ORU WARRANTY" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("VERIFIED") ? (
-              <Image src={calendar1} alt="ORU VERIFIED" width={25} height={25} objectFit="contain" />
+              <Image src={verified} alt="ORU VERIFIED" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("LISTED") ? (
-              <Image src={calendar3} alt="ORU LISTED" width={25} height={25} objectFit="contain" />
+              <Image src={listedon} alt="ORU LISTED" width={25} height={25} objectFit="contain" />
             ) : label.toUpperCase().includes("REPORT") ? (
               <Image src={box} alt="ORU REPORT" width={25} height={25} objectFit="contain" />
             ) : (

@@ -73,7 +73,7 @@ function SellerDetailsCard({ data }) {
     if (
       showLoginPopup == false &&
       performAction2 == true &&
-      Cookies.get("userUniqueId") !== undefined
+      Cookies.get("userUniqueId") !== undefined && productLink != ""
     ) {
       openSellerWebSite(productLink);
     }
@@ -103,6 +103,8 @@ function SellerDetailsCard({ data }) {
       window.open(e);
     }
   };
+
+  console.log("other seller ", otherSeller);
 
   return (
     <div className="seller-info">
@@ -205,12 +207,17 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
     "https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/",
     ""
   );
+
   vendor = vendor.replaceAll("_logo.png", "");
   if (vendor.includes("mbr_")) {
     vendor = vendor.replaceAll("mbr_", "");
   }
+  
+
   // console.log("vendor", vendor);
   
+  console.log('data : ',data);
+
   return (
     <>
       {/* {data?.map((item, index) => ( */}
@@ -229,7 +236,7 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
                 // width={120}
                 // height={32}
                 // objectFit="contain"
-                style={{ height: 35, width: "auto" }}
+                style={{ height: 35, width: "auto"}}
                 />
                 )}
           </span>
@@ -241,7 +248,7 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
               setShowLoginPopup(true);
               setProductLink(data?.productLink);
               setPerformAction2(true);
-            } else window.open(data?.productLink, "_blank");
+            } else if(data?.externalSourceImage != 'https://zenrodeviceimages.s3.us-west-2.amazonaws.com/oru/product/mobiledevices/img/txt_phone.png') window.open(data?.productLink, "_blank");
           }}
         >
           {/* <span className="text-xs text-m-grey-2">Price</span> */}
