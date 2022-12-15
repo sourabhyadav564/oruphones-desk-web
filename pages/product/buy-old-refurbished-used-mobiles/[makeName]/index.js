@@ -14,6 +14,7 @@ import Head from "next/head";
 // import ShopByBrandSection from "@/components/ShopByBrandSection";
 import { useRecoilValue } from "recoil";
 import { makeState } from "atoms/globalState";
+import ShopByBrandSection from "@/components/ShopByBrandSection";
 // import {
 //   otherVendorDataState,
 //   // otherVandorListingIdState,
@@ -53,6 +54,63 @@ function BrandPage() {
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 console.log("product", applyFilter);
   const loadData = (intialPage) => {
+    if(!isFilterApplied){
+    const getMakeModel = async () => {
+      brandResult = await getMakeModel(
+        Cookies.get("userUniqueId") || "Guest",
+        Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : ""
+        // makeName2,
+        // "Y"
+      );
+    };
+    // let makemodel=JSON.parse(localStorage.getItem("make_models")!=undefined?localStorage.getItem("make_models"):
+    // await getMakeModel()
+    // );
+    let makemodel;
+    if (localStorage.getItem("make_models") != undefined) {
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else {
+        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+      }
+      console.log("local storage", makeName);
+      makemodel = JSON.parse(localStorage.getItem("make_models"));
+      makemodel.map((item) => {
+        if (item.make == makeName) {
+          setTitle(item.make);
+          setDescription(item.make);
+          setshopbymodel(item.models);
+        }
+      })
+    }
+    else {
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else {
+        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+      }
+       getMakeModel();
+      makemodel = JSON.parse(localStorage.getItem("make_models"));
+      makemodel.map((item) => {
+        if (item.make == makeName) {
+          setTitle(item.make);
+          setDescription(item.make);
+          setshopbymodel(item.models);
+        }
+      })
+    }
+    if(makemodel!=undefined){
+      makemodel.map((item)=>{
+        if(item.makeName==makeName2){
+          setTitle(item.makeName);
+          setDescription(item.makeName);
+          setshopbymodel(item.models);
+        }
+      })
+    }
+  }
+
+
     if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
         getSearchLocation,
@@ -167,7 +225,7 @@ console.log("product", applyFilter);
     //     "Y"
     //   );
     // }
-    // await getMakeModel();
+    // getMakeModel();
 
 
     // console.log('brandresult ',brandResult?.dataObject);
@@ -488,13 +546,13 @@ console.log("product", applyFilter);
           </div>
            */}
             
-          {/* {<div className="font-Roboto-Semibold text-xlFontSize">
+          {<div className="font-Roboto-Semibold text-xlFontSize">
             <p className="opacity-50">Shop By Model</p>
             <ShopByBrandSection
               shopbymodeldata={shopbymodel} 
               shopbymakedata={makeName}
             />
-          </div>} */}
+          </div>}
 
           <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
             Total Products ({totalProducts})

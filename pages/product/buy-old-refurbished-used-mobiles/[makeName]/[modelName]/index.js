@@ -46,7 +46,7 @@ const Products = () => {
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   const loadData = (intialPage) => {
-    if (modelName && !isFilterApplied && !applySort) {
+    if (modelName && !isFilterApplied) {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
           getSearchLocation,

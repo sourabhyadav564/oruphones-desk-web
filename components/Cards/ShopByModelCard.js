@@ -28,7 +28,7 @@ function ShopByModelCard({ data, location, makeLink, make, src, alt, fallBackSrc
   }
 
 
-  console.log("shop by models make : ", make)
+  // console.log("shop by models make : ", make)
 
 
   return (

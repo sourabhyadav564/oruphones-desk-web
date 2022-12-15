@@ -32,7 +32,7 @@ function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, inde
                             data={item.marketingname}
                             src={`https://zenrodeviceimages.s3.us-west-2.amazonaws.com/allModelsImg/${item?.marketingname?.toString().toLowerCase().replaceAll(" ", "_")}.jpg`}
                             // alt={data?.models?.model_name}
-                            location={location}
+                            // location={location}
                             make={shopbymakedata}
                         />
                     </SwiperSlide>
