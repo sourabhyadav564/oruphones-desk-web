@@ -14,9 +14,9 @@ function BestDealsCard({ data, setProducts }) {
 
   var type = ["old phone", "used", "refurbished"]
   const soldout = (`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase();
-  const [imageError,setImageError] = useState(false);
+  const [imageError, setImageError] = useState(false);
   return (
-    
+
     <div
       className="bg-white h-[300px] rounded-lg py-2 text-m-grey-2 mb-6 bg-gradient-to-l from-m-white to-m-green"
       style={{ boxShadow: "0px 2px 3px #0000000A" }}
@@ -90,9 +90,10 @@ function BestDealsCard({ data, setProducts }) {
             <div className="font-Roboto-Light text-smallFontSize text-white">
               {data?.deviceStorage}
             </div>
-            <div className="flex absolute pt-4">
+            <div className="flex absolute pt-4 z-50">
+{/*              
               {data?.isOtherVendor === "Y" ? (
-                <div className="px-2">
+                <div className="px-2"> */}
                   {/* <h2 className="font-semibold text-lg text-black-20">
                     {" "}
                     Seller Details{" "}
@@ -106,23 +107,31 @@ function BestDealsCard({ data, setProducts }) {
                       alt={data?.marketingName}
                     />
                   </p> */}
-                </div>
-              ) : (
-                <div />
-              )}
+                {/* </div> */}
+              {/* ) : ( */}
+                {/* <div></div> */}
+              {/* )} */}
+
               <div className="">
-              <Link
-                href={{
-                  pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`,
-                  query: { isOtherVendor: data?.isOtherVendor },
-                }}
-                passHref
+                <Link
+                  // href={{
+                  //   pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`,
+                  //   query: { isOtherVendor: data?.isOtherVendor },
+                  // }}
+                  // passHref
+                  href={`/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`}
                 >
-                <a className="hover:bg-yellow-500 hover:cursor-pointer duration-500 flex items-center font-Roboto-Semibold self-end py-2 px-4 text bg-m-white text-m-green rounded-lg ">
+                  {/* <div className="hover:bg-yellow-500 hover:cursor-pointer duration-500 flex items-center font-Roboto-Semibold self-end py-2 px-4 text bg-m-white text-m-green rounded-lg ">
                   View Deal{" "}
                   <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
-                </a>
-              </Link>
+                </div> */}
+                  <div className="flex items-center font-Roboto-Semibold bg-m-white text-m-green py-2 px-4 rounded-lg hover:bg-yellow-500 hover:cursor-pointer duration-500">
+                    <div> View Deal{""}</div>
+                    <div>
+                    <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -139,7 +148,7 @@ function BestDealsCard({ data, setProducts }) {
             src={imageError ? Logo : data?.imagePath || Logo}
             onError={() => setImageError(true)}
             objectFit="contain"
-            alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()} 
+            alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}
           />
         </div>
       </div>

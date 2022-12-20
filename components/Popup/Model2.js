@@ -49,7 +49,7 @@ export default function Model2({ open, setOpen, children, title }) {
                 />
               </div>
               <div
-                className="bg-white overflow-y-auto"
+                className="bg-white overflow-y-auto rounded-lg"
                 style={{ maxHeight: "80vh" }}
               >
                 {children}

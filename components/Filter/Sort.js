@@ -30,7 +30,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
   // console.log({ sortOptions, setApplySort, setFilters });
   return (
     <Fragment>
-      <div className="relative z-40 flex items-baseline justify-end py-4">
+      <div className="relative z-20 flex items-baseline justify-end py-4">
         <div className="flex items-center">
           <Menu as="div" className="relative inline-block text-left ">
             <div>
@@ -82,7 +82,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
         </div>
       </div>
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-        <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setMobileFiltersOpen}>
+        <Dialog as="div" className="fixed inset-0 flex  lg:hidden" onClose={setMobileFiltersOpen}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"

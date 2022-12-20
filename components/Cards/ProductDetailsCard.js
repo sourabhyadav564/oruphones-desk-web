@@ -452,7 +452,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                       />
                     )}
                   </div>
-                ))}
+                ))} 
               </div>
             )}
           </div>

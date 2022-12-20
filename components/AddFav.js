@@ -8,6 +8,7 @@ import LoginPopup from "./Popup/LoginPopup";
 function AddFav({ data, setProducts, ...rest }) {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [performAction, setPerformAction] = useState(false);
+  
   function handleFavoties() {
     setProducts((prevState) => {
       let tempVal;
@@ -51,6 +52,8 @@ function AddFav({ data, setProducts, ...rest }) {
       data?.status == "Active" ? addFavorite() : toast.warning("This device is sold out");
     }
   }
+
+
   useEffect(() => {
     // let payLoad = {
     //   listingId: data.listingId,
