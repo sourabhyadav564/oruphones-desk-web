@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import RamFilter from "./RamFilter";
+import WarrantyPopup from "../Popup/WarrantyPopup";
+import WarrantyInfo from "../Popup/WarrantyInfo";
 
 const DesktopFilter = ({ setFilters, filterOptions }) => {
   const [selectedBrand, setSelectedBrand] = useState();
@@ -23,6 +25,7 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   const [selectedPriceRange, setSelectedPriceRange] = useState();
   const [openConditionPopup, setOpenConditionPopup] = useState(false);
   const [openVerificationPopup, setOpenVerificationPopup] = useState(false);
+  const [openWarrantyPopup,setWarrantyPopup] = useState(false);
 
   const router = useRouter();
 
@@ -79,7 +82,7 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
           ) : section?.id === "Ram" ? (
             <RamFilter options={section} key={section?.id} setter={setSelectedRam} selected={selectedRam} router={router} />
           ) : section?.id === "warranty" ? (
-            <WarrantyFilter options={section} key={section?.id} setter={setSelectedWarranty} selected={selectedWarranty} router={router} />
+            <WarrantyFilter options={section} key={section?.id} setter={setSelectedWarranty} selected={selectedWarranty} router={router} openPopup={() => setWarrantyPopup(true)} />
           ) : section?.id === "verification" ? (
             <VerificationFilter
               options={section}
@@ -91,6 +94,8 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
             />
           ) : null
         )}
+
+      <WarrantyInfo open={openWarrantyPopup} setOpen={setWarrantyPopup} ></WarrantyInfo>
       <ConditionInfoPopup open={openConditionPopup} setOpen={setOpenConditionPopup} ></ConditionInfoPopup>
       <VerifiedInfoPopup open={openVerificationPopup} setOpen={setOpenVerificationPopup}></VerifiedInfoPopup>
     </form>

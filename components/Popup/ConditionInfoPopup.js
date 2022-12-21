@@ -38,7 +38,7 @@ function ConditionInfoPopup({ open, setOpen }) {
 
   return (
     <Model2 open={open} setOpen={setOpen}>
-      <div className="bg-white px-3 py-6 max-w-2xl">
+      <div className="bg-white px-3 py-6 max-w-2xl z-50">
         <div className="sm:flex sm:items-start">
           <div className="mt-3 sm:mt-0 sm:ml-4">
             <div className="mt-2">

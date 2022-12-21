@@ -78,6 +78,7 @@ function LocationPopup({ open, setOpen }) {
           loaded: true,
           city: address,
         });
+        setOpen(false);
       },
       (error) => {
         console.error(error);
@@ -85,6 +86,7 @@ function LocationPopup({ open, setOpen }) {
           loaded: true,
           city: "India",
         });
+        setOpen(false);
       }
     );
   };
@@ -237,7 +239,7 @@ function LocationPopup({ open, setOpen }) {
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
                   <div className="flex flex-row w-72 justify-center items-center">
                     <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
-                      onClick={() => { handleNearme }}>
+                      onClick={ handleNearme}>
                       <BiCurrentLocation size={22} />
                     </div>
                     <div className="w-full">

@@ -1,10 +1,11 @@
+import fetchStaticHTML from "api/fetchStaticHtml";
 import { useEffect, useState } from "react";
+import Modal2 from "./Model2";
 import parse from "html-react-parser";
 import { parse as nodeParser } from "node-html-parser";
-import fetchStaticHTML from "api/fetchStaticHtml";
-import Model2 from "./Model2";
 
-function VerifiedInfoPopup({ open, setOpen }) {
+
+function WarrantyInfo({ open, setOpen }) {
   const [htmlText1, setHtmlText1] = useState("");
 
   useEffect(() => {
@@ -23,7 +24,8 @@ function VerifiedInfoPopup({ open, setOpen }) {
     var htmlText;
     try {
       // const { serverUrl, templateUrls } = staticDataPath;
-      const res = await fetchStaticHTML("/verification.html");
+      // const res = await fetchStaticHTML("/verification.html");
+      const res = await fetchStaticHTML("/warranty.html");
       // const res = await fetchStaticHTML(serverUrl + templateUrls.VERIFICATION);
       const html = res.data;
       const doc = nodeParser(html);
@@ -36,8 +38,8 @@ function VerifiedInfoPopup({ open, setOpen }) {
   }
 
   return (
-    <Model2 open={open} setOpen={setOpen}>
-      <div className="bg-white px-3 py-6 max-w-2xl z-50">
+    <Modal2 open={open} setOpen={setOpen}>
+      <div className="bg-white p-5 sm:p-6 sm:pb-4  max-w-lg">
         <div className="sm:flex sm:items-start">
           <div className="mt-3 sm:mt-0 sm:ml-4">
             {/* <Dialog.Title as="h3" className="text-lg leading-6 font-semibold text-gray-900">
@@ -52,9 +54,8 @@ function VerifiedInfoPopup({ open, setOpen }) {
         </div>
       </div>
       {/* <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"></div> */}
-    </Model2>
+    </Modal2>
   );
 }
 
-export default VerifiedInfoPopup;
-
+export default WarrantyInfo;

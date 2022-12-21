@@ -91,6 +91,8 @@ console.log("product", applyFilter);
       }
        getMakeModel();
       makemodel = JSON.parse(localStorage.getItem("make_models"));
+      console.log("makemodel : ",makemodel);
+      
       makemodel.map((item) => {
         if (item.make == makeName) {
           setTitle(item.make);

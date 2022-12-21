@@ -29,12 +29,14 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useEffect } from "react";
 import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
+import WarrantyInfo from "../Popup/WarrantyInfo";
 
 function ProductDetailsCard({ data, openFullImage }) {
   const [performAction2, setPerformAction2] = useState(false);
   const [openDeviceReport, setOpenDeviceReport] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
+  const [openWarrantyInfoPopup, setWarrantyInfoPopup ] = useState(false);
   const [
     openRequestVerificationSuccessPopup,
     setRequestVerificationSuccessPopup,
@@ -342,11 +344,13 @@ function ProductDetailsCard({ data, openFullImage }) {
                   label="Brand Warranty"
                   value={"Not Applicable"}
                   labelTextSize
+                  showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
                 />
                 <LabelAndValue
                   label="Seller Warranty"
                   value={data?.warranty || "--"}
                   labelTextSize
+                  showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
                 />
                 <LabelAndValue
                   label="Color"
@@ -366,6 +370,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                   <LabelAndValue
                     label="Warranty"
                     value={data?.warranty || "--"}
+                    showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
                   />
                 }
                 <LabelAndValue label="Color" value={data?.color || "--"} />
@@ -516,6 +521,11 @@ function ProductDetailsCard({ data, openFullImage }) {
         open={showLoginPopup}
         setOpen={setShowLoginPopup}
         redirect={false}
+      />
+      <WarrantyInfo
+      open={openWarrantyInfoPopup}
+      setOpen={setWarrantyInfoPopup}
+      data={data}
       />
     </Fragment>
   );
