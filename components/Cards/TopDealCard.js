@@ -46,6 +46,11 @@ function TopDealCard({ data, setProducts, prodLink }) {
         <div className="flex justify-center pb-[17.77px] h-[163.14px] bg-transparent">
           {data?.imagePath ? (
             <Image
+            loading="lazy"
+            placeholder="blur"
+            priority={false}
+            unoptimized={false}
+            blurDataURL={imageError?Logo: data?.imagePath || Logo}
               src={imageError?Logo: data?.imagePath || Logo}
               // src={imageError ? Logo : img?.fullImage}
                 onError={()=>setImageError(true)}
@@ -56,6 +61,11 @@ function TopDealCard({ data, setProducts, prodLink }) {
             />
           ) : (
             <Image
+            loading="lazy"
+            placeholder="blur"
+            priority={false}
+            unoptimized={false}
+            blurDataURL={Logo}
               src={Logo}
               alt={data?.name}
               width={"150"}

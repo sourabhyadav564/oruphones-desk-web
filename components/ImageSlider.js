@@ -61,8 +61,12 @@ function ImageSlider({data, images, openFullImage }) {
             .map((img, index) => (
               <Fragment key={index}>
                 <Image
-                  priority
                   // src={img?.fullImage || Logo}
+                  loading="lazy"
+                  placeholder="blur"
+                  priority={false}
+                  unoptimized={false}
+                  blurDataURL={imageError ? Logo : img?.fullImage || Logo}
                   src={imageError ? Logo : img?.fullImage || Logo}
                   onError={()=>setImageError(true)}
                   alt={alternate_text}
@@ -84,9 +88,13 @@ function ImageSlider({data, images, openFullImage }) {
         >
           <Fragment>
             <Image
-              priority
               // src={images?.fullImage || Logo}
               src={imageError ? Logo : images?.fullImage ||Logo}
+              loading="lazy"
+              placeholder="blur"
+              priority={false}
+              blurDataURL={imageError ? Logo : images?.fullImage || Logo}
+              unoptimized={false}
               onError={()=>setImageError(true)}
               alt={alternate_text}
               width={"100%"}
@@ -111,6 +119,11 @@ function ImageSlider({data, images, openFullImage }) {
                 <Fragment key={index}>
                   <Image
                     src={imageError?Logo : img?.thumbImage || img.fullImage  || Logo}
+                    loading="lazy"
+                    placeholder="blur"
+                    priority={false}
+                    unoptimized={false}
+                    blurDataURL={imageError ? Logo : img?.thumbImage || img.fullImage || Logo}
                     // src={imageError ? Logo : img?.fullImage}
                     onError={()=>setImageError(true)}
                     width={"100%"}
@@ -132,6 +145,11 @@ function ImageSlider({data, images, openFullImage }) {
             <Image
               src={imageError ? Logo : images?.thumbImage || images?.fullImage || Logo}
               onError={()=>setImageError(true)}
+              loading="lazy"
+              placeholder="blur"
+              priority={false}
+              unoptimized={false}
+              blurDataURL={imageError ? Logo : images?.thumbImage || images?.fullImage || Logo}
               width={"100%"}
               height={"100%"}
               layout="responsive"

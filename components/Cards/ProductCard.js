@@ -43,6 +43,12 @@ function ProductCard({ data, prodLink, setProducts }) {
 
           <div className="flex justify-center mb-2">
             <Image
+              loading="lazy"
+              placeholder="blur"
+              minimumCacheTTL={3600}
+              priority={false}
+              unoptimized={false}
+              blurDataURL={imageError?Logo: data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo}
               src={imageError?Logo: data?.imagePath || data?.defaultImage?.fullImage || data?.images[0]?.fullImage || Logo}
               alt={(`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}
               // src={imageError ? Logo : img?.fullImage}

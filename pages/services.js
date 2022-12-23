@@ -27,6 +27,11 @@ function Services() {
                         >
                             <div className="p-4">
                                 <Image
+                                 loading="lazy"
+                                 placeholder="blur"
+                                 priority={false}
+                                 unoptimized={false}
+                                 blurDataURL={item?.imgSrc || "/"}
                                     src={item?.imgSrc || "/"}
                                     width={"48"}
                                     height={"30"}
