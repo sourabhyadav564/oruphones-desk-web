@@ -28,7 +28,16 @@ function TopSellingCard({ data }) {
         <div className="grid grid-cols-1 rounded-md shadow-lg hover:shadow-md p-4 pb-2 bg-m-white" data-aos="fade-up">
           <div className="grid grid-cols-1">
             <div className="flex justify-center">
-              <Image src={data?.imagePath || Logo} alt={alternate_text} width={150} height={150} objectFit="contain" />
+              <Image
+                loading="lazy"
+                priority={false}
+                blurDataURL={data?.imagePath || Logo}
+                placeholder="blur"
+                src={data?.imagePath || Logo} 
+                alt={alternate_text} 
+                width={150} 
+                height={150} 
+                objectFit="contain" />
             </div>
             <div className="flex-wrap w-full">
               <p className="text-regularFontSize sm:text-base flex-1 sm:py-1 truncate w-full capitalize font-Roboto-Regular text-m-grey-2">{data?.marketingName}</p>

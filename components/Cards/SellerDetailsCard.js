@@ -143,6 +143,11 @@ function SellerDetailsCard({ data }) {
           <div className="flex flex-row">
             {data?.vendorLogo && (
               <Image
+              loading="lazy"
+              placeholder="blur"
+              priority={false}
+              unoptimized={false}
+              blurDataURL={data?.vendorLogo || "/"}
                 src={data?.vendorLogo || "/"}
                 width={100}
                 height={50}

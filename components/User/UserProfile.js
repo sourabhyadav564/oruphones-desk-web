@@ -63,10 +63,14 @@ function UserProfile({ children, className }) {
               >
                 <Image
                   src={inputImage || UserProfileIcon}
+                  loading="lazy"
+                  placeholder="blur"
+                  priority={false}
+                  unoptimized={false}
+                  blurDataURL={inputImage || UserProfileIcon}
                   alt="ORU Account"
                   layout="fill"
                   objectFit="contain"
-                  priority
                   className={`hover:cursor-pointer ${UserProfileIcon && "rounded-full"
                     }`}
                 />
