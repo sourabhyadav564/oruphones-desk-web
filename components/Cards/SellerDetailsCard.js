@@ -15,6 +15,8 @@ import third from "@/assets/third.png";
 
 
 
+
+
 function SellerDetailsCard({ data }) {
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -30,8 +32,6 @@ function SellerDetailsCard({ data }) {
     openRequestVerificationSuccessPopup,
     setOpenRequestVerificationSuccessPopup,
   ] = useState(false);
-<<<<<<< Updated upstream
-=======
   const [resData, setResData] = useState([]);
   const [listingid, setListingid] = useState(data?.listingId);
 
@@ -48,9 +48,19 @@ function SellerDetailsCard({ data }) {
    });
   },[data])
  
-
-
->>>>>>> Stashed changes
+  useState(()=>{
+    setListingid(data?.listingId);
+    Axios.sendverification(
+     listingid,
+     Cookies.get("userUniqueId") || "Guest"
+   ).then((response) => {
+       setResData(response);
+     // if (response.status == "SUCCESS") {
+      //  setRequestVerificationSuccessPopup(true);
+     // }
+   });
+  },[data])
+ 
   const handleClick = () => {
     if (Cookies.get("userUniqueId") === undefined ) {
       setPerformAction(true);
@@ -261,11 +271,6 @@ const OtherSeller = ({
   
 
   // console.log("vendor", vendor);
-<<<<<<< HEAD
-  
-  console.log('data : ',data);
-=======
->>>>>>> 478c03c1dc36d9b23207ef03cb4fca6f6617df6e
 
   return (
     <>
@@ -280,16 +285,6 @@ const OtherSeller = ({
           <div className="my-1 w-28 flex">
             {/* {console.log("rnak",index)} */}
             {data.externalSourceImage && (
-<<<<<<< HEAD
-              <img
-                src={data.externalSourceImage}
-                alt={vendor}
-                // width={120}
-                // height={32}
-                // objectFit="contain"
-                style={{ height: 35, width: "auto"}}
-                />
-=======
               <div className="flex flex-row gap-2">
                 {index < 3 && (
                   <Image
@@ -306,7 +301,6 @@ const OtherSeller = ({
                     objectFit="contain"
                     className=""
                   />
->>>>>>> 478c03c1dc36d9b23207ef03cb4fca6f6617df6e
                 )}
                 <Image
                   src={data.externalSourceImage}
