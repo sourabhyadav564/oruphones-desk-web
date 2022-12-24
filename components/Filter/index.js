@@ -12,10 +12,12 @@ const sortOptions = [
   { name: "Featured", href: "#", current: true },
 ];
 
-function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeName }) {
+function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeName,makename }) {
   const { filterOptions } = useFilterOptions();
   const router = useRouter();
   let tempFilters = filterOptions;
+
+
   if (filterOptions && makeName !== null && makeName !== undefined) {
     tempFilters = filterOptions.map((i) =>
       i.id === "brand"
@@ -111,7 +113,10 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
         : i
     );
   }
-   if(filterOptions && (router.query["makeName"]=="apple" || router.query["makeName"]=="Apple")){
+  
+  console.log('makename : ',makename);
+
+   if(filterOptions && (router.query["makeName"]=="apple" || router.query["makeName"]=="Apple" || makename == "Apple" || makename =="apple")){
     tempFilters = filterOptions.map((i) =>
     i.id =="Ram"
     ? {
@@ -130,9 +135,9 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
     );
   }
   
-  console.log("filterOptions", router.query["makeName"]);
+  // console.log("filterOptions", router.query["makeName"]);
 
-  console.log("filterOptions2", tempFilters);
+  // console.log("filterOptions2", tempFilters);
 
   return (
     <React.Fragment>
