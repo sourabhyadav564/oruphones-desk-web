@@ -19,9 +19,12 @@ module.exports = {
   },
   images: {
     domains: [
+<<<<<<< HEAD
       "zenrodevimages.s3.us-west-2.amazonaws.com",
       "zenrodevimages.s3.us-west-2.amazonaws.com",
       "zenrodevimages.s3.us-west-2.amazonaws.com",
+=======
+>>>>>>> 478c03c1dc36d9b23207ef03cb4fca6f6617df6e
       "zenrodevimages.s3-us-west-2.amazonaws.com",
       "zenrodeviceimages.s3.us-west-2.amazonaws.com",
       "www.mobiruindia.com",

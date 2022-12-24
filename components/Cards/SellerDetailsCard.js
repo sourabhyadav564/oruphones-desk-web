@@ -9,6 +9,9 @@ import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccess
 import Cookies from "js-cookie";
 import { CgProfile } from "react-icons/cg";
 import { FaGreaterThan } from "react-icons/fa";
+import first from "@/assets/first.png";
+import second from "@/assets/second.png";
+import third from "@/assets/third.png";
 
 function SellerDetailsCard({ data }) {
   const [productLink, setProductLink] = useState("");
@@ -25,7 +28,6 @@ function SellerDetailsCard({ data }) {
     openRequestVerificationSuccessPopup,
     setOpenRequestVerificationSuccessPopup,
   ] = useState(false);
-
   const handleClick = () => {
     if (Cookies.get("userUniqueId") === undefined) {
       setPerformAction(true);
@@ -145,11 +147,11 @@ function SellerDetailsCard({ data }) {
           <div className="flex flex-row">
             {data?.vendorLogo && (
               <Image
-              loading="lazy"
-              placeholder="blur"
-              priority={false}
-              unoptimized={false}
-              blurDataURL={data?.vendorLogo || "/"}
+                loading="lazy"
+                placeholder="blur"
+                priority={false}
+                unoptimized={false}
+                blurDataURL={data?.vendorLogo || "/"}
                 src={data?.vendorLogo || "/"}
                 width={100}
                 height={50}
@@ -175,7 +177,13 @@ function SellerDetailsCard({ data }) {
           </p>
           <div className="flex flex-col overflow-y-auto">
             {otherSeller.map((items, index) => (
-              <OtherSeller key={index} data={items} setShowLoginPopup={setShowLoginPopup} setPerformAction2={setPerformAction2} setProductLink={setProductLink} />
+              <OtherSeller
+                index={index}
+                data={items}
+                setShowLoginPopup={setShowLoginPopup}
+                setPerformAction2={setPerformAction2}
+                setProductLink={setProductLink}
+              />
             ))}
           </div>
         </div>
@@ -202,8 +210,13 @@ function SellerDetailsCard({ data }) {
   );
 }
 
-
-const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }) => {
+const OtherSeller = ({
+  index,
+  data,
+  setShowLoginPopup,
+  setPerformAction2,
+  setProductLink,
+}) => {
   // console.log("data : ",data.externalSourceImage);
   // console.log(
   //   data.externalSourceImage.replaceAll('https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/',"") , data.externalSourceImage.replace('_logo.png',""));
@@ -220,8 +233,11 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
   
 
   // console.log("vendor", vendor);
+<<<<<<< HEAD
   
   console.log('data : ',data);
+=======
+>>>>>>> 478c03c1dc36d9b23207ef03cb4fca6f6617df6e
 
   return (
     <>
@@ -230,11 +246,13 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
         className="my-0.5 p-2 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
         // key={index}
         style={{ background: "#EFEFEF" }}
-        >
+      >
         <div className="flex flex-col justify-center items-start">
           {/* <span className="text-xs text-m-grey-2">Seller</span> */}
-          <span className="my-1 w-28">
+          <div className="my-1 w-28 flex">
+            {/* {console.log("rnak",index)} */}
             {data.externalSourceImage && (
+<<<<<<< HEAD
               <img
                 src={data.externalSourceImage}
                 alt={vendor}
@@ -243,8 +261,36 @@ const OtherSeller = ({ data,setShowLoginPopup,setPerformAction2,setProductLink }
                 // objectFit="contain"
                 style={{ height: 35, width: "auto"}}
                 />
+=======
+              <div className="flex flex-row gap-2">
+                {index < 3 && (
+                  <Image
+                    src={
+                      index == 0
+                        ? first
+                        : index == 1
+                        ? second
+                        : index == 2 && third
+                    }
+                    alt="icon"
+                    width={35}
+                    height={20}
+                    objectFit="contain"
+                    className=""
+                  />
+>>>>>>> 478c03c1dc36d9b23207ef03cb4fca6f6617df6e
                 )}
-          </span>
+                <Image
+                  src={data.externalSourceImage}
+                  alt={vendor}
+                  width={130}
+                  height={50}
+                  objectFit="contain"
+                  // style={{ height: 35, width: "auto" }}
+                />
+              </div>
+            )}
+          </div>
         </div>
         <div
           className="flex flex-col items-center justify-center pr-4"
