@@ -339,7 +339,7 @@ const OtherSeller = ({
               setShowLoginPopup(true);
               setProductLink(data?.productLink);
               setPerformAction2(true);
-            } else if(data?.externalSourceImage != 'https://zenrodeviceimages.s3.us-west-2.amazonaws.com/oru/product/mobiledevices/img/txt_phone.png') window.open(data?.productLink, "_blank");
+            } else if(data?.externalSourceImage != 'https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png') window.open(data?.productLink, "_blank");
           }}
         >
           {/* <span className="text-xs text-m-grey-2">Price</span> */}
