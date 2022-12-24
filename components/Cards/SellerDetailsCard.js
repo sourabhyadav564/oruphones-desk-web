@@ -53,8 +53,6 @@ function SellerDetailsCard({ data }) {
   },[data])
  
 
-
-
   useState(()=>{
     setListingid(data?.listingId);
     Axios.sendverification(
