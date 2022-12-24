@@ -30,6 +30,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
+import * as Axios from "../../api/axios";
 
 function ProductDetailsCard({ data, openFullImage }) {
   const [performAction2, setPerformAction2] = useState(false);
@@ -41,6 +42,10 @@ function ProductDetailsCard({ data, openFullImage }) {
     openRequestVerificationSuccessPopup,
     setRequestVerificationSuccessPopup,
   ] = useState(false);
+  const [resData, setResData] = useState([]);
+  const [listingid, setListingid] = useState(data?.listingId);
+
+
   const [deviceListingInfo, setDeviceListingInfo] = useState(data);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const myRef = useRef(null);
@@ -82,13 +87,29 @@ function ProductDetailsCard({ data, openFullImage }) {
   useEffect(() => {
     // console.log("showLoginPopup",showLoginPopup);
     // console.log("performAction2",performAction2);
-    console.log("Cookies.get(userUniqueId)",Cookies.get("userUniqueId"));
+    // console.log("Cookies.get(userUniqueId)",Cookies.get("userUniqueId"));
     if (showLoginPopup == false && performAction2 == true) {
       // console.log("aa");
       // if(Cookies.get("userUniqueId")!=undefined)
       setRequestVerificationSuccessPopup(true);
     }
   }, [showLoginPopup]);
+
+
+  useState(()=>{
+    setListingid(data?.listingId);
+    Axios.sendverification(
+     listingid,
+     Cookies.get("userUniqueId") || "Guest"
+   ).then((response) => {
+       setResData(response);
+     // if (response.status == "SUCCESS") {
+      //  setRequestVerificationSuccessPopup(true);
+     // }
+   });
+  },[data])
+ 
+
 
   return (
     <Fragment>
@@ -177,14 +198,13 @@ function ProductDetailsCard({ data, openFullImage }) {
               {/* <p className="block text-base text-m-grey-2">List price</p> */}
               <div className="flex flex-row justify-between">
                 <p
-                  className="font-Roboto-Bold text-xl3FontSize flex items-center -ml-1 text-green2"
-                  style={{ fontSize: 42 }}
+                  className="font-Roboto-Bold text-xl4FontSize flex items-center -ml-1 text-green2"
                 >
                   {data?.listingPrice && <BiRupee />}{" "}
                   {numberWithCommas(data?.listingPrice || "")}
                 </p>
                 <span
-                  className="grid grid-cols-2 my-4 hover:cursor-pointer rounded-md py-1 px-4 w-[160pr] h-[40pr] opacity-bg-50 text-xs2FontSize"
+                  className="grid grid-cols-2 hover:cursor-pointer rounded-md py-1 px-4 w-[160pr] h-[40pr] opacity-bg-50 text-xs2FontSize"
                   style={{ backgroundColor: "#F3F3F3" }}
                   onClick={() => {
                     setConditionInfoPopup(true);
@@ -219,7 +239,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                     >
                       <div className="flex flex-1 space-x-1 ">
                         <VerificationIcon className="flex self-center" />
-                        <p className="font-Roboto-Light italic text-mediumFontSize self-center">
+                        <p className="font-Roboto-Regularitalic text-mediumFontSize self-center">
                           Verified
                         </p>
                       </div>
@@ -253,7 +273,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                               />
                               {/* <UnVerifiedIcon /> */}
 
-                              <span className="text-xs2FontSize font-Roboto-Light  self-center text-[#000944] italic uppercase">
+                              <span className="text-xs2FontSize font-Roboto-Regularitalic self-center text-[#000944] italic uppercase">
                                 unverified
                               </span>
                             </div>
@@ -310,11 +330,11 @@ function ProductDetailsCard({ data, openFullImage }) {
                 )}
               </div>
             </div>
-            <div className="flex font-Roboto-Light text-mediumFontSize text-black ">
+            <div className="flex font-Roboto-Light text-mediumFontSize text-black mb-1">
               Device Info
             </div>
             <div className="pr-2 pb-4">
-              <div className="bg-gray-600 h-1 border-2"></div>
+              <div className="bg-gray-600 h-1 border-2 border-white"></div>
             </div>
 
             {data?.isOtherVendor === "Y" ? (
@@ -465,7 +485,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             <div className="text-gray-20 font-Roboto-Light text-regularFontSize my-3 ">
               <span>Device Verification Report</span>
               <div className="pb-4">
-                <div className="bg-gray-600 h-1 border-2"></div>
+                <div className="bg-gray-600 h-1 border-2 border-white"></div>
               </div>
             </div>
           )}
@@ -515,8 +535,9 @@ function ProductDetailsCard({ data, openFullImage }) {
       <RequestVerificationSuccessPopup
         open={openRequestVerificationSuccessPopup}
         setOpen={setRequestVerificationSuccessPopup}
-        data={data}
+        data={resData}
       />
+      
       <LoginPopup
         open={showLoginPopup}
         setOpen={setShowLoginPopup}

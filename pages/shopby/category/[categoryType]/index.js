@@ -40,7 +40,7 @@ function CategoryPage() {
   const [description, setDescription] = useState(metaTags.BRANDS.description);
 
   const loadData = (intialPage) => {
-    if (categoryType && !isFilterApplied && !applySort) {
+    if (categoryType && !isFilterApplied) {
       Axios.shopByCategory(
         getSearchLocation,
         categoryType,

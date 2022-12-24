@@ -38,7 +38,7 @@ const Pricerange = () => {
   let newPages = 0;
 
   const loadData = (intialPage) => {
-    if (!isFilterApplied && !applySort) {
+    if (!isFilterApplied) {
       const fetchData = async () => {
         const priceRange = await Axios.shopByPriceRange(
           // max === "above" ? "200000" : max,
