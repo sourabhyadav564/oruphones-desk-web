@@ -29,7 +29,6 @@ const HomeContent = () => {
             on the phone model, condition of the phone, and referenced from the
             general market rate to help you get maximum cash for your old phone.
           </div><br />
-
           <div className="font-Roboto-Medium text-xlFontSize">Why should you buy used phones on ORUphones? </div>
           <div className="font-Roboto-Light text-mediumFontSize text-left">
             1. Save more and buy from direct sellers:&nbsp;Did you know that 90%
@@ -74,6 +73,7 @@ const HomeContent = () => {
             condition with the buyer prior to them connecting with you.
           </div>
         </div>
+        <br/>
         <div id="how_to_sell">
           <div className="font-Roboto-Medium text-xlFontSize">How to Sell Used Phone with ORUphones?</div>
           <div className="font-Roboto-Light text-mediumFontSize text-left">
