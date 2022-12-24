@@ -19,6 +19,8 @@ import third from "@/assets/third.png";
 
 
 
+
+
 function SellerDetailsCard({ data }) {
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -36,6 +38,22 @@ function SellerDetailsCard({ data }) {
   ] = useState(false);
   const [resData, setResData] = useState([]);
   const [listingid, setListingid] = useState(data?.listingId);
+
+  useState(()=>{
+    setListingid(data?.listingId);
+    Axios.sendverification(
+     listingid,
+     Cookies.get("userUniqueId") || "Guest"
+   ).then((response) => {
+       setResData(response);
+     // if (response.status == "SUCCESS") {
+      //  setRequestVerificationSuccessPopup(true);
+     // }
+   });
+  },[data])
+ 
+
+
 
   useState(()=>{
     setListingid(data?.listingId);
