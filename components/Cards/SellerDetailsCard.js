@@ -17,6 +17,8 @@ import third from "@/assets/third.png";
 
 
 
+
+
 function SellerDetailsCard({ data }) {
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
