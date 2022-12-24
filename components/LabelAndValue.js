@@ -57,7 +57,7 @@ function LabelAndValue({ label, value, showDeviceReport, showInfoPopup,showWarra
             ) : showConditionInfoPopup ? (
               <p className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>
                 {label}
-                <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showWarrantyInfoPopup} />
+                <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showConditionInfoPopup} />
               </p>
             ) :  showWarrantyInfoPopup ? (
               <p className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>

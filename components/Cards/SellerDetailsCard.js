@@ -13,6 +13,8 @@ import first from "@/assets/first.png";
 import second from "@/assets/second.png";
 import third from "@/assets/third.png";
 
+
+
 function SellerDetailsCard({ data }) {
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -28,8 +30,29 @@ function SellerDetailsCard({ data }) {
     openRequestVerificationSuccessPopup,
     setOpenRequestVerificationSuccessPopup,
   ] = useState(false);
+<<<<<<< Updated upstream
+=======
+  const [resData, setResData] = useState([]);
+  const [listingid, setListingid] = useState(data?.listingId);
+
+  useState(()=>{
+    setListingid(data?.listingId);
+    Axios.sendverification(
+     listingid,
+     Cookies.get("userUniqueId") || "Guest"
+   ).then((response) => {
+       setResData(response);
+     // if (response.status == "SUCCESS") {
+      //  setRequestVerificationSuccessPopup(true);
+     // }
+   });
+  },[data])
+ 
+
+
+>>>>>>> Stashed changes
   const handleClick = () => {
-    if (Cookies.get("userUniqueId") === undefined) {
+    if (Cookies.get("userUniqueId") === undefined ) {
       setPerformAction(true);
       setShowLoginPopup(true);
     } else if (data.verified) {
@@ -37,12 +60,12 @@ function SellerDetailsCard({ data }) {
     } else {
       if (showNumber) {
         setShowNumber((prav) => !prav);
-      } else {
+      } else { 
+
         setRequestVerificationPopup(true);
       }
     }
   };
-
   useEffect(() => {
     // console.log("showLoginPopup", performAction);
     if (
@@ -111,21 +134,21 @@ function SellerDetailsCard({ data }) {
   return (
     <div className="seller-info">
       <div className="pr-4 py-2">
-        <p className="text-mediumFontSize text-black-20 font-Roboto-Light capitalize mb-2">
+        <p className="text-mediumFontSize text-black-20 font-Roboto-Light capitalize mb-1">
           Seller Details
         </p>
         <div className="pb-4">
-          <div className="bg-gray-600 h-1 border-2"></div>
+          <div className="bg-gray-600 h-1 border-2 border-white"></div>
         </div>
         {data?.isOtherVendor === "N" || data?.isOtherVendor === null ? (
           <div className="flex flex-row justify-between">
             <div className="flex ">
               <CgProfile size={40} />
               <div className="pt-1">
-                <p className="pl-2 text-grey2 font-Roboto-Bold text-regularFontSize leading-4">
+                <p className="pl-2 text-grey2 font-Roboto-Light text-smallFontSize leading-4">
                   {data?.listedBy}
                 </p>
-                <span className="pl-2 text-gray-2 font-Roboto-Light text-mediumFontSize text-sm inline-block">
+                <span className="pl-2 text-gray-2 font-Roboto-Medium text-mediumFontSize text-sm inline-block">
                   {data?.listingLocation}
                 </span>
               </div>
@@ -175,6 +198,9 @@ function SellerDetailsCard({ data }) {
           <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">
             Compare from Other Sellers
           </p>
+          <div className="pb-4">
+          <div className="bg-gray-600 h-1 border-2 border-white"></div>
+        </div>
           <div className="flex flex-col overflow-y-auto">
             {otherSeller.map((items, index) => (
               <OtherSeller
@@ -193,11 +219,13 @@ function SellerDetailsCard({ data }) {
         setOpen={setRequestVerificationPopup}
         data={data}
         setShowNumber={setShowNumber}
+        openRequestVerificationSuccessPopup={openRequestVerificationSuccessPopup}
         setRequestVerificationSuccessPopup={
           setOpenRequestVerificationSuccessPopup
         }
       />
       <RequestVerificationSuccessPopup
+        data={resData}
         open={openRequestVerificationSuccessPopup}
         setOpen={setOpenRequestVerificationSuccessPopup}
       />
@@ -243,7 +271,7 @@ const OtherSeller = ({
     <>
       {/* {data?.map((item, index) => ( */}
       <div
-        className="my-0.5 p-2 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
+        className="my-1 py-1 px-4 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
         // key={index}
         style={{ background: "#EFEFEF" }}
       >

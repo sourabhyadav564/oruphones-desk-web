@@ -2,6 +2,8 @@ import Cookies from "js-cookie";
 import Modal2 from "./Model2";
 import { FiAlertOctagon } from "react-icons/fi";
 import * as Axios from "../../api/axios";
+import RequestVerificationSuccessPopup from "./RequestVerificationSuccessPopup";
+import { useState } from "react";
 // import RequestVerificationSuccessPopup from "./RequestVerificationSuccessPopup";
 
 function RequestVerificationPopup({
@@ -9,21 +11,30 @@ function RequestVerificationPopup({
   setOpen,
   data,
   setShowNumber,
+  openRequestVerificationSuccessPopup,
   setRequestVerificationSuccessPopup,
 }) {
   // const [openRequestVerificationSuccessPopup, setRequestVerificationSuccessPopup] = useState(false);
+  const [resData, setResData] = useState([]);
+  const [listingid, setListingid] = useState(data?.listingId);
 
-  const requestVerificarion = async () => {
+
+  const requestVerification = async () => {
+    setListingid(data?.listingId);
     await Axios.sendverification(
-      data?.listingId,
-      Cookies.get("userUniqueId")
+      listingid,
+      Cookies.get("userUniqueId") || "Guest"
     ).then((response) => {
-      if (response.status === "SUCCESS") {
+        setResData(response);
+      // if (response.status == "SUCCESS") {
         setOpen(false);
         setRequestVerificationSuccessPopup(true);
-      }
+      // }
     });
   };
+  console.log("resdata3: ", resData);
+  console.log("Listing Id: ", data?.listingId);
+  
 
   return (
     <Modal2 open={open} setOpen={setOpen} title={"This device is unverified"}>
@@ -38,7 +49,25 @@ function RequestVerificationPopup({
           </p>
         </div>
         <div className="mb-2 mt-4  flex items-center ">
-          <button className="border  bg-m-green  px-4 py-2 rounded text-white uppercase font-Roboto-Medium" onClick={() => sendVerificationLink()}>
+          <button className="border  bg-m-green  px-4 py-2 rounded text-white uppercase font-Roboto-Medium" 
+          // onClick={() => requestVerification()}
+          onClick={() => {
+            // console.log("bbb");
+            // Cookies.get("userUniqueId") === undefined
+            //   ? () => {
+            //       setPerformAction2(true);
+            //       setShowLoginPopup(true);
+            //     }
+            //   : setRequestVerificationSuccessPopup(true);
+            if (Cookies.get("userUniqueId") === undefined) {
+              setPerformAction2(true);
+              setShowLoginPopup(true);
+            } else {
+              setOpen(false);
+              requestVerification();
+            }
+          }}
+          >
             Request Verification
           </button>
           <button
@@ -52,6 +81,7 @@ function RequestVerificationPopup({
           </button>
         </div>
       </div>
+      <RequestVerificationSuccessPopup open={openRequestVerificationSuccessPopup} data={resData} setOpen={setRequestVerificationSuccessPopup}/>
     </Modal2>
   );
 }

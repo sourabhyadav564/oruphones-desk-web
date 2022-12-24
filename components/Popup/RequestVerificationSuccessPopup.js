@@ -7,6 +7,9 @@ import { BsCheck2Circle } from "react-icons/bs";
 import { FiAlertOctagon } from "react-icons/fi";
 
 function RequestVerificationSuccessPopup({ open, setOpen, data }) {
+  const [resData, setResData] = useState(data);
+  const [listingid, setListingid] = useState(data?.listingId);
+  const [statuscode,setStatuscode] =useState(data?.statusCode);
   // useEffect(() => {
   //   const requestVerificarion = async () => {
   //     await Axios.sendverification(
@@ -23,41 +26,55 @@ function RequestVerificationSuccessPopup({ open, setOpen, data }) {
   //   }
   // }, [open]);
 
-
+ 
   useEffect(() => {
-    if (open) {
-      Axios.sendverification(data?.listingId,Cookies.get("userUniqueId") || "Guest").then(
-        (response) => {
-          setResData(response);
-        }
-      );
-    }
+    setListingid(data?.listingId);
+    setStatuscode(data?.statusCode);
+
+
+
+    // console.log("data-statuscode : ", statuscode)
+    // console.log("data6", data);
+    // console.log("data2345 : ",data);
+    // console.log("userUniqueId",Cookies.get("userUniqueId"));
+    // if (open) {
+      // Axios.sendverification(listingid,Cookies.get("userUniqueId") || "Guest").then(
+      //   (response) => {
+         
+      //     // setResData(response?.statusCode);
+      //     // console.log("response : ",response?.statusCode);
+      //     setStatuscode(response?.statusCode);
+
+      //   }
+      // );
+    // }
   }, [data]);
 
-
-  const [resData, setResData] = useState({});
-
+  
+  // console.log("userUniqueId2",Cookies.get("userUniqueId"));
+  
+ 
   return (
     <Modal2 open={open} setOpen={setOpen}>
       <div className="flex flex-col items-center max-w-lg py-4 px-6 text-base text-black-4e">
-        {resData?.statusCode ? (
+        {statuscode ? (
           <>
-            {resData?.statusCode === 200 ? (
+            {statuscode === 200 ? (
               <BsCheck2Circle size={42} color="#00A483" />
             ) : (
               <FiAlertOctagon size={44} color="#f7e17d" />
             )}
             <p className="font-Roboto-Bold my-2 text-lg">
-              {resData?.statusCode === 200
+              {statuscode === 200
                 ? "Request Sent"
                 : "Request Already Sent"}
             </p>
             <p className="text-md my-2 text-center font-Roboto-Regular">
-              {resData?.statusCode === 200
+              {statuscode === 200
                 ? "You will receive a notification once Seller completes verification."
                 : "You have already sent verification request for this listing."}
               <br />{" "}
-              {resData?.statusCode === 200
+              {statuscode === 200
                 ? "This listing will also be added to My Favorites"
                 : "You will receive a notification once Seller completes verification. A new verification request can only be sent after 7 days of the previous request."}
             </p>
