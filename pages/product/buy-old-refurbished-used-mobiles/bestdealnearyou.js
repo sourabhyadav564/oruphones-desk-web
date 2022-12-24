@@ -42,7 +42,7 @@ function Bestdealnearyou() {
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
   
   const loadData = (intialPage) => {
-    if (getSearchLocation && !isFilterApplied && !applySort) {
+    if (getSearchLocation && !isFilterApplied) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
         Cookies.get("userUniqueId"),

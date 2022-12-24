@@ -45,6 +45,11 @@ function ShopByModelCard({ data, location, makeLink, make, src, alt, fallBackSrc
 
         <div className="">
           <Image
+           loading="lazy"
+           placeholder="blur"
+           priority={false}
+           unoptimized={false}
+            blurDataURL={imageError?fallBackSrc: src}
             src={imageError ? fallBackSrc : src}
             alt={alt}
             onError={() => setImageError(true)}

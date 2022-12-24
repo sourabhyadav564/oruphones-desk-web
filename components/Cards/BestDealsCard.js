@@ -141,6 +141,10 @@ function BestDealsCard({ data, setProducts }) {
       <div className="flex justify-end items-end pr-20 pt-5 relative">
         <div className="relative flex justify-end items-end">
           <Image
+            loading="lazy"
+            priority={false}
+            blurDataURL={imageError ? Logo : data?.imagePath || Logo}
+            placeholder="blur"
             className="flex rounded-[20px]"
             width={140}
             height={190}
