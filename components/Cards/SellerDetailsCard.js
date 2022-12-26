@@ -12,16 +12,10 @@ import { FaGreaterThan } from "react-icons/fa";
 import first from "@/assets/first.png";
 import second from "@/assets/second.png";
 import third from "@/assets/third.png";
-
-
-
-
-
-
-
-
+import ThisPhonePopup from "../Popup/ThisPhonePopup";
 
 function SellerDetailsCard({ data }) {
+  const [thisPhonePopup,setThisPhonePopup] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
   const [performAction2, setPerformAction2] = useState(false);
@@ -51,7 +45,8 @@ function SellerDetailsCard({ data }) {
      // }
    });
   },[data])
- 
+
+  
 
   useState(()=>{
     setListingid(data?.listingId);
@@ -237,6 +232,7 @@ function SellerDetailsCard({ data }) {
                 setShowLoginPopup={setShowLoginPopup}
                 setPerformAction2={setPerformAction2}
                 setProductLink={setProductLink}
+                setThisPhonePopup={setThisPhonePopup}
               />
             ))}
           </div>
@@ -262,6 +258,10 @@ function SellerDetailsCard({ data }) {
         setOpen={setShowLoginPopup}
         redirect={false}
       />
+      <ThisPhonePopup
+      open={thisPhonePopup}
+      setOpen={setThisPhonePopup}
+      />
     </div>
   );
 }
@@ -272,6 +272,7 @@ const OtherSeller = ({
   setShowLoginPopup,
   setPerformAction2,
   setProductLink,
+  setThisPhonePopup,
 }) => {
   // console.log("data : ",data.externalSourceImage);
   // console.log(
@@ -297,6 +298,16 @@ const OtherSeller = ({
         className="my-1 py-1 px-4 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
         // key={index}
         style={{ background: "#EFEFEF" }}
+        onClick={() => {
+          if (Cookies.get("userUniqueId") == undefined) {
+            setShowLoginPopup(true);
+            setProductLink(data?.productLink);
+            setPerformAction2(true);
+          } else if(data?.externalSourceImage != 'https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png') window.open(data?.productLink, "_blank");
+          else if(data?.externalSourceImage == 'https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png') {
+                setThisPhonePopup(true);
+          }
+        }}
       >
         <div className="flex flex-col justify-center items-start">
           {/* <span className="text-xs text-m-grey-2">Seller</span> */}
@@ -334,13 +345,6 @@ const OtherSeller = ({
         </div>
         <div
           className="flex flex-col items-center justify-center pr-4"
-          onClick={() => {
-            if (Cookies.get("userUniqueId") == undefined) {
-              setShowLoginPopup(true);
-              setProductLink(data?.productLink);
-              setPerformAction2(true);
-            } else if(data?.externalSourceImage != 'https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png') window.open(data?.productLink, "_blank");
-          }}
         >
           {/* <span className="text-xs text-m-grey-2">Price</span> */}
           {data.externalSourcePrice && (

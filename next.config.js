@@ -19,10 +19,7 @@ module.exports = {
   },
   images: {
     domains: [
-      "zenrodevimages.s3.us-west-2.amazonaws.com",
-      "zenrodevimages.s3.us-west-2.amazonaws.com",
-      "zenrodevimages.s3.us-west-2.amazonaws.com",
-    "zenrodevimages.s3-us-west-2.amazonaws.com",
+      "zenrodevimages.s3-us-west-2.amazonaws.com",
       "zenrodeviceimages.s3.us-west-2.amazonaws.com",
       "www.mobiruindia.com",
       "www.oruphones.com",
