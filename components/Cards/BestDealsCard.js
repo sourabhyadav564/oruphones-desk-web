@@ -131,7 +131,7 @@ function BestDealsCard({ data, setProducts }) {
                     <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
                     </div>
                   </div>
-                </Link>
+              </Link>
               </div>
             </div>
           </div>
