@@ -97,17 +97,20 @@ function ProductDetailsCard({ data, openFullImage }) {
 
 
   useState(()=>{
-    setListingid(data?.listingId);
-    Axios.sendverification(
-     listingid,
-     Cookies.get("userUniqueId") || "Guest"
-   ).then((response) => {
-       setResData(response);
-     // if (response.status == "SUCCESS") {
-      //  setRequestVerificationSuccessPopup(true);
-     // }
-   });
-  },[data])
+    if(openRequestVerificationSuccessPopup){
+      
+      setListingid(data?.listingId);
+      Axios.sendverification(
+        listingid,
+        Cookies.get("userUniqueId") || "Guest"
+        ).then((response) => {
+          setResData(response);
+          // if (response.status == "SUCCESS") {
+            //  setRequestVerificationSuccessPopup(true);
+            // }
+          });
+        }
+  },[data]);
  
 
 
@@ -388,11 +391,17 @@ function ProductDetailsCard({ data, openFullImage }) {
                 />
                 {
                   <LabelAndValue
-                    label="Warranty"
+                    label="Brand Warranty"
                     value={data?.warranty || "--"}
                     showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
                   />
                 }
+                <LabelAndValue
+                  label="Seller Warranty"
+                  value={"Not Applicable"}
+                  labelTextSize
+                  showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
+                />
                 <LabelAndValue label="Color" value={data?.color || "--"} />
                 <LabelAndValue
                   label="Storage"

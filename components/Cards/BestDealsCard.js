@@ -9,6 +9,7 @@ import { BiChevronRight } from "react-icons/bi";
 import SoldOut from "@/assets/soldout.png"
 import Logo from "@/assets/oru_phones_logo.png"
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 function BestDealsCard({ data, setProducts }) {
 
@@ -40,7 +41,7 @@ function BestDealsCard({ data, setProducts }) {
           Best Deals
         </p>
         <div>
-          {!(data?.isOtherVendor === "Y") && (
+          {!(data?.isOtherVendor === "Y" && Cookies.get("userUniqueId")==undefined) && (
             <AddFav data={data} setProducts={setProducts} />
           )}
         </div>
@@ -113,14 +114,21 @@ function BestDealsCard({ data, setProducts }) {
               {/* )} */}
 
               <div className="">
-                <Link
+              <div
+                onClick={() => window.open(
+                  `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${data?.isOtherVendor}`,
+                  "_blank",)}
+              >
+
+                {/* <Link
                   // href={{
-                  //   pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`,
+                    //   pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`,
                   //   query: { isOtherVendor: data?.isOtherVendor },
                   // }}
                   // passHref
                   href={`/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}`}
-                >
+                  target="_blank"
+                > */}
                   {/* <div className="hover:bg-yellow-500 hover:cursor-pointer duration-500 flex items-center font-Roboto-Semibold self-end py-2 px-4 text bg-m-white text-m-green rounded-lg ">
                   View Deal{" "}
                   <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
@@ -131,7 +139,8 @@ function BestDealsCard({ data, setProducts }) {
                     <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
                     </div>
                   </div>
-              </Link>
+              {/* </Link> */}
+                </div>
               </div>
             </div>
           </div>
