@@ -32,8 +32,8 @@ function RequestVerificationPopup({
       // }
     });
   };
-  console.log("resdata3: ", resData);
-  console.log("Listing Id: ", data?.listingId);
+ 
+ 
   
 
   return (

@@ -33,7 +33,7 @@ function SellerDetailsCard({ data }) {
   const [resData, setResData] = useState([]);
   const [listingid, setListingid] = useState(data?.listingId);
 
-  useState(()=>{
+  useEffect(()=>{
     setListingid(data?.listingId);
     Axios.sendverification(
      listingid,
@@ -48,7 +48,7 @@ function SellerDetailsCard({ data }) {
 
   
 
-  useState(()=>{
+  useEffect(()=>{
     setListingid(data?.listingId);
     Axios.sendverification(
      listingid,
@@ -61,7 +61,7 @@ function SellerDetailsCard({ data }) {
    });
   },[data])
  
-  useState(()=>{
+  useEffect(()=>{
     setListingid(data?.listingId);
     Axios.sendverification(
      listingid,
@@ -84,7 +84,6 @@ function SellerDetailsCard({ data }) {
       if (showNumber) {
         setShowNumber((prav) => !prav);
       } else { 
-
         setRequestVerificationPopup(true);
       }
     }
@@ -126,17 +125,16 @@ function SellerDetailsCard({ data }) {
       openSellerWebSite(productLink);
     }
   }, [showLoginPopup]);
-
   useEffect(() => {
     // setShowNumber(false);
     if (
       !(data?.isOtherVendor === "Y") &&
       Cookies.get("userUniqueId") !== undefined
-    ) {
-      Axios.fetchSellerMobileNumber(data?.listingId, data?.userUniqueId).then(
-        (response) => {
-          // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
-          setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
+      ) {
+        Axios.fetchSellerMobileNumber(data?.listingId, Cookies.get("userUniqueId")).then(
+          (response) => {
+            // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
+            setContactSellerMobileNumber(response?.dataObject?.mobileNumber); 
         }
       );
     }
@@ -153,7 +151,6 @@ function SellerDetailsCard({ data }) {
   };
 
   console.log("other seller ", otherSeller);
-
   return (
     <div className="seller-info">
       <div className="pr-4 py-2">

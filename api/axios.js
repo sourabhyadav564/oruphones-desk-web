@@ -740,6 +740,7 @@ export function fetchMyFavorites(userUniqueId) {
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
+      console.log("response data : ",response.data);
       localStorage.setItem("favoriteList", response.data.dataObject.map((item) => item.listingId));
       return response.data;
     },

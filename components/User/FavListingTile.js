@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
 import { useState, useEffect, useCallback } from "react";
 import { numberWithCommas } from "../../utils/util";
@@ -13,6 +14,7 @@ import { AiFillHeart } from "react-icons/ai";
 
 function FavListingTile({ data, setProducts }) {
   const [frontImagePath, setFrontImagePath] = useState();
+  const [imageError, setImageError] = useState(false);
   const frontImage = data?.images?.filter((img) => {
     if (img?.panel === "front") {
       return img?.fullImage;
@@ -39,6 +41,8 @@ function FavListingTile({ data, setProducts }) {
     });
   };
 
+  
+
   return (
     <div className="grid grid-cols-8 rounded border p-3 hover:shadow relative">
       <div className="absolute top-1 left-0 z-10">
@@ -58,33 +62,50 @@ function FavListingTile({ data, setProducts }) {
           />
         )}
       </div>
+     
       <div className="col-span-3 flex">
         {data?.images && frontImagePath && (
           <div className="flex justify-center w-32 h-24">
-            <img
-              src={frontImagePath || Logo}
+            <Image
+              // src={frontImagePath || Logo}
               alt={data?.marketingName}
-              style={{ width: "auto", height: "100%" }}
+              src={imageError ? Logo : frontImage || Logo}
+              onError={() => setImageError(true)}
+              objectFit="contain"
+              // style={{ width: "auto", height: "100%" }}
+              width={128}
+              height={96}
             />
           </div>
         )}
 
         {!data?.images && (
           <div className="flex justify-center w-32 h-24">
-            <img
-              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+            <Image
+              // src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={imageError ? Logo : data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              onError={() => setImageError(true)}
               alt={data?.marketingName}
-              style={{ width: "auto", height: "100%" }}
+              objectFit="contain"
+              // style={{ width: "auto", height: "100%" }}
+              width={128}
+              height={96}
             />
           </div>
         )}
 
+
         {data?.images && (
           <div className="flex justify-center w-32 h-24">
-            <img
-              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+            <Image
+              // src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
               alt={data?.marketingName}
+              src={imageError ? Logo : data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              onError={() => setImageError(true)}
+              objectFit="contain"
               style={{ width: "auto", height: "100%" }}
+              width={128}
+              height={96}
             />
           </div>
         )}

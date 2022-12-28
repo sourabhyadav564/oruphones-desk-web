@@ -85,9 +85,9 @@ function RequestVerificationSuccessPopup({ open, setOpen, data }) {
             <p className="text-mx">Your verification request will be sent soon...</p>
           </div>
         )}
-        <div className="mb-2 mt-4 font-Roboto-Regular">
+        <div className="mb-2 mt-4 font-Roboto-bold ">
           <button
-            className="border border-primary  w-32 px-4 py-2 rounded text-primary"
+            className="w-32 px-4 py-2 rounded bg-m-green text-white duration-500"
             onClick={(e) => {
               setOpen(false);
             }}
