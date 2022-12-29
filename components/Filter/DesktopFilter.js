@@ -25,7 +25,7 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   const [selectedPriceRange, setSelectedPriceRange] = useState();
   const [openConditionPopup, setOpenConditionPopup] = useState(false);
   const [openVerificationPopup, setOpenVerificationPopup] = useState(false);
-  const [openWarrantyPopup,setWarrantyPopup] = useState(false);
+  const [openWarrantyPopup, setWarrantyPopup] = useState(false);
 
   const router = useRouter();
 
