@@ -37,7 +37,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [openDeviceReport, setOpenDeviceReport] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
-  const [openWarrantyInfoPopup, setWarrantyInfoPopup ] = useState(false);
+  const [openWarrantyInfoPopup, setWarrantyInfoPopup] = useState(false);
   const [
     openRequestVerificationSuccessPopup,
     setRequestVerificationSuccessPopup,
@@ -54,14 +54,14 @@ function ProductDetailsCard({ data, openFullImage }) {
     data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
       ? 5
       : data?.deviceCondition?.toLowerCase() == "Excellent".toLowerCase()
-      ? 4
-      : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
-      ? 3
-      : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
-      ? 2
-      : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
-      ? 1
-      : 5;
+        ? 4
+        : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
+          ? 3
+          : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
+            ? 2
+            : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
+              ? 1
+              : 5;
   let iconToShow = (index) => {
     if (index < filled) {
       return <BsStarFill className="text-yellow-400" />;
@@ -95,23 +95,21 @@ function ProductDetailsCard({ data, openFullImage }) {
     }
   }, [showLoginPopup]);
 
-
-  useState(()=>{
-    if(openRequestVerificationSuccessPopup){
-      
+  useEffect(() => {
+    if (openRequestVerificationSuccessPopup) {
       setListingid(data?.listingId);
       Axios.sendverification(
         listingid,
         Cookies.get("userUniqueId") || "Guest"
-        ).then((response) => {
-          setResData(response);
-          // if (response.status == "SUCCESS") {
-            //  setRequestVerificationSuccessPopup(true);
-            // }
-          });
-        }
-  },[data]);
- 
+      ).then((response) => {
+        setResData(response);
+        // if (response.status == "SUCCESS") {
+        //  setRequestVerificationSuccessPopup(true);
+        // }
+      });
+    }
+  }, [openRequestVerificationSuccessPopup]);
+
 
 
   return (
@@ -216,7 +214,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                   <div className="m-auto justify-center">
                     <span
                       className="font-Roboto-Light text-bx opacity-100 text-[#000] flex leading-tight items-center"
-                      // onClick={() => setOpenConditionInfo(true)}
+                    // onClick={() => setOpenConditionInfo(true)}
                     >
                       Condition{" "}
                     </span>
@@ -225,7 +223,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                     </div>
                   </div>
                   <div className="flex text-bx space-x-[2.5px] m-auto justify-center ">
-                    {}
+                    { }
                     {Array(5)
                       .fill()
                       .map((_, index) => iconToShow(index))}
@@ -258,62 +256,62 @@ function ProductDetailsCard({ data, openFullImage }) {
                   </span> */}
                   </Fragment>
                 )) || (
-                  <Fragment>
-                    {/* <UnVerifiedIcon width={75} height={32} /> */}
-                    {data?.isOtherVendor === "N" && (
-                      <div className="w-full  py-2 space-x-2 text-center">
-                        <div
-                          className="flex py-2 rounded-md space-x-2 col-span-3 px-10"
-                          style={{ backgroundColor: "#F9C414" }}
-                        >
-                          <div className="flex space-x-1 flex-1">
-                            {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
-                            <div className="flex space-x-2">
-                              <AiFillExclamationCircle
-                                size={20}
-                                fill="white"
-                                className="self-center text-black"
-                              />
-                              {/* <UnVerifiedIcon /> */}
+                    <Fragment>
+                      {/* <UnVerifiedIcon width={75} height={32} /> */}
+                      {data?.isOtherVendor === "N" && (
+                        <div className="w-full  py-2 space-x-2 text-center">
+                          <div
+                            className="flex py-2 rounded-md space-x-2 col-span-3 px-10"
+                            style={{ backgroundColor: "#F9C414" }}
+                          >
+                            <div className="flex space-x-1 flex-1">
+                              {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
+                              <div className="flex space-x-2">
+                                <AiFillExclamationCircle
+                                  size={20}
+                                  fill="white"
+                                  className="self-center text-black"
+                                />
+                                {/* <UnVerifiedIcon /> */}
 
-                              <span className="text-xs2FontSize font-Roboto-Regularitalic self-center text-[#000944] italic uppercase">
-                                unverified
-                              </span>
+                                <span className="text-xs2FontSize font-Roboto-Regularitalic self-center text-[#000944] italic uppercase">
+                                  unverified
+                                </span>
+                              </div>
+                              {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
                             </div>
-                            {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
+                            <p className="flex items-center">
+                              <span
+                                className="underline font-Roboto-Light text-smallFontSize hover:cursor-pointer"
+                                // onClick={() =>
+                                onClick={() => {
+                                  // console.log("bbb");
+                                  // Cookies.get("userUniqueId") === undefined
+                                  //   ? () => {
+                                  //       setPerformAction2(true);
+                                  //       setShowLoginPopup(true);
+                                  //     }
+                                  //   : setRequestVerificationSuccessPopup(true);
+                                  if (Cookies.get("userUniqueId") === undefined) {
+                                    setPerformAction2(true);
+                                    setShowLoginPopup(true);
+                                  } else {
+                                    setRequestVerificationSuccessPopup(true);
+                                  }
+                                }}
+                              >
+                                Click here to Request Verification
+                              </span>
+                              <BsInfoCircle
+                                size={12}
+                                className="ml-1"
+                                onClick={() => setOpenInfo(true)}
+                              />
+                            </p>
                           </div>
-                          <p className="flex items-center">
-                            <span
-                              className="underline font-Roboto-Light text-smallFontSize hover:cursor-pointer"
-                              // onClick={() =>
-                              onClick={() => {
-                                // console.log("bbb");
-                                // Cookies.get("userUniqueId") === undefined
-                                //   ? () => {
-                                //       setPerformAction2(true);
-                                //       setShowLoginPopup(true);
-                                //     }
-                                //   : setRequestVerificationSuccessPopup(true);
-                                if (Cookies.get("userUniqueId") === undefined) {
-                                  setPerformAction2(true);
-                                  setShowLoginPopup(true);
-                                } else {
-                                  setRequestVerificationSuccessPopup(true);
-                                }
-                              }}
-                            >
-                              Click here to Request Verification
-                            </span>
-                            <BsInfoCircle
-                              size={12}
-                              className="ml-1"
-                              onClick={() => setOpenInfo(true)}
-                            />
-                          </p>
                         </div>
-                      </div>
-                    )}
-                    {/* <p className="flex items-center">
+                      )}
+                      {/* <p className="flex items-center">
                     <span
                       className="underline text-xs"
                       onClick={() =>
@@ -329,8 +327,8 @@ function ProductDetailsCard({ data, openFullImage }) {
                       onClick={() => setOpenVerificationInfo(true)}
                     />
                   </p> */}
-                  </Fragment>
-                )}
+                    </Fragment>
+                  )}
               </div>
             </div>
             <div className="flex font-Roboto-Light text-mediumFontSize text-black mb-1">
@@ -486,7 +484,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                       />
                     )}
                   </div>
-                ))} 
+                ))}
               </div>
             )}
           </div>
@@ -546,16 +544,16 @@ function ProductDetailsCard({ data, openFullImage }) {
         setOpen={setRequestVerificationSuccessPopup}
         data={resData}
       />
-      
+
       <LoginPopup
         open={showLoginPopup}
         setOpen={setShowLoginPopup}
         redirect={false}
       />
       <WarrantyInfo
-      open={openWarrantyInfoPopup}
-      setOpen={setWarrantyInfoPopup}
-      data={data}
+        open={openWarrantyInfoPopup}
+        setOpen={setWarrantyInfoPopup}
+        data={data}
       />
     </Fragment>
   );

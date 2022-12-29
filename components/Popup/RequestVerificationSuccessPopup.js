@@ -1,5 +1,5 @@
 import Modal2 from "./Model2";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as Axios from "../../api/axios";
 import Loader from "../Loader/Loader";
 import Cookies from "js-cookie";
@@ -7,98 +7,92 @@ import { BsCheck2Circle } from "react-icons/bs";
 import { FiAlertOctagon } from "react-icons/fi";
 
 function RequestVerificationSuccessPopup({ open, setOpen, data }) {
-  const [resData, setResData] = useState(data);
-  const [listingid, setListingid] = useState(data?.listingId);
-  const [statuscode,setStatuscode] =useState(data?.statusCode);
-  // useEffect(() => {
-  //   const requestVerificarion = async () => {
-  //     await Axios.sendverification(
-  //       data?.listingId,
-  //       Cookies.get("userUniqueId")
-  //     ).then((response) => {
-  //       console.log("sendverification ", response);
-  //     });
-  //   };
-  //   if (open && (data != undefined || data != null)) {
-  //     requestVerificarion();
-  //   } else if (open && (data === undefined || data === null)) {
-  //     setOpen(true);
-  //   }
-  // }, [open]);
+    const [resData, setResData] = useState(data);
+    const [listingid, setListingid] = useState(data?.listingId);
+    const [statuscode, setStatuscode] = useState(data?.statusCode);
 
- 
-  useEffect(() => {
-    setListingid(data?.listingId);
-    setStatuscode(data?.statusCode);
+    // useEffect(() => {
+    //   const requestVerificarion = async () => {
+    //     await Axios.sendverification(
+    //       data?.listingId,
+    //       Cookies.get("userUniqueId")
+    //     ).then((response) => {
+    //       console.log("sendverification ", response);
+    //     });
+    //   };
+    //   if (open && (data != undefined || data != null)) {
+    //     requestVerificarion();
+    //   } else if (open && (data === undefined || data === null)) {
+    //     setOpen(true);
+    //   }
+    // }, [open]);
+
+    useEffect(() => {
+        setListingid(data?.listingId);
+        setStatuscode(data?.statusCode);
+        // console.log("data-statuscode : ", statuscode)
+        // console.log("data2345 : ", data);
+        // console.log("userUniqueId",Cookies.get("userUniqueId"));
+        // if (open) {
+        // Axios.sendverification(listingid,Cookies.get("userUniqueId") || "Guest").then(
+        //   (response) => {
+
+        //     // setResData(response?.statusCode);
+        //     // console.log("response : ",response?.statusCode);
+        //     setStatuscode(response?.statusCode);
+        //   }
+        // );
+        // }
+    }, [data]);
 
 
 
-    // console.log("data-statuscode : ", statuscode)
-    // console.log("data6", data);
-    // console.log("data2345 : ",data);
-    // console.log("userUniqueId",Cookies.get("userUniqueId"));
-    // if (open) {
-      // Axios.sendverification(listingid,Cookies.get("userUniqueId") || "Guest").then(
-      //   (response) => {
-         
-      //     // setResData(response?.statusCode);
-      //     // console.log("response : ",response?.statusCode);
-      //     setStatuscode(response?.statusCode);
-
-      //   }
-      // );
-    // }
-  }, [data]);
-
-  
-  // console.log("userUniqueId2",Cookies.get("userUniqueId"));
-  
- 
-  return (
-    <Modal2 open={open} setOpen={setOpen}>
-      <div className="flex flex-col items-center max-w-lg py-4 px-6 text-base text-black-4e">
-        {statuscode ? (
-          <>
-            {statuscode === 200 ? (
-              <BsCheck2Circle size={42} color="#00A483" />
-            ) : (
-              <FiAlertOctagon size={44} color="#f7e17d" />
-            )}
-            <p className="font-Roboto-Bold my-2 text-lg">
-              {statuscode === 200
-                ? "Request Sent"
-                : "Request Already Sent"}
-            </p>
-            <p className="text-md my-2 text-center font-Roboto-Regular">
-              {statuscode === 200
-                ? "You will receive a notification once Seller completes verification."
-                : "You have already sent verification request for this listing."}
-              <br />{" "}
-              {statuscode === 200
-                ? "This listing will also be added to My Favorites"
-                : "You will receive a notification once Seller completes verification. A new verification request can only be sent after 7 days of the previous request."}
-            </p>
-          </>
-        ) : (
-          <div className="font-Roboto-Regular">
-            <Loader />
-            <p className="text-mx">Your verification request will be sent soon...</p>
-          </div>
-        )}
-        <div className="mb-2 mt-4 font-Roboto-bold ">
-          <button
-            className="w-32 px-4 py-2 rounded bg-m-green text-white duration-500"
-            onClick={(e) => {
-              setOpen(false);
-            }}
-          >
-            {" "}
-            OK{" "}
-          </button>
-        </div>
-      </div>
-    </Modal2>
-  );
+    return (
+        <Modal2 open={open} setOpen={setOpen}>
+            <div className="flex flex-col items-center max-w-lg py-4 px-6 text-base text-black-4e">
+                {console.log("data6", resData)}
+                {statuscode ? (
+                    <>
+                        {statuscode === 200 ? (
+                            <BsCheck2Circle size={42} color="#00A483" />
+                        ) : (
+                            <FiAlertOctagon size={44} color="#f7e17d" />
+                        )}
+                        <p className="font-Roboto-Bold my-2 text-lg">
+                            {statuscode === 200
+                                ? "Request Sent"
+                                : "Request Already Sent"}
+                        </p>
+                        <p className="text-md my-2 text-center font-Roboto-Regular">
+                            {statuscode === 200
+                                ? "You will receive a notification once Seller completes verification."
+                                : "You have already sent verification request for this listing."}
+                            <br />{" "}
+                            {statuscode === 200
+                                ? "This listing will also be added to My Favorites"
+                                : "You will receive a notification once Seller completes verification. A new verification request can only be sent after 7 days of the previous request."}
+                        </p>
+                    </>
+                ) : (
+                    <div className="font-Roboto-Regular">
+                        <Loader />
+                        <p className="text-mx">Your verification request will be sent soon...</p>
+                    </div>
+                )}
+                <div className="mb-2 mt-4 font-Roboto-Regular">
+                    <button
+                        className="border border-primary  w-32 px-4 py-2 rounded text-primary"
+                        onClick={(e) => {
+                            setOpen(false);
+                        }}
+                    >
+                        {" "}
+                        OK{" "}
+                    </button>
+                </div>
+            </div>
+        </Modal2>
+    );
 }
 
 export default RequestVerificationSuccessPopup;
