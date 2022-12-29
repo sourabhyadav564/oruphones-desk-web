@@ -70,7 +70,7 @@ function AddFav({ data, setProducts, ...rest }) {
     //   }
     //   const addFav = await Axios.addFavotie(payLoad);
     // };
-    if(showLoginPopup==false && performAction==true){
+    if(showLoginPopup==false && performAction==true && Cookies.get("userUniqueId") !== undefined){
       // data?.status == "Active" ? addFavorite() : toast.warning("This device is sold out");
       handleFavoties();
     }

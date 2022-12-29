@@ -34,6 +34,7 @@ function SellerDetailsCard({ data }) {
   const [listingid, setListingid] = useState(data?.listingId);
 
   useEffect(()=>{
+    if(openRequestVerificationPopup){
     setListingid(data?.listingId);
     Axios.sendverification(
      listingid,
@@ -44,41 +45,15 @@ function SellerDetailsCard({ data }) {
       //  setRequestVerificationSuccessPopup(true);
      // }
    });
-  },[data])
+  }
+  },[data]);
 
-  
-
-  useEffect(()=>{
-    setListingid(data?.listingId);
-    Axios.sendverification(
-     listingid,
-     Cookies.get("userUniqueId") || "Guest"
-   ).then((response) => {
-       setResData(response);
-     // if (response.status == "SUCCESS") {
-      //  setRequestVerificationSuccessPopup(true);
-     // }
-   });
-  },[data])
- 
-  useEffect(()=>{
-    setListingid(data?.listingId);
-    Axios.sendverification(
-     listingid,
-     Cookies.get("userUniqueId") || "Guest"
-   ).then((response) => {
-       setResData(response);
-     // if (response.status == "SUCCESS") {
-      //  setRequestVerificationSuccessPopup(true);
-     // }
-   });
-  },[data])
  
   const handleClick = () => {
     if (Cookies.get("userUniqueId") === undefined ) {
       setPerformAction(true);
       setShowLoginPopup(true);
-    } else if (data.verified) {
+    } else if (data?.verified) {
       setShowNumber((prav) => !prav);
     } else {
       if (showNumber) {
@@ -130,11 +105,11 @@ function SellerDetailsCard({ data }) {
     if (
       !(data?.isOtherVendor === "Y") &&
       Cookies.get("userUniqueId") !== undefined
-      ) {
-        Axios.fetchSellerMobileNumber(data?.listingId, Cookies.get("userUniqueId")).then(
-          (response) => {
-            // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
-            setContactSellerMobileNumber(response?.dataObject?.mobileNumber); 
+    ) {
+      Axios.fetchSellerMobileNumber(data?.listingId, Cookies.get("userUniqueId")).then(
+        (response) => {
+          // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
+          setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
         }
       );
     }
@@ -230,6 +205,8 @@ function SellerDetailsCard({ data }) {
                 setPerformAction2={setPerformAction2}
                 setProductLink={setProductLink}
                 setThisPhonePopup={setThisPhonePopup}
+                listingId={data?.listingId}
+                isOtherVendor={data?.isOtherVendor}
               />
             ))}
           </div>
@@ -270,6 +247,8 @@ const OtherSeller = ({
   setPerformAction2,
   setProductLink,
   setThisPhonePopup,
+  listingId,
+  isOtherVendor,
 }) => {
   // console.log("data : ",data.externalSourceImage);
   // console.log(
@@ -287,6 +266,7 @@ const OtherSeller = ({
   
 
   // console.log("vendor", vendor);
+  console.log("othervendor", isOtherVendor);
 
   return (
     <>
@@ -327,7 +307,7 @@ const OtherSeller = ({
                     objectFit="contain"
                     className=""
                   />
-                )}
+                  )}
                 <Image
                   src={data.externalSourceImage}
                   alt={vendor}
@@ -335,7 +315,8 @@ const OtherSeller = ({
                   height={50}
                   objectFit="contain"
                   // style={{ height: 35, width: "auto" }}
-                />
+                  />
+                  {data?.listingId==listingId  && isOtherVendor=='Y' &&  <p className="font-Roboto-Semibold opacity-30 py-1 w-64">(This Phone)</p>}
               </div>
             )}
           </div>
