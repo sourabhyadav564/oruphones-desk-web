@@ -2,6 +2,8 @@
 function PriceFilter({ options, router, setPriceRange }) {
   const { min, max } = router.query;
 
+
+
   const handleMinChange = (e) => {
     setPriceRange((prev) => ({ ...prev, min: parseInt(e.target.value) }))
   }

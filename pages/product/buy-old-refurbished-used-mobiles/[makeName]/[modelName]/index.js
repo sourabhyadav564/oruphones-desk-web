@@ -185,7 +185,7 @@ const Products = () => {
         //   setBestDeals((data && data?.dataObject?.bestDeals) || []);
         //   // setProductsData((data && data?.dataObject?.bestDeals) || []);
         // }
-        
+
       };
       if (modelName) {
         fetchData();
@@ -203,7 +203,7 @@ const Products = () => {
         verification,
         priceRange,
       } = applyFilter;
-      
+
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
@@ -235,7 +235,7 @@ const Products = () => {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if (Ram?.length > 0) {  
+        if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
@@ -301,6 +301,7 @@ const Products = () => {
       priceRange,
     } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+      setIsFilterApplied(true);
       if (makeName === "oneplus") {
         makeName = "OnePlus";
       } else {
@@ -333,7 +334,7 @@ const Products = () => {
       }
       if (Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
-    }
+      }
       if (color?.length > 0) {
         payLoad.color = color.includes("all") ? [] : color;
       }
@@ -350,7 +351,7 @@ const Products = () => {
         intialPage,
         applySort
       ).then((response) => {
-        setIsFilterApplied(true);
+
         // if (verification?.length > 0) {
         //   payLoad.verification = verification;
         // }

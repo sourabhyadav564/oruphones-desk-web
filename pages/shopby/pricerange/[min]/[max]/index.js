@@ -264,6 +264,7 @@ const Pricerange = () => {
       maxPrice,
     } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+      setIsFilterApplied(true);
       let payLoad = {
         listingLocation: getSearchLocation,
         // maxsellingPrice: max === "above" ? "200000" : max,
@@ -308,7 +309,7 @@ const Pricerange = () => {
           // if (verification?.length > 0) {
           //   payLoad.verification = verification;
           // }
-          setIsFilterApplied(true);
+
           setOtherListings(response?.dataObject?.otherListings);
           setBestDeal(response?.dataObject?.bestDeals);
           setTotalProducts(response?.dataObject?.totalProducts);

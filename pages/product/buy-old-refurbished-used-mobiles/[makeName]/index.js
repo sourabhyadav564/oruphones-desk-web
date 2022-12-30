@@ -52,65 +52,65 @@ function BrandPage() {
   let brandResult = [];
   let makeName2 = useRecoilValue(makeState);
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-console.log("product", applyFilter);
+  console.log("product", applyFilter);
   const loadData = (intialPage) => {
-    if(!isFilterApplied){
-    const getMakeModel = async () => {
-      brandResult = await getMakeModel(
-        Cookies.get("userUniqueId") || "Guest",
-        Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : ""
-        // makeName2,
-        // "Y"
-      );
-    };
-    // let makemodel=JSON.parse(localStorage.getItem("make_models")!=undefined?localStorage.getItem("make_models"):
-    // await getMakeModel()
-    // );
-    let makemodel;
-    if (localStorage.getItem("make_models") != undefined) {
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+    if (!isFilterApplied) {
+      const getMakeModel = async () => {
+        brandResult = await getMakeModel(
+          Cookies.get("userUniqueId") || "Guest",
+          Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : ""
+          // makeName2,
+          // "Y"
+        );
+      };
+      // let makemodel=JSON.parse(localStorage.getItem("make_models")!=undefined?localStorage.getItem("make_models"):
+      // await getMakeModel()
+      // );
+      let makemodel;
+      if (localStorage.getItem("make_models") != undefined) {
+        if (makeName === "oneplus") {
+          makeName = "OnePlus";
+        } else {
+          makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+        }
+        console.log("local storage", makeName);
+        makemodel = JSON.parse(localStorage.getItem("make_models"));
+        makemodel.map((item) => {
+          if (item.make == makeName) {
+            setTitle(item.make);
+            setDescription(item.make);
+            setshopbymodel(item.models);
+          }
+        })
       }
-      console.log("local storage", makeName);
-      makemodel = JSON.parse(localStorage.getItem("make_models"));
-      makemodel.map((item) => {
-        if (item.make == makeName) {
-          setTitle(item.make);
-          setDescription(item.make);
-          setshopbymodel(item.models);
+      else {
+        if (makeName === "oneplus") {
+          makeName = "OnePlus";
+        } else {
+          makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
         }
-      })
-    }
-    else {
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+        getMakeModel();
+        makemodel = JSON.parse(localStorage.getItem("make_models"));
+        console.log("makemodel : ", makemodel);
+
+        makemodel.map((item) => {
+          if (item.make == makeName) {
+            setTitle(item.make);
+            setDescription(item.make);
+            setshopbymodel(item.models);
+          }
+        })
       }
-       getMakeModel();
-      makemodel = JSON.parse(localStorage.getItem("make_models"));
-      console.log("makemodel : ",makemodel);
-      
-      makemodel.map((item) => {
-        if (item.make == makeName) {
-          setTitle(item.make);
-          setDescription(item.make);
-          setshopbymodel(item.models);
-        }
-      })
+      if (makemodel != undefined) {
+        makemodel.map((item) => {
+          if (item.makeName == makeName2) {
+            setTitle(item.makeName);
+            setDescription(item.makeName);
+            setshopbymodel(item.models);
+          }
+        })
+      }
     }
-    if(makemodel!=undefined){
-      makemodel.map((item)=>{
-        if(item.makeName==makeName2){
-          setTitle(item.makeName);
-          setDescription(item.makeName);
-          setshopbymodel(item.models);
-        }
-      })
-    }
-  }
 
 
     if (makeName && !isFilterApplied) {
@@ -287,7 +287,7 @@ console.log("product", applyFilter);
       if (applyFilter) {
         setIsFilterApplied(true);
         // alert("applyFilter" + applyFilter);
-        const { brand, condition, storage,Ram, warranty, verification, priceRange } = applyFilter;
+        const { brand, condition, storage, Ram, warranty, verification, priceRange } = applyFilter;
         if (Object.keys(applyFilter).some(i => applyFilter[i])) {
           if (makeName === "oneplus") {
             makeName = "OnePlus";
@@ -318,7 +318,7 @@ console.log("product", applyFilter);
           if (storage?.length > 0) {
             payLoad.deviceStorage = storage.includes("all") ? [] : storage;
           }
-          if(Ram?.length > 0) {
+          if (Ram?.length > 0) {
             payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
           }
           // if (color?.length > 0) {
@@ -371,6 +371,7 @@ console.log("product", applyFilter);
   }, [makeName, getSearchLocation, applySort, applyFilter]);
 
   useEffect(() => {
+
     const {
       brand,
       condition,
@@ -382,6 +383,7 @@ console.log("product", applyFilter);
       priceRange,
     } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+      setIsFilterApplied(true);
       if (makeName === "oneplus") {
         makeName = "OnePlus";
       } else {
@@ -411,7 +413,7 @@ console.log("product", applyFilter);
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if(Ram?.length > 0) {
+      if (Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       // if (color?.length > 0) {
@@ -430,7 +432,6 @@ console.log("product", applyFilter);
         intialPage,
         applySort
       ).then((response) => {
-        setIsFilterApplied(true);
         setProducts(response?.dataObject?.otherListings);
         // setBestDeal([]);
         setTotalProducts(
@@ -540,18 +541,18 @@ console.log("product", applyFilter);
             </div>
           )}
 
-        {/* <div className="space-y-2 h-[106px] bg-[#EEEEEE] opacity-bg-40 -mx-4 my-2 px-6 pt-1 items-center">
+          {/* <div className="space-y-2 h-[106px] bg-[#EEEEEE] opacity-bg-40 -mx-4 my-2 px-6 pt-1 items-center">
             <p>Shop By Model</p>
             <ShopByBrandSection
               shopbymodeldata={shopbymodel} location={selectedSearchCity}
             />
           </div>
            */}
-            
+
           {<div className="font-Roboto-Semibold text-xlFontSize">
             <p className="opacity-50">Shop By Model</p>
             <ShopByBrandSection
-              shopbymodeldata={shopbymodel} 
+              shopbymodeldata={shopbymodel}
               shopbymakedata={makeName}
             />
           </div>}

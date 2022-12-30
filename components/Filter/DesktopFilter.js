@@ -13,6 +13,7 @@ import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import RamFilter from "./RamFilter";
 import WarrantyPopup from "../Popup/WarrantyPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
+import { compareDocumentPosition } from "domutils";
 
 const DesktopFilter = ({ setFilters, filterOptions }) => {
   const [selectedBrand, setSelectedBrand] = useState();
@@ -58,8 +59,10 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   }, [selectedVerification]);
 
   useEffect(() => {
-    if (selectedPriceRange && selectedPriceRange.min && selectedPriceRange.max && selectedPriceRange.min < selectedPriceRange.max) {
+    // console.log("selectedPrice", selectedPriceRange, selectedPriceRange?.min, selectedPriceRange?.max, selectedPriceRange?.min < selectedPriceRange?.max);
+    if (selectedPriceRange && selectedPriceRange?.min && selectedPriceRange?.max && selectedPriceRange?.min < selectedPriceRange?.max) {
       setFilters((prev) => ({ ...prev, priceRange: selectedPriceRange }));
+      // console.log("selected price range", selectedPriceRange)
     }
   }, [selectedPriceRange]);
 
@@ -70,7 +73,7 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
       {filterOptions &&
         filterOptions.map((section) =>
           section?.id === "price" ? (
-            <PriceFilter options={section} key={section?.id} setPriceRange={setSelectedPriceRange} router={router} />
+            <PriceFilter options={section} key={section?.id} setPriceRange={setSelectedPriceRange} selected={selectedPriceRange} router={router} />
           ) : section?.id === "brand" ? (
             <BrandFilter options={section} key={section?.id} setter={setSelectedBrand} selected={selectedBrand} router={router} />
           ) : section?.id === "condition" ? (

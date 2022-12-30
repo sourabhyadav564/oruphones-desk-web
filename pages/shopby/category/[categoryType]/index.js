@@ -64,7 +64,7 @@ function CategoryPage() {
         // setPageNumber(pageNumber + 1);
       });
     } else {
-      const { brand, condition, color, storage,Ram, warranty, verification, priceRange } =
+      const { brand, condition, color, storage, Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
@@ -97,7 +97,7 @@ function CategoryPage() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if(Ram?.length > 0){
+        if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
@@ -167,7 +167,7 @@ function CategoryPage() {
         setIsLoadingMore(false);
       });
     } else {
-      const { condition, color, storage,Ram, warranty, verification, priceRange } =
+      const { condition, color, storage, Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
@@ -199,7 +199,7 @@ function CategoryPage() {
         if (storage?.length > 0) {
           payLoad.deviceStorage = storage.includes("all") ? [] : storage;
         }
-        if(Ram?.length > 0){
+        if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
         if (color?.length > 0) {
@@ -223,26 +223,26 @@ function CategoryPage() {
           pageNumber
         ).then((response) => {
           setIsFilterApplied(true);
-        setIsLoadingMore(false);
-        setLoading(false);
-        if (newPages == 0) {
-          setProducts(response?.dataObject?.otherListings);
-        } else {
-          setProducts((products) => [
-            ...products,
-            ...response?.dataObject?.otherListings,
-          ]);
-        }
-        // setBestDeals([]);
-        setTotalProducts(response?.dataObject?.totalProducts);
-        if (newPages == 0) {
-          setBestDeal(response?.dataObject?.bestDeals);
-        } else {
-          setBestDeal((products) => [
-            ...products,
-            ...response?.dataObject?.bestDeals,
-          ]);
-        };
+          setIsLoadingMore(false);
+          setLoading(false);
+          if (newPages == 0) {
+            setProducts(response?.dataObject?.otherListings);
+          } else {
+            setProducts((products) => [
+              ...products,
+              ...response?.dataObject?.otherListings,
+            ]);
+          }
+          // setBestDeals([]);
+          setTotalProducts(response?.dataObject?.totalProducts);
+          if (newPages == 0) {
+            setBestDeal(response?.dataObject?.bestDeals);
+          } else {
+            setBestDeal((products) => [
+              ...products,
+              ...response?.dataObject?.bestDeals,
+            ]);
+          };
         });
       }
     }
@@ -255,9 +255,10 @@ function CategoryPage() {
   }, [categoryType, getSearchLocation, applySort]);
 
   useEffect(() => {
-    const { brand, condition, color, storage,Ram, warranty, verification, priceRange } =
+    const { brand, condition, color, storage, Ram, warranty, verification, priceRange } =
       applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+      setIsFilterApplied(true);
       let payLoad = {
         listingLocation: getSearchLocation,
         make: [],
@@ -281,7 +282,7 @@ function CategoryPage() {
       }
       console.log("router.query.categoryType", router.query.categoryType);
       console.log("condition", condition);
-      if ((condition?.length > 0 && router.query.categoryType != "like new")|| (condition?.length > 0 && router.query.categoryType == "like%20new" )) {
+      if ((condition?.length > 0 && router.query.categoryType != "like new") || (condition?.length > 0 && router.query.categoryType == "like%20new")) {
         payLoad.deviceCondition = condition.includes("all") ? [] : condition;
       } else if (router.query.categoryType == "like new") {
         payLoad.deviceCondition = "Like New";
@@ -289,7 +290,7 @@ function CategoryPage() {
       if (storage?.length > 0) {
         payLoad.deviceStorage = storage.includes("all") ? [] : storage;
       }
-      if(Ram?.length > 0){
+      if (Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
       if (color?.length > 0) {
@@ -305,9 +306,9 @@ function CategoryPage() {
       if (verification?.length > 0 && router.query.categoryType != "verified") {
         payLoad.verified = verification.includes("all") ? "" : "verified";
       } else
-       if (router.query.categoryType === "verified") {
-        payLoad.verified = "verified";
-      }
+        if (router.query.categoryType === "verified") {
+          payLoad.verified = "verified";
+        }
       setLoading(true);
 
       Axios.searchFilter(
@@ -315,7 +316,7 @@ function CategoryPage() {
         Cookies.get("userUniqueId") || "Guest",
         pageNumber
       ).then((response) => {
-        setIsFilterApplied(true);
+
         setIsLoadingMore(false);
         setLoading(false);
         if (newPages == 0) {
