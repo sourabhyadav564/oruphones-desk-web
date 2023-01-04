@@ -88,11 +88,14 @@ function ProductDetailsCard({ data, openFullImage }) {
     // console.log("showLoginPopup",showLoginPopup);
     // console.log("performAction2",performAction2);
     // console.log("Cookies.get(userUniqueId)",Cookies.get("userUniqueId"));
-    if (showLoginPopup == false && performAction2 == true) {
-      // console.log("aa");
-      // if(Cookies.get("userUniqueId")!=undefined)
-      setRequestVerificationSuccessPopup(true);
-    }
+    const interval = setInterval(() => {
+      if (showLoginPopup == false && performAction2 == true && Cookies.get("userUniqueId") != undefined) {
+        // console.log("aa");
+        // if(Cookies.get("userUniqueId")!=undefined)
+        setRequestVerificationSuccessPopup(true);
+        clearInterval(interval);
+      }
+    }, 1000);
   }, [showLoginPopup]);
 
   useEffect(() => {
@@ -280,7 +283,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                               </div>
                               <BsInfoCircle
                                 size={18}
-                                className="ml-1 pt-2"
+                                className="ml-1 pt-2 hover:cursor-pointer"
                                 onClick={() => setOpenInfo(true)}
                               />
                               <div className="pl-3">
@@ -288,25 +291,26 @@ function ProductDetailsCard({ data, openFullImage }) {
                               </div>
                               {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
                             </div>
-                            <div className="flex w-full items-center pr-10 justify-end">
+                            <div className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
+                              onClick={() => {
+                                // console.log("bbb");
+                                // Cookies.get("userUniqueId") === undefined
+                                //   ? () => {
+                                //       setPerformAction2(true);
+                                //       setShowLoginPopup(true);
+                                //     }
+                                //   : setRequestVerificationSuccessPopup(true);
+                                if (Cookies.get("userUniqueId") === undefined) {
+                                  setPerformAction2(true);
+                                  setShowLoginPopup(true);
+                                } else {
+                                  setRequestVerificationSuccessPopup(true);
+                                }
+                              }}
+                            >
                               <span
-                                className="underline font-Roboto-Light text-smallFontSize hover:cursor-pointer"
-                                // onClick={() =>
-                                onClick={() => {
-                                  // console.log("bbb");
-                                  // Cookies.get("userUniqueId") === undefined
-                                  //   ? () => {
-                                  //       setPerformAction2(true);
-                                  //       setShowLoginPopup(true);
-                                  //     }
-                                  //   : setRequestVerificationSuccessPopup(true);
-                                  if (Cookies.get("userUniqueId") === undefined) {
-                                    setPerformAction2(true);
-                                    setShowLoginPopup(true);
-                                  } else {
-                                    setRequestVerificationSuccessPopup(true);
-                                  }
-                                }}
+                                className="underline font-Roboto-Light text-smallFontSize"
+                              // onClick={() =>
                               >
                                 Click here to Request Verification
                               </span>

@@ -48,7 +48,7 @@ function TopDeals({ location }) {
     if (Cookies.get("userUniqueId") != undefined && Cookies.get("userUniqueId") != "" && Cookies.get("userUniqueId") != "Guest") {
       Axios.fetchMyFavorites(Cookies.get("userUniqueId")).then((res) => {
         console.log("userUniqueId", res);
-        setMyFavListings(res.dataObject.map((item2) => item2.listingId));
+        setMyFavListings(res?.dataObject?.map((item2) => item2.listingId));
       });
     }
     if (location != undefined) {

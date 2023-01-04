@@ -12,7 +12,7 @@ const sortOptions = [
   { name: "Featured", href: "#", current: true },
 ];
 
-function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeName,makename }) {
+function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeName, makename }) {
   const { filterOptions } = useFilterOptions();
   const router = useRouter();
   let tempFilters = filterOptions;
@@ -113,35 +113,35 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
         : i
     );
   }
-  
-  console.log('makename : ',makename);
 
-   if(filterOptions && (router.query["makeName"]=="apple" || router.query["makeName"]=="Apple" || makename == "Apple" || makename =="apple")){
+  console.log('makename : ', makename);
+
+  if (filterOptions && (router.query["makeName"] == "apple" || router.query["makeName"] == "Apple" || makename == "Apple" || makename == "apple")) {
     tempFilters = filterOptions.map((i) =>
-    i.id =="Ram"
-    ? {
-      ...i,
-      options: [
-        {
-          value:"All",
-          label:"All",
-          disabled: true,
-          checked:true,
-          active: false,
+      i.id == "Ram"
+        ? {
+          ...i,
+          options: [
+            {
+              value: "All",
+              label: "All",
+              disabled: true,
+              checked: true,
+              active: false,
+            }
+          ],
         }
-      ],
-    }
-    : i
+        : i
     );
   }
-  
+
   // console.log("filterOptions", router.query["makeName"]);
 
   // console.log("filterOptions2", tempFilters);
 
   return (
     <React.Fragment>
-      <div className="flex justify-end items-center ">
+      <div className="flex justify-end items-center hover:cursor-pointer">
         {/* {listingsCount && listingsCount > 0 ? <h1> {listingsCount && `Total listings (${listingsCount || "..."}) `}</h1> : <span></span>} */}
         <Sort sortOptions={sortOptions} setApplySort={setApplySort} filterOptions={tempFilters} />
       </div>

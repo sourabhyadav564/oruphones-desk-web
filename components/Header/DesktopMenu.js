@@ -123,20 +123,20 @@ function DesktopMenu({ menuItems }) {
       </span>
       <span>
         <Popover.Group className=" container hidden lg:flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
-        {menus.map((item, index) =>
-          item && item.options ? (
-            <Popover key={item.name}>
-              {({ open, close }) => (
-                <>
-                  <Popover.Button
-                    className={`${open ? "" : "text-opacity-90"
-                      }text-m-white px-4 opacity-100 font-light `}
-                  >
-                    <Link key={index} href={{ pathname: item.chlink }}>
-                      <span> {item.name} </span>
-                    </Link>
-                  </Popover.Button>
-                  {/* <Transition
+          {menus.map((item, index) =>
+            item && item.options ? (
+              <Popover key={item.name}>
+                {({ open, close }) => (
+                  <>
+                    <Popover.Button
+                      className={`${open ? "" : "text-opacity-90"
+                        }text-m-white px-4 opacity-100 font-light `}
+                    >
+                      <Link key={index} href={{ pathname: item.chlink }}>
+                        <span> {item.name} </span>
+                      </Link>
+                    </Popover.Button>
+                    {/* <Transition
                     as={Fragment}
                     enter="transition ease-out duration-50"
                     enterFrom="opacity-50 translate-y-1"
@@ -215,16 +215,16 @@ function DesktopMenu({ menuItems }) {
                       </div>
                     </Popover.Panel>
                   </Transition> */}
-                </>
-              )}
-            </Popover>
-          ) : (
-            <Link href={item.href} key={item.name} passHref>
-              <a>{item.name}</a>
-            </Link>
-          )
-        )}
-      </Popover.Group>
+                  </>
+                )}
+              </Popover>
+            ) : (
+              <Link href={item.href} key={item.name} passHref>
+                <a className="px-4">{item.name}</a>
+              </Link>
+            )
+          )}
+        </Popover.Group>
       </span>
       <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
     </nav>

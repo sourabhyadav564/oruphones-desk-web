@@ -347,7 +347,7 @@ function Bestdealnearyou() {
         makename={bestDeal[0]?.make}
       >
         {!isLoading && bestDeal && bestDeal.length > 0 && (
-          <Carousel {...settings} className="bestDealCarousel">
+          <Carousel {...settings} className="bestDealCarousel z-0">
             {bestDeal.map((items, index) => (
               <BestDealsCard key={index} data={items} />
             ))}

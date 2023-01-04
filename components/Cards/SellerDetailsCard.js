@@ -103,7 +103,7 @@ function SellerDetailsCard({ data }) {
     useEffect(() => {
         // setShowNumber(false);
         if (!(data?.isOtherVendor === "Y") &&
-            Cookies.get("userUniqueId") !== undefined
+            Cookies.get("userUniqueId") !== undefined && showNumber
         ) {
             Axios.fetchSellerMobileNumber(
                 data?.listingId,
@@ -114,7 +114,7 @@ function SellerDetailsCard({ data }) {
             });
         }
         setOtherSeller(data?.externalSource);
-    }, [data, showNumber]);
+    }, [showNumber]);
 
     const openSellerWebSite = (e) => {
         if (Cookies.get("userUniqueId") === undefined) {
