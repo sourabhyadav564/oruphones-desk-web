@@ -22,7 +22,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import VerificationIcon from "../VerificationIcon";
 import SellerDetailsCard from "./SellerDetailsCard";
 import { deviceConditionQuestion } from "@/utils/constant";
-import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
+import ConditionOptionLarge2 from "../Condition/ConditionOptionLarge2";
 import testpass from "../../assets/testpass.png";
 import testfail from "../../assets/testFail.png";
 import Image from "next/image";
@@ -230,15 +230,15 @@ function ProductDetailsCard({ data, openFullImage }) {
                   </div>
                 </span>
               </div>
-              <div className="py-2 pb-4">
+              <div className="py-6">
                 {(data?.verified && (
                   <Fragment>
                     {/* <VerifiedIcon width={75} height={32} /> */}
                     <div
-                      className="flex m-auto justify-center text-white py-2 rounded-md px-10"
+                      className="flex m-auto justify-center text-white py-0.5 rounded-md px-7"
                       style={{ background: "#4CAF50" }}
                     >
-                      <div className="flex flex-1 space-x-1 ">
+                      <div className="flex flex-1 ">
                         <VerificationIcon className="flex self-center" />
                         <p className="font-Roboto-Regularitalic text-mediumFontSize self-center">
                           Verified
@@ -261,10 +261,10 @@ function ProductDetailsCard({ data, openFullImage }) {
                       {data?.isOtherVendor === "N" && (
                         <div className="w-full  py-2 space-x-2 text-center">
                           <div
-                            className="flex py-2 rounded-md space-x-2 col-span-3 px-10"
+                            className="flex py-2 rounded-md space-x-2 col-span-3"
                             style={{ backgroundColor: "#F9C414" }}
                           >
-                            <div className="flex space-x-1 flex-1">
+                            <div className="flex space-x-1 flex-1 pl-10">
                               {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
                               <div className="flex space-x-2">
                                 <AiFillExclamationCircle
@@ -274,13 +274,21 @@ function ProductDetailsCard({ data, openFullImage }) {
                                 />
                                 {/* <UnVerifiedIcon /> */}
 
-                                <span className="text-xs2FontSize font-Roboto-Regularitalic self-center text-[#000944] italic uppercase">
+                                <span className="text-xs2FontSize font-Roboto-Regularitalic pt-0.5 self-center text-[#000944] italic uppercase">
                                   unverified
                                 </span>
                               </div>
+                              <BsInfoCircle
+                                size={18}
+                                className="ml-1 pt-2"
+                                onClick={() => setOpenInfo(true)}
+                              />
+                              <div className="pl-3">
+                                <div className="bg-gray-100 w-[1px] h-6 "></div>
+                              </div>
                               {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
                             </div>
-                            <p className="flex items-center">
+                            <div className="flex w-full items-center pr-10 justify-end">
                               <span
                                 className="underline font-Roboto-Light text-smallFontSize hover:cursor-pointer"
                                 // onClick={() =>
@@ -302,12 +310,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                               >
                                 Click here to Request Verification
                               </span>
-                              <BsInfoCircle
-                                size={12}
-                                className="ml-1"
-                                onClick={() => setOpenInfo(true)}
-                              />
-                            </p>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -474,11 +477,9 @@ function ProductDetailsCard({ data, openFullImage }) {
                       {data?.cosmetic[index] != undefined && item?.title}
                     </span>
                     {data?.cosmetic[index] != undefined && (
-                      <ConditionOptionLarge
+                      <ConditionOptionLarge2
                         title={data?.cosmetic[index]}
-                        options={
-                          data?.cosmetic[index] && item?.options[0]?.options
-                        }
+                        options={data?.cosmetic[index] && item?.options}
                         conditionResults={data?.cosmetic}
                         questionIndex={index}
                       />

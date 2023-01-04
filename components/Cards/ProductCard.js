@@ -12,14 +12,13 @@ import { useState } from "react";
 
 function ProductCard({ data, prodLink, setProducts }) {
   var type = ["old phone", "used", "refurbished"];
-  const soldout = ` buy ${type[Math.floor(Math.random() * type.length)]} ${
-    data?.marketingName
-  } ${data?.deviceStorage} ${data?.deviceCondition} soldout`.toLowerCase();
+  const soldout = ` buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
+    } ${data?.deviceStorage} ${data?.deviceCondition} soldout`.toLowerCase();
   const [imageError, setImageError] = useState(false);
   return (
     <div
-    data-aos="fade-up">
-      <span className="absolute pl-[250px] flex z-10 justify-between pt-2  w-full">
+      data-aos="fade-up">
+      <span className="absolute pl-[250px] flex z-10 justify-between pt-2 w-full">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}
@@ -30,7 +29,7 @@ function ProductCard({ data, prodLink, setProducts }) {
         )}
       </span>
       <div
-      className="hover:cursor-pointer"
+        className="hover:cursor-pointer"
         onClick={() =>
           window.open(
             `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${data?.isOtherVendor}`,
@@ -48,7 +47,7 @@ function ProductCard({ data, prodLink, setProducts }) {
         <a>
           <div
             className="w-full h-full rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
-           
+
             style={{ boxShadow: "2px 2px 10px #00000029", padding: " 0 10px" }}
           >
             <div
@@ -83,23 +82,21 @@ function ProductCard({ data, prodLink, setProducts }) {
                   imageError
                     ? Logo
                     : data?.imagePath ||
-                      data?.defaultImage?.fullImage ||
-                      data?.images[0]?.fullImage ||
-                      Logo
+                    data?.defaultImage?.fullImage ||
+                    data?.images[0]?.fullImage ||
+                    Logo
                 }
                 src={
                   imageError
                     ? Logo
                     : data?.imagePath ||
-                      data?.defaultImage?.fullImage ||
-                      data?.images[0]?.fullImage ||
-                      Logo
+                    data?.defaultImage?.fullImage ||
+                    data?.images[0]?.fullImage ||
+                    Logo
                 }
-                alt={`buy ${type[Math.floor(Math.random() * type.length)]} ${
-                  data?.marketingName
-                } ${data?.deviceStorage} ${
-                  data?.deviceCondition
-                }`.toLowerCase()}
+                alt={`buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
+                  } ${data?.deviceStorage} ${data?.deviceCondition
+                  }`.toLowerCase()}
                 // src={imageError ? Logo : img?.fullImage}
                 onError={() => setImageError(true)}
                 width={150}

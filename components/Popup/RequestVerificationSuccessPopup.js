@@ -81,7 +81,7 @@ function RequestVerificationSuccessPopup({ open, setOpen, data }) {
                 )}
                 <div className="mb-2 mt-4 font-Roboto-Regular">
                     <button
-                        className="bg-m-green  w-32 px-4 py-2 rounded text-white"
+                        className="bg-m-green w-32 px-4 py-2 rounded text-white"
                         onClick={(e) => {
                             setOpen(false);
                         }}

@@ -3,12 +3,13 @@ import Link from "next/link";
 import { BiRupee } from "react-icons/bi";
 import { numberWithCommas } from "../../utils/util";
 import Logo from "@/assets/oru_phones_logo.png"
+import { useState } from "react";
 
 function TopSellingCard({ data }) {
-
+  const [imageError, setImageError] = useState(false);
   var type = ["old phone", "used", "refurbished"]
   const alternate_text = (`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} like new `).toLowerCase()
-  
+
   console.log("models : ", alternate_text);
   if (data?.name?.toLowerCase().includes("all")) {
     return (
@@ -31,12 +32,13 @@ function TopSellingCard({ data }) {
               <Image
                 loading="lazy"
                 priority={false}
-                blurDataURL={data?.imagePath || Logo}
+                onError={() => setImageError(true)}
+                blurDataURL={imageError ? Logo : data?.imagePath || Logo}
                 placeholder="blur"
-                src={data?.imagePath || Logo} 
-                alt={alternate_text} 
-                width={150} 
-                height={150} 
+                src={imageError ? Logo : data?.imagePath || Logo}
+                alt={alternate_text}
+                width={150}
+                height={150}
                 objectFit="contain" />
             </div>
             <div className="flex-wrap w-full">

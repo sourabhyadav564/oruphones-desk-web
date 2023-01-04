@@ -5,7 +5,7 @@ import testpass from "../../assets/testpass.png";
 import testfail from "../../assets/testFail.png";
 import pass from "../../assets/pass1.png";
 import { deviceConditionQuestion } from "@/utils/constant";
-import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
+import ConditionOptionLarge2 from "../Condition/ConditionOptionLarge2";
 import { useState } from "react";
 
 function DeviceVerificationReport({ open, setOpen, data }) {
@@ -84,7 +84,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
                   <div>
                     <span className="text-lg font-semibold text-black">{data?.cosmetic[index] != undefined && item?.title}</span>
                     {data?.cosmetic[index] != undefined &&
-                      <ConditionOptionLarge
+                      <ConditionOptionLarge2
                         title={data?.cosmetic[index]}
                         options={data?.cosmetic[index] && item?.options[0]?.options}
                         conditionResults={data?.cosmetic}
