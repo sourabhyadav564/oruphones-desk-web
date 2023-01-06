@@ -31,6 +31,7 @@ import { useEffect } from "react";
 import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 import * as Axios from "../../api/axios";
+import ComparisonTable from "../Table/ComparisonTable";
 
 function ProductDetailsCard({ data, openFullImage }) {
   const [performAction2, setPerformAction2] = useState(false);
@@ -462,6 +463,11 @@ function ProductDetailsCard({ data, openFullImage }) {
           </div>
         </div>
         <div>
+          <div>
+          <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">Detailed Comparison Between Other Sellers</p>
+          <div className="bg-gray-600 h-1 border-2 border-white"></div>
+            <ComparisonTable data={data.externalSource}/>
+          </div>
           <div className="">
             {data && data?.cosmetic && (
               <>
