@@ -740,7 +740,7 @@ export function fetchMyFavorites(userUniqueId) {
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
-      console.log("response data : ",response.data);
+      console.log("response data : ", response.data);
       localStorage.setItem("favoriteList", response.data.dataObject.map((item) => item.listingId));
       return response.data;
     },
@@ -933,6 +933,21 @@ export function markAsRead(notificationId) {
   headers = { ...headers, eventName: "NOTIFICATION_SELECTED" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/notification/read/` + notificationId;
+  return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
+    (response) => {
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export function deleteNotification(notificationId, userUniqueId) {
+  headers = { ...headers, eventName: "NOTIFICATION_REMOVED" };
+  const DEFAULT_HEADER = { headers: { ...headers } };
+  const API_ENDPOINT =
+    BASE_URL + `/notification/remove?id=` + notificationId + "&userUniqueId=" + userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;

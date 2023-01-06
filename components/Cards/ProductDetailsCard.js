@@ -244,9 +244,17 @@ function ProductDetailsCard({ data, openFullImage }) {
                     >
                       <div className="flex flex-1 ">
                         <VerificationIcon className="flex self-center" />
-                        <p className="font-Roboto-Regularitalic text-mediumFontSize self-center">
+                        <p className="font-Roboto-Regularitalic text-mediumFontSize self-center pr-1">
                           Verified
                         </p>
+                        <BsInfoCircle
+                          size={12}
+                          className="ml-2 mt-3 hover:cursor-pointer"
+                          onClick={() => setOpenInfo(true)}
+                        />
+                        <div className="pl-3 pt-2">
+                          <div className="bg-gray-100 w-[0.5px] h-6 "></div>
+                        </div>
                       </div>
                       <div className="m-auto justify-center font-Roboto-Light text-smallFontSize">
                         <p>This phone is verified by ORUphones</p>
@@ -278,17 +286,17 @@ function ProductDetailsCard({ data, openFullImage }) {
                                 />
                                 {/* <UnVerifiedIcon /> */}
 
-                                <span className="text-xs2FontSize font-Roboto-Regularitalic pt-0.5 self-center text-[#000944] italic uppercase">
+                                <span className="text-xs2FontSize font-Roboto-Regularitalic pr-1.5 pt-0.5 self-center text-[#000944] italic uppercase">
                                   unverified
                                 </span>
                               </div>
                               <BsInfoCircle
-                                size={18}
-                                className="ml-1 pt-2 hover:cursor-pointer"
+                                size={12}
+                                className="ml-2 mt-1.5 hover:cursor-pointer"
                                 onClick={() => setOpenInfo(true)}
                               />
                               <div className="pl-3">
-                                <div className="bg-gray-100 w-[1px] h-6 "></div>
+                                <div className="bg-gray-100 w-[0.5px] h-6 "></div>
                               </div>
                               {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
                             </div>
@@ -538,6 +546,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             </div>
           </div>
         </div>
+        <ComparisonTable />
       </div>
       <DeviceVerificationReport
         open={openDeviceReport}
