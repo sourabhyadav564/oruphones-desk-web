@@ -7,14 +7,6 @@ import mob from "@/assets/logo_square.svg";
 import { deleteNotification, getAllNotificationByUserd, markAsRead } from "api/axios";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 import Cookies from "js-cookie";
-import {
-  LeadingActions,
-  SwipeableList,
-  SwipeableListItem,
-  SwipeAction,
-  TrailingActions,
-} from 'react-swipeable-list';
-import 'react-swipeable-list/dist/styles.css';
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 export default function Notifications() {
