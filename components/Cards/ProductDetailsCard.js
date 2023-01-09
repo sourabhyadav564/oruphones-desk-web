@@ -46,7 +46,6 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [resData, setResData] = useState([]);
   const [listingid, setListingid] = useState(data?.listingId);
 
-
   const [deviceListingInfo, setDeviceListingInfo] = useState(data);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const myRef = useRef(null);
@@ -55,14 +54,14 @@ function ProductDetailsCard({ data, openFullImage }) {
     data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
       ? 5
       : data?.deviceCondition?.toLowerCase() == "Excellent".toLowerCase()
-        ? 4
-        : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
-          ? 3
-          : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
-            ? 2
-            : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
-              ? 1
-              : 5;
+      ? 4
+      : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
+      ? 3
+      : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
+      ? 2
+      : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
+      ? 1
+      : 5;
   let iconToShow = (index) => {
     if (index < filled) {
       return <BsStarFill className="text-yellow-400" />;
@@ -90,7 +89,11 @@ function ProductDetailsCard({ data, openFullImage }) {
     // console.log("performAction2",performAction2);
     // console.log("Cookies.get(userUniqueId)",Cookies.get("userUniqueId"));
     const interval = setInterval(() => {
-      if (showLoginPopup == false && performAction2 == true && Cookies.get("userUniqueId") != undefined) {
+      if (
+        showLoginPopup == false &&
+        performAction2 == true &&
+        Cookies.get("userUniqueId") != undefined
+      ) {
         // console.log("aa");
         // if(Cookies.get("userUniqueId")!=undefined)
         setRequestVerificationSuccessPopup(true);
@@ -113,8 +116,6 @@ function ProductDetailsCard({ data, openFullImage }) {
       });
     }
   }, [openRequestVerificationSuccessPopup]);
-
-
 
   return (
     <Fragment>
@@ -202,9 +203,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             )) || <span className="h-5 block"></span>} */}
               {/* <p className="block text-base text-m-grey-2">List price</p> */}
               <div className="flex flex-row justify-between">
-                <p
-                  className="font-Roboto-Bold text-xl4FontSize flex items-center -ml-1 text-green2"
-                >
+                <p className="font-Roboto-Bold text-xl4FontSize flex items-center -ml-1 text-green2">
                   {data?.listingPrice && <BiRupee />}{" "}
                   {numberWithCommas(data?.listingPrice || "")}
                 </p>
@@ -218,7 +217,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                   <div className="m-auto justify-center">
                     <span
                       className="font-Roboto-Light text-bx opacity-100 text-[#000] flex leading-tight items-center"
-                    // onClick={() => setOpenConditionInfo(true)}
+                      // onClick={() => setOpenConditionInfo(true)}
                     >
                       Condition{" "}
                     </span>
@@ -227,7 +226,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                     </div>
                   </div>
                   <div className="flex text-bx space-x-[2.5px] m-auto justify-center ">
-                    { }
+                    {}
                     {Array(5)
                       .fill()
                       .map((_, index) => iconToShow(index))}
@@ -268,66 +267,67 @@ function ProductDetailsCard({ data, openFullImage }) {
                   </span> */}
                   </Fragment>
                 )) || (
-                    <Fragment>
-                      {/* <UnVerifiedIcon width={75} height={32} /> */}
-                      {data?.isOtherVendor === "N" && (
-                        <div className="w-full  py-2 space-x-2 text-center">
-                          <div
-                            className="flex py-2 rounded-md space-x-2 col-span-3"
-                            style={{ backgroundColor: "#F9C414" }}
-                          >
-                            <div className="flex space-x-1 flex-1 pl-10">
-                              {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
-                              <div className="flex space-x-2">
-                                <AiFillExclamationCircle
-                                  size={20}
-                                  fill="white"
-                                  className="self-center text-black"
-                                />
-                                {/* <UnVerifiedIcon /> */}
-
-                                <span className="text-xs2FontSize font-Roboto-Regularitalic pr-1.5 pt-0.5 self-center text-[#000944] italic uppercase">
-                                  unverified
-                                </span>
-                              </div>
-                              <BsInfoCircle
-                                size={12}
-                                className="ml-2 mt-1.5 hover:cursor-pointer"
-                                onClick={() => setOpenInfo(true)}
+                  <Fragment>
+                    {/* <UnVerifiedIcon width={75} height={32} /> */}
+                    {data?.isOtherVendor === "N" && (
+                      <div className="w-full  py-2 space-x-2 text-center">
+                        <div
+                          className="flex py-2 rounded-md space-x-2 col-span-3"
+                          style={{ backgroundColor: "#F9C414" }}
+                        >
+                          <div className="flex space-x-1 flex-1 pl-10">
+                            {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
+                            <div className="flex space-x-2">
+                              <AiFillExclamationCircle
+                                size={20}
+                                fill="white"
+                                className="self-center text-black"
                               />
-                              <div className="pl-3">
-                                <div className="bg-gray-100 w-[0.5px] h-6 "></div>
-                              </div>
-                              {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
-                            </div>
-                            <div className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
-                              onClick={() => {
-                                // console.log("bbb");
-                                // Cookies.get("userUniqueId") === undefined
-                                //   ? () => {
-                                //       setPerformAction2(true);
-                                //       setShowLoginPopup(true);
-                                //     }
-                                //   : setRequestVerificationSuccessPopup(true);
-                                if (Cookies.get("userUniqueId") === undefined) {
-                                  setPerformAction2(true);
-                                  setShowLoginPopup(true);
-                                } else {
-                                  setRequestVerificationSuccessPopup(true);
-                                }
-                              }}
-                            >
-                              <span
-                                className="underline font-Roboto-Light text-smallFontSize"
-                              // onClick={() =>
-                              >
-                                Click here to Request Verification
+                              {/* <UnVerifiedIcon /> */}
+
+                              <span className="text-xs2FontSize font-Roboto-Regularitalic pt-0.5 self-center text-[#000944] italic uppercase">
+                                unverified
                               </span>
                             </div>
+                            <BsInfoCircle
+                              size={18}
+                              className="ml-1 pt-2 hover:cursor-pointer"
+                              onClick={() => setOpenInfo(true)}
+                            />
+                            <div className="pl-3">
+                              <div className="bg-gray-100 w-[1px] h-6 "></div>
+                            </div>
+                            {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
+                          </div>
+                          <div
+                            className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
+                            onClick={() => {
+                              // console.log("bbb");
+                              // Cookies.get("userUniqueId") === undefined
+                              //   ? () => {
+                              //       setPerformAction2(true);
+                              //       setShowLoginPopup(true);
+                              //     }
+                              //   : setRequestVerificationSuccessPopup(true);
+                              if (Cookies.get("userUniqueId") === undefined) {
+                                setPerformAction2(true);
+                                setShowLoginPopup(true);
+                              } else {
+                                setRequestVerificationSuccessPopup(true);
+                              }
+                            }}
+                          >
+                            <span
+                              className="underline font-Roboto-Light text-smallFontSize"
+                              // onClick={() =>
+                            >
+                              Click here to Request Verification
+                            </span>
                           </div>
                         </div>
-                      )}
-                      {/* <p className="flex items-center">
+                      </div>
+                    )}
+                    {/* <p className="flex items-center">
                     <span
                       className="underline text-xs"
                       onClick={() =>
@@ -343,8 +343,8 @@ function ProductDetailsCard({ data, openFullImage }) {
                       onClick={() => setOpenVerificationInfo(true)}
                     />
                   </p> */}
-                    </Fragment>
-                  )}
+                  </Fragment>
+                )}
               </div>
             </div>
             <div className="flex font-Roboto-Light text-mediumFontSize text-black mb-1">
@@ -472,9 +472,32 @@ function ProductDetailsCard({ data, openFullImage }) {
         </div>
         <div>
           <div>
-          <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">Detailed Comparison Between Other Sellers</p>
-          <div className="bg-gray-600 h-1 border-2 border-white"></div>
-            <ComparisonTable data={data.externalSource}/>
+            <p className="text-xlFontSize pt-6 pr-2 text-black-20 font-Roboto-bold font-bold capitalize mb-2">
+              Detailed Comparison Between Other Sellers
+            </p>
+            <div className="bg-gray-600 h-1 border-2 border-white "></div>
+            <div className="pt-2 font-Roboto-Bold text-m-green-1 text-2xl flex flex-row">
+              {data?.marketingName+"  ("}
+              {data?.make != "Apple" && 
+                  (data?.deviceRam+" / ") 
+              }  
+                {data?.deviceStorage+ ") - "} 
+                {data?.deviceCondition}
+            </div>
+            {/* <div className="flex flex-row"> */}
+              {/* {data?.make != "Apple" && (
+                <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
+                  Ram : {data?.deviceRam}
+                </div>
+              )} */}
+              {/* <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
+                Storage : {data?.deviceStorage}
+              </div> */}
+              {/* <div className="text-m-green-1 font-Roboto-Bold text-sm">
+                Condition : {data?.deviceCondition}
+              </div> */}
+            {/* </div> */}
+            <ComparisonTable data={data.externalSource} />
           </div>
           <div className="">
             {data && data?.cosmetic && (

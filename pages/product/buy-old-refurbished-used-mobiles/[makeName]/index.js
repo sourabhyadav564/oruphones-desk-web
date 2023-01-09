@@ -70,7 +70,11 @@ function BrandPage() {
       if (localStorage.getItem("make_models") != undefined) {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
-        } else {
+        } else if (makeName === "lg") {
+          makeName = "LG";
+        } else if(makeName === 'htc'){makeName="HTC"} 
+        else if(makeName==='zte'){makeName="ZTE"}
+         else {
           makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
         }
         console.log("local storage", makeName);

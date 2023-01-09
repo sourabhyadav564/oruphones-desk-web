@@ -1,6 +1,13 @@
+import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { BsInfoCircle } from "react-icons/bs";
+import { FaGreaterThan } from "react-icons/fa";
+import LoginPopup from "../Popup/LoginPopup";
+import ThisPhonePopup from "../Popup/ThisPhonePopup";
+import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
+import WarrantyInfo from "../Popup/WarrantyInfo";
 
 function ComparisonTable(data) {
   console.log("data prod", data);
@@ -14,6 +21,35 @@ function ComparisonTable(data) {
       }, 1000);
     }
   }, []);
+
+  const [performAction2, setperformAction2] = useState(false);
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  const [productLink, setProductLink] = useState("");
+  const [thisPhonePopup, setThisPhonePopup] = useState(false);
+  const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
+  const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+
+      if (
+        openLoginPopup == false &&
+        performAction2 == true &&
+        Cookies.get("userUniqueId") !== undefined &&
+        data?.productLink !== "" &&
+        productLink !== ""
+        ) {
+          window.open(productLink, "_blank");
+          clearInterval(interval);}
+        else if( openLoginPopup == false &&
+          performAction2 == true &&
+          Cookies.get("userUniqueId") !== undefined &&
+          productLink == ""){
+            setThisPhonePopup(true);
+            clearInterval(interval);
+          }
+      } , 1000);
+  }, [openLoginPopup]);
 
   return (
     <>
@@ -36,14 +72,21 @@ function ComparisonTable(data) {
               <th
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center"
-              >
-                Brand Warranty
+                onClick={()=>setOpenWarrantyInfo(true)}>
+              
+               <div className="flex justify-center items-center hover:cursor-pointer" >
+                <p className="">Brand Warranty</p>
+                <BsInfoCircle size={14} classname=""/>
+                </div>
               </th>
               <th
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center"
               >
-                Seller Warranty
+                <div className="flex justify-center items-center hover:cursor-pointer" onClick={()=>setOpenWarrantyInfo(true)}>
+                <p className="">Seller Warranty</p>
+                <BsInfoCircle size={14}/>
+                </div>
               </th>
               <th
                 scope="col"
@@ -61,7 +104,10 @@ function ComparisonTable(data) {
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center"
               >
-                ORU Verified
+                <div className="flex justify-center items-center hover:cursor-pointer" onClick={()=>setOpenVerificationInfo(true)}>
+                <p className="pr-1">Oru Verified</p>
+                <BsInfoCircle size={14} classname="pl-1"/>
+                </div>
               </th>
             </tr>
           </thead>
@@ -74,17 +120,38 @@ function ComparisonTable(data) {
                       scope="row"
                       class="px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white  bg-white drop-shadow-xl  border-[1px]"
                     >
+                      <div className="flex justify-between hover:cursor-pointer" onClick={() => {
+                      if (Cookies.get("userUniqueId") == undefined) {
+                        setOpenLoginPopup(true);
+                        setProductLink(item?.productLink);
+                        setperformAction2(true);
+                      } else if (
+                        item?.externalSourceImage !=
+                        "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png"
+                      )
+                        window.open(item?.productLink, "_blank");
+                      else if (
+                        item?.externalSourceImage ==
+                        "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png"
+                      ) {
+                        setThisPhonePopup(true);
+                      }
+                    }}>
+
                       {item?.userName &&
                       item?.externalSourceImage !=
-                        "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? (
+                      "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? (
                         item?.userName
                       ) : (
                         <Image
-                          src={item?.externalSourceImage}
+                        src={item?.externalSourceImage}
                           height={30}
                           width={70}
-                        />
-                      )}
+                          />
+                          )}
+                      <FaGreaterThan size={18} className="pt-1.5" />
+                      </div>
+                    
                     </th>
                     <td class="px-6 py-4 border-[1px] ">
                       {item?.externalSourcePrice}
@@ -166,6 +233,21 @@ function ComparisonTable(data) {
           </tbody>
         </table>
       </div>
+      {openWarrantyInfo && (
+        <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
+      )}
+      {openVerificationInfo && (
+        <VerifiedInfoPopup
+          open={openVerificationInfo}
+          setOpen={setOpenVerificationInfo}
+        />
+      )}
+        <ThisPhonePopup open={thisPhonePopup} setOpen={setThisPhonePopup}/>
+        <LoginPopup
+        open={openLoginPopup}
+        setOpen={setOpenLoginPopup}
+        fromAddListing
+      />
     </>
   );
 }
