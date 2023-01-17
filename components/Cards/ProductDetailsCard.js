@@ -471,20 +471,26 @@ function ProductDetailsCard({ data, openFullImage }) {
           </div>
         </div>
         <div>
-          <div>
-            <p className="text-xlFontSize pt-6 pr-2 text-black-20 font-Roboto-bold font-bold capitalize mb-2">
-              Detailed Comparison Between Other Sellers
-            </p>
-            <div className="bg-gray-600 h-1 border-2 border-white "></div>
-            <div className="pt-2 font-Roboto-Bold text-m-green-1 text-2xl flex flex-row">
-              {data?.marketingName+"  ("}
-              {data?.make != "Apple" && 
-                  (data?.deviceRam+" / ") 
-              }  
-                {data?.deviceStorage+ ") - "} 
-                {data?.deviceCondition}
-            </div>
-            {/* <div className="flex flex-row"> */}
+          {data?.externalSource && data?.externalSource?.length > 0 && (
+            <div>
+              <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light  capitalize mb-2">
+                Detailed Comparison Between Other Sellers
+              </p>
+              <div className="bg-gray-600 h-1 border-2 border-white "></div>
+              <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row">
+                {data?.marketingName + "  ("}
+                {data?.make != "Apple" && data?.deviceRam + " / "}
+                {data?.deviceStorage + ") - "}
+                Condition: {data?.deviceCondition}
+              </div>
+              <div className="flex">
+                <span className="text-smallFontSize font-Roboto-light">
+                  *The products compared here are either used mobile phones,
+                  refurbished/renewed smartphone or second hand mobile phones.
+                  These are not new phones.
+                </span>
+              </div>
+              {/* <div className="flex flex-row"> */}
               {/* {data?.make != "Apple" && (
                 <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
                   Ram : {data?.deviceRam}
@@ -496,9 +502,10 @@ function ProductDetailsCard({ data, openFullImage }) {
               {/* <div className="text-m-green-1 font-Roboto-Bold text-sm">
                 Condition : {data?.deviceCondition}
               </div> */}
-            {/* </div> */}
-            <ComparisonTable data={data.externalSource} />
-          </div>
+              {/* </div> */}
+              {<ComparisonTable data={data.externalSource} />}
+            </div>
+          )}
           <div className="">
             {data && data?.cosmetic && (
               <>

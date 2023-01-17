@@ -263,7 +263,7 @@ const OtherSeller = ({
                     }
                 } >
                 <div className="flex flex-col justify-center items-start" > { /* <span className="text-xs text-m-grey-2">Seller</span> */}
-                    <div className="my-1 w-28 flex" > { /* {console.log("rnak",index)} */}
+                    <div className="my-1 w-64 flex" > { /* {console.log("rnak",index)} */}
                         {data.externalSourceImage && (
                             <div className="flex flex-row gap-2" >
                                 {index < 3 && (<Image src={

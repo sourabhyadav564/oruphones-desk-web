@@ -53,8 +53,8 @@ function ShopByModelCard({
             placeholder="blur"
             priority={false}
             unoptimized={false}
-            blurDataURL={imageError ? fallBackSrc : src}
-            src={imageError ? fallBackSrc : src}
+            blurDataURL={imageError ? fallBackSrc : src || Logo}
+            src={imageError ? fallBackSrc : src || Logo}
             alt={alt}
             onError={() => setImageError(true)}
             width="40"

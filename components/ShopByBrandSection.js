@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import ShopByModelCard from "./Cards/ShopByModelCard";
 // import BasicCarousel from "./Carousel/BasicCarousel";
 import Carousel from "./Carousel";
+import { getDefaultImage } from "@/utils/util";
 
 const settings = {
     slidesToShow: 3,
@@ -30,7 +31,8 @@ function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, inde
                     <SwiperSlide key={item?.make}>
                         <ShopByModelCard
                             data={item.marketingname}
-                            src={`https://zenrodeviceimages.s3.us-west-2.amazonaws.com/allModelsImg/${item?.marketingname?.toString().toLowerCase().replaceAll(" ", "_")}.jpg`}
+                            // src={`https://zenrodeviceimages.s3.us-west-2.amazonaws.com/allModelsImg/${item?.marketingname?.toString().toLowerCase().replaceAll(" ", "_")}.jpg`}
+                            src={getDefaultImage(item?.marketingname)}
                             // alt={data?.models?.model_name}
                             // location={location}
                             make={shopbymakedata}

@@ -77,11 +77,11 @@ export default function Notifications() {
           className="text-m-green cursor-pointer mx-1"
           onClick={() => setShowNotification((prev) => !prev)}
         />
-        {/* {(
-          <span className="absolute top-1 ml-5 bg-white text-smallFontSize font-Roboto-Semibold text-m-green rounded-full flex items-center justify-center">
+        {(
+          <span className="absolute top-1 ml-5 bg-yellow2 w-6 text-smallFontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
             {unreadNotificationsCount}
           </span>
-        )} */}
+        )}
       </div>
 
       <div
@@ -93,9 +93,11 @@ export default function Notifications() {
             <div className="h-7 w-7 relative bg-white rotate-45 transform origin-bottom-left"></div>
           </div>
           <div className="-mt-1 flex flex-col w-96 h-72 overflow-hidden overflow-y-auto rounded-md shadow-md pb-2 border-t-4 border-transparent bg-white">
-            <p className="text-center text-xlFontSize pt-4 pb-3 font-Roboto-Semibold text-m-grey-1 h-auto">
+            <p className="text-center text-xlFontSize pt-4 pb-3 font-Roboto-Semibold text-m-grey-1 h-auto ">
               Notification
             </p>
+            <div className="py-[0.5px] bg-gray-700 mx-1"></div>
+            
             {notifications && notifications.length > 0 ? (
               notifications.map((items, index) => (
                 <NotificationsItem
@@ -110,7 +112,7 @@ export default function Notifications() {
                 />
               ))
             ) : (
-              <div className="text-regularFontSize font-Roboto-Regular">No notifications</div>
+              <div className="uppercase text-regularFontSize font-Roboto-Bold flex justify-center items-center text-center h-full w-full">No notifications</div>
             )}
           </div>
         </div>

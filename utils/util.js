@@ -1,4 +1,5 @@
 import moment from "moment";
+import { deviceDefaultImage } from "./constant";
 
 // export function numberWithCommas(x) {
 //   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -25,6 +26,12 @@ export const ENV = {
   },
   MENULISTSECRETKEY: 'DSJDGJLGFJLGADUEJMBNBDSHULFBFNBHJGXY',
 };
+
+export function getDefaultImage(data)
+{
+  data=data?.toString().toLowerCase().replace('+','plus');
+  return deviceDefaultImage[data];
+}
 
 export function numberFromString(x) {
   return x?.replace(/[^0-9]/g, "");

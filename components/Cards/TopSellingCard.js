@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BiRupee } from "react-icons/bi";
-import { numberWithCommas } from "../../utils/util";
+import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import Logo from "@/assets/oru_phones_logo.png"
 import { useState } from "react";
 
@@ -33,9 +33,9 @@ function TopSellingCard({ data }) {
                 loading="lazy"
                 priority={false}
                 onError={() => setImageError(true)}
-                blurDataURL={imageError ? Logo : data?.imagePath || Logo}
+                blurDataURL={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
                 placeholder="blur"
-                src={imageError ? Logo : data?.imagePath || Logo}
+                src={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
                 alt={alternate_text}
                 width={150}
                 height={150}

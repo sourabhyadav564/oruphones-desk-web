@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaRupeeSign } from "react-icons/fa";
-import { numberWithCommas } from "../../utils/util";
+import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import LabelAndValue from "../LabelAndValue";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
@@ -152,13 +152,13 @@ function BestDealsCard({ data, setProducts }) {
           <Image
             loading="lazy"
             priority={false}
-            blurDataURL={imageError ? Logo : data?.imagePath || Logo}
+            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
             placeholder="blur"
             className="flex rounded-[20px]"
             width={140}
             height={190}
             // src={data?.imagePath || Logo}
-            src={imageError ? Logo : data?.imagePath || Logo}
+            src={imageError ? getDefaultImage(data?.marketingName) ||  Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
             onError={() => setImageError(true)}
             objectFit="contain"
             alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}

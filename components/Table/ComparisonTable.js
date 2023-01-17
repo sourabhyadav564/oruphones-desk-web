@@ -1,3 +1,4 @@
+import { numberWithCommas } from "@/utils/util";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -53,7 +54,7 @@ function ComparisonTable(data) {
 
   return (
     <>
-      <div class="relative pt-3 w-full">
+      {productData && productData?.length>0 && <div class="relative pt-3 w-full">
         <table class="w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
           <thead class=" uppercase text-white dark:bg-gray-700 dark:text-gray-400 font-Roboto-Semibold">
             <tr>
@@ -115,10 +116,10 @@ function ComparisonTable(data) {
             {productData &&
               productData?.map((item) => {
                 return (
-                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center">
+                  <tr class={item?.externalSourceImage == "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? `bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center` : `bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white  bg-white drop-shadow-xl  border-[1px]"
+                      class={item?.externalSourceImage == "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
                     >
                       <div className="flex justify-between hover:cursor-pointer" onClick={() => {
                       if (Cookies.get("userUniqueId") == undefined) {
@@ -141,35 +142,38 @@ function ComparisonTable(data) {
                       {item?.userName &&
                       item?.externalSourceImage !=
                       "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? (
-                        item?.userName
+                        <div className="filter brightness-50 invert-1 object-contain">{item?.userName}
+                        </div>
                       ) : (
                         <Image
                         src={item?.externalSourceImage}
-                          height={30}
+                          height={35}
                           width={70}
+                          className={item?.externalSourceImage !=
+                            "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? `filter brightness-50 invert-1 object-contain` : `object-contain`} 
                           />
                           )}
-                      <FaGreaterThan size={18} className="pt-1.5" />
+                      {/* <FaGreaterThan size={18} className="pt-1.5" /> */}
                       </div>
                     
                     </th>
-                    <td class="px-6 py-4 border-[1px] ">
-                      {item?.externalSourcePrice}
+                    <td class="px-2 py-4 border-[1px] text-yellow2 font-Roboto-Semibold">
+                      ₹ {numberWithCommas(item?.externalSourcePrice)}
                     </td>
                     <td class="px-6 py-4  border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
                         ? item?.Object?.warranty
-                        : "Not Applicable"}
+                        : "None"}
                     </td>
                     <td class="px-6 py-4  border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
-                        ? "Not Applicable"
+                        ? "None"
                         : "6 months"}
                     </td>
                     <td class="px-6 py-4 border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
-                        ? "Not Applicable"
-                        : "Charger, Original Box"}
+                        ? "None"
+                        : "Phone Charger, Phone Box"}
                     </td>
                     <td class="px-6 py-4 border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
@@ -188,14 +192,14 @@ function ComparisonTable(data) {
                           : item?.Object?.originalbox == "Y"
                           ? "Original Box"
                           : "Not Available"
-                        : "Not Applicable"}
+                        : "None"}
                     </td>
                     <td class="px-6 py-4 border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
                         ? item?.Object?.verified
                           ? "Yes"
                           : "No"
-                        : "Not Applicable"}
+                        : "None"}
                     </td>
                   </tr>
                 );
@@ -232,7 +236,7 @@ function ComparisonTable(data) {
             </tr> */}
           </tbody>
         </table>
-      </div>
+      </div>}
       {openWarrantyInfo && (
         <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
       )}

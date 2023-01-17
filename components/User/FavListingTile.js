@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
 import { useState, useEffect, useCallback } from "react";
-import { numberWithCommas } from "../../utils/util";
+import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import IconLabelValue from "./IconLableValue";
 import verifiedIcon from "../../assets/verified.svg";
 import unVerifiedIcon from "../../assets/unverified.svg";
@@ -69,7 +69,7 @@ function FavListingTile({ data, setProducts }) {
             <Image
               // src={frontImagePath || Logo}
               alt={data?.marketingName}
-              src={imageError ? Logo : frontImage || Logo}
+              src={imageError ? Logo : frontImage || getDefaultImage(data?.marketingName)}
               onError={() => setImageError(true)}
               objectFit="contain"
               // style={{ width: "auto", height: "100%" }}
@@ -83,7 +83,7 @@ function FavListingTile({ data, setProducts }) {
           <div className="flex justify-center w-32 h-24">
             <Image
               // src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
-              src={imageError ? Logo : data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.defaultImage?.fullImage || data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
               onError={() => setImageError(true)}
               alt={data?.marketingName}
               objectFit="contain"
@@ -100,7 +100,7 @@ function FavListingTile({ data, setProducts }) {
             <Image
               // src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
               alt={data?.marketingName}
-              src={imageError ? Logo : data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.defaultImage?.fullImage || data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
               onError={() => setImageError(true)}
               objectFit="contain"
               style={{ width: "auto", height: "100%" }}

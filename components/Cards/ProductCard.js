@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiRupee } from "react-icons/bi";
 import { FaRupeeSign } from "react-icons/fa";
-import { numberWithCommas } from "../../utils/util";
+import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
 // import Logo from "@/assets/home_logo.svg"
@@ -80,19 +80,20 @@ function ProductCard({ data, prodLink, setProducts }) {
                 unoptimized={false}
                 blurDataURL={
                   imageError
-                    ? Logo
+                    ?getDefaultImage(data?.marketingName) || Logo
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
-                    Logo
+                    getDefaultImage(data?.marketingName) || Logo
                 }
                 src={
                   imageError
-                    ? Logo
+                    ? getDefaultImage(data?.marketingName) || Logo
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
-                    Logo
+                    getDefaultImage(data?.marketingName)
+                    || Logo
                 }
                 alt={`buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
                   } ${data?.deviceStorage} ${data?.deviceCondition

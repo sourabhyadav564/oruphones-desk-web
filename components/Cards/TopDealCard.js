@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BiRupee } from "react-icons/bi";
-import { numberWithCommas } from "../../utils/util";
+import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import VerifiedIcon from "../VerifiedIcon";
 import AddFav from "../AddFav";
 import Logo from "@/assets/oru_phones_logo.png";
@@ -78,8 +78,8 @@ function TopDealCard({ data, setProducts, prodLink }) {
             placeholder="blur"
             priority={false}
             unoptimized={false}
-            blurDataURL={imageError ? Logo : data?.imagePath || Logo}
-            src={imageError ? Logo : data?.imagePath || Logo}
+            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
+            src={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
             // src={imageError ? Logo : img?.fullImage}
             onError={() => setImageError(true)}
             alt={data?.name}
@@ -93,8 +93,9 @@ function TopDealCard({ data, setProducts, prodLink }) {
               placeholder="blur"
               priority={false}
               unoptimized={false}
-              blurDataURL={Logo}
-              src={Logo}
+              blurDataURL={imageError? Logo : getDefaultImage(data?.marketingName) || Logo}
+              src={imageError? Logo : getDefaultImage(data?.marketingName) || Logo}
+              onError={() => setImageError(true)}
               alt={data?.name}
               width={"150"}
               height={"150"}
