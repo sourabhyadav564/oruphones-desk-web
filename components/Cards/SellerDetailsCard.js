@@ -164,9 +164,8 @@ function SellerDetailsCard({ data }) {
               <div className="flex flex-row justify-between">
                 <button
                   onClick={() => handleClick()}
-                  className={`${
-                    !showNumber ? "bg-m-green text-white" : "text-m-green"
-                  } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
+                  className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
+                    } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
                 >
                   {" "}
                   {showNumber ? contactSellerMobileNumber : "Contact Seller"}
@@ -294,10 +293,12 @@ const OtherSeller = ({
             setShowLoginPopup(true);
             setProductLink(data?.productLink);
             setPerformAction2(true);
+          } else if (data?.listingId == listingId && isOtherVendor == "N") {
+            setThisPhonePopup(true);
           } else if (data?.listingId != listingId) {
             window.open(data?.productLink, "_blank");
-          } else if (data?.listingId == listingId) {
-            setThisPhonePopup(true);
+          } else {
+            window.open(data?.productLink, "_blank");
           }
         }}
       >
@@ -317,8 +318,8 @@ const OtherSeller = ({
                         index == 0
                           ? first
                           : index == 1
-                          ? second
-                          : index == 2 && third
+                            ? second
+                            : index == 2 && third
                       }
                       alt="icon"
                       width={35}
@@ -339,7 +340,7 @@ const OtherSeller = ({
                     <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
                       {data?.userName}
                     </p>
-                  ) : data?.listingId == listingId ? (
+                  ) : data?.listingId == listingId && isOtherVendor == "N" ? (
                     <div className="flex">
                       <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
                         {data?.userName}
