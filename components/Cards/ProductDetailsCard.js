@@ -504,7 +504,14 @@ function ProductDetailsCard({ data, openFullImage }) {
                 Condition : {data?.deviceCondition}
               </div> */}
               {/* </div> */}
-              {<ComparisonTable data={data.compareData} />}
+              {
+                <ComparisonTable
+                  data={data.compareData}
+                  listingId={
+                    data.listingId !== undefined ? data?.listingId : []
+                  }
+                />
+              }
             </div>
           )}
           <div className="">

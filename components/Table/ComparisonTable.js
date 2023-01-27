@@ -10,14 +10,16 @@ import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 
-function ComparisonTable(data) {
+function ComparisonTable(data,listingId) {
   // console.log("data prod", data);
   const [productData, setProductData] = useState([]);
+  const [thisPhoneListingId, setThisPhoneListingId] = useState(listingId);
   useEffect(() => {
     if (data?.data?.length > 0) {
       const interval = setInterval(() => {
         setProductData(data?.data);
-        console.log("productData", productData);
+        setThisPhoneListingId(data?.listingId);
+        // console.log("productData", productData);
         clearInterval(interval);
       }, 1000);
     }
@@ -122,10 +124,16 @@ function ComparisonTable(data) {
             {productData &&
               productData?.map((item,index) => {
                 return (
-                  <tr class={item?.externalSourceImage == "" ? `bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center` : `bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
+                  <tr class={
+                    // item?.externalSourceImage == ""
+                    thisPhoneListingId == item?.listingId 
+                    ? `bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center` : `bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
                     <th
                       scope="row"
-                      class={item?.externalSourceImage == "" ? `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
+                      class={
+                        // item?.externalSourceImage == "" 
+                        thisPhoneListingId == item?.listingId
+                        ? `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
                     >
                       <div className="flex justify-between hover:cursor-pointer" onClick={() => {
                       if (Cookies.get("userUniqueId") == undefined) {
@@ -133,31 +141,37 @@ function ComparisonTable(data) {
                         setProductLink(item?.productLink);
                         setperformAction2(true);
                       } else if (
-                        item?.externalSourceImage !=
-                        ""
+                        // item?.externalSourceImage !=
+                        // ""
+                        thisPhoneListingId != item?.listingId
                       )
                         window.open(item?.productLink, "_blank");
                       else if (
-                        item?.externalSourceImage ==
-                        ""
+                        // item?.externalSourceImage ==
+                        // ""
+                        thisPhoneListingId == item?.listingId
                       ) {
                         setThisPhonePopup(true);
                       }
                     }}>
 
-                      {item?.userName &&
-                      (item?.externalSourceImage ==
-                      "" || item?.externalSourceImage == 
-                      "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/oru_logo.png") ? (
-                        <div className="filter brightness-50 invert-1 object-contain">{item?.userName}
+                      {item?.userName
+                      // (item?.externalSourceImage ==
+                      // "" || item?.externalSourceImage == 
+                      // "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/oru_logo.png") 
+                      
+                      ? (
+                        <div className={`filter ${thisPhoneListingId != item.listingId &&  "brightness-50 invert-1"} object-contain`}>{item?.userName}
                         </div>
                       ) : (
                         <Image
                         src={item?.externalSourceImage}
                           height={35}
                           width={70}
-                          className={item?.externalSourceImage !=
-                            "" ? `filter brightness-50 invert-1 object-contain` : `object-contain`} 
+                          className={
+                            // item?.externalSourceImage !=""
+                            thisPhoneListingId != item?.listingId
+                             ? `filter brightness-50 invert-1 object-contain` : `object-contain`} 
                           />
                           )}
                       {/* <FaGreaterThan size={18} className="pt-1.5" /> */}
