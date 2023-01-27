@@ -473,6 +473,7 @@ function ProductDetailsCard({ data, openFullImage }) {
         <div>
           {data?.externalSource && data?.externalSource?.length > 0 && (
             <div>
+              {/* {console.log("nimit", data?.externalSource)}; */}
               <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light  capitalize mb-2">
                 Detailed Comparison Between Other Sellers
               </p>
@@ -503,7 +504,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 Condition : {data?.deviceCondition}
               </div> */}
               {/* </div> */}
-              {<ComparisonTable data={data.externalSource} />}
+              {<ComparisonTable data={data.compareData} />}
             </div>
           )}
           <div className="">

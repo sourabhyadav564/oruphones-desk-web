@@ -11,7 +11,7 @@ import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 
 function ComparisonTable(data) {
-  console.log("data prod", data);
+  // console.log("data prod", data);
   const [productData, setProductData] = useState([]);
   useEffect(() => {
     if (data?.data?.length > 0) {
@@ -68,6 +68,12 @@ function ComparisonTable(data) {
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray"
               >
+                Rank
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray"
+              >
                 Price
               </th>
               <th
@@ -114,12 +120,12 @@ function ComparisonTable(data) {
           </thead>
           <tbody>
             {productData &&
-              productData?.map((item) => {
+              productData?.map((item,index) => {
                 return (
-                  <tr class={item?.externalSourceImage == "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? `bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center` : `bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
+                  <tr class={item?.externalSourceImage == "" ? `bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center` : `bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
                     <th
                       scope="row"
-                      class={item?.externalSourceImage == "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
+                      class={item?.externalSourceImage == "" ? `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
                     >
                       <div className="flex justify-between hover:cursor-pointer" onClick={() => {
                       if (Cookies.get("userUniqueId") == undefined) {
@@ -128,20 +134,21 @@ function ComparisonTable(data) {
                         setperformAction2(true);
                       } else if (
                         item?.externalSourceImage !=
-                        "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png"
+                        ""
                       )
                         window.open(item?.productLink, "_blank");
                       else if (
                         item?.externalSourceImage ==
-                        "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png"
+                        ""
                       ) {
                         setThisPhonePopup(true);
                       }
                     }}>
 
                       {item?.userName &&
-                      item?.externalSourceImage !=
-                      "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? (
+                      (item?.externalSourceImage ==
+                      "" || item?.externalSourceImage == 
+                      "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/oru_logo.png") ? (
                         <div className="filter brightness-50 invert-1 object-contain">{item?.userName}
                         </div>
                       ) : (
@@ -150,13 +157,16 @@ function ComparisonTable(data) {
                           height={35}
                           width={70}
                           className={item?.externalSourceImage !=
-                            "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/txt_phone.png" ? `filter brightness-50 invert-1 object-contain` : `object-contain`} 
+                            "" ? `filter brightness-50 invert-1 object-contain` : `object-contain`} 
                           />
                           )}
                       {/* <FaGreaterThan size={18} className="pt-1.5" /> */}
                       </div>
                     
                     </th>
+                    <td class="px-2 py-4 border-[1px] font-Roboto-Semibold">
+                      {index+1}
+                    </td>
                     <td class="px-2 py-4 border-[1px] text-yellow2 font-Roboto-Semibold">
                       ₹ {numberWithCommas(item?.externalSourcePrice)}
                     </td>
@@ -168,12 +178,29 @@ function ComparisonTable(data) {
                     <td class="px-6 py-4  border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
                         ? "None"
-                        : "6 months"}
+                        : item?.Object?.warranty}
                     </td>
                     <td class="px-6 py-4 border-[1px]">
-                      {item?.Object?.isOtherVendor == "N"
+                      {/* {item?.Object?.isOtherVendor == "N"
                         ? "None"
-                        : "Phone Charger, Phone Box"}
+                        : "Phone Charger, Phone Box"} */}
+                         {item?.Object?.isOtherVendor == "Y"
+                        ? item?.Object?.charger == "Y"
+                          ? item?.Object?.earphone == "Y"
+                            ? item?.Object?.originalbox == "Y"
+                              ? "Phone Charger, Earphone, Phone Box"
+                              : "Phone Charger, Earphone"
+                            : item?.Object?.originalbox == "Y"
+                            ? "Phone Charger, Phone Box"
+                            : "Phone Charger"
+                          : item?.Object?.earphone == "Y"
+                          ? item?.Object?.originalbox == "Y"
+                            ? "Earphone, Phone Box"
+                            : "Earphone"
+                          : item?.Object?.originalbox == "Y"
+                          ? "Phone Box"
+                          : "Not Available"
+                        : "None"}
                     </td>
                     <td class="px-6 py-4 border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
@@ -197,8 +224,8 @@ function ComparisonTable(data) {
                     <td class="px-6 py-4 border-[1px]">
                       {item?.Object?.isOtherVendor == "N"
                         ? item?.Object?.verified
-                          ? "Yes"
-                          : "No"
+                          ? "Verified"
+                          : "Not Verified"
                         : "None"}
                     </td>
                   </tr>

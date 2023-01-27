@@ -50,17 +50,17 @@ const Products = () => {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
           getSearchLocation,
-          modelName,
+          modelName.replace("+", "%2B"),
           Cookies.get("userUniqueId"),
           intialPage,
           applySort
         );
         if (data?.dataObject?.otherListings.length > -1) {
-          setProducts((data && data?.dataObject?.otherListings));
+          setProducts(data && data?.dataObject?.otherListings);
           // setProductsData((data && data?.dataObject?.otherListings) || []);
         }
         if (data?.dataObject?.bestDeals.length > -1) {
-          setBestDeals((data && data?.dataObject?.bestDeals));
+          setBestDeals(data && data?.dataObject?.bestDeals);
           // setProductsData((data && data?.dataObject?.bestDeals) || []);
         }
         if (data?.dataObject?.totalProducts > -1) {
@@ -92,7 +92,7 @@ const Products = () => {
         let payLoad = {
           listingLocation: getSearchLocation,
           make: brand?.length > 0 ? brand : [makeName],
-          marketingName: [modelName],
+          marketingName: [modelName.replace("+", "%2B")],
           reqPage: "BBNM",
           color: [],
           deviceCondition: [],
@@ -155,7 +155,7 @@ const Products = () => {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
           getSearchLocation,
-          modelName,
+          modelName.replace("+", "%2B"),
           Cookies.get("userUniqueId"),
           newPages,
           applySort
@@ -176,16 +176,13 @@ const Products = () => {
         }
 
         if (data?.dataObject?.totalProducts > -1) {
-          setTotalProducts(
-            (data && data?.dataObject?.totalProducts) || 0
-          );
+          setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
         }
 
         // if (data?.dataObject?.bestDeals.length > -1) {
         //   setBestDeals((data && data?.dataObject?.bestDeals) || []);
         //   // setProductsData((data && data?.dataObject?.bestDeals) || []);
         // }
-
       };
       if (modelName) {
         fetchData();
@@ -213,7 +210,7 @@ const Products = () => {
         let payLoad = {
           listingLocation: getSearchLocation,
           make: brand?.length > 0 ? brand : [makeName],
-          marketingName: [modelName],
+          marketingName: [modelName.replace("+", "%2B")],
           reqPage: "BBNM",
           // color: [],
           deviceCondition: [],
@@ -272,7 +269,7 @@ const Products = () => {
               ...products,
               ...response?.dataObject?.bestDeals,
             ]);
-          };
+          }
           setLoading(false);
         });
       }
@@ -310,7 +307,7 @@ const Products = () => {
       let payLoad = {
         listingLocation: getSearchLocation,
         make: brand?.length > 0 ? brand : [makeName],
-        marketingName: [modelName],
+        marketingName: [modelName.replace("+", "%2B")],
         reqPage: "BBNM",
         color: [],
         deviceCondition: [],
@@ -351,7 +348,6 @@ const Products = () => {
         intialPage,
         applySort
       ).then((response) => {
-
         // if (verification?.length > 0) {
         //   payLoad.verification = verification;
         // }
@@ -420,10 +416,12 @@ const Products = () => {
           )}
         </div>
         {!isLoading &&
-          isFinished == false && products.length != totalProducts && (
+          isFinished == false &&
+          products.length != totalProducts && (
             <span
-              className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
-                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+              className={`${
+                isLoadingMore ? "w-[250px]" : "w-[150px]"
+              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
               onClick={loadMoreData}
             >
               <p className="block text-m-green font-semibold">

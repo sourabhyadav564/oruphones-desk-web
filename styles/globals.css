@@ -217,3 +217,7 @@ input::-webkit-inner-spin-button {
   font-family: 'Roboto-Medium';
   src: local('Roboto-Medium'), url('../assets/fonts/Roboto-Medium.ttf') format('truetype');
 }
+
+.blues{
+  /* add light blue filter */
+ }
