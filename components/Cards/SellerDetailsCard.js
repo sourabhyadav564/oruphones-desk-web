@@ -98,12 +98,13 @@ function SellerDetailsCard({ data }) {
       productLink != ""
     ) {
       openSellerWebSite(productLink);
-    }
-    else if(showLoginPopup == false &&
-        performAction2 == true &&
-        Cookies.get("userUniqueId") !== undefined &&
-        productLink == ""){
-            setThisPhonePopup(true);
+    } else if (
+      showLoginPopup == false &&
+      performAction2 == true &&
+      Cookies.get("userUniqueId") !== undefined &&
+      productLink == ""
+    ) {
+      setThisPhonePopup(true);
     }
   }, [showLoginPopup]);
   useEffect(() => {
@@ -293,9 +294,9 @@ const OtherSeller = ({
             setShowLoginPopup(true);
             setProductLink(data?.productLink);
             setPerformAction2(true);
-          } else if (data?.externalSourceImage != "")
+          } else if (data?.listingId != listingId) {
             window.open(data?.productLink, "_blank");
-          else if (data?.externalSourceImage == "") {
+          } else if (data?.listingId == listingId) {
             setThisPhonePopup(true);
           }
         }}
@@ -307,27 +308,26 @@ const OtherSeller = ({
             {" "}
             {/* {console.log("rnak",index)} */}
             {
-            // (data.externalSourceImage || data?.externalSourceImage=="")
-            data?.externalSourcePrice 
-            && (
-              <div className="flex flex-row gap-2">
-                {index < 3 && (
-                  <Image
-                    src={
-                      index == 0
-                        ? first
-                        : index == 1
-                        ? second
-                        : index == 2 && third
-                    }
-                    alt="icon"
-                    width={35}
-                    height={20}
-                    objectFit="contain"
-                    className=""
-                  />
-                )}
-                {/* <Image
+              // (data.externalSourceImage || data?.externalSourceImage=="")
+              data?.externalSourcePrice && (
+                <div className="flex flex-row gap-2">
+                  {index < 3 && (
+                    <Image
+                      src={
+                        index == 0
+                          ? first
+                          : index == 1
+                          ? second
+                          : index == 2 && third
+                      }
+                      alt="icon"
+                      width={35}
+                      height={20}
+                      objectFit="contain"
+                      className=""
+                    />
+                  )}
+                  {/* <Image
                                     src={data.externalSourceImage}
                                     alt={vendor}
                                     width={130}
@@ -335,31 +335,34 @@ const OtherSeller = ({
                                     objectFit="contain"
                                 // style={{ height: 35, width: "auto" }}
                                 /> */}
-                {data.externalSourceImage ==
-                "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/oru_logo.png" ? (
-                  <p className="font-Roboto-Semibold opacity-30 py-1 text-ex">
-                    {data?.userName}
-                  </p>
-                ) : data.externalSourceImage == "" ? (
-                  <p className="font-Roboto-Semibold opacity-30 py-1 text-ex">
-                    This Phone
-                  </p>
-                ) : (
-                  <Image
-                    src={data?.externalSourceImage}
-                    alt={vendor}
-                    height={35}
-                    width={70}
-                    objectFit="contain"
-                  />
-                )}
-                {data?.listingId == listingId && isOtherVendor == "Y" && (
-                  <p className="font-Roboto-Semibold opacity-30 py-1 w-64">
-                    (This Phone){" "}
-                  </p>
-                )}{" "}
-              </div>
-            )}{" "}
+                  {data?.userName && data?.listingId != listingId ? (
+                    <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
+                      {data?.userName}
+                    </p>
+                  ) : data?.listingId == listingId ? (
+                    <div className="flex">
+                      <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
+                        {data?.userName}
+                      </p>
+                      <p className="font-Roboto-Semibold opacity-30 py-1 text-smallFontSize pt-2 pl-1.5">(This Phone)</p>
+                    </div>
+                  ) : (
+                    <Image
+                      src={data?.externalSourceImage}
+                      alt={vendor}
+                      height={35}
+                      width={70}
+                      objectFit="contain"
+                    />
+                  )}
+                  {data?.listingId == listingId && isOtherVendor == "Y" && (
+                    <p className="font-Roboto-Semibold opacity-30 py-1 w-64">
+                      (This Phone){" "}
+                    </p>
+                  )}{" "}
+                </div>
+              )
+            }{" "}
           </div>{" "}
         </div>{" "}
         <div className="flex flex-col items-center justify-center pr-4">
