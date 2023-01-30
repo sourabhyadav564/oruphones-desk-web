@@ -15,7 +15,6 @@ import third from "@/assets/third.png";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 
 function SellerDetailsCard({ data }) {
-<<<<<<< Updated upstream
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -33,24 +32,6 @@ function SellerDetailsCard({ data }) {
   ] = useState(false);
   const [resData, setResData] = useState([]);
   const [listingid, setListingid] = useState(data?.listingId);
-=======
-    const [thisPhonePopup, setThisPhonePopup] = useState(false);
-    const [productLink, setProductLink] = useState("");
-    const [performAction, setPerformAction] = useState(false);
-    const [performAction2, setPerformAction2] = useState(false);
-    const [showNumber, setShowNumber] = useState(false);
-    const [contactSellerMobileNumber, setContactSellerMobileNumber] = useState("Loading...");
-    const [showLoginPopup, setShowLoginPopup] = useState(false);
-    const [openRequestVerificationPopup, setRequestVerificationPopup] =
-        useState(false);
-    const [otherSeller, setOtherSeller] = useState([]);
-    const [
-        openRequestVerificationSuccessPopup,
-        setOpenRequestVerificationSuccessPopup,
-    ] = useState(false);
-    const [resData, setResData] = useState([]);
-    const [listingid, setListingid] = useState(data?.listingId);
->>>>>>> Stashed changes
 
   useEffect(() => {
     if (openRequestVerificationPopup) {
