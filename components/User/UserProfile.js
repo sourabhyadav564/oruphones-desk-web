@@ -15,7 +15,7 @@ function UserProfile({ children, className }) {
   const { userInfo, setUserInfo } = useContext(AppContext);
   const { logout } = useContext(AuthContext);
   const [inputImage, setInputImage] = useState(
-    userInfo?.userdetails?.profilePicPath || UserProfileIcon
+    userInfo?.userdetails?.profilePicPath
   );
 
   const authUserData = { name: userInfo?.userdetails?.userName };
@@ -24,6 +24,7 @@ function UserProfile({ children, className }) {
   }, [userInfo]);
 
   function handleChange(e) {
+    e.preventDefau
     let data = new FormData();
     data.append("image", e.target.files[0]);
     Axios.uploadUserProfilePic(data, Cookies.get("userUniqueId")).then(
@@ -37,13 +38,19 @@ function UserProfile({ children, className }) {
           };
 
           Axios.updateUserDetails(payload).then((res) => {
+            console.log("userDetails0", userInfo.userdetails.profilePicPath)
+            setInputImage(payload?.profilePicPath);
+            console.log("response : ", res);
             if (res?.status === "SUCCESS") {
               userInfo.userdetails = {
                 ...userInfo.userdetails,
                 profilePicPath: res?.dataObject?.userdetails.profilePicPath,
               };
               setInputImage(res?.dataObject?.userdetails.profilePicPath);
+              console.log("userdetails1 : ", res?.dataObject?.userdetails);
             }
+
+            console.log("userdetails2 : ", res?.dataObject?.userdetails);
           });
         }
       }
@@ -80,7 +87,7 @@ function UserProfile({ children, className }) {
                 type="file"
                 id="IMG"
                 accept="image/*"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
               />
             </div>
             <p className="text-m-white my-2.5 ml-10" style={{ fontSize: 32 }}>

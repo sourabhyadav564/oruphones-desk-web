@@ -20,7 +20,7 @@ function Profile() {
     let payload = {
       // city: seletedCity,
       email: email || userInfo?.userdetails.email,
-      mobileNumber: mobileNumber?.current,
+      mobileNumber: user?.userdetails?.mobileNumber,
       userName: name || userInfo.userdetails.userName,
       userUniqueId: Cookies.get("userUniqueId"),
     };

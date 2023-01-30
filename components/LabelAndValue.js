@@ -17,7 +17,7 @@ import listedon from "../assets/svgicons/calendar.svg";
 // import ram from "../assets/ram.png";
 import { BsInfoCircle } from "react-icons/bs";
 
-function LabelAndValue({ label, value, showDeviceReport, showInfoPopup,showWarrantyInfoPopup, showConditionInfoPopup, textAsLink, showRequestVerificationSuccessPopup, labelTextSize }) {
+function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showWarrantyInfoPopup, showConditionInfoPopup, textAsLink, showRequestVerificationSuccessPopup, labelTextSize }) {
   if (label) {
     return (
       <div className="flex items-start justify-start flex-row">
@@ -59,7 +59,7 @@ function LabelAndValue({ label, value, showDeviceReport, showInfoPopup,showWarra
                 {label}
                 <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showConditionInfoPopup} />
               </p>
-            ) :  showWarrantyInfoPopup ? (
+            ) : showWarrantyInfoPopup ? (
               <p className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>
                 {label}
                 <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showWarrantyInfoPopup} />

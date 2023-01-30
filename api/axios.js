@@ -533,7 +533,7 @@ export function getUserProfile(countryCode, mobileNumber) {
 }
 
 export function updateUserDetails(payload) {
-  headers = { ...headers, eventName: "UPDATE_USER_DETAILS" };
+  headers = { ...headers, eventName: "UPDATE_USER_DETAILS", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/login/user/update`;
   return Axios.post(API_ENDPOINT, payload, DEFAULT_HEADER).then(
@@ -880,10 +880,11 @@ export function uploadUserProfilePic(userProfilePicData, userUniqueId) {
     BASE_URL +
     `/device/uploadimage?deviceFace=profilePic&userUniqueId=` +
     userUniqueId;
-  headers = {
+  var headers = {
     ...headers,
-    eventName: "PRODUCTINFO_SHARE_SELECTED",
+    eventName: "UPLOAD_PROFILE_PIC",
     "Content-Type": "multipart/form-data",
+    userUniqueId: 0
   };
   const MULTIPART_HEADER = { headers: { ...headers } };
   return Axios.post(API_ENDPOINT, userProfilePicData, MULTIPART_HEADER).then(
