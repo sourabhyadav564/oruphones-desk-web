@@ -59,54 +59,12 @@ const useFilterOptions = () => {
       (res) => {
         if (res?.status === "SUCCESS") {
           let tempFilters = filterOptions.map((item) => {
-            if (item.id === "brand") {
-              return {
-                ...item,
-                options: [
-                  { value: "all", label: "All", checked: false },
-                  ...res?.dataObject?.Brand.map((items) => {
-                    return { value: items, label: items, checked: false };
-                  }),
-                ],
-              };
-            } else if (item.id === "storage") {
-              return {
-                ...item,
-                options: [
-                  { value: "all", label: "All", checked: false },
-                  ...res?.dataObject?.Storage.map((items) => {
-                    return { value: items, label: items, checked: false };
-                  }),
-                ],
-              };
-            } else if (item.id === "condition") {
+            if (item.id === "condition") {
               return {
                 ...item,
                 options: [
                   { value: "all", label: "All", checked: false },
                   ...res?.dataObject?.Conditions.map((items) => {
-                    return { value: items, label: items, checked: false };
-                  }),
-                ],
-              };
-            }
-            else if (item.id === "Ram") {
-              return {
-                ...item,
-                options: [
-                  { value: "all", label: "All", checked: false },
-                  ...res?.dataObject?.Ram.map((items) => {
-                    return { value: items, label: items, checked: false };
-                  }),
-                ],
-              };
-            }
-            else if (item.id === "warranty") {
-              return {
-                ...item,
-                options: [
-                  { value: "all", label: "All", checked: false },
-                  ...res?.dataObject?.Warranty.map((items) => {
                     return { value: items, label: items, checked: false };
                   }),
                 ],

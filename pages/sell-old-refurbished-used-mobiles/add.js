@@ -54,9 +54,9 @@ export async function getServerSideProps({ req, res, query }) {
     brandsList = [];
   } else {
     const data = await Axios.fetchMakeModelList(
-        userUniqueId || "Guest",
-        sessionId || ""
-      );
+      userUniqueId || "Guest",
+      sessionId || ""
+    );
     brandsList = data?.dataObject;
   }
 
