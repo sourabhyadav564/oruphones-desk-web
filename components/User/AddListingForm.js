@@ -135,11 +135,10 @@ function AddEditListing({
   }, [make]);
 
   useEffect(() => {
-    let modelData = modelOptions.filter(
-      (item) => item.marketingname === marketingName
-    );
-    if (modelData && modelData.length > 0) {
-      setColorAndStorageOption(modelData[0]);
+    let makeData = makeOptions.filter((item) => item.make === make);
+    if (makeData && makeData.length > 0) {
+      setModelOptions((makeData && makeData[0]?.models));
+      setmarketingName(null);
       setStorage(null);
       setColor(null);
       setDeviceCondition(null);
@@ -148,7 +147,9 @@ function AddEditListing({
       setQuestionIndex(0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketingName]);
+  }, [make]);
+
+
 
   useEffect(() => {
     if (numberFromString(sellPrice) >= 1000) {
@@ -903,6 +904,7 @@ function AddEditListing({
                   Enter price more than 1000
                 </span>
               )}
+
             </div>
             <div className="text-sm bg-gray-1f text-m-grey-1 py-2 justify-evenly items-center flex flex-col w-full rounded rounded-l-none">
               <span>Recommended Price</span>

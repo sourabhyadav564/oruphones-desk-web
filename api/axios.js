@@ -410,7 +410,7 @@ export function fetchUserListings(userUniqueId, sessionId) {
 }
 
 export function getRecommandedPrice(data) {
-  headers = { ...headers, eventName: "FETCH_RECOMMENDED_PRICE" };
+  headers = { ...headers, eventName: "FETCH_RECOMMENDED_PRICE", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/global/recomanded/price`;
   return Axios.post(API_ENDPOINT, JSON.stringify(data), DEFAULT_HEADER).then(
@@ -789,7 +789,7 @@ export function sendverification(listingid, userUniqueId) {
 }
 
 export function searchFilter(payLoad, userUniqueId, pageNumber, sortBy) {
-  headers = { ...headers, eventName: "FETCH_SEARCH_LISTINGS" };
+  headers = { ...headers, eventName: "FETCH_SEARCH_LISTINGS", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL +
@@ -836,7 +836,7 @@ export function getTinyUrl() {
 }
 
 export function getExternalSellSourceData(payLoad) {
-  headers = { ...headers, eventName: "GET_EXTERNAL_SELL_SOURCE" };
+  headers = { ...headers, eventName: "GET_EXTERNAL_SELL_SOURCE", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/device/price/externalsellsource`;
   return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
