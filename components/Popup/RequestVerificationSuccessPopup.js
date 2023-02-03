@@ -30,15 +30,13 @@ function RequestVerificationSuccessPopup({ open, setOpen, data }) {
     useEffect(() => {
         setListingid(data?.listingId);
         setStatuscode(data?.statusCode);
-        // console.log("data-statuscode : ", statuscode)
-        // console.log("data2345 : ", data);
-        // console.log("userUniqueId",Cookies.get("userUniqueId"));
+      
         // if (open) {
         // Axios.sendverification(listingid,Cookies.get("userUniqueId") || "Guest").then(
         //   (response) => {
 
         //     // setResData(response?.statusCode);
-        //     // console.log("response : ",response?.statusCode);
+        //    
         //     setStatuscode(response?.statusCode);
         //   }
         // );
@@ -50,7 +48,7 @@ function RequestVerificationSuccessPopup({ open, setOpen, data }) {
     return (
         <Modal2 open={open} setOpen={setOpen}>
             <div className="flex flex-col items-center max-w-lg py-4 px-6 text-base text-black-4e">
-                {console.log("data6", resData)}
+              
                 {statuscode ? (
                     <>
                         {statuscode === 200 ? (

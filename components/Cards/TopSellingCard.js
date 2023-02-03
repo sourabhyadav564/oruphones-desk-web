@@ -10,7 +10,6 @@ function TopSellingCard({ data }) {
   var type = ["old phone", "used", "refurbished"]
   const alternate_text = (`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} like new `).toLowerCase()
 
-  console.log("models : ", alternate_text);
   if (data?.name?.toLowerCase().includes("all")) {
     return (
       <Link href={`/product/models`} passHref>

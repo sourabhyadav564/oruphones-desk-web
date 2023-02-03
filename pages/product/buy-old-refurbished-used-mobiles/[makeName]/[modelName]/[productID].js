@@ -74,7 +74,7 @@ function ProductDetails({ listingInfo }) {
       );
       setTotalProducts(response?.dataObject?.totalProducts);
       // setPageNumber(pageNumber + 1);
-      console.log("pageNumber from initial", pageNumber);
+     
     });
   };
 
@@ -96,7 +96,7 @@ function ProductDetails({ listingInfo }) {
       verified: "",
       warenty: []
     };
-    console.log("pageNumber from loadMore", newPages);
+   
     Axios.fetchSimilarProducts(
       payLoad,
       Cookies.get("userUniqueId") || "Guest",

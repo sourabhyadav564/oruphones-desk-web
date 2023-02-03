@@ -72,8 +72,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
       //   setError(true);
       // }
       // Cookies.set("userUniqueId", resData.dataObject.userUniqueId);
-      // console.log("response nimit", response);
-      // console.log("userUniqueId nimit", response.dataObject.userUniqueId);
+     
       Cookies.set("userUniqueId", response.dataObject.userUniqueId);
       Cookies.set("mobileNumber", response.dataObject.mobileNumber);
       // setUserUniqueId(resData.dataObject.userUniqueId);

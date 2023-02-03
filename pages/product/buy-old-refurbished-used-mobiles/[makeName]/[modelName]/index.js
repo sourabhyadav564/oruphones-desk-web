@@ -150,7 +150,7 @@ const Products = () => {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
-    // console.log("isFilterApplied", isFilterApplied);
+   
     if (!isFilterApplied) {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
@@ -360,7 +360,7 @@ const Products = () => {
     }
   }, [applyFilter, applySort]);
 
-  console.log("isFinished", isFinished);
+ 
 
   const sortingProducts = getSortedProducts(applySort, products);
 

@@ -15,7 +15,7 @@ function TopBrand({ brandsList }) {
   brandsList = brandsList?.sort((list1, list2) => list2.isPopular - list1.isPopular);
   brandsList = brandsList?.sort((list1, list2) => parseInt(list1.displayOrder) - parseInt(list2.displayOrder));
   var _bList = brandsList?.slice(0, 13);
-  // console.log(_bList);
+ 
   return (
     <>
       <div className="bg-m-grey pt-[54px] pb-[57px]">

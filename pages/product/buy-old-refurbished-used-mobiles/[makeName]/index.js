@@ -52,7 +52,7 @@ function BrandPage() {
   let brandResult = [];
   let makeName2 = useRecoilValue(makeState);
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  console.log("product", applyFilter);
+
   const loadData = (intialPage) => {
     if (!isFilterApplied) {
       const getMakeModel = async () => {
@@ -77,7 +77,7 @@ function BrandPage() {
          else {
           makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
         }
-        console.log("local storage", makeName);
+      
         makemodel = JSON.parse(localStorage.getItem("make_models"));
         makemodel.map((item) => {
           if (item.make == makeName) {
@@ -95,7 +95,7 @@ function BrandPage() {
         }
         getMakeModel();
         makemodel = JSON.parse(localStorage.getItem("make_models"));
-        console.log("makemodel : ", makemodel);
+      
 
         makemodel.map((item) => {
           if (item.make == makeName) {
@@ -223,7 +223,7 @@ function BrandPage() {
 
 
     // const getMakeModel = async()=>{
-    //   console.log("makename2 ",makeName2);
+   
     //   brandResult = await Axios.fetchMakeModelList(
     //     Cookies.get("userUniqueId") || "Guest",
     //     Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : "",
@@ -234,9 +234,6 @@ function BrandPage() {
     // getMakeModel();
 
 
-    // console.log('brandresult ',brandResult?.dataObject);
-
-    // console.log("result", router.query["makeName"]);
 
     // setshopbymodel(brandResult?.dataObject);
     // brandResult = [] ;

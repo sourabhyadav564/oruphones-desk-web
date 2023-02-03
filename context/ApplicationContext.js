@@ -15,7 +15,7 @@ export const ApplicationContext = ({ children }) => {
     const fetchUserProfileData = async () => {
       if (Cookies.get("mobileNumber") !== undefined) {
         const userProfile = await Axios.getUserProfile("91", Cookies.get("mobileNumber"));
-        console.log(userProfile?.dataObject)
+        
         setUserInfo(userProfile?.dataObject);
       };
     }

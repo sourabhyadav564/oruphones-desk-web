@@ -85,17 +85,14 @@ function ProductDetailsCard({ data, openFullImage }) {
     accessoriesList.push("Earphones");
   }
   useEffect(() => {
-    // console.log("showLoginPopup",showLoginPopup);
-    // console.log("performAction2",performAction2);
-    // console.log("Cookies.get(userUniqueId)",Cookies.get("userUniqueId"));
+    
     const interval = setInterval(() => {
       if (
         showLoginPopup == false &&
         performAction2 == true &&
         Cookies.get("userUniqueId") != undefined
       ) {
-        // console.log("aa");
-        // if(Cookies.get("userUniqueId")!=undefined)
+       
         setRequestVerificationSuccessPopup(true);
         clearInterval(interval);
       }
@@ -302,13 +299,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                           <div
                             className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
                             onClick={() => {
-                              // console.log("bbb");
-                              // Cookies.get("userUniqueId") === undefined
-                              //   ? () => {
-                              //       setPerformAction2(true);
-                              //       setShowLoginPopup(true);
-                              //     }
-                              //   : setRequestVerificationSuccessPopup(true);
+                              
                               if (Cookies.get("userUniqueId") === undefined) {
                                 setPerformAction2(true);
                                 setShowLoginPopup(true);
@@ -473,7 +464,7 @@ function ProductDetailsCard({ data, openFullImage }) {
         <div>
           {data?.externalSource && data?.externalSource?.length > 0 && (
             <div>
-              {/* {console.log("nimit", data?.externalSource)}; */}
+           
               <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light  capitalize mb-2">
                 Detailed Comparison Between Other Sellers
               </p>

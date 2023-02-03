@@ -38,19 +38,19 @@ function UserProfile({ children, className }) {
           };
 
           Axios.updateUserDetails(payload).then((res) => {
-            console.log("userDetails0", userInfo.userdetails.profilePicPath)
+           
             setInputImage(payload?.profilePicPath);
-            console.log("response : ", res);
+          
             if (res?.status === "SUCCESS") {
               userInfo.userdetails = {
                 ...userInfo.userdetails,
                 profilePicPath: res?.dataObject?.userdetails.profilePicPath,
               };
               setInputImage(res?.dataObject?.userdetails.profilePicPath);
-              console.log("userdetails1 : ", res?.dataObject?.userdetails);
+             
             }
 
-            console.log("userdetails2 : ", res?.dataObject?.userdetails);
+         
           });
         }
       }

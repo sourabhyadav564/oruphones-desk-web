@@ -89,10 +89,13 @@ function Index({ isFromEdit, brandsList }) {
     const [totalProducts, setTotalProducts] = useState(0);
     const [PriceShow, setPriceShow] = useState(false);
     const [PriceProduct, setPriceProduct] = useState(false);
+    
+    const [Finished,setFinished] = useState(false);
+    const [loading,setLoading] = useState(true);
 
     var { filterOptions } = useFilterOptions();
 
-
+ 
 
 
     useEffect(() => {
@@ -246,7 +249,6 @@ function Index({ isFromEdit, brandsList }) {
         };
         const fetchData = async () => {
             const getRecommandedPrice = await Axios.getRecommandedPrice(payload);
-
             setLeastSellingprice(getRecommandedPrice?.dataObject.leastSellingprice);
             setMaxsellingprice(getRecommandedPrice?.dataObject.maxsellingprice);
         };
@@ -261,8 +263,7 @@ function Index({ isFromEdit, brandsList }) {
 
     }, [make2, marketingName2, storage2]);
 
-    console.log("setleast selling price : ", leastSellingprice);
-    console.log("setmax selling price : ", maxsellingprice);
+  
 
     const handleClick = () => {
         setShowAppDownloadPopup(true);
@@ -291,7 +292,7 @@ function Index({ isFromEdit, brandsList }) {
                 warenty: [],
                 pageNumber: 0,
             };
-            // setLoading(true);
+            setLoading(true);
             Axios.searchFilter(
                 payLoad,
                 0,
@@ -304,8 +305,9 @@ function Index({ isFromEdit, brandsList }) {
                 setProducts(response?.dataObject?.bestDeals);
                 setProducts((products) => [...products, ...response?.dataObject?.otherListings]);
                 // setBestDeals([]);
-                // setTotalProducts(response?.dataObject?.totalProducts);
+                setTotalProducts(response?.dataObject?.totalProducts);
                 // setLoading(false);
+                setLoading(false);
             });
         }
     }, [storage, deviceCondition]);
@@ -321,12 +323,18 @@ function Index({ isFromEdit, brandsList }) {
 
 
     useEffect(() => {
-        if (make != null && marketingName != null && storage != null) {
+        if (make != null && marketingName != null && storage != null  && deviceCondition != null) {
             setPriceProduct(true);
         } else {
             setPriceProduct(false);
+            setLoading(false);
         }
-    }, [make, marketingName, storage])
+
+        if(make == null && marketingName == null && storage == null ){
+            setactive(false);
+        }
+
+    }, [make, marketingName, storage, deviceCondition])
 
 
 
@@ -349,9 +357,9 @@ function Index({ isFromEdit, brandsList }) {
 
 
     return (
-        <div className=''>
-            <div className='w-full grid grid-cols-3'>
-                <div className='col-span-1 border text-m-green text-center py-[16vh]'>
+        <div className='lg:px-48 '>
+            <div className=' grid grid-cols-4'>
+                <div className='col-span-1 border-r text-m-green text-center py-[16vh]'>
                     <p className='text-[20px] font-Roboto-Semibold'>Sell / Buy Mobiles</p>
                     <p className='text-[16px] font-Roboto-Regular'>Are you a seller or buyer of ORUphones</p>
                     <div className='space-y-4 my-4'>
@@ -359,14 +367,14 @@ function Index({ isFromEdit, brandsList }) {
                         <div className={showpage == 2 ? ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 cursor-default") : ("text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 cursor-default")} onClick={() => { setShowpage(2); setMake2(null); setmarketingName2(null); setStorage2(null); setactive(false); setProducts([]) }}>Buy</div>
                     </div>
                 </div>
-                <div className='col-span-2 border '>
+                <div className='col-span-3 border-l '>
                     {(showpage == 2) ? (
                         <div>
                             <div className="px-8 gap-8 py-4">
                                 <div>
                                     <span className='px-4 py-4'>
                                         <Select
-                                            labelName="Brand*"
+                                            labelName="Brand"
                                             //placeholder=""
                                             className={`${makeRequired} py-2`}
                                             onFocus={(e) => {
@@ -396,7 +404,7 @@ function Index({ isFromEdit, brandsList }) {
                                                     ? "Select.."
                                                     : { label: marketingName, value: marketingName }
                                             }
-                                            labelName="Model*"
+                                            labelName="Model"
                                             disabled={isFromEdit}
                                             className={`${marketingNameRequired} py-2`}
                                             onFocus={(e) => {
@@ -422,7 +430,7 @@ function Index({ isFromEdit, brandsList }) {
                                                     ? "Select.."
                                                     : { label: storage, value: storage }
                                             }
-                                            labelName="Storage*"
+                                            labelName="Storage"
                                             disabled={isFromEdit}
                                             className={`${storageRequired} py-2`}
                                             onFocus={(e) => {
@@ -453,12 +461,13 @@ function Index({ isFromEdit, brandsList }) {
 
                                     </div>
 
+                                      
                                     {PriceProduct ?
                                         (
                                             <div>
                                                 <div className='pt-8 text-[18px] font-semibold'>Best Deals</div>
-                                                <div className="grid grid-cols-3 gap-4 mt-4">
-                                                    {
+                                                <div className="grid lg:grid-cols-4 grid-cols-3  gap-4 mt-4">
+                                                    {!loading  ? (
                                                         products?.map((product, index) => (
                                                             <ProductCard
                                                                 key={index}
@@ -467,10 +476,17 @@ function Index({ isFromEdit, brandsList }) {
                                                                 setProducts={setProducts}
                                                             />
                                                         ))
+                                                    ):(
+                                                        <div>{loading ? (<div>Loading...</div>):(<div></div>)} </div>
+                                                    )
                                                     }
+                                                    {
+                                                        totalProducts ==0 && !loading ?(<div>No products available</div>):(<div></div>)
+                                                    }
+                                                    
                                                 </div>
                                             </div>
-                                        ) : (<div></div>)
+                                        ) : (<div className='pt-16 font-normal opacity-80 text-center '>Please select all fields</div>)
                                     }
 
 
@@ -483,7 +499,7 @@ function Index({ isFromEdit, brandsList }) {
                             <div>
                                 <span className='px-4 py-4'>
                                     <Select
-                                        labelName="Brand*"
+                                        labelName="Brand"
                                         //placeholder=""
                                         className={`${makeRequired2} py-2`}
                                         onFocus={(e) => {
@@ -513,7 +529,7 @@ function Index({ isFromEdit, brandsList }) {
                                                 ? "Select.."
                                                 : { label: marketingName2, value: marketingName2 }
                                         }
-                                        labelName="Model*"
+                                        labelName="Model"
                                         disabled={isFromEdit}
                                         className={`${marketingNameRequired2} py-2`}
                                         onFocus={(e) => {
@@ -539,7 +555,7 @@ function Index({ isFromEdit, brandsList }) {
                                                 ? "Select.."
                                                 : { label: storage2, value: storage2 }
                                         }
-                                        labelName="Storage*"
+                                        labelName="Storage Variant"
                                         disabled={isFromEdit}
                                         className={`${storageRequired2} py-2`}
                                         onFocus={(e) => {
@@ -563,7 +579,7 @@ function Index({ isFromEdit, brandsList }) {
                             {
                                 PriceShow ? (
                                     <div>
-                                        <div className="text-sm bg-gray-1f text-m-grey-1 py-2 justify-evenly items-center flex  w-full rounded-[5px] px-8">
+                                        <div className="text-sm border-2 text-m-grey-1 py-2 justify-evenly items-center flex  w-full rounded-[5px] px-8">
                                             <div className='flex-1 '>
                                                 <span>ORU Price</span>
                                                 {(leastSellingprice && (
@@ -574,7 +590,7 @@ function Index({ isFromEdit, brandsList }) {
                                                 )) || <p>--</p>}
                                             </div>
 
-                                            <div className='border bg-m-green text-white px-4 py-2 rounded-[5px]' onClick={() => { handleClick(); }}>
+                                            <div className='border bg-m-green text-white px-4 py-2 rounded-[5px] cursor-pointer' onClick={() => { handleClick(); }}>
                                                 Sell Now
                                             </div>
                                         </div>
@@ -605,12 +621,13 @@ function Index({ isFromEdit, brandsList }) {
                                                                     </p>
                                                                 </div>
                                                                 <div className="flex flex-col space-y-1">
-                                                                    <span>Buyer</span>
+                                                                    <span className='text-center  font-medium'>Buyer</span>
                                                                     <div className="w-full h-full">
                                                                         <img
                                                                             src={items.externalSourceImage}
                                                                             alt={items.externalSourceName}
-                                                                            style={{ height: 33, width: "auto" }}
+                                                                            style={{ height: 35, width: 70 }}
+                                                                            className="object-contain"
                                                                         />
                                                                     </div>
                                                                 </div>

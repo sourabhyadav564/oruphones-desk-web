@@ -59,10 +59,10 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
   }, [selectedVerification]);
 
   useEffect(() => {
-    // console.log("selectedPrice", selectedPriceRange, selectedPriceRange?.min, selectedPriceRange?.max, selectedPriceRange?.min < selectedPriceRange?.max);
+    
     if (selectedPriceRange && selectedPriceRange?.min && selectedPriceRange?.max && selectedPriceRange?.min < selectedPriceRange?.max) {
       setFilters((prev) => ({ ...prev, priceRange: selectedPriceRange }));
-      // console.log("selected price range", selectedPriceRange)
+      
     }
   }, [selectedPriceRange]);
 

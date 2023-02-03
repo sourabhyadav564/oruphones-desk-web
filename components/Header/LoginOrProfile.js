@@ -30,7 +30,7 @@ function LoginOrProfile() {
   useEffect(() => {
     getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
       setNotifications(response?.dataObject?.notifications);
-      console.log(response?.dataObject);
+     
       setUnreadNotificationsCount(
         response?.dataObject?.unReadCount
       );

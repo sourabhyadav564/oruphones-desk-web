@@ -11,7 +11,7 @@ const classNames = (...classes) => {
 
 export default function Sort({ sortOptions, setApplySort, setFilters }) {
   const router = useRouter();
-  // console.log("router", router);
+ 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   function handleOnChange(data) {
     setApplySort(data.name);
@@ -27,7 +27,6 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
     setApplySort("Featured");
   }, [router.pathname]);
 
-  // console.log({ sortOptions, setApplySort, setFilters });
   return (
     <Fragment>
       <div className="relative z-10 flex items-baseline justify-end py-4">

@@ -3,7 +3,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { deviceConditionResult } from "../../utils/constant";
 
 const DeviceConditionCard = ({ condition, answer }) => {
-  // console.log("results", answer);
+  
   const [subtitle, setSubtitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [head, setHead] = React.useState("");
@@ -13,7 +13,7 @@ const DeviceConditionCard = ({ condition, answer }) => {
   useEffect(() => {
     deviceConditionResult.filter((item, index) => {
       if (item.title === condition) {
-        console.log("item", item.subtitle);
+       
         setSubtitle(item.subtitle);
         setDescription(item.description);
         setHead(item.head);
@@ -22,7 +22,7 @@ const DeviceConditionCard = ({ condition, answer }) => {
       }
     });
   }, [condition]);
-  console.log("note", note);
+ 
 
   return (
     <div className="grid grid-cols-5 hover:cursor-pointer p-3 rounded-md border-2 border-gray-200 active:opacity-50 duration-300 hover:bg-gray-300 space-x-3 bg-gray-200">

@@ -42,7 +42,7 @@ function Bestdealnearyou() {
   let intialPage = 0;
   let newPages = 0;
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-  console.log("MAKENAME : ", bestDeal[0]?.make);
+
   const loadData = (intialPage) => {
     if (getSearchLocation && !isFilterApplied) {
       Axios.bestDealNearYouAll(
@@ -139,7 +139,7 @@ function Bestdealnearyou() {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
-    // console.log("newPages", getSearchLocation, isFilterApplied);
+   
     if (getSearchLocation && !isFilterApplied) {
       Axios.bestDealNearYouAll(
         getSearchLocation,
@@ -336,7 +336,7 @@ function Bestdealnearyou() {
   }, [applyFilter, applySort]);
 
   // const sortingProducts = getSortedProducts(applySort, products);
-  console.log("maKENMAE:", bestDeal[0]?.make);
+
   return (
     <main className="container py-4">
       <h1 className="sr-only">Best Deal Near You Page</h1>

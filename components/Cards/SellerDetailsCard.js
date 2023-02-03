@@ -63,7 +63,7 @@ function SellerDetailsCard({ data }) {
     }
   };
   useEffect(() => {
-    // console.log("showLoginPopup", performAction);
+   
     if (
       showLoginPopup == false &&
       performAction == true &&
@@ -134,7 +134,7 @@ function SellerDetailsCard({ data }) {
     }
   };
 
-  // console.log("resdatasellerdetail : ", data);
+ 
 
   return (
     <div className="seller-info">
@@ -264,10 +264,8 @@ const OtherSeller = ({
   listingId,
   isOtherVendor,
 }) => {
-  console.log("data : ", data);
-  // console.log(
-  //   data.externalSourceImage.replaceAll('https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/',"") , data.externalSourceImage.replace('_logo.png',""));
-  // console.log(data.externalSourceImage);
+  
+  
   let vendor = data.externalSourceImage.replaceAll(
     "https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/",
     ""
@@ -278,8 +276,7 @@ const OtherSeller = ({
     vendor = vendor.replaceAll("mbr_", "");
   }
 
-  // console.log("vendor", vendor);
-  console.log("othervendor", isOtherVendor);
+  
 
   return (
     <>
@@ -307,7 +304,7 @@ const OtherSeller = ({
           {/* <span className="text-xs text-m-grey-2">Seller</span> */}
           <div className="my-1 w-64 flex">
             {" "}
-            {/* {console.log("rnak",index)} */}
+           
             {
               // (data.externalSourceImage || data?.externalSourceImage=="")
               data?.externalSourcePrice && (

@@ -23,39 +23,34 @@ let headers = {
 
 Axios.interceptors.request.use(
   async (request) => {
-    // console.log("request", request);
+    
     return request;
   },
   (err) => {
-    // console.log("err", err);
+   
     return Promise.reject(err);
   }
 );
 
 Axios.interceptors.response.use(
   async (response) => {
-    // console.log("response", response);
-    // console.log("response", response?.data?.status);
+    
     if (response?.data?.status === "SESSION_INVALID") {
       headers = { ...headers, eventName: "NA" };
       const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
       const result = await Axios.get(API_ENDPOINT, { headers: { ...headers } });
-      // console.log("response from session id", result);
-      // console.log(
-      //   "response from session id",
-      //   result?.data?.dataObject?.sessionId
-      // );
+      
       if (typeof window !== "undefined") {
         localStorage.setItem("sessionId", result?.data?.dataObject?.sessionId);
       }
       Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
       window.location.reload();
-      // console.log("response.config", response.config);
+      
     }
     return response;
   },
   async (error) => {
-    // console.log("error", error);
+    
     return Promise.reject(error);
   }
 );
@@ -438,7 +433,6 @@ export function getListedDeviceInfo(listingid, userUniqueId, sessionId) {
     listingid +
     `&userUniqueId=` +
     userUniqueId;
-  console.log("default header", DEFAULT_HEADER);
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -734,14 +728,13 @@ export function bestDealNearYouAll(location, userUniqueId, pageNumber, sortBy) {
 }
 
 export function fetchMyFavorites(userUniqueId) {
-  headers = { ...headers, eventName: "FETCH_FAVORITE_LIST" };
+  headers = { ...headers, eventName: "FETCH_FAVORITE_LIST", userUniqueId:0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
-      console.log("response data : ", response.data);
-      localStorage.setItem("favoriteList", response.data.dataObject.map((item) => item.listingId));
+      localStorage.setItem("favoriteList", response?.data?.dataObject?.map((item) => item?.listingId));
       return response.data;
     },
     (err) => {

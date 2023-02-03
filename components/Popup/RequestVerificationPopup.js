@@ -24,14 +24,14 @@ function RequestVerificationPopup({
             Cookies.get("userUniqueId") || "Guest"
         ).then((response) => {
             setResData(response);
-            console.log("responseData", response);
+         
             // if (response.status == "SUCCESS") {
             setOpen(false);
             setRequestVerificationSuccessPopup(true);
             // }
         });
     };
-    // console.log("Listing Id: ", data?.listingId);
+   
 
     return (
         <Modal2 open={open} setOpen={setOpen} title={"This device is unverified"}>
@@ -49,7 +49,7 @@ function RequestVerificationPopup({
                     <button className="border  bg-m-green  px-4 py-2 rounded text-white uppercase font-Roboto-Medium"
                         // onClick={() => requestVerification()}
                         onClick={() => {
-                            // console.log("bbb");
+                           
                             // Cookies.get("userUniqueId") === undefined
                             //   ? () => {
                             //       setPerformAction2(true);

@@ -135,7 +135,7 @@ function CategoryPage() {
   const loadMoreData = () => {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
-    console.log("newPages", newPages);
+    
     setIsLoadingMore(true);
     if (categoryType && !isFilterApplied) {
       Axios.shopByCategory(
@@ -280,8 +280,7 @@ function CategoryPage() {
         payLoad.minsellingPrice = priceRange.min;
         payLoad.maxsellingPrice = priceRange.max;
       }
-      console.log("router.query.categoryType", router.query.categoryType);
-      console.log("condition", condition);
+     
       if ((condition?.length > 0 && router.query.categoryType != "like new") || (condition?.length > 0 && router.query.categoryType == "like%20new")) {
         payLoad.deviceCondition = condition.includes("all") ? [] : condition;
       } else if (router.query.categoryType == "like new") {

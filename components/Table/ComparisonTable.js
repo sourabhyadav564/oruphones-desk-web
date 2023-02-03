@@ -11,7 +11,7 @@ import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 
 function ComparisonTable(data, listingId) {
-  // console.log("data prod", data);
+  
   const [productData, setProductData] = useState([]);
   const [thisPhoneListingId, setThisPhoneListingId] = useState(listingId);
   useEffect(() => {
@@ -19,7 +19,7 @@ function ComparisonTable(data, listingId) {
       const interval = setInterval(() => {
         setProductData(data?.data);
         setThisPhoneListingId(data?.listingId);
-        // console.log("productData", productData);
+        
         clearInterval(interval);
       }, 1000);
     }

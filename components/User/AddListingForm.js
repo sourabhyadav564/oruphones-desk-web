@@ -526,7 +526,7 @@ function AddEditListing({
         <div className="grid grid-cols-2 gap-8 ">
           <span>
             <Select
-              // labelName="Brand*"
+              // labelName="Brand"
               //placeholder=""
               className={makeRequired}
               onFocus={(e) => {
@@ -556,7 +556,7 @@ function AddEditListing({
                   ? "Select.."
                   : { label: marketingName, value: marketingName }
               }
-              labelName="Model*"
+              labelName="Model"
               disabled={isFromEdit}
               className={marketingNameRequired}
               onFocus={(e) => {
@@ -582,7 +582,7 @@ function AddEditListing({
                   ? "Select.."
                   : { label: storage, value: storage }
               }
-              labelName="Storage*"
+              labelName="Storage"
               disabled={isFromEdit}
               className={storageRequired}
               onFocus={(e) => {
@@ -620,7 +620,7 @@ function AddEditListing({
             <div className="col-span-2">
               {/* <span>
               <Select
-                labelName="Device Condition*"
+                labelName="Device Condition"
                 className={deviceConditionRequired}
                 onFocus={(e) => {
                   setDeviceConditionRequired("");
@@ -756,7 +756,7 @@ function AddEditListing({
             <span>
               <div className="flex flex-row w-full justify-center items-center mt-4">
                 <Select
-                  labelName="Location*"
+                  labelName="Location"
                   placeholder={selectedCity}
                   className={`${locationRequired}`}
                   value={selectedCity}

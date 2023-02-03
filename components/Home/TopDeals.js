@@ -27,7 +27,7 @@ function TopDeals({ location }) {
   const [isFinished, setIsFinished] = useState(false);
   const [myFavListings, setMyFavListings] = useState([]);
 
-  // console.log(bestDeals);
+ 
 
   const loadData = (initialPage) => {
     const fetchNestDealsNearByMe = async () => {
@@ -47,7 +47,7 @@ function TopDeals({ location }) {
     };
     if (Cookies.get("userUniqueId") != undefined && Cookies.get("userUniqueId") != "" && Cookies.get("userUniqueId") != "Guest") {
       Axios.fetchMyFavorites(Cookies.get("userUniqueId")).then((res) => {
-        console.log("userUniqueId", res);
+       
         setMyFavListings(res?.dataObject?.map((item2) => item2.listingId));
       });
     }

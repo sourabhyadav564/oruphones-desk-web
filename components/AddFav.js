@@ -45,7 +45,7 @@ function AddFav({ data, setProducts, ...rest }) {
       }
       const removeFav = await Axios.removeFavotie(data.listingId, Cookies.get("userUniqueId") || "Guest");
     };
-    console.log("data.favourite", data);
+  
     if (data.favourite) {
       data?.status == "Active" ? removeFavorite() : toast.warning("This device is sold out");
     } else {

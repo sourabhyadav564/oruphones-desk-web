@@ -114,7 +114,7 @@ function Filter2({ listingsCount, children, setApplySort, setApplyFilter, makeNa
         );
     }
 
-    console.log('makename : ', makename);
+   
 
     if (filterOptions && (router.query["makeName"] == "apple" || router.query["makeName"] == "Apple" || makename == "Apple" || makename == "apple")) {
         tempFilters = filterOptions.map((i) =>
@@ -135,9 +135,7 @@ function Filter2({ listingsCount, children, setApplySort, setApplyFilter, makeNa
         );
     }
 
-    // console.log("filterOptions", router.query["makeName"]);
 
-    // console.log("filterOptions2", tempFilters);
 
     return (
         <React.Fragment>

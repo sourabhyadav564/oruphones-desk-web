@@ -8,7 +8,7 @@ const ConditionOptionLarge2 = ({
     questionIndex,
 }) => {
     var option2 = [[]];
-    console.log("conditionResults", options);
+   
     options && options?.map((option, index) => {
         if (option.title == conditionResults[questionIndex]) {
             option.options.map((optionIn, index2) => {

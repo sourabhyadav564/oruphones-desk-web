@@ -9,10 +9,14 @@ import Link from "next/link";
 function Services() {
 
   const [openAppDownload, setOpenAppDownload] = useState(false);
+  const [active,setActive] = useState(false);
 
-  // function handleVerifyListing() {
-  //   setOpenAppDownload(true);
-  // }
+
+  const handleClick = () => {
+    setOpenAppDownload(true);
+  };
+
+  
 
   return (
     <UserProfile>
@@ -21,10 +25,12 @@ function Services() {
         <div className="flex flex-col space-y-4 my-4 text-xlFontSize font-Roboto-Regular">
           {servicesData && servicesData.length > 0 ? (
             servicesData.map((item, index) => (
-              <a
+              <div>
+              {index==0 ?(<div>
+                <a
                 href={item.link}
                 key={index}
-                className="border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer"
+                className={`${index==0?("bg-gray-200 bg-opacity-60"):("bg-white")} border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
               // onClick={handleVerifyListing}
               >
                 <div className="p-4">
@@ -41,6 +47,29 @@ function Services() {
                   <p className="text-sm text-gray-70">{item.description}</p>
                 </div>
               </a>
+              </div>):(<div>
+                <a
+                key={index}
+                className={`${index==0?("bg-gray-200 "):("bg-white")} border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
+              onClick={handleClick}
+              >
+                <div className="p-4">
+                  <Image
+                    src={item?.imgSrc || "/"}
+                    width={"48"}
+                    height={"30"}
+                    objectFit="contain"
+                    alt={item.title}
+                  />
+                </div>
+                <div className="flex-1 ">
+                  <h2 className="text-black opacity-80">{item.title}</h2>
+                  <p className="text-sm text-black opacity-80">{item.description}</p>
+                </div>
+              </a>
+              </div>)}
+              </div>
+           
             ))
           ) : (
             <div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">

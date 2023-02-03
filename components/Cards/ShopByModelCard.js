@@ -32,7 +32,7 @@ function ShopByModelCard({
     );
   };
 
-  // console.log("shop by models make : ", make)
+
 
   return (
     <div>

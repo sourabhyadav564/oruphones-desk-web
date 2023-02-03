@@ -47,7 +47,7 @@ function EditListing({ brandsList }) {
 
 // export async function getServerSideProps() {
 //   const makeModelLists = await Axios.fetchMakeModelList();
-//   console.log("makeModelLists ID ",makeModelLists);
+
 //   return {
 //     props: { makeModelLists: makeModelLists?.dataObject || [] }
 //   }

@@ -334,7 +334,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
             </Input>
           ) : (
             <Select
-              labelName="Storage*"
+              labelName="Storage"
               placeholder={listedDeviceInfo?.deviceStorage}
               onChange={(e) => {
                 setStorage(e.value);
@@ -466,7 +466,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 checked={showWarranty}
                 onClick={(e) => {
                   e.target.checked ? setShowWarranty("Y") : setShowWarranty("N");
-                  console.log("warranty", warranty);
+             
                   setWarranty((listedDeviceInfo?.warranty != "None" || listedDeviceInfo?.warranty != "" || listedDeviceInfo?.warranty != null) ? listedDeviceInfo?.warranty : "more");
                 }}
                 isChecked={listedDeviceInfo?.warranty !== "more"}
