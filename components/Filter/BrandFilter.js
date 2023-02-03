@@ -8,7 +8,7 @@ function BrandFilter({ options, router, ...rest }) {
   } else {
     optionObj = options;
   }
-
+  
   return <FilterUI optionObj={optionObj} {...rest} />;
 }
 

@@ -115,7 +115,6 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
   }
 
 
-
   if (filterOptions && (router.query["makeName"] == "apple" || router.query["makeName"] == "Apple" || makename == "Apple" || makename == "apple")) {
     tempFilters = filterOptions.map((i) =>
       i.id == "Ram"
@@ -135,7 +134,6 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
     );
   }
 
-  
 
   return (
     <React.Fragment>

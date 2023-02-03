@@ -1,6 +1,6 @@
 import React from "react";
 import Sort from "./Sort";
-import DesktopFilter from "./DesktopFilter";
+import DesktopFilter from "./DesktopFilter2";
 import useFilterOptions from "hooks/useFilterOptions";
 import { useRouter } from "next/router";
 
@@ -17,6 +17,7 @@ function Filter2({ listingsCount, children, setApplySort, setApplyFilter, makeNa
     const router = useRouter();
     let tempFilters = filterOptions;
 
+   
 
     if (filterOptions && makeName !== null && makeName !== undefined) {
         tempFilters = filterOptions.map((i) =>
@@ -135,6 +136,8 @@ function Filter2({ listingsCount, children, setApplySort, setApplyFilter, makeNa
         );
     }
 
+
+   
 
 
     return (

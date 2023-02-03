@@ -541,7 +541,7 @@ export function updateUserDetails(payload) {
 }
 
 export function getShowSerchFilters() {
-  headers = { ...headers, eventName: "FETCH_SEARCH_FILTERS" };
+  headers = { ...headers, eventName: "FETCH_SEARCH_FILTERS",userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/master/showserchFilters`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
