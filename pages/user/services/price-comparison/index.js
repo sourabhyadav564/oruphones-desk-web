@@ -362,9 +362,9 @@ function Index({ isFromEdit, brandsList }) {
                 <div className='col-span-1 border-r text-m-green text-center py-[16vh]'>
                     <p className='text-[20px] font-Roboto-Semibold'>Sell / Buy Mobiles</p>
                     <p className='text-[16px] font-Roboto-Regular'>Are you a seller or buyer of ORUphones</p>
-                    <div className='space-y-4 my-4'>
-                        <div className={showpage == 2 ? ("text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 cursor-default") : ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 cursor-default")} onClick={() => { setShowpage(1); setMake(null); setmarketingName(null); setStorage(null); setLeastSellingprice(""); setMaxsellingprice(""); setGetExternalSellerData([]) }} >Sell</div>
-                        <div className={showpage == 2 ? ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 cursor-default") : ("text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 cursor-default")} onClick={() => { setShowpage(2); setMake2(null); setmarketingName2(null); setStorage2(null); setactive(false); setProducts([]) }}>Buy</div>
+                    <div className='space-y-4 my-4 cursor-pointer'>
+                        <div className={showpage == 2 ? (" text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ") : ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ")} onClick={() => { setShowpage(1); setMake(null); setmarketingName(null); setStorage(null); setLeastSellingprice(""); setMaxsellingprice(""); setGetExternalSellerData([]) }} >Sell</div>
+                        <div className={showpage == 2 ? ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ") : ("text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ")} onClick={() => { setShowpage(2); setMake2(null); setmarketingName2(null); setStorage2(null); setactive(false); setProducts([]) }}>Buy</div>
                     </div>
                 </div>
                 <div className='col-span-3 border-l '>
@@ -449,11 +449,11 @@ function Index({ isFromEdit, brandsList }) {
                                             </p>
                                         )}
                                     </span>
-                                    <div>
+                                    <div >
                                         <p className='text-[14px] font-medium pb-4 px-2'>Condition <span className='text-red-400'>*</span></p>
                                         {
                                             conditionOption.map((items, index) => (
-                                                <div key={index} className={`py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
+                                                <div key={index} className={`cursor-pointer py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
                                                     onClick={() => { setactive(true); setIndex(index); setDeviceCondition(items) }}>
                                                     {items}
                                                 </div>
