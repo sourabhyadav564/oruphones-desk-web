@@ -15,7 +15,7 @@ export default function Carousel({ children, className, ...rest }) {
     nextArrow: <ArrowRight />,
   };
   return (
-    <Slider className={`carousel  ${className ? className : ""}`} {...settings}>
+    <Slider className={`carousel  ${className ? className : ""} z-0`} {...settings}>
       {children}
     </Slider>
   );

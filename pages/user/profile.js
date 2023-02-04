@@ -16,11 +16,10 @@ function Profile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let payload = {
       // city: seletedCity,
       email: email || userInfo?.userdetails.email,
-      mobileNumber: user?.userdetails?.mobileNumber,
+      mobileNumber: userInfo?.userdetails?.mobileNumber,
       userName: name || userInfo.userdetails.userName,
       userUniqueId: Cookies.get("userUniqueId"),
     };

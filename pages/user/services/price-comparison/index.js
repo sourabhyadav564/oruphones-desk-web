@@ -485,7 +485,7 @@ function Index({ isFromEdit, brandsList }) {
                                                     )
                                                     }
                                                     {
-                                                        totalProducts ==0 && !loading ?(<div>No products available</div>):(<div></div>)
+                                                        totalProducts ==0 && !loading ?(<div className='w-[40vh]'>No products available</div>):(<div></div>)
                                                     }
                                                     
                                                 </div>
