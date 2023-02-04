@@ -330,7 +330,7 @@ function Index({ isFromEdit, brandsList }) {
             setLoading(false);
         }
 
-        if(make == null && marketingName == null && storage == null ){
+        if(make == null || (marketingName == null || storage == null) ){
             setactive(false);
         }
 
@@ -450,6 +450,7 @@ function Index({ isFromEdit, brandsList }) {
                                         )}
                                     </span>
                                     <div>
+                                        <p className='text-[14px] font-medium pb-4 px-2'>Condition <span className='text-red-400'>*</span></p>
                                         {
                                             conditionOption.map((items, index) => (
                                                 <div key={index} className={`py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
