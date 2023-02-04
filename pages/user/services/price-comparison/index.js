@@ -374,6 +374,7 @@ function Index({ isFromEdit, brandsList }) {
                                 <div>
                                     <span className='px-4 py-4'>
                                         <Select
+                                        star="*"
                                             labelName="Brand"
                                             //placeholder=""
                                             className={`${makeRequired} py-2`}
@@ -404,6 +405,7 @@ function Index({ isFromEdit, brandsList }) {
                                                     ? "Select.."
                                                     : { label: marketingName, value: marketingName }
                                             }
+                                            star="*"
                                             labelName="Model"
                                             disabled={isFromEdit}
                                             className={`${marketingNameRequired} py-2`}
@@ -430,6 +432,7 @@ function Index({ isFromEdit, brandsList }) {
                                                     ? "Select.."
                                                     : { label: storage, value: storage }
                                             }
+                                            star="*"
                                             labelName="Storage"
                                             disabled={isFromEdit}
                                             className={`${storageRequired} py-2`}
@@ -500,6 +503,7 @@ function Index({ isFromEdit, brandsList }) {
                             <div>
                                 <span className='px-4 py-4'>
                                     <Select
+                                    star="*"
                                         labelName="Brand"
                                         //placeholder=""
                                         className={`${makeRequired2} py-2`}
@@ -525,6 +529,7 @@ function Index({ isFromEdit, brandsList }) {
                                 </span>
                                 <span className='px-4 py-4'>
                                     <Select
+                                    star="*"
                                         value={
                                             marketingName2 === null
                                                 ? "Select.."
@@ -551,6 +556,7 @@ function Index({ isFromEdit, brandsList }) {
                                 </span>
                                 <span className='px-4 '>
                                     <Select
+                                    star="*"
                                         value={
                                             storage2 === null
                                                 ? "Select.."

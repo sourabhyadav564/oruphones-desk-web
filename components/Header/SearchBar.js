@@ -9,6 +9,8 @@ function SearchBar() {
   const [searchResults, setSearchResults] = useState();
   const [input, setInput] = useState("");
   const [brands, setBrands] = useState([]);
+  const [searchHistory,setSearchHistory] = useState([]);
+
   const ref = useRef();
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function SearchBar() {
     const checkIfClickedOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
         setSearchResults();
-        setInput("");
+        setInput(""); 
       }
     };
     document.addEventListener("mousedown", checkIfClickedOutside);
@@ -60,6 +62,9 @@ function SearchBar() {
   //   Cookies.set("brands", true);
   //   setBrands(brandsList);
   // }
+  const handlehistoryChange = () => {
+    console.log("brand ::: ", searchResults?.brandList[0]);
+  }
 
   return (
     <Fragment>
@@ -100,6 +105,7 @@ function SearchBar() {
                   clicked={() => {
                     setInput("");
                     setSearchResults();
+                    handlehistoryChange();
                   }}
                   key={item}
                   make={item}
@@ -115,6 +121,7 @@ function SearchBar() {
                   clicked={() => {
                     setInput("");
                     setSearchResults();
+                    handlehistoryChange();
                   }}
                   key={item}
                   make={searchResults && searchResults.marketingNameAndMakeMap && searchResults.marketingNameAndMakeMap[item]}
@@ -128,6 +135,7 @@ function SearchBar() {
                   clicked={() => {
                     setInput("");
                     setSearchResults();
+                    handlehistoryChange();
                   }}
                 >
                   Not found
