@@ -369,7 +369,7 @@ function BrandPage() {
     newPages = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [makeName, getSearchLocation, applySort, applyFilter]);
+  }, [makeName, getSearchLocation, applySort]);
 
   useEffect(() => {
 
@@ -426,7 +426,7 @@ function BrandPage() {
       if (verification?.length > 0) {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
-      setLoading(true);
+      // setLoading(true);
       Axios.searchFilter(
         payLoad,
         Cookies.get("userUniqueId") || "Guest",
@@ -439,7 +439,7 @@ function BrandPage() {
           response?.dataObject?.totalProducts
         );
         setBestDeal(response?.dataObject?.bestDeals);
-        setLoading(false);
+        // setLoading(false);
       });
     }
   }, [applyFilter, applySort]);

@@ -135,8 +135,8 @@ function CategoryPage() {
   const loadMoreData = () => {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
-    
     setIsLoadingMore(true);
+
     if (categoryType && !isFilterApplied) {
       Axios.shopByCategory(
         getSearchLocation,
@@ -145,6 +145,11 @@ function CategoryPage() {
         newPages,
         applySort
       ).then((response) => {
+
+         setLoading(false);
+        // setPageNumber(pageNumber + 1);
+        setIsLoadingMore(false);
+
         if (response?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [
             ...products,
@@ -162,12 +167,13 @@ function CategoryPage() {
           );
         }
 
-        setLoading(false);
+        // setLoading(false);
         // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
     } else {
-      const { condition, color, storage, Ram, warranty, verification, priceRange } =
+      setIsFilterApplied(true);
+      const { condition, color,brand, storage, Ram, warranty, verification, priceRange } =
         applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
@@ -202,9 +208,9 @@ function CategoryPage() {
         if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
-        if (color?.length > 0) {
-          payLoad.color = color.includes("all") ? [] : color;
-        }
+        // if (color?.length > 0) {
+        //   payLoad.color = color.includes("all") ? [] : color;
+        // }
         if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         } else if (router.query.categoryType == "brandWarranty") {
@@ -220,11 +226,11 @@ function CategoryPage() {
         Axios.searchFilter(
           payLoad,
           Cookies.get("userUniqueId") || "Guest",
-          pageNumber
+          newPages
         ).then((response) => {
           setIsFilterApplied(true);
           setIsLoadingMore(false);
-          setLoading(false);
+          // setLoading(false);
           if (newPages == 0) {
             setProducts(response?.dataObject?.otherListings);
           } else {
@@ -316,7 +322,7 @@ function CategoryPage() {
         pageNumber
       ).then((response) => {
 
-        setIsLoadingMore(false);
+        // setIsLoadingMore(false);
         setLoading(false);
         if (newPages == 0) {
           setProducts(response?.dataObject?.otherListings);

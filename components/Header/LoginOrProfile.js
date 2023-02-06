@@ -7,15 +7,19 @@ import AppContext from "@/context/ApplicationContext";
 import Notifications from "../Notifications";
 import Cookies from "js-cookie";
 import { getAllNotificationByUserd } from "api/axios";
+import { useRouter } from "next/router";
+
 
 function LoginOrProfile() {
+  const router = useRouter();
   const [showLogin, setShowLogin] = React.useState(false);
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState();
   const [notifications, setNotifications] = useState();
   const [userAuthenticated, setUserAuthenticated] = useState(false);
-
+  const [performAction, setPerformAction] = useState(false);
   const { logout } = useContext(AuthContext);
   const { setUserInfo } = useContext(AppContext);
+  const [ItemLink,setItemLink] = useState('');
 
   const isUserAuthenticated = false;
   useEffect(() => {
@@ -36,6 +40,16 @@ function LoginOrProfile() {
       );
     });
   }, []);
+
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      if(performAction == true && showLogin == false && ItemLink !== '' && Cookies.get('userUniqueId')!==undefined){
+        setPerformAction(false);
+        clearInterval(interval);
+        router.push(ItemLink);
+      }
+    },1000) 
+  },[showLogin]);
 
   return (
     <React.Fragment className="z-50">
@@ -83,12 +97,71 @@ function LoginOrProfile() {
         </div>
       ) : (
         <React.Fragment>
-          <button
-            className="cursor-pointer w-20 h-8 border border-solid border-m-green-1 rounded-md  self-center  text-m-green-1 font-Roboto-Regular text-smallFontSize hover:bg-m-green-1 duration-500 hover:border-m-green-1 hover:text-white font-bold hover:scale-110 transition-all"
-            onClick={() => setShowLogin(true)}
-          >
-            Log In
-          </button>
+           <div className="flex space-x-1 items-center h-full w-20">
+          <Notifications />
+          {/* <span>
+            {(
+              <span className="absolute mr-16 text-smallFontSize font-Roboto-Semibold text-m-green rounded-full flex items-center justify-center">
+                {unreadNotificationsCount}
+              </span>
+            )}
+          </span> */}
+          <div className="relative inline-block group">
+            <FaRegUserCircle
+              size={30}
+              className="text-m-green cursor-pointer"
+            />
+            <div className="absolute z-50 hidden group-hover:block transform -translate-x-1/2 left-1/2 bg-transparent">
+              <div className="flex flex-col items-center">
+                <div className="w-10 overflow-hidden inline-block">
+                  <div className="h-7 w-7 bg-white rotate-45 transform origin-bottom-left"></div>
+                </div>
+                <div className="-mt-1 grid grid-cols-1 w-64 rounded px-4 shadow-md pb-2 bg-white border-t-4 border-transparent">
+                  <p className="text-center text-regularFontSize pt-4 pb-2 font-Roboto-Semibold text-m-grey-1">
+                    My Account
+                  </p>
+                  <NavListItem text="My Profile" 
+                  // link="/user/profile"
+                    onClick={() => {
+                      setShowLogin(true)
+                      setPerformAction(true);
+                      setItemLink('/user/profile')
+                    }}/>
+                  <NavListItem text="My Listings" 
+                  // link="/user/listings"  
+                  onClick={() => {
+                      setShowLogin(true)
+                      setPerformAction(true);
+                      setItemLink('/user/listings')
+                    }} />
+                  <NavListItem text="My Favorites"
+                  //  link="/user/favorites"
+                     onClick={() => {
+                      setShowLogin(true)
+                      setPerformAction(true);
+                      setItemLink('/user/favorites')
+                    }}/>
+                  <NavListItem text="ORU Services"
+                  //  link="/user/services" 
+                    onClick={() => {
+                      setShowLogin(true)
+                      setPerformAction(true);
+                      setItemLink('/user/services');
+                    }}/>
+                  {/* Add logout function */}
+                  <NavListItem
+                    text="Login"
+                    // link="/"
+                    onClick={() => {
+                      setShowLogin(true)
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
           <LoginPopup open={showLogin} setOpen={setShowLogin} />
         </React.Fragment>
       )}

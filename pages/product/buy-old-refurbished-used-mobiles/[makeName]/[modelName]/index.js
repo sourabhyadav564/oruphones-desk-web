@@ -151,7 +151,7 @@ const Products = () => {
     setPageNumber(newPages);
     setIsLoadingMore(true);
    
-    if (!isFilterApplied) {
+    if (modelName && !isFilterApplied) {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
           getSearchLocation,
@@ -183,13 +183,14 @@ const Products = () => {
         //   setBestDeals((data && data?.dataObject?.bestDeals) || []);
         //   // setProductsData((data && data?.dataObject?.bestDeals) || []);
         // }
+        setIsLoadingMore(false);
       };
       if (modelName) {
         fetchData();
       }
     } else {
       setIsFilterApplied(true);
-      alert("applyfilter" + applyFilter);
+      // alert("applyfilter" + applyFilter);
       const {
         brand,
         condition,
@@ -235,16 +236,16 @@ const Products = () => {
         if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
-        if (color?.length > 0) {
-          payLoad.color = color.includes("all") ? [] : color;
-        }
+        // if (color?.length > 0) {
+        //   payLoad.color = color.includes("all") ? [] : color;
+        // }
         if (warranty?.length > 0) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         }
         if (verification?.length > 0) {
           payLoad.verified = verification.includes("all") ? [] : "verified";
         }
-        setLoading(true);
+        // setLoading(true);
         Axios.searchFilter(
           payLoad,
           Cookies.get("userUniqueId") || "Guest",
@@ -252,6 +253,7 @@ const Products = () => {
           applySort
         ).then((response) => {
           setIsFilterApplied(true);
+          setIsLoadingMore(false);
           if (newPages == 0) {
             setProducts(response?.dataObject?.otherListings);
           } else {
@@ -270,7 +272,7 @@ const Products = () => {
               ...response?.dataObject?.bestDeals,
             ]);
           }
-          setLoading(false);
+          // setLoading(false);
         });
       }
     }
@@ -281,10 +283,10 @@ const Products = () => {
 
   useEffect(() => {
     intialPage = 0;
-    newPages = 0;
+    // newPages = 0;
     setPageNumber(intialPage);
     loadData(intialPage);
-  }, [modelName, getSearchLocation, applySort, applyFilter]);
+  }, [modelName, getSearchLocation,applySort]);
 
   useEffect(() => {
     const {
@@ -302,12 +304,12 @@ const Products = () => {
       if (makeName === "oneplus") {
         makeName = "OnePlus";
       } else {
-        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+        makeName = makeName?.charAt(0).toUpperCase() + makeName?.slice(1);
       }
       let payLoad = {
         listingLocation: getSearchLocation,
         make: brand?.length > 0 ? brand : [makeName],
-        marketingName: [modelName.replace("+", "%2B")],
+        marketingName: [modelName?.replace("+", "%2B")],
         reqPage: "BBNM",
         color: [],
         deviceCondition: [],
@@ -362,13 +364,13 @@ const Products = () => {
 
  
 
-  const sortingProducts = getSortedProducts(applySort, products);
+  // const sortingProducts = getSortedProducts(applySort, products);
 
   return (
     <main className="container py-4">
       <h1 className="sr-only">{modelName} Page</h1>
       <Filter
-        listingsCount={sortingProducts?.length + bestDeals?.length}
+        listingsCount={products?.length + bestDeals?.length}
         setApplySort={setApplySort}
         setApplyFilter={setApplyFilter}
       >
@@ -393,8 +395,8 @@ const Products = () => {
           Total Products ({totalProducts})
         </h4>
         <div className="grid grid-cols-3 gap-4">
-          {!isLoading && sortingProducts && sortingProducts.length > 0 ? (
-            sortingProducts?.map((product, index) => (
+          {!isLoading && products && products.length > 0 ? (
+            products?.map((product, index) => (
               <div
                 key={index}
                 onClick={() => {
@@ -416,7 +418,7 @@ const Products = () => {
           )}
         </div>
         {!isLoading &&
-          isFinished == false &&
+          isFinished === false &&
           products.length != totalProducts && (
             <span
               className={`${
