@@ -31,6 +31,7 @@ function LoginOrProfile() {
     return () => { };
   });
 
+  
   useEffect(() => {
     getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
       setNotifications(response?.dataObject?.notifications);

@@ -179,10 +179,10 @@ function Index({ isFromEdit, brandsList }) {
             make: make2,
             marketingName: marketingName2,
             deviceCondition: "Like New",
-            warrantyPeriod: warranty,
-            hasCharger: charger === "Y" ? "Y" : "N",
-            hasEarphone: headphone1 === "Y" ? "Y" : "N",
-            hasOriginalBox: originalBox1 === "Y" ? "Y" : "N",
+            warrantyPeriod: 'zero',
+            hasCharger: charger === "Y" ,
+            hasEarphone: headphone1 === "Y" ,
+            hasOriginalBox: originalBox1 === "Y" ,
         };
         if (make2 !== null && marketingName2 !== null && storage2 !== null) {
             Axios.getExternalSellSourceData(payload).then((response) => {

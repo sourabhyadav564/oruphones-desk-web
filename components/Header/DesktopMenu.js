@@ -10,6 +10,10 @@ import { useContext } from "react";
 import AppContext from "@/context/ApplicationContext";
 import { GrLocation } from "react-icons/gr";
 import { MdLocationOn } from "react-icons/md";
+import Cookies from "js-cookie";
+import LoginPopup from "../Popup/LoginPopup";
+import { useRouter } from "next/router";
+
 
 const menus = [
   {
@@ -42,6 +46,11 @@ const menus = [
     chlink: "/product/buy-old-refurbished-used-mobiles/bestdealnearyou",
   },
   // {
+  //   name: "Services",
+  //   options: [],
+  //   chlink: "/user/services",
+  // },
+  // {
   //   name: "Shop by Grade",
   //   options: [],
   // },
@@ -49,9 +58,33 @@ const menus = [
 ];
 
 function DesktopMenu({ menuItems }) {
+  const router = useRouter();
   let menusResponse = [];
   const [openLocationPopup, setOpenLocationPopup] = useState(false);
   const { getSearchLocation } = useContext(AppContext);
+  const [authenticated,setauthenticated] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+ const [ItemLink,setItemLink] =useState('');
+ const [performAction, setPerformAction] = useState(false);
+
+ useEffect(() => {
+  if (Cookies.get("userUniqueId") !== undefined) {
+    setauthenticated(true);
+  } else {
+    setauthenticated(false);
+  }
+  return () => { };
+});
+
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      if(showLogin == false && ItemLink !== ''  && Cookies.get('userUniqueId')!==undefined){
+        setPerformAction(false);
+        clearInterval(interval);
+        router.push(ItemLink);
+      }
+    },1000) 
+  },[showLogin]);
 
   // const [toggle, setToggle] = useState(false)
 
@@ -107,6 +140,8 @@ function DesktopMenu({ menuItems }) {
   //       }
   //     );
   // }, []);
+
+  
 
   return (
     <nav className="px-0 h-12 bg-m-green-1 bg-no-repeat items-center flex flex-row justify-between" data-aos="fade-down">
@@ -224,11 +259,38 @@ function DesktopMenu({ menuItems }) {
               </Link>
             )
           )}
+          {
+            authenticated ? (
+              <NavListItem text="Services" 
+              link="/user/profile"
+              />
+          ):(
+             <NavListItem text="Services" 
+             // link="/user/profile"
+               onClick={() => {
+                 setShowLogin(true)
+                 setPerformAction(true);
+                 setItemLink('/user/services')
+               }}/>)
+          }
+         
         </Popover.Group>
       </span>
+      <LoginPopup open={showLogin} setOpen={setShowLogin} />
       <LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
     </nav>
   );
 }
 
 export default DesktopMenu;
+
+const NavListItem = ({ text, link, onClick }) => (
+  <Link href={link || "#"} passHref>
+    <a
+      className="text-m-white px-4 opacity-100 font-light px-2"
+      onClick={onClick}
+    >
+      {text}
+    </a>
+  </Link>
+);
