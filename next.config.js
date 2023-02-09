@@ -27,7 +27,8 @@ module.exports = {
       "zenroecom.s3.us-west-2.amazonaws.com",
       "zenrodeviceimages.s3-us-west-2.amazonaws.com",
       "demo-bucket-c2c-001.s3.amazonaws.com",
-      "d1tl44nezj10jx.cloudfront.net"
+      "d1tl44nezj10jx.cloudfront.net",
+      "images.unsplash.com"
     ],
   },
 };

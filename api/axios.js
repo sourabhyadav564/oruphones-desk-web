@@ -422,7 +422,7 @@ export function getListedDeviceInfo(listingid, userUniqueId, sessionId) {
   headers = {
     ...headers,
     eventName: "FETCH_LISTING_DETAILS",
-    userUniqueId: userUniqueId,
+    userUniqueId: 0,
     sessionId: sessionId,
   };
   const DEFAULT_HEADER = { headers: { ...headers } };

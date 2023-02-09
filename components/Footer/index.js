@@ -223,6 +223,9 @@ const Footer = () => {
           <Link href="/contact-us">
             <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
           </Link>
+          <Link href="/team">
+            <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Team</a>
+          </Link>
         </div>
         <div>
           <div className="flex flex-col">

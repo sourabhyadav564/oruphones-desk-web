@@ -22,7 +22,8 @@ import Logo from "@/assets/oru_phones_logo.png";
 // import { useRecoilValue } from "recoil";
 import { useRouter } from "next/router";
 
-function ProductDetails({ listingInfo }) {
+function ProductDetails({ listingInfo,data }) {
+  console.log("listing Info :: ",listingInfo);
   let [simliarProducts, setSimliarProducts] = useState([]);
   const { getSearchLocation } = useContext(AppContext);
   const [openImageFullView, setOpenImageFullView] = useState(false);
@@ -31,6 +32,8 @@ function ProductDetails({ listingInfo }) {
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+
+  console.log("data:::",listingInfo);
 
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
@@ -230,6 +233,9 @@ export async function getServerSideProps({ req, res, query }) {
     sessionId || ""
   );
   return {
-    props: { listingInfo: listingInfo?.dataObject || [] },
+    props: { 
+      listingInfo: listingInfo?.dataObject || [] },
   };
+
+
 }

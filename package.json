@@ -30,6 +30,7 @@
     "react-geocode": "^0.2.3",
     "react-icons": "^4.4.0",
     "react-loading-skeleton": "^3.1.0",
+    "react-parallax-tilt": "^1.7.100",
     "react-select": "^5.2.1",
     "react-slick": "^0.28.1",
     "react-toastify": "^8.1.0",

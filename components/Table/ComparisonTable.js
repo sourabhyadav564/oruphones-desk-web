@@ -11,7 +11,7 @@ import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 
 function ComparisonTable(data, listingId) {
-  
+  console.log("1",data);
   const [productData, setProductData] = useState([]);
   const [thisPhoneListingId, setThisPhoneListingId] = useState(listingId);
   useEffect(() => {
@@ -89,6 +89,7 @@ function ComparisonTable(data, listingId) {
                   <BsInfoCircle size={14} classname="" />
                 </div>
               </th>
+              
               <th
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center"
@@ -118,6 +119,12 @@ function ComparisonTable(data, listingId) {
                   <p className="pr-1">Oru Verified</p>
                   <BsInfoCircle size={14} classname="pl-1" />
                 </div>
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray"
+              >
+                Location
               </th>
             </tr>
           </thead>
@@ -241,6 +248,9 @@ function ComparisonTable(data, listingId) {
                           ? "Verified"
                           : "Not Verified"
                         : "None"}
+                    </td>
+                    <td class="px-2 py-4 border-[1px] font-Roboto-Semibold">
+                      {item?.Object?.listingLocation}
                     </td>
                   </tr>
                 );

@@ -262,7 +262,7 @@ function DesktopMenu({ menuItems }) {
           {
             authenticated ? (
               <NavListItem text="Services" 
-              link="/user/profile"
+              link="/user/services"
               />
           ):(
              <NavListItem text="Services" 

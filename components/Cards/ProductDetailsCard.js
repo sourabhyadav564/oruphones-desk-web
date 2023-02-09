@@ -32,6 +32,7 @@ import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 import * as Axios from "../../api/axios";
 import ComparisonTable from "../Table/ComparisonTable";
+import ComparisonTable2 from "../Table/ComparisonTable2";
 
 function ProductDetailsCard({ data, openFullImage }) {
   const [performAction2, setPerformAction2] = useState(false);
@@ -39,6 +40,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [openInfo, setOpenInfo] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
   const [openWarrantyInfoPopup, setWarrantyInfoPopup] = useState(false);
+  const [deailsData,setDetailsData] = useState([]);
   const [
     openRequestVerificationSuccessPopup,
     setRequestVerificationSuccessPopup,
@@ -48,6 +50,8 @@ function ProductDetailsCard({ data, openFullImage }) {
 
   const [deviceListingInfo, setDeviceListingInfo] = useState(data);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [ListingResData, SetListingtResData] = useState([]);
+
   const myRef = useRef(null);
 
   let filled =
@@ -69,6 +73,7 @@ function ProductDetailsCard({ data, openFullImage }) {
       return <BsStar className="text-black-7e" />;
     }
   };
+
 
   // const executeScroll = () => {
   //   myRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -99,12 +104,18 @@ function ProductDetailsCard({ data, openFullImage }) {
     }, 1000);
   }, [showLoginPopup]);
 
+  useEffect(()=>{
+    setDetailsData(data.similarListTable);
+    console.log("similarListTable : ", deailsData);
+  })
+  
   useEffect(() => {
     if (openRequestVerificationSuccessPopup) {
       setListingid(data?.listingId);
       Axios.sendverification(
         listingid,
-        Cookies.get("userUniqueId") || "Guest"
+        Cookies.get("userUniqueId") || "Guest",
+        
       ).then((response) => {
         setResData(response);
         // if (response.status == "SUCCESS") {
@@ -114,6 +125,7 @@ function ProductDetailsCard({ data, openFullImage }) {
     }
   }, [openRequestVerificationSuccessPopup]);
 
+  
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
@@ -503,6 +515,15 @@ function ProductDetailsCard({ data, openFullImage }) {
                   }
                 />
               }
+               {
+                <ComparisonTable2
+                  data={data.similarListTable}
+                  listingId={
+                    data.listingId !== undefined ? data?.listingId : []
+                  }
+                />
+              }
+
             </div>
           )}
           <div className="">
@@ -576,6 +597,7 @@ function ProductDetailsCard({ data, openFullImage }) {
           </div>
         </div>
         <ComparisonTable />
+       
       </div>
       <DeviceVerificationReport
         open={openDeviceReport}
