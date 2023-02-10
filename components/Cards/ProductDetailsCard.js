@@ -40,7 +40,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [openInfo, setOpenInfo] = useState(false);
   const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
   const [openWarrantyInfoPopup, setWarrantyInfoPopup] = useState(false);
-  const [deailsData,setDetailsData] = useState([]);
+  const [details,setDetailsData] = useState([]);
   const [
     openRequestVerificationSuccessPopup,
     setRequestVerificationSuccessPopup,
@@ -106,7 +106,7 @@ function ProductDetailsCard({ data, openFullImage }) {
 
   useEffect(()=>{
     setDetailsData(data.similarListTable);
-    console.log("similarListTable : ", deailsData);
+    console.log("similarListTable : ", details);
   })
   
   useEffect(() => {

@@ -221,3 +221,24 @@ input::-webkit-inner-spin-button {
 .blues{
   /* add light blue filter */
  }
+
+
+ @layer utilities {
+  @variants responsive {
+      .mostly-customized-scrollbar::-webkit-scrollbar {
+          width: 5px;
+          height: 0px;
+          background-color: #aaa;
+      }
+      .mostly-customized-scrollbar::-webkit-scrollbar-thumb {
+          background: #000;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: 20px;
+      }
+  }
+}

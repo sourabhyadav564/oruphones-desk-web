@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
 import ShowBy from "@/components/Home/ShopBy";
+import SellBuyFlow from "@/components/SellBuyFlow";
 
 export default function Home({
   brandsList,
@@ -103,6 +104,7 @@ export default function Home({
         {/* <TopArticles articles={fetchTopArticles}/> */}
         {/* <TopArticles articles={topArticles} /> */}
         <ShowBy />
+        <SellBuyFlow/>
         <DownloadApp />
         <HomeContent />
         <NewsLetter />

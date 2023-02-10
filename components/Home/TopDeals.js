@@ -19,7 +19,7 @@ import Link from "next/link";
 
 function TopDeals({ location }) {
   // const [loc, setLoc] = useState("Best Deals Near You (" + location + ")");
-  const [bestDeals, setBeatDeals] = useState();
+  const [bestDeals, setBeatDeals] = useState([]);
   const [openLocationPopup, setOpenLocationPopup] = useState(false);
   const [isLoading, setLoading] = useState(true);
   let [pageNumber, setPageNumber] = useState(0);
