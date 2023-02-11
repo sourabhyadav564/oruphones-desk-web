@@ -474,62 +474,10 @@ function ProductDetailsCard({ data, openFullImage }) {
           </div>
         </div>
         <div>
-          {data?.externalSource && data?.externalSource?.length > 0 && (
-            <div>
-           
-              <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light  capitalize mb-2">
-                Detailed Comparison Between Other Sellers
-              </p>
-              <div className="bg-gray-600 h-1 border-2 border-white "></div>
-              <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row">
-                {data?.marketingName + "  ("}
-                {data?.make != "Apple" && data?.deviceRam + " / "}
-                {data?.deviceStorage + ") - "}
-                Condition: {data?.deviceCondition}
-              </div>
-              <div className="flex">
-                <span className="text-smallFontSize font-Roboto-light">
-                  *The products compared here are either used mobile phones,
-                  refurbished/renewed smartphone or second hand mobile phones.
-                  These are not new phones.
-                </span>
-              </div>
-              {/* <div className="flex flex-row"> */}
-              {/* {data?.make != "Apple" && (
-                <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
-                  Ram : {data?.deviceRam}
-                </div>
-              )} */}
-              {/* <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
-                Storage : {data?.deviceStorage}
-              </div> */}
-              {/* <div className="text-m-green-1 font-Roboto-Bold text-sm">
-                Condition : {data?.deviceCondition}
-              </div> */}
-              {/* </div> */}
-              {
-                <ComparisonTable
-                  data={data.compareData}
-                  listingId={
-                    data.listingId !== undefined ? data?.listingId : []
-                  }
-                />
-              }
-               {
-                <ComparisonTable2
-                  data={data.similarListTable}
-                  listingId={
-                    data.listingId !== undefined ? data?.listingId : []
-                  }
-                />
-              }
-
-            </div>
-          )}
           <div className="">
             {data && data?.cosmetic && (
               <>
-                <h2 className="mt-20 text-gray-20 font-Roboto-Light text-regularFontSize mb-3">
+                <h2 className="mt-12 text-gray-20 font-Roboto-Light text-regularFontSize mb-3">
                   Device Cosmetic Report
                 </h2>
                 <div className="pb-4">
@@ -580,7 +528,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                   );
                 })}
             </div>
-            <div className="pl-28">
+            <div className="pl-28 mb-8">
               {data?.functionalTestResults &&
                 data?.functionalTestResults.map((items, index) => {
                   return (
@@ -596,6 +544,64 @@ function ProductDetailsCard({ data, openFullImage }) {
             </div>
           </div>
         </div>
+        {data?.externalSource && data?.externalSource?.length > 0 && (
+            <div>
+           
+              <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light  capitalize mb-2">
+                Detailed Comparison Between Other Sellers
+              </p>
+              <div className="bg-gray-600 h-1 border-2 border-white "></div>
+              <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row">
+                {data?.marketingName + "  ("}
+                {data?.make != "Apple" && data?.deviceRam + " / "}
+                {data?.deviceStorage + ") - "}
+                Condition: {data?.deviceCondition}
+              </div>
+              <div className="flex">
+                <span className="text-smallFontSize font-Roboto-light">
+                  *The products compared here are either used mobile phones,
+                  refurbished/renewed smartphone or second hand mobile phones.
+                  These are not new phones.
+                </span>
+              </div>
+              {/* <div className="flex flex-row"> */}
+              {/* {data?.make != "Apple" && (
+                <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
+                  Ram : {data?.deviceRam}
+                </div>
+              )} */}
+              {/* <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
+                Storage : {data?.deviceStorage}
+              </div> */}
+              {/* <div className="text-m-green-1 font-Roboto-Bold text-sm">
+                Condition : {data?.deviceCondition}
+              </div> */}
+              {/* </div> */}
+              {
+                <ComparisonTable
+                  data={data?.compareData}
+                  listingId={
+                    data?.listingId !== undefined ? data?.listingId : []
+                  }
+                />
+              }
+               {
+                <ComparisonTable2
+                data={
+                  data?.similarListTable && data?.similarListTable?.length > 0 ? data?.similarListTable : []
+                }
+                listingId={data?.listingId !== undefined ? data?.listingId : []}
+              />
+                // <ComparisonTable2
+                //   data={data.similarListTable}
+                //   listingId={
+                //     data.listingId !== undefined ? data?.listingId : []
+                //   }
+                // />
+              }
+
+            </div>
+          )}
         <ComparisonTable />
        
       </div>

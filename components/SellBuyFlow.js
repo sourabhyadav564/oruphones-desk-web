@@ -28,7 +28,7 @@ function SellBuyFlow() {
                       className="text-smallFontSize font-Roboto-Semibold text-center pt-2" >How to Sell</span>
                   </div>
 
-                  <div 
+                  {/* <div 
                      className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative"
                     >
                     <Image
@@ -52,7 +52,7 @@ function SellBuyFlow() {
                     />
                     <span
                       className="text-smallFontSize font-Roboto-Semibold text-center pt-2" >Why ORUPhones</span>
-                  </div>
+                  </div> */}
                   </div>
         <HowtoBuyPopup open={open} setOpen={setOpen}/>
     </div>
