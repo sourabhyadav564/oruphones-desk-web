@@ -116,31 +116,6 @@ function SearchBar() {
               maxHeight: 400,
             }}
           >
-            <div>
-              {recentSearch && showRecentSearch && recentSearch.length > 0 && (
-                <>
-                  <p className="px-4 py-3 block border-b text-primary text-regularFontSize">
-                    Recent Searches
-                  </p>
-                  <div>
-                    {recentSearch.map((item) => (
-                      <div className="flex items-center hover:bg-gray-100">
-                        <BiTimeFive className="w-5 h-5 ml-4 -mr-4 z-50"/>
-                        <ListItem
-                          clicked={() => {
-                            setInput("");
-                            setSearchResults();
-                            showRecentSearch = true;
-                          }}
-                          marketingName={item}
-                          make={item && item.split(" ")[0]}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
 
             {searchResults.brandList && searchResults.brandList.length > 0 && (
               <p className="px-4 py-3 block border-b text-m-green">Brand</p>
@@ -199,6 +174,31 @@ function SearchBar() {
                   Not found
                 </ListItem>
               )}
+              <div>
+              {recentSearch && showRecentSearch && recentSearch.length > 0 && (
+                <>
+                  <p className="px-4 py-3 block border-b text-primary text-regularFontSize">
+                    Recent Searches
+                  </p>
+                  <div>
+                    {recentSearch.map((item) => (
+                      <div className="flex items-center hover:bg-gray-100">
+                        <BiTimeFive className="w-5 h-5 ml-4 -mr-4 z-50"/>
+                        <ListItem
+                          clicked={() => {
+                            setInput("");
+                            setSearchResults();
+                            showRecentSearch = true;
+                          }}
+                          marketingName={item}
+                          make={item && item.split(" ")[0]}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         )}
         <div className="absolute right-[10px]  top-0 bottom-0 flex items-center px-4 ">
@@ -229,7 +229,7 @@ const ListItem = ({ make, makeLink, marketingName, children, clicked }) => {
     if (localStorage.getItem("pastSearches")) {
       pastSearch = localStorage.getItem("pastSearches");
       pastSearch = JSON.parse(pastSearch);
-      pastSearch = pastSearch.filter((item) => item !== marketingName || make);
+      pastSearch = pastSearch.filter((item) => item !== (marketingName || make));
     }
     if (pastSearch.length >= 5) {
       pastSearch.shift();
