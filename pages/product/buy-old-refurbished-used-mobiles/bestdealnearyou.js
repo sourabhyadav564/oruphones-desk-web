@@ -7,6 +7,7 @@ import ProductCard from "@/components/Cards/ProductCard";
 import AppContext from "@/context/ApplicationContext";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
+import NoMatch from "@/components/NoMatch";
 import { useRouter } from "next/router";
 
 // import {
@@ -358,7 +359,7 @@ function Bestdealnearyou() {
         </h4>
         <div className="grid grid-cols-3 gap-4 mt-4">
           {!isLoading &&
-            isFinished == false ? (
+            isFinished == false && products && products.length > 0  ? (
             products?.map((product, index) => (
               <ProductCard
                 key={index}
@@ -369,7 +370,7 @@ function Bestdealnearyou() {
             ))
           ) : (
             <div className="col-span-3 h-96 items-center flex justify-center ">
-              {isLoading ? "Loading..." : "No match found"}
+              {isLoading ? "Loading..." : <NoMatch/>}
             </div>
           )}
         </div>

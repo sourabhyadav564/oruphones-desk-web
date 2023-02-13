@@ -79,7 +79,8 @@ export default function Notifications() {
         />
         {(
           <span className="absolute top-1 ml-5 bg-yellow2 w-6 text-smallFontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
-            {unreadNotificationsCount}
+            {unreadNotificationsCount == 0 ? <></> : unreadNotificationsCount
+            }
           </span>
         )}
       </div>

@@ -68,6 +68,8 @@ function LocationPicker() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
   };
 
+
+  
   useEffect(() => {
     const initialState = localStorage.getItem("usedLocation");
     if (!initialState || initialState == null) {
@@ -105,7 +107,10 @@ function LocationPicker() {
     }
   }, [location]);
 
+
   return null;
 }
+
+
 
 export default LocationPicker;

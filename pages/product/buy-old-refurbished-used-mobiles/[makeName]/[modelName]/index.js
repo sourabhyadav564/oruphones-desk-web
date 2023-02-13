@@ -8,6 +8,7 @@ import AppContext from "@/context/ApplicationContext";
 import * as Axios from "../../../../../api/axios";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
+import NoMatch from "@/components/NoMatch";
 
 // import {
 //   otherVendorDataState,
@@ -413,7 +414,7 @@ const Products = () => {
             ))
           ) : (
             <div className="col-span-3 h-96 items-center flex justify-center ">
-              {isLoading ? "Loading..." : "No match found"}
+              {isLoading ? "Loading..." : <NoMatch/>}
             </div>
           )}
         </div>

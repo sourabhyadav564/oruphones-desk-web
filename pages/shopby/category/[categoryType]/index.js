@@ -449,7 +449,7 @@ function CategoryPage() {
           </h4>
           <div className="grid grid-cols-3 gap-4">
             {!isLoading &&
-              isFinished === false ? (
+              isFinished === false && products && products.length > 0 ? (
               products?.map((product, index) => (
                 <div
                   key={index}

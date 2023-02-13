@@ -9,6 +9,8 @@ import AppContext from "@/context/ApplicationContext";
 import { useContext } from "react";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
+import NoMatch from "@/components/NoMatch";
+
 
 const settings = {
   slidesToShow: 1,
@@ -353,7 +355,7 @@ const Pricerange = () => {
             ))
           ) : (
             <div className="col-span-3 h-96 items-center flex justify-center ">
-              {isLoading ? "Loading..." : "No match found"}
+              {isLoading ? "Loading..." : <NoMatch/>}
             </div>
           )}
         </div>

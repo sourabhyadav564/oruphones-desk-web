@@ -19,7 +19,6 @@ function LocationPopup({ open, setOpen }) {
   // const [selectedCity, setSelectedCity] = useState();
   let cityInfo = [];
   const selectedCity = useRef();
-
   const { userInfo, setCities, setUserInfo, setSearchLocation } =
     useContext(AppContext);
 
@@ -90,6 +89,8 @@ function LocationPopup({ open, setOpen }) {
       }
     );
   };
+
+
 
   const onError = (error) => {
     // alert(error.message);
@@ -185,6 +186,9 @@ function LocationPopup({ open, setOpen }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  console.log("location",citiesResponse);
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -251,10 +255,11 @@ function LocationPopup({ open, setOpen }) {
                         options={
                           citiesResponse &&
                           citiesResponse
-                            ?.filter((item) => item.displayWithImage === "0")
-                            ?.map((items) => {
-                              return { label: items.city, value: items.city };
-                            })
+                          ?.sort((a, b) => a.city.localeCompare(b.city))
+                    ?.filter((item) => item.city != "India")
+                    .map((items) => {
+                      return { label: items.city, value: items.city };
+                    })
                         }
                       ></Select>
                     </div>
