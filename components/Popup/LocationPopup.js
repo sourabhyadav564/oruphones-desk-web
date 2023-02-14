@@ -187,7 +187,6 @@ function LocationPopup({ open, setOpen }) {
   }, []);
 
 
-  console.log("location",citiesResponse);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -256,10 +255,9 @@ function LocationPopup({ open, setOpen }) {
                           citiesResponse &&
                           citiesResponse
                           ?.sort((a, b) => a.city.localeCompare(b.city))
-                    ?.filter((item) => item.city != "India")
-                    .map((items) => {
-                      return { label: items.city, value: items.city };
-                    })
+                          ?.map((items, index) => {
+                            return { label: items.city, value: items.city };
+                          })
                         }
                       ></Select>
                     </div>

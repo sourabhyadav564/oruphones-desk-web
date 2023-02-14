@@ -162,7 +162,7 @@ const Products = () => {
           applySort
         );
         setLoading(false);
-        // setPageNumber(pageNumber + 1);
+        setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
         if (data?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [

@@ -15,6 +15,7 @@ function ProductCard({ data, prodLink, setProducts }) {
   const soldout = ` buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
     } ${data?.deviceStorage} ${data?.deviceCondition} soldout`.toLowerCase();
   const [imageError, setImageError] = useState(false);
+
   return (
     <div
       data-aos="fade-up">

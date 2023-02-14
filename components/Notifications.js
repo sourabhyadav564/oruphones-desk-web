@@ -11,7 +11,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 
 export default function Notifications() {
   const innerRef = useRef();
-  const [showNotification, setShowNotification] = React.useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [openAppDownload, setOpenAppDownload] = useState(false);
   const [notifications, setNotifications] = useState();
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState();

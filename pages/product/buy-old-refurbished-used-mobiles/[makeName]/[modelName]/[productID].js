@@ -33,13 +33,11 @@ function ProductDetails({ listingInfo,data }) {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  console.log("data:::",listingInfo);
-
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   // const productData = useRecoilValue(otherVandorDataSelector);
 
-  // const router = useRouter();
+  // const router = useRouter();  
   // const listingId = router.query.productID;
 
   // let otherVendorData = [];
@@ -77,9 +75,10 @@ function ProductDetails({ listingInfo,data }) {
       );
       setTotalProducts(response?.dataObject?.totalProducts);
       // setPageNumber(pageNumber + 1);
-     
     });
   };
+
+
 
   const loadMoreData = () => {
     let newPages = pageNumber + 1;

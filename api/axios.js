@@ -913,7 +913,7 @@ export function prepareShareLink(listingId, userUniqueId) {
 }
 
 export function getAllNotificationByUserd(userUniqueId) {
-  headers = { ...headers, eventName: "FETCH_NOTIFICATIONS" };
+  headers = { ...headers, eventName: "FETCH_NOTIFICATIONS" , userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/notification/byUserId/` + userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
