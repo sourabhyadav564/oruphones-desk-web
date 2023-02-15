@@ -1,12 +1,14 @@
 import { prepareShareLink } from "api/axios";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export default function ShareIcon({data, ...rest }) {
 
 function shareListingInfo(data){
+  console.log("data6 : ",data);
   prepareShareLink(data.listingId,Cookies.get("info") || "Guest").then((response)=>
   {
-    sharePopupInfo(response?.dataObject.url,response?.dataObject.content);
+    data?.status!="Active" ? toast.warning("This device is sold out"): sharePopupInfo(response?.dataObject.url,response?.dataObject.content);
   });
 }
 

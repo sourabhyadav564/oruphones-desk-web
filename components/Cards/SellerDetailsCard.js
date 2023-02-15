@@ -13,8 +13,10 @@ import first from "@/assets/first.png";
 import second from "@/assets/second.png";
 import third from "@/assets/third.png";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
+import { toast } from "react-toastify";
 
 function SellerDetailsCard({ data }) {
+  console.log('data4 ', data);
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -120,9 +122,11 @@ function SellerDetailsCard({ data }) {
       ).then((response) => {
         // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
+        console.log("data5 :",response);
       });
     }
     setOtherSeller(data?.externalSource);
+    
   }, [showNumber]);
 
   const openSellerWebSite = (e) => {
@@ -163,7 +167,7 @@ function SellerDetailsCard({ data }) {
             <span className="px-6">
               <div className="flex flex-row justify-between">
                 <button
-                  onClick={() => handleClick()}
+                  onClick={() => data?.status!="Active" ? toast.warning("This device is sold out"): handleClick()}
                   className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
                     } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
                 >
