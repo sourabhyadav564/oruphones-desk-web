@@ -1,3 +1,4 @@
+import ComparisonTable from "@/components/Table/ComparisonTable";
 import Axios from "axios";
 import Cookies from "js-cookie";
 
@@ -603,7 +604,7 @@ export function detailWithUserInfo(
 
 
 export function fetchSellerMobileNumber(listingid, userUniqueid) {
-  headers = { ...headers, eventName: "GET_SELLER_CONTACT" };
+  headers = { ...headers, eventName: "GET_SELLER_CONTACT",userUniqueId:0};
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL +

@@ -33,6 +33,7 @@ import WarrantyInfo from "../Popup/WarrantyInfo";
 import * as Axios from "../../api/axios";
 import ComparisonTable from "../Table/ComparisonTable";
 import ComparisonTable2 from "../Table/ComparisonTable2";
+import { toast } from "react-toastify";
 
 function ProductDetailsCard({ data, openFullImage }) {
   const [performAction2, setPerformAction2] = useState(false);
@@ -51,7 +52,8 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [deviceListingInfo, setDeviceListingInfo] = useState(data);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [ListingResData, SetListingtResData] = useState([]);
-
+  const [showNumber, setShowNumber] = useState(false);
+  
   const myRef = useRef(null);
 
   let filled =
@@ -125,14 +127,29 @@ function ProductDetailsCard({ data, openFullImage }) {
     }
   }, [openRequestVerificationSuccessPopup]);
 
+
+  const handleClick = () => {
+    if (Cookies.get("userUniqueId") === undefined) {
+      setPerformAction2(true);
+      setShowLoginPopup(true);
+    } else if (data?.verified) {
+      setShowNumber((prav) => !prav);
+    } else {
+      if (showNumber) {
+        setShowNumber((prav) => !prav);
+      } else {
+        setRequestVerificationSuccessPopup(true);
+      }
+    }
+  };
   
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
-        <div className="space-x-4 relative -right-2 flex items-center justify-end pr-4 -top-2">
+        <div className="space-x-4 relative -right-2 flex items-center justify-end pr-4 -top-2" >
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
-              <ShareIcon data={deviceListingInfo} width={16} height={16} />
+              <ShareIcon data={deviceListingInfo} width={16} height={16}  />
               <AddFav
                 data={deviceListingInfo}
                 setProducts={setDeviceListingInfo}
@@ -311,13 +328,13 @@ function ProductDetailsCard({ data, openFullImage }) {
                           <div
                             className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
                             onClick={() => {
-                              
-                              if (Cookies.get("userUniqueId") === undefined) {
-                                setPerformAction2(true);
-                                setShowLoginPopup(true);
-                              } else {
-                                setRequestVerificationSuccessPopup(true);
-                              }
+                              // if (Cookies.get("userUniqueId") === undefined) {
+                              //   setPerformAction2(true);
+                              //   setShowLoginPopup(true);
+                              // } else {
+                              //   setRequestVerificationSuccessPopup(true);
+                              // }
+                              data?.status!="Active" ? toast.warning("This device is sold out"): handleClick()
                             }}
                           >
                             <span
@@ -431,12 +448,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                     value={data?.verifiedDate || "Request Verification"}
                     showInfoPopup={() => setOpenInfo(true)}
                     showRequestVerificationSuccessPopup={() => {
-                      if (Cookies.get("userUniqueId") === undefined) {
-                        setPerformAction2(true);
-                        setShowLoginPopup(true);
-                      } else {
-                        setRequestVerificationSuccessPopup(true);
-                      }
+                      data?.status!="Active" ? toast.warning("This device is sold out"):handleClick()
                     }}
                     textAsLink={data?.verifiedDate != null ? false : true}
                     labelTextSize

@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { toast } from "react-toastify";
 import * as Axios from "../api/axios";
 import LoginPopup from "./Popup/LoginPopup";
 
