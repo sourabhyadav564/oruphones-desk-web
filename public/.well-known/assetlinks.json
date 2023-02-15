@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.oruphones.oru",
+            "sha256_cert_fingerprints": [
+                "93:15:85:B4:1A:3C:C9:C3:A7:C1:75:EC:D8:6E:FF:DB:48:FC:03:0F:AE:BF:D8:0B:1C:6B:3A:24:2C:A8:07:3C"
+            ]
+        }
+    }
+]
