@@ -144,9 +144,9 @@ function DesktopMenu({ menuItems }) {
   
 
   return (
-    <nav className="px-0 h-12 bg-m-green-1 bg-no-repeat items-center flex flex-row justify-between" data-aos="fade-down">
+    <nav className="px-0 h-12 bg-m-green-1 bg-no-repeat items-center flex flex-row justify-between " data-aos="fade-down">
       <span
-        className="text-white mt-0.5 pl-52 flex flex-row justify-start hover:cursor-pointer"
+        className="text-white mt-0.5 lg:pl-52 pl-8 flex flex-row justify-start hover:cursor-pointer"
         onClick={() => setOpenLocationPopup(true)}>
         <MdLocationOn className="mt-1.5 mr-1 text-[#fffffff]" />
         <span

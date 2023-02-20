@@ -150,7 +150,7 @@ function Header({ menuItems }) {
       <div className=" container w-full h-16 bg-m-white bg-no-repeat  flex items-center opacity-100 px-0 py-0 ">
 
         <Link href="/">
-          <a className="h-9 w-[75px] px-44 pr-0 py-[14px] mr-4 lg:mr-8 block relative">
+          <a className="h-9 md:w-[75px] px-32 pr-0 py-[14px] mr-4 lg:mr-8 block relative">
             <Image src={home_logo} alt="ORUphones" layout="fill" priority />
           </a>
         </Link>

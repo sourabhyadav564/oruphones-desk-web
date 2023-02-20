@@ -36,6 +36,7 @@ const Pricerange = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [products, setProducts] = useState([]);
   let intialPage = 0;
   let newPages = 0;
 
@@ -221,9 +222,9 @@ const Pricerange = () => {
             //   payLoad.verification = verification;
             // }
             if (newPages == 0) {
-              setProducts(response?.dataObject?.otherListings);
+              setOtherListings(response?.dataObject?.otherListings);
             } else {
-              setProducts((products) => [
+              setOtherListings((products) => [
                 ...products,
                 ...response?.dataObject?.otherListings,
               ]);

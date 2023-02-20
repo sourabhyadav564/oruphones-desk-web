@@ -1,7 +1,37 @@
 import { Transition } from "@headlessui/react";
+import { useEffect, useState } from "react";
 import { BiCurrentLocation, BiChevronDown } from "react-icons/bi";
+import LoginPopup from "../Popup/LoginPopup";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 function MobileMenu({ isOpen }) {
+  const router = useRouter();
+  const [showLogin, setShowLogin] = useState(false);
+  const [performAction, setPerformAction] = useState(false);
+  const [authenticated,setauthenticated] = useState(false);
+  const [ItemLink,setItemLink] =useState('');
+
+  useEffect(() => {
+    if (Cookies.get("userUniqueId") !== undefined) {
+      setauthenticated(true);
+    } else {
+      setauthenticated(false);
+    }
+    return () => { };
+  });
+
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      if(showLogin == false && ItemLink !== ''  && Cookies.get('userUniqueId')!==undefined){
+        setPerformAction(false);
+        clearInterval(interval);
+        router.push(ItemLink);
+      }
+    },1000) 
+  },[showLogin]);
+
+
   return (
     <Transition
       show={isOpen}
@@ -31,24 +61,39 @@ function MobileMenu({ isOpen }) {
               <span className="flex-1 text-center">Hyderbad</span>
               <BiChevronDown className="h-5 w-5" />
             </div>
-            <Item>IPhones</Item>
-            <Item>Samsung Phones</Item>
-            <Item>OnePlus Phones</Item>
-            <Item>Shop by Brand</Item>
-            <Item>Shop by Grade</Item>
-            <Item>Blogs</Item>
-            <Item>ORU App</Item>
+            <Item href="/product/models">Popular Models</Item>
+            <Item href='/product/buy-old-refurbished-used-mobiles/apple'>Apple</Item>
+            <Item href='/product/buy-old-refurbished-used-mobiles/samsung'>Samsung</Item>
+            <Item href='/product/buy-old-refurbished-used-mobiles/oneplus'>One Plus</Item>
+            <Item href='https://www.oruphones.com/blog/'>Blog</Item>
+            <Item href='/product/buy-old-refurbished-used-mobiles/bestdealnearyou'>Best Deals</Item>
+            {
+            authenticated ? (
+              <Item  
+              href="/user/services"
+              >Services</Item>
+          ):(
+             <Item  
+             // link="/user/profile"
+               onClick={() => {
+                 setShowLogin(true)
+                 setPerformAction(true);
+                 setItemLink('/user/services')
+               }}>Services</Item>)
+          }
+           
           </div>
+          <LoginPopup open={showLogin} setOpen={setShowLogin} />
         </div>
-      )}
+     )}
     </Transition>
   );
 }
 
 export default MobileMenu;
 
-const Item = ({ href, children }) => (
-  <a href={href || "#"} className="hover:bg-gray-700 hover:text-white block px-4 py-2 rounded-md text-base font-medium">
+const Item = ({ href, children,onClick }) => (
+  <a href={href || "#"}  onClick={onClick} className="hover:bg-gray-700 hover:text-white block px-4 py-2 rounded-md text-base font-medium">
     {children}
   </a>
 );

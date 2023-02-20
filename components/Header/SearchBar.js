@@ -86,7 +86,7 @@ function SearchBar() {
   return (
     <Fragment>
       <div className="flex-1 relative custom-scroll h-8" ref={ref}>
-        <div className="flex w-[715px] rounded bg-m-white-1 ">
+        <div className="flex w-full rounded bg-m-white-1 ">
           {/* <select className="w-[104px] pr-6 py-1 h-10 rounded border-none m-auto  items-center text-m-green-1 font-normal bg-[#D9D9D9] text-xs" >
             {brands.map((brand, index) => (
               <option key={index} value={brand.make}
@@ -107,6 +107,9 @@ function SearchBar() {
             }`}
             style={{ boxShadow: "0px 2px 3px #0000000A" }}
           />
+           <div className=" flex items-center px-4 ">
+          <BiSearch className="text-black-1" size={20} />
+        </div>
         </div>
         {searchResults && (
           <div
@@ -201,9 +204,7 @@ function SearchBar() {
             </div>
           </div>
         )}
-        <div className="absolute right-[10px]  top-0 bottom-0 flex items-center px-4 ">
-          <BiSearch className="text-black-1" size={20} />
-        </div>
+       
       </div>
     </Fragment>
   );
