@@ -20,30 +20,30 @@ function HowtoUsePopup({open,setOpen}) {
   return (
     <div>
           <Modal open={open} setOpen={setOpen} title={"Steps On How to Use ORUphones"}>
-            <div className='px-16  h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
+            <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
                 <div>
             <p className='text-[20px] font-semibold py-4'>1. Device Health Check</p>
                 <div className='flex items-center'>
                     <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>ORUphones provides best in industry device health check.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>ORUphones provides best in industry device health check.</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>Wait till you see this window.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>Wait till you see this window.</p>
                     <Image src={Image2} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 </div>
                 {/* <div className='flex items-center'>
                     <Image src={Image3} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>After filling all the fields above, click next</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>After filling all the fields above, click next</p>
                 </div> */}
                 <div>
                  <p className='text-[20px] font-semibold py-4'>2. Bettery Health</p>
                 <div className='flex items-center'>
                     <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>You can check your device bettery health in just one click.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>You can check your device bettery health in just one click.</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>Wait for 2-3 min to complete the process.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>Wait for 2-3 min to complete the process.</p>
                     <Image src={Image4} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 </div>
@@ -52,10 +52,10 @@ function HowtoUsePopup({open,setOpen}) {
                 <p className='text-[20px] font-semibold py-4'>3. Price Comparison</p>
                 <div className='flex items-center'>
                     <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>Compare price of your device with other vendors.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>Compare price of your device with other vendors.</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>Fill all the Specification of your device to get accurate price.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>Fill all the Specification of your device to get accurate price.</p>
                     <Image src={Image5} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 </div>
@@ -65,7 +65,7 @@ function HowtoUsePopup({open,setOpen}) {
                 <p className='text-[20px] font-semibold py-4'>4. Device Details</p>
                 <div className='flex items-center'>
                     <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>We also provide your device details in just one click.</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-4 text-center'>We also provide your device details in just one click.</p>
                 </div>
                 <div className='items-center py-16'>
                     <p className='font-Roboto-Semibold w-80 px-4 text-center'>We want our users to do less work so we provide your device details like CPU, Hardware, Battery and manu more in just one click.</p>

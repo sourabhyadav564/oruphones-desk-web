@@ -19,7 +19,7 @@ function ProductCard({ data, prodLink, setProducts }) {
   return (
     <div
       data-aos="fade-up">
-      <span className="absolute pl-[250px] flex z-10 justify-between pt-2 w-full">
+      <span className="absolute md:pl-[220px] pl-[170px] flex z-10 justify-between pt-2 w-full">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}
@@ -47,7 +47,7 @@ function ProductCard({ data, prodLink, setProducts }) {
     // > */}
         <a>
           <div
-            className="w-full h-full rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
+            className="w-[32vh]  rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
 
             style={{ boxShadow: "2px 2px 10px #00000029", padding: " 0 10px" }}
           >

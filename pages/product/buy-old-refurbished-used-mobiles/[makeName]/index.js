@@ -558,10 +558,10 @@ function BrandPage() {
             />
           </div>}
 
-          <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
+          <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
             Total Products ({totalProducts})
           </h4>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4 justify-center gap-4 ">
             {!isLoading &&
               isFinished == false && products.length > 0 ? (
               products?.map((product, index) => (

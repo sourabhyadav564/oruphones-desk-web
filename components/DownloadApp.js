@@ -20,10 +20,10 @@ function DownloadApp() {
     <section className="w-full pt-5">
       <div className="flex flex-col sm:flex-row justify-between items-center p-4 pt-12 sm:p-12 bg-bg-mask-1 bg-no-repeat bg-cover sm:bg-center bg-m-green text-white rounded-md" data-aos="zoom-in">
         <div className="px-8">
-          <p className="pb-4 font-Roboto-Bold" style={{ fontSize: 40 }}>
+          <p className="pb-4 font-Roboto-Bold md:text-[40px] text-[28px] " >
             Download ORUphones app
           </p>
-          <p style={{ fontSize: 22, }} className="font-Roboto-Medium">
+          <p className="font-Roboto-Medium md:text-[24px] text-[20px]">
             Want to get the best price for your mobile or want to get a mobile
             at your best price, ORUphones app is the one stop solution.
           </p>

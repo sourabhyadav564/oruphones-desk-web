@@ -17,45 +17,45 @@ function HowtoSellPopup({open,setOpen}) {
   return (
     <div>
           <Modal open={open} setOpen={setOpen} title={"Steps On How to Sell Your Phone"}>
-            <div className='px-16  h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
+            <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
                 <div className='flex items-center'>
                     <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Click on Sell Now Button</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Sell Now Button</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Click on this button to sell other phone than above</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on this button to sell other phone than above</p>
                     <Image src={Image2} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
                     <Image src={Image3} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>After filling all the fields above, click next</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>After filling all the fields above, click next</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Select Accessories and Mobile Age, click Next</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select Accessories and Mobile Age, click Next</p>
                     <Image src={Image4} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
                     <Image src={Image5} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Select working condition of mobile, click Next</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select working condition of mobile, click Next</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Add pictures of mobile, click Next</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add pictures of mobile, click Next</p>
                     <Image src={Image6} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
                     <Image src={Image7} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Add location, and click Next</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add location, and click Next</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Add price, and click on Take me to Verification</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add price, and click on Take me to Verification</p>
                     <Image src={Image10} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
                     <Image src={Image8} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Wait till diagnostic test is completed</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Wait till diagnostic test is completed</p>
                 </div>
                 <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold w-48 px-8 text-center'>Click on Complete Listing</p>
+                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Complete Listing</p>
                     <Image src={Image9} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div>

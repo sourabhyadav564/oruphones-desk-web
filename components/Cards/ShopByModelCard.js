@@ -63,7 +63,7 @@ function ShopByModelCard({
         </div>
 
         <div className="m-auto">
-          <p className="font-Roboto-Light opacity-100 text-regularFontSize text-[#2C2F45]">
+          <p className="font-Roboto-Light opacity-100 md:text-regularFontSize text-smallFontSize text-[#2C2F45]">
             {data}
           </p>
         </div>

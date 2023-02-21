@@ -17,10 +17,10 @@ export default function NewsLetter() {
   }
 
   return (
-    <section className="bg-m-green text-white pt-16">
+    <section className="bg-m-green text-white pt-16 ">
       <div className="container flex items-center md:justify-around flex-col md:flex-row ">
-        <p className="font-Roboto-Semibold text-xl3FontSize text-center">Sign up for newsletter</p>
-        <form className="flex max-w-md flex-1 mt-8 md:mt-0" onSubmit={subscribeNewsletter}>
+        <p className="font-Roboto-Semibold text-xl3FontSize text-center uppercase">Sign up for newsletter</p>
+        <form className="flex max-w-md flex-1 mt-8  md:mt-0" onSubmit={subscribeNewsletter}>
           <input
             type="email"
             required

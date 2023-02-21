@@ -48,7 +48,7 @@ const CategoryCards = ({ data, priceRange }) => {
   if (priceRange) {
     return (
       <div>
-        <div className="shadow drop-shadow rounded-lg px-1.5 py-1.5 sm:px-1.5 bg-m-white grid grid-cols-2 gap-1">
+        <div className="shadow drop-shadow rounded-lg w-32 h-28 px-1.5 py-1.5 sm:px-1.5 bg-m-white grid grid-cols-2 gap-1">
           {priceRangeData.map((item, index) => (
             <Link href={`/shopby/pricerange/${item.min}/${item.max}`} key={index}>
               <p className="flex flex-col items-center justify-center rounded-md bg-m-grey-8 opacity-100 hover:cursor-pointer font-light text-m-green-1 text-xs">

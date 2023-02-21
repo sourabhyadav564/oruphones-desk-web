@@ -43,7 +43,7 @@ export default function Modal({ open, setOpen, children, title }) {
             leaveTo="opacity-0 scale-50"
           >
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
-              <div className="pt-5 px-6 sm:flex justify-between items-center">
+              <div className="pt-5 px-6 flex justify-between items-center">
                 <div className="text-black-20 text-lg capitalize pl-6 flex-1 text-center font-semibold">
                   {title}
                 </div>

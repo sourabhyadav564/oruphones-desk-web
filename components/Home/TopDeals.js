@@ -95,14 +95,14 @@ function TopDeals({ location }) {
   }, [location]);
 
   return (
-    <section className="container pt-[25px] px-20 font-bold">
+    <section className="container  pt-[25px] md:px-20 px-16 font-bold">
       <Title
         text={`Best Deals Near You`}
         onClick={() => setOpenLocationPopup(true)}
         location={`(${location})`}
       />
       {bestDeals && bestDeals?.length > 1 ? (
-        <div className="grid grid-cols-5 gap-3 py-4">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2  gap-4 py-4">
           {bestDeals &&
             bestDeals
               .slice(0, 10)

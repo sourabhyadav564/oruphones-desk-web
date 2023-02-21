@@ -181,7 +181,7 @@ function Header({ menuItems }) {
 
         </div>
         {/* Mobile Toggler */}
-        <div className="-mr-1 sm:mr-2 flex lg:hidden w-16 justify-end ml-auto">
+        <div className="-mr-1 sm:mr-2 px-4 flex lg:hidden w-16 justify-end ml-auto">
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"

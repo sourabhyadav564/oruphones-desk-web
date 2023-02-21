@@ -1,11 +1,11 @@
 const HomeContent = () => {
   return (
-    <section className="container mb-6">
+    <section className="container mb-6 mt-8">
       <div className="content">
         <div id="why_ORUphones">
-          <div className="text-xl  font-Roboto-Bold">Why should I use ORUphones?</div><br />
-          <h1 className="font-Roboto-Medium text-xl FontSize">Buy & Sell Your Phone at ORUphones </h1>
-          <div className="font-Roboto-Light text-medium FontSize text-left">
+          <div className="text-2xl text-center  font-Roboto-Bold">Why should I use ORUphones?</div><br />
+          <h1 className="font-Roboto-Light text-xl FontSize">Buy & Sell Your Phone at ORUphones </h1>
+          <div className="font-Roboto-Light text-mediumFontSize text-left">
             ORUphones is India&apos;s first and unique online marketplace where
             you can buy and sell old phones, refurbished phones and used mobile
             phones for the best deal. Our vision is to be a trusted marketplace
@@ -13,7 +13,7 @@ const HomeContent = () => {
             for the best price possible. We strive to achieve this with a strong
             base of technology and a dedicated team of professionals who are
             well-seasoned and understand the needs of the market.
-          </div>
+          </div> 
           <div className="font-Roboto-Light text-mediumFontSize text-left">
             If you want to buy second-hand mobile online, check out our best
             deal section- Our A.I-based algorithm curates and presents the best

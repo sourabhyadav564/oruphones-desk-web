@@ -19,23 +19,14 @@ function BestDealsCard({ data, setProducts }) {
   return (
 
     <div
-      className="bg-white h-[300px] rounded-lg py-2 text-m-grey-2 mb-6 bg-gradient-to-l from-m-white to-m-green"
+      className=" bg-white h-[300px] rounded-lg py-2 text-m-grey-2 mb-6 bg-gradient-to-l from-m-white to-m-green "
       style={{ boxShadow: "0px 2px 3px #0000000A" }}
     >
-      <div className="flex items-end justify-end absolute z-10 pt-11 pl-[620px]">
-        {data?.status === "Sold_Out" ? <Image
-          src={SoldOut}
-          width={"50"}
-          height={"30"}
-          objectFit="contain"
-          alt={soldout}
-        /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
-          <span className="h-9 block" />
-        )}
-      </div>
+      {/* <div className="flex items-end justify-end absolute z-10 pt-11 lg:pl-[620px]  "> */}
+      
       <div className="text-sm text-white font-light flex justify-between items-center mr-4">
         <p
-          className="bg-yellow-500 py-1.5 px-4 rounded-r font-Roboto-Semibold text-regularFontSize"
+          className="bg-yellow-500 md:py-1.5 md:px-4 py-1 px-2 rounded-r font-Roboto-Semibold md:text-regularFontSize"
           style={{ marginLeft: "0.5px" }}
         >
           Best Deals
@@ -50,28 +41,28 @@ function BestDealsCard({ data, setProducts }) {
         <div className=" justify-between items-center">
 
           <div className="pt-5 mx-6 pl-5 text-m-white">
-            <span className="flex flex-row">
-              <span className="mx-6">
-                <div className="font-Roboto-Light text-smallFontSize">
+            <span className="flex ">
+              <span className="md:mx-6 mx-2">
+                <div className="font-Roboto-Light md:text-smallFontSize text-xs2FontSize">
                   Condition
                 </div>
-                <div className="font-Roboto-Medium text-regularFontSize">
+                <div className="font-Roboto-Medium md:text-regularFontSize text-mediumFontSize">
                   {data?.deviceCondition}
                 </div>
               </span>
-              <span className="mx-6">
-                <div className="font-Roboto-Light text-smallFontSize">
+              <span className="md:mx-6 mx-2">
+                <div className="font-Roboto-Light md:text-smallFontSize text-xs2FontSize">
                   Storage
                 </div>
-                <div className="font-Roboto-Medium text-regularFontSize">
+                <div className="font-Roboto-Medium md:text-regularFontSize text-mediumFontSize">
                   {data?.deviceStorage}
                 </div>
               </span>
-              {data?.deviceRam && <span className=" mx-6">
-                <div className="font-Roboto-Light text-smallFontSize">
+              {data?.deviceRam && <span className=" md:mx-6 mx-2">
+                <div className="font-Roboto-Light md:text-smallFontSize text-xs2FontSize">
                   RAM
                 </div>
-                <div className=" font-Roboto-Medium text-regularFontSize">
+                <div className=" font-Roboto-Medium md:text-regularFontSize text-mediumFontSize">
                   {data?.deviceRam}
                 </div>
               </span>}
@@ -79,13 +70,13 @@ function BestDealsCard({ data, setProducts }) {
           </div>
           <div className="relative pt-5 pl-16 ">
             <p
-              className="font-Roboto-Bold flex items-center -ml-1 text-yellow2"
-              style={{ fontSize: 30 }}
+              className="font-Roboto-Bold flex items-center -ml-1 text-yellow2 md:text-[28px] text-[24px]"
+              
             >
-              {data?.listingPrice && <FaRupeeSign size={24} />}{" "}
+              {data?.listingPrice && <FaRupeeSign className="md:text-[24px] text-[20px]" />}{" "}
               {numberWithCommas(data?.listingPrice || "")}
             </p>
-            <div className="font-Roboto-Regular text-white text-regularFontSize">
+            <div className="font-Roboto-Regular text-white md:text-regularFontSize text-mediumFontSize">
               {data?.marketingName}
             </div>
             <div className="font-Roboto-Light text-smallFontSize text-white">
@@ -133,7 +124,7 @@ function BestDealsCard({ data, setProducts }) {
                   View Deal{" "}
                   <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
                 </div> */}
-                  <div className="flex items-center font-Roboto-Semibold bg-m-white text-m-green py-2 px-4 rounded-lg hover:bg-yellow-500 hover:cursor-pointer duration-500">
+                  <div className="flex items-center md:text-regularFontSizete text-smallFontSize font-Roboto-Semibold bg-m-white text-m-green md:py-2 py-1 md:px-4 px-2 md:rounded-lg rounded-md hover:bg-yellow-500 hover:cursor-pointer duration-500">
                     <div> View Deal{""}</div>
                     <div>
                     <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
@@ -147,7 +138,19 @@ function BestDealsCard({ data, setProducts }) {
 
         </div>
       </div>
+      
       <div className="flex justify-end items-end pr-20 pt-5 relative">
+      <div className=" absolute z-10 top-4 right-44">
+        {data?.status === "Sold_Out" ? <Image
+          src={SoldOut}
+          width={"50"}
+          height={"30"}
+          objectFit="contain"
+          alt={soldout}
+        /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
+          <span className="h-9 block" />
+        )}
+      </div>
         <div className="relative flex justify-end items-end">
           <Image
             loading="lazy"
@@ -164,6 +167,7 @@ function BestDealsCard({ data, setProducts }) {
             alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}
           />
         </div>
+        
       </div>
       {/* </div> */}
 

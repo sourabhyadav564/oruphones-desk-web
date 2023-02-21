@@ -46,13 +46,13 @@ function ShowBy() {
   return (
     <>
       <div className="bg-m-grey">
-        <section className="container top_brand px-24 pt-[57px] pb-[44px] font-bold">
+        <section className="container top_brand lg:px-24 px-10 pt-[57px] pb-[44px] font-bold">
           <Title text="Shop By" />
-          <Carousel {...settings}>
+          <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 pt-4 gap-4 items-center m-auto justify-center">
             {data &&
               data.map((item, index) => <CategoryCards key={index} data={item} />)}
             <CategoryCards priceRange />
-          </Carousel>
+          </div>
         </section>
       </div>
     </>

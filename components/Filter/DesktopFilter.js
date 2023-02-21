@@ -16,7 +16,7 @@ import WarrantyInfo from "../Popup/WarrantyInfo";
 import { compareDocumentPosition } from "domutils";
 
 const DesktopFilter = ({ setFilters, filterOptions }) => {
-  const [selectedBrand, setSelectedBrand] = useState();
+  const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedCondition, setSelectedCondition] = useState();
   const [selectedColor, setSelectedColor] = useState();
   const [selectedRam, setSelectedRam] = useState();

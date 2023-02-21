@@ -102,7 +102,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <div className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
+            <div className="ml-auto relative max-w-xs w-full h-[100vh]  bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
               <div className="px-4 flex items-center justify-between">
                 <h2 className="text-lg font-medium text-gray-900">Filters</h2>
                 <button
@@ -114,7 +114,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
                   <AiOutlineClose className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-              <DesktopFilter setFilters={setFilters} />
+              <DesktopFilter setFilters={setFilters}/>
             </div>
           </Transition.Child>
         </Dialog>

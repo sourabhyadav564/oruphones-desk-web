@@ -43,13 +43,13 @@ function AllModels() {
         </div>
       </Filter> */}
       {topsellingmodels && topsellingmodels.length > 0 ? (
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4">
           {topsellingmodels?.map((product, index) => (
             <TopSellingCard key={`${index}-${product?.make}`} data={product} />
           ))}
           <Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`} passHref>
             <a>
-              <div className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
+              <div className="w-full h-full  rounded-md shadow-md hover:shadow-lg  p-4 bg-m-white flex justify-center items-center">
                 <p className="block text-m-green">{"Show All"}</p>
               </div>
             </a>

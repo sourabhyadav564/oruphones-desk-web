@@ -44,8 +44,8 @@ function brands({ brandsList }) {
         <meta property="og:description" content={metaTags.BRANDS.description} />
       </Head>
       <main className="py-12 min-h-full">
-        <section className="container">
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-x-4 gap-y-6">
+        <section className="container ">
+          <div className="flex flex-wrap justify-center m-auto gap-x-4 gap-y-6">
             {brandsList?.map((item) => (
               <BrandCard key={item.make} data={item} />
             ))}
