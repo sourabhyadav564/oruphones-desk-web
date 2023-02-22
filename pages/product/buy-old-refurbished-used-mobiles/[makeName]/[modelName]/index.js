@@ -88,12 +88,12 @@ const Products = () => {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
         } else {
-          makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+          makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
         }
         let payLoad = {
           listingLocation: getSearchLocation,
           make: brand?.length > 0 ? brand : [makeName],
-          marketingName: [modelName.replace("+", "%2B")],
+          marketingName: [String(modelName).replace("+", "%2B")],
           reqPage: "BBNM",
           color: [],
           deviceCondition: [],

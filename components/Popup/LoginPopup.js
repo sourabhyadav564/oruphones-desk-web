@@ -52,14 +52,14 @@ function LoginPopup({ open, setOpen, redirect }) {
         <Fragment>
           <div className="container max-w-xl grid place-items-center">
             <div>
-              <Image src={home_logo} alt="ORUPhones" width={200} height={40} />
+              <Image src={home_logo} alt="ORUPhones" width={100} height={40} className="md:w-96 w-60 h-96 " />
             </div>
             <form
               onSubmit={handleSubmit}
-              className="m-16 mt-4 px-6 flex flex-col space-y-4 items-center justify-center w-96"
+              className="md:m-16 m-8 mt-4 md:px-6 flex flex-col space-y-4 items-center justify-center md:w-96"
             >
               <h2
-                className="text-xl3FontSize font-Roboto-Bold py-5 text-center"
+                className="md:text-xl3FontSize  font-Roboto-Bold py-5 text-center"
                 style={{ color: "#2c2f44" }}
               >
                 Sign In
@@ -92,7 +92,7 @@ function LoginPopup({ open, setOpen, redirect }) {
                 />
                 <label
                   htmlFor="mobile"
-                  className="absolute top-0 text-xlFontSize font-Roboto-Light bg-white px-4 mt-1 -z-1 duration-300 origin-0"
+                  className="absolute top-0 md:text-xlFontSize text-regularFontSize font-Roboto-Light bg-white px-4 mt-1 -z-1 duration-300 origin-0"
                   style={{ color: "#00000099" }}
                 >
                   Mobile No
@@ -104,10 +104,10 @@ function LoginPopup({ open, setOpen, redirect }) {
                   name="termsAndCondition"
                   defaultChecked={formData?.termsAndCondition || false}
                   onChange={handleChange}
-                  className="border-gray-300 rounded text-m-green focus:ring-transparent"
+                  className="border-gray-300 rounded md:text-xl2FontSize text-smallFontSize   text-m-green focus:ring-transparent"
                 />
                 <label
-                  className="ml-2 underline cursor-pointer text-regularFontSize font-Roboto-Regular"
+                  className="ml-2 underline cursor-pointer md:text-regularFontSize text-smallFontSize font-Roboto-Regular"
                   onClick={() => setOpenTermAndCondPopup(true)}
                 >
                   Accept terms and conditions
@@ -115,7 +115,7 @@ function LoginPopup({ open, setOpen, redirect }) {
               </div>
               <button
                 disabled={!formData?.termsAndCondition}
-                className="w-full bg-m-green px-4 py-3 shadow-2xl rounded-lg text-xlFontSize font-Roboto-Regular text-white block disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full bg-m-green px-4 py-3 shadow-2xl rounded-lg md:text-xlFontSize text-regularFontSize font-Roboto-Regular text-white block disabled:cursor-not-allowed disabled:opacity-50"
               >
                 NEXT
               </button>

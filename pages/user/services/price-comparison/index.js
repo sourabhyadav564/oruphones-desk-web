@@ -230,7 +230,7 @@ function Index({ isFromEdit, brandsList }) {
 
     useEffect(() => {
         let payload = {
-            charger: charger === "Y" ? "Y" : "N",
+            charger: "Y" ,
             deviceCondition: "Like New",
             devicestorage: storage2?.split("/")[0],
             deviceRam: storage2
@@ -240,11 +240,11 @@ function Index({ isFromEdit, brandsList }) {
                 .replace(/GB/g, " GB")
                 .replace(/RAM/, "")
                 .trim(),
-            earPhones: headphone1 === "Y" ? "Y" : "N",
+            earPhones: "Y",
             make: make2,
             marketingName: marketingName2,
-            originalBox: originalBox1 === "Y" ? "Y" : "N",
-            warrantyPeriod: warranty,
+            originalBox: "Y",
+            warrantyPeriod: "zero",
             verified: "no",
         };
         const fetchData = async () => {

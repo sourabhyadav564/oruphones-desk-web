@@ -119,19 +119,19 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   return (
     <div className="container max-w-xl grid place-items-center">
       <div>
-        <Image src={home_logo} alt="ORUphones" width={160} height={40} />
+        <Image src={home_logo} alt="ORUphones" width={160} height={40} className="md:w-100 w-72"/>
       </div>
       <form
         onSubmit={handleSubmit}
-        className="m-16 mt-4 px-6 flex flex-col space-y-6 items-center justify-center w-96"
+        className="md:m-16 sm:m-2 m-4 mt-4  md:px-6 flex flex-col space-y-6 items-center justify-center md:w-96 w-[60vw]"
       >
         <h2
-          className="text-xl4FontSize font-Roboto-Bold text-center"
+          className="md:text-xl4FontSize text-xlFontSize font-Roboto-Bold text-center"
           style={{ color: "#2c2f44" }}
         >
           Verify Mobile No
         </h2>
-        <p className="text-regularFontSize font-Roboto-Regular text-m-grey-1">
+        <p className="md:text-regularFontSize text-smallFontSize font-Roboto-Regular text-m-grey-1">
           {" "}
           Please enter the 4 digit verification code sent to your mobile number{" "}
           {formData?.mobile} via SMS.{" "}
@@ -173,15 +173,13 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
             </label>
           ) : (
             <label
-              className="ml-2 text-m-green cursor-pointer"
+              className="ml-2 text-m-green md:text-mediumFontSize text-smallFontSize underline cursor-pointer"
               onClick={otpResend}
-            >
-              RESEND OTP
-            </label>
+            >RESEND OTP</label>
           )}
         </div>
 
-        <button className="w-full bg-m-green p-4 text-white block text-xlFontSize font-Roboto-Regular rounded-lg shadow-2xl">
+        <button className="w-full   bg-m-green md:p-4 p-3 text-white block md:text-xlFontSize text-mediumFontSize font-Roboto-Regular rounded-lg shadow-2xl">
           VERIFY
         </button>
       </form>
