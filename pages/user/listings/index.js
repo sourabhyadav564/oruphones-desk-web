@@ -34,7 +34,7 @@ function Listings() {
     <>
       <UserProfile>
         <UserListingTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
-        <div className="flex flex-col space-y-4 px-4 my-4">
+        <div className="lg:flex lg:flex-col grid grid-cols-2 gap-4 lg:space-y-4 px-4 my-4">
           {currentTab === 0
             ? // userListings && userListings.sort((a, b) => b.date - a.date) && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
             userListings &&
@@ -77,7 +77,7 @@ function Listings() {
               ))}
 
           {isLoading && (
-            <div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
+            <div className="flex gap-4 col-span-2 h-60  items-center justify-center text-xlFontSize font-Roboto-Regular">
               <Loader />
               Please wait, while we are fetching your listings...
             </div>

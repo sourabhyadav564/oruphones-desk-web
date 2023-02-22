@@ -149,7 +149,7 @@ function ProductDetails({ listingInfo,data }) {
             Similar Products ({simliarProducts?.length || 0})
           </p>
           <div
-            className="grid grid-cols-4 gap-6 mt-5"
+            className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-5"
           // onClick={() => {
           //   setProductsData(
           //     simliarProducts.length > 0 &&

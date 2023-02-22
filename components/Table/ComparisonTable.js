@@ -56,17 +56,18 @@ function ComparisonTable(data, listingId) {
   }, [openLoginPopup]);
 
   return (
-    <>
-      {productData && productData?.length > 0 && <div class="relative pt-3 w-full">
-        <table class="w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
-          <thead class=" uppercase text-white dark:bg-gray-700 dark:text-gray-400 font-Roboto-Semibold">
+    <div className="">
+      {productData && productData?.length > 0 && <div class="relative pt-3 lg:w-[90vw] w-full  overflow-x-scroll">
+        <table class=" w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
+          <thead class="uppercase text-white dark:bg-gray-700 dark:text-gray-400 font-Roboto-Semibold">
             <tr>
               <th
                 scope="col"
-                class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray"
+                class=" sticky left-0 top-0 px-6 py-3 bg-m-green-1 border-[1px] border-r-gray"
               >
                 Seller
               </th>
+
               <th
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray"
@@ -135,13 +136,13 @@ function ComparisonTable(data, listingId) {
                   <tr class={
                     // item?.externalSourceImage == ""
                     thisPhoneListingId == item?.listingId
-                      ? `bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center` : `bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
+                      ? ` bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 font-Roboto-Regular text-center` : ` bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
                     <th
                       scope="row"
                       class={
                         // item?.externalSourceImage == "" 
                         thisPhoneListingId == item?.listingId
-                          ? `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
+                          ? `bg-gray-100 sticky  left-0 top-0  px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `sticky left-0 top-0 px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
                     >
                       <div className="flex justify-between hover:cursor-pointer" onClick={() => {
                         if (Cookies.get("userUniqueId") == undefined) {
@@ -303,7 +304,7 @@ function ComparisonTable(data, listingId) {
         setOpen={setOpenLoginPopup}
         fromAddListing
       />
-    </>
+    </div>
   );
 }
 

@@ -357,17 +357,17 @@ function Index({ isFromEdit, brandsList }) {
 
 
     return (
-        <div className='lg:px-48 '>
-            <div className=' grid grid-cols-4'>
-                <div className='col-span-1 border-r text-m-green text-center py-[16vh]'>
+        <div className='lg:px-36 '>
+            <div className=' grid lg:grid-cols-4 grid-cols-3  lg:my-0 lg:mx-0 my-16 mx-8'>
+                <div className='lg:col-span-1 col-span-3 lg:border-r  text-m-green text-center lg:py-[16vh]'>
                     <p className='text-[20px] font-Roboto-Semibold'>Sell / Buy Mobiles</p>
                     <p className='text-[16px] font-Roboto-Regular'>Are you a seller or buyer of ORUphones</p>
-                    <div className='space-y-4 my-4 cursor-pointer'>
+                    <div className='lg:grid  flex lg:gap-0  lg:pl-0 pl-10 pr-8 gap-4 lg:space-y-4 my-4 cursor-pointer'>
                         <div className={showpage == 2 ? (" text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ") : ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ")} onClick={() => { setShowpage(1); setMake(null); setmarketingName(null); setStorage(null); setLeastSellingprice(""); setMaxsellingprice(""); setGetExternalSellerData([]) }} >Sell</div>
                         <div className={showpage == 2 ? ("text-[18px] bg-m-green text-yellow-300 font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ") : ("text-[18px]  font-Roboto-Semibold py-2 border m-auto justify-center  rounded-md w-8/12 ")} onClick={() => { setShowpage(2); setMake2(null); setmarketingName2(null); setStorage2(null); setactive(false); setProducts([]) }}>Buy</div>
                     </div>
                 </div>
-                <div className='col-span-3 border-l '>
+                <div className='col-span-3 lg:border-l '>
                     {(showpage == 2) ? (
                         <div>
                             <div className="px-8 gap-8 py-4">
@@ -454,14 +454,16 @@ function Index({ isFromEdit, brandsList }) {
                                     </span>
                                     <div >
                                         <p className='text-[14px] font-medium pb-4 px-2'>Condition <span className='text-red-400'>*</span></p>
+                                        <div className='flex flex-wrap gap-2'>
                                         {
                                             conditionOption.map((items, index) => (
-                                                <div key={index} className={`cursor-pointer py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
+                                                <div key={index} className={`w-28 text-center cursor-pointer py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
                                                     onClick={() => { setactive(true); setIndex(index); setDeviceCondition(items) }}>
                                                     {items}
                                                 </div>
                                             ))
                                         }
+                                        </div>
 
                                     </div>
 
@@ -492,10 +494,7 @@ function Index({ isFromEdit, brandsList }) {
                                             </div>
                                         ) : (<div className='pt-16 font-normal opacity-80 text-center '>Please select all fields</div>)
                                     }
-
-
                                 </div>
-
                             </div>
                         </div>
                     ) : (<div>
@@ -616,19 +615,23 @@ function Index({ isFromEdit, brandsList }) {
                                             <div>
                                                 {getExternalSellerData && getExternalSellerData.length > 0 && (
                                                     <div className="grid border rounded max-w-sm">
+                                                        <div className='flex px-8'>
+                                                         <span className='flex flex-1'>You will get</span>
+                                                         <span className=' '>Buyer</span>
+                                                         </div>
                                                         {getExternalSellerData?.map((items, index) => (
                                                             <div
                                                                 className="flex  px-4 py-2 gap-4 text-xs text-m-grey-2"
                                                                 key={index}
                                                             >
                                                                 <div className="flex flex-col space-1 flex-1">
-                                                                    <span>You will get</span>
+                                                                   
                                                                     <p className="font-semibold text-2xl text-m-grey-1 h-9">
                                                                         {"₹" + numberWithCommas(items.externalSourcePrice)}
                                                                     </p>
                                                                 </div>
                                                                 <div className="flex flex-col space-y-1">
-                                                                    <span className='text-center  font-medium'>Buyer</span>
+                                                                   
                                                                     <div className="w-full h-full">
                                                                         <img
                                                                             src={items.externalSourceImage}

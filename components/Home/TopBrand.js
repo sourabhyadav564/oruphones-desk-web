@@ -22,7 +22,7 @@ function TopBrand({ brandsList }) {
         <section className="container px-20 pt-0 gap-6 flex justify-center pb-4 font-Roboto-Semibold text-m-green-1 font-bold text-2xl  " data-aos="flip-up">
           <p>Top Brands</p>
         </section>
-        <section className="container m-auto py-4 justify-center lg:px-16 md:px-8 bg-m-grey top_brand  gap-4 flex flex-wrap   ">
+        <section className="container m-auto py-4 justify-center bg-m-grey top_brand  gap-4 flex flex-wrap   ">
           {/* <Carousel {...settings}> */}
           {_bList && _bList.map((item) => <BrandCard key={item.make} data={item} />)}
           <BrandCard data={{ make: "Show all" }} />

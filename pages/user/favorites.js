@@ -21,7 +21,7 @@ function Favorites() {
     <UserProfile>
       <div className="px-4 py-3">
         <h1 className="text-lg py-2"> My Favorites </h1>
-        <div className="flex flex-col space-y-4 my-4">
+        <div className="lg:flex lg:flex-col grid grid-cols-2 gap-8 lg:space-y-4 my-4">
           {myFavList &&
             myFavList.length > 0 &&
             myFavList.map((item, index) => (

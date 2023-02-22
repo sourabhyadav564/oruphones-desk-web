@@ -19,7 +19,7 @@ function ProductCard({ data, prodLink, setProducts }) {
   return (
     <div
       data-aos="fade-up">
-      <span className="absolute md:pl-[220px] pl-[170px] flex z-10 justify-between pt-2 w-full">
+      <span className="absolute pl-[220px]  flex z-10 justify-between pt-2 w-full">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}

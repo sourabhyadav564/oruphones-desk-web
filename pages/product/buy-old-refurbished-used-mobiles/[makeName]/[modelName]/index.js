@@ -395,7 +395,7 @@ const Products = () => {
         <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
           Total Products ({totalProducts})
         </h4>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
           {!isLoading && products && products.length > 0 ? (
             products?.map((product, index) => (
               <div

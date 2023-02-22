@@ -146,7 +146,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
-        <div className="space-x-4 relative -right-2 flex items-center justify-end pr-4 -top-2" >
+        <div className="space-x-4 relative lg:-right-2 md:right-20 flex items-center justify-end pr-4 -top-2" >
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
               <ShareIcon data={deviceListingInfo} width={16} height={16}  />
@@ -158,8 +158,8 @@ function ProductDetailsCard({ data, openFullImage }) {
           )}
         </div>
 
-        <div className="flex flex-col-2 w-full">
-          <div className="col-span-1 w-[600px] pr-4">
+        <div className="lg:flex lg:flex-col-2  m-auto justify-center w-full">
+          <div className="col-span-1 lg:w-[600px] w-[400px] m-auto justify-center  pr-4">
             {(data?.images || data?.defaultImage || data?.imagePath) && (
               <ImageSlider
                 openFullImage={openFullImage}
@@ -184,7 +184,7 @@ function ProductDetailsCard({ data, openFullImage }) {
               />
             )}
           </div>
-          <div className="col-span-2 w-[700px] pl-4">
+          <div className="col-span-2 lg:w-[700px] md:w-[80vw] w-[90vw] m-auto  pl-4 lg:pt-0 pt-8 ">
             <div className="mb-3 pr-2 ">
               <h1 className="text-xl2FontSize font-Roboto-Bold text-black-20 pl-1">
                 {data?.marketingName} - {data?.deviceStorage}
@@ -498,7 +498,7 @@ function ProductDetailsCard({ data, openFullImage }) {
               </>
             )}
             {data && data?.cosmetic && (
-              <div className="flex flex-row-3 mx-2">
+              <div className="lg:flex  lg:flex-row-3  mx-2">
                 {deviceConditionQuestion.map((item, index) => (
                   <div className="px-2">
                     <span className="text-regularFontSize font-Roboto-Bold text-black truncate">
@@ -518,7 +518,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             )}
           </div>
           {data?.functionalTestResults && data?.verified && (
-            <div className="text-gray-20 font-Roboto-Light text-regularFontSize my-3 ">
+            <div className="text-gray-20 font-Roboto-Light text-regularFontSize lg:my-3 py-9 ">
               <span>Device Verification Report</span>
               <div className="pb-4">
                 <div className="bg-gray-600 h-1 border-2 border-white"></div>
@@ -526,7 +526,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             </div>
           )}
           <div className="flex flex-row w-full justify-items-start">
-            <div className="pl-8 pr-28">
+            <div className="lg:pl-28 px-8">
               {data?.functionalTestResults &&
                 data?.functionalTestResults.map((items, index) => {
                   return (
@@ -536,11 +536,12 @@ function ProductDetailsCard({ data, openFullImage }) {
                         testName={items.displayName}
                         testStatus={items.testStatus}
                       />
+                     
                     )
                   );
                 })}
             </div>
-            <div className="pl-28 mb-8">
+            <div className="lg:pl-28 pl-16 mb-8">
               {data?.functionalTestResults &&
                 data?.functionalTestResults.map((items, index) => {
                   return (
@@ -652,7 +653,7 @@ export default ProductDetailsCard;
 
 const TestListItem = ({ testName, testStatus }) => {
   return (
-    <div className="flex items-center justify-between py-3 space-x-24">
+    <div className="flex items-center justify-between py-3 lg:space-x-24 space-x-8">
       <p className="font-Roboto-Regular text-mediumFontSize">{testName}</p>
       <p className="flex items-center justify-between">
         <span className="mr-3 font-Roboto-Regular text-smallFontSize">
