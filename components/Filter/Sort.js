@@ -4,14 +4,16 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GrFormDown, GrFormFilter } from "react-icons/gr";
 import DesktopFilter from "./DesktopFilter";
 import { useRouter } from "next/router";
+import useFilterOptions from "hooks/useFilterOptions";
 
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
 
-export default function Sort({ sortOptions, setApplySort, setFilters }) {
+export default function Sort({ sortOptions, setApplySort, setFilters,makeName }) {
   const router = useRouter();
- 
+  const { filterOptions } = useFilterOptions();
+  let tempFilters = filterOptions;
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   function handleOnChange(data) {
     setApplySort(data.name);
@@ -31,7 +33,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
     <Fragment>
       <div className="relative z-10 flex items-baseline justify-end py-4">
         <div className="flex items-center">
-          <Menu as="div" className="relative inline-block text-left ">
+          <Menu as="div" className=" relative inline-block text-left ">
             <div>
               <Menu.Button className="group inline-flex justify-center px-4 py-2 rounded-md bg-white text-sm font-Roboto-Regular text-regularFontSize text-gray-700 hover:text-gray-900 border">
                 {(sortOptions && sortOptions.filter((i) => i.current)[0]?.name) || "Sort"}
@@ -81,7 +83,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
         </div>
       </div>
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-        <Dialog as="div" className="fixed inset-0 flex  lg:hidden" onClose={setMobileFiltersOpen}>
+        <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setMobileFiltersOpen}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -102,7 +104,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <div className="ml-auto relative max-w-xs w-full h-[100vh]  bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
+            <div className="ml-auto relative max-w-xs w-full h-[100vh]  bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto ">
               <div className="px-4 flex items-center justify-between">
                 <h2 className="text-lg font-medium text-gray-900">Filters</h2>
                 <button
@@ -114,7 +116,9 @@ export default function Sort({ sortOptions, setApplySort, setFilters }) {
                   <AiOutlineClose className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-              <DesktopFilter setFilters={setFilters}/>
+              <div className=""> 
+              <DesktopFilter filterOptions={tempFilters} setFilters={setFilters} key={makeName}/>
+              </div>
             </div>
           </Transition.Child>
         </Dialog>

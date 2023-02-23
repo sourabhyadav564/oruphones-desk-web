@@ -139,7 +139,7 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
     <React.Fragment>
       <div className="flex justify-end items-center hover:cursor-pointer">
         {/* {listingsCount && listingsCount > 0 ? <h1> {listingsCount && `Total listings (${listingsCount || "..."}) `}</h1> : <span></span>} */}
-        <Sort sortOptions={sortOptions} setApplySort={setApplySort} filterOptions={tempFilters} />
+        <Sort sortOptions={sortOptions} setApplySort={setApplySort} filterOptions={tempFilters} setFilters={setApplyFilter} makeName={makeName}/>
       </div>
       <section aria-labelledby="products-heading" className="">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-6">

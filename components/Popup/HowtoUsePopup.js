@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from '.';
 import Image1 from '../../assets/design2/1.png'
 import Image2 from '../../assets/design2/2.png'
@@ -14,13 +14,48 @@ import Image12 from '../../assets/design2/12.png'
 import Image13 from '../../assets/design2/13.png'
 import Image14 from '../../assets/design2/14.png'
 import Image from 'next/image';
-
+import QRCode from "qrcode.react";
+import Link from 'next/link';
 
 function HowtoUsePopup({open,setOpen}) {
+    const [qrValue1, setQrValue1] = useState(
+        "https://apps.apple.com/in/app/oruphones/id1629378420"
+    );
+
+    const [qrValue2, setQrValue2] = useState(
+        "https://play.google.com/store/apps/details?id=com.oruphones.oru"
+    );
+
   return (
     <div>
-          <Modal open={open} setOpen={setOpen} title={"Steps On How to Use ORUphones"}>
+          <Modal open={open} setOpen={setOpen} title={"ORU Guide"}>
             <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
+            <div className="flex pb-8 justify-start items-center">
+                        <div className="flex flex-col items-center justify-center m-auto">
+                            <QRCode
+                                id="qr-gen"
+                                value={qrValue1}
+                                size={130}
+                                level={"H"}
+                                includeMargin={true}
+                            />
+                            <Link href={qrValue1}>
+                                <a className="w-32 h-10 bg-app-store bg-contain"></a>
+                            </Link>
+                        </div>
+                        <div className="flex flex-col items-center justify-center m-auto">
+                            <QRCode
+                                id="qr-gen"
+                                value={qrValue2}
+                                size={130}
+                                level={"H"}
+                                includeMargin={true}
+                            />
+                            <Link href={qrValue2}>
+                                <a className="w-32 h-10 bg-play-store bg-contain"></a>
+                            </Link>
+                        </div>
+                    </div>
                 <div>
             <p className='text-[20px] font-semibold py-4'>1. Device Health Check</p>
                 <div className='flex items-center'>
@@ -96,7 +131,7 @@ function HowtoUsePopup({open,setOpen}) {
                 </div>
 
                 <div>
-                <p className='text-[20px] font-semibold py-4 mt-4'>6. Profile</p>
+                <p className='text-[20px] font-semibold py-4 '>6. Profile</p>
                 <div className='flex items-center'>
                     <Image src={Image11} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>You can always edit your personal details in profile section.</p>
@@ -104,7 +139,7 @@ function HowtoUsePopup({open,setOpen}) {
                 </div>
 
                 <div>
-                <p className='text-[20px] font-semibold py-4 mt-4'>7. Your Listings</p>
+                <p className='text-[20px] font-semibold py-4 '>7. Your Listings</p>
                 <div className='flex items-center'>
                     <Image src={Image12} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold w-48 px-4 text-center'>Once you list your device on ORUphones you can check your listings in my listing section.</p>

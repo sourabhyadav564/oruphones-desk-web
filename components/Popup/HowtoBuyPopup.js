@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from '.';
 import Image1 from '../../assets/design1/1.png'
 import Image2 from '../../assets/design1/2.png'
@@ -14,13 +14,48 @@ import Image11 from '../../assets/design1/11.png'
 import Image12 from '../../assets/design1/12.png'
 import Image13 from '../../assets/design1/13.png'
 import Image from 'next/image';
-
+import QRCode from "qrcode.react";
+import Link from 'next/link';
 
 function HowtoBuyPopup({open,setOpen}) {
+    const [qrValue1, setQrValue1] = useState(
+        "https://apps.apple.com/in/app/oruphones/id1629378420"
+    );
+
+    const [qrValue2, setQrValue2] = useState(
+        "https://play.google.com/store/apps/details?id=com.oruphones.oru"
+    );
+
   return (
     <div>
           <Modal open={open} setOpen={setOpen} title={"Steps On How to Buy Phone"}>
             <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
+            <div className="flex pb-8  justify-start items-center">
+                        <div className="flex flex-col items-center justify-center m-auto">
+                            <QRCode
+                                id="qr-gen"
+                                value={qrValue1}
+                                size={130}
+                                level={"H"}
+                                includeMargin={true}
+                            />
+                            <Link href={qrValue1}>
+                                <a className="w-32 h-10 bg-app-store bg-contain"></a>
+                            </Link>
+                        </div>
+                        <div className="flex flex-col items-center justify-center m-auto">
+                            <QRCode
+                                id="qr-gen"
+                                value={qrValue2}
+                                size={130}
+                                level={"H"}
+                                includeMargin={true}
+                            />
+                            <Link href={qrValue2}>
+                                <a className="w-32 h-10 bg-play-store bg-contain"></a>
+                            </Link>
+                        </div>
+                    </div>
                 <div className='flex items-center'>
                     <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Browse in Shop By Brand for specific brand</p>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from '.';
 import Image1 from '../../assets/design/1.png'
 import Image2 from '../../assets/design/2.png'
@@ -11,61 +11,98 @@ import Image8 from '../../assets/design/8.png'
 import Image9 from '../../assets/design/9.png'
 import Image10 from '../../assets/design/10.png'
 import Image from 'next/image';
+import QRCode from "qrcode.react";
+import Link from 'next/link';
 
 
-function HowtoSellPopup({open,setOpen}) {
-  return (
-    <div>
-          <Modal open={open} setOpen={setOpen} title={"Steps On How to Sell Your Phone"}>
-            <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
-                <div className='flex items-center'>
-                    <Image src={Image1} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Sell Now Button</p>
+function HowtoSellPopup({ open, setOpen }) {
+
+    const [qrValue1, setQrValue1] = useState(
+        "https://apps.apple.com/in/app/oruphones/id1629378420"
+    );
+
+    const [qrValue2, setQrValue2] = useState(
+        "https://play.google.com/store/apps/details?id=com.oruphones.oru"
+    );
+
+    return (
+        <div>
+            <Modal open={open} setOpen={setOpen} title={"Steps On How to Sell Your Phone"}>
+                <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
+                    <div className="flex pb-8 justify-start items-center">
+                        <div className="flex flex-col items-center justify-center m-auto">
+                            <QRCode
+                                id="qr-gen"
+                                value={qrValue1}
+                                size={130}
+                                level={"H"}
+                                includeMargin={true}
+                            />
+                            <Link href={qrValue1}>
+                                <a className="w-32 h-10 bg-app-store bg-contain"></a>
+                            </Link>
+                        </div>
+                        <div className="flex flex-col items-center justify-center m-auto">
+                            <QRCode
+                                id="qr-gen"
+                                value={qrValue2}
+                                size={130}
+                                level={"H"}
+                                includeMargin={true}
+                            />
+                            <Link href={qrValue2}>
+                                <a className="w-32 h-10 bg-play-store bg-contain"></a>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className='flex items-center'>
+                        <Image src={Image1} width={150} height={300} alt="" className='object-contain' />
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Sell Now Button</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on this button to sell other phone than above</p>
+                        <Image src={Image2} width={150} height={300} alt="" className='object-contain' />
+                    </div>
+                    <div className='flex items-center'>
+                        <Image src={Image3} width={150} height={300} alt="" className='object-contain' />
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>After filling all the fields above, click next</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select Accessories and Mobile Age, click Next</p>
+                        <Image src={Image4} width={150} height={300} alt="" className='object-contain' />
+                    </div>
+                    <div className='flex items-center'>
+                        <Image src={Image5} width={150} height={300} alt="" className='object-contain' />
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select working condition of mobile, click Next</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add pictures of mobile, click Next</p>
+                        <Image src={Image6} width={150} height={300} alt="" className='object-contain' />
+                    </div>
+                    <div className='flex items-center'>
+                        <Image src={Image7} width={150} height={300} alt="" className='object-contain' />
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add location, and click Next</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add price, and click on Take me to Verification</p>
+                        <Image src={Image10} width={150} height={300} alt="" className='object-contain' />
+                    </div>
+                    <div className='flex items-center'>
+                        <Image src={Image8} width={150} height={300} alt="" className='object-contain' />
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Wait till diagnostic test is completed</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Complete Listing</p>
+                        <Image src={Image9} width={150} height={300} alt="" className='object-contain' />
+                    </div>
+                    <div>
+                        <p className=' text-[20px] font-Roboto-Semibold text-center py-4'>Congrats Your Mobile is Listed on ORUphones.
+                            <br></br> Welcome from Team ORUphones..</p>
+                    </div>
                 </div>
-                <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on this button to sell other phone than above</p>
-                    <Image src={Image2} width={150} height={300} alt="" className='object-contain'/>
-                </div>
-                <div className='flex items-center'>
-                    <Image src={Image3} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>After filling all the fields above, click next</p>
-                </div>
-                <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select Accessories and Mobile Age, click Next</p>
-                    <Image src={Image4} width={150} height={300} alt="" className='object-contain'/>
-                </div>
-                <div className='flex items-center'>
-                    <Image src={Image5} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select working condition of mobile, click Next</p>
-                </div>
-                <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add pictures of mobile, click Next</p>
-                    <Image src={Image6} width={150} height={300} alt="" className='object-contain'/>
-                </div>
-                <div className='flex items-center'>
-                    <Image src={Image7} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add location, and click Next</p>
-                </div>
-                <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Add price, and click on Take me to Verification</p>
-                    <Image src={Image10} width={150} height={300} alt="" className='object-contain'/>
-                </div>
-                <div className='flex items-center'>
-                    <Image src={Image8} width={150} height={300} alt="" className='object-contain'/>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Wait till diagnostic test is completed</p>
-                </div>
-                <div className='flex items-center'>
-                    <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Complete Listing</p>
-                    <Image src={Image9} width={150} height={300} alt="" className='object-contain'/>
-                </div>
-                <div>
-                <p className=' text-[20px] font-Roboto-Semibold text-center py-4'>Congrats Your Mobile is Listed on ORUphones.
-                   <br></br> Welcome from Team ORUphones..</p>
-                </div>
-            </div>
-          </Modal>
-    </div>
-  )
+            </Modal>
+        </div>
+    )
 }
 
 export default HowtoSellPopup
