@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
-import Logo from "@/assets/oru_phones_logo.png";
+// import Logo from "@/assets/oru_phones_logo.png";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { fetchByMarketingName } from "../../api/axios";
@@ -12,7 +12,7 @@ function ShopByModelCard({
   make,
   src,
   alt,
-  fallBackSrc = Logo.src,
+  fallBackSrc = "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png".src,
 }) {
   const router = useRouter();
   const [imageError, setImageError] = useState(false);

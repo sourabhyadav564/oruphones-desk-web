@@ -8,7 +8,7 @@ import { numberWithCommas, numberFromString } from "../../utils/util";
 // import headphone from "https://d1tl44nezj10jx.cloudfront.net/assets/headphones.png";
 // import originalBox from "https://d1tl44nezj10jx.cloudfront.net/assets/original-box.png";
 // import originalBill from "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png";
-import amazon from "../../assets/amazon_renewed.png";
+// import amazon from "../../assets/amazon_renewed.png";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 import AppContext from "@/context/ApplicationContext";

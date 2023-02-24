@@ -1,7 +1,7 @@
 import ArticleCard from "../Cards/ArticleCard";
 import Carousel from "../Carousel";
 import Title from "../Title";
-import image from "@/assets/demo_blog.jpg"
+// import image from "@/assets/demo_blog.jpg"
 
 const data = [1, 2, 3, 4, 5, 6];
 

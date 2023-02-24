@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import bg from "../../assets/bg_buy_step.png";
+// import bg from "https://d1tl44nezj10jx.cloudfront.net/assets/bg_buy_step.png";
 // import homepage_banner from "../../assets/homepage_banner.png";
 // import banner_one from "../../assets/banner_1.png";
 // import banner_two from "../../assets/banner_2.png";
@@ -12,14 +12,14 @@ import QRCode from "qrcode.react";
 import { useState } from "react";
 import AppDownloadPopup from "../Popup/AppDownloadPopup";
 
-const tutorialSteps = {
-  id: 0,
-  imgPathDesktop: bg,
-  imgPathMobile: bg,
-  url: "#why_oruphones",
-  heading: "Welcome to",
-  desc: "India's leading marketplace to buy and sell used/refurbished mobile phones",
-};
+// const tutorialSteps = {
+//   id: 0,
+//   imgPathDesktop: "https://d1tl44nezj10jx.cloudfront.net/assets/bg_buy_step.png",
+//   imgPathMobile: "https://d1tl44nezj10jx.cloudfront.net/assets/bg_buy_step.png",
+//   url: "#why_oruphones",
+//   heading: "Welcome to",
+//   desc: "India's leading marketplace to buy and sell used/refurbished mobile phones",
+// };
 
 export default function Hero() {
   const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);
