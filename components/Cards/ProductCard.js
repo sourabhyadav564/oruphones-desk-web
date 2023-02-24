@@ -18,8 +18,8 @@ function ProductCard({ data, prodLink, setProducts }) {
 
   return (
     <div
-      data-aos="fade-up">
-      <span className="absolute pl-[200px]  flex z-10 justify-between pt-4 w-full">
+      data-aos="fade-up" className="relative">
+      <span className="flex justify-end pr-4 ">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}
@@ -29,7 +29,7 @@ function ProductCard({ data, prodLink, setProducts }) {
           />
         )}
       </span>
-      <div
+      <div 
         className="hover:cursor-pointer"
         onClick={() =>
           window.open(
@@ -47,7 +47,7 @@ function ProductCard({ data, prodLink, setProducts }) {
     // > */}
         <a>
           <div
-            className="w-[32vh]  rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
+            className="w-30  -mt-8 -z-1 rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
 
             style={{ boxShadow: "2px 2px 10px #00000029", padding: " 0 10px" }}
           >
