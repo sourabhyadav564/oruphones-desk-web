@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import bg from "../../assets/bg_buy_step.png";
-import homepage_banner from "../../assets/homepage_banner.png";
-import banner_one from "../../assets/banner_1.png";
-import banner_two from "../../assets/banner_2.png";
-import banner_three from "../../assets/banner_3.png";
-import banner_4 from "../../assets/banner_4.png";
+// import homepage_banner from "../../assets/homepage_banner.png";
+// import banner_one from "../../assets/banner_1.png";
+// import banner_two from "../../assets/banner_2.png";
+// import banner_three from "../../assets/banner_3.png";
+// import banner_4 from "https://d1tl44nezj10jx.cloudfront.net/assets/banner_4.png";
 import Carousel from "../Carousel";
 import QRCode from "qrcode.react";
 import { useState } from "react";
@@ -73,12 +73,14 @@ export default function Hero() {
     <section className="flex-grow w-full  px-0 ">
       {/* <Carousel> */}
 
-      <Image
+      <img
         className="hover:cursor-pointer" data-aos="fade-down"
-        src={banner_4}
+        src={"https://d1tl44nezj10jx.cloudfront.net/assets/banner_4.png"}
         alt="BannerImage"
         priority
         onClick={() => handleClick()}
+        // width={`auto`}
+        // height={`auto`}
       // width="100%"
       // height="90%"
       // layout="responsive"

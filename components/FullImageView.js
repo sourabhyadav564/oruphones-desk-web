@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import styles from "../styles/fullimageview.module.css";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
+import { useState } from "react";
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
   <BiChevronLeft
@@ -19,6 +20,7 @@ const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
 );
 
 function FullImageView({ open, close, images }) {
+  const [imageError, setImageError] = useState(false);
   if (!open) {
     return null;
   }
@@ -55,16 +57,31 @@ function FullImageView({ open, close, images }) {
           }}
         >
           {images
-            .filter((i) => i.fullImage)
+            .filter((i) => i?.fullImage)
             .map((img, index) => (
               <div key={index} className={styles.image_wrapper}>
                 <img
-                  src={img?.fullImage}
+                  src={imageError?"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png":  img?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                   alt={index}
+                  onError={() => {
+                    setImageError(true);
+                  }}
                   style={{ maxWidth: "80%", maxHeight: "70vh" }}
                 />
               </div>
             ))}
+            {console.log("images", images)}
+            {images[0]?.fullImage=="" && 
+            <div className={styles.image_wrapper}>
+              <img
+              src={"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+              // onError={() => {
+              //   setImageError(true);
+              // }}
+              style={{ maxWidth: "40%", maxHeight: "70vh" }}
+            />
+            </div>
+            }
         </Slider>
       )}
     </section>

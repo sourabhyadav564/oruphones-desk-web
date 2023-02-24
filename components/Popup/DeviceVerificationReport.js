@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Modal from ".";
-import calendar1 from "../../assets/calendar-3.png";
-import testpass from "../../assets/testpass.png";
-import testfail from "../../assets/testFail.png";
-import pass from "../../assets/pass1.png";
+// import calendar1 from "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png";
+// import testpass from "https://d1tl44nezj10jx.cloudfront.net/assets/testpass.png";
+// import testfail from "https://d1tl44nezj10jx.cloudfront.net/assets/testFail.png";
+// import pass from "https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png";
 import { deviceConditionQuestion } from "@/utils/constant";
 import ConditionOptionLarge2 from "../Condition/ConditionOptionLarge2";
 import { useState } from "react";
@@ -40,7 +40,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
           <div className="flex justify-center items-center ">
             <span className="text-xs mr-2 flex items-center">
               <Image
-                src={calendar1}
+                src={"https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png"}
                 width={15}
                 height={15}
                 alt={data?.marketingName}
@@ -129,7 +129,7 @@ const TestListItem = ({ testName, testStatus }) => {
       <p className="flex items-center justify-between">
         <span className="mr-3">{testStatus}</span>{" "}
         <Image
-          src={testStatus === "PASS" ? testpass : testfail}
+          src={testStatus === "PASS" ? "https://d1tl44nezj10jx.cloudfront.net/assets/testpass.png" : "https://d1tl44nezj10jx.cloudfront.net/assets/testFail.png"}
           width={25}
           height={24}
           alt={testName}
@@ -149,13 +149,13 @@ const QuestionnaireResults = ({ question, result, childQuestions, index }) => {
         {childQuestions && childQuestions?.length > 0 ? (
           childQuestions.map((items, index1) => (
             <div key={index1} className="flex items-start pt-2">
-              <img src={pass.src} alt={items} className="mt-1 mr-2" />
+              <Image src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"} width={15} height={15} alt={items} className="mt-1 mr-2" />
               <p>{items}</p>
             </div>
           ))
         ) : (
           <div className="flex items-start pt-2">
-            <img src={pass.src} alt={result} className="mt-1 mr-2" />
+            <Image src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"} width={15} height={15} alt={result} className="mt-1 mr-2" />
             <p>{result}</p>
           </div>
         )}

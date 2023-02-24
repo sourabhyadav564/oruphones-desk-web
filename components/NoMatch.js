@@ -1,5 +1,6 @@
 import React from "react";
-import nomatching from "@/assets/noMatching.png";
+// import nomatching from "https://d1tl44nezj10jx.cloudfront.net/assets/noMatching.png";
+import Image from "next/image";
 
 function NoMatch({ text = "" }) {
   return (
@@ -7,7 +8,7 @@ function NoMatch({ text = "" }) {
       className="flex flex-col justify-center  items-center"
       style={{ minHeight: "300px", height: "60vh" }}
     >
-      <img src={nomatching.src}  alt={text} className="select-none"/>
+      <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/noMatching.png"} width={600} height={400} alt={text} className="object-contain select-none"/>
       <p className="font-semibold text-black mt-5 pb-28 ">{text}</p>
     </div>
   );

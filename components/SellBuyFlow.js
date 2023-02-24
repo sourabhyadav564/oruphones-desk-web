@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import { useState } from 'react';
-import Sell from "../assets/sell.png";
-import Buy from "../assets/buy.png";
-import Book from "../assets/Book.png";
+// import Sell from "https://d1tl44nezj10jx.cloudfront.net/assets/sell.png";
+// import Buy from "https://d1tl44nezj10jx.cloudfront.net/assets/buy.png";
+// import Book from "https://d1tl44nezj10jx.cloudfront.net/assets/Book.png";
 import HowtoSellPopup from './Popup/HowtoSellPopup';
 import HowtoBuyPopup from "./Popup/HowtoBuyPopup";
 import HowtoUsePopup from './Popup/HowtoUsePopup';
@@ -25,7 +25,7 @@ function SellBuyFlow() {
                      className="cursor-pointer shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative"
                      onClick={()=>setOpenSell(true)}>
                     <Image
-                      src={Sell}
+                      src={"https://d1tl44nezj10jx.cloudfront.net/assets/sell.png"}
                       height={50}
                       width={40}
                       objectFit="contain m-auto justify-center flex"
@@ -37,7 +37,7 @@ function SellBuyFlow() {
                      className="cursor-pointer shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative"
                      onClick={()=>setOpenBuy(true)}>
                     <Image
-                      src={Buy}
+                      src={"https://d1tl44nezj10jx.cloudfront.net/assets/buy.png"}
                       height={50}
                       width={40}
                       objectFit="contain m-auto justify-center flex"
@@ -49,7 +49,7 @@ function SellBuyFlow() {
                      className="cursor-pointer shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative"
                      onClick={()=>setOpenUse(true)}>
                     <Image
-                      src={Book}
+                      src={"https://d1tl44nezj10jx.cloudfront.net/assets/Book.png"}
                       height={50}
                       width={40}
                       objectFit="contain m-auto justify-center flex"

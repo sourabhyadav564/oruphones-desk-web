@@ -4,10 +4,10 @@ import Input from "../Form/Input";
 import { useState, useEffect, useContext } from "react";
 import ImageInput from "../Form/ImageInput";
 import { numberWithCommas, numberFromString } from "../../utils/util";
-import charging from "../../assets/charging-station.png";
-import headphone from "../../assets/headphones.png";
-import originalBox from "../../assets/original-box.png";
-import originalBill from "../../assets/original-bill.png";
+// import charging from "https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.png";
+// import headphone from "https://d1tl44nezj10jx.cloudfront.net/assets/headphones.png";
+// import originalBox from "https://d1tl44nezj10jx.cloudfront.net/assets/original-box.png";
+// import originalBill from "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png";
 import amazon from "../../assets/amazon_renewed.png";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
@@ -435,7 +435,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
           listedDeviceInfo?.originalbox && (
             <div className="grid grid-cols-4 gap-4 mb-8">
               <Checkbox
-                src={charging}
+                src={"https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.png"}
                 text="Charger"
                 onClick={(e) => {
                   e.target.checked ? setCharger("Y") : setCharger("N");
@@ -443,7 +443,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 isChecked={listedDeviceInfo?.charger === "Y"}
               />
               <Checkbox
-                src={headphone}
+                src={"https://d1tl44nezj10jx.cloudfront.net/assets/headphones.png"}
                 text="Earphones"
                 onClick={(e) => {
                   e.target.checked ? setHeadphone1("Y") : setHeadphone1("N");
@@ -451,7 +451,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 isChecked={listedDeviceInfo?.earphone === "Y"}
               />
               <Checkbox
-                src={originalBox}
+                src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-box.png"}
                 text="Original Box"
                 onClick={(e) => {
                   e.target.checked
@@ -461,7 +461,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 isChecked={listedDeviceInfo?.originalbox === "Y"}
               />
               <Checkbox
-                src={originalBill}
+                src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png"}
                 text="Original Bill"
                 checked={showWarranty}
                 onClick={(e) => {

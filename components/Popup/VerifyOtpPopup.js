@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 // import home_logo from "../../assets/home_logo.svg";
-import home_logo from "../../assets/logo_square.svg";
+// import home_logo from "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg";
 import * as Axios from "../../api/axios";
 import Router from "next/router";
 import AuthContext from "../../context/AuthContext";
@@ -119,7 +119,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   return (
     <div className="container max-w-xl grid place-items-center">
       <div>
-        <Image src={home_logo} alt="ORUphones" width={160} height={40} className="md:w-100 w-72"/>
+        <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} alt="ORUphones" width={160} height={40} className="md:w-100 w-72"/>
       </div>
       <form
         onSubmit={handleSubmit}

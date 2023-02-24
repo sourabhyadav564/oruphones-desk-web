@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { BiRupee } from "react-icons/bi";
-import devicePlaceholder from "../../assets/stock_image.png";
-import { numberWithCommas } from "../../utils/util";
+// import devicePlaceholder from "../../assets/stock_image.png";
+import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import ImageSlider from "../ImageSlider";
 import LabelAndValue from "../LabelAndValue";
 import DeviceVerificationReport from "../Popup/DeviceVerificationReport";
@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import ShareIcon from "../ShareIcon";
-import Logo from "@/assets/oru_phones_logo.png";
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
 import { BsInfoCircle, BsStar, BsStarFill } from "react-icons/bs";
 import { AiFillExclamationCircle } from "react-icons/ai";
 import { VscPass } from "react-icons/vsc";
@@ -23,8 +23,8 @@ import VerificationIcon from "../VerificationIcon";
 import SellerDetailsCard from "./SellerDetailsCard";
 import { deviceConditionQuestion } from "@/utils/constant";
 import ConditionOptionLarge2 from "../Condition/ConditionOptionLarge2";
-import testpass from "../../assets/testpass.png";
-import testfail from "../../assets/testFail.png";
+// import testpass from "../../assets/testpass.png";
+// import testfail from "../../assets/testFail.png";
 import Image from "next/image";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -53,6 +53,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [ListingResData, SetListingtResData] = useState([]);
   const [showNumber, setShowNumber] = useState(false);
+  const [ImageError, setImageError] = useState(false);
   
   const myRef = useRef(null);
 
@@ -165,21 +166,21 @@ function ProductDetailsCard({ data, openFullImage }) {
                 openFullImage={openFullImage}
                 data={deviceListingInfo}
                 images={
-                  (data?.images?.length && data?.images) ||
+                  (data?.images?.length && data?.images!="" && data?.images ) ||
                   (data?.imagePath && {
                     fullImage: data?.imagePath,
                     thumbImage: data?.imagePath,
                   }) ||
-                  (data?.defaultImage.fullImage && {
+                  (data?.defaultImage.fullImage && data?.defaultImage.fullImage!="" && {
                     fullImage: data?.defaultImage?.fullImage,
                     thumbImage: data?.defaultImage?.fullImage,
                   }) ||
-                  (data?.vendorLogo && {
+                   {
                     // fullImage: Logo,
                     // thumbImage: Logo,
-                    fullImage: Logo,
-                    thumbImage: Logo,
-                  })
+                    fullImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
+                    thumbImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
+                  }
                 }
               />
             )}
@@ -560,9 +561,61 @@ function ProductDetailsCard({ data, openFullImage }) {
         {data?.externalSource && data?.externalSource?.length > 0 && (
             <div>
            
-              <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light  capitalize mb-2">
-                Detailed Comparison Between Other Sellers
+              <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
+                Detailed Comparison Between Other Sellers for {data?.marketingName + "  ("}
+                {data?.make != "Apple" && data?.deviceRam + " / "}
+                {data?.deviceStorage + ") - "}
+                Condition: {data?.deviceCondition}
               </p>
+              {data && <div className="relative flex py-2">
+                    <Image
+                      src={
+                        ImageError
+                          ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                          : getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      }
+                      onError={() => setImageError(true)}
+                      className=""
+                      // alt={`${
+                      //   type[Math.floor(Math.random() * type.length)]
+                      // } ${model} ${storage} like new `.toLowerCase()}
+                      height="120"
+                      width="90"
+                    />
+                    <div className="flex flex-col justify-end relative  left-6">
+                      {/* <p className="font-bold text-dx text-[#2C2F45]">{data?.marketingName}</p> */}
+                      <p className='font-Roboto-Bold text-tx text-[#000944]'>{data?.marketingName}</p>
+
+                      {data?.make != "Apple" && (
+                        <p className="flex items-center space-x-1">
+                          
+                            {/* <CardHeading4 title="RAM :" /> */}
+                            <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>RAM :</p>
+                          <div className="font-Roboto-Bold text-jx pt-0.5 text-[#2C2F45]">
+                            {data?.deviceRam}
+                          </div>
+                        </p>
+                      )}
+
+                      <div className="flex space-x-1 items-center">
+                        
+                          
+                        <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Storage :</p>
+                        
+                        <div className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
+                          {data?.deviceStorage}
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        
+                          <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Condition :</p>
+                      
+                        <div className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
+                          {data?.deviceCondition}
+                        </div>
+                      </div>
+                    </div>
+                  </div>}
               <div className="bg-gray-600 h-1 border-2 border-white "></div>
               <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row">
                 {data?.marketingName + "  ("}

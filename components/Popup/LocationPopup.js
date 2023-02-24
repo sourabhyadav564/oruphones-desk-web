@@ -4,7 +4,7 @@ import Image from "next/image";
 import { GrClose } from "react-icons/gr";
 import Select from "../Form/Select";
 
-import bgImage from "@/assets/location/bg.png";
+// import bgImage from "https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
@@ -238,7 +238,7 @@ function LocationPopup({ open, setOpen }) {
                     className="cursor-pointer"
                   />
                 </div>
-                <Image src={bgImage} alt="location" layout="fill" />
+                <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"} alt="location" layout="fill" />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
                   <div className="flex flex-row w-72 justify-center items-center">
                     <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
@@ -285,6 +285,7 @@ function LocationPopup({ open, setOpen }) {
                               src={items.imgpath}
                               alt="hyderabad"
                               layout="fill"
+                              className="Object-contain"
                             />
                           </div>
                           <span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">

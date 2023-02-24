@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import SellStep1 from "../../assets/sell_step_1.svg";
-import SellStep2 from "../../assets/sell_step_2.svg";
-import SellStep3 from "../../assets/sell_step_3.svg";
-import BuyStep1 from "../../assets/buy_step_1.svg";
-import BuyStep2 from "../../assets/buy_step_2.svg";
-import BuyStep3 from "../../assets/buy_step_3.png";
+// import SellStep1 from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_1.svg";
+// import SellStep2 from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_2.svg";
+// import SellStep3 from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_3.svg";
+// import BuyStep1 from "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_1.svg";
+// import BuyStep2 from "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_2.svg";
+// import BuyStep3 from "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_3.png";
 import Carousel from "../Carousel";
 
 const sellStepsData = [
@@ -19,7 +19,7 @@ const sellStepsData = [
         price for your device.
       </span>
     ),
-    src: SellStep1,
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_1.svg",
     alt: "Add your device",
     link: "#how_to_sell",
   },
@@ -32,7 +32,7 @@ const sellStepsData = [
         device and get verified.
       </span>
     ),
-    src: SellStep2,
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_2.svg",
     alt: "Device verification",
     link: "#how_to_sell",
   },
@@ -45,7 +45,7 @@ const sellStepsData = [
         a great deal.
       </span>
     ),
-    src: SellStep3,
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_3.svg",
     alt: "Get cash",
     link: "#how_to_sell",
   },
@@ -61,7 +61,7 @@ const BuyStepsData = [
         device.
       </span>
     ),
-    src: BuyStep1,
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_1.svg",
     alt: "Select device",
     link: "#how_to_buy",
   },
@@ -74,7 +74,7 @@ const BuyStepsData = [
         details of the seller and setup a meet.
       </span>
     ),
-    src: BuyStep2,
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_2.svg",
     alt: "Contact Seller",
     link: "#how_to_buy",
   },
@@ -87,7 +87,7 @@ const BuyStepsData = [
         credentials and verify the device.
       </span>
     ),
-    src: BuyStep3,
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_3.png",
     alt: "Verify Your Purchase",
     link: "#how_to_buy",
   },

@@ -2,7 +2,8 @@ import React, { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import Logo from "@/assets/oru_phones_logo.png"
+// import Logo from "@/assets/oru_phones_logo.png"
+
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
   <BiChevronLeft {...rest} className={`prev ${className}`} />
@@ -66,8 +67,8 @@ function ImageSlider({data, images, openFullImage }) {
                   placeholder="blur"
                   priority={false}
                   unoptimized={false}
-                  blurDataURL={imageError ? Logo : img?.fullImage || Logo}
-                  src={imageError ? Logo : img?.fullImage || Logo}
+                  blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+                  src={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                   onError={()=>setImageError(true)}
                   alt={alternate_text}
                   width={"100%"}
@@ -89,11 +90,11 @@ function ImageSlider({data, images, openFullImage }) {
           <Fragment>
             <Image
               // src={images?.fullImage || Logo}
-              src={imageError ? Logo : images?.fullImage ||Logo}
+              src={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.fullImage ||"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               loading="lazy"
               placeholder="blur"
               priority={false}
-              blurDataURL={imageError ? Logo : images?.fullImage || Logo}
+              blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               unoptimized={false}
               onError={()=>setImageError(true)}
               alt={alternate_text}
@@ -118,12 +119,12 @@ function ImageSlider({data, images, openFullImage }) {
               .map((img, index) => (
                 <Fragment key={index}>
                   <Image
-                    src={imageError?Logo : img?.thumbImage || img.fullImage  || Logo}
+                    src={imageError?"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.thumbImage || img.fullImage  || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                     loading="lazy"
                     placeholder="blur"
                     priority={false}
                     unoptimized={false}
-                    blurDataURL={imageError ? Logo : img?.thumbImage || img.fullImage || Logo}
+                    blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.thumbImage || img.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                     // src={imageError ? Logo : img?.fullImage}
                     onError={()=>setImageError(true)}
                     width={"100%"}
@@ -143,13 +144,13 @@ function ImageSlider({data, images, openFullImage }) {
             ref={(slider) => setSlider2(slider)}
           >
             <Image
-              src={imageError ? Logo : images?.thumbImage || images?.fullImage || Logo}
+              src={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.thumbImage || images?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               onError={()=>setImageError(true)}
               loading="lazy"
               placeholder="blur"
               priority={false}
               unoptimized={false}
-              blurDataURL={imageError ? Logo : images?.thumbImage || images?.fullImage || Logo}
+              blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.thumbImage || images?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               width={"100%"}
               height={"100%"}
               layout="responsive"

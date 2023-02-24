@@ -53,8 +53,8 @@ function ShopByModelCard({
             placeholder="blur"
             priority={false}
             unoptimized={false}
-            blurDataURL={imageError ? fallBackSrc : src || Logo}
-            src={imageError ? fallBackSrc : src || Logo}
+            blurDataURL={imageError ? fallBackSrc : src || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+            src={imageError ? fallBackSrc : src || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
             alt={alt}
             onError={() => setImageError(true)}
             width="40"

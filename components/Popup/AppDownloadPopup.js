@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import bgImage from "@/assets/app_download.png";
+// import bgImage from "https://d1tl44nezj10jx.cloudfront.net/assets/app_download.png";
 import { GrClose } from "react-icons/gr";
 import QRCode from "qrcode.react";
 import { useState, useEffect } from "react";
@@ -60,7 +60,7 @@ function AppDownloadPopup({ open, setOpen }) {
             leaveTo="opacity-0 scale-50"
           >
             <div className="relative" style={{ width: 916, minHeight: 475 }}>
-              <Image src={bgImage} alt="ORU close" layout="fill" />
+              <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/app_download.png"} alt="ORU close" layout="fill" />
               <GrClose
                 onClick={() => setOpen(false)}
                 className="cursor-pointer absolute right-3 top-3"

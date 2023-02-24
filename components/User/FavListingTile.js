@@ -5,8 +5,8 @@ import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
 import { useState, useEffect, useCallback } from "react";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import IconLabelValue from "./IconLableValue";
-import verifiedIcon from "../../assets/verified.svg";
-import unVerifiedIcon from "../../assets/unverified.svg";
+// import verifiedIcon from "https://d1tl44nezj10jx.cloudfront.net/assets/verified.svg";
+// import unVerifiedIcon from "https://d1tl44nezj10jx.cloudfront.net/assets/unverified.svg";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 import Logo from "@/assets/oru_phones_logo.png"
@@ -49,14 +49,14 @@ function FavListingTile({ data, setProducts }) {
       <div className="absolute top-1 left-0 z-10">
         {data?.verified ? (
           <Image
-            src={verifiedIcon}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/verified.svg"}
             width={90}
             height={28}
             alt="verified icon"
           />
         ) : (
           <Image
-            src={unVerifiedIcon}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/unverified.svg"}
             width={90}
             height={28}
             alt="unverified icon"
@@ -179,14 +179,14 @@ function FavListingTile({ data, setProducts }) {
       <div className="absolute top-2 left-8 z-10 px-3">
         {data?.verified ? (
           <Image
-            src={verifiedIcon}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/verified.svg"}
             width={90}
             height={28}
             alt="verified icon"
           />
         ) : (
           <Image
-            src={unVerifiedIcon}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/unverified.svg"}
             width={90}
             height={28}
             alt="unverified icon"

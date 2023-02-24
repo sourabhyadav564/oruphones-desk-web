@@ -6,8 +6,8 @@ import LabelAndValue from "../LabelAndValue";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
 import { BiChevronRight } from "react-icons/bi";
-import SoldOut from "@/assets/soldout.png"
-import Logo from "@/assets/oru_phones_logo.png"
+// import SoldOut from "https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
 import { useState } from "react";
 import Cookies from "js-cookie";
 
@@ -142,7 +142,7 @@ function BestDealsCard({ data, setProducts }) {
       <div className="flex justify-end items-end pr-20 pt-5 relative">
       <div className=" absolute z-10 top-4 right-44">
         {data?.status === "Sold_Out" ? <Image
-          src={SoldOut}
+          src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
           width={"50"}
           height={"30"}
           objectFit="contain"
@@ -155,13 +155,13 @@ function BestDealsCard({ data, setProducts }) {
           <Image
             loading="lazy"
             priority={false}
-            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
+            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
             placeholder="blur"
             className="flex rounded-[20px]"
             width={140}
             height={190}
             // src={data?.imagePath || Logo}
-            src={imageError ? getDefaultImage(data?.marketingName) ||  Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
+            src={imageError ? getDefaultImage(data?.marketingName) ||  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
             onError={() => setImageError(true)}
             objectFit="contain"
             alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}

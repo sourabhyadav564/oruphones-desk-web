@@ -6,12 +6,14 @@ import * as Axios from "../../../../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import FullImageView from "@/components/FullImageView";
 import Cookies from "js-cookie";
-import Logo from "@/assets/oru_phones_logo.png";
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
+
 
 // import {
 //   otherVandorDataSelector,
 //   // otherVandorListingIdSelector,
 // } from "../../../../../atoms/globalState";
+
 
 // import {
 //   otherVendorDataState,
@@ -33,6 +35,7 @@ function ProductDetails({ listingInfo,data }) {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
+  console.log("listing information : ",listingInfo);
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   // const productData = useRecoilValue(otherVandorDataSelector);
@@ -211,8 +214,8 @@ function ProductDetails({ listingInfo,data }) {
           ]) ||
           (listingInfo?.vendorLogo && [
             {
-              fullImage: Logo?.src,
-              thumbImage: Logo?.src,
+              fullImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"?.src,
+              thumbImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"?.src,
             },
           ])
         }

@@ -7,7 +7,7 @@ import DesktopMenu from "./DesktopMenu";
 import Geocode from "react-geocode";
 import MobileMenu from "./MobileMenu";
 // import home_logo from "../../assets/home_logo.svg";
-import home_logo from "../../assets/logo_square.svg";
+// import home_logo from "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg";
 import LoginOrProfile from "./LoginOrProfile";
 import LocationPopup from "../Popup/LocationPopup";
 import AppContext from "@/context/ApplicationContext";
@@ -151,7 +151,7 @@ function Header({ menuItems }) {
 
         <Link href="/">
           <a className="h-9 md:w-[75px] px-32 pr-0 py-[14px] mr-4 lg:mr-8 block relative">
-            <Image src={home_logo} alt="ORUphones" layout="fill" priority />
+            <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} alt="ORUphones" layout="fill" priority />
           </a>
         </Link>
         <div className="hidden sm:flex  justify-center mx-12 flex-1 text-sm">

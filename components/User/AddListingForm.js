@@ -7,10 +7,10 @@ import { numberWithCommas, numberFromString } from "../../utils/util";
 // import charging from "../../assets/charging-station.png";
 // import headphone from "../../assets/headphones.png";
 // import originalBox from "../../assets/original-box.png";
-import charging from "../../assets/charging-station.svg";
-import headphone from "../../assets/headphones.svg";
-import originalBox from "../../assets/original-box.svg";
-import originalBill from "../../assets/original-bill.png";
+// import charging from "https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.svg";
+// import headphone from "https://d1tl44nezj10jx.cloudfront.net/assets/headphones.svg";
+// import originalBox from "https://d1tl44nezj10jx.cloudfront.net/assets/original-box.svg";
+// import originalBill from "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
@@ -833,7 +833,7 @@ function AddEditListing({
         </p>
         <div className="grid grid-cols-4 gap-4 mb-8">
           <Checkbox
-            src={charging}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.svg"}
             text="Charger"
             checked={charger}
             onClick={(e) => {
@@ -841,7 +841,7 @@ function AddEditListing({
             }}
           />
           <Checkbox
-            src={headphone}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/headphones.svg"}
             text="Earphones"
             checked={headphone1}
             onClick={(e) => {
@@ -849,7 +849,7 @@ function AddEditListing({
             }}
           />
           <Checkbox
-            src={originalBox}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-box.svg"}
             text="Original Box"
             checked={originalBox1}
             onClick={(e) => {
@@ -857,7 +857,7 @@ function AddEditListing({
             }}
           />
           <Checkbox
-            src={originalBill}
+            src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png"}
             text="Original Bill"
             checked={showWarranty}
             onClick={(e) => {

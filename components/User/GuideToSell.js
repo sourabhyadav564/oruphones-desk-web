@@ -1,11 +1,11 @@
 import Image from "next/image";
-import howtosellbgImg from "../../assets/sell_your_phone.png";
+// import howtosellbgImg from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_your_phone.png";
 
 function GuideToSell() {
   return (
     <div>
       <div className="relative w-full h-40">
-        <Image src={howtosellbgImg} alt="ORU devices" layout="fill" />
+        <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/sell_your_phone.png"} alt="ORU devices" layout="fill" />
       </div>
       <div className="px-4 py-6 text-sm">
         <p className="font-semibold capitalize text-m-green py-3">

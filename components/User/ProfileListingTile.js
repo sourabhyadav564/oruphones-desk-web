@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import Cookies from "js-cookie";
-import Logo from "@/assets/oru_phones_logo.png"
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
 
 function ProfileListingTile({ data, fromMyFav, setProducts }) {
   const router = useRouter();
@@ -77,7 +77,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           <div className="flex justify-center w-32 h-24 pr-4">
             <img
               src={frontImagePath}
-              alt={data?.marketingName || Logo}
+              alt={data?.marketingName || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
           </div>
@@ -86,7 +86,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         {!data?.images && (
           <div className="flex justify-center w-32 h-24 pr-4">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={data?.defaultImage?.fullImage || data?.imagePath || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
@@ -96,7 +96,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         {data?.images && (
           <div className="flex justify-center w-32 h-24 pr-4">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={data?.defaultImage?.fullImage || data?.imagePath || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
@@ -237,7 +237,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           <div className="flex  m-auto justify-center w-32 h-24 pr-4">
             <img
               src={frontImagePath}
-              alt={data?.marketingName || Logo}
+              alt={data?.marketingName || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
           </div>
@@ -246,7 +246,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         {!data?.images && (
           <div className="flex m-auto justify-center w-32 h-24 pr-4">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={data?.defaultImage?.fullImage || data?.imagePath || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />
@@ -256,7 +256,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
         {data?.images && (
           <div className="flex m-auto justify-center w-32 h-24 pr-4">
             <img
-              src={data?.defaultImage?.fullImage || data?.imagePath || Logo}
+              src={data?.defaultImage?.fullImage || data?.imagePath || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               alt={data?.marketingName}
               style={{ width: "auto", height: "100%", objectFit: "contain" }}
             />

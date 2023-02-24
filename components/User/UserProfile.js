@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
 // import UserProfileIcon from "../../assets/user-profile-icon.png";
-import UserProfileIcon from "../../assets/profile.svg";
+// import UserProfileIcon from "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg";
 
 import AppContext from "@/context/ApplicationContext";
 import AuthContext from "@/context/AuthContext";
@@ -20,7 +20,7 @@ function UserProfile({ children, className }) {
 
   const authUserData = { name: userInfo?.userdetails?.userName };
   useEffect(() => {
-    setInputImage(userInfo?.userdetails?.profilePicPath || UserProfileIcon);
+    setInputImage(userInfo?.userdetails?.profilePicPath || "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg");
   }, [userInfo]);
 
   function handleChange(e) {
@@ -69,16 +69,16 @@ function UserProfile({ children, className }) {
                 className="block w-full h-full relative rounded-full"
               >
                 <Image
-                  src={inputImage || UserProfileIcon}
+                  src={inputImage || "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"}
                   loading="lazy"
                   placeholder="blur"
                   priority={false}
                   unoptimized={false}
-                  blurDataURL={inputImage || UserProfileIcon}
+                  blurDataURL={inputImage || "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"}
                   alt="ORU Account"
                   layout="fill"
                   objectFit="contain"
-                  className={`hover:cursor-pointer ${UserProfileIcon && "rounded-full"
+                  className={`hover:cursor-pointer ${"https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg" && "rounded-full"
                     }`}
                 />
               </label>

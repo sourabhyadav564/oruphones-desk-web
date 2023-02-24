@@ -57,7 +57,7 @@ function ComparisonTable(data, listingId) {
 
   return (
     <div className="">
-      {productData && productData?.length > 0 && <div class="relative pt-3 lg:w-[90vw] w-full  overflow-x-scroll">
+      {productData && productData?.length > 0 && <div class="relative pt-3 lg:w-[80vw] w-full  overflow-x-scroll">
         <table class=" w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
           <thead class="uppercase text-white dark:bg-gray-700 dark:text-gray-400 font-Roboto-Semibold">
             <tr>

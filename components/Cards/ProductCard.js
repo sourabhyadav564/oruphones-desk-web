@@ -6,8 +6,8 @@ import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
 // import Logo from "@/assets/home_logo.svg"
-import Logo from "@/assets/oru_phones_logo.png";
-import SoldOut from "@/assets/soldout.png";
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
+// import SoldOut from "https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png";
 import { useState } from "react";
 
 function ProductCard({ data, prodLink, setProducts }) {
@@ -58,7 +58,7 @@ function ProductCard({ data, prodLink, setProducts }) {
               <div className="h-9">
                 {data?.status === "Sold_Out" ? (
                   <Image
-                    src={SoldOut}
+                    src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
                     width={"50"}
                     height={"30"}
                     objectFit="contain"
@@ -81,20 +81,20 @@ function ProductCard({ data, prodLink, setProducts }) {
                 unoptimized={false}
                 blurDataURL={
                   imageError
-                    ?getDefaultImage(data?.marketingName) || Logo
+                    ?getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
-                    getDefaultImage(data?.marketingName) || Logo
+                    getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                 }
                 src={
                   imageError
-                    ? getDefaultImage(data?.marketingName) || Logo
+                    ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
                     getDefaultImage(data?.marketingName)
-                    || Logo
+                    || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                 }
                 alt={`buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
                   } ${data?.deviceStorage} ${data?.deviceCondition

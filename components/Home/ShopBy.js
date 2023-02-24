@@ -2,34 +2,34 @@ import React from "react";
 import CategoryCards from "../Cards/CategoryCards";
 import Carousel from "../Carousel";
 import Title from "../Title";
-import bestSelling from "../../assets/cards/bestselling.png";
-import likeNew from "../../assets/cards/like_new.png";
-import verified from "../../assets/cards/verified.png";
-import warranty from "../../assets/cards/warranty.png";
+// import bestSelling from "https://d1tl44nezj10jx.cloudfront.net/assets/bestselling.png";
+// import likeNew from "https://d1tl44nezj10jx.cloudfront.net/assets/like_new.png";
+// import verified from "https://d1tl44nezj10jx.cloudfront.net/assets/verified.png";
+// import warranty from "https://d1tl44nezj10jx.cloudfront.net/assets/warranty.png";
 
 const data = [
   {
     id: 1,
     text: "BestSelling Mobiles",
-    imagePath: bestSelling,
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/best-selling-mobiles.png",
     urlPath: "Bestselling",
   },
   {
     id: 3,
     text: "Verified Devices Only",
-    imagePath: verified,
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/verified-mobils.png",
     urlPath: "Verified",
   },
   {
     id: 2,
     text: "Like New Condition",
-    imagePath: likeNew,
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/like-new.png",
     urlPath: "Like New",
   },
   {
     id: 4,
     text: "Phone with Warranty",
-    imagePath: warranty,
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/warranty.png",
     urlPath: "Warranty",
   },
 ];

@@ -4,8 +4,8 @@ import { BiRupee } from "react-icons/bi";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import VerifiedIcon from "../VerifiedIcon";
 import AddFav from "../AddFav";
-import Logo from "@/assets/oru_phones_logo.png";
-import SoldOut from "@/assets/soldout.png";
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
+// import SoldOut from "https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png";
 import { useState } from "react";
 
 function TopDealCard({ data, setProducts, prodLink }) {
@@ -59,7 +59,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
               ) : (
                 data?.status === "Sold_Out" && (
                   <Image
-                    src={SoldOut}
+                    src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
                     width={"50"}
                     height={"50"}
                     objectFit="contain"
@@ -78,8 +78,8 @@ function TopDealCard({ data, setProducts, prodLink }) {
             placeholder="blur"
             priority={false}
             unoptimized={false}
-            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
-            src={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
+            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+            src={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
             // src={imageError ? Logo : img?.fullImage}
             onError={() => setImageError(true)}
             alt={data?.name}
@@ -93,8 +93,8 @@ function TopDealCard({ data, setProducts, prodLink }) {
               placeholder="blur"
               priority={false}
               unoptimized={false}
-              blurDataURL={imageError? Logo : getDefaultImage(data?.marketingName) || Logo}
-              src={imageError? Logo : getDefaultImage(data?.marketingName) || Logo}
+              blurDataURL={imageError? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+              src={imageError? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
               onError={() => setImageError(true)}
               alt={data?.name}
               width={"150"}

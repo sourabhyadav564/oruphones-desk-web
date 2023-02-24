@@ -5,7 +5,7 @@ import { BiRupee } from "react-icons/bi";
 import { numberWithCommas } from "../../utils/util";
 import ImageSlider from "../ImageSlider";
 import LabelAndValue from "../LabelAndValue";
-import chartIcon from "../../assets/chart.svg";
+// import chartIcon from "https://d1tl44nezj10jx.cloudfront.net/assets/chart.svg";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import DeviceVerificationReport from "../Popup/DeviceVerificationReport";
 import ActivatePauseListing from "../Popup/ActivatePauseListingPopup";
@@ -107,7 +107,7 @@ function ListingDetailsCard({ data }) {
               {/* </Link> */}
               <button onClick={() => setOpenAppDownload(true)}>Edit</button>
             </p>
-            <Image src={chartIcon} width={15} height={15} alt="Chart Icon" className="cursor-pointer" />
+            <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/chart.svg"} width={15} height={15} alt="Chart Icon" className="cursor-pointer" />
           </div>
           {data?.status === "Active" ? (
             <div className="flex flex-col items-end">

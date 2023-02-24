@@ -9,9 +9,9 @@ import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccess
 import Cookies from "js-cookie";
 import { CgProfile } from "react-icons/cg";
 import { FaGreaterThan } from "react-icons/fa";
-import first from "@/assets/first.png";
-import second from "@/assets/second.png";
-import third from "@/assets/third.png";
+// import first from "https://d1tl44nezj10jx.cloudfront.net/assets/first.png";
+// import second from "https://d1tl44nezj10jx.cloudfront.net/assets/second.png";
+// import third from "https://d1tl44nezj10jx.cloudfront.net/assets/third.png";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import { toast } from "react-toastify";
 
@@ -317,10 +317,10 @@ const OtherSeller = ({
                     <Image
                       src={
                         index == 0
-                          ? first
+                          ? "https://d1tl44nezj10jx.cloudfront.net/assets/first.png"
                           : index == 1
-                            ? second
-                            : index == 2 && third
+                            ? "https://d1tl44nezj10jx.cloudfront.net/assets/second.png"
+                            : index == 2 && "https://d1tl44nezj10jx.cloudfront.net/assets/third.png"
                       }
                       alt="icon"
                       width={35}

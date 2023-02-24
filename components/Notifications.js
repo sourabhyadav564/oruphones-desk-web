@@ -3,7 +3,7 @@ import Image from "next/image";
 import { MdNotificationsNone } from "react-icons/md";
 import router from "next/router";
 // import mob from "@/assets/notification.png";
-import mob from "@/assets/logo_square.svg";
+// import mob from "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg";
 import { deleteNotification, getAllNotificationByUserd, markAsRead } from "api/axios";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 import Cookies from "js-cookie";
@@ -133,7 +133,7 @@ const NotificationsItem = ({ id, text, timestamp, onClick, isUnRead, notificatio
       style={{ background: "#EFEFEF" }}
       onClick={onClick}
     >
-      <Image src={mob} width={30} height={30} alt="ORUphones notification" />
+      <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} width={30} height={30} alt="ORUphones notification" />
     </div>
     <div>
       <div className="flex flex-row">

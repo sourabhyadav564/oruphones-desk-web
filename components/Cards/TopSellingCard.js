@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiRupee } from "react-icons/bi";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
-import Logo from "@/assets/oru_phones_logo.png"
+// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
 import { useState } from "react";
 
 function TopSellingCard({ data }) {
@@ -32,9 +32,9 @@ function TopSellingCard({ data }) {
                 loading="lazy"
                 priority={false}
                 onError={() => setImageError(true)}
-                blurDataURL={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
+                blurDataURL={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                 placeholder="blur"
-                src={imageError ? getDefaultImage(data?.marketingName) || Logo : data?.imagePath || getDefaultImage(data?.marketingName) || Logo}
+                src={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                 alt={alternate_text}
                 width={150}
                 height={150}

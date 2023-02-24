@@ -2,61 +2,61 @@ export const servicesData = [
   {
     title: "Price Comparison (Beta) ",
     description: "Compare deals on Old, Refurbished and Used phones",
-    imgSrc: require("@/assets/prcomp.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/prcomp.png",
     link: '/user/services/price-comparison'
   },
   {
     title: "Data Transfer to other devices",
     description: "can transfer the existing data (Photos, videos, contacts, apps, settings etc) to another device",
-    imgSrc: require("@/assets/services/data-transfer.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/data-transfer.svg",
     link: ""
   },
   {
     title: "Device Health Check",
     description: "Run diagnostics to check if all components are working fine.",
-    imgSrc: require("@/assets/services/health-check.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/health-check.svg",
     link: ""
   },
   {
     title: "Battery Check",
     description: "Check the battery performance of your device",
-    imgSrc: require("@/assets/services/battery-check.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/battery-check.svg",
     link: ""
   },
   {
     title: "Fake Parts Detection",
     description: "Check if your phone has any non- OEM parts",
-    imgSrc: require("@/assets/services/fake-detection.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/fake-detection.svg",
     link: ""
   },
   {
     title: "Stolen Phone Check",
     description: "Check if the device has been blacklisted as stolen",
-    imgSrc: require("@/assets/services/stolen-check.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/stolen-check.svg",
     link: ""
   },
   {
     title: "Phone Repair",
     description: "Run diagnostics to check if all components are working fine",
-    imgSrc: require("@/assets/services/phone-repair.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/phone-repair.svg",
     link: ""
   },
   {
     title: "Data Backup",
     description: "Users can back-up their device data to SD card or in cloud.",
-    imgSrc: require("@/assets/services/data-backup.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/data-backup.svg",
     link: ""
   },
   {
     title: "Alerts",
     description: "Users can choose to be notified if any exciting offers are available",
-    imgSrc: require("@/assets/services/alerts.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/alerts.svg",
     link: ""
   },
   {
     title: "Tips & Tricks",
     description: "A help section where users can find out about any useful tips to enhance their mobile.",
-    imgSrc: require("@/assets/services/tips-tricks.png"),
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/tips-tricks.svg",
     link: ""
   },
 ];
