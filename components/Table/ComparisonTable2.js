@@ -14,10 +14,11 @@ function ComparisonTable2(data, listingId) {
   const [thisdealopen, setThisdealOpen] = useState(false);
   const [openLoginPopup, setopenLoginPopup] = useState(false);
   const [performAction2, setperformAction2] = useState(false);
-  const [productLink, setProductLink] = useState("");
   const [thisactive, setThisActive] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
+  const [performAction1, setperformAction1] = useState(false);
+  const [productLink, setProductLink] = useState("");
 
   console.log('datamine',data);
 
@@ -70,7 +71,32 @@ function ComparisonTable2(data, listingId) {
             //     ? `(${item?.ImagePath})`
             //     : item?.ImagePath}
             // </th>
-            <th className="px-6 py-3 text-center">
+            <th className="px-6 py-3 text-center" onClick={() => {
+              if(Cookies.get("userUniqueId") == undefined){
+                setProductLink(`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`);
+                setopenLoginPopup(true);
+                setperformAction1(true);
+              }
+              else if (thisPhoneListingId == item?.listingId && item?.isOtherVendor == "N") {
+                setThisPhonePopup(true);
+              } else 
+              if (thisPhoneListingId != item?.listingId) {
+                // window.open(item.productLink, "_blank");}
+                window.open(
+                  `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+                  "_blank"
+                );}
+                else if(item?.isOtherVendor=="Y" && item?.vendorLink)
+            {
+              window.open(item?.vendorLink,"_blank");
+            }
+                else {
+                window.open(
+                  `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+                  "_blank"
+                );
+              }
+            }}>
                 <Image 
                 src={
                   getDefaultImage(item?.marketingName) 
@@ -83,21 +109,29 @@ function ComparisonTable2(data, listingId) {
           <th className="sticky left-0 px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center">Compare By</th>
           {productData?.map((item, index) => (
             <th className="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center" onClick={() => {
-              if (Cookies.get("userUniqueId") == undefined) {
+              if(Cookies.get("userUniqueId") == undefined){
+                setProductLink(`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`);
                 setopenLoginPopup(true);
-                setProductLink(item?.productLink);
-                setperformAction2(true);
+                setperformAction1(true);
               }
-              else if (
-                thisPhoneListingId == item?.listingId && item?.Object?.isOtherVendor == "N"
-              ) {
+              else if (thisPhoneListingId == item?.listingId && item?.isOtherVendor == "N") {
                 setThisPhonePopup(true);
-              } else if (
-                thisPhoneListingId != item?.listingId
-              ) {
-                window.open(item?.productLink, "_blank");
-              } else {
-                window.open(item?.productLink, "_blank");
+              } else 
+              if (thisPhoneListingId != item?.listingId) {
+                // window.open(item.productLink, "_blank");}
+                window.open(
+                  `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+                  "_blank"
+                );}
+                else if(item?.isOtherVendor=="Y" && item?.vendorLink)
+            {
+              window.open(item?.vendorLink,"_blank");
+            }
+                else {
+                window.open(
+                  `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+                  "_blank"
+                );
               }
             }}> 
               {item?.listingId == thisPhoneListingId
@@ -112,16 +146,16 @@ function ComparisonTable2(data, listingId) {
             // <Link href={item.ven}>
             <th
               className="border px-2 py-6 text-yellow-500 font-Roboto-Light "
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {" "}
               <span className="px-0.2">₹</span> {item?.listingPrice}
@@ -134,16 +168,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.deviceCondition}
             </th>
@@ -154,16 +188,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.deviceStorage}
             </th>
@@ -176,16 +210,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.isOtherVendor == "Y" ? item?.warranty : "None"}
             </th>
@@ -196,16 +230,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.isOtherVendor == "N" ? item?.warranty : "None"}
             </th>
@@ -218,16 +252,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.isOtherVendor == "Y"
                 ? item?.charger == "Y"
@@ -256,16 +290,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.isOtherVendor == "N"
                 ? item?.charger == "Y"
@@ -292,16 +326,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className={`border px-4 py-4 font-Roboto-Light text-gray`}
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {item?.listingLocation}
             </th>
@@ -314,16 +348,16 @@ function ComparisonTable2(data, listingId) {
           {productData?.map((item, index) => (
             <th
               className={`border px-4 py-4 font-Roboto-Light text-gray`}
-              onClick={() => {
-                if (item.vendorLink) {
-                  window.open(item.vendorLink, "_blank");
-                } else {
-                  window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
-                    "_blank"
-                  );
-                }
-              }}
+              // onClick={() => {
+              //   if (item.vendorLink) {
+              //     window.open(item.vendorLink, "_blank");
+              //   } else {
+              //     window.open(
+              //       `/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+              //       "_blank"
+              //     );
+              //   }
+              // }}
             >
               {!item?.listedBy ? (
                 <Image

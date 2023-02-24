@@ -13,9 +13,9 @@ function Input({
         }`}
     >
       <div
-        className={`flex items-center px-4 rounded ${errorClass || ""}`}
+        className={`flex items-center px-4  rounded  ${errorClass || ""}`}
         style={{
-          border: !errorClass && "1px solid rgba(0, 0, 0, 0.12)",
+          border: !errorClass && "2px solid rgba(0, 0, 0, 0.60)",
           color: "rgba(0, 0, 0, 0.6)",
         }}
       >

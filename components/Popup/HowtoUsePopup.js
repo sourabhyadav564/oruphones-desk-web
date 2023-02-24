@@ -29,7 +29,7 @@ function HowtoUsePopup({open,setOpen}) {
   return (
     <div>
           <Modal open={open} setOpen={setOpen} title={"ORU Guide"}>
-            <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar text-center'>
+            <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar '>
             <div className="flex pb-8 justify-start items-center">
                         <div className="flex flex-col items-center justify-center m-auto">
                             <QRCode
@@ -57,7 +57,7 @@ function HowtoUsePopup({open,setOpen}) {
                         </div>
                     </div>
                 <div>
-                <p className='font-Roboto-Semibold text-center text-[24px] w-[350px]  '>Download our App using these QR Codes</p>
+                <p className='font-Roboto-Semibold  text-[24px] w-[350px]  text-center'>Download our App using these QR Codes</p>
             <p className='text-[20px] font-semibold py-4'>1. Device Health Check</p>
                 <div className='flex items-center'>
                     <Image src={'https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/1.png'} width={150} height={300} alt="" className='object-contain'/>
@@ -162,7 +162,7 @@ function HowtoUsePopup({open,setOpen}) {
                 </div>
                 </div>
                 <div>
-                <p className=' text-[20px] font-Roboto-Semibold text-center py-4 w-80'>ORUphones never take any personal information from our users. Your privacy is our priority.</p>
+                <p className=' text-[20px] font-Roboto-Semibold text-center py-4 w-80'>*ORUphones never take any personal information from our users. Your privacy is our priority.</p>
                 </div>
             </div>
           </Modal>

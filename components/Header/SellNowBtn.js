@@ -27,7 +27,7 @@ function SellNowBtn() {
 
 
         }}
-        className=" bg-m-yellow-1  py-1 w-20 h-8 rounded-md border-2  border-m-yellow-1 text-m-green-1 text-smallFontSize self-center items-center font-Roboto-Semibold hover:bg-[rgb(44,47,69)] duration-500 hover:border-[rgb(44,47,69)] hover:text-white hover:scale-110"
+        className=" bg-m-yellow-1  py-1 w-20 h-8 rounded-md border-2   md:border-m-yellow-1 hover:border-white text-m-green-1 text-smallFontSize self-center items-center font-Roboto-Semibold hover:bg-[rgb(44,47,69)] duration-500 hover:border-[rgb(44,47,69)] hover:text-white hover:scale-110"
         onClick={() => handleClick()}
       >
         Sell Now

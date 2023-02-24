@@ -98,7 +98,7 @@ function HowtoSellPopup({ open, setOpen }) {
                     </div>
                     <div>
                         <p className=' text-[20px] font-Roboto-Semibold text-center py-4'>Congrats Your Mobile is Listed on ORUphones.
-                            <br></br> Welcome from Team ORUphones..</p>
+                            <br></br> Welcome from Team ORUphones.</p>
                     </div>
                 </div>
             </Modal>

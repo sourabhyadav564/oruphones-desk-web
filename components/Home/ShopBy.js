@@ -46,9 +46,9 @@ function ShowBy() {
   return (
     <>
       <div className="bg-m-grey">
-        <section className="container top_brand lg:px-24 px-10 pt-[57px] pb-[44px] font-bold">
+        <section className="container top_brand pt-[57px] pb-[44px] font-bold ">
           <Title text="Shop By" />
-          <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 pt-4 gap-4 items-center m-auto justify-center">
+          <div className="flex flex-wrap pt-4 gap-4  justify-between px-4">
             {data &&
               data.map((item, index) => <CategoryCards key={index} data={item} />)}
             <CategoryCards priceRange />

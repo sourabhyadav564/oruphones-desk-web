@@ -168,7 +168,8 @@ function DesktopMenu({ menuItems }) {
                         }text-m-white px-4 opacity-100 font-light `}
                     >
                       <Link key={index} href={{ pathname: item.chlink }}>
-                        <span> {item.name} </span>
+                        {/* <span> {item.name} </span> */}
+                        <span> {item.name}   </span>
                       </Link>
                     </Popover.Button>
                     {/* <Transition
@@ -261,17 +262,30 @@ function DesktopMenu({ menuItems }) {
           )}
           {
             authenticated ? (
+              <div>
+                 <div className=" absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+              NEW
+            </div>
               <NavListItem text="Services" 
               link="/user/services"
               />
+              
+              </div>
           ):(
+            <div>
+              <div className=" absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+              NEW
+            </div>
+            
              <NavListItem text="Services" 
              // link="/user/profile"
                onClick={() => {
                  setShowLogin(true)
                  setPerformAction(true);
                  setItemLink('/user/services')
-               }}/>)
+               }}/>
+               </div>
+            )
           }
          
         </Popover.Group>

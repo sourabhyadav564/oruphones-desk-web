@@ -38,19 +38,19 @@ function UserProfile({ children, className }) {
           };
 
           Axios.updateUserDetails(payload).then((res) => {
-           
+
             setInputImage(payload?.profilePicPath);
-          
+
             if (res?.status === "SUCCESS") {
               userInfo.userdetails = {
                 ...userInfo.userdetails,
                 profilePicPath: res?.dataObject?.userdetails.profilePicPath,
               };
               setInputImage(res?.dataObject?.userdetails.profilePicPath);
-             
+
             }
 
-         
+
           });
         }
       }
@@ -105,7 +105,12 @@ function UserProfile({ children, className }) {
           <NavListItem text="My Profile" link="/user/profile" />
           <NavListItem text="My Listings" link="/user/listings" />
           <NavListItem text="My Favorites" link="/user/favorites" />
-          <NavListItem text="ORU Services" link="/user/services" />
+          <div className=" absolute mt-48 ml-28  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+              NEW
+            </div>
+
+            <NavListItem text="ORU Services" link="/user/services" />
+            
           {/* add logout function */}
           <NavListItem
             text="Logout"
@@ -129,7 +134,7 @@ const NavListItem = ({ text, link, onClick }) => {
   return (
     <Link href={link} passHref>
       <a
-        className={`px-4 py-2 my-1 font-Roboto-Light text-mediumFontSize hover:bg-gray-100 rounded text-black-60 ${router.pathname == link && "bg-gray-100"
+        className={`px-4 py-2 my-1 font-Roboto-Light  text-mediumFontSize hover:bg-gray-100 rounded text-black-60 ${router.pathname == link && "bg-gray-100"
           }`}
         onClick={onClick}
       >

@@ -107,7 +107,7 @@ function HowtoBuyPopup({open,setOpen}) {
                     <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/11.png'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div>
-                <p className=' text-[20px] font-Roboto-Semibold text-center py-4'>We wish you a happy ORUing with us.</p>
+                <p className=' text-[20px] font-Roboto-Semibold text-center py-4'>We wish you a happy shopping.</p>
                 </div>
             </div>
           </Modal>

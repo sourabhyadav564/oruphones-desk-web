@@ -38,7 +38,7 @@ function Profile() {
     <UserProfile className="mb-10">
       <div className="px-12 py-4">
         <h1 className="text-xl2FontSize font-Roboto-Semibold py-3"> Profile Information </h1>
-        <form className="mt-4 grid md:grid-cols-2 grid-cols-1 gap-8" onSubmit={handleSubmit}>
+        <form className="mt-4 grid md:grid-cols-2 grid-cols-1 gap-8 " onSubmit={handleSubmit}>
           <Input
             type="text"
             maxLength="30"

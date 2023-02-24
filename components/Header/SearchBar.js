@@ -99,7 +99,7 @@ function SearchBar() {
             ))}
           </select> */}
           <input
-            placeholder="Search on ORUphones"
+            placeholder="Search with make and models . . ."
             onChange={handleChange}
             value={input}
             className={`px-4 pt-3 py-3 h-8 w-full bg-m-white-1 text-smallFontSize font-Roboto-Regular rounded bg-no-repeat ${

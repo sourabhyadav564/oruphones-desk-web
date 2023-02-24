@@ -7,10 +7,8 @@ import AppDownloadPopup from "@/components/Popup/AppDownloadPopup";
 import Link from "next/link";
 
 function Services() {
-
   const [openAppDownload, setOpenAppDownload] = useState(false);
   const [active,setActive] = useState(false);
-
 
   const handleClick = () => {
     setOpenAppDownload(true);
@@ -50,7 +48,7 @@ function Services() {
               </div>):(<div>
                 <a
                 key={index}
-                className={`${index==0?("bg-gray-200 "):("bg-white")} border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
+                className={`${index==0?("bg-gray-200 "):("bg-white")} opacity-70 border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
               onClick={handleClick}
               >
                 <div className="p-4">

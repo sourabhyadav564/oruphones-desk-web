@@ -22,7 +22,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
   return (
     <div data-aos="flip-right"
     data-aos-duration="2000">
-      <span className="absolute pl-[170px] flex z-10 justify-between pt-2  w-full">
+      <span className="absolute pl-[160px] flex z-10 justify-between pt-2  w-full">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}

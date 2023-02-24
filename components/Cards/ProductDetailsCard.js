@@ -526,8 +526,8 @@ function ProductDetailsCard({ data, openFullImage }) {
               </div>
             </div>
           )}
-          <div className="flex flex-row w-full justify-items-start">
-            <div className="lg:pl-28 px-8">
+          <div className="flex flex-row w-full justify-evenly gap-8 pb-10">
+            <div className="">
               {data?.functionalTestResults &&
                 data?.functionalTestResults.map((items, index) => {
                   return (
