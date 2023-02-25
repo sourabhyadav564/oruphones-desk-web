@@ -111,7 +111,7 @@ function ComparisonTable2(data, listingId) {
         <tr className="text-white  ">
           <th className="sticky left-0 px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center">Compare By</th>
           {productData?.map((item, index) => (
-            <th className="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center" onClick={() => {
+            <th className="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center hover:opacity-90 " onClick={() => {
               if(Cookies.get("userUniqueId") == undefined){
                 setProductLink(`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`);
                 setopenLoginPopup(true);

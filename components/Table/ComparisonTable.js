@@ -136,42 +136,42 @@ function ComparisonTable(data, listingId) {
                   <tr class={
                     // item?.externalSourceImage == ""
                     thisPhoneListingId == item?.listingId
-                      ? ` bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 font-Roboto-Regular text-center` : ` bg-white border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
+                      ? ` bg-gray-100 border-b  dark:bg-gray-800 dark:border-gray-700 font-Roboto-Regular text-center` : ` bg-white  border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `}>
                     <th
                       scope="row"
                       class={
                         // item?.externalSourceImage == "" 
                         thisPhoneListingId == item?.listingId
-                          ? `bg-gray-100 sticky  left-0 top-0  px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `sticky left-0 top-0 px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
+                          ? `bg-gray-100 sticky  left-0 top-0  px-6 py-4 font-medium hover:bg-gray-200 hover:text-black text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]` : `sticky left-0 top-0 px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`}
+                          onClick={() => {
+                            if (Cookies.get("userUniqueId") == undefined) {
+                              setOpenLoginPopup(true);
+                              setProductLink(item?.productLink);
+                              setperformAction2(true);
+                            }
+                            else if (
+                              thisPhoneListingId == item?.listingId && item?.Object?.isOtherVendor == "N"
+                            ) {
+                              setThisPhonePopup(true);
+                            } else if (
+                              thisPhoneListingId != item?.listingId
+                            ) {
+                              window.open(item?.productLink, "_blank");
+                            } else {
+                              window.open(item?.productLink, "_blank");
+                            }
+                          }}
                     >
-                      <div className="flex justify-between hover:cursor-pointer" onClick={() => {
-                        if (Cookies.get("userUniqueId") == undefined) {
-                          setOpenLoginPopup(true);
-                          setProductLink(item?.productLink);
-                          setperformAction2(true);
-                        }
-                        else if (
-                          thisPhoneListingId == item?.listingId && item?.Object?.isOtherVendor == "N"
-                        ) {
-                          setThisPhonePopup(true);
-                        } else if (
-                          thisPhoneListingId != item?.listingId
-                        ) {
-                          window.open(item?.productLink, "_blank");
-                        } else {
-                          window.open(item?.productLink, "_blank");
-                        }
-                      }}>
+                      <div className="flex justify-between hover:cursor-pointer" 
+                      >
                         {item?.userName
                           // (item?.externalSourceImage ==
                           // "" || item?.externalSourceImage == 
                           // "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/oru_logo.png") 
-
                           ? (
                             <div className={`filter ${thisPhoneListingId != item.listingId && "brightness-50 invert-1"} object-contain`}>{item?.userName}
                              <p className="text-[#2196f3] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize">View Deal <span> > </span></p>
                             </div>
-                            
                           ) : (
                             <div>
                             <Image
