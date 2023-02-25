@@ -18,7 +18,7 @@ const settings = {
 
 function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, index, location }) {
 
-   
+   console.log("ShopByBrandSection",shopbymodeldata);
 
     return (
         <section className="m-auto items-center">
@@ -27,12 +27,12 @@ function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, inde
             // slidesPerView={3}
             // spaceBetween={1}
             >
-                {shopbymodeldata.map((item) => (
+                {shopbymodeldata?.map((item) => (
                     <SwiperSlide key={item?.make}>
                         <ShopByModelCard
-                            data={item.marketingname}
+                            data={item.replace(/"/g, "")}
                             // src={`https://zenrodeviceimages.s3.us-west-2.amazonaws.com/allModelsImg/${item?.marketingname?.toString().toLowerCase().replaceAll(" ", "_")}.jpg`}
-                            src={getDefaultImage(item?.marketingname)}
+                            src={getDefaultImage(item.replace(/"/g, ""))}
                             // alt={data?.models?.model_name}
                             // location={location}
                             make={shopbymakedata}

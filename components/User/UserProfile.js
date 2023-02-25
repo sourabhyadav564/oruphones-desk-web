@@ -105,7 +105,7 @@ function UserProfile({ children, className }) {
           <NavListItem text="My Profile" link="/user/profile" />
           <NavListItem text="My Listings" link="/user/listings" />
           <NavListItem text="My Favorites" link="/user/favorites" />
-          <div className=" absolute mt-48 ml-28  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+          <div className=" absolute mt-48 md:ml-28 ml-24   bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
               NEW
             </div>
 

@@ -354,7 +354,7 @@ function Bestdealnearyou() {
             ))}
           </Carousel>
         )}
-        <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4 mt-8">
+        <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-8  mt-8">
           Total Products ({totalProducts})
         </h4>
         <div className="grid md:grid-cols-3 grid-cols-2 m-auto justify-center gap-4  mt-4">

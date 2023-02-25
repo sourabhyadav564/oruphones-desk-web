@@ -392,7 +392,7 @@ const Products = () => {
             </Carousel>
           </div>
         )}
-        <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
+        <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-8">
           Total Products ({totalProducts})
         </h4>
         <div className="grid md:grid-cols-3 grid-cols-2 gap-4">

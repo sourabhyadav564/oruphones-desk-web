@@ -33,6 +33,7 @@ function BrandPage() {
   const router = useRouter();
   let { makeName } = router.query;
   const [products, setProducts] = useState([]);
+  const [shopByModel, setShopByModel] = useState([]);
   const [bestDeal, setBestDeal] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [shopbymodel, setshopbymodel] = useState([]);
@@ -67,7 +68,7 @@ function BrandPage() {
       // await getMakeModel()
       // );
       let makemodel;
-      if (localStorage.getItem("make_models") != undefined) {
+      if (localStorage.getItem("shopByModel") != undefined) {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
         } else if (makeName === "lg") {
@@ -78,12 +79,18 @@ function BrandPage() {
           makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
         }
       
-        makemodel = JSON.parse(localStorage.getItem("make_models"));
+        makemodel = JSON.parse(localStorage.getItem("shopByModel"));
         makemodel.map((item) => {
           if (item.make == makeName) {
             setTitle(item.make);
             setDescription(item.make);
-            setshopbymodel(item.models);
+            // setshopbymodel(item.models);
+            if (shopByModel==[]){
+              setShopByModel(JSON.stringify(item.marketingName))
+            }
+            else{
+              setShopByModel((shopByModel)=>[...shopByModel, JSON.stringify(item.marketingName)]);
+            }
           }
         })
       }
@@ -93,24 +100,37 @@ function BrandPage() {
         } else {
           makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
         }
-        getMakeModel();
-        makemodel = JSON.parse(localStorage.getItem("make_models"));
+        // getMakeModel();
+        Axios.fetchTopsellingmodels();
+        makemodel = JSON.parse(localStorage.getItem("shopByModel"));
       
 
         makemodel.map((item) => {
           if (item.make == makeName) {
             setTitle(item.make);
             setDescription(item.make);
-            setshopbymodel(item.models);
+            // setshopbymodel(item.models);
+            if (shopByModel==[]){
+              setShopByModel(JSON.stringify(item.marketingName))
+            }
+            else{
+              setShopByModel((shopByModel)=>[...shopByModel, JSON.stringify(item.marketingName)]);
+            }
           }
         })
       }
       if (makemodel != undefined) {
         makemodel.map((item) => {
-          if (item.makeName == makeName2) {
-            setTitle(item.makeName);
-            setDescription(item.makeName);
-            setshopbymodel(item.models);
+          if (item.make == makeName) {
+            setTitle(item.make);
+            setDescription(item.make);
+            // setshopbymodel(item.models);
+            if (shopByModel==[]){
+              setShopByModel(JSON.stringify(item.marketingName))
+            }
+            else{
+              setShopByModel((shopByModel)=>[...shopByModel, JSON.stringify(item.marketingName)]);
+            }
           }
         })
       }
@@ -549,11 +569,10 @@ function BrandPage() {
             />
           </div>
            */}
-
           {<div className="font-Roboto-Semibold text-xlFontSize">
             <p className="opacity-50">Shop By Model</p>
             <ShopByBrandSection
-              shopbymodeldata={shopbymodel}
+              shopbymodeldata={shopByModel}
               shopbymakedata={makeName}
             />
           </div>}

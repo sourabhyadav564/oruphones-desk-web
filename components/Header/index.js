@@ -147,7 +147,7 @@ function Header({ menuItems }) {
         progress={progress_number}
         // onLoaderFinished={() => setProgress(0)}
       /> */}
-      <div className=" container w-full h-16 bg-m-white bg-no-repeat  flex items-center opacity-100 px-0 py-0 ">
+      <div className=" container w-10/12 h-16 bg-m-white bg-no-repeat  flex justify-center items-center opacity-100 px-0 py-0 ">
 
         <Link href="/">
           <a className="h-9 md:w-[75px] px-32 pr-0 py-[14px] mr-4 lg:mr-8 block relative">

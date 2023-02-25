@@ -74,7 +74,7 @@ function LoginOrProfile() {
                 <div className="w-10 overflow-hidden inline-block">
                   <div className="h-7 w-7 bg-white rotate-45 transform origin-bottom-left"></div>
                 </div>
-                <div className="-mt-1 grid grid-cols-1 w-64 rounded px-4 shadow-md pb-2 bg-white border-t-4 border-transparent">
+                <div className="-mt-1 grid grid-cols-1 w-48 rounded px-4 shadow-md pb-2 bg-white border-t-4 border-transparent">
                   <p className="text-center text-regularFontSize pt-4 pb-2 font-Roboto-Semibold text-m-grey-1">
                     My Account
                   </p>
@@ -120,7 +120,7 @@ function LoginOrProfile() {
                 <div className="w-10 overflow-hidden inline-block">
                   <div className="h-7 w-7 bg-white rotate-45 transform origin-bottom-left"></div>
                 </div>
-                <div className="-mt-1 grid grid-cols-1 w-64 rounded px-4 shadow-md pb-2 bg-white border-t-4 border-transparent">
+                <div className="-mt-1 grid grid-cols-1 w-48 rounded px-4 shadow-md pb-2 bg-white border-t-4 border-transparent">
                   <p className="text-center text-regularFontSize pt-4 pb-2 font-Roboto-Semibold text-m-grey-1">
                     My Account
                   </p>

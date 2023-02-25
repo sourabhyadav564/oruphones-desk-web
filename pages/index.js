@@ -25,6 +25,7 @@ export default function Home({
   fetchTopsellingmodels,
   sessionId,
   fetchTopArticles,
+  shopByModel
   // fetchShopByPrice
   // makeModelLists,
 }) {
@@ -32,7 +33,7 @@ export default function Home({
   const { locale } = router;
   const t = locale === "en" ? en : null;
   const { getSearchLocation } = useContext(AppContext);
-
+  const [shopbyModel, setShopbyModel] = useState(shopByModel);
   const [brands, setBrands] = useState([]);
   const [topsellingmodels, setTopsellingmodels] = useState([]);
   const [topArticles, setTopArticles] = useState([]);
@@ -56,6 +57,10 @@ export default function Home({
       localStorage.setItem("top_models", JSON.stringify(fetchTopsellingmodels));
       Cookies.set("top_models", true);
       setTopsellingmodels(fetchTopsellingmodels);
+    }
+
+    if (shopbyModel?.length > 0) {
+      localStorage.setItem("shopByModel", JSON.stringify(shopByModel));
     }
 
     // if (fetchTopArticles.length === 0) {
@@ -143,11 +148,13 @@ export async function getServerSideProps({ req, res, query }) {
   }
 
   let fetchTopsellingmodels;
+  let shopByModel;
   if (top_models) {
     fetchTopsellingmodels = [];
   } else {
     const data = await Axios.fetchTopsellingmodels();
     fetchTopsellingmodels = data?.dataObject;
+    shopByModel = data?.allModels;
   }
 
   // let fetchTopArticles;
@@ -173,6 +180,7 @@ export async function getServerSideProps({ req, res, query }) {
       //fetchShopByPrice:fetchShopByPrice?.dataObject || [],
       fetchTopsellingmodels: fetchTopsellingmodels || [],
       sessionId: sessionID,
+      shopByModel: shopByModel||[],
       // makeModelLists: makeModelLists || [],
       // fetchTopArticles: fetchTopArticles || [],
     },

@@ -18,8 +18,8 @@ function ProductCard({ data, prodLink, setProducts }) {
 
   return (
     <div
-      data-aos="fade-up" className="relative">
-      <span className="flex justify-end pr-4 ">
+      data-aos="fade-up" className="relative my-4">
+      <span className=" pt-2 pr-2 right-2  absolute ">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}
@@ -38,6 +38,7 @@ function ProductCard({ data, prodLink, setProducts }) {
           )
         }
       >
+        
         {/* // <Link */}
         {/* //   href={{ */}
         {/* //     pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${prodLink ? data?.listingId : ""}`,
@@ -47,7 +48,7 @@ function ProductCard({ data, prodLink, setProducts }) {
     // > */}
         <a>
           <div
-            className="w-30  -mt-8 -z-1 rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
+            className="w-30   -z-1 rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
 
             style={{ boxShadow: "2px 2px 10px #00000029", padding: " 0 10px" }}
           >

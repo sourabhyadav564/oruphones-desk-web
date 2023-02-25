@@ -29,7 +29,7 @@ function Input({
 
       <label
         htmlFor={name}
-        className="absolute top-1 font-normal left-0 text-regularFontSize font-Roboto-Light bg-white p-1 z-1 duration-300 origin-0"
+        className="absolute top-1 font-normal left-0 text-regularFontSize font-Roboto-Bold bg-white p-1 z-1 duration-300 origin-0"
         style={{ color: "rgba(0, 0, 0, 0.6)" }}
       >
         {children}

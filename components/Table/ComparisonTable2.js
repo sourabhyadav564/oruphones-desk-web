@@ -60,9 +60,9 @@ function ComparisonTable2(data, listingId) {
   return (
    
 <div className="">
-     <div className="my-8 relative pt-3 lg:w-[80vw] w-full  overflow-x-scroll">
+     <div className="my-8 relative pt-3 lg:w-[80vw] w-full  overflow-x-scroll text-center">
     {productData.length > 0 && productData ?  
-      <table className=" w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
+      <table className=" w-full text-mediumFontSize text-center text-left text-gray-500 dark:text-gray-400">
         <tr className="text-white  ">
           <th className="sticky left-0 px-6 py-3 bg-white z-10 text-center">{" "}</th>
           {productData?.map((item, index) => (
@@ -164,7 +164,7 @@ function ComparisonTable2(data, listingId) {
           ))}
         </tr>
         <tr className="  font-Roboto-Regular text-cx sticky">
-          <th className=" bg-white px-4 py-2 sticky left-0 drop-shadow-2xl uppercase">Condition</th>
+          <th className=" bg-white border px-4 py-2 sticky left-0 drop-shadow-2xl uppercase">Condition</th>
           {productData?.map((item, index) => (
             <th
               className="border px-4 py-4 font-Roboto-Light text-gray"
@@ -204,7 +204,7 @@ function ComparisonTable2(data, listingId) {
           ))}
         </tr>
         <tr className="  font-Roboto-Regular text-cx">
-          <th className="sticky left-0 bg-white px-4 py-2 drop-shadow-2xl uppercase">
+          <th className="sticky border left-0 bg-white px-4 py-2 drop-shadow-2xl uppercase">
             Seller's warranty
           </th>
           {productData?.map((item, index) => (

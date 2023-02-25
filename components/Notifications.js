@@ -93,7 +93,7 @@ export default function Notifications() {
           <div className="w-10 overflow-hidden inline-block">
             <div className="h-7 w-7 relative bg-white rotate-45 transform origin-bottom-left"></div>
           </div>
-          <div className="-mt-1 flex flex-col w-96 h-72 overflow-hidden overflow-y-auto rounded-md shadow-md pb-2 border-t-4 border-transparent bg-white">
+          <div className="-mt-1 flex flex-col w-72  h-72  overflow-hidden overflow-y-auto rounded-md shadow-md pb-2 border-t-4 border-transparent bg-white">
             <p className="text-center text-xlFontSize pt-4 pb-3 font-Roboto-Semibold text-m-grey-1 h-auto ">
               Notification
             </p>

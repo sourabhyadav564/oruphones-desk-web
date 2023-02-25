@@ -48,7 +48,7 @@ function ShowBy() {
       <div className="bg-m-grey">
         <section className="container top_brand pt-[57px] pb-[44px] font-bold ">
           <Title text="Shop By" />
-          <div className="flex flex-wrap pt-4 gap-4  justify-between px-4">
+          <div className="md:flex md:flex-wrap grid grid-cols-3   pt-4 gap-4  justify-between px-4">
             {data &&
               data.map((item, index) => <CategoryCards key={index} data={item} />)}
             <CategoryCards priceRange />

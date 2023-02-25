@@ -81,7 +81,9 @@ function LoginOrProfileInMobileMenu() {
                   <NavListItem text="My Profile" link="/user/profile" />
                   <NavListItem text="My Listings" link="/user/listings" />
                   <NavListItem text="My Favorites" link="/user/favorites" />
-                  
+                  <div className=" absolute  ml-24 mt-44  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+              NEW
+            </div>
                   <NavListItem text="ORU Services" link="/user/services" />
                   {/* Add logout function */}
                   <NavListItem
@@ -143,6 +145,9 @@ function LoginOrProfileInMobileMenu() {
                       setPerformAction(true);
                       setItemLink('/user/favorites')
                     }}/>
+                    <div className=" absolute  ml-24 mt-44  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+              NEW
+            </div>
                   <NavListItem text="ORU Services"
                   //  link="/user/services" 
                     onClick={() => {
