@@ -13,7 +13,7 @@ export default function Model2({ open, setOpen, children, title }) {
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
-        <div className="flex items-end justify-center min-h-screen text-center sm:block">
+        <div className="flex items-end justify-center md:mt-0 mt-48 text-center sm:block">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

@@ -562,10 +562,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             <div>
            
               <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
-                Detailed Comparison Between Other Sellers for {data?.marketingName + "  ("}
-                {data?.make != "Apple" && data?.deviceRam + " / "}
-                {data?.deviceStorage + ") - "}
-                Condition: {data?.deviceCondition}
+                Detailed Comparison Between Other Sellers 
               </p>
               {data && <div className="relative flex py-2">
                     <Image
@@ -591,37 +588,30 @@ function ProductDetailsCard({ data, openFullImage }) {
                           
                             {/* <CardHeading4 title="RAM :" /> */}
                             <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>RAM :</p>
-                          <div className="font-Roboto-Bold text-jx pt-0.5 text-[#2C2F45]">
+                          <p className="font-Roboto-Bold text-jx pt-0.5 text-[#2C2F45]">
                             {data?.deviceRam}
-                          </div>
+                          </p>
                         </p>
                       )}
 
-                      <div className="flex space-x-1 items-center">
-                        
-                          
+                      <div className="flex space-x-1 items-center"> 
                         <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Storage :</p>
-                        
-                        <div className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
+                        <p className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
                           {data?.deviceStorage}
-                        </div>
+                        </p>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        
-                          <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Condition :</p>
                       
-                        <div className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
+                      <div className="flex items-center space-x-1">
+                          <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Condition :</p>
+                        <p className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
                           {data?.deviceCondition}
-                        </div>
+                        </p>
                       </div>
                     </div>
                   </div>}
               <div className="bg-gray-600 h-1 border-2 border-white "></div>
               <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row">
-                {data?.marketingName + "  ("}
-                {data?.make != "Apple" && data?.deviceRam + " / "}
-                {data?.deviceStorage + ") - "}
-                Condition: {data?.deviceCondition}
+                
               </div>
               <div className="flex">
                 <span className="text-smallFontSize font-Roboto-light">

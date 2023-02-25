@@ -1,7 +1,0 @@
-<svg id="Group_676" data-name="Group 676" xmlns="http://www.w3.org/2000/svg" width="70.295" height="29.389" viewBox="0 0 70.295 29.389">
-  <path id="Union_4" data-name="Union 4" d="M9.81,26.487A5.562,5.562,0,0,1,2.9,19.58a5.562,5.562,0,0,1,0-9.769A5.562,5.562,0,0,1,9.81,2.9a5.562,5.562,0,0,1,9.769,0,5.565,5.565,0,0,1,6.808,3.452H62.353a7.943,7.943,0,0,1,0,15.887H26.607a5.562,5.562,0,0,1-7.029,4.247,5.562,5.562,0,0,1-9.769,0Z" fill="#fbb215"/>
-  <g id="exclamation" transform="translate(13.106 9.531)">
-    <path id="Path_41" data-name="Path 41" d="M15.755,19.176a1.454,1.454,0,1,1,1.454,1.454A1.454,1.454,0,0,1,15.755,19.176Zm.142-8.732a1.316,1.316,0,1,1,2.617,0l-.509,5.1a.8.8,0,0,1-1.6,0Z" transform="translate(-15.755 -8.992)" fill="#4e4e4e"/>
-  </g>
-  <text id="UnVerified" transform="translate(20.76 17.402)" fill="#4e4e4e" font-size="8" font-family="OpenSans-SemiboldItalic, Open Sans" font-weight="600" font-style="italic"><tspan x="0" y="0">UNVERIFIED</tspan></text>
-</svg>

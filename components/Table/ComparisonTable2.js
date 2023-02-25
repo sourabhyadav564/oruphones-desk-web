@@ -60,9 +60,9 @@ function ComparisonTable2(data, listingId) {
   return (
    
 <div className="">
-     <div className="my-8 relative pt-3 lg:w-[80vw] w-full  overflow-x-scroll text-center">
+     <div className="my-8 relative pt-3 lg:w-[80vw] w-full  overflow-x-scroll text-cen">
     {productData.length > 0 && productData ?  
-      <table className=" w-full text-mediumFontSize text-center text-left text-gray-500 dark:text-gray-400">
+      <table className=" w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
         <tr className="text-white  ">
           <th className="sticky left-0 px-6 py-3 bg-white z-10 text-center">{" "}</th>
           {productData?.map((item, index) => (
@@ -99,9 +99,12 @@ function ComparisonTable2(data, listingId) {
             }}>
                 <Image 
                 src={
-                  getDefaultImage(item?.marketingName) 
+                  imageError
+                    ? getDefaultImage(item?.marketingName)|| "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    : getDefaultImage(item?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                 }
-                width={80} height={100} className="" alt=""/>
+                onError={() => setImageError(true)}
+                width={80} height={100}  alt=""/>
             </th>
           ))}
         </tr>
@@ -137,6 +140,7 @@ function ComparisonTable2(data, listingId) {
               {item?.listingId == thisPhoneListingId
                 ? `This Deal (${item?.marketingName})`
                 : item?.marketingName}
+                <p className="text-[#2196f3] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize">View Deal <span> > </span></p>
             </th>
           ))}
         </tr>

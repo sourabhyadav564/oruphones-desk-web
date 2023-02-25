@@ -162,7 +162,6 @@ function ComparisonTable(data, listingId) {
                           window.open(item?.productLink, "_blank");
                         }
                       }}>
-
                         {item?.userName
                           // (item?.externalSourceImage ==
                           // "" || item?.externalSourceImage == 
@@ -170,8 +169,11 @@ function ComparisonTable(data, listingId) {
 
                           ? (
                             <div className={`filter ${thisPhoneListingId != item.listingId && "brightness-50 invert-1"} object-contain`}>{item?.userName}
+                             <p className="text-[#2196f3] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize">View Deal <span> > </span></p>
                             </div>
+                            
                           ) : (
+                            <div>
                             <Image
                               src={item?.externalSourceImage}
                               height={35}
@@ -181,6 +183,8 @@ function ComparisonTable(data, listingId) {
                                 thisPhoneListingId != item?.listingId
                                   ? `filter brightness-50 invert-1 object-contain` : `object-contain`}
                             />
+                             <p className="text-[#2196f3] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize">View Deal <span> > </span></p>
+                            </div>
                           )}
                         {/* <FaGreaterThan size={18} className="pt-1.5" /> */}
                       </div>
