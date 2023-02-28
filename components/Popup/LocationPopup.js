@@ -199,7 +199,7 @@ function LocationPopup({ open, setOpen }) {
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed z-20 inset-0 overflow-y-auto"
+        className="fixed z-20 inset-0 overflow-y-auto mx-8"
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
@@ -247,9 +247,15 @@ function LocationPopup({ open, setOpen }) {
                 </div>
                 <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"} alt="location" layout="fill" />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
+<<<<<<< Updated upstream
                   <div className="flex flex-row w-72 justify-center items-center">
                     <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
                       onClick={handleNearme}>
+=======
+                  <div className="flex flex-row w-[40vw] justify-center items-center">
+                    <div className="h-full  z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
+                      onClick={ handleNearme}>
+>>>>>>> Stashed changes
                       <BiCurrentLocation size={22} />
                     </div>
                     <div className="w-full">
@@ -277,7 +283,7 @@ function LocationPopup({ open, setOpen }) {
                 </div>
               </div>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="grid grid-cols-6 gap-2 text-center">
+                <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3  gap-2 text-center">
                   {citiesResponse &&
                     citiesResponse
                       .filter((item) => item.displayWithImage === "1")

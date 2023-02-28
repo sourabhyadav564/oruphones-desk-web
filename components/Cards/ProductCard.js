@@ -18,7 +18,7 @@ function ProductCard({ data, prodLink, setProducts }) {
 
   return (
     <div
-      data-aos="fade-up" className="relative my-4">
+      data-aos="fade-up" className="relative my-1">
       <span className=" pt-2 pr-2 right-2  absolute ">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav

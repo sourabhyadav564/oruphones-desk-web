@@ -74,7 +74,7 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
           </Menu>
           <button
             type="button"
-            className="p-2 -m-2 ml-4 sm:ml-6 text-gray-400 hover:text-gray-500 lg:hidden"
+            className="p-2 -m-2 ml-4 sm:ml-6 text-gray-400 hover:text-gray-500 hidden"
             onClick={() => setMobileFiltersOpen(true)}
           >
             <span className="sr-only">Filters</span>

@@ -39,15 +39,15 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
         <Fragment>
           <h3 className="-my-3 flow-root">
             <Disclosure.Button className="py-3  w-full flex items-center justify-between text-sm text-gray-900 hover:text-gray-500">
-              <p className="font-Roboto-Regular text-regularFontSize text-m-green flex items-center">{optionObj?.name}
+              <p className="flg:font-Roboto-Regular font-Roboto-Semibold lg:text-regularFontSize text-smallFontSize  text-m-green flex whitespace-nowrap items-center">{optionObj?.name}
                 {openPopup && <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />}
               </p>
-              <span className="ml-6 flex items-center">
+              <span className="md:ml-6 ml-2 flex items-center">
                 {open ? <FiMinus className="h-5 w-5" aria-hidden="true" /> : <FiPlus className="h-5 w-5" aria-hidden="true" />}
               </span>
             </Disclosure.Button>
           </h3>
-          <Disclosure.Panel className="pt-6">
+          <Disclosure.Panel className="pt-6  ">
             <div className="space-y-4">
               {optionObj?.options.map((option, optionIdx) => (
                 <div key={option.value} className="flex items-center font-Roboto-Light text-smallFontSize">

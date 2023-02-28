@@ -13,7 +13,7 @@ export default function Model3({ open, setOpen, children, title }) {
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
-        <div className="flex items-end justify-center min-h-screen text-center sm:block w-full">
+        <div className="items-end justify-center min-h-screen text-center sm:block w-full">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -41,7 +41,7 @@ export default function Model3({ open, setOpen, children, title }) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-50"
           >
-            <div className="relative inline-block bg-white rounded-lg text-left shadow-xl align-middle custom-scroll">
+            <div className="relative inline-block bg-white rounded-lg text-left shadow-xl align-middle custom-scroll mx-8">
               <div className="absolute right-0 pt-5 px-6 sm:flex justify-between items-center">
                 <GrClose
                   onClick={() => setOpen(false)}
@@ -49,8 +49,7 @@ export default function Model3({ open, setOpen, children, title }) {
                 />
               </div>
               <div
-                className="bg-white overflow-y-auto"
-                style={{ maxHeight: "80vh" }}
+                className="bg-white overflow-y-auto h-[80vh] mx-8"
               >
                 {children}
               </div>

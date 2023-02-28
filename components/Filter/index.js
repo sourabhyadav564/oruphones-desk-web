@@ -142,11 +142,11 @@ function Filter({ listingsCount, children, setApplySort, setApplyFilter, makeNam
         <Sort sortOptions={sortOptions} setApplySort={setApplySort} filterOptions={tempFilters} setFilters={setApplyFilter} makeName={makeName}/>
       </div>
       <section aria-labelledby="products-heading" className="">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-6">
-          <div className="hidden lg:block">
+        <div className="grid grid-cols-4 gap-x-6">
+          <div className="">
             <DesktopFilter setFilters={setApplyFilter} filterOptions={tempFilters} key={makeName} />
           </div>
-          <div className="lg:col-span-3">{children}</div>
+          <div className="col-span-3">{children}</div>
         </div>
       </section>
     </React.Fragment>

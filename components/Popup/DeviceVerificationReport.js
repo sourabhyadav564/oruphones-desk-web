@@ -15,7 +15,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
   return (
     <Modal open={open} setOpen={setOpen} title={"Device Report"}>
       <div className="grid grid-cols-5 device_verification_report">
-        <div className="flex flex-col px-6 col-span-2">
+        <div className="flex flex-col px-6 col-span-2 ">
           <div>
             <p className="text-black-20" style={{ fontSize: 21 }}>
               {data?.marketingName || "SAMSUNG Galaxy S21 Plus"}
