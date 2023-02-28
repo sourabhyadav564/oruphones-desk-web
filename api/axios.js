@@ -24,34 +24,34 @@ let headers = {
 
 Axios.interceptors.request.use(
   async (request) => {
-    
+
     return request;
   },
   (err) => {
-   
+
     return Promise.reject(err);
   }
 );
 
 Axios.interceptors.response.use(
   async (response) => {
-    
+
     if (response?.data?.status === "SESSION_INVALID") {
       headers = { ...headers, eventName: "NA" };
       const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
       const result = await Axios.get(API_ENDPOINT, { headers: { ...headers } });
-      
+
       if (typeof window !== "undefined") {
         localStorage.setItem("sessionId", result?.data?.dataObject?.sessionId);
       }
       Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
       window.location.reload();
-      
+
     }
     return response;
   },
   async (error) => {
-    
+
     return Promise.reject(error);
   }
 );
@@ -246,6 +246,26 @@ export async function fetchMakeModelList(userUniqueId, sessionId) {
   return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       localStorage.setItem("make_models", JSON.stringify(response.data.dataObject))
+      return response.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function fetchModelList(userUniqueId, sessionId, make, searchModel) {
+  headers = {
+    ...headers,
+    eventName: "GET_MODEL_LIST",
+    userUniqueId: userUniqueId,
+    sessionId: sessionId,
+  };
+  const DEFAULT_HEADER = { headers: { ...headers } };
+  const API_ENDPOINT = BASE_URL + "/master/modellist?make=" + make + "&searchModel=" + searchModel;
+  return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
+    (response) => {
+      // localStorage.setItem("make_models", JSON.stringify(response.data.dataObject))
       return response.data;
     },
     (err) => {
@@ -494,10 +514,10 @@ export function pauseListingDevice(payload) {
   );
 }
 
-export function getGlobalCities() {
+export function getGlobalCities(searchText) {
   headers = { ...headers, eventName: "FETCH_CITIES" };
   const DEFAULT_HEADER = { headers: { ...headers } };
-  const API_ENDPOINT = BASE_URL + `/global/cities`;
+  const API_ENDPOINT = BASE_URL + `/global/cities?limited=true&searchText=` + searchText;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -542,7 +562,7 @@ export function updateUserDetails(payload) {
 }
 
 export function getShowSerchFilters() {
-  headers = { ...headers, eventName: "FETCH_SEARCH_FILTERS",userUniqueId: 0 };
+  headers = { ...headers, eventName: "FETCH_SEARCH_FILTERS", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/master/showserchFilters`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
@@ -604,7 +624,7 @@ export function detailWithUserInfo(
 
 
 export function fetchSellerMobileNumber(listingid, userUniqueid) {
-  headers = { ...headers, eventName: "GET_SELLER_CONTACT",userUniqueId:0};
+  headers = { ...headers, eventName: "GET_SELLER_CONTACT", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL +
@@ -732,7 +752,7 @@ export function bestDealNearYouAll(location, userUniqueId, pageNumber, sortBy) {
 }
 
 export function fetchMyFavorites(userUniqueId) {
-  headers = { ...headers, eventName: "FETCH_FAVORITE_LIST", userUniqueId:0 };
+  headers = { ...headers, eventName: "FETCH_FAVORITE_LIST", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
@@ -914,7 +934,7 @@ export function prepareShareLink(listingId, userUniqueId) {
 }
 
 export function getAllNotificationByUserd(userUniqueId) {
-  headers = { ...headers, eventName: "FETCH_NOTIFICATIONS" , userUniqueId: 0 };
+  headers = { ...headers, eventName: "FETCH_NOTIFICATIONS", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/notification/byUserId/` + userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(

@@ -28,6 +28,7 @@ function Index({ isFromEdit, brandsList }) {
         { name: "image-3" },
         { name: "image-4" },
     ];
+    const [searchModel, setSearchModel] = useState("");
     const [showpage, setShowpage] = useState(0);
     const [makeRequired, setMakeRequired] = useState("");
     const [makeRequired2, setMakeRequired2] = useState("");
@@ -89,14 +90,22 @@ function Index({ isFromEdit, brandsList }) {
     const [totalProducts, setTotalProducts] = useState(0);
     const [PriceShow, setPriceShow] = useState(false);
     const [PriceProduct, setPriceProduct] = useState(false);
-    
-    const [Finished,setFinished] = useState(false);
-    const [loading,setLoading] = useState(true);
+
+    const [Finished, setFinished] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     var { filterOptions } = useFilterOptions();
 
- 
-
+    useEffect(() => {
+        setModelOptions([]);
+        setModelOptions2([]);
+        setStorage(null);
+        setStorage2(null);
+        setmarketingName(null);
+        setmarketingName2(null);
+        setColorAndStorageOption([]);
+        setColorAndStorageOption2([]);
+    }, [make, make2]);
 
     useEffect(() => {
         modelOptions?.map((item) => {
@@ -116,24 +125,26 @@ function Index({ isFromEdit, brandsList }) {
 
 
     useEffect(async () => {
-        if (localStorage.getItem("make_models") != undefined) {
-            setBrands(JSON.parse(localStorage.getItem("make_models")));
-            const data = JSON.parse(localStorage.getItem("make_models"));
-            setMakeOptions(data);
-            setMakeOptions2(data);
-        } else {
-            const data = await Axios.fetchMakeModelList(
-                Cookies.get("userUniqueId") || "Guest",
-                Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") || ""
-            );
-            let makeModelLists = data?.dataObject;
-            if (makeModelLists) {
-                localStorage.setItem("make_models", JSON.stringify(makeModelLists));
-                Cookies.set("make_models", true);
-                setMakeOptions(makeModelLists);
-                setMakeOptions2(makeModelLists);
-            }
+        // if (localStorage.getItem("make_models") != undefined) {
+        //     setBrands(JSON.parse(localStorage.getItem("make_models")));
+        //     const data = JSON.parse(localStorage.getItem("make_models"));
+        //     setMakeOptions(data);
+        //     setMakeOptions2(data);
+        // } else {
+        const data = await Axios.fetchModelList(
+            Cookies.get("userUniqueId") || "Guest",
+            Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") || "",
+            "",
+            ""
+        );
+        let makeModelLists = data?.dataObject;
+        if (makeModelLists) {
+            // localStorage.setItem("make_models", JSON.stringify(makeModelLists));
+            // Cookies.set("make_models", true);
+            setMakeOptions(makeModelLists);
+            setMakeOptions2(makeModelLists);
         }
+        // }
     }, []);
 
 
@@ -180,9 +191,9 @@ function Index({ isFromEdit, brandsList }) {
             marketingName: marketingName2,
             deviceCondition: "Like New",
             warrantyPeriod: 'zero',
-            hasCharger: charger === "Y" ,
-            hasEarphone: headphone1 === "Y" ,
-            hasOriginalBox: originalBox1 === "Y" ,
+            hasCharger: charger === "Y",
+            hasEarphone: headphone1 === "Y",
+            hasOriginalBox: originalBox1 === "Y",
         };
         if (make2 !== null && marketingName2 !== null && storage2 !== null) {
             Axios.getExternalSellSourceData(payload).then((response) => {
@@ -196,41 +207,55 @@ function Index({ isFromEdit, brandsList }) {
     ]);
 
 
-    useEffect(() => {
-        let makeData = makeOptions?.filter((item) => item.make === make);
-        if (makeData && makeData.length > 0) {
-            setModelOptions((makeData && makeData[0]?.models));
-            setmarketingName(null);
-            setStorage(null);
-            setColor(null);
-            setDeviceCondition(null);
-            setShow(false);
-            setConditionResults({});
-            setQuestionIndex(0);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [make]);
+    // useEffect(async () => {
+    // let makeData = makeOptions?.filter((item) => item.make === make);
+    // if (makeData && makeData.length > 0) {
+    //     setModelOptions((makeData && makeData[0]?.models));
+    //     setmarketingName(null);
+    //     setStorage(null);
+    //     setColor(null);
+    //     setDeviceCondition(null);
+    //     setShow(false);
+    //     setConditionResults({});
+    //     setQuestionIndex(0);
+    // }
+    // console.log("make", make2, searchModel);
+    // const models = await Axios.fetchModelList(make);
+    // setModelOptions(models);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [searchModel, make2]);
 
-    useEffect(() => {
-        let makeData = makeOptions2?.filter((item) => item.make === make2);
-        if (makeData && makeData.length > 0) {
-            setModelOptions2((makeData && makeData[0]?.models));
-            setmarketingName2(null);
-            setStorage2(null);
-            setColor(null);
-            setDeviceCondition(null);
-            setShow(false);
-            setConditionResults({});
-            setQuestionIndex(0);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [make2]);
+    const setSearchModelList2 = async (e) => {
+        console.log("e.target.value", e);
+        const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make2, e);
+        setModelOptions2(models?.dataObject[0]?.models);
+    };
+
+    const setSearchModelList = async (e) => {
+        console.log("e.target.value", e);
+        const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make, e);
+        setModelOptions(models?.dataObject[0]?.models);
+    };
 
 
+    // useEffect(() => {
+    //     let makeData = makeOptions2?.filter((item) => item.make === make2);
+    //     if (makeData && makeData.length > 0) {
+    //         setModelOptions2((makeData && makeData[0]?.models));
+    //         setmarketingName2(null);
+    //         setStorage2(null);
+    //         setColor(null);
+    //         setDeviceCondition(null);
+    //         setShow(false);
+    //         setConditionResults({});
+    //         setQuestionIndex(0);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [make2]);
 
     useEffect(() => {
         let payload = {
-            charger: "Y" ,
+            charger: "Y",
             deviceCondition: "Like New",
             devicestorage: storage2?.split("/")[0],
             deviceRam: storage2
@@ -263,7 +288,7 @@ function Index({ isFromEdit, brandsList }) {
 
     }, [make2, marketingName2, storage2]);
 
-  
+
 
     const handleClick = () => {
         setShowAppDownloadPopup(true);
@@ -323,14 +348,14 @@ function Index({ isFromEdit, brandsList }) {
 
 
     useEffect(() => {
-        if (make != null && marketingName != null && storage != null  && deviceCondition != null) {
+        if (make != null && marketingName != null && storage != null && deviceCondition != null) {
             setPriceProduct(true);
         } else {
             setPriceProduct(false);
             setLoading(false);
         }
 
-        if(make == null || (marketingName == null || storage == null) ){
+        if (make == null || (marketingName == null || storage == null)) {
             setactive(false);
         }
 
@@ -374,7 +399,7 @@ function Index({ isFromEdit, brandsList }) {
                                 <div>
                                     <span className='px-4 py-4'>
                                         <Select
-                                        star="*"
+                                            star="*"
                                             labelName="Brand"
                                             //placeholder=""
                                             className={`${makeRequired} py-2`}
@@ -411,6 +436,7 @@ function Index({ isFromEdit, brandsList }) {
                                             className={`${marketingNameRequired} py-2`}
                                             onFocus={(e) => {
                                                 setMarketingNameRequired("");
+                                                setSearchModelList2("");
                                             }}
                                             onChange={(e) => {
                                                 setmarketingName(e.value);
@@ -418,6 +444,9 @@ function Index({ isFromEdit, brandsList }) {
                                             options={modelOptions?.map((item) => {
                                                 return { label: item.marketingname, value: item.marketingname };
                                             })}
+                                            onInputChange={(e) => {
+                                                setSearchModelList(e);
+                                            }}
                                         ></Select>
                                         {marketingNameRequired && (
                                             <p className="text-sm whitespace-nowrap cursor-pointer text-red">
@@ -455,25 +484,25 @@ function Index({ isFromEdit, brandsList }) {
                                     <div >
                                         <p className='text-[14px] font-medium pb-4 px-2'>Condition <span className='text-red-400'>*</span></p>
                                         <div className='flex flex-wrap gap-2'>
-                                        {
-                                            conditionOption.map((items, index) => (
-                                                <div key={index} className={`w-28 text-center cursor-pointer py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
-                                                    onClick={() => { setactive(true); setIndex(index); setDeviceCondition(items) }}>
-                                                    {items}
-                                                </div>
-                                            ))
-                                        }
+                                            {
+                                                conditionOption.map((items, index) => (
+                                                    <div key={index} className={`w-28 text-center cursor-pointer py-2 px-4 border inline mx-2 rounded-md ${(active && Index == index) ? "bg-m-green text-white" : ""}`}
+                                                        onClick={() => { setactive(true); setIndex(index); setDeviceCondition(items) }}>
+                                                        {items}
+                                                    </div>
+                                                ))
+                                            }
                                         </div>
 
                                     </div>
 
-                                      
+
                                     {PriceProduct ?
                                         (
                                             <div>
                                                 <div className='pt-8 text-[18px] font-semibold'>Best Deals</div>
                                                 <div className="grid lg:grid-cols-4 grid-cols-3  gap-4 mt-4">
-                                                    {!loading  ? (
+                                                    {!loading ? (
                                                         products?.map((product, index) => (
                                                             <ProductCard
                                                                 key={index}
@@ -482,14 +511,14 @@ function Index({ isFromEdit, brandsList }) {
                                                                 setProducts={setProducts}
                                                             />
                                                         ))
-                                                    ):(
-                                                        <div>{loading ? (<div>Loading...</div>):(<div></div>)} </div>
+                                                    ) : (
+                                                        <div>{loading ? (<div>Loading...</div>) : (<div></div>)} </div>
                                                     )
                                                     }
                                                     {
-                                                        totalProducts ==0 && !loading ?(<div className='w-[40vh]'>No products available</div>):(<div></div>)
+                                                        products?.length == 0 && !loading ? (<div className='w-[40vh]'>No products available</div>) : (<div></div>)
                                                     }
-                                                    
+
                                                 </div>
                                             </div>
                                         ) : (<div className='pt-16 font-normal opacity-80 text-center '>Please select all fields</div>)
@@ -502,7 +531,7 @@ function Index({ isFromEdit, brandsList }) {
                             <div>
                                 <span className='px-4 py-4'>
                                     <Select
-                                    star="*"
+                                        star="*"
                                         labelName="Brand"
                                         //placeholder=""
                                         className={`${makeRequired2} py-2`}
@@ -528,7 +557,7 @@ function Index({ isFromEdit, brandsList }) {
                                 </span>
                                 <span className='px-4 py-4'>
                                     <Select
-                                    star="*"
+                                        star="*"
                                         value={
                                             marketingName2 === null
                                                 ? "Select.."
@@ -539,6 +568,7 @@ function Index({ isFromEdit, brandsList }) {
                                         className={`${marketingNameRequired2} py-2`}
                                         onFocus={(e) => {
                                             setMarketingNameRequired2("");
+                                            setSearchModelList2("");
                                         }}
                                         onChange={(e) => {
                                             setmarketingName2(e.value);
@@ -546,6 +576,9 @@ function Index({ isFromEdit, brandsList }) {
                                         options={modelOptions2?.map((item) => {
                                             return { label: item.marketingname, value: item.marketingname };
                                         })}
+                                        onInputChange={(e) => {
+                                            setSearchModelList2(e);
+                                        }}
                                     ></Select>
                                     {marketingNameRequired2 && (
                                         <p className="text-sm whitespace-nowrap cursor-pointer text-red">
@@ -555,7 +588,7 @@ function Index({ isFromEdit, brandsList }) {
                                 </span>
                                 <span className='px-4 '>
                                     <Select
-                                    star="*"
+                                        star="*"
                                         value={
                                             storage2 === null
                                                 ? "Select.."
@@ -616,22 +649,22 @@ function Index({ isFromEdit, brandsList }) {
                                                 {getExternalSellerData && getExternalSellerData.length > 0 && (
                                                     <div className="grid border rounded max-w-sm">
                                                         <div className='flex px-8'>
-                                                         <span className='flex flex-1'>You will get</span>
-                                                         <span className=' '>Buyer</span>
-                                                         </div>
+                                                            <span className='flex flex-1'>You will get</span>
+                                                            <span className=' '>Buyer</span>
+                                                        </div>
                                                         {getExternalSellerData?.map((items, index) => (
                                                             <div
                                                                 className="flex  px-4 py-2 gap-4 text-xs text-m-grey-2"
                                                                 key={index}
                                                             >
                                                                 <div className="flex flex-col space-1 flex-1">
-                                                                   
+
                                                                     <p className="font-semibold text-2xl text-m-grey-1 h-9">
                                                                         {"₹" + numberWithCommas(items.externalSourcePrice)}
                                                                     </p>
                                                                 </div>
                                                                 <div className="flex flex-col space-y-1">
-                                                                   
+
                                                                     <div className="w-full h-full">
                                                                         <img
                                                                             src={items.externalSourceImage}

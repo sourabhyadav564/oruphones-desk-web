@@ -71,22 +71,21 @@ export default function Home({
     //   setTopArticles(fetchTopArticles);
     // }
 
-
-    if (make_models) {
-      // setBrands(JSON.parse(localStorage.getItem("make_models")));
-      console.log("makeModelLists from local");
-    } else {
-      const data = await Axios.fetchMakeModelList(
-        Cookies.get("userUniqueId") || "Guest",
-        Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") || ""
-      );
-      let makeModelLists = data?.dataObject;
-      if (makeModelLists) {
-        localStorage.setItem("make_models", JSON.stringify(makeModelLists));
-        Cookies.set("make_models", true);
-      }
-      //   // setBrands(brandsList);
-    }
+    // if (make_models) {
+    //   // setBrands(JSON.parse(localStorage.getItem("make_models")));
+    //   console.log("makeModelLists from local");
+    // } else {
+    //   const data = await Axios.fetchMakeModelList(
+    //     Cookies.get("userUniqueId") || "Guest",
+    //     Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") || ""
+    //   );
+    //   let makeModelLists = data?.dataObject;
+    //   if (makeModelLists) {
+    //     localStorage.setItem("make_models", JSON.stringify(makeModelLists));
+    //     Cookies.set("make_models", true);
+    //   }
+    //   //   // setBrands(brandsList);
+    // }
   }, []);
 
   return (

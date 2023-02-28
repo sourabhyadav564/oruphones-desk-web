@@ -15,7 +15,10 @@ import { BiCurrentLocation } from "react-icons/bi";
 function LocationPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
   const [citiesResponse, setCitiesResponse] = useState([]);
+  const [citiesResponse2, setCitiesResponse2] = useState([]);
   const [searchLocationID, setSearchLocationID] = useState();
+  const [searchText, setSearchText] = useState("");
+  // const searchBox = document.getElementById("searchBox");
   // const [selectedCity, setSelectedCity] = useState();
   let cityInfo = [];
   const selectedCity = useRef();
@@ -28,8 +31,8 @@ function LocationPopup({ open, setOpen }) {
     cityInfo = citiesResponse.filter((item) => item.city === city);
     let payLoad = {
       city: selectedCity.current,
-      country: cityInfo[0].country,
-      state: cityInfo[0].state,
+      // country: cityInfo[0].country,
+      // state: cityInfo[0].state,
       locationId: searchLocationID,
       userUniqueId: Cookies.get("userUniqueId"),
     };
@@ -90,6 +93,12 @@ function LocationPopup({ open, setOpen }) {
     );
   };
 
+  const onLocChange = async (e) => {
+    setSearchText(e);
+    const citiesResponse = await Axios.getGlobalCities(e);
+    setCitiesResponse2(citiesResponse?.dataObject);
+    setCities(citiesResponse?.dataObject);
+  };
 
 
   const onError = (error) => {
@@ -169,7 +178,7 @@ function LocationPopup({ open, setOpen }) {
     } else {
       const fetchData = async () => {
         try {
-          const citiesResponse = await Axios.getGlobalCities();
+          const citiesResponse = await Axios.getGlobalCities(searchText);
           setCitiesResponse(citiesResponse?.dataObject);
           setCities(citiesResponse?.dataObject);
           localStorage.setItem(
@@ -185,8 +194,6 @@ function LocationPopup({ open, setOpen }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -242,7 +249,7 @@ function LocationPopup({ open, setOpen }) {
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
                   <div className="flex flex-row w-72 justify-center items-center">
                     <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
-                      onClick={ handleNearme}>
+                      onClick={handleNearme}>
                       <BiCurrentLocation size={22} />
                     </div>
                     <div className="w-full">
@@ -250,14 +257,17 @@ function LocationPopup({ open, setOpen }) {
                         onChange={(e) => {
                           handleCityChange(e.value);
                         }}
+                        onInputChange={(e) => {
+                          onLocChange(e);
+                        }}
                         ref={selectedCity}
                         options={
-                          citiesResponse &&
-                          citiesResponse
-                          ?.sort((a, b) => a.city.localeCompare(b.city))
-                          ?.map((items, index) => {
-                            return { label: items.city, value: items.city };
-                          })
+                          citiesResponse2 &&
+                          citiesResponse2
+                            ?.sort((a, b) => a.city.localeCompare(b.city))
+                            ?.map((items, index) => {
+                              return { label: items.city, value: items.city };
+                            })
                         }
                       ></Select>
                     </div>
