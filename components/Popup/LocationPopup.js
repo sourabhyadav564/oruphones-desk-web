@@ -247,15 +247,9 @@ function LocationPopup({ open, setOpen }) {
                 </div>
                 <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"} alt="location" layout="fill" />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
-<<<<<<< Updated upstream
                   <div className="flex flex-row w-72 justify-center items-center">
                     <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
                       onClick={handleNearme}>
-=======
-                  <div className="flex flex-row w-[40vw] justify-center items-center">
-                    <div className="h-full  z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
-                      onClick={ handleNearme}>
->>>>>>> Stashed changes
                       <BiCurrentLocation size={22} />
                     </div>
                     <div className="w-full">
