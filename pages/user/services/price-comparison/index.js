@@ -501,7 +501,7 @@ function Index({ isFromEdit, brandsList }) {
                                         (
                                             <div>
                                                 <div className='pt-8 text-[18px] font-semibold'>Best Deals</div>
-                                                <div className="grid lg:grid-cols-4 grid-cols-3  gap-4 mt-4">
+                                                <div className="grid md:grid-cols-3 grid-cols-2  gap-4 mt-4">
                                                     {!loading ? (
                                                         products?.map((product, index) => (
                                                             <ProductCard
