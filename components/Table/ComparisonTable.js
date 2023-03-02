@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { FaGreaterThan } from "react-icons/fa";
+import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 
 function ComparisonTable(data, listingId) {
-  console.log("1",data);
+
   const [productData, setProductData] = useState([]);
   const [thisPhoneListingId, setThisPhoneListingId] = useState(listingId);
   useEffect(() => {
@@ -25,12 +26,14 @@ function ComparisonTable(data, listingId) {
     }
   }, []);
 
+
   const [performAction2, setperformAction2] = useState(false);
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
   const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
   const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -162,16 +165,20 @@ function ComparisonTable(data, listingId) {
                             }
                           }}
                     >
-                      <div className="flex justify-between hover:cursor-pointer" 
+                      <div className="flex  justify-between hover:cursor-pointer" 
                       >
                         {item?.userName
                           // (item?.externalSourceImage ==
                           // "" || item?.externalSourceImage == 
                           // "https://d1tl44nezj10jx.cloudfront.net/devImg/oru/product/mobiledevices/img/oru_logo.png") 
                           ? (
+                            <div>
                             <div className={`filter ${thisPhoneListingId != item.listingId && "brightness-50 invert-1"} object-contain`}>{item?.userName}
-                             <p className="text-[#2196f3] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize">View Deal <span> > </span></p>
+                             {/* <div className="text-[#2196f3ff] flex-nowrap whitespace-nowrap  text-smallFontSize  hover:cursor-pointer">View Deal <span> &gt; </span></div> */}
                             </div>
+                            <p className="text-[#2196f3ff] text-smallFontSize hover:cursor-pointer">View Deal &gt; </p>
+                            </div>
+                            
                           ) : (
                             <div>
                             <Image
@@ -183,7 +190,7 @@ function ComparisonTable(data, listingId) {
                                 thisPhoneListingId != item?.listingId
                                   ? `filter brightness-50 invert-1 object-contain` : `object-contain`}
                             />
-                             <p className="text-[#2196f3] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize">View Deal <span> > </span></p>
+                             <p className="text-[#2196f3ff] text-smallFontSize hover:cursor-pointer">View Deal &gt; </p>
                             </div>
                           )}
                         {/* <FaGreaterThan size={18} className="pt-1.5" /> */}
@@ -296,6 +303,8 @@ function ComparisonTable(data, listingId) {
       {openWarrantyInfo && (
         <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
       )}
+
+      
       {openVerificationInfo && (
         <VerifiedInfoPopup
           open={openVerificationInfo}

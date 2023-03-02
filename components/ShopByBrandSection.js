@@ -18,7 +18,7 @@ const settings = {
 
 function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, index, location }) {
 
-   console.log("ShopByBrandSection",shopbymodeldata);
+
 
     return (
         <section className="m-auto items-center">

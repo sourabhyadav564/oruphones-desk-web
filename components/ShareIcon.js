@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 export default function ShareIcon({data, ...rest }) {
 
 function shareListingInfo(data){
-  console.log("data6 : ",data);
   prepareShareLink(data.listingId,Cookies.get("info") || "Guest").then((response)=>
   {
     data?.status!="Active" ? toast.warning("This device is sold out"): sharePopupInfo(response?.dataObject.url,response?.dataObject.content);

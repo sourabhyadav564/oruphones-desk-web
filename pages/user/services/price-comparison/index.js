@@ -226,13 +226,11 @@ function Index({ isFromEdit, brandsList }) {
     // }, [searchModel, make2]);
 
     const setSearchModelList2 = async (e) => {
-        console.log("e.target.value", e);
         const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make2, e);
         setModelOptions2(models?.dataObject[0]?.models);
     };
 
     const setSearchModelList = async (e) => {
-        console.log("e.target.value", e);
         const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make, e);
         setModelOptions(models?.dataObject[0]?.models);
     };

@@ -17,8 +17,9 @@ const ConditionOptionLarge2 = ({
         }
     });
     return (
+        
         <div
-            className={`${conditionResults?.[questionIndex] == title && "bg-gray-200"
+            className={`${conditionResults?.[questionIndex] == title && "bg-gray-200 lg:h-72"
                 } my-4 hover:cursor-pointer p-2 rounded-md border-2 border-gray-200 active:opacity-50 duration-300 hover:bg-gray-200 font-Roboto-Light text-mediumFontSize`}
         >
             <span className="flex items-center space-x-3">
@@ -41,7 +42,9 @@ const ConditionOptionLarge2 = ({
                 option2.map((option, index) => (
                     <div className="flex items-center space-x-3 p-1 ml-5" key={index}>
                         {/* <div className="border border-black p-0.5 rounded-full"> */}
+                        <span>
                         <BsInfoCircle className="text-[10px]" />
+                        </span>
                         {/* </div> */}
                         <p >{option}</p>
                     </div>

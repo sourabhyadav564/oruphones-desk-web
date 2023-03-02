@@ -35,7 +35,6 @@ function ProductDetails({ listingInfo,data }) {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  console.log("listing information : ",listingInfo);
   // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   // const productData = useRecoilValue(otherVandorDataSelector);

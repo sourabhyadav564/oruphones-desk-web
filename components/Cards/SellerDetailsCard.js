@@ -15,8 +15,7 @@ import { FaGreaterThan } from "react-icons/fa";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import { toast } from "react-toastify";
 
-function SellerDetailsCard({ data }) {
-  console.log('data4 ', data);
+function SellerDetailsCard({ data,comparisontableid }) {
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -122,7 +121,6 @@ function SellerDetailsCard({ data }) {
       ).then((response) => {
         // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
-        console.log("data5 :",response);
       });
     }
     setOtherSeller(data?.externalSource);
@@ -228,6 +226,7 @@ function SellerDetailsCard({ data }) {
                 isOtherVendor={data?.isOtherVendor}
               />
             ))}{" "}
+            <a href={comparisontableid} className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold">See Details &gt;</a>
           </div>{" "}
         </div>
       )}{" "}

@@ -28,7 +28,8 @@ module.exports = {
       "zenrodeviceimages.s3-us-west-2.amazonaws.com",
       "demo-bucket-c2c-001.s3.amazonaws.com",
       "d1tl44nezj10jx.cloudfront.net",
-      "images.unsplash.com"
+      "images.unsplash.com",
+      "media.licdn.com"
     ],
   },
 };
