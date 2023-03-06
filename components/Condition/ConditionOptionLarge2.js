@@ -1,5 +1,7 @@
 import React from "react";
-import { BsInfoCircle } from "react-icons/bs";
+// import { BsInfoCircle } from "react-icons/bs";
+import InfoCircle from "@/assets/infocircle2.svg";
+import Image from "next/image";
 
 const ConditionOptionLarge2 = ({
     title,
@@ -23,7 +25,10 @@ const ConditionOptionLarge2 = ({
                 } my-4 hover:cursor-pointer p-2 rounded-md border-2 border-gray-200 active:opacity-50 duration-300 hover:bg-gray-200 font-Roboto-Light text-mediumFontSize`}
         >
             <span className="flex items-center space-x-3">
-                <BsInfoCircle />
+                {/* <BsInfoCircle /> */}
+                <div className="w-[20px]">
+                <Image src={InfoCircle} width={18} height={18}/>
+                </div>
                 <p className="font-semibold">{title}</p>
             </span>
             {/* {options &&
@@ -43,7 +48,10 @@ const ConditionOptionLarge2 = ({
                     <div className="flex items-center space-x-3 p-1 ml-5" key={index}>
                         {/* <div className="border border-black p-0.5 rounded-full"> */}
                         <span>
-                        <BsInfoCircle className="text-[10px]" />
+                        {/* <BsInfoCircle className="text-[10px]" /> */}
+                        <div className="w-[10px]">
+                        <Image src={InfoCircle} width={10} height={10}/>
+                        </div>
                         </span>
                         {/* </div> */}
                         <p >{option}</p>

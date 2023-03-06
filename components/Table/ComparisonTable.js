@@ -3,9 +3,10 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { BsInfoCircle } from "react-icons/bs";
-import { FaGreaterThan } from "react-icons/fa";
-import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
+// import { BsInfoCircle } from "react-icons/bs";
+import InfoCircle from "@/assets/infocircle.svg";
+// import { FaGreaterThan } from "react-icons/fa";
+// import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
@@ -90,7 +91,8 @@ function ComparisonTable(data, listingId) {
 
                 <div className="flex justify-center items-center hover:cursor-pointer" >
                   <p className="">Brand Warranty</p>
-                  <BsInfoCircle size={14} classname="" />
+                  {/* <BsInfoCircle size={14} classname="" /> */}
+                  <Image src={InfoCircle} width={15} height={15}/>
                 </div>
               </th>
               
@@ -98,9 +100,10 @@ function ComparisonTable(data, listingId) {
                 scope="col"
                 class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center"
               >
-                <div className="flex justify-center items-center hover:cursor-pointer" onClick={() => setOpenWarrantyInfo(true)}>
+                <div className=" flex justify-center items-center hover:cursor-pointer" onClick={() => setOpenWarrantyInfo(true)}>
                   <p className="">Seller Warranty</p>
-                  <BsInfoCircle size={14} />
+                  {/* <BsInfoCircle size={14} /> */}
+                  <Image src={InfoCircle} width={15} height={15}/>
                 </div>
               </th>
               <th
@@ -121,7 +124,8 @@ function ComparisonTable(data, listingId) {
               >
                 <div className="flex justify-center items-center hover:cursor-pointer" onClick={() => setOpenVerificationInfo(true)}>
                   <p className="pr-1">Oru Verified</p>
-                  <BsInfoCircle size={14} classname="pl-1" />
+                  {/* <BsInfoCircle size={14} classname="pl-1" /> */}
+                  <Image src={InfoCircle} width={15} height={15}/>
                 </div>
               </th>
               <th

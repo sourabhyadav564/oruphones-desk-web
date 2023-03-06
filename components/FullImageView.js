@@ -1,22 +1,30 @@
 import Slider from "react-slick";
 import styles from "../styles/fullimageview.module.css";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import { MdClose } from "react-icons/md";
+
+// import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import Chevronleft from "@/assets/chevronleft.svg";
+import ChevronRight from "@/assets/chevronright.svg";
+import Cross from "@/assets/cross1.svg";
+// import { MdClose } from "react-icons/md";
+
 import { useState } from "react";
+import Image from "next/image";
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  <BiChevronLeft
-    {...rest}
-    className={`fullimage_prev prev ${className}`}
-    size={32}
-  />
+  // <BiChevronLeft
+  //   {...rest}
+  //   className={`fullimage_prev prev ${className}`}
+  //   size={32}
+  // />
+  <Image src={Chevronleft} width={32} height={32}  className={`fullimage_prev prev ${className}`}/>
 );
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  <BiChevronRight
-    {...rest}
-    className={`fullimage_next  next ${className}`}
-    size={32}
-  />
+  // <BiChevronRight
+  //   {...rest}
+  //   className={`fullimage_next  next ${className}`}
+  //   size={32}
+  // />
+  <Image src={ChevronRight} width={32} height={32}  className={`fullimage_prev prev ${className}`}/>
 );
 
 function FullImageView({ open, close, images }) {
@@ -32,7 +40,8 @@ function FullImageView({ open, close, images }) {
   return (
     <section className={styles.imageview_container}>
       <div className="w-full h-20 flex justify-end p-4 text-white">
-        <MdClose className="cursor-pointer" size={32} onClick={() => close()} />
+        {/* <MdClose className="cursor-pointer" size={32} onClick={() => close()} /> */}
+        <Image src={Cross} width={36} height={36} alt="" className="cursor-pointer" onClick={() => close()}/>
       </div>
       {images && (
         <Slider

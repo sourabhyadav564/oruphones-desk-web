@@ -1,6 +1,5 @@
 import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
-import { BiCurrentLocation, BiChevronDown } from "react-icons/bi";
 import LoginPopup from "../Popup/LoginPopup";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";

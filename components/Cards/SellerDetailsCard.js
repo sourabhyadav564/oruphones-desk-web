@@ -1,14 +1,17 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { BiRupee } from "react-icons/bi";
+// import { BiRupee } from "react-icons/bi";
+import Rupee from "@/assets/rupee1.svg"
 import { numberWithCommas } from "../../utils/util";
 import * as Axios from "../../api/axios";
 import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccessPopup";
 import Cookies from "js-cookie";
-import { CgProfile } from "react-icons/cg";
-import { FaGreaterThan } from "react-icons/fa";
+// import { CgProfile } from "react-icons/cg";
+import RegUser from "@/assets/user1.svg"
+import GreaterThan from "@/assets/greaterthan.svg"; 
+// import { FaGreaterThan } from "react-icons/fa";
 // import first from "https://d1tl44nezj10jx.cloudfront.net/assets/first.png";
 // import second from "https://d1tl44nezj10jx.cloudfront.net/assets/second.png";
 // import third from "https://d1tl44nezj10jx.cloudfront.net/assets/third.png";
@@ -150,7 +153,8 @@ function SellerDetailsCard({ data,comparisontableid }) {
         {data?.isOtherVendor === "N" || data?.isOtherVendor === null ? (
           <div className="flex flex-row justify-between">
             <div className="flex ">
-              <CgProfile size={40} />
+              {/* <CgProfile size={40} /> */}
+              <Image src={RegUser} width={30} height={30} alt=""/>
               <div className="pt-1">
                 <p className="pl-2 text-grey2 font-Roboto-Light text-smallFontSize leading-4">
                   {" "}
@@ -370,9 +374,12 @@ const OtherSeller = ({
           {" "}
           {/* <span className="text-xs text-m-grey-2">Price</span> */}
           {data.externalSourcePrice && (
-            <span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
-              <BiRupee /> {numberWithCommas(data.externalSourcePrice)}{" "}
-              <FaGreaterThan size={13} className="pl-1" />
+            <span className="items-center text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
+              {/* <BiRupee />  */}
+              <Image src={Rupee} width={20} height={20}/> 
+               {numberWithCommas(data.externalSourcePrice)}{" "}
+              {/* <FaGreaterThan size={13} className="pl-1" /> */}
+              <Image src={GreaterThan} width={15} height={15}/>
             </span>
           )}{" "}
         </div>{" "}

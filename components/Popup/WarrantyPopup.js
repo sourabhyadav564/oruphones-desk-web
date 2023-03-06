@@ -21,7 +21,7 @@ function WarrantyPopup({ open, setOpen, data, redirect }) {
     return (
         <>
             <Model3 open={open} setOpen={setOpen}>
-                <div className="h-full w-full px-16 pt-12 pb-10 cardShadow1 rounded-lg space-y-5 gap-5">
+                <div className="h-full w-full  px-16 pt-12 pb-10 cardShadow1 rounded-lg space-y-5 gap-5">
                     <div className="grid grid-cols-2 gap-5">
                         {warrantycarddata.map((item, index) => (
                             <Link

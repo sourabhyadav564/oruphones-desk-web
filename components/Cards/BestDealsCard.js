@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaRupeeSign } from "react-icons/fa";
+
+// import { FaRupeeSign } from "react-icons/fa";
+import Rupee1 from "@/assets/rupee2.svg";
+
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import LabelAndValue from "../LabelAndValue";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
-import { BiChevronRight } from "react-icons/bi";
+// import { BiChevronRight } from "react-icons/bi";   
+import ChevronRight from "@/assets/chevronright.svg"; 
 // import SoldOut from "https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"
 // import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
 import { useState } from "react";
@@ -73,7 +77,11 @@ function BestDealsCard({ data, setProducts }) {
               className="font-Roboto-Bold flex items-center -ml-1 text-yellow2 md:text-[28px] text-[24px]"
               
             >
-              {data?.listingPrice && <FaRupeeSign className="md:text-[24px] text-[20px]" />}{" "}
+              {data?.listingPrice && 
+              //  <Image src={Rupee1} width={20} height={20} alt="" />
+              <p className="">₹</p>
+              // <FaRupeeSign className="md:text-[24px] text-[20px]" />
+              }{" "}
               {numberWithCommas(data?.listingPrice || "")}
             </p>
             <div className="font-Roboto-Regular text-white md:text-regularFontSize text-mediumFontSize">
@@ -124,10 +132,11 @@ function BestDealsCard({ data, setProducts }) {
                   View Deal{" "}
                   <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
                 </div> */}
-                  <div className="flex items-center md:text-regularFontSizete text-smallFontSize font-Roboto-Semibold bg-m-white text-m-green md:py-2 py-1 md:px-4 px-2 md:rounded-lg rounded-md hover:bg-yellow-500 hover:cursor-pointer duration-500">
-                    <div> View Deal{""}</div>
-                    <div>
-                    <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} />
+                  <div className="flex items-center items-center md:text-regularFontSizete text-smallFontSize font-Roboto-Semibold bg-m-white text-m-green md:py-2 py-1 md:px-4 px-2 md:rounded-lg rounded-md hover:bg-yellow-500 hover:cursor-pointer duration-500">
+                    <div>View Deal </div>
+                    <div className="pt-0.5">
+                    {/* <BiChevronRight style={{ marginLeft: 2, fontSize: 20 }} /> */}
+                    <Image src={ChevronRight} width={10} height={10}/>
                     </div>
                   </div>
               {/* </Link> */}

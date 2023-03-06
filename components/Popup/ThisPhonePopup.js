@@ -1,6 +1,7 @@
 import Modal2 from './Model2'
-import { FiAlertOctagon } from "react-icons/fi";
-
+// import { FiAlertOctagon } from "react-icons/fi";
+import Alert from "@/assets/alert.svg";
+import Image from 'next/image';
 
 function ThisPhonePopup({open,setOpen}) {
     
@@ -9,7 +10,8 @@ function ThisPhonePopup({open,setOpen}) {
     <Modal2 open={open} setOpen={setOpen} title={"This device is unverified"}>
      <div className="flex flex-col items-center max-w-2xl px-6 text-base text-black-4e py-8  ">
       
-        <FiAlertOctagon size={44} color="#f7e17d" />
+        {/* <FiAlertOctagon size={44} color="#f7e17d" /> */}
+        <Image src={Alert} width={30} height={30}/>
         {/* <p className="font-Roboto-Bold text-xl mt-1"></p> */}
         <div className="text-md my-2 text-center font-Roboto-Regular">
           <p>

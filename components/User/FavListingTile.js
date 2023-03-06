@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
+// import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
+import Rupee from "@/assets/rupee1.svg";
 import { useState, useEffect, useCallback } from "react";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import IconLabelValue from "./IconLableValue";
@@ -10,8 +11,8 @@ import IconLabelValue from "./IconLableValue";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 // import Logo from "@/assets/oru_phones_logo.png"
-import { AiFillHeart } from "react-icons/ai";
-
+// import { AiFillHeart } from "react-icons/ai";
+import OutlineHeart from "@/assets/heartfill.svg";
 function FavListingTile({ data, setProducts }) {
   const [frontImagePath, setFrontImagePath] = useState();
   const [imageError, setImageError] = useState(false);
@@ -55,12 +56,15 @@ function FavListingTile({ data, setProducts }) {
             alt="verified icon"
           />
         ) : (
+          <div>
           <Image
             src={"https://d1tl44nezj10jx.cloudfront.net/assets/unverified.svg"}
             width={90}
             height={28}
             alt="unverified icon"
           />
+          <p className="text-xsFontSize absolute top-1.5 font-Roboto-Semibold right-4">unverified</p>
+          </div>
         )}
       </div>
      
@@ -118,7 +122,10 @@ function FavListingTile({ data, setProducts }) {
           </p>
           {/* <span className="text-m-grey-2 font-Roboto-Regular text-smallFontSize">List Price</span> */}
           <p className="flex items-center text-mediumFontSize font-Roboto-Bold text-m-grey-1">
-            {data?.listingPrice && <BiRupee className="h-full" />}{" "}
+            {data?.listingPrice && 
+            // <BiRupee className="h-full" />
+            <Image src={Rupee} width={15} height={16}/>}
+            {" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
         </div>
@@ -158,7 +165,7 @@ function FavListingTile({ data, setProducts }) {
             fill={data.favourite ? "#FF0000" : "#C7C7C7"}
           />
         </svg> */}
-        <AiFillHeart
+        {/* <AiFillHeart
           className="hover:cursor-pointer"
           color="#FF0000"
           size='18px'
@@ -170,7 +177,15 @@ function FavListingTile({ data, setProducts }) {
               //  : toast.error("You can't add your own listing to your favorites");
             }
           }
-        />
+        /> */}
+         <Image src={OutlineHeart} width={20} height={20} onClick={
+            (e) => {
+              e.preventDefault();
+              // !listings.includes(data.listingId) ? 
+              handleFavoties(data);
+              //  : toast.error("You can't add your own listing to your favorites");
+            }
+          }/>
       </div>
     </div>
 
@@ -185,12 +200,15 @@ function FavListingTile({ data, setProducts }) {
             alt="verified icon"
           />
         ) : (
+          <div>
           <Image
             src={"https://d1tl44nezj10jx.cloudfront.net/assets/unverified.svg"}
             width={90}
             height={28}
             alt="unverified icon"
           />
+          <p className="text-xsFontSize absolute top-1.5 font-Roboto-Semibold right-8">unverified</p>
+          </div>
         )}
       </div>
      
@@ -248,7 +266,10 @@ function FavListingTile({ data, setProducts }) {
           </p>
           {/* <span className="text-m-grey-2 font-Roboto-Regular text-smallFontSize">List Price</span> */}
           <p className="flex items-center font-Roboto-Bold md:text-xl2FontSize text-xlFontSize -ml-1 text-m-grey-1">
-            {data?.listingPrice && <BiRupee className="h-full" />}{" "}
+            {data?.listingPrice && 
+            // <BiRupee className="h-full" />
+            <Image src={Rupee} width={20} height={20}/>}
+            {" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
         </div>
@@ -288,7 +309,7 @@ function FavListingTile({ data, setProducts }) {
             fill={data.favourite ? "#FF0000" : "#C7C7C7"}
           />
         </svg> */}
-        <AiFillHeart
+        {/* <AiFillHeart
           className="hover:cursor-pointer"
           color="#FF0000"
           size='18px'
@@ -300,6 +321,16 @@ function FavListingTile({ data, setProducts }) {
               //  : toast.error("You can't add your own listing to your favorites");
             }
           }
+        /> */}
+        <Image src={OutlineHeart} width={20} height={20} 
+        onClick={
+          (e) => {
+            e.preventDefault();
+            // !listings.includes(data.listingId) ? 
+            handleFavoties(data);
+            //  : toast.error("You can't add your own listing to your favorites");
+          }
+        }
         />
       </div>
     </div>

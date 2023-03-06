@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
-import { BiRupee } from "react-icons/bi";
+// import { BiRupee } from "react-icons/bi";
+import Rupee1 from "@/assets/rupee3.svg";
 // import devicePlaceholder from "../../assets/stock_image.png";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import ImageSlider from "../ImageSlider";
@@ -15,10 +16,20 @@ import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import ShareIcon from "../ShareIcon";
 // import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
-import { BsInfoCircle, BsStar, BsStarFill } from "react-icons/bs";
-import { AiFillExclamationCircle } from "react-icons/ai";
-import { VscPass } from "react-icons/vsc";
-import { IoCloseCircleOutline } from "react-icons/io5";
+
+// import { BsInfoCircle, BsStar, BsStarFill } from "react-icons/bs";
+import InfoCircle from "@/assets/infocircle2.svg";
+import InfoCircle1 from "@/assets/infocircle.svg";
+import Star from "@/assets/star1.svg";
+import FillStar from "@/assets/star2.svg";
+import FillExclamation from "@/assets/fillexclamation.svg";
+import PassCheck from "@/assets/gcheck.svg";
+import Close from "@/assets/close.svg";
+
+// import { AiFillExclamationCircle } from "react-icons/ai";
+// import { VscPass } from "react-icons/vsc";
+// import { IoCloseCircleOutline } from "react-icons/io5";
+
 import VerificationIcon from "../VerificationIcon";
 import SellerDetailsCard from "./SellerDetailsCard";
 import { deviceConditionQuestion } from "@/utils/constant";
@@ -71,9 +82,10 @@ function ProductDetailsCard({ data, openFullImage }) {
               : 5;
   let iconToShow = (index) => {
     if (index < filled) {
-      return <BsStarFill className="text-yellow-400" />;
+      return <Image src={FillStar} width={24} height={24} alt="" />;
     } else {
-      return <BsStar className="text-black-7e" />;
+      return <Image src={Star} width={22} height={22} alt="" />
+      // <BsStar className="text-black-7e" />;
     }
   };
 
@@ -146,10 +158,11 @@ function ProductDetailsCard({ data, openFullImage }) {
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
-        <div className="space-x-4 relative lg:-right-2 md:right-20 flex items-center justify-end pr-4 -top-2" >
+        <div className="space-x-4 relative lg:-right-2 md:right-20 flex items-center justify-end pr-4 -top-2 " >
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
               <ShareIcon data={deviceListingInfo} width={16} height={16} />
+              <span className=""></span>
               <AddFav
                 data={deviceListingInfo}
                 setProducts={setDeviceListingInfo}
@@ -229,8 +242,11 @@ function ProductDetailsCard({ data, openFullImage }) {
             )) || <span className="h-5 block"></span>} */}
               {/* <p className="block text-base text-m-grey-2">List price</p> */}
               <div className="flex flex-row justify-between">
-                <p className="font-Roboto-Bold text-xl4FontSize flex items-center -ml-1 text-green2">
-                  {data?.listingPrice && <BiRupee />}{" "}
+                <p className="font-Roboto-Bold text-xl4FontSize flex items-center ml-1 text-green2">
+                  {data?.listingPrice &&
+                    // <BiRupee />
+                    <Image src={Rupee1} width={18} height={18} alt="" />
+                  }{" "}
                   {numberWithCommas(data?.listingPrice || "")}
                 </p>
                 <span
@@ -267,16 +283,19 @@ function ProductDetailsCard({ data, openFullImage }) {
                       className="flex m-auto justify-center text-white py-0.5 rounded-md px-7"
                       style={{ background: "#4CAF50" }}
                     >
-                      <div className="flex flex-1 ">
+                      <div className="flex flex-1 items-center">
                         <VerificationIcon className="flex self-center" />
-                        <p className="font-Roboto-Regularitalic text-mediumFontSize self-center pr-1">
+                        <p className=" font-Roboto-Regularitalic text-mediumFontSize self-center pr-1 ">
                           Verified
                         </p>
-                        <BsInfoCircle
+                        {/* <BsInfoCircle
                           size={12}
                           className="ml-2 mt-3 hover:cursor-pointer"
                           onClick={() => setOpenInfo(true)}
-                        />
+                        /> */}
+                        <div className="w-[13px] ml-0.5 mt-0.5">
+                        <Image src={InfoCircle1} width={13} height={13} alt="" onClick={() => setOpenInfo(true)} />
+                        </div>
                         <div className="pl-3 pt-2">
                           <div className="bg-gray-100 w-[0.5px] h-6 "></div>
                         </div>
@@ -302,25 +321,33 @@ function ProductDetailsCard({ data, openFullImage }) {
                             className="flex py-2 rounded-md space-x-2 col-span-3"
                             style={{ backgroundColor: "#F9C414" }}
                           >
-                            <div className="flex space-x-1 flex-1 pl-10">
+                            <div className="whitespace-nowrap w-[100px] flex space-x-1 flex-1 pl-10">
                               {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
-                              <div className="flex space-x-2">
-                                <AiFillExclamationCircle
+
+                              <div className="flex space-x-1 items-center">
+                                <div className="w-[24px] mt-0.5">
+                                  <Image src={FillExclamation} width={24} height={24} alt="" />
+                                </div>
+                                {/* <AiFillExclamationCircle
                                   size={20}
                                   fill="white"
                                   className="self-center text-black"
-                                />
+                                /> */}
                                 {/* <UnVerifiedIcon /> */}
 
-                                <span className="text-xs2FontSize font-Roboto-Regularitalic pt-0.5 self-center text-[#000944] italic uppercase">
-                                  unverified
+                                <span className="flex text-xs2FontSize items-center font-Roboto-Regularitalic  self-center text-[#000944] italic uppercase">
+                                  <span> unverified  </span>
+                                  <span className="w-[13px] ml-2 mt-1">
+                                    <Image src={InfoCircle} width={15} height={15} alt="" onClick={() => setOpenInfo(true)} />
+                                  </span>
                                 </span>
                               </div>
-                              <BsInfoCircle
+                              {/* <BsInfoCircle
                                 size={18}
                                 className="ml-1 pt-2 hover:cursor-pointer"
                                 onClick={() => setOpenInfo(true)}
-                              />
+                              /> */}
+
                               <div className="pl-3">
                                 <div className="bg-gray-100 w-[1px] h-6 "></div>
                               </div>
@@ -482,7 +509,7 @@ function ProductDetailsCard({ data, openFullImage }) {
               *This phone might be old or refurbished
             </div>
             <div className="pr-2">
-              <SellerDetailsCard data={data} comparisontableid="#Comparisontabl1"/>
+              <SellerDetailsCard data={data} comparisontableid="#Comparisontabl1" />
             </div>
           </div>
         </div>
@@ -639,29 +666,31 @@ function ProductDetailsCard({ data, openFullImage }) {
                 }
               />
             }
+            {console.log("similar data length", data?.similarListTable.length)}
 
-            {data?.data?.compareData && data?.data?.compareData?.length > 0 ?
-              ""
-               :
+            {data?.similarListTable && data?.similarListTable.length !== 0 && <div className="pt-16">
+              <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">You may also like these deals</p>
+              {
+                <ComparisonTable2
+                  data={
+                    data?.similarListTable && data?.similarListTable?.length > 0 ? data?.similarListTable : []
+                  }
+                  listingId={data?.listingId !== undefined ? data?.listingId : []}
+                />
+                // <ComparisonTable2
+                //   data={data.similarListTable}
+                //   listingId={
+                //     data.listingId !== undefined ? data?.listingId : []
+                //   }
+                // />
+              }
+            </div>
+              // ?
+              //   ""d
+              //    :
 
-               <div className="pt-16">
-               <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">You may also like these deals</p>
-               {
-                 <ComparisonTable2
-                   data={
-                     data?.similarListTable && data?.similarListTable?.length > 0 ? data?.similarListTable : []
-                   }
-                   listingId={data?.listingId !== undefined ? data?.listingId : []}
-                 />
-                 // <ComparisonTable2
-                 //   data={data.similarListTable}
-                 //   listingId={
-                 //     data.listingId !== undefined ? data?.listingId : []
-                 //   }
-                 // />
-               }
-             </div>
-             } 
+
+            }
 
           </div>
         )}
@@ -710,9 +739,11 @@ const TestListItem = ({ testName, testStatus }) => {
           {testStatus}
         </span>{" "}
         {testStatus === "PASS" ? (
-          <VscPass className="text-green2" />
+          // <VscPass className="text-green2" />
+          <Image src={PassCheck} width={20} height={20} alt="" />
         ) : (
-          <IoCloseCircleOutline className="text-red" />
+          // <IoCloseCircleOutline className="text-red" />
+          <Image src={Close} width={20} height={20} alt="" />
         )}
       </p>
     </div>

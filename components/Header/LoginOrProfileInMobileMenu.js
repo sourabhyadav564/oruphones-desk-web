@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import LoginPopup from "../Popup/LoginPopup";
-import { FaRegUserCircle } from "react-icons/fa";
+// import { FaRegUserCircle } from "react-icons/fa";
+import RegUser from "@/assets/user2.svg";
 import Link from "next/link";
 import AuthContext from "@/context/AuthContext";
 import AppContext from "@/context/ApplicationContext";
@@ -8,6 +9,7 @@ import Notifications from "../Notifications";
 import Cookies from "js-cookie";
 import { getAllNotificationByUserd } from "api/axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 
 function LoginOrProfileInMobileMenu() {
@@ -55,7 +57,7 @@ function LoginOrProfileInMobileMenu() {
   return (
     <React.Fragment className="z-50">
       {userAuthenticated ? (
-        <div className=" flex space-x-1 items-center h-full w-20 ">
+        <div className=" flex space-x-1 items-center h-full w-20 mt-1">
           {/* <Notifications /> */}
           {/* <span>
             {(
@@ -65,10 +67,11 @@ function LoginOrProfileInMobileMenu() {
             )}
           </span> */}
           <div className="relative inline-block group">
-            <FaRegUserCircle
+            {/* <FaRegUserCircle
               size={30}
               className="cursor-pointer"
-            />
+            /> */}
+              <Image src={RegUser} width={30} height={30} alt=""/>
             <div className="absolute z-50 hidden group-hover:block transform -translate-x-1/2 left-1/2 bg-transparent">
               <div className="flex flex-col items-center">
                 <div className="w-10 overflow-hidden inline-block">
@@ -101,7 +104,7 @@ function LoginOrProfileInMobileMenu() {
         </div>
       ) : (
         <React.Fragment>
-           <div className="flex space-x-1 items-center h-full w-20">
+           <div className="flex space-x-1 items-center h-full w-20 mt-1">
           {/* <Notifications /> */}
           {/* <span>
             {(
@@ -110,11 +113,12 @@ function LoginOrProfileInMobileMenu() {
               </span>
             )}
           </span> */}
-          <div className="relative inline-block group">
-            <FaRegUserCircle
+          <div className="relative inline-block group ">
+            {/* <FaRegUserCircle
               size={30}
               className="text-white cursor-pointer"
-            />
+            /> */}
+              <Image src={RegUser} width={30} height={30} alt="" />
             <div className="absolute z-50 hidden group-hover:block transform -translate-x-1/2 left-1/2 bg-transparent">
               <div className="flex flex-col items-center">
                 <div className="w-10 overflow-hidden inline-block">

@@ -14,7 +14,9 @@ import Modal from '.';
 // import Image12 from 'https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/12.png'
 // import Image13 from 'https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/13.png'
 import Image from 'next/image';
-import QRCode from "qrcode.react";
+// import QRCode from "qrcode.react";
+import AppleStore from "@/assets/apple_store.svg";
+import PlayStore from "@/assets/playstore.svg";
 import Link from 'next/link';
 
 function HowtoBuyPopup({open,setOpen}) {
@@ -32,27 +34,29 @@ function HowtoBuyPopup({open,setOpen}) {
             <div className='px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar'>
             <div className="flex pb-8  justify-start items-center">
                         <div className="flex flex-col items-center justify-center m-auto">
-                            <QRCode
+                            {/* <QRCode
                                 id="qr-gen"
                                 value={qrValue1}
                                 size={130}
                                 level={"H"}
                                 includeMargin={true}
-                            />
+                            /> */}
+                             <Image src={AppleStore} width={96} height={96} alt=""/>
                             <Link href={qrValue1}>
-                                <a className="w-32 h-10 bg-app-store bg-contain"></a>
+                                <a className="w-32 h-10 bg-app-store bg-contain mt-2"></a>
                             </Link>
                         </div>
                         <div className="flex flex-col items-center justify-center m-auto">
-                            <QRCode
+                            {/* <QRCode
                                 id="qr-gen"
                                 value={qrValue2}
                                 size={130}
                                 level={"H"}
                                 includeMargin={true}
-                            />
+                            /> */}
+                             <Image src={PlayStore} width={96} height={96} alt=""/>
                             <Link href={qrValue2}>
-                                <a className="w-32 h-10 bg-play-store bg-contain"></a>
+                                <a className="w-32 h-10 bg-play-store bg-contain mt-2"></a>
                             </Link>
                         </div>
                     </div>

@@ -1,9 +1,13 @@
 import Cookies from "js-cookie";
 import Modal2 from "./Model2";
-import { FiAlertOctagon } from "react-icons/fi";
+
+// import { FiAlertOctagon } from "react-icons/fi";
+import Alert from "@/assets/alert.svg";
+
 import * as Axios from "../../api/axios";
 import RequestVerificationSuccessPopup from "./RequestVerificationSuccessPopup";
 import { useState } from "react";
+import Image from "next/image";
 // import RequestVerificationSuccessPopup from "./RequestVerificationSuccessPopup";
 function RequestVerificationPopup({
     open,
@@ -37,7 +41,8 @@ function RequestVerificationPopup({
         <Modal2 open={open} setOpen={setOpen} title={"This device is unverified"}>
             <div className="flex flex-col items-center max-w-2xl px-6 text-base text-black-4e py-4  ">
 
-                <FiAlertOctagon size={44} color="#f7e17d" />
+                {/* <FiAlertOctagon size={44} color="#f7e17d" /> */}
+                <Image src={Alert} width={40} height={40} alt=""/> 
                 <p className="font-Roboto-Bold text-xl mt-1">Alert</p>
                 <div className="text-md my-2 text-center font-Roboto-Regular">
                     <p>

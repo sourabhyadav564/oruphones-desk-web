@@ -7,7 +7,8 @@ import Image from "next/image";
 // import storage from "../assets/storage.png";
 // import ram from "../assets/ram.png";
 
-import { BsInfoCircle } from "react-icons/bs";
+// import { BsInfoCircle } from "react-icons/bs";
+import InfoCircle from "@/assets/infocircle2.svg";
 
 function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showWarrantyInfoPopup, showConditionInfoPopup, textAsLink, showRequestVerificationSuccessPopup, labelTextSize }) {
   if (label) {
@@ -44,17 +45,26 @@ function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showWarr
             {showInfoPopup ? (
               <p className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>
                 {label}
-                <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showInfoPopup} />
+                {/* <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showInfoPopup} /> */}
+                <div className="px-1 pt-0.5">
+                <Image src={InfoCircle} width={10} height={10}  className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showInfoPopup}/>
+                </div>
               </p>
             ) : showConditionInfoPopup ? (
-              <p className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>
+              <p className=" text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>
                 {label}
-                <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showConditionInfoPopup} />
+                {/* <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showConditionInfoPopup} /> */}
+                <div className="px-1 pt-0.5">
+                <Image src={InfoCircle} width={10} height={10}  className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showConditionInfoPopup}/>
+              </div>
               </p>
             ) : showWarrantyInfoPopup ? (
               <p className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2" style={{ color: "#878787" }}>
                 {label}
-                <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showWarrantyInfoPopup} />
+                {/* <BsInfoCircle size={10} className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showWarrantyInfoPopup} /> */}
+                <div className="px-1 pt-0.5">
+                <Image src={InfoCircle} width={10} height={10}  className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2" onClick={showWarrantyInfoPopup}/>
+              </div>
               </p>
             ) : (
               <span className="text-smallFontSize font-Roboto-Light whitespace-nowrap ml-2" style={{ color: "#878787" }}>

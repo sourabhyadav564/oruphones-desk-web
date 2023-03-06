@@ -3,9 +3,13 @@ import { Fragment, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import bgImage from "https://d1tl44nezj10jx.cloudfront.net/assets/app_download.png";
-import { GrClose } from "react-icons/gr";
-import QRCode from "qrcode.react";
+// import { GrClose } from "react-icons/gr";
+import Close from "@/assets/cross.svg";
+// import QRCode from "qrcode.react";
+import AppleStore from "@/assets/apple_store.svg";
+import PlayStore from "@/assets/playstore.svg";
 import { useState, useEffect } from "react";
+
 import * as Axios from "../../api/axios";
 
 function AppDownloadPopup({ open, setOpen }) {
@@ -65,10 +69,12 @@ function AppDownloadPopup({ open, setOpen }) {
               </div>  
 
               <div className="md:absolute md:right-3 md:top-0 text-white flex justify-end mr-4 mt-4 ">
-              <GrClose
+              {/* <GrClose
                 onClick={() => setOpen(false)}
                 className=""
-              /></div>
+              /> */}
+              <Image src={Close} width={28} height={28} onClick={() => setOpen(false)}/>
+              </div>
               <div className="z-20 relative px-8 py-4  md:w-8/12 text-black-20">
                 <p className="font-Roboto-Bold text-xl2FontSize mb-4"> Just one more step </p>
                 <ul className="list-disc text-mediumFontSize font-Roboto-Regular flex flex-col space-y-4 px-4">
@@ -99,25 +105,30 @@ function AppDownloadPopup({ open, setOpen }) {
                 </ul>
                 <div className="flex space-x-4 md:justify-start md:py-0 my-4 justify-center items-center">
                   <div className="flex flex-col items-center justify-center pl-4">
-                    <QRCode
+                    {/* <QRCode
                       id="qr-gen"
                       value={qrValue1}
                       size={130}
                       level={"H"}
                       includeMargin={true}
-                    />
+                    /> */}
+                    <Image src={AppleStore} width={96} height={96} alt=""/>
+
                     <Link href={qrValue1}>
                       <a className="w-32 h-10 bg-app-store bg-contain"></a>
                     </Link>
                   </div>
                   <div className="flex flex-col items-center justify-center pl-4">
-                    <QRCode
+                    {/* <QRCode
                       id="qr-gen"
                       value={qrValue2}
                       size={130}
                       level={"H"}
                       includeMargin={true}
-                    />
+                    /> */}
+
+                     <Image src={PlayStore} width={96} height={96} alt=""/>
+
                     <Link href={qrValue2}>
                       <a className="w-32 h-10 bg-play-store bg-contain"></a>
                     </Link>

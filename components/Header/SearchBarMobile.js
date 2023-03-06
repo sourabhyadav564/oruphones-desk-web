@@ -3,9 +3,11 @@ import Link from "next/link";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
-import { BiSearch } from "react-icons/bi";
-import { BiTimeFive } from "react-icons/bi";
-import { GrFormClose } from "react-icons/gr";
+// import { BiSearch } from "react-icons/bi";
+// import { BiTimeFive } from "react-icons/bi";
+import Search from "@/assets/search.svg";
+import Recent from "@/assets/recent.svg";
+import Image from "next/image";
 
 function SearchBarMobile() {
   const [searchResults, setSearchResults] = useState();
@@ -108,7 +110,8 @@ function SearchBarMobile() {
             style={{ boxShadow: "0px 2px 3px #0000000A" }}
           />
            <div className=" flex items-center px-4 ">
-          <BiSearch className="text-black-1" size={20} />
+          {/* <BiSearch className="text-black-1" size={20} /> */}
+          <Image src={Search} width={22} height={22} alt=""/>
         </div>
         </div>
         {searchResults && (
@@ -186,7 +189,8 @@ function SearchBarMobile() {
                   <div>
                     {recentSearch.map((item) => (
                       <div className="flex items-center hover:bg-gray-100">
-                        <BiTimeFive className="w-5 h-5 ml-4 -mr-4 z-50"/>
+                        {/* <BiTimeFive className="w-5 h-5 ml-4 -mr-4 z-50"/> */}
+                        <Image src={Recent} width={28} height={28} alt=""/>
                         <ListItem
                           clicked={() => {
                             setInput("");

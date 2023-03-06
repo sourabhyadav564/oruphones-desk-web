@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
-import { GrClose } from "react-icons/gr";
+// import { GrClose } from "react-icons/gr";
+import Cross from "@/assets/cross.svg";
+import Image from "next/image";
 
 function ImageInput({ name, preview, clearImage, ...rest }) {
   return (
@@ -10,7 +12,8 @@ function ImageInput({ name, preview, clearImage, ...rest }) {
           style={{ border: "1px solid #0000001F", color: "#00000099" }}
         >
           <img src={preview} style={{ width: "auto", height: "100%" }} />
-          <GrClose className="absolute top-2 right-2 text-sm cursor-pointer" onClick={clearImage} />
+          {/* <GrClose className="absolute top-2 right-2 text-sm cursor-pointer" onClick={clearImage} /> */}
+          <Image src={Cross} width={20} height={20}/> 
         </label>
       ) : (
         <label

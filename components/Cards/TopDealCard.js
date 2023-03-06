@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BiRupee } from "react-icons/bi";
+// import { BiRupee } from "react-icons/bi";
+import Rupee1 from "@/assets/rupee1.svg";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import VerifiedIcon from "../VerifiedIcon";
 import AddFav from "../AddFav";
@@ -108,7 +109,10 @@ function TopDealCard({ data, setProducts, prodLink }) {
             {data?.marketingName}
           </h1> */}
           <p className="font-bold flex items-center w-[74px] text-[18px] -ml-1 text-lg opacity-100 text-m-blue-1 font-Roboto-Bold">
-            {data?.listingPrice && <BiRupee size={20} />}{" "}
+            {data?.listingPrice && 
+            // <BiRupee size={20} />
+            <Image src={Rupee1} width={20} height={20} alt="" /> 
+            }{" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
           <p className=" text-regularFontSize flex-1 w-full opacity-100 text-black-1 font-Roboto-Light truncate">

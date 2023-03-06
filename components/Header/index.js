@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BiCurrentLocation, BiChevronDown } from "react-icons/bi";
+// import { BiCurrentLocation, BiChevronDown } from "react-icons/bi";
 
 import DesktopMenu from "./DesktopMenu";
 import Geocode from "react-geocode";

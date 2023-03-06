@@ -1,12 +1,21 @@
 import Link from "next/link";
-import {
-  FaFacebookSquare,
-  FaTwitterSquare,
-  FaInstagram,
-  FaPinterestSquare,
-  FaLinkedin,
-  FaYoutube,
-} from "react-icons/fa";
+// import {
+//   FaFacebookSquare,
+//   FaTwitterSquare,
+//   FaInstagram,
+//   FaPinterestSquare,
+//   FaLinkedin,
+//   FaYoutube,
+// } from "react-icons/fa";
+import Fb from "@/assets/fb.svg";
+import gmail from "@/assets/gmail.svg";
+import instagram from "@/assets/ig.svg";
+import pinterest from "@/assets/pinterest.svg";
+import linkedin from "@/assets/linkedIn.svg";
+import youtube from "@/assets/yt.svg";
+import twitter from "@/assets/twitter.svg";
+
+
 
 import {
   addListingBrandState,
@@ -14,7 +23,8 @@ import {
 import { useRecoilState } from "recoil";
 import AppDownloadPopup from "../Popup/AppDownloadPopup";
 import { useState } from "react";
-import { FiMail } from "react-icons/fi";
+import Image from "next/image";
+// import { FiMail } from "react-icons/fi";
 
 const Footer = () => {
   const [addListingBrand, setAddListingBrand] = useRecoilState(addListingBrandState);
@@ -173,7 +183,7 @@ const Footer = () => {
       name: "Huawei",
     },
     {
-      id: 30,
+      id: 20,
       prefill: "ZTE",
       name: "ZTE",
     },
@@ -223,9 +233,9 @@ const Footer = () => {
           <Link href="/contact-us">
             <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
           </Link>
-          <Link href="/team">
+          {/* <Link href="/team">
             <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Team</a>
-          </Link>
+          </Link> */}
         </div>
         <div>
           <div className="flex flex-col">
@@ -242,68 +252,74 @@ const Footer = () => {
           <div>
             Follow us on Social Media
           </div>
-          <div className="flex items-center gap-x-1 mt-4 ">
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+          <div className="flex items-center gap-x-1 mt-4 space-x-4">
+            <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.facebook.com/ORUphones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaFacebookSquare size={25} />
+                <Image src={Fb} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://twitter.com/ORUPhones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaTwitterSquare size={25} />
+                {/* <FaTwitterSquare size={25} /> */}
+                <Image src={twitter} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.instagram.com/oruphones/?igshid=YmMyMTA2M2Y%3D"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaInstagram size={25} />
+                {/* <FaInstagram size={25} /> */}
+                <Image src={instagram} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.pinterest.com/ORUphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaPinterestSquare size={25} />
+                {/* <FaPinterestSquare size={25} /> */}
+                <Image src={pinterest} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.linkedin.com/company/oruphones/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaLinkedin size={25} />
+                {/* <FaLinkedin size={25} /> */}
+                <Image src={linkedin} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="https://www.youtube.com/channel/UCJTgZUz7jkMCECYVO1uFE6A"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaYoutube size={25} />
+                {/* <FaYoutube size={25} /> */}
+                <Image src={youtube} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="w-10 h-10 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
               <a
                 href="mailto:contact@oruphones.com?subject = Feedback"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FiMail size={25} />
+                {/* <FiMail size={25} /> */}
+                <Image src={gmail} width={20} height={20} alt=""/>
               </a>
             </div>
           </div>

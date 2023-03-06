@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
+// import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
+import Rupee from "@/assets/rupee1.svg";
 import { useState, useEffect, useCallback } from "react";
 import { numberWithCommas } from "../../utils/util";
 import IconLabelValue from "./IconLableValue";
@@ -12,6 +13,7 @@ import { useRouter } from "next/router";
 import VerifiedIcon from "../VerifiedIcon";
 import UnVerifiedIcon from "../UnVerifiedIcon";
 import Cookies from "js-cookie";
+import Image from "next/image";
 // import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
 
 function ProfileListingTile({ data, fromMyFav, setProducts }) {
@@ -110,7 +112,10 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           </p>
           {/* <span className="text-m-grey-2 text-sm">List Price</span> */}
           <p className="flex items-center font-Roboto-Bold text-xl2FontSize text-m-grey-1">
-            {data?.listingPrice && <BiRupee className="h-full" />}{" "}
+            {data?.listingPrice && 
+            // <BiRupee className="h-full" />
+            <Image src={Rupee} width={20} height={20}/>
+            } {" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
         </div>
@@ -270,7 +275,10 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
           </p>
           {/* <span className="text-m-grey-2 text-sm">List Price</span> */}
           <p className="flex items-center font-Roboto-Bold md:text-xl2FontSize text-xlFontSize -ml-1 text-m-grey-1">
-            {data?.listingPrice && <BiRupee className="h-full" />}{" "}
+            {data?.listingPrice && 
+            // <BiRupee className="h-full" />
+            <Image src={Rupee} width={20} height={20}/>}
+            {" "}
             {numberWithCommas(data?.listingPrice || "")}
           </p>
         </div>

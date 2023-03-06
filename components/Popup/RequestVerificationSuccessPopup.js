@@ -3,8 +3,12 @@ import { useState, useEffect } from "react";
 import * as Axios from "../../api/axios";
 import Loader from "../Loader/Loader";
 import Cookies from "js-cookie";
-import { BsCheck2Circle } from "react-icons/bs";
-import { FiAlertOctagon } from "react-icons/fi";
+
+// import { BsCheck2Circle } from "react-icons/bs";
+// import { FiAlertOctagon } from "react-icons/fi";
+import Alert from "@/assets/alert.svg";
+import gcheck from "@/assets/gcheck.svg";
+import Image from "next/image";
 
 function RequestVerificationSuccessPopup({ open, setOpen, data }) {
     const [resData, setResData] = useState(data);
@@ -52,9 +56,11 @@ function RequestVerificationSuccessPopup({ open, setOpen, data }) {
                 {statuscode ? (
                     <>
                         {statuscode === 200 ? (
-                            <BsCheck2Circle size={42} color="#00A483" />
+                            // <BsCheck2Circle size={42} color="#00A483" />
+                            <Image src={gcheck} width={32} height={32}/>
                         ) : (
-                            <FiAlertOctagon size={44} color="#f7e17d" />
+                            // <FiAlertOctagon size={44} color="#f7e17d" />
+                            <Image src={Alert} width={40} height={40} alt=""/> 
                         )}
                         <p className="font-Roboto-Bold my-2 text-lg">
                             {statuscode === 200

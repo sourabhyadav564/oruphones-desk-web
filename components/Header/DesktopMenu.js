@@ -8,8 +8,8 @@ import LocationPopup from "../Popup/LocationPopup";
 import Title from "../Title";
 import { useContext } from "react";
 import AppContext from "@/context/ApplicationContext";
-import { GrLocation } from "react-icons/gr";
-import { MdLocationOn } from "react-icons/md";
+// import { MdLocationOn } from "react-icons/md";
+import Location from "@/assets/location.svg";
 import Cookies from "js-cookie";
 import LoginPopup from "../Popup/LoginPopup";
 import { useRouter } from "next/router";
@@ -146,11 +146,12 @@ function DesktopMenu({ menuItems }) {
   return (
     <nav className="px-0 h-12 bg-m-green-1 bg-no-repeat items-center flex flex-row justify-between " data-aos="fade-down">
       <span
-        className="text-white mt-0.5 lg:pl-52 pl-8 flex flex-row justify-start hover:cursor-pointer"
+        className="text-white  lg:pl-52 pl-8  flex flex-row justify-start items-center space-x-1 hover:cursor-pointer"
         onClick={() => setOpenLocationPopup(true)}>
-        <MdLocationOn className="mt-1.5 mr-1 text-[#fffffff]" />
+        {/* <MdLocationOn className="mt-1.5 mr-1 text-[#fffffff]" /> */}
+        <Image src={Location} width={14} height={15} alt=""/>
         <span
-          className="text-white font-Roboto-Semibold items-center pt-0.5"
+          className="text-white font-Roboto-Semibold items-center "
           location={`${getSearchLocation} ${getSearchLocation != "India" ? " ,India" : ""}`}
           color={"white"}
           fontsize={"mediumFontSize"}

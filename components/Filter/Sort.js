@@ -1,10 +1,17 @@
 import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition, Dialog } from "@headlessui/react";
-import { AiOutlineClose } from "react-icons/ai";
-import { GrFormDown, GrFormFilter } from "react-icons/gr";
+
+// import { AiOutlineClose } from "react-icons/ai";
+import Cross from "@/assets/cross.svg";
+
+// import { GrFormDown, GrFormFilter } from "react-icons/gr";
+import ArrowDown from "@/assets/arrow-drop-down.svg";
+import Filter from "@/assets/filter.svg";
+
 import DesktopFilter from "./DesktopFilter";
 import { useRouter } from "next/router";
 import useFilterOptions from "hooks/useFilterOptions";
+import Image from "next/image";
 
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
@@ -37,7 +44,8 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
             <div>
               <Menu.Button className="group inline-flex justify-center px-4 py-2 rounded-md bg-white text-sm font-Roboto-Regular text-regularFontSize text-gray-700 hover:text-gray-900 border">
                 {(sortOptions && sortOptions.filter((i) => i.current)[0]?.name) || "Sort"}
-                <GrFormDown className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                {/* <GrFormDown className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" /> */}
+                <Image src={ArrowDown} width={20} height={20} alt="" className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
               </Menu.Button>
             </div>
 
@@ -78,7 +86,8 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
             onClick={() => setMobileFiltersOpen(true)}
           >
             <span className="sr-only">Filters</span>
-            <GrFormFilter className="w-5 h-5" aria-hidden="true" />
+            {/* <GrFormFilter className="w-5 h-5" aria-hidden="true" /> */}
+            <Image src={Filter} width={20} height={20} alt=""/>
           </button>
         </div>
       </div>
@@ -113,7 +122,8 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
                   onClick={() => setMobileFiltersOpen(false)}
                 >
                   <span className="sr-only">Close menu</span>
-                  <AiOutlineClose className="h-6 w-6" aria-hidden="true" />
+                  {/* <AiOutlineClose className="h-6 w-6" aria-hidden="true" /> */}
+                  <Image src={Cross} width={10} height={10} alt=""/>
                 </button>
               </div>
               <div className=""> 

@@ -61,7 +61,7 @@ function Bestdealnearyou() {
         //   ...response?.dataObject?.otherListings,
         //   ...response?.dataObject?.bestDeals,
         // ]);
-        setLoading(false);
+         setLoading(false);
       });
     } else {
       const {
@@ -348,7 +348,7 @@ function Bestdealnearyou() {
         makename={bestDeal[0]?.make}
       >
         {!isLoading && bestDeal && bestDeal.length > 0 && (
-          <Carousel {...settings} className="bestDealCarousel z-0">
+          <Carousel {...settings} className="bestDealCarousel z-0 ">
             {bestDeal.map((items, index) => (
               <BestDealsCard key={index} data={items} />
             ))}

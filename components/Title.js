@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt } from "react-icons/bi";
+// import { FaMapMarkerAlt } from "react-icons/bi";
 
 function Title({ text, location, onClick, color, fontsize }) {
   return (

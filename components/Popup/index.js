@@ -1,6 +1,8 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { GrClose } from "react-icons/gr";
+// import { GrClose } from "react-icons/gr";
+import Close from "@/assets/cross.svg";
+import Image from "next/image";
 
 export default function Modal({ open, setOpen, children, title }) {
   const cancelButtonRef = useRef(null);
@@ -47,10 +49,11 @@ export default function Modal({ open, setOpen, children, title }) {
                 <div className="text-black-20 text-lg capitalize pl-6 flex-1 text-center font-semibold">
                   {title}
                 </div>
-                <GrClose
+                {/* <GrClose
                   onClick={() => setOpen(false)}
                   className="cursor-pointer"
-                />
+                /> */}
+                <Image src={Close} width={20} height={20}/>
               </div>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 {children}

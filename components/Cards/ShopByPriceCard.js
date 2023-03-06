@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BiRupee } from "react-icons/bi";
+// import { BiRupee } from "react-icons/bi";
+import Rupee1 from "@/assets/rupee1.svg";
 
 function ShopByPriceCard({ src, min, max }) {
   if (max && max.toString().toLowerCase().includes("above")) {
@@ -12,7 +13,8 @@ function ShopByPriceCard({ src, min, max }) {
           </div>
           <div className="text-m-grey-1 text-lg sm:text-base py-1 font-bold flex items-center justify-center w-full">
             <p className="flex items-center">
-              <BiRupee /> {min}
+              {/* <BiRupee /> */}
+               <Image src={Rupee1} width={20} height={20} alt="" />  {min}
             </p>
             <p className="w-10 inline-flex justify-center items-center"> and </p>
             <p className="flex items-center">above</p>
@@ -29,11 +31,13 @@ function ShopByPriceCard({ src, min, max }) {
         </div>
         <div className="text-m-grey-1 text-lg sm:text-base py-1 font-bold flex items-center justify-center w-full">
           <p className="flex items-center">
-            <BiRupee /> {min}
+            {/* <BiRupee />  */}
+            <Image src={Rupee1} width={20} height={20} alt="" /> {min}
           </p>
           <p className="w-4 inline-flex justify-center items-center"> {"-"} </p>
           <p className="flex items-center">
-            <BiRupee /> {max}
+            {/* <BiRupee />  */}
+            <Image src={Rupee1} width={20} height={20} alt="" /> {max}
           </p>
         </div>
       </a>

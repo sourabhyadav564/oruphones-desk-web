@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BiRupee } from "react-icons/bi";
-import { FaRupeeSign } from "react-icons/fa";
+// import { BiRupee } from "react-icons/bi";
+// import { FaRupeeSign } from "react-icons/fa";
+import Rupee1 from "@/assets/rupee1.svg";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
@@ -108,7 +109,11 @@ function ProductCard({ data, prodLink, setProducts }) {
               />
             </div>
             <p className="font-semibold flex items-center text-m-grey-1 font-Roboto-Bold text-xlFontSize">
-              {data?.listingPrice && <FaRupeeSign size={16} />}
+              {data?.listingPrice &&
+              // <FaRupeeSign size={16} />
+              <Image src={Rupee1} width={20} height={20} alt="" /> 
+              }
+              
               {numberWithCommas(data?.listingPrice || "")}
             </p>
             <div className="flex flex-col items-baseline pb-2 text-m-grey-2 flex-wrap w-full">

@@ -1,7 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState, useContext } from "react";
 import Image from "next/image";
-import { GrClose } from "react-icons/gr";
+// import { GrClose } from "react-icons/gr";
+import Close from "@/assets/cross.svg";
+import CurrentLocation from "@/assets/currentlocation.svg";
+
 import Select from "../Form/Select";
 
 // import bgImage from "https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png";
@@ -10,7 +13,7 @@ import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
 import Geocode from "react-geocode";
 import { getCityFromResponse } from "@/utils/util";
-import { BiCurrentLocation } from "react-icons/bi";
+// import { BiCurrentLocation } from "react-icons/bi";
 
 function LocationPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);
@@ -240,17 +243,19 @@ function LocationPopup({ open, setOpen }) {
                     {" "}
                     Location{" "}
                   </span>
-                  <GrClose
+                  {/* <GrClose
                     onClick={() => setOpen(false)}
                     className="cursor-pointer"
-                  />
+                  /> */}
+                   <Image src={Close} width={28} height={28} onClick={() => setOpen(false)}/>
                 </div>
                 <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"} alt="location" layout="fill" />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
                   <div className="flex flex-row w-72 justify-center items-center">
                     <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
                       onClick={handleNearme}>
-                      <BiCurrentLocation size={22} />
+                      {/* <BiCurrentLocation size={22} /> */}
+                      <Image src={CurrentLocation} width={28} height={28}/>
                     </div>
                     <div className="w-full">
                       <Select

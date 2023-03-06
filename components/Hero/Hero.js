@@ -8,7 +8,7 @@ import Image from "next/image";
 // import banner_three from "../../assets/banner_3.png";
 // import banner_4 from "https://d1tl44nezj10jx.cloudfront.net/assets/banner_4.png";
 import Carousel from "../Carousel";
-import QRCode from "qrcode.react";
+// import QRCode from "qrcode.react";
 import { useState } from "react";
 import AppDownloadPopup from "../Popup/AppDownloadPopup";
 

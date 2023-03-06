@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { MdNotificationsNone } from "react-icons/md";
+// import { MdNotificationsNone } from "react-icons/md";
+import Notification from "@/assets/notification.svg";
+
 import router from "next/router";
 // import mob from "@/assets/notification.png";
 // import mob from "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg";
 import { deleteNotification, getAllNotificationByUserd, markAsRead } from "api/axios";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 import Cookies from "js-cookie";
-import { MdOutlineDeleteOutline } from "react-icons/md";
+// import { MdOutlineDeleteOutline } from "react-icons/md";
+import Trash from "@/assets/trash.svg";
 
 export default function Notifications() {
   const innerRef = useRef();
@@ -69,16 +72,17 @@ export default function Notifications() {
   }
 
   return (
-    <div className="relative inline-block" ref={innerRef}>
-      <div className="relative ">
+    <div className="relative inline-block mx-2" ref={innerRef}>
+      <div className="relative">
         {/* <span className="absolute right-0 top-0">{unreadCount}</span> */}
-        <MdNotificationsNone
+        {/* <MdNotificationsNone
           size={35}
           className="text-m-green cursor-pointer mx-1"
           onClick={() => setShowNotification((prev) => !prev)}
-        />
+        /> */}
+        <Image src={Notification} width={30} height={30} className="" onClick={() => setShowNotification((prev) => !prev)} />
         {(
-          <span className="absolute top-1 ml-5 bg-yellow2 w-6 text-smallFontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
+          <span className="absolute -top-1 ml-5 bg-yellow2 w-6 text-xs2FontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
             {unreadNotificationsCount == 0 ? <></> : unreadNotificationsCount
             }
           </span>
@@ -136,11 +140,11 @@ const NotificationsItem = ({ id, text, timestamp, onClick, isUnRead, notificatio
       <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} width={30} height={30} alt="ORUphones notification" />
     </div>
     <div>
-      <div className="flex flex-row">
+      <div className="flex flex-row ">
         <p className="text-sm text-m-grey-1 break-words text-mediumFontSize font-Roboto-Semibold pr-2"
           onClick={onClick}
         > {text} </p>
-        <div className="flex border-m-green h-10 mt-2 px-2 items-center rounded-3xl bg-m-green hover:bg-m-white hover: border-2 hover:text-m-green"
+        <div className="flex  w-20  items-center hover:text-m-green "
           onClick={
             () => {
               setNotifications(
@@ -157,7 +161,10 @@ const NotificationsItem = ({ id, text, timestamp, onClick, isUnRead, notificatio
             }
           }
         >
-          <MdOutlineDeleteOutline size={25} className="text-white hover:text-m-green" />
+          {/* <MdOutlineDeleteOutline size={25} className="text-white hover:text-m-green" /> */}
+          <div className=" hover:rounded-full hover:shadow-md p-0.5 hover:bg-opacity-20">
+          <Image src={Trash} width={36} height={36}/>
+          </div>
         </div>
       </div>
       <span className="text-smallFontSize font-Roboto-Semibold" style={{ color: "#C7C7C7" }}>

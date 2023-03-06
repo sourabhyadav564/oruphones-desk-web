@@ -1,10 +1,15 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+// import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
+import OutlineHeartBlack from "@/assets/heart_black.svg";
+import OutlineHeart from "@/assets/heartoutline.svg";
+import FillHeart from "@/assets/heartfill.svg";
 import { toast } from "react-toastify";
 import * as Axios from "../api/axios";
 import LoginPopup from "./Popup/LoginPopup";
+import Image from "next/image";
 
 function AddFav({ data, setProducts, ...rest }) {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -99,7 +104,7 @@ function AddFav({ data, setProducts, ...rest }) {
             fill={"#C7C7C7"}
           />
         </svg> */}
-        <AiOutlineHeart
+        {/* <AiOutlineHeart
           className="hover:cursor-pointer"
           size='18px'
           fill={"#000000"}
@@ -110,7 +115,16 @@ function AddFav({ data, setProducts, ...rest }) {
               setShowLoginPopup(true);
             }
           }
-        />
+        /> */}
+        <Image src={OutlineHeartBlack} width={20} height={20} 
+        onClick={
+            (e) => {
+              e.preventDefault();
+              setPerformAction(true);
+              setShowLoginPopup(true);
+            }
+          }/>
+
         <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} />
       </div>
     );
@@ -137,10 +151,21 @@ function AddFav({ data, setProducts, ...rest }) {
     //   />
     // </svg>
     Cookies.get("userUniqueId") != undefined && Cookies.get("userUniqueId") != "" && Cookies.get("userUniqueId") != "Guest" && localStorage.getItem("favoriteList") != null && localStorage.getItem("favoriteList").includes(data?.listingId) ?
-      (<AiFillHeart
-        className="hover:cursor-pointer"
-        color="#FF0000"
-        size='18px'
+      (
+      // <AiFillHeart
+      //   className="hover:cursor-pointer"
+      //   color="#FF0000"
+      //   size='18px'
+      //   onClick={
+      //     (e) => {
+      //       e.preventDefault();
+      //       // !listings.includes(data.listingId) ? 
+      //       handleFavoties(data);
+      //       //  : toast.error("You can't add your own listing to your favorites");
+      //     }
+      //   }
+      // />
+      <Image src={FillHeart} width={24} height={24} 
         onClick={
           (e) => {
             e.preventDefault();
@@ -149,21 +174,36 @@ function AddFav({ data, setProducts, ...rest }) {
             //  : toast.error("You can't add your own listing to your favorites");
           }
         }
-      />)
+        />    
+      
+      )
       :
-      (<AiOutlineHeart
-        className="hover:cursor-pointer"
-        color="#FF0000"
-        size='18px'
-        onClick={
-          (e) => {
-            e.preventDefault();
-            // !listings.includes(data.listingId) ? 
-            handleFavoties(data);
-            //  : toast.error("You can't add your own listing to your favorites");
-          }
+      // OutlineHeart
+      (
+      // <AiOutlineHeart
+      //   className="hover:cursor-pointer"
+      //   color="#FF0000"
+      //   size='18px'
+      //   onClick={
+      //     (e) => {
+      //       e.preventDefault();
+      //       // !listings.includes(data.listingId) ? 
+      //       handleFavoties(data);
+      //       //  : toast.error("You can't add your own listing to your favorites");
+      //     }
+      //   }
+      // />
+      <Image src={OutlineHeart} width={24} height={24} 
+      onClick={
+        (e) => {
+          e.preventDefault();
+          // !listings.includes(data.listingId) ? 
+          handleFavoties(data);
+          //  : toast.error("You can't add your own listing to your favorites");
         }
-      />)
+      }
+      />
+      )
   );
 }
 

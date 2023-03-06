@@ -77,9 +77,9 @@ module.exports = {
             spacing: {
                 "4rem": "4px, 4px, 4px,4px",
             },
-            fontFamily: {
-                "open-sans": '"Open Sans", Helvetica, Arial, sans-serif',
-            },
+            // fontFamily: {
+            //     "open-sans": '"Open Sans", Helvetica, Arial, sans-serif',
+            // },
             transformOrigin: {
                 0: "0%",
             },

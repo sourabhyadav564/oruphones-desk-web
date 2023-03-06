@@ -1,15 +1,20 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+// import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import Chevronleft from "@/assets/chevronleft.svg";
+import ChevronRight from "@/assets/chevronright.svg";
+
 // import Logo from "@/assets/oru_phones_logo.png"
 
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  <BiChevronLeft {...rest} className={`prev ${className}`} />
+  // <BiChevronLeft {...rest} className={`prev ${className}`} />
+  <Image src={Chevronleft} width={32} height={32}   {...rest} className={`prev ${className}`}/>
 );
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  <BiChevronRight {...rest} className={`next ${className}`} />
+  // <BiChevronRight {...rest} className={`next ${className}`} />
+  <Image src={ChevronRight} width={32} height={32}   {...rest} className={`prev ${className}`}/>
 );
 
 function ImageSlider({data, images, openFullImage }) {

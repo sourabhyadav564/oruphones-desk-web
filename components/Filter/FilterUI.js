@@ -1,7 +1,12 @@
 import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
-import { FiMinus, FiPlus } from "react-icons/fi";
-import { BsInfoCircle } from "react-icons/bs";
+// import { FiMinus, FiPlus } from "react-icons/fi";
+import Minus from "@/assets/minus.svg";
+import Plus from "@/assets/plus.svg";
+// import { BsInfoCircle } from "react-icons/bs";
+import InfoCircle from "@/assets/infocircle2.svg";
+import Image from "next/image";
+
 
 function FilterUI({ optionObj, setter, selected, openPopup }) {
   const handleChange = (e, value) => {
@@ -39,11 +44,20 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
         <Fragment>
           <h3 className="-my-3 flow-root">
             <Disclosure.Button className="py-3  w-full flex items-center justify-between text-sm text-gray-900 hover:text-gray-500">
-              <p className="flg:font-Roboto-Regular font-Roboto-Semibold lg:text-regularFontSize text-smallFontSize  text-m-green flex whitespace-nowrap items-center">{optionObj?.name}
-                {openPopup && <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />}
+              <p className="flg:font-Roboto-Regular gap-1 mt-0.5 font-Roboto-Semibold lg:text-regularFontSize text-smallFontSize  text-m-green flex whitespace-nowrap items-center">{optionObj?.name}
+                {openPopup && 
+                // <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />
+                <Image src={InfoCircle} width={12} height={12}  className="text-sm cursor-pointer ml-1 " onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />
+                }
               </p>
               <span className="md:ml-6 ml-2 flex items-center">
-                {open ? <FiMinus className="h-5 w-5" aria-hidden="true" /> : <FiPlus className="h-5 w-5" aria-hidden="true" />}
+                {open ? 
+                // <FiMinus className="h-5 w-5" aria-hidden="true" />
+                <Image src={Minus} width={20} height={20}/>
+                 :
+                  // <FiPlus className="h-5 w-5" aria-hidden="true" />
+                  <Image src={Plus} width={20} height={20}/>
+                 }
               </span>
             </Disclosure.Button>
           </h3>

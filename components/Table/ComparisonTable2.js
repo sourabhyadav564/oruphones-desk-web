@@ -4,9 +4,15 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { BsInfoCircle } from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
-import { MdLocationOn } from "react-icons/md";
+
+// import { BsInfoCircle } from "react-icons/bs";
+import InfoCircle from "@/assets/infocircle2.svg";
+import UserProfile from "@/assets/user1.svg";
+// import { CgProfile } from "react-icons/cg";
+// import { MdLocationOn } from "react-icons/md";
+import Location from "@/assets/location2.svg";
+
+
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
@@ -118,7 +124,7 @@ function ComparisonTable2(data, listingId) {
             <tr className="text-white  text-center">
               <th className=" sticky left-0 px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center ">Compare By</th>
               {productData?.map((item, index) => (
-                <th className="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center hover:opacity-90 text-center cursor-pointer" onClick={() => {
+                <th className="px-6 py-3 min-w-[13vw] bg-m-green-1 border-[1px] border-r-gray text-center hover:opacity-90 text-center cursor-pointer" onClick={() => {
                   if (Cookies.get("userUniqueId") == undefined) {
                     setProductLink(`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`);
                     setopenLoginPopup(true);
@@ -145,7 +151,7 @@ function ComparisonTable2(data, listingId) {
                     }
                 }}>
                   {item?.listingId == thisPhoneListingId
-                    ? `This Deal (${item?.marketingName})`
+                    ? `(This Deal) ${item?.marketingName}`
                     : item?.marketingName}
                   <p className="text-[#2196f3ff] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize hover:cursor-pointer">View Deal <span> &gt; </span></p>
                 </th>
@@ -158,8 +164,8 @@ function ComparisonTable2(data, listingId) {
                 // <Link href={item.ven}>
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300 text-yellow2"
-                  : "border px-2 py-6  font-Roboto-Light text-center text-yellow2"}`}
+                  ? "text-center bg-[#6b7280]  min-w-[13vw] bg-opacity-5 border border-gray-300 text-yellow2"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center text-yellow2"}`}
                   // "border px-2 py-6  font-Roboto-Light text-center"
                 // onClick={() => {
                 //   if (item.vendorLink) {
@@ -182,13 +188,17 @@ function ComparisonTable2(data, listingId) {
               <th className=" bg-white border px-4 py-2  sticky left-0 drop-shadow-2xl uppercase items-center cursor-pointer" onClick={() => setOpenConditionInfo(true)}>
              <div className="flex">
               <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/star-dac.svg"} alt="ORU CONDITION" width={20} height={20} objectFit="contain" className=" " />
-              <span className="pl-2 text-center pt-1 flex items-center" > <span className="pr-1"> Condition </span> <BsInfoCircle size={14}  /> </span>
+              <span className="pl-2 text-center pt-1 flex items-center" > <span className="pr-1"> Condition </span> 
+              {/* <BsInfoCircle size={14}  />     */}
+              <Image src={InfoCircle} width={12} height={12} alt=""/>
+              
+              </span>
               </div></th>
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6  min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -214,8 +224,8 @@ function ComparisonTable2(data, listingId) {
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -235,14 +245,17 @@ function ComparisonTable2(data, listingId) {
               <th className=" sticky border left-0 bg-white px-4 py-2 drop-shadow-2xl uppercase cursor-pointer" onClick={() => setOpenWarrantyInfo(true)}>
                 <div className="flex ">
                 <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/warranty.svg"} alt="ORU CONDITION" width={20} height={20} objectFit="contain" className="" />
-                <div className="pl-2 flex items-center "> <span className="pr-1"> Seller's warranty </span> <span> <BsInfoCircle className="w-4 h-4" /> </span></div>
+                <div className="pl-2 flex items-center "> <span className="pr-1"> Seller's warranty </span> <span> 
+                  {/* <BsInfoCircle className="w-4 h-4" />  */}
+                  <Image src={InfoCircle} width={12} height={12} alt=""/>
+                  </span></div>
                 </div>
               </th>
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -261,14 +274,17 @@ function ComparisonTable2(data, listingId) {
             <tr className=" font-Roboto-Regular text-cx">
               <th className=" sticky left-0 bg-white border px-4 py-2 drop-shadow-2xl uppercase  items-center cursor-pointer" onClick={() => setOpenWarrantyInfo(true)}>
                 <div className="flex"> 
-                <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/warranty.svg"} alt="ORU CONDITION" width={20} height={20} /> <span className="pl-2  flex items-center"> <span className="pr-1"> Brand warranty </span>  <BsInfoCircle size={14}  />   </span>
+                <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/warranty.svg"} alt="ORU CONDITION" width={20} height={20} /> <span className="pl-2  flex items-center"> <span className="pr-1"> Brand warranty </span> 
+                 {/* <BsInfoCircle size={14}  />    */}
+                 <Image src={InfoCircle} width={12} height={12} alt=""/>
+                 </span>
                 </div>
                 </th>
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6  min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -294,8 +310,8 @@ function ComparisonTable2(data, listingId) {
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -337,8 +353,8 @@ function ComparisonTable2(data, listingId) {
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -373,14 +389,17 @@ function ComparisonTable2(data, listingId) {
             <tr className=" font-Roboto-Regular text-cx">
               
               <th className=" sticky left-0 bg-white border px-4 py-2 drop-shadow-2xl "> 
-              <div className="flex"><MdLocationOn className="w-5 h-5  text-[#fffffff]" />  <span className="pl-2 text-regularFontSize"> Location </span></div>
+              <div className="flex">
+                {/* <MdLocationOn className="w-5 h-5  text-[#fffffff]" />   */}
+                <Image src={Location} width={20} height={20} alt="" className="opacity-60"/>
+                <span className="pl-2 text-regularFontSize"> Location </span></div>
               
               </th>
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6  min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -399,15 +418,16 @@ function ComparisonTable2(data, listingId) {
             <tr className=" font-Roboto-Regular text-cx">
               <th className=" sticky left-0 bg-white border px-4 py-2 drop-shadow-2xl uppercase z-10 ">
               <div className="flex items-center">
-              <CgProfile size={20} />
+              {/* <CgProfile size={20} /> */}
+              <Image src={UserProfile} width={20} height={20}/>
                 <span className="pl-2 "> Listed By</span>
                 </div>
               </th>
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
@@ -438,14 +458,17 @@ function ComparisonTable2(data, listingId) {
               <th className="  sticky left-0 bg-white border px-4 py-2 drop-shadow-2xl uppercase z-10" onClick={() => setOpenVerificationInfo(true)} >
               <div className="flex items-center">
               <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/quality.svg"} alt="" width={20} height={20} objectFit="contain" className="" />
-                <span className="pl-2 flex items-center "><span className="pr-1"> Verified </span> <BsInfoCircle size={14}  /></span>
+                <span className="pl-2 flex items-center "><span className="pr-1"> Verified </span> 
+                {/* <BsInfoCircle size={14}  /> */}
+                <Image src={InfoCircle} width={12} height={12} alt=""/>
+                </span>
                 </div>
               </th>
               {productData?.map((item, index) => (
                 <th
                 className={`${item?.listingId == thisPhoneListingId
-                  ? "text-center bg-[#6b7280]  bg-opacity-5 border border-gray-300"
-                  : "border px-2 py-6  font-Roboto-Light text-center "}`}
+                  ? "text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300"
+                  : "border px-2 py-6 min-w-[13vw] font-Roboto-Light text-center "}`}
                 // onClick={() => {
                 //   if (item.vendorLink) {
                 //     window.open(item.vendorLink, "_blank");
