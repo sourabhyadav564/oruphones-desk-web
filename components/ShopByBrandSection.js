@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import ShopByModelCard from "./Cards/ShopByModelCard";
 // import BasicCarousel from "./Carousel/BasicCarousel";
-import Carousel from "./Carousel";
+import Carousel from "./Carousel2";
 import { getDefaultImage } from "@/utils/util";
 
 const settings = {
@@ -26,6 +26,7 @@ function ShopByBrandSection({ shopbymodeldata, shopbymakedata, setProducts, inde
                 {...settings}
             // slidesPerView={3}
             // spaceBetween={1}
+            className=""
             >
                 {shopbymodeldata?.map((item) => (
                     <SwiperSlide key={item?.make}>

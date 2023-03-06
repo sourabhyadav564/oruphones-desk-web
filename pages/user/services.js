@@ -14,7 +14,6 @@ function Services() {
     setOpenAppDownload(true);
   };
 
-  
 
   return (
     <UserProfile>

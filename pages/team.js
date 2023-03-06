@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import React from 'react'
-import TeamCard from '@/components/Cards/teamCard'
+import TeamCard from '@/components/Cards/TeamCard'
 
 const data = [
     {
@@ -71,7 +71,7 @@ const data = [
 
 ]
 
-function team() {
+function Team() {
  
   return (
     <div className="container my-28  text-center">
@@ -89,4 +89,4 @@ function team() {
   )
 }
 
-export default team
+export default Team
