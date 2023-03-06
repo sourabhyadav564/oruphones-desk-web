@@ -1,12 +1,4 @@
 import Link from "next/link";
-// import {
-//   FaFacebookSquare,
-//   FaTwitterSquare,
-//   FaInstagram,
-//   FaPinterestSquare,
-//   FaLinkedin,
-//   FaYoutube,
-// } from "react-icons/fa";
 import Fb from "@/assets/fb.svg";
 import gmail from "@/assets/gmail.svg";
 import instagram from "@/assets/ig.svg";
@@ -24,7 +16,6 @@ import { useRecoilState } from "recoil";
 import AppDownloadPopup from "../Popup/AppDownloadPopup";
 import { useState } from "react";
 import Image from "next/image";
-// import { FiMail } from "react-icons/fi";
 
 const Footer = () => {
   const [addListingBrand, setAddListingBrand] = useRecoilState(addListingBrandState);

@@ -1,5 +1,4 @@
 import Slider from "react-slick";
-// import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import Chevronleft from "@/assets/chevronleft.svg"
 import Chevronright from "@/assets/chevronright.svg"
 import Image from "next/image";

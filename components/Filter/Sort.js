@@ -1,10 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition, Dialog } from "@headlessui/react";
 
-// import { AiOutlineClose } from "react-icons/ai";
 import Cross from "@/assets/cross.svg";
-
-// import { GrFormDown, GrFormFilter } from "react-icons/gr";
 import ArrowDown from "@/assets/arrow-drop-down.svg";
 import Filter from "@/assets/filter.svg";
 

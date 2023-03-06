@@ -8,7 +8,6 @@ import LocationPopup from "../Popup/LocationPopup";
 import Title from "../Title";
 import { useContext } from "react";
 import AppContext from "@/context/ApplicationContext";
-// import { MdLocationOn } from "react-icons/md";
 import Location from "@/assets/location.svg";
 import Cookies from "js-cookie";
 import LoginPopup from "../Popup/LoginPopup";

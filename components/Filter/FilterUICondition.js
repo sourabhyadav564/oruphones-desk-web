@@ -1,7 +1,9 @@
 import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
-import { FiMinus, FiPlus } from "react-icons/fi";
-import { BsInfoCircle } from "react-icons/bs";
+import Minus from "@/assets/minus.svg";
+import Plus from "@/assets/plus.svg";
+import InfoCircle from "@/assets/infocircle2.svg";
+import Image from "next/image";
 
 function FilterUI({ optionObj, setter, selected, openPopup }) {
     const handleChange = (e, value) => {
@@ -40,10 +42,14 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
                     <h3 className="-my-3 flow-root">
                         <Disclosure.Button className="py-3  w-full flex items-center justify-between text-sm text-gray-900 hover:text-gray-500">
                             <p className="font-Roboto-Regular text-regularFontSize text-m-green flex items-center">{optionObj?.name}
-                                {openPopup && <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />}
+                                {openPopup && 
+                                  <Image src={InfoCircle} width={12} height={12}  className="text-sm cursor-pointer ml-1 " onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />
+                                // <BsInfoCircle className="text-sm cursor-pointer ml-1" onClick={(e) => { e.stopPropagation(); e.preventDefault(); openPopup() }} />
+                                
+                                }
                             </p>
                             <span className="ml-6 flex items-center">
-                                {open ? <FiMinus className="h-5 w-5" aria-hidden="true" /> : <FiPlus className="h-5 w-5" aria-hidden="true" />}
+                                {open ?  <Image src={Minus} width={20} height={20}/>:  <Image src={Plus} width={20} height={20}/>}
                             </span>
                         </Disclosure.Button>
                     </h3>

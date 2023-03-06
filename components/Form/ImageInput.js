@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-// import { GrClose } from "react-icons/gr";
 import Cross from "@/assets/cross.svg";
 import Image from "next/image";
 

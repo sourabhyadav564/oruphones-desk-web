@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import LoginPopup from "../Popup/LoginPopup";
-// import { FaRegUserCircle } from "react-icons/fa";
 import RegUser from "@/assets/user2.svg";
 import Link from "next/link";
 import AuthContext from "@/context/AuthContext";

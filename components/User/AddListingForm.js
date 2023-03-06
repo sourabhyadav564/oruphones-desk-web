@@ -22,7 +22,6 @@ import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
 import DeviceConditionCard from "../Condition/DeviceConditionCard";
 import Geocode from "react-geocode";
 import { getCityFromResponse } from "@/utils/util";
-import { BiCurrentLocation } from "react-icons/bi";
 import {
   addListingBrandSelector,
 } from "../../atoms/globalState";
@@ -773,7 +772,7 @@ function AddEditListing({
                 <div className="h-14 w-16 bg-gray-200 rounded-r-lg inline-flex justify-center items-center hover:cursor-pointer"
                   onClick={handleNearme}
                 >
-                  <BiCurrentLocation size={24} />
+                  {/* <BiCurrentLocation size={24} /> */}
                 </div>
               </div>
               {locationRequired && (

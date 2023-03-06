@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import { BiRupee } from "react-icons/bi";
 import Rupee from "@/assets/rupee1.svg"
 import { numberWithCommas } from "../../utils/util";
 import * as Axios from "../../api/axios";
@@ -8,10 +7,9 @@ import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccessPopup";
 import Cookies from "js-cookie";
-// import { CgProfile } from "react-icons/cg";
+
 import RegUser from "@/assets/user1.svg"
 import GreaterThan from "@/assets/greaterthan.svg"; 
-// import { FaGreaterThan } from "react-icons/fa";
 // import first from "https://d1tl44nezj10jx.cloudfront.net/assets/first.png";
 // import second from "https://d1tl44nezj10jx.cloudfront.net/assets/second.png";
 // import third from "https://d1tl44nezj10jx.cloudfront.net/assets/third.png";

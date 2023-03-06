@@ -3,7 +3,6 @@ import { Fragment, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import bgImage from "https://d1tl44nezj10jx.cloudfront.net/assets/app_download.png";
-// import { GrClose } from "react-icons/gr";
 import Close from "@/assets/cross.svg";
 // import QRCode from "qrcode.react";
 import AppleStore from "@/assets/apple_store.svg";

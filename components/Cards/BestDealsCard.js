@@ -1,14 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// import { FaRupeeSign } from "react-icons/fa";
 import Rupee1 from "@/assets/rupee2.svg";
 
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import LabelAndValue from "../LabelAndValue";
 import AddFav from "../AddFav";
-import VerifiedIcon from "../VerifiedIcon";
-// import { BiChevronRight } from "react-icons/bi";   
+import VerifiedIcon from "../VerifiedIcon"; 
 import ChevronRight from "@/assets/chevronright.svg"; 
 // import SoldOut from "https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"
 // import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"

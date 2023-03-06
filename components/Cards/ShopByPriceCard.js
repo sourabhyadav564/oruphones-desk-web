@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-// import { BiRupee } from "react-icons/bi";
 import Rupee1 from "@/assets/rupee1.svg";
 
 function ShopByPriceCard({ src, min, max }) {

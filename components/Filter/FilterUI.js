@@ -1,9 +1,8 @@
 import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
-// import { FiMinus, FiPlus } from "react-icons/fi";
+
 import Minus from "@/assets/minus.svg";
 import Plus from "@/assets/plus.svg";
-// import { BsInfoCircle } from "react-icons/bs";
 import InfoCircle from "@/assets/infocircle2.svg";
 import Image from "next/image";
 

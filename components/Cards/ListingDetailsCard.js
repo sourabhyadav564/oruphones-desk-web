@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BiRupee } from "react-icons/bi";
 import { numberWithCommas } from "../../utils/util";
 import ImageSlider from "../ImageSlider";
 import LabelAndValue from "../LabelAndValue";

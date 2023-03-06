@@ -1,5 +1,4 @@
 import React from "react";
-// import { BsInfoCircle } from "react-icons/bs";
 import InfoCircle from "@/assets/infocircle2.svg";
 import Image from "next/image";
 

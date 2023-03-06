@@ -1,7 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState, useContext } from "react";
 import Image from "next/image";
-// import { GrClose } from "react-icons/gr";
 import Close from "@/assets/cross.svg";
 import CurrentLocation from "@/assets/currentlocation.svg";
 
@@ -13,7 +12,6 @@ import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
 import Geocode from "react-geocode";
 import { getCityFromResponse } from "@/utils/util";
-// import { BiCurrentLocation } from "react-icons/bi";
 
 function LocationPopup({ open, setOpen }) {
   const cancelButtonRef = useRef(null);

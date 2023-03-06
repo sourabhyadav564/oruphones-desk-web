@@ -3,9 +3,6 @@ import { useState, useEffect } from "react";
 import * as Axios from "../../api/axios";
 import Loader from "../Loader/Loader";
 import Cookies from "js-cookie";
-
-// import { BsCheck2Circle } from "react-icons/bs";
-// import { FiAlertOctagon } from "react-icons/fi";
 import Alert from "@/assets/alert.svg";
 import gcheck from "@/assets/gcheck.svg";
 import Image from "next/image";

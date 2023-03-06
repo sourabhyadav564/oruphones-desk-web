@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-// import { BiRupee } from "react-icons/bi";
+
 import Rupee1 from "@/assets/rupee3.svg";
 // import devicePlaceholder from "../../assets/stock_image.png";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
@@ -17,7 +17,7 @@ import UnVerifiedIcon from "../UnVerifiedIcon";
 import ShareIcon from "../ShareIcon";
 // import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
 
-// import { BsInfoCircle, BsStar, BsStarFill } from "react-icons/bs";
+
 import InfoCircle from "@/assets/infocircle2.svg";
 import InfoCircle1 from "@/assets/infocircle.svg";
 import Star from "@/assets/star1.svg";
@@ -25,10 +25,6 @@ import FillStar from "@/assets/star2.svg";
 import FillExclamation from "@/assets/fillexclamation.svg";
 import PassCheck from "@/assets/gcheck.svg";
 import Close from "@/assets/close.svg";
-
-// import { AiFillExclamationCircle } from "react-icons/ai";
-// import { VscPass } from "react-icons/vsc";
-// import { IoCloseCircleOutline } from "react-icons/io5";
 
 import VerificationIcon from "../VerificationIcon";
 import SellerDetailsCard from "./SellerDetailsCard";

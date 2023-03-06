@@ -1,7 +1,5 @@
 import Cookies from "js-cookie";
 import Modal2 from "./Model2";
-
-// import { FiAlertOctagon } from "react-icons/fi";
 import Alert from "@/assets/alert.svg";
 
 import * as Axios from "../../api/axios";

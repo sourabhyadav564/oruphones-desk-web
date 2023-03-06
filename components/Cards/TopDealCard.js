@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import { BiRupee } from "react-icons/bi";
 import Rupee1 from "@/assets/rupee1.svg";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import VerifiedIcon from "../VerifiedIcon";

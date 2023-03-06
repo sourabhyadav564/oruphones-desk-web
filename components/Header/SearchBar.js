@@ -3,8 +3,6 @@ import Link from "next/link";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
-// import { BiSearch } from "react-icons/bi";
-// import { BiTimeFive } from "react-icons/bi";
 import Search from "@/assets/search.svg";
 import Recent from "@/assets/recent.svg";
 import Image from "next/image";

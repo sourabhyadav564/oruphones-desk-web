@@ -1,5 +1,4 @@
 import Modal2 from './Model2'
-// import { FiAlertOctagon } from "react-icons/fi";
 import Alert from "@/assets/alert.svg";
 import Image from 'next/image';
 

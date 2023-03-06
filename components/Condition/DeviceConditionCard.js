@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { BsInfoCircle } from "react-icons/bs";
 import { deviceConditionResult } from "../../utils/constant";
+import InfoCircle from "@/assets/infocircle2.svg";
+import Image from "next/image";
 
 const DeviceConditionCard = ({ condition, answer }) => {
   
@@ -53,7 +54,7 @@ export default DeviceConditionCard;
 const CheckPoints = ({ points }) => {
   return (
     <div className="flex items-center space-x-3 space-y-1">
-      <BsInfoCircle className="text-[10px]" />
+      <Image src={InfoCircle} width={10} height={10}/>
       <p className="text-sm">{points}</p>
     </div>
   );

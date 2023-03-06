@@ -1,11 +1,10 @@
 import Slider from "react-slick";
 import styles from "../styles/fullimageview.module.css";
 
-// import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import Chevronleft from "@/assets/chevronleft.svg";
 import ChevronRight from "@/assets/chevronright.svg";
 import Cross from "@/assets/cross1.svg";
-// import { MdClose } from "react-icons/md";
+
 
 import { useState } from "react";
 import Image from "next/image";

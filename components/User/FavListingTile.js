@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
-// import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
 import Rupee from "@/assets/rupee1.svg";
 import { useState, useEffect, useCallback } from "react";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
@@ -10,8 +8,6 @@ import IconLabelValue from "./IconLableValue";
 // import unVerifiedIcon from "https://d1tl44nezj10jx.cloudfront.net/assets/unverified.svg";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
-// import Logo from "@/assets/oru_phones_logo.png"
-// import { AiFillHeart } from "react-icons/ai";
 import OutlineHeart from "@/assets/heartfill.svg";
 function FavListingTile({ data, setProducts }) {
   const [frontImagePath, setFrontImagePath] = useState();

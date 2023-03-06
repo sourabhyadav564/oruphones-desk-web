@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-// import { MdNotificationsNone } from "react-icons/md";
+
 import Notification from "@/assets/notification.svg";
 
 import router from "next/router";
@@ -9,7 +9,7 @@ import router from "next/router";
 import { deleteNotification, getAllNotificationByUserd, markAsRead } from "api/axios";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 import Cookies from "js-cookie";
-// import { MdOutlineDeleteOutline } from "react-icons/md";
+
 import Trash from "@/assets/trash.svg";
 
 export default function Notifications() {

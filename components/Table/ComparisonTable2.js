@@ -4,12 +4,8 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
-// import { BsInfoCircle } from "react-icons/bs";
 import InfoCircle from "@/assets/infocircle2.svg";
 import UserProfile from "@/assets/user1.svg";
-// import { CgProfile } from "react-icons/cg";
-// import { MdLocationOn } from "react-icons/md";
 import Location from "@/assets/location2.svg";
 
 

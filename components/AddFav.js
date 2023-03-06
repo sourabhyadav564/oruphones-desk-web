@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useEffect } from "react";
-// import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 
 import OutlineHeartBlack from "@/assets/heart_black.svg";
 import OutlineHeart from "@/assets/heartoutline.svg";

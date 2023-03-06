@@ -7,7 +7,7 @@ import Image from "next/image";
 // import storage from "../assets/storage.png";
 // import ram from "../assets/ram.png";
 
-// import { BsInfoCircle } from "react-icons/bs";
+
 import InfoCircle from "@/assets/infocircle2.svg";
 
 function LabelAndValue({ label, value, showDeviceReport, showInfoPopup, showWarrantyInfoPopup, showConditionInfoPopup, textAsLink, showRequestVerificationSuccessPopup, labelTextSize }) {

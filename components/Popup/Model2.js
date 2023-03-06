@@ -1,6 +1,5 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// import { GrClose } from "react-icons/gr";
 import Close from "@/assets/cross.svg";
 import Image from "next/image";
 

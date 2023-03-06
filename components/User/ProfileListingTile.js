@@ -1,5 +1,4 @@
 import Link from "next/link";
-// import { BiDotsVerticalRounded, BiRupee } from "react-icons/bi";
 import Rupee from "@/assets/rupee1.svg";
 import { useState, useEffect, useCallback } from "react";
 import { numberWithCommas } from "../../utils/util";

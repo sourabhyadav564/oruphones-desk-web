@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
-// import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import Chevronleft from "@/assets/chevronleft.svg";
 import ChevronRight from "@/assets/chevronright.svg";
 
