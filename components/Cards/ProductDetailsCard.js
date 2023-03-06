@@ -580,7 +580,7 @@ function ProductDetailsCard({ data, openFullImage }) {
             </div>
           </div>
         </div>
-        {data?.externalSource && data?.externalSource?.length > 0 && (
+        {data?.compareData && data?.compareData?.length > 0 && (
           <div id="Comparisontabl1">
             <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
               Detailed Comparison Between Other Sellers for {data?.marketingName} ({data?.deviceStorage}{data?.make != "Apple" && "/" + data?.deviceRam}) - {data?.deviceCondition} Condition
@@ -662,7 +662,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 }
               />
             }
-            {console.log("similar data length", data?.similarListTable.length)}
+            {/* {console.log("similar data length", data?.similarListTable.length)} */}
 
             {data?.similarListTable && data?.similarListTable.length !== 0 && <div className="pt-16">
               <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">You may also like these deals</p>

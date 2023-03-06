@@ -9,14 +9,14 @@ import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccess
 import Cookies from "js-cookie";
 
 import RegUser from "@/assets/user1.svg"
-import GreaterThan from "@/assets/greaterthan.svg"; 
+import GreaterThan from "@/assets/greaterthan.svg";
 // import first from "https://d1tl44nezj10jx.cloudfront.net/assets/first.png";
 // import second from "https://d1tl44nezj10jx.cloudfront.net/assets/second.png";
 // import third from "https://d1tl44nezj10jx.cloudfront.net/assets/third.png";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import { toast } from "react-toastify";
 
-function SellerDetailsCard({ data,comparisontableid }) {
+function SellerDetailsCard({ data, comparisontableid }) {
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [performAction, setPerformAction] = useState(false);
@@ -65,7 +65,7 @@ function SellerDetailsCard({ data,comparisontableid }) {
     }
   };
   useEffect(() => {
-   
+
     if (
       showLoginPopup == false &&
       performAction == true &&
@@ -125,7 +125,7 @@ function SellerDetailsCard({ data,comparisontableid }) {
       });
     }
     setOtherSeller(data?.externalSource);
-    
+
   }, [showNumber]);
 
   const openSellerWebSite = (e) => {
@@ -137,7 +137,7 @@ function SellerDetailsCard({ data,comparisontableid }) {
     }
   };
 
- 
+
 
   return (
     <div className="seller-info">
@@ -152,7 +152,7 @@ function SellerDetailsCard({ data,comparisontableid }) {
           <div className="flex flex-row justify-between">
             <div className="flex ">
               {/* <CgProfile size={40} /> */}
-              <Image src={RegUser} width={30} height={30} alt=""/>
+              <Image src={RegUser} width={30} height={30} alt="" />
               <div className="pt-1">
                 <p className="pl-2 text-grey2 font-Roboto-Light text-smallFontSize leading-4">
                   {" "}
@@ -167,7 +167,7 @@ function SellerDetailsCard({ data,comparisontableid }) {
             <span className="px-6">
               <div className="flex flex-row justify-between">
                 <button
-                  onClick={() => data?.status!="Active" ? toast.warning("This device is sold out"): handleClick()}
+                  onClick={() => data?.status != "Active" ? toast.warning("This device is sold out") : handleClick()}
                   className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
                     } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
                 >
@@ -228,7 +228,8 @@ function SellerDetailsCard({ data,comparisontableid }) {
                 isOtherVendor={data?.isOtherVendor}
               />
             ))}{" "}
-            <a href={comparisontableid} className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold">See Details &gt;</a>
+            {data?.compareData && data?.compareData.length > 0 &&
+              <a href={comparisontableid} className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold">See Details &gt;</a>}
           </div>{" "}
         </div>
       )}{" "}
@@ -269,8 +270,8 @@ const OtherSeller = ({
   listingId,
   isOtherVendor,
 }) => {
-  
-  
+
+
   let vendor = data.externalSourceImage.replaceAll(
     "https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/",
     ""
@@ -281,7 +282,7 @@ const OtherSeller = ({
     vendor = vendor.replaceAll("mbr_", "");
   }
 
-  
+
 
   return (
     <>
@@ -309,7 +310,7 @@ const OtherSeller = ({
           {/* <span className="text-xs text-m-grey-2">Seller</span> */}
           <div className="my-1 w-64 flex">
             {" "}
-           
+
             {
               // (data.externalSourceImage || data?.externalSourceImage=="")
               data?.externalSourcePrice && (
@@ -372,12 +373,12 @@ const OtherSeller = ({
           {" "}
           {/* <span className="text-xs text-m-grey-2">Price</span> */}
           {data.externalSourcePrice && (
-            <span className="items-center text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
+            <span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
               {/* <BiRupee />  */}
-              <Image src={Rupee} width={20} height={20}/> 
-               {numberWithCommas(data.externalSourcePrice)}{" "}
+              <Image src={Rupee} width={20} height={20} />
+              {numberWithCommas(data.externalSourcePrice)}{" "}
               {/* <FaGreaterThan size={13} className="pl-1" /> */}
-              <Image src={GreaterThan} width={15} height={15}/>
+              <Image src={GreaterThan} width={15} height={15} />
             </span>
           )}{" "}
         </div>{" "}
