@@ -147,7 +147,7 @@ function ComparisonTable2(data, listingId) {
                     }
                 }}>
                   {item?.listingId == thisPhoneListingId
-                    ? `(This Deal) ${item?.marketingName}`
+                    ? ` ${item?.marketingName} (This Deal) `
                     : item?.marketingName}
                   <p className="text-[#2196f3ff] flex-nowrap whitespace-nowrap cursor-default text-smallFontSize hover:cursor-pointer">View Deal <span> &gt; </span></p>
                 </th>

@@ -136,7 +136,7 @@ function TopDeals({ location }) {
             // query: prodLink && { isOtherVendor: data?.isOtherVendor },
           }}
         >
-          <p className="flex justify-center w-full items-center font-semibold p-5 text-m-blue underline hover:cursor-pointer">
+          <p className="flex justify-center w-full items-center font-semibold p-5 text-m-blue hover:underline hover:opacity-60 hover:cursor-pointer">
             {isLoadingMore ? "Fetching more products..." : "View All >"}
           </p>
         </Link>

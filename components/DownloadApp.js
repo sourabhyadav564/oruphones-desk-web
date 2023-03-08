@@ -45,7 +45,7 @@ function DownloadApp() {
             /> */}
             <Image src={AppleStore||""} width={86} height={86} alt=""/>
             <a target={"_blank"} rel="noreferrer" href={qrValue1}>
-              <p className="w-32 mt-2 h-10 bg-app-store bg-no-repeat bg-contain" />
+              <p className="w-32 hover:scale-105 mt-2 h-10 bg-app-store bg-no-repeat bg-contain" />
             </a>
           </div>
           <div className="flex flex-col justify-end">
@@ -58,7 +58,7 @@ function DownloadApp() {
             /> */}
             <Image src={PlayStore || "" } width={86} height={86} alt=""/>
             <a target={"_blank"} rel="noreferrer" href={qrValue2}>
-              <p className="w-32 mt-2 h-10 bg-play-store bg-no-repeat bg-contain" />
+              <p className="w-32 mt-2 hover:scale-105 h-10 bg-play-store bg-no-repeat bg-contain" />
             </a>
           </div>
         </div>

@@ -50,7 +50,7 @@ function LoginPopup({ open, setOpen, redirect }) {
     <Modal open={open} setOpen={setOpen}>
       {!isVerifyStep ? (
         <Fragment>
-          <div className="container max-w-xl grid place-items-center">
+          <div className="container max-w-xl grid place-items-center py-8">
             <div>
               <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} alt="ORUPhones" width={100} height={40} className="md:w-96 w-60 h-96 " />
             </div>

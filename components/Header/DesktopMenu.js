@@ -145,7 +145,7 @@ function DesktopMenu({ menuItems }) {
   return (
     <nav className="px-0 h-12 bg-m-green-1 bg-no-repeat items-center flex flex-row justify-between " data-aos="fade-down">
       <span
-        className="text-white  lg:pl-52 pl-8  flex flex-row justify-start items-center space-x-1 hover:cursor-pointer"
+        className="text-white  lg:pl-52 pl-8  flex flex-row justify-start items-center space-x-1 hover:cursor-pointer hover:underline hover:opacity-70"
         onClick={() => setOpenLocationPopup(true)}>
         {/* <MdLocationOn className="mt-1.5 mr-1 text-[#fffffff]" /> */}
         <Image src={Location} width={14} height={15} alt=""/>
@@ -165,7 +165,7 @@ function DesktopMenu({ menuItems }) {
                   <>
                     <Popover.Button
                       className={`${open ? "" : "text-opacity-90"
-                        }text-m-white px-4 opacity-100 font-light `}
+                        }text-m-white px-4 opacity-100 hover:opacity-60  font-light `}
                     >
                       <Link key={index} href={{ pathname: item.chlink }}>
                         {/* <span> {item.name} </span> */}
@@ -255,15 +255,15 @@ function DesktopMenu({ menuItems }) {
                 )}
               </Popover>
             ) : (
-              <Link href={item.href} key={item.name} passHref>
-                <a className="px-4">{item.name}</a>
+              <Link href={item.href} key={item.name} passHref >
+                <a className="px-4 hover:opacity-60">{item.name}</a>
               </Link>
             )
           )}
           {
             authenticated ? (
               <div>
-                 <div className=" absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+                 <div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
               NEW
             </div>
               <NavListItem text="Services" 
@@ -273,7 +273,7 @@ function DesktopMenu({ menuItems }) {
               </div>
           ):(
             <div>
-              <div className=" absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
+              <div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
               NEW
             </div>
             
@@ -301,7 +301,7 @@ export default DesktopMenu;
 const NavListItem = ({ text, link, onClick }) => (
   <Link href={link || "#"} passHref>
     <a
-      className="text-m-white px-4 opacity-100 font-light px-2"
+      className="text-m-white px-4 opacity-100  hover:opacity-60 font-light px-2"
       onClick={onClick}
     >
       {text}

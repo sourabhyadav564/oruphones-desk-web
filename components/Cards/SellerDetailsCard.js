@@ -229,7 +229,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
               />
             ))}{" "}
             {data?.compareData && data?.compareData.length > 0 &&
-              <a href={comparisontableid} className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold">See Details &gt;</a>}
+              <a href={comparisontableid} className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold hover:opacity-70">See Details &gt;</a>}
           </div>{" "}
         </div>
       )}{" "}

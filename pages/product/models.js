@@ -49,8 +49,8 @@ function AllModels() {
           ))}
           <Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`} passHref>
             <a>
-              <div className="w-full h-full  rounded-md shadow-md hover:shadow-lg  p-4 bg-m-white flex justify-center items-center">
-                <p className="block text-m-green">{"Show All"}</p>
+              <div className="w-full h-full hover:bg-gray-100 group   rounded-md shadow-md hover:shadow-lg  p-4 bg-m-white flex justify-center items-center">
+                <p className="block group-hover:scale-110 text-m-green">{"Show All"}</p>
               </div>
             </a>
           </Link>

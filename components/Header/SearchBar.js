@@ -107,7 +107,7 @@ function SearchBar() {
             }`}
             style={{ boxShadow: "0px 2px 3px #0000000A" }}
           />
-           <div className=" flex items-center px-4 ">
+           <div className=" flex items-center px-4 cursor-pointer hover:bg-gray-200 hover:rounded-r-md">
           {/* <BiSearch className="text-black-1" size={20} /> */}
           <Image src={Search} width={20} height={20} alt=""/>
         </div>

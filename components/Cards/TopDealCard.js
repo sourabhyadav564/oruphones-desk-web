@@ -22,7 +22,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
   return (
     <div data-aos="flip-right"
     data-aos-duration="2000" className="relative">
-      <span className="flex justify-end pr-2  ">
+      <span className="flex justify-end pr-2 cursor-pointer ">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}
@@ -31,8 +31,15 @@ function TopDealCard({ data, setProducts, prodLink }) {
             width={18}
           />
         )}
+        
+        {!(data?.isOtherVendor === "N")&&(
+          <div className="mt-7">
+
+          </div>
+        )}
+        
       </span>
-      <div className="hover:cursor-pointer"
+      <div className="hover:cursor-pointer group"
         onClick={() =>
           window.open(
             `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${data?.isOtherVendor}`,
@@ -49,7 +56,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
     //   }}
   // > */}
       <a
-        className="flex flex-col pt-6 relative w-30 -mt-8 -z-1 h-full drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white shadow-lg"
+        className="group-hover:bg-gray-100 flex flex-col pt-6 relative w-30 -mt-8 -z-1 h-full drop-shadow-sm rounded-md bg-no-repeat shadow-m-grey-6 py-1 px-3 bg-m-white shadow-lg"
         >
         {data?.isOtherVendor === "N" && (
           <div className="flex z-20 items-center absolute top-0 right-0 left-0 pt-2 px-2 justify-between">
@@ -71,7 +78,7 @@ function TopDealCard({ data, setProducts, prodLink }) {
                      </div>
         )}
 
-        <div className="flex justify-center pb-[17.77px] h-[163.14px] bg-transparent">
+        <div className="flex justify-center pb-[17.77px] h-[163.14px] bg-transparent " >
           {data?.imagePath ? (
             <Image
             loading="lazy"

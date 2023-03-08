@@ -123,7 +123,8 @@ function AddFav({ data, setProducts, ...rest }) {
               setPerformAction(true);
               setShowLoginPopup(true);
             }
-          }/>
+          }
+           className="hover:scale-110 "/>
 
         <LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} />
       </div>
@@ -171,6 +172,7 @@ function AddFav({ data, setProducts, ...rest }) {
             e.preventDefault();
             // !listings.includes(data.listingId) ? 
             handleFavoties(data);
+            className="hover:scale-110"
             //  : toast.error("You can't add your own listing to your favorites");
           }
         }
@@ -199,6 +201,7 @@ function AddFav({ data, setProducts, ...rest }) {
           e.preventDefault();
           // !listings.includes(data.listingId) ? 
           handleFavoties(data);
+          className="hover:scale-110 "
           //  : toast.error("You can't add your own listing to your favorites");
         }
       }

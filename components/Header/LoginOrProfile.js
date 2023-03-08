@@ -65,12 +65,12 @@ function LoginOrProfile() {
               </span>
             )}
           </span> */}
-          <div className="relative inline-block group">
+          <div className="relative inline-block group ">
             {/* <FaRegUserCircle
               size={30}
               className="text-m-green cursor-pointer"
             /> */}
-            <Image src={RegUser} width={30} height={30} alt=""/>
+            <Image src={RegUser} width={30} height={30} alt="" className="hover:scale-110 hover:bg-gray-100  rounded-full   cursor-pointer"/>
             <div className="absolute z-50 hidden group-hover:block transform -translate-x-1/2 left-1/2 bg-transparent">
               <div className="flex flex-col items-center">
                 <div className="w-10 overflow-hidden inline-block">
@@ -117,7 +117,7 @@ function LoginOrProfile() {
               size={30}
               className="text-m-green cursor-pointer"
             /> */}
-            <Image src={RegUser} width={30} height={30} alt=""/>
+            <Image src={RegUser} width={30} height={30} alt="" className="hover:scale-110 hover:bg-gray-100  rounded-full  cursor-pointer "/>
             <div className="absolute z-50 hidden group-hover:block transform -translate-x-1/2 left-1/2 bg-transparent">
               <div className="flex flex-col items-center">
                 <div className="w-10 overflow-hidden inline-block">

@@ -188,9 +188,9 @@ const Footer = () => {
   return (
     <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
       <div><div className="lg:pl-24 lg:pr-28 px-8 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
-        <p className='text-white tracking-[0.15em] leading-8'>
+        <p className='text-white  tracking-[0.15em] leading-8'>
           {brandData && brandData.map((brand, index) => (
-            <a className="hover:cursor-pointer"
+            <a className="hover:cursor-pointer hover:opacity-60 "
               // href="/sell-old-refurbished-used-mobiles/add"
               // onClick={() => setAddListingBrand(brand.prefill)}>
               onClick={() => setOpenAppDownload(true)}>
@@ -202,30 +202,30 @@ const Footer = () => {
         <div className="flex flex-col">
           <p className="font-Roboto-Semibold text-xlFontSize">Customer Service</p>
           <Link href="/privacy-policy">
-            <a className="hover:scale-150 hover:pl-4 duration-500 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold hover:pl-4 duration-300 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
           </Link>
           <Link href="/terms">
-            <a className="hover:scale-150 duration-500 hover:pl-4 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-4 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
               Terms of service
             </a>
           </Link>
           <Link href="/faq">
-            <a className="hover:scale-150 duration-500 hover:pl-2 mt-4 max-w-max font-Roboto-Light text-regularFontSize">FAQs</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2 mt-4 max-w-max font-Roboto-Light text-regularFontSize">FAQs</a>
           </Link>
         </div>
         <div className="flex flex-col">
           <p className="font-Roboto-Semibold text-xlFontSize">Links</p>
           <Link href="https://www.oruphones.com/blog/">
-            <a className="hover:scale-150 duration-500 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
           </Link>
           <Link href="/about-us">
-            <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">About Us</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">About Us</a>
           </Link>
           <Link href="/contact-us">
-            <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
           </Link>
           {/* <Link href="/team">
-            <a className="hover:scale-150 duration-500 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Team</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Team</a>
           </Link> */}
         </div>
         <div>
@@ -233,10 +233,10 @@ const Footer = () => {
             <p className="font-Roboto-Semibold text-xlFontSize">DOWNLOAD ORUphones App</p>
             <div className="flex flex-row">
               <a target={"_blank"} rel="noreferrer" href={qrValue2}>
-                <p className="w-32 mt-2 mb-2 mr-2 h-10 bg-play-store bg-no-repeat bg-contain" />
+                <p className="w-32 mt-2 mb-2 mr-2 h-10 bg-play-store bg-no-repeat hover:scale-105 hover:duration-300  bg-contain" />
               </a>
               <a target={"_blank"} rel="noreferrer" href={qrValue1}>
-                <p className="w-32 mt-2 mb-2 ml-2 h-10 bg-app-store bg-no-repeat bg-contain" />
+                <p className="w-32 mt-2 mb-2 ml-2 h-10 hover:scale-105 hover:duration-300  bg-app-store bg-no-repeat bg-contain" />
               </a>
             </div>
           </div>
@@ -244,7 +244,7 @@ const Footer = () => {
             Follow us on Social Media
           </div>
           <div className="flex items-center gap-x-1 mt-4 space-x-4">
-            <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="https://www.facebook.com/ORUphones"
                 target="_blank"
@@ -253,7 +253,7 @@ const Footer = () => {
                 <Image src={Fb} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="https://twitter.com/ORUPhones"
                 target="_blank"
@@ -263,7 +263,7 @@ const Footer = () => {
                 <Image src={twitter} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="https://www.instagram.com/oruphones/?igshid=YmMyMTA2M2Y%3D"
                 target="_blank"
@@ -273,7 +273,7 @@ const Footer = () => {
                 <Image src={instagram} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="https://www.pinterest.com/ORUphones/"
                 target="_blank"
@@ -283,7 +283,7 @@ const Footer = () => {
                 <Image src={pinterest} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="https://www.linkedin.com/company/oruphones/"
                 target="_blank"
@@ -293,7 +293,7 @@ const Footer = () => {
                 <Image src={linkedin} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="https://www.youtube.com/channel/UCJTgZUz7jkMCECYVO1uFE6A"
                 target="_blank"
@@ -303,7 +303,7 @@ const Footer = () => {
                 <Image src={youtube} width={20} height={20} alt=""/>
               </a>
             </div>
-            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-150 duration-500">
+            <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
                 href="mailto:contact@oruphones.com?subject = Feedback"
                 target="_blank"

@@ -14,7 +14,7 @@ export default function Modal({ open, setOpen, children, title }) {
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
-        <div className="flex items-end justify-center md:min-h-screen md:mt-0 mt-36 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex  items-end justify-center md:min-h-screen md:mt-0 mt-36 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -43,18 +43,18 @@ export default function Modal({ open, setOpen, children, title }) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-50"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
-              <div className="pt-5 px-6 flex justify-between items-center">
-                <div className="text-black-20 text-lg capitalize pl-6 flex-1 text-center font-semibold">
-                  {title}
-                </div>
+           <div className="relative inline-block bg-white rounded-lg text-left shadow-xl align-middle custom-scroll mx-8">
+              <div className="absolute right-0 pt-4 px-6 sm:flex justify-between items-center">
                 {/* <GrClose
                   onClick={() => setOpen(false)}
                   className="cursor-pointer"
                 /> */}
-                <Image src={Close} width={20} height={20}/>
+                 <Image src={Close} width={28} height={28} onClick={() => setOpen(false)}/>
               </div>
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div
+                className="bg-white overflow-y-auto rounded-lg "
+                style={{ maxHeight: "80vh" }}
+              >
                 {children}
               </div>
             </div>

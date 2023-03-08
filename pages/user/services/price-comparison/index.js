@@ -17,6 +17,7 @@ import useFilterOptions from 'hooks/useFilterOptions';
 import { useRouter } from 'next/router';
 import PriceFilter from '@/components/Filter/PriceFilter';
 import ProductCard from '@/components/Cards/ProductCard';
+import Sort from '@/components/Filter/Sort';
 
 function Index({ isFromEdit, brandsList }) {
 
@@ -137,10 +138,12 @@ function Index({ isFromEdit, brandsList }) {
             "",
             ""
         );
-        let makeModelLists = data?.dataObject;
+        let makeModelLists = (data?.dataObject);
+            console.log(makeModelLists);
         if (makeModelLists) {
-            // localStorage.setItem("make_models", JSON.stringify(makeModelLists));
-            // Cookies.set("make_models", true);
+            makeModelLists.sort((a, b) => {
+                return a.make.localeCompare(b.make);
+            });
             setMakeOptions(makeModelLists);
             setMakeOptions2(makeModelLists);
         }
@@ -225,16 +228,37 @@ function Index({ isFromEdit, brandsList }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }, [searchModel, make2]);
 
+    // const setSearchModelList2 = async (e) => {
+    //     const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make2, e);
+    //     setModelOptions2(models?.dataObject[0]?.models);
+    // };
+
+    // const setSearchModelList = async (e) => {
+    //     const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make, e);
+    //     setModelOptions(models?.dataObject[0]?.models);
+    // };
+
     const setSearchModelList2 = async (e) => {
         const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make2, e);
-        setModelOptions2(models?.dataObject[0]?.models);
-    };
+        if (models?.dataObject[0]?.models) {
+          const sortedModels = models.dataObject[0].models.sort((a, b) => {
+            return a.marketingname.localeCompare(b.marketingname);
+          });
+          setModelOptions2(sortedModels);
+        }
 
-    const setSearchModelList = async (e) => {
+      };
+      
+      const setSearchModelList = async (e) => {
         const models = await Axios.fetchModelList(Cookies.get("userUniqueId"), Cookies.get("sessionId"), make, e);
-        setModelOptions(models?.dataObject[0]?.models);
-    };
-
+        if (models?.dataObject[0]?.models) {
+          const sortedModels = models.dataObject[0].models.sort((a, b) => {
+            return a.marketingname.localeCompare(b.marketingname);
+          });
+          setModelOptions(sortedModels);
+        }
+      };
+      
 
     // useEffect(() => {
     //     let makeData = makeOptions2?.filter((item) => item.make === make2);

@@ -4,7 +4,7 @@ import Chevronright from "@/assets/chevronright.svg"
 import Image from "next/image";
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>( 
-  <div className="absolute z-10 top-14 left-2  bg-gray-400  rounded-full p-1 flex ">
+  <div className="absolute z-10 top-14 left-2  bg-gray-200  rounded-full p-1 flex ">
 <Image src={Chevronleft} width={10} height={10} alt="" {...rest} />
 </div>
 )
@@ -12,7 +12,7 @@ const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>(
 {/* <BiChevronLeft {...rest} className={`prev ${className}`}  */}
 // />;
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  <div className="absolute z-10 top-14 right-2  bg-gray-400 flex p-1 rounded-full">
+  <div className="absolute z-10 top-14 right-2  bg-gray-200 flex p-1 rounded-full">
 <Image src={Chevronright} width={10} height={10} alt="" {...rest} />
 </div>
 )

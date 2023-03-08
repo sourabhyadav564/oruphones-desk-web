@@ -157,12 +157,15 @@ function ProductDetailsCard({ data, openFullImage }) {
         <div className="space-x-4 relative lg:-right-2 md:right-20 flex items-center justify-end pr-4 -top-2 " >
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
+              <div className="hover:scale-110">
               <ShareIcon data={deviceListingInfo} width={16} height={16} />
-              <span className=""></span>
+              </div>
+              <span className="pt-2 hover:scale-110 ">
               <AddFav
                 data={deviceListingInfo}
                 setProducts={setDeviceListingInfo}
               />
+              </span>
             </Fragment>
           )}
         </div>
@@ -298,7 +301,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                       </div>
                       <div className=" flex items-center m-auto justify-center font-Roboto-Light text-smallFontSize">
                         <p>This phone is verified by ORUphones</p>
-                        <a href="#devicereport" className="text-m-green underline cursor-pointer pl-10" >Device Report &gt;</a>
+                        <a href="#devicereport" className="text-m-green underline cursor-pointer pl-10 hover:opacity-80 hover:font-bold" >Device Report &gt;</a>
                       </div>
                     </div>
                     {/* <span

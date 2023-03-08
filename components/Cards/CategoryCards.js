@@ -48,10 +48,10 @@ const CategoryCards = ({ data, priceRange }) => {
   if (priceRange) {
     return (
       <div>
-        <div className="shadow drop-shadow rounded-lg w-40 h-28 px-1.5 py-1.5 sm:px-1.5 bg-m-white grid grid-cols-2 gap-1">
+        <div className="shadow  drop-shadow hover:bg-gray-200  rounded-lg w-40 h-28 px-1.5 py-1.5 sm:px-1.5 bg-m-white grid grid-cols-2 gap-1">
           {priceRangeData.map((item, index) => (
             <Link href={`/shopby/pricerange/${item.min}/${item.max}`} key={index}>
-              <p className="flex flex-col items-center justify-center rounded-md bg-m-grey-8 opacity-100 hover:cursor-pointer font-light text-m-green-1 text-xs">
+              <p className="flex flex-col items-center hover:scale-105 justify-center rounded-md bg-m-grey-8 opacity-100 hover:cursor-pointer font-light text-m-green-1 text-xs">
                 {item.bracket}{" "}
                 <span className="font-semibold">{item.text}</span>
               </p>
@@ -66,7 +66,7 @@ const CategoryCards = ({ data, priceRange }) => {
         <div
           onClick={() => setOpenWarrantyPopup(true)}
         >
-          <a className="shadow drop-shadow rounded-lg w-32  h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
+          <a className="shadow drop-shadow hover:bg-gray-100  hover:cursor-pointer rounded-lg w-32  h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
             <Image
               src={data?.imagePath}
               alt={data?.make}
@@ -92,7 +92,7 @@ const CategoryCards = ({ data, priceRange }) => {
               : data?.urlPath != "Warranty" && `/shopby/category/${data?.urlPath?.toLowerCase()}`,
         }}
       >
-        <a className="shadow drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
+        <a className="shadow hover:bg-gray-100  drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
           <Image
             src={data?.imagePath}
             alt={data?.make}

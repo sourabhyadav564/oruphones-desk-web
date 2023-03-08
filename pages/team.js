@@ -71,7 +71,7 @@ const data = [
 
 ]
 
-function Team() {
+function team() {
  
   return (
     <div className="container my-28  text-center">
@@ -89,4 +89,4 @@ function Team() {
   )
 }
 
-export default Team
+export default team

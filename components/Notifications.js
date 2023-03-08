@@ -80,7 +80,7 @@ export default function Notifications() {
           className="text-m-green cursor-pointer mx-1"
           onClick={() => setShowNotification((prev) => !prev)}
         /> */}
-        <Image src={Notification} width={30} height={30} className="" onClick={() => setShowNotification((prev) => !prev)} />
+        <Image src={Notification} width={30} height={30} className="hover:bg-gray-200 hover:rounded-full cursor-pointer " onClick={() => setShowNotification((prev) => !prev)} />
         {(
           <span className="absolute -top-1 ml-5 bg-yellow2 w-6 text-xs2FontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
             {unreadNotificationsCount == 0 ? <></> : unreadNotificationsCount

@@ -19,7 +19,7 @@ function ProductCard({ data, prodLink, setProducts }) {
   return (
     <div
       data-aos="fade-up" className="relative my-1">
-      <span className=" pt-2 pr-2 right-2  absolute ">
+      <span className=" pt-2 pr-2 right-2  absolute">
         {!(data?.isOtherVendor === "Y") && (
           <AddFav
             data={data}
@@ -30,7 +30,7 @@ function ProductCard({ data, prodLink, setProducts }) {
         )}
       </span>
       <div 
-        className="hover:cursor-pointer"
+        className="hover:cursor-pointer group"
         onClick={() =>
           window.open(
             `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${data?.isOtherVendor}`,
@@ -48,7 +48,7 @@ function ProductCard({ data, prodLink, setProducts }) {
     // > */}
         <a>
           <div
-            className="w-30   -z-1 rounded-lg shadow-xl py-1 text-gray-900 bg-m-white"
+            className="w-30 -z-1 rounded-lg shadow-lg group-hover:shadow-xl py-1 text-gray-900 bg-m-white group-hover:bg-gray-100"
 
             style={{ boxShadow: "2px 2px 10px #00000029", padding: " 0 10px" }}
           >
