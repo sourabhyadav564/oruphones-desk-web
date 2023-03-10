@@ -118,43 +118,43 @@ export default function Home({
 }
 
 export async function getServerSideProps({ req, res, query }) {
-  const {
-    userUniqueId,
-    sessionId,
-    brands,
-    top_models,
-    make_models,
-    top_articles,
-  } = req.cookies;
+  // const {
+  //   userUniqueId,
+  //   sessionId,
+  //   brands,
+  //   top_models,
+  //   make_models,
+  //   top_articles,
+  // } = req.cookies;
   // const brandsList = await Axios.fetchBrands();
   // const fetchTopsellingmodels = await Axios.fetchTopsellingmodels();
   // const fetchShopByPrice = await Axios.fetchShopByPrice();
 
-  let sessionID;
-  if (sessionId) {
-    sessionID = sessionId;
-  } else {
-    const session = await Axios.getSessionId();
-    sessionID = session?.dataObject?.sessionId;
-  }
+  // let sessionID;
+  // if (sessionId) {
+  //   sessionID = sessionId;
+  // } else {
+  //   const session = await Axios.getSessionId();
+  //   sessionID = session?.dataObject?.sessionId;
+  // }
 
-  let brandsList;
-  if (brands) {
-    brandsList = [];
-  } else {
-    const data = await Axios.fetchBrands();
-    brandsList = data?.dataObject;
-  }
+  // let brandsList;
+  // if (brands) {
+  //   brandsList = [];
+  // } else {
+  //   const data = await Axios.fetchBrands();
+  //   brandsList = data?.dataObject;
+  // }
 
-  let fetchTopsellingmodels;
-  let shopByModel;
-  if (top_models) {
-    fetchTopsellingmodels = [];
-  } else {
-    const data = await Axios.fetchTopsellingmodels();
-    fetchTopsellingmodels = data?.dataObject;
-    shopByModel = data?.allModels;
-  }
+  // let fetchTopsellingmodels;
+  // let shopByModel;
+  // if (top_models) {
+  //   fetchTopsellingmodels = [];
+  // } else {
+  //   const data = await Axios.fetchTopsellingmodels();
+  //   fetchTopsellingmodels = data?.dataObject;
+  //   shopByModel = data?.allModels;
+  // }
 
   // let fetchTopArticles;
   // if (top_articles) {
@@ -175,11 +175,11 @@ export async function getServerSideProps({ req, res, query }) {
 
   return {
     props: {
-      brandsList: brandsList || [],
-      //fetchShopByPrice:fetchShopByPrice?.dataObject || [],
-      fetchTopsellingmodels: fetchTopsellingmodels || [],
-      sessionId: sessionID,
-      shopByModel: shopByModel||[],
+      // brandsList: brandsList || [],
+      // //fetchShopByPrice:fetchShopByPrice?.dataObject || [],
+      // fetchTopsellingmodels: fetchTopsellingmodels || [],
+      // sessionId: sessionID,
+      // shopByModel: shopByModel||[],
       // makeModelLists: makeModelLists || [],
       // fetchTopArticles: fetchTopArticles || [],
     },
