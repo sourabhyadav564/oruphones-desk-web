@@ -393,7 +393,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
           listedDeviceInfo?.originalbox && (
             <div className="grid grid-cols-4 gap-4 mb-8">
               <Checkbox
-                src={"https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.png"}
+                src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/charging-station.svg"}
                 text="Charger"
                 onClick={(e) => {
                   e.target.checked ? setCharger("Y") : setCharger("N");
@@ -401,7 +401,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 isChecked={listedDeviceInfo?.charger === "Y"}
               />
               <Checkbox
-                src={"https://d1tl44nezj10jx.cloudfront.net/assets/headphones.png"}
+                src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/svgicons/earphones.svg"}
                 text="Earphones"
                 onClick={(e) => {
                   e.target.checked ? setHeadphone1("Y") : setHeadphone1("N");
@@ -409,7 +409,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 isChecked={listedDeviceInfo?.earphone === "Y"}
               />
               <Checkbox
-                src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-box.png"}
+                src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/box.svg"}
                 text="Original Box"
                 onClick={(e) => {
                   e.target.checked
@@ -419,7 +419,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 isChecked={listedDeviceInfo?.originalbox === "Y"}
               />
               <Checkbox
-                src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png"}
+                src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/original-bill.svg"}
                 text="Original Bill"
                 checked={showWarranty}
                 onClick={(e) => {

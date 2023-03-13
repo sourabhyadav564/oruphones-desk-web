@@ -4,12 +4,12 @@ module.exports = {
     darkMode: false,
     theme: {
         fontFamily: {
-            'Roboto-Bold': ['Roboto-Bold'],
-            'Roboto-Semibold': ['Roboto-Semibold'],
-            'Roboto-Light': ['Roboto-Light'],
-            'Roboto-Regular': ['Roboto-Regular'],
-            'Roboto-Regularitalic': ['Roboto-Regularitalic'],
-            'Roboto-Medium': ['Roboto-Medium']
+            'Roboto-Bold': ['Roboto-Bold', 'sans-serif' ],
+            'Roboto-Semibold': ['Roboto-Semibold', 'sans-serif'],
+            'Roboto-Light': ['Roboto-Light','sans-serif'],
+            'Roboto-Regular': ['Roboto-Regular', 'sans-serif'],
+            'Roboto-Regularitalic': ['Roboto-Regularitalic', 'sans-serif'],
+            'Roboto-Medium': ['Roboto-Medium', 'sans-serif']
         },
         extend: {
             fontSize: {

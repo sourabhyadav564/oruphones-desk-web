@@ -41,7 +41,7 @@ function faq() {
         >
           <div className="flex items-center w-10/12 justify-between">
             <h1 className="text-8xl text-m-green font-bold"> F.A.Q </h1>
-            <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/FAQs.png"} width={230} height={163} alt="ORU faq "/>
+            <Image src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/FAQs.svg"} width={230} height={163} alt="ORU faq "/>
           </div>
         </section>
         <main className="px-6 my-4 ">

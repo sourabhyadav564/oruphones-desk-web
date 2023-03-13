@@ -46,7 +46,7 @@ function ProductCard({ data, prodLink, setProducts }) {
               <div className="h-9">
                 {data?.status === "Sold_Out" ? (
                   <Image
-                    src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
+                    src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/soldout.svg"}
                     width={"50"}
                     height={"30"}
                     objectFit="contain"
@@ -73,16 +73,16 @@ function ProductCard({ data, prodLink, setProducts }) {
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
-                    getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 src={
                   imageError
-                    ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
                     getDefaultImage(data?.marketingName)
-                    || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 alt={`buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
                   } ${data?.deviceStorage} ${data?.deviceCondition

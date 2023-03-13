@@ -6,25 +6,25 @@ const data = [
   {
     id: 1,
     text: "BestSelling Mobiles",
-    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/best-selling-mobiles.png",
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/web/assets/best-selling-mobiles.svg",
     urlPath: "Bestselling",
   },
   {
     id: 3,
     text: "Verified Devices Only",
-    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/verified-mobils.png",
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/web/assets/verified-mobils.svg",
     urlPath: "Verified",
   },
   {
     id: 2,
     text: "Like New Condition",
-    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/like-new.png",
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/web/assets/like-new.svg",
     urlPath: "Like New",
   },
   {
     id: 4,
     text: "Phone with Warranty",
-    imagePath: "https://d1tl44nezj10jx.cloudfront.net/assets/warranty.png",
+    imagePath: "https://d1tl44nezj10jx.cloudfront.net/web/assets/warranty.svg",
     urlPath: "Warranty",
   },
 ];

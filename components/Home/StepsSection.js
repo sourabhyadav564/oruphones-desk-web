@@ -13,7 +13,7 @@ const sellStepsData = [
         price for your device.
       </span>
     ),
-    src: "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_1.svg",
+    src: "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_step_1.svg",
     alt: "Add your device",
     link: "#how_to_sell",
   },
@@ -26,7 +26,7 @@ const sellStepsData = [
         device and get verified.
       </span>
     ),
-    src: "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_2.svg",
+    src: "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_step_2.svg",
     alt: "Device verification",
     link: "#how_to_sell",
   },

@@ -34,53 +34,53 @@ function HowtoBuyPopup({open,setOpen}) {
                     </div>
                     <p className='font-Roboto-Semibold text-center text-[24px] w-[350px]'>Download our App using these QR Codes</p>
                 <div className='flex items-center'>
-                    <Image src={'https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/1.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={'https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/1.webp'} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Browse in Shop By Brand for specific brand</p>
                 </div>
                 <div className='flex items-center'>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>You can buy through search, Buy now and scroll for best deals.</p>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/2.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/2.webp'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/3.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/3.webp'} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Select your location from top bar. You can select from this popup.</p>
                 </div>
                 <div className='flex items-center'>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on the filter icon to add specific filters.</p>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/4.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/4.webp'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/5.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/5.webp'} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Choose Brand Name, Storage, Ram, Condition and Warranty.</p>
                 </div>
                 <div className='flex items-center'>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Now open desired deal from all the available products.</p>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/6.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/6.webp'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/7.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/7.webp'} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Scroll down to view Device details.</p>
                 </div>
                 <div className='flex items-center'>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Click on Contact Seller to request verification.</p>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/9.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/9.webp'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
                    
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/8.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/8.webp'} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>You can also view other deals of same model.</p>
                 </div>
                 <div className='flex items-center'>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Go to Home and Click on Three lines on top left corner and click on verification for buyer tile.</p>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/10.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/10.webp'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div className='flex items-center'>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/12.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/12.webp'} width={150} height={300} alt="" className='object-contain'/>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Enter your Mobile Number to get start verification in seller's device.</p>
                 </div>
                 <div className='flex items-center'>
                     <p className='word-wrap font-Roboto-Semibold md:w-48 w-60 px-8 text-center'>Wait for Diagnostic check. Once it completes you can contact the seller.</p>
-                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/assets/buy_icons/11.png'} width={150} height={300} alt="" className='object-contain'/>
+                    <Image src={' https://d1tl44nezj10jx.cloudfront.net/web/assets/buy_icons/11.webp'} width={150} height={300} alt="" className='object-contain'/>
                 </div>
                 <div>
                 <p className=' text-[20px] font-Roboto-Semibold text-center py-4'>We wish you a happy shopping.</p>

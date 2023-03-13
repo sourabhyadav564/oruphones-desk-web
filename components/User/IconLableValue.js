@@ -16,7 +16,7 @@ function LabelAndValue({ label, value }) {
           ) : label.toUpperCase().includes("WARRANTY") ? (
             <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/warranty.svg"} width={13} height={13} layout="fixed" alt={label} />
           ) : label.toUpperCase().includes("VERIFIED") ? (
-            <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/calendar-1.png"} width={13} height={13} layout="fixed" alt={label} />
+            <Image src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/calendar-1.svg"} width={13} height={13} layout="fixed" alt={label} />
           ) : label.toUpperCase().includes("LISTED") ? (
             <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/svgicons/calendar.svg"} width={13} height={13} layout="fixed" alt={label} />
           ) : label.toUpperCase().includes("REPORT") ? (
