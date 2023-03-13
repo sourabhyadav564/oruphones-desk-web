@@ -1,12 +1,7 @@
 import Image from "next/image";
 import Modal from ".";
-// import calendar1 from "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png";
-// import testpass from "https://d1tl44nezj10jx.cloudfront.net/assets/testpass.png";
-// import testfail from "https://d1tl44nezj10jx.cloudfront.net/assets/testFail.png";
-// import pass from "https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png";
 import { deviceConditionQuestion } from "@/utils/constant";
 import ConditionOptionLarge2 from "../Condition/ConditionOptionLarge2";
-import { useState } from "react";
 
 function DeviceVerificationReport({ open, setOpen, data }) {
   const setDate = data?.verifiedDate ? data?.verifiedDate : data?.listingDate;
@@ -27,9 +22,10 @@ function DeviceVerificationReport({ open, setOpen, data }) {
           <div className="flex-1 py-4">
             <Image
               src={
-                (data?.images && data?.images[0]?.fullImage) || data?.imagePath || data?.defaultImage?.fullImage
+                (data?.images && data?.images[0]?.fullImage) ||
+                data?.imagePath ||
+                data?.defaultImage?.fullImage
               }
-              // layout="responsive"
               width={250}
               height={350}
               priority
@@ -40,38 +36,22 @@ function DeviceVerificationReport({ open, setOpen, data }) {
           <div className="flex justify-center items-center ">
             <span className="text-xs mr-2 flex items-center">
               <Image
-                src={"https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png"}
+                src={
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png"
+                }
                 width={15}
                 height={15}
                 alt={data?.marketingName}
               />
             </span>
             <span className="text-xs mr-2">{setDateName}</span>
-            <span className="text-lg">
-              {setDate}
-            </span>
+            <span className="text-lg">{setDate}</span>
           </div>
         </div>
         <div
           className="flex flex-col border-l-2 col-span-3 overflow-y-auto max-w-lg"
           style={{ maxHeight: 480 }}
         >
-          {/* {data?.questionnaireResults &&
-            data?.questionnaireResults?.length > 0 && (
-              <div className="border-b-2 pb-4 px-8">
-                {data?.questionnaireResults.map((items, index) => {
-                  return (
-                    <QuestionnaireResults
-                      key={index}
-                      index={index + 1}
-                      question={items.question}
-                      result={items.result}
-                      childQuestions={items.childQuestions}
-                    />
-                  );
-                })}
-              </div>
-            )} */}
           <div className="mx-4">
             {data && data?.cosmetic && (
               <h2 className="text-gray-20 font-bold mb-3">
@@ -82,14 +62,19 @@ function DeviceVerificationReport({ open, setOpen, data }) {
               <div>
                 {deviceConditionQuestion.map((item, index) => (
                   <div>
-                    <span className="text-lg font-semibold text-black">{data?.cosmetic[index] != undefined && item?.title}</span>
-                    {data?.cosmetic[index] != undefined &&
+                    <span className="text-lg font-semibold text-black">
+                      {data?.cosmetic[index] != undefined && item?.title}
+                    </span>
+                    {data?.cosmetic[index] != undefined && (
                       <ConditionOptionLarge2
                         title={data?.cosmetic[index]}
-                        options={data?.cosmetic[index] && item?.options[0]?.options}
+                        options={
+                          data?.cosmetic[index] && item?.options[0]?.options
+                        }
                         conditionResults={data?.cosmetic}
                         questionIndex={index}
-                      />}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -97,9 +82,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
           </div>
           {data?.verified && (
             <div className="text-gray-20 font-bold mb-3 mx-4">
-              <span>
-                Device Verification Report
-              </span>
+              <span>Device Verification Report</span>
             </div>
           )}
           <div className="px-8">
@@ -129,7 +112,11 @@ const TestListItem = ({ testName, testStatus }) => {
       <p className="flex items-center justify-between">
         <span className="mr-3">{testStatus}</span>{" "}
         <Image
-          src={testStatus === "PASS" ? "https://d1tl44nezj10jx.cloudfront.net/assets/testpass.png" : "https://d1tl44nezj10jx.cloudfront.net/assets/testFail.png"}
+          src={
+            testStatus === "PASS"
+              ? "https://d1tl44nezj10jx.cloudfront.net/assets/testpass.png"
+              : "https://d1tl44nezj10jx.cloudfront.net/assets/testFail.png"
+          }
           width={25}
           height={24}
           alt={testName}
@@ -149,13 +136,25 @@ const QuestionnaireResults = ({ question, result, childQuestions, index }) => {
         {childQuestions && childQuestions?.length > 0 ? (
           childQuestions.map((items, index1) => (
             <div key={index1} className="flex items-start pt-2">
-              <Image src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"} width={15} height={15} alt={items} className="mt-1 mr-2" />
+              <Image
+                src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"}
+                width={15}
+                height={15}
+                alt={items}
+                className="mt-1 mr-2"
+              />
               <p>{items}</p>
             </div>
           ))
         ) : (
           <div className="flex items-start pt-2">
-            <Image src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"} width={15} height={15} alt={result} className="mt-1 mr-2" />
+            <Image
+              src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"}
+              width={15}
+              height={15}
+              alt={result}
+              className="mt-1 mr-2"
+            />
             <p>{result}</p>
           </div>
         )}

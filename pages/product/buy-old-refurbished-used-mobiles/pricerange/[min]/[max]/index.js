@@ -20,7 +20,6 @@ const settings = {
 };
 
 const Pricerange = () => {
-  // use loaction of auth user or default location
   const router = useRouter();
   const { min, max } = router.query;
   const [bestDeal, setBestDeal] = useState();
@@ -72,7 +71,6 @@ const Pricerange = () => {
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
       }
-
       if (condition?.length > 0) {
         payLoad.deviceCondition = condition.includes("all") ? [] : condition;
       }
@@ -94,9 +92,6 @@ const Pricerange = () => {
       setLoading(true);
       Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest").then(
         (response) => {
-          // if (verification?.length > 0) {
-          //   payLoad.verification = verification;
-          // }
           setOtherListings(response?.dataObject?.otherListings);
           setTotalProducts(response?.dataObject?.totalProducts);
           setBestDeal([]);
@@ -105,8 +100,6 @@ const Pricerange = () => {
       );
     }
   }, [applyFilter]);
-
-  // const sortingProducts = getSortedProducts(applySort, otherListings);
 
   return (
     <main className="container py-4">
@@ -145,31 +138,5 @@ const Pricerange = () => {
     </main>
   );
 };
-
-function getSortedProducts(applySort, otherListings) {
-  var sortedProducts = otherListings ? [...otherListings] : [];
-  if (applySort && applySort === "Price: Low to High") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Price - High to Low") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Newest First") {
-    sortedProducts.sort((a, b) => {
-      return stringToDate(b.modifiedDate) - stringToDate(a.modifiedDate);
-    });
-  } else if (applySort && applySort === "Oldest First") {
-    sortedProducts.sort((a, b) => {
-      return stringToDate(a.modifiedDate) - stringToDate(b.modifiedDate);
-    });
-  }
-  return sortedProducts;
-}
 
 export default Pricerange;

@@ -11,15 +11,9 @@ import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
-// import ShopByBrandSection from "@/components/ShopByBrandSection";
 import { useRecoilValue } from "recoil";
 import { makeState } from "atoms/globalState";
 import ShopByBrandSection from "@/components/ShopByBrandSection";
-// import {
-//   otherVendorDataState,
-//   // otherVandorListingIdState,
-// } from "../../../../atoms/globalState";
-// import { useRecoilState } from "recoil";
 
 const settings = {
   slidesToShow: 1,
@@ -36,8 +30,6 @@ function BrandPage() {
   const [shopByModel, setShopByModel] = useState([]);
   const [bestDeal, setBestDeal] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [shopbymodel, setshopbymodel] = useState([]);
-  // const { selectedSearchCity, loading } = AppContext;
   const [applyFilter, setApplyFilter] = useState({});
   const [applySort, setApplySort] = useState();
   const { getSearchLocation } = useContext(AppContext);
@@ -51,91 +43,93 @@ function BrandPage() {
   let intialPage = 0;
   let newPages = 0;
   let brandResult = [];
-  let makeName2 = useRecoilValue(makeState);
-  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
 
   const loadData = (intialPage) => {
     if (!isFilterApplied) {
       const getMakeModel = async () => {
         brandResult = await getMakeModel(
           Cookies.get("userUniqueId") || "Guest",
-          Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : ""
-          // makeName2,
-          // "Y"
+          Cookies.get("sessionId") != undefined
+            ? Cookies.get("sessionId")
+            : localStorage.getItem("sessionId") != undefined
+            ? localStorage.getItem("sessionId")
+            : ""
         );
       };
-      // let makemodel=JSON.parse(localStorage.getItem("make_models")!=undefined?localStorage.getItem("make_models"):
-      // await getMakeModel()
-      // );
       let makemodel;
       if (localStorage.getItem("shopByModel") != undefined) {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
         } else if (makeName === "lg") {
           makeName = "LG";
-        } else if(makeName === 'htc'){makeName="HTC"} 
-        else if(makeName==='zte'){makeName="ZTE"}
-         else {
-          makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+        } else if (makeName === "htc") {
+          makeName = "HTC";
+        } else if (makeName === "zte") {
+          makeName = "ZTE";
+        } else {
+          makeName =
+            String(makeName).charAt(0).toUpperCase() +
+            String(makeName).slice(1);
         }
-      
+
         makemodel = JSON.parse(localStorage.getItem("shopByModel"));
         makemodel.map((item) => {
           if (item.make == makeName) {
             setTitle(item.make);
             setDescription(item.make);
             // setshopbymodel(item.models);
-            if (shopByModel==[]){
-              setShopByModel(JSON.stringify(item.marketingName))
-            }
-            else{
-              setShopByModel((shopByModel)=>[...shopByModel, JSON.stringify(item.marketingName)]);
+            if (shopByModel == []) {
+              setShopByModel(JSON.stringify(item.marketingName));
+            } else {
+              setShopByModel((shopByModel) => [
+                ...shopByModel,
+                JSON.stringify(item.marketingName),
+              ]);
             }
           }
-        })
-      }
-      else {
+        });
+      } else {
         if (makeName === "oneplus") {
           makeName = "OnePlus";
         } else {
-          makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+          makeName =
+            String(makeName).charAt(0).toUpperCase() +
+            String(makeName).slice(1);
         }
-        // getMakeModel();
         Axios.fetchTopsellingmodels();
         makemodel = JSON.parse(localStorage.getItem("shopByModel"));
-      
-
         makemodel.map((item) => {
           if (item.make == makeName) {
             setTitle(item.make);
             setDescription(item.make);
-            // setshopbymodel(item.models);
-            if (shopByModel==[]){
-              setShopByModel(JSON.stringify(item.marketingName))
-            }
-            else{
-              setShopByModel((shopByModel)=>[...shopByModel, JSON.stringify(item.marketingName)]);
+            if (shopByModel == []) {
+              setShopByModel(JSON.stringify(item.marketingName));
+            } else {
+              setShopByModel((shopByModel) => [
+                ...shopByModel,
+                JSON.stringify(item.marketingName),
+              ]);
             }
           }
-        })
+        });
       }
       if (makemodel != undefined) {
         makemodel.map((item) => {
           if (item.make == makeName) {
             setTitle(item.make);
             setDescription(item.make);
-            // setshopbymodel(item.models);
-            if (shopByModel==[]){
-              setShopByModel(JSON.stringify(item.marketingName))
-            }
-            else{
-              setShopByModel((shopByModel)=>[...shopByModel, JSON.stringify(item.marketingName)]);
+            if (shopByModel == []) {
+              setShopByModel(JSON.stringify(item.marketingName));
+            } else {
+              setShopByModel((shopByModel) => [
+                ...shopByModel,
+                JSON.stringify(item.marketingName),
+              ]);
             }
           }
-        })
+        });
       }
     }
-
 
     if (makeName && !isFilterApplied) {
       Axios.getListingbyMake(
@@ -145,23 +139,15 @@ function BrandPage() {
         intialPage,
         applySort
       ).then((response) => {
-        // setProducts(response?.dataObject?.otherListings);
-        // setBestDeal(response?.dataObject?.bestDeals);
         if (response?.dataObject?.otherListings.length > -1) {
           setProducts((response && response?.dataObject?.otherListings) || []);
-          // setProductsData(
-          //   (response && response?.dataObject?.otherListings) || []
-          // );
         }
         if (response?.dataObject?.bestDeals.length > -1) {
           setBestDeal((response && response?.dataObject?.bestDeals) || []);
-          // setProductsData((response && response?.dataObject?.bestDeals) || []);
         }
         if (response?.dataObject?.totalProducts > -1) {
           setTotalProducts(
-            (response &&
-              response?.dataObject?.totalProducts) ||
-            0
+            (response && response?.dataObject?.totalProducts) || 0
           );
         }
 
@@ -171,7 +157,6 @@ function BrandPage() {
       const {
         brand,
         condition,
-        // color,
         storage,
         Ram,
         warranty,
@@ -188,7 +173,6 @@ function BrandPage() {
           listingLocation: getSearchLocation,
           make: brand?.length > 0 ? brand : [makeName],
           reqPage: "BRAND",
-          // color: [],
           deviceCondition: [],
           deviceStorage: [],
           deviceRam: [],
@@ -202,9 +186,6 @@ function BrandPage() {
           payLoad.minsellingPrice = priceRange.min;
           payLoad.maxsellingPrice = priceRange.max;
         }
-        // if(ram?.length>0){
-        //   payLoad.deviceRam = ram.includes("all") ? [] : ram;
-        // }
         if (condition?.length > 0) {
           payLoad.deviceCondition = condition.includes("all") ? [] : condition;
         }
@@ -214,16 +195,12 @@ function BrandPage() {
         if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
-        // if (color?.length > 0) {
-        //   payLoad.color = color.includes("all") ? [] : color;
-        // }
         if (warranty?.length > 0) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         }
         if (verification?.length > 0) {
           payLoad.verified = verification.includes("all") ? [] : "verified";
         }
-        // setLoading(true);
         Axios.searchFilter(
           payLoad,
           Cookies.get("userUniqueId") || "Guest",
@@ -231,35 +208,12 @@ function BrandPage() {
           applySort
         ).then((response) => {
           setProducts(response?.dataObject?.otherListings);
-          // setBestDeal([]);
-          setTotalProducts(
-            response?.dataObject?.totalProducts
-          );
+          setTotalProducts(response?.dataObject?.totalProducts);
           setBestDeal(response?.dataObject?.bestDeals);
-          // setLoading(false);
         });
       }
     }
-
-
-    // const getMakeModel = async()=>{
-   
-    //   brandResult = await Axios.fetchMakeModelList(
-    //     Cookies.get("userUniqueId") || "Guest",
-    //     Cookies.get("sessionId") != undefined ? Cookies.get("sessionId") : localStorage.getItem("sessionId") != undefined ? localStorage.getItem("sessionId") : "",
-    //     makeName2,
-    //     "Y"
-    //   );
-    // }
-    // getMakeModel();
-
-
-
-    // setshopbymodel(brandResult?.dataObject);
-    // brandResult = [] ;
   };
-
-
 
   const loadMoreData = () => {
     newPages = pageNumber + 1;
@@ -273,8 +227,6 @@ function BrandPage() {
         newPages,
         applySort
       ).then((response) => {
-        // setProducts(response?.dataObject?.otherListings);
-        // setBestDeal(response?.dataObject?.bestDeals);
         if (response?.dataObject?.otherListings.length > 0) {
           setProducts((products) => [
             ...products,
@@ -282,34 +234,30 @@ function BrandPage() {
           ]);
           if (response?.dataObject?.totalProducts > -1) {
             setTotalProducts(
-              (response &&
-                response?.dataObject?.totalProducts) ||
-              0
+              (response && response?.dataObject?.totalProducts) || 0
             );
           }
-          // setProductsData(
-          //   (response && response?.dataObject?.otherListings) || []
-          // );
         }
 
         if (response?.dataObject?.otherListings.length == 0) {
           setIsFinished(true);
         }
-        // if (response?.dataObject?.bestDeals.length > -1) {
-        //   setBestDeal((response && response?.dataObject?.bestDeals) || []);
-        //   // setProductsData((response && response?.dataObject?.bestDeals) || []);
-        // }
-
         setLoading(false);
-        // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
     } else {
       if (applyFilter) {
         setIsFilterApplied(true);
-        // alert("applyFilter" + applyFilter);
-        const { brand, condition, storage, Ram, warranty, verification, priceRange } = applyFilter;
-        if (Object.keys(applyFilter).some(i => applyFilter[i])) {
+        const {
+          brand,
+          condition,
+          storage,
+          Ram,
+          warranty,
+          verification,
+          priceRange,
+        } = applyFilter;
+        if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
           if (makeName === "oneplus") {
             makeName = "OnePlus";
           } else {
@@ -319,7 +267,6 @@ function BrandPage() {
             listingLocation: getSearchLocation,
             make: brand?.length > 0 ? brand : [makeName],
             reqPage: "BRAND",
-            // color: [],
             deviceCondition: [],
             deviceStorage: [],
             deviceRam: [],
@@ -334,7 +281,9 @@ function BrandPage() {
             payLoad.maxsellingPrice = priceRange.max;
           }
           if (condition?.length > 0) {
-            payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+            payLoad.deviceCondition = condition.includes("all")
+              ? []
+              : condition;
           }
           if (storage?.length > 0) {
             payLoad.deviceStorage = storage.includes("all") ? [] : storage;
@@ -342,16 +291,12 @@ function BrandPage() {
           if (Ram?.length > 0) {
             payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
           }
-          // if (color?.length > 0) {
-          //   payLoad.color = color.includes("all") ? [] : color;
-          // }
           if (warranty?.length > 0) {
             payLoad.warenty = warranty.includes("all") ? [] : warranty;
           }
           if (verification?.length > 0) {
             payLoad.verified = verification.includes("all") ? [] : "verified";
           }
-          // setLoading(true);
           Axios.searchFilter(
             payLoad,
             Cookies.get("userUniqueId") || "Guest",
@@ -367,7 +312,6 @@ function BrandPage() {
                 ...response?.dataObject?.otherListings,
               ]);
             }
-            // setBestDeals([]);
             setIsFilterApplied(true);
             setTotalProducts(response?.dataObject?.totalProducts);
             if (newPages == 0) {
@@ -377,7 +321,7 @@ function BrandPage() {
                 ...products,
                 ...response?.dataObject?.bestDeals,
               ]);
-            };
+            }
           });
         }
       }
@@ -392,11 +336,9 @@ function BrandPage() {
   }, [makeName, getSearchLocation, applySort]);
 
   useEffect(() => {
-
     const {
       brand,
       condition,
-      // color,
       Ram,
       storage,
       warranty,
@@ -414,7 +356,6 @@ function BrandPage() {
         listingLocation: getSearchLocation,
         make: brand?.length > 0 ? brand : [makeName],
         reqPage: "BRAND",
-        // color: [],
         deviceCondition: [],
         deviceStorage: [],
         deviceRam: [],
@@ -437,16 +378,12 @@ function BrandPage() {
       if (Ram?.length > 0) {
         payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
       }
-      // if (color?.length > 0) {
-      //   payLoad.color = color.includes("all") ? [] : color;
-      // }
       if (warranty?.length > 0) {
         payLoad.warenty = warranty.includes("all") ? [] : warranty;
       }
       if (verification?.length > 0) {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
-      // setLoading(true);
       Axios.searchFilter(
         payLoad,
         Cookies.get("userUniqueId") || "Guest",
@@ -454,18 +391,11 @@ function BrandPage() {
         applySort
       ).then((response) => {
         setProducts(response?.dataObject?.otherListings);
-        // setBestDeal([]);
-        setTotalProducts(
-          response?.dataObject?.totalProducts
-        );
+        setTotalProducts(response?.dataObject?.totalProducts);
         setBestDeal(response?.dataObject?.bestDeals);
-        // setLoading(false);
       });
     }
   }, [applyFilter, applySort]);
-
-  // const sortingProducts = useMemo(() => getSortedProducts(applySort, products), [applySort, products]);
-  // const sortingProducts = getSortedProducts(applySort, products);
 
   useEffect(() => {
     switch (makeName) {
@@ -561,36 +491,22 @@ function BrandPage() {
               </Carousel>
             </div>
           )}
-
-          {/* <div className="space-y-2 h-[106px] bg-[#EEEEEE] opacity-bg-40 -mx-4 my-2 px-6 pt-1 items-center">
-            <p>Shop By Model</p>
-            <ShopByBrandSection
-              shopbymodeldata={shopbymodel} location={selectedSearchCity}
-            />
-          </div>
-           */}
-          {<div className="font-Roboto-Semibold text-xlFontSize">
-            <p className="opacity-50">Shop By Model</p>
-            <ShopByBrandSection
-              shopbymodeldata={shopByModel}
-              shopbymakedata={makeName}
-            />
-          </div>}
-
+          {
+            <div className="font-Roboto-Semibold text-xlFontSize">
+              <p className="opacity-50">Shop By Model</p>
+              <ShopByBrandSection
+                shopbymodeldata={shopByModel}
+                shopbymakedata={makeName}
+              />
+            </div>
+          }
           <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
             Total Products ({totalProducts})
           </h4>
           <div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-            {!isLoading &&
-              isFinished == false && products.length > 0 ? (
+            {!isLoading && isFinished == false && products.length > 0 ? (
               products?.map((product, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    // setListingId(item.listingId);
-                    // setProductsData(products);
-                  }}
-                >
+                <div key={index}>
                   <ProductCard
                     data={product}
                     prodLink
@@ -608,8 +524,9 @@ function BrandPage() {
             isFinished === false &&
             products.length != totalProducts && (
               <span
-                className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
-                  } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                className={`${
+                  isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
                 onClick={loadMoreData}
               >
                 <p className="block text-m-green font-semibold">
@@ -621,40 +538,6 @@ function BrandPage() {
       </main>
     </>
   );
-}
-
-function getSortedProducts(applySort, products) {
-  var sortedProducts = products ? [...products] : [];
-  if (applySort && applySort === "Price Low to High") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Price - High to Low") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Newest First") {
-    sortedProducts.sort((a, b) => {
-      return (
-        a.updatedAt &&
-        b.updatedAt &&
-        stringToDate(b.updatedAt) - stringToDate(a.updatedAt)
-      );
-    });
-  } else if (applySort && applySort === "Oldest First") {
-    sortedProducts.sort((a, b) => {
-      return (
-        a.updatedAt &&
-        b.updatedAt &&
-        stringToDate(a.updatedAt) - stringToDate(b.updatedAt)
-      );
-    });
-  }
-  return sortedProducts;
 }
 
 export default BrandPage;

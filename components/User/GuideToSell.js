@@ -1,5 +1,4 @@
 import Image from "next/image";
-// import howtosellbgImg from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_your_phone.png";
 
 function GuideToSell() {
   return (

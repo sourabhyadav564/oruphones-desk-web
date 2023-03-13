@@ -2,9 +2,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
-// import UserProfileIcon from "../../assets/user-profile-icon.png";
-// import UserProfileIcon from "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg";
-
 import AppContext from "@/context/ApplicationContext";
 import AuthContext from "@/context/AuthContext";
 import { useState } from "react";
@@ -20,11 +17,14 @@ function UserProfile({ children, className }) {
 
   const authUserData = { name: userInfo?.userdetails?.userName };
   useEffect(() => {
-    setInputImage(userInfo?.userdetails?.profilePicPath || "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg");
+    setInputImage(
+      userInfo?.userdetails?.profilePicPath ||
+        "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"
+    );
   }, [userInfo]);
 
   function handleChange(e) {
-    e.preventDefau
+    e.preventDefau;
     let data = new FormData();
     data.append("image", e.target.files[0]);
     Axios.uploadUserProfilePic(data, Cookies.get("userUniqueId")).then(
@@ -38,7 +38,6 @@ function UserProfile({ children, className }) {
           };
 
           Axios.updateUserDetails(payload).then((res) => {
-
             setInputImage(payload?.profilePicPath);
 
             if (res?.status === "SUCCESS") {
@@ -47,10 +46,7 @@ function UserProfile({ children, className }) {
                 profilePicPath: res?.dataObject?.userdetails.profilePicPath,
               };
               setInputImage(res?.dataObject?.userdetails.profilePicPath);
-
             }
-
-
           });
         }
       }
@@ -69,17 +65,25 @@ function UserProfile({ children, className }) {
                 className="block w-full h-full relative rounded-full"
               >
                 <Image
-                  src={inputImage || "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"}
+                  src={
+                    inputImage ||
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"
+                  }
                   loading="lazy"
                   placeholder="blur"
                   priority={false}
                   unoptimized={false}
-                  blurDataURL={inputImage || "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"}
+                  blurDataURL={
+                    inputImage ||
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg"
+                  }
                   alt="ORU Account"
                   layout="fill"
                   objectFit="contain"
-                  className={`hover:cursor-pointer ${"https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg" && "rounded-full"
-                    }`}
+                  className={`hover:cursor-pointer ${
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg" &&
+                    "rounded-full"
+                  }`}
                 />
               </label>
               <input
@@ -91,8 +95,14 @@ function UserProfile({ children, className }) {
               />
             </div>
             <p className="text-m-white my-2.5 ml-10" style={{ fontSize: 32 }}>
-              <span className="font-Roboto-Light text-xl5FontSize"> Welcome </span>{" "}
-              <span className="font-Roboto-Bold text-xl5FontSize"> {authUserData?.name} </span>
+              <span className="font-Roboto-Light text-xl5FontSize">
+                {" "}
+                Welcome{" "}
+              </span>{" "}
+              <span className="font-Roboto-Bold text-xl5FontSize">
+                {" "}
+                {authUserData?.name}{" "}
+              </span>
             </p>
           </div>
         </div>
@@ -101,17 +111,17 @@ function UserProfile({ children, className }) {
         className={`container grid grid-cols-4 py-4 gap-4 ${className || ""}`}
       >
         <div className="bg-white shadow rounded text-black-60 p-4 flex flex-col h-96">
-          <p className="py-2 px-4 uppercase font-Roboto-Regular text-regularFontSize"> Account </p>
+          <p className="py-2 px-4 uppercase font-Roboto-Regular text-regularFontSize">
+            {" "}
+            Account{" "}
+          </p>
           <NavListItem text="My Profile" link="/user/profile" />
           <NavListItem text="My Listings" link="/user/listings" />
           <NavListItem text="My Favorites" link="/user/favorites" />
           <div className=" absolute mt-48 md:ml-28 ml-24   bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
-              NEW
-            </div>
-
-            <NavListItem text="ORU Services" link="/user/services" />
-            
-          {/* add logout function */}
+            NEW
+          </div>
+          <NavListItem text="ORU Services" link="/user/services" />
           <NavListItem
             text="Logout"
             link="/"
@@ -134,8 +144,9 @@ const NavListItem = ({ text, link, onClick }) => {
   return (
     <Link href={link} passHref>
       <a
-        className={`px-4 py-2 my-1 font-Roboto-Light  text-mediumFontSize hover:bg-gray-100 rounded text-black-60 ${router.pathname == link && "bg-gray-100"
-          }`}
+        className={`px-4 py-2 my-1 font-Roboto-Light  text-mediumFontSize hover:bg-gray-100 rounded text-black-60 ${
+          router.pathname == link && "bg-gray-100"
+        }`}
         onClick={onClick}
       >
         {text}

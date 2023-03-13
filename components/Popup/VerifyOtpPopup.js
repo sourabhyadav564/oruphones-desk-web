@@ -1,9 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-// import home_logo from "../../assets/home_logo.svg";
-// import home_logo from "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg";
 import * as Axios from "../../api/axios";
-import Router from "next/router";
 import AuthContext from "../../context/AuthContext";
 import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
@@ -44,66 +41,16 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
         countryCode: "91",
         mobileNumber: formData.mobile.split("-")[1],
       };
-
-      // const resData = await Axios.getUserUniqueId(payload);
-
-      // if (
-      //   resData.status === "SUCCESS" ||
-      //   (resData.status === "FAIL" &&
-      //     resData.reason === "User Already Available")
-      // ) {
-      //   if (resData.status === "SUCCESS") {
-      //     addUserSearchandProfileLocations(resData.dataObject.userUniqueId);
-      //   }
-      //   Cookies.set("userUniqueId", resData.dataObject.userUniqueId);
-      //   Cookies.set(
-      //     "mobileNumber",
-      //     resData.dataObject.userdetails.mobileNumber
-      //   );
-      //   setUserUniqueId(resData.dataObject.userUniqueId);
-
-      //   if (redirect !== undefined && redirect === false) {
-      //     setOpen(false);
-      //   } else {
-      //     Router.push(`/`);
-      //   }
-      //   setUserLogged(true);
-      // } else {
-      //   setError(true);
-      // }
-      // Cookies.set("userUniqueId", resData.dataObject.userUniqueId);
-     
       Cookies.set("userUniqueId", response.dataObject.userUniqueId);
       Cookies.set("mobileNumber", response.dataObject.mobileNumber);
-      // setUserUniqueId(resData.dataObject.userUniqueId);
       setUserUniqueId(response.dataObject.userUniqueId);
       if (redirect !== undefined && redirect === false) {
         setOpen(false);
-      } 
-      // else {
-      //   Router.push(`/`);
-      // }
+      }
       setUserLogged(true);
     } else {
       setError(true);
     }
-  };
-
-  const addUserSearchandProfileLocations = async (data) => {
-    const locationPayload = {
-      city: "Hyderabad",
-      country: "India",
-      locationId: 0,
-      state: "Telangana",
-      userUniqueId: data,
-    };
-
-    const addUserSearchLocationResponse = await Axios.addUserSearchLocation(
-      locationPayload
-    );
-    const addUserProfileLocationResponse = await Axios.addUserProfileLocation(
-      locationPayload
-    );
   };
 
   const otpResend = async () => {
@@ -119,7 +66,13 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
   return (
     <div className="container max-w-xl grid place-items-center">
       <div>
-        <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} alt="ORUphones" width={160} height={40} className="md:w-100 w-72"/>
+        <Image
+          src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"}
+          alt="ORUphones"
+          width={160}
+          height={40}
+          className="md:w-100 w-72"
+        />
       </div>
       <form
         onSubmit={handleSubmit}
@@ -141,14 +94,13 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
           <input
             type="text"
             name="otp"
-            // pattern="[0-9]"
-            // maxLength="6"
             required
             title="4 digits code"
-            className={`text-center text-mediumFontSize font-Roboto-Semibold block p-4 w-full rounded appearance-none border-1  bg-transparent ${error
-              ? "ring-2 ring-red-600 focus:ring-2 focus:ring-red-600"
-              : "ring-0 focus:ring-0"
-              }`}
+            className={`text-center text-mediumFontSize font-Roboto-Semibold block p-4 w-full rounded appearance-none border-1  bg-transparent ${
+              error
+                ? "ring-2 ring-red-600 focus:ring-2 focus:ring-red-600"
+                : "ring-0 focus:ring-0"
+            }`}
             style={{ border: "1px solid #0000001F", color: "#00000099" }}
             value={formData?.otp || ""}
             onChange={handleChange}
@@ -175,7 +127,9 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
             <label
               className="ml-2 text-m-green md:text-mediumFontSize text-smallFontSize underline cursor-pointer"
               onClick={otpResend}
-            >RESEND OTP</label>
+            >
+              RESEND OTP
+            </label>
           )}
         </div>
 

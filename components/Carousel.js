@@ -8,9 +8,6 @@ const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>(
 <Image src={Chevronleft} width={10} height={10} alt="" {...rest} />
 </div>
 )
-
-{/* <BiChevronLeft {...rest} className={`prev ${className}`}  */}
-// />;
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
   <div className="absolute z-10 top-32 right-2  bg-gray-400 flex p-1 rounded-full">
 <Image src={Chevronright} width={10} height={10} alt="" {...rest} />

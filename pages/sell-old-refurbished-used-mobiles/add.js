@@ -7,8 +7,6 @@ import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 
 function AddListing({ brandsList }) {
- 
-
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
@@ -27,7 +25,6 @@ function AddListing({ brandsList }) {
     <main className="container grid grid-cols-3 gap-4 my-8">
       <div className="col-span-2 bg-white rounded shadow">
         <AddListingForm
-          // brandsList={brandsList}
           brandsList={brands}
           openPopup={() => setOpen(true)}
           openTCPopup={() => setOpenTCPopup(true)}
@@ -44,10 +41,6 @@ function AddListing({ brandsList }) {
 
 export async function getServerSideProps({ req, res, query }) {
   const { userUniqueId, sessionId, make_models } = req.cookies;
-  // const brandsList = await Axios.fetchMakeModelList(
-  //   userUniqueId || "Guest",
-  //   sessionId || ""
-  // );
 
   let brandsList;
   if (make_models) {
@@ -61,7 +54,6 @@ export async function getServerSideProps({ req, res, query }) {
   }
 
   return {
-    // props: { brandsList: brandsList?.dataObject || [] },
     props: { brandsList: brandsList || [] },
   };
 }

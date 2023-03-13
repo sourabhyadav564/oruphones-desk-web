@@ -4,15 +4,9 @@ import Input from "../Form/Input";
 import { useState, useEffect, useContext } from "react";
 import ImageInput from "../Form/ImageInput";
 import { numberWithCommas, numberFromString } from "../../utils/util";
-// import charging from "https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.png";
-// import headphone from "https://d1tl44nezj10jx.cloudfront.net/assets/headphones.png";
-// import originalBox from "https://d1tl44nezj10jx.cloudfront.net/assets/original-box.png";
-// import originalBill from "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png";
-// import amazon from "../../assets/amazon_renewed.png";
 import * as Axios from "../../api/axios";
 import Cookies from "js-cookie";
 import AppContext from "@/context/ApplicationContext";
-import Model2 from "../Popup/Model2";
 import DeviceConditionPopup from "../Popup/DeviceConditionPopup";
 
 function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
@@ -28,7 +22,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
   const [marketingName, setmarketingName] = useState();
   const [storage, setStorage] = useState();
   const [color, setColor] = useState(null);
-  const [deviceFunctional, setDeviceFunctional] = useState(null);
   const [deviceCondition, setDeviceCondition] = useState(null);
   const [name, setName] = useState(null);
   const [charger1, setCharger] = useState("N");
@@ -90,16 +83,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
     { value: "more", label: "More Than 11 Months Ago" },
   ];
 
-  const isDeviceFunctional = [
-    { value: "Yes", label: "Yes" },
-    { value: "No", label: "No" },
-  ];
-  const deviceConditionCheck = [
-    { value: "Excellent", label: "Excellent" },
-    { value: "Like New", label: "Like New" },
-    { value: "Good", label: "Good" },
-  ];
-
   useEffect(() => {
     setDeviceCondition(conditionEdit);
     setConditionResults(conditionQuesEdit);
@@ -141,7 +124,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
       if (getListedDeviceInfo) {
         setListedDeviceInfo(getListedDeviceInfo?.dataObject);
         if (getListedDeviceInfo?.dataObject.images !== null) {
-          // setImages(getListedDeviceInfo?.dataObject.images);
           listedDeviceImages(getListedDeviceInfo?.dataObject, setImages);
         } else {
           setImages(initialState);
@@ -236,12 +218,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
         panel: index === 0 ? "front" : index === 1 ? "back" : index - 1,
       };
       setImages(tempImages);
-
-      // setImages((prev) =>
-      // prev.map((item,i) => {
-      //     return i === index ? { ...item, thumbnailImagePath: data1?.dataObject?.thumbnailImagePath, imagePath: data1?.dataObject?.imagePath, panel: index === 0 ? "front" : index === 1 ? "back" : index - 1 } : item;
-      //   })
-      // );
     }
   };
 
@@ -320,14 +296,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               setmarketingName(e.value);
             }}
           ></Input>
-          {/* <Input
-            value={listedDeviceInfo?.deviceStorage}
-            labelName="Storage"
-            disabled
-            onChange={(e) => {
-              setStorage(e.value);
-            }}
-          ></Input> */}
           {listedDeviceInfo?.verified ? (
             <Input value={listedDeviceInfo?.deviceStorage} disabled>
               Storage
@@ -340,9 +308,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 setStorage(e.value);
               }}
               value={listedDeviceInfo?.deviceStorage}
-            // options={deviceStorages?.map((item) => {
-            //   return { label: item, value: item };
-            // })}
             />
           )}
           <Select
@@ -361,13 +326,7 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               className="flex flex-col justify-center items-start px-4 border h-14 rounded-md text-gray-500"
               open={open}
               setOpen={setOpen}
-              // placeholder={listedDeviceInfo?.deviceCondition}
-              // labelName="Device Condition"
-              // onChange={(e) => {
-              //   setDeviceCondition(e.value);
-              // }}
               onClick={() => setOpen(true)}
-            // options={deviceConditionCheck}
             >
               {deviceCondition ? deviceCondition : listedDeviceInfo?.deviceCondition}
               <div className="absolute top-[390px] text-lg bg-white py-1 z-1 duration-300 origin-0 text-[13px]" style={{ color: "#00000099" }}>
@@ -403,7 +362,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 </span>
                 <ImageInput
                   type="file"
-                  // key={item?.panel}
                   preview={item?.thumbImage}
                   name={item?.panel || item?.name}
                   onChange={(e) => handleImageChange(e, index)}
@@ -490,17 +448,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
         <div className="grid grid-cols-7 gap-1">
           {listedDeviceInfo?.listingPrice && (
             <div className="col-span-2">
-              {/* <Input
-                placeholder="Enter Price"
-                defaultValue={"₹" + listedDeviceInfo?.listingPrice}
-                className="text-2xl"
-                onChange={(e) => {
-                  setSellPrice(e.target.value);
-                }}
-              >
-                Enter your sell price
-              </Input> */}
-
               <Input
                 value={numberFromString(sellPrice)}
                 prefix={"₹"}
@@ -508,10 +455,8 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
                 max="999999"
                 inputClass="text-3xl font-bold"
                 className={`text-3xl font-bold rounded-r-none border-r-0`}
-                //errorClass={`border ${sellValueRequired}`}
                 onChange={(e) => {
                   setSellPrice(e.target.value);
-                  // setSellValueRequired("");
                 }}
               >
                 Enter your sell price
@@ -520,10 +465,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
           )}
           <div className="col-span-2 text-sm bg-gray-100 py-2 justify-evenly items-center flex flex-col w-full rounded">
             <span>Recommended Price</span>
-            {/* <p className="font-bold text-base">
-              {"₹" + numberWithCommas(leastSellingprice)} -{" "}
-              {"₹" + numberWithCommas(maxsellingprice)}
-            </p> */}
             {(leastSellingprice && (
               <p className="font-bold text-base">
                 {"₹ " + numberWithCommas(leastSellingprice)} -{" "}
@@ -531,20 +472,6 @@ function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
               </p>
             )) || <p>--</p>}
           </div>
-          {/* <div className="col-span-3 grid grid-cols-2 px-4 py-2 gap-4 text-xs rounded border">
-            <div className="flex flex-col space-y-1">
-              <span> Buyer</span>
-              <div className="relative w-full h-full">
-                <Image src={amazon} layout="fill" alt="buyer" />
-              </div>
-            </div>
-            <div className="flex flex-col space-1">
-              <span>You will get</span>
-              <p className="font-semibold text-2xl">
-                {numberWithCommas("22900")}
-              </p>
-            </div>
-          </div> */}
         </div>
         {getExternalSellerData && getExternalSellerData.length > 0 && (
           <p

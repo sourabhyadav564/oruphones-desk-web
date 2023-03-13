@@ -32,7 +32,6 @@ function EditListing({ brandsList }) {
           id={id}
           openPopup={() => setOpen(true)}
           openTCPopup={() => setOpenTCPopup(true)}
-          // brandsList={brandsList}
           brandsList={brands}
         />
       </div>
@@ -45,20 +44,8 @@ function EditListing({ brandsList }) {
   );
 }
 
-// export async function getServerSideProps() {
-//   const makeModelLists = await Axios.fetchMakeModelList();
-
-//   return {
-//     props: { makeModelLists: makeModelLists?.dataObject || [] }
-//   }
-// }
-
 export async function getServerSideProps({ req, res, query }) {
   const { userUniqueId, sessionId, make_models } = req.cookies;
-  // const brandsList = await Axios.fetchMakeModelList(
-  //   userUniqueId || "Guest",
-  //   sessionId || ""
-  // );
 
   let brandsList;
   if (make_models) {

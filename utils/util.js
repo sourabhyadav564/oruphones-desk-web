@@ -1,11 +1,6 @@
 import moment from "moment";
 import { deviceDefaultImage } from "./constant";
 
-// export function numberWithCommas(x) {
-//   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-//   // return x;
-// }
-
 export function numberWithCommas(s) {
   s = s?.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
   return s;

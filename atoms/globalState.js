@@ -17,20 +17,6 @@ export const otherVandorDataSelector = selector({
     },
 })
 
-// export const otherVandorListingIdState = atom({
-//     key: "otherVandorListingId",
-//     default: "",
-// })
-
-// export const otherVandorListingIdSelector = selector({
-//     key: "otherVandorListingIdSelector",
-//     get: ({get}) => {
-//         const data = get(otherVandorListingIdState)
-//         return data
-//     }
-// })
-
-
 export const makeState = atom({
     key: "makeState",
     default: "",

@@ -1,11 +1,10 @@
 import * as Axios from "../../../api/axios";
 
 function Share() {
-  return (<></>);
+  return <></>;
 }
 
 export default Share;
-
 
 export async function getServerSideProps({ query }) {
   try {
@@ -25,5 +24,4 @@ export async function getServerSideProps({ query }) {
       },
     };
   }
-
 }

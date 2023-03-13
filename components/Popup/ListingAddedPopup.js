@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import patchCheck from "https://d1tl44nezj10jx.cloudfront.net/assets/patch-check.svg";
 import Modal from ".";
 
 function ListingAddedPopup({ open, setOpen, data }) {

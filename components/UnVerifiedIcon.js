@@ -4,8 +4,6 @@ export default function UnVerifiedIcon({ ...rest }) {
     id="Group_552"
     data-name="Group 552"
     xmlns="http://www.w3.org/2000/svg"
-    // width="68.912"
-    // height="28.811"
     viewBox="0 0 68.912 28.811"
     {...rest}
   >

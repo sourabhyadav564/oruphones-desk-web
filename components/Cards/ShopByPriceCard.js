@@ -12,7 +12,6 @@ function ShopByPriceCard({ src, min, max }) {
           </div>
           <div className="text-m-grey-1 text-lg sm:text-base py-1 font-bold flex items-center justify-center w-full">
             <p className="flex items-center">
-              {/* <BiRupee /> */}
                <Image src={Rupee1} width={20} height={20} alt="" />  {min}
             </p>
             <p className="w-10 inline-flex justify-center items-center"> and </p>
@@ -30,12 +29,10 @@ function ShopByPriceCard({ src, min, max }) {
         </div>
         <div className="text-m-grey-1 text-lg sm:text-base py-1 font-bold flex items-center justify-center w-full">
           <p className="flex items-center">
-            {/* <BiRupee />  */}
             <Image src={Rupee1} width={20} height={20} alt="" /> {min}
           </p>
           <p className="w-4 inline-flex justify-center items-center"> {"-"} </p>
           <p className="flex items-center">
-            {/* <BiRupee />  */}
             <Image src={Rupee1} width={20} height={20} alt="" /> {max}
           </p>
         </div>

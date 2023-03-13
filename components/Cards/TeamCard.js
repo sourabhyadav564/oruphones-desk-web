@@ -17,7 +17,6 @@ function TeamCard({ imgsrc, name, position, description, twittersrc, linkedInsrc
       <p className="font-Roboto-Regular text-[14px]">{description}</p>
       <div className=" m-auto justify-center gap-2  py-2">
         <a href={linkedInsrc} target="_blank" className="">
-        {/* <AiFillLinkedin className="w-8 h-8 hover:rounded-full hover:bg-gray-600 p-2"/> */}
         <Image src={linkedin} width={20} height={20} alt=""/>
         </a>
       </div>

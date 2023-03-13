@@ -1,7 +1,7 @@
 module.exports = {
     mode: "jit",
     purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-    darkMode: false, // or 'media' or 'class'
+    darkMode: false,
     theme: {
         fontFamily: {
             'Roboto-Bold': ['Roboto-Bold'],
@@ -77,9 +77,9 @@ module.exports = {
             spacing: {
                 "4rem": "4px, 4px, 4px,4px",
             },
-            // fontFamily: {
-            //     "open-sans": '"Open Sans", Helvetica, Arial, sans-serif',
-            // },
+            fontFamily: {
+                "open-sans": '"Open Sans", Helvetica, Arial, sans-serif',
+            },
             transformOrigin: {
                 0: "0%",
             },

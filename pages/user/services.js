@@ -4,16 +4,12 @@ import { servicesData } from "@/utils/constant";
 import Image from "next/image";
 import { useState } from "react";
 import AppDownloadPopup from "@/components/Popup/AppDownloadPopup";
-import Link from "next/link";
 
 function Services() {
   const [openAppDownload, setOpenAppDownload] = useState(false);
-  const [active,setActive] = useState(false);
-
   const handleClick = () => {
     setOpenAppDownload(true);
   };
-
 
   return (
     <UserProfile>
@@ -28,7 +24,6 @@ function Services() {
                 href={item.link}
                 key={index}
                 className={`${index==0?("bg-gray-200 bg-opacity-60"):("bg-white")} border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
-              // onClick={handleVerifyListing}
               >
                 <div className="p-4">
                   <Image

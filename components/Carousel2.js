@@ -1,24 +1,20 @@
 import Slider from "react-slick";
-import Chevronleft from "@/assets/chevronleft.svg"
-import Chevronright from "@/assets/chevronright.svg"
+import Chevronleft from "@/assets/chevronleft.svg";
+import Chevronright from "@/assets/chevronright.svg";
 import Image from "next/image";
 
-const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>( 
+const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
   <div className="absolute z-10 top-14 left-2  bg-gray-200  rounded-full p-1 flex ">
-<Image src={Chevronleft} width={10} height={10} alt="" {...rest} />
-</div>
-)
-
-{/* <BiChevronLeft {...rest} className={`prev ${className}`}  */}
-// />;
+    <Image src={Chevronleft} width={10} height={10} alt="" {...rest} />
+  </div>
+);
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
   <div className="absolute z-10 top-14 right-2  bg-gray-200 flex p-1 rounded-full">
-<Image src={Chevronright} width={10} height={10} alt="" {...rest} />
-</div>
-)
+    <Image src={Chevronright} width={10} height={10} alt="" {...rest} />
+  </div>
+);
 
 export default function Carousel2({ children, className, ...rest }) {
-
   var settings = {
     arrows: true,
     slidesToShow: 2,
@@ -28,7 +24,10 @@ export default function Carousel2({ children, className, ...rest }) {
     nextArrow: <ArrowRight />,
   };
   return (
-    <Slider className={`carousel ${className ? className : ""} z-0`} {...settings}>
+    <Slider
+      className={`carousel ${className ? className : ""} z-0`}
+      {...settings}
+    >
       {children}
     </Slider>
   );

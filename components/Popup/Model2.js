@@ -44,10 +44,6 @@ export default function Model2({ open, setOpen, children, title }) {
           >
             <div className="relative inline-block bg-white rounded-lg text-left shadow-xl align-middle custom-scroll mx-8">
               <div className="absolute right-0 pt-5 px-6 sm:flex justify-between items-center">
-                {/* <GrClose
-                  onClick={() => setOpen(false)}
-                  className="cursor-pointer"
-                /> */}
                  <Image src={Close} width={28} height={28} onClick={() => setOpen(false)}/>
               </div>
               <div

@@ -7,24 +7,23 @@ import linkedin from "@/assets/linkedIn.svg";
 import youtube from "@/assets/yt.svg";
 import twitter from "@/assets/twitter.svg";
 
-
-
-import {
-  addListingBrandState,
-} from "../../atoms/globalState";
+import { addListingBrandState } from "../../atoms/globalState";
 import { useRecoilState } from "recoil";
 import AppDownloadPopup from "../Popup/AppDownloadPopup";
 import { useState } from "react";
 import Image from "next/image";
 
 const Footer = () => {
-  const [addListingBrand, setAddListingBrand] = useRecoilState(addListingBrandState);
+  const [addListingBrand, setAddListingBrand] =
+    useRecoilState(addListingBrandState);
   const [openAppDownload, setOpenAppDownload] = useState(false);
   const [qrValue1, setQrValue1] = useState(
     "https://apps.apple.com/in/app/oruphones/id1629378420"
   );
 
-  const [qrValue2, setQrValue2] = useState("https://play.google.com/store/apps/details?id=com.oruphones.oru");
+  const [qrValue2, setQrValue2] = useState(
+    "https://play.google.com/store/apps/details?id=com.oruphones.oru"
+  );
 
   const brandData = [
     {
@@ -141,7 +140,6 @@ const Footer = () => {
       id: 23,
       prefill: "Panasonic",
       name: "Panasonic",
-
     },
     {
       id: 24,
@@ -187,22 +185,30 @@ const Footer = () => {
 
   return (
     <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
-      <div><div className="lg:pl-24 lg:pr-28 px-8 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
-        <p className='text-white  tracking-[0.15em] leading-8'>
-          {brandData && brandData.map((brand, index) => (
-            <a className="hover:cursor-pointer hover:opacity-60 "
-              // href="/sell-old-refurbished-used-mobiles/add"
-              // onClick={() => setAddListingBrand(brand.prefill)}>
-              onClick={() => setOpenAppDownload(true)}>
-                    Sell {" "}{brand.name} Phone   {brand.id!=31&& "|"} </a>
-          ))}          
-        </p>
-      </div></div>
+      <div>
+        <div className="lg:pl-24 lg:pr-28 px-8 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
+          <p className="text-white  tracking-[0.15em] leading-8">
+            {brandData &&
+              brandData.map((brand, index) => (
+                <a
+                  className="hover:cursor-pointer hover:opacity-60 "
+                  onClick={() => setOpenAppDownload(true)}
+                >
+                  Sell {brand.name} Phone {brand.id != 31 && "|"}{" "}
+                </a>
+              ))}
+          </p>
+        </div>
+      </div>
       <div className="container grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4 text-m-white">
         <div className="flex flex-col">
-          <p className="font-Roboto-Semibold text-xlFontSize">Customer Service</p>
+          <p className="font-Roboto-Semibold text-xlFontSize">
+            Customer Service
+          </p>
           <Link href="/privacy-policy">
-            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold hover:pl-4 duration-300 mt-4 max-w-max font-Roboto-Light text-regularFontSize">Privacy policy</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold hover:pl-4 duration-300 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
+              Privacy policy
+            </a>
           </Link>
           <Link href="/terms">
             <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-4 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
@@ -210,27 +216,37 @@ const Footer = () => {
             </a>
           </Link>
           <Link href="/faq">
-            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2 mt-4 max-w-max font-Roboto-Light text-regularFontSize">FAQs</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
+              FAQs
+            </a>
           </Link>
         </div>
         <div className="flex flex-col">
           <p className="font-Roboto-Semibold text-xlFontSize">Links</p>
           <Link href="https://www.oruphones.com/blog/">
-            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize" target="_blank">Blog</a>
+            <a
+              className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize"
+              target="_blank"
+            >
+              Blog
+            </a>
           </Link>
           <Link href="/about-us">
-            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">About Us</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">
+              About Us
+            </a>
           </Link>
           <Link href="/contact-us">
-            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Contact Us</a>
+            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">
+              Contact Us
+            </a>
           </Link>
-          {/* <Link href="/team">
-            <a className="hover:scale-125 hover:opacity-70 font-Roboto-Bold duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">Team</a>
-          </Link> */}
         </div>
         <div>
           <div className="flex flex-col">
-            <p className="font-Roboto-Semibold text-xlFontSize">DOWNLOAD ORUphones App</p>
+            <p className="font-Roboto-Semibold text-xlFontSize">
+              DOWNLOAD ORUphones App
+            </p>
             <div className="flex flex-row">
               <a target={"_blank"} rel="noreferrer" href={qrValue2}>
                 <p className="w-32 mt-2 mb-2 mr-2 h-10 bg-play-store bg-no-repeat hover:scale-105 hover:duration-300  bg-contain" />
@@ -240,9 +256,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div>
-            Follow us on Social Media
-          </div>
+          <div>Follow us on Social Media</div>
           <div className="flex items-center gap-x-1 mt-4 space-x-4">
             <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
               <a
@@ -250,7 +264,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image src={Fb} width={20} height={20} alt=""/>
+                <Image src={Fb} width={20} height={20} alt="" />
               </a>
             </div>
             <div className="cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
@@ -259,8 +273,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* <FaTwitterSquare size={25} /> */}
-                <Image src={twitter} width={20} height={20} alt=""/>
+                <Image src={twitter} width={20} height={20} alt="" />
               </a>
             </div>
             <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
@@ -269,8 +282,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* <FaInstagram size={25} /> */}
-                <Image src={instagram} width={20} height={20} alt=""/>
+                <Image src={instagram} width={20} height={20} alt="" />
               </a>
             </div>
             <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
@@ -279,8 +291,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* <FaPinterestSquare size={25} /> */}
-                <Image src={pinterest} width={20} height={20} alt=""/>
+                <Image src={pinterest} width={20} height={20} alt="" />
               </a>
             </div>
             <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
@@ -289,8 +300,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* <FaLinkedin size={25} /> */}
-                <Image src={linkedin} width={20} height={20} alt=""/>
+                <Image src={linkedin} width={20} height={20} alt="" />
               </a>
             </div>
             <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
@@ -299,8 +309,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* <FaYoutube size={25} /> */}
-                <Image src={youtube} width={20} height={20} alt=""/>
+                <Image src={youtube} width={20} height={20} alt="" />
               </a>
             </div>
             <div className=" cursor-pointer  rounded-full flex items-center justify-center hover:scale-125 font-Roboto-Bold duration-300">
@@ -309,15 +318,14 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* <FiMail size={25} /> */}
-                <Image src={gmail} width={20} height={20} alt=""/>
+                <Image src={gmail} width={20} height={20} alt="" />
               </a>
             </div>
           </div>
         </div>
       </div>
       <AppDownloadPopup open={openAppDownload} setOpen={setOpenAppDownload} />
-    </footer >
+    </footer>
   );
 };
 

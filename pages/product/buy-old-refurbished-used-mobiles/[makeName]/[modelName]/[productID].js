@@ -1,54 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import ProductCard from "../../../../../components/Cards/ProductCard";
 import ProductDetailsCard from "../../../../../components/Cards/ProductDetailsCard";
-import SellerDetailsCard from "../../../../../components/Cards/SellerDetailsCard";
 import * as Axios from "../../../../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import FullImageView from "@/components/FullImageView";
 import Cookies from "js-cookie";
-// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
 
-
-// import {
-//   otherVandorDataSelector,
-//   // otherVandorListingIdSelector,
-// } from "../../../../../atoms/globalState";
-
-
-// import {
-//   otherVendorDataState,
-//   // otherVandorListingIdState,
-// } from "../../../../../atoms/globalState";
-// import { useRecoilState } from "recoil";
-
-// import { useRecoilValue } from "recoil";
-import { useRouter } from "next/router";
-
-function ProductDetails({ listingInfo,data }) {
-  console.log("listing Info :: ",listingInfo);
+function ProductDetails({ listingInfo, data }) {
   let [simliarProducts, setSimliarProducts] = useState([]);
   const { getSearchLocation } = useContext(AppContext);
   const [openImageFullView, setOpenImageFullView] = useState(false);
-
   const [pageNumber, setPageNumber] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-
-  // const [product, setProductsData] = useRecoilState(otherVendorDataState);
-
-  // const productData = useRecoilValue(otherVandorDataSelector);
-
-  // const router = useRouter();  
-  // const listingId = router.query.productID;
-
-  // let otherVendorData = [];
-
-  // productData.filter((item) => {
-  //   if (item.listingId === listingId) {
-  //     otherVendorData.push(item);
-  //   }
-  // });
 
   const loadData = (intialPage) => {
     let payLoad = {
@@ -63,7 +28,7 @@ function ProductDetails({ listingInfo,data }) {
       maxsellingPrice: 200000,
       minsellingPrice: 0,
       verified: "",
-      warenty: []
+      warenty: [],
     };
     Axios.fetchSimilarProducts(
       payLoad,
@@ -76,11 +41,8 @@ function ProductDetails({ listingInfo,data }) {
         })
       );
       setTotalProducts(response?.dataObject?.totalProducts);
-      // setPageNumber(pageNumber + 1);
     });
   };
-
-
 
   const loadMoreData = () => {
     let newPages = pageNumber + 1;
@@ -98,9 +60,9 @@ function ProductDetails({ listingInfo,data }) {
       maxsellingPrice: 200000,
       minsellingPrice: 0,
       verified: "",
-      warenty: []
+      warenty: [],
     };
-   
+
     Axios.fetchSimilarProducts(
       payLoad,
       Cookies.get("userUniqueId") || "Guest",
@@ -114,7 +76,6 @@ function ProductDetails({ listingInfo,data }) {
       if (response?.dataObject?.otherListings.length == 0) {
         setIsFinished(true);
       }
-      // setPageNumber(pageNumber + 1);
       setIsLoadingMore(false);
     });
   };
@@ -140,9 +101,6 @@ function ProductDetails({ listingInfo,data }) {
             openFullImage={() => setOpenImageFullView(true)}
           />
         </div>
-        {/* <div className="bg-white shadow rounded">
-          <SellerDetailsCard data={listingInfo} />
-        </div> */}
         <div className="col-span-4">
           <p
             className="text-m-black font-Roboto-Light text-regularFontSize my-3"
@@ -150,17 +108,7 @@ function ProductDetails({ listingInfo,data }) {
           >
             Similar Products ({simliarProducts?.length || 0})
           </p>
-          <div
-            className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4"
-          // onClick={() => {
-          //   setProductsData(
-          //     simliarProducts.length > 0 &&
-          //     simliarProducts?.filter((items) => {
-          //         return items.listingId != listingInfo.listingId;
-          //       }) || []
-          //   );
-          // }}
-          >
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
             {simliarProducts && simliarProducts.length > 0 ? (
               simliarProducts?.map((product, index) => (
                 <ProductCard
@@ -176,17 +124,13 @@ function ProductDetails({ listingInfo,data }) {
               </div>
             )}
           </div>
-          {/* {isLoadingMore && (
-            <div className="flex items-center justify-center mt-5 text-lg font-semibold animate-pulse">
-              <span>Fetching more products...</span>
-            </div>
-          )} */}
           {simliarProducts &&
             simliarProducts.length > 0 &&
             isFinished == false && (
               <span
-                className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
-                  } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                className={`${
+                  isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
                 onClick={loadMoreData}
               >
                 <p className="block text-m-green font-semibold">
@@ -201,7 +145,6 @@ function ProductDetails({ listingInfo,data }) {
         close={() => setOpenImageFullView(false)}
         images={
           (listingInfo?.images?.length && listingInfo?.images) ||
-          // listingInfo?.defaultImage ||
           (listingInfo?.defaultImage?.fullImage && [
             { fullImage: listingInfo?.defaultImage?.fullImage },
           ]) ||
@@ -213,8 +156,12 @@ function ProductDetails({ listingInfo,data }) {
           ]) ||
           (listingInfo?.vendorLogo && [
             {
-              fullImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"?.src,
-              thumbImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"?.src,
+              fullImage:
+                "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  ?.src,
+              thumbImage:
+                "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  ?.src,
             },
           ])
         }
@@ -234,9 +181,8 @@ export async function getServerSideProps({ req, res, query }) {
     sessionId || ""
   );
   return {
-    props: { 
-      listingInfo: listingInfo?.dataObject || [] },
+    props: {
+      listingInfo: listingInfo?.dataObject || [],
+    },
   };
-
-
 }

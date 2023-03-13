@@ -1,11 +1,4 @@
 import Image from "next/image";
-// import box from "https://d1tl44nezj10jx.cloudfront.net/assets/box.png";
-// import condition from "https://d1tl44nezj10jx.cloudfront.net/assets/condition.png";
-// import calendar1 from "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-1.png";
-// import calendar2 from "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-2.png";
-// import calendar3 from "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png";
-// import color from "@/assets/color.png";
-// import storage from "https://d1tl44nezj10jx.cloudfront.net/assets/storage.png";
 
 function LabelAndValue({ label, value }) {
   if (label) {

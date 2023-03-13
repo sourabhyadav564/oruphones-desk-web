@@ -4,27 +4,17 @@ import Input from "../Form/Input";
 import { useState, useEffect, useContext } from "react";
 import ImageInput from "../Form/ImageInput";
 import { numberWithCommas, numberFromString } from "../../utils/util";
-// import charging from "../../assets/charging-station.png";
-// import headphone from "../../assets/headphones.png";
-// import originalBox from "../../assets/original-box.png";
-// import charging from "https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.svg";
-// import headphone from "https://d1tl44nezj10jx.cloudfront.net/assets/headphones.svg";
-// import originalBox from "https://d1tl44nezj10jx.cloudfront.net/assets/original-box.svg";
-// import originalBill from "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import Cookies from "js-cookie";
 import { deviceConditionQuestion } from "@/utils/constant";
-import { deviceConditionQuestionUpdated } from "@/utils/constant";
 import ConditionOptionLarge from "../Condition/ConditionOptionLarge";
 import DeviceConditionCard from "../Condition/DeviceConditionCard";
 import Geocode from "react-geocode";
 import { getCityFromResponse } from "@/utils/util";
-import {
-  addListingBrandSelector,
-} from "../../atoms/globalState";
+import { addListingBrandSelector } from "../../atoms/globalState";
 import { useRecoilValue } from "recoil";
 
 function AddEditListing({
@@ -67,7 +57,6 @@ function AddEditListing({
   const [maxsellingprice, setMaxsellingprice] = useState("");
   const [formData, setFormData] = useState({ termsAndCondition: true });
   const [disableSubmitButton, setDisableSubmitButton] = useState(true);
-  // const [makeRequired, setMakeRequired] = useState("border-red-700 border rounded");
   const [makeRequired, setMakeRequired] = useState("");
   const [marketingNameRequired, setMarketingNameRequired] = useState("");
   const [storageRequired, setStorageRequired] = useState("");
@@ -121,7 +110,7 @@ function AddEditListing({
   useEffect(() => {
     let makeData = makeOptions.filter((item) => item.make === make);
     if (makeData && makeData.length > 0) {
-      setModelOptions((makeData && makeData[0]?.models));
+      setModelOptions(makeData && makeData[0]?.models);
       setmarketingName(null);
       setStorage(null);
       setColor(null);
@@ -136,7 +125,7 @@ function AddEditListing({
   useEffect(() => {
     let makeData = makeOptions.filter((item) => item.make === make);
     if (makeData && makeData.length > 0) {
-      setModelOptions((makeData && makeData[0]?.models));
+      setModelOptions(makeData && makeData[0]?.models);
       setmarketingName(null);
       setStorage(null);
       setColor(null);
@@ -147,8 +136,6 @@ function AddEditListing({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [make]);
-
-
 
   useEffect(() => {
     if (numberFromString(sellPrice) >= 1000) {
@@ -254,11 +241,11 @@ function AddEditListing({
         prev.map((item) => {
           return item.name === name
             ? {
-              ...item,
-              thumbnailImagePath: data1?.dataObject?.thumbnailImagePath,
-              imagePath: data1?.dataObject?.imagePath,
-              panel: index === 0 ? "front" : index === 1 ? "back" : index - 1,
-            }
+                ...item,
+                thumbnailImagePath: data1?.dataObject?.thumbnailImagePath,
+                imagePath: data1?.dataObject?.imagePath,
+                panel: index === 0 ? "front" : index === 1 ? "back" : index - 1,
+              }
             : item;
         })
       );
@@ -275,12 +262,6 @@ function AddEditListing({
     };
     setImages(tempImages);
   };
-
-  // const handleFocus = async (e) => {
-  //   alert("FOCUS");
-  // }
-
-  const [currentLocation, setCurrentLocation] = useState(false);
 
   const options = {
     enableHighAccuracy: true,
@@ -299,10 +280,7 @@ function AddEditListing({
     Geocode.setApiKey("AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w");
 
     Geocode.setLanguage("en");
-    // Geocode.setRegion("es");
-    // Geocode.setLocationType("ROOFTOP");
     Geocode.enableDebug();
-    // Get address from latitude & longitude.
     Geocode.fromLatLng(lat, lng).then(
       (response) => {
         let address = response?.plus_code?.compound_code;
@@ -324,7 +302,6 @@ function AddEditListing({
   };
 
   const onError = (error) => {
-    // alert(error.message);
     setLocation({
       loaded: true,
       city: "India",
@@ -341,15 +318,6 @@ function AddEditListing({
     navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
   };
 
-  // useEffect(() => {
-  //   const initialState = localStorage.getItem("usedLocation");
-  //   if (!initialState || initialState == null) {
-  //     handleNearme();
-  //   } else {
-  //     setSearchLocation(initialState);
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (location.loaded && location.city && location.city.length > 0) {
       if (Cookies.get("userUniqueId") !== undefined) {
@@ -360,18 +328,6 @@ function AddEditListing({
         if (searchLocId) {
           searchID = searchLocId[0]?.locationId;
         }
-        let payLoad = {
-          city: location.city,
-          country: "India",
-          state: "",
-          locationId: searchID,
-          userUniqueId: Cookies.get("userUniqueId"),
-        };
-        // Axios.updateAddress(payLoad).then((res) => {
-        //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-        //     setUserInfo(resp.dataObject);
-        //   });
-        // });
       }
       setSearchLocation(location.city);
       setSelectedCity(location.city);
@@ -525,15 +481,12 @@ function AddEditListing({
         <div className="grid grid-cols-2 gap-8 ">
           <span>
             <Select
-              // labelName="Brand"
-              //placeholder=""
               className={makeRequired}
               onFocus={(e) => {
                 setMakeRequired("");
               }}
               required
               value={make === null ? "Select..." : { label: make, value: make }}
-              //value={data?.make}
               disabled={isFromEdit}
               onChange={(e) => {
                 setMake(e.value);
@@ -617,32 +570,6 @@ function AddEditListing({
           </span>
           {!show ? (
             <div className="col-span-2">
-              {/* <span>
-              <Select
-                labelName="Device Condition"
-                className={deviceConditionRequired}
-                onFocus={(e) => {
-                  setDeviceConditionRequired("");
-                }}
-                onChange={(e) => {
-                  setDeviceCondition(e.value);
-                }}
-                options={deviceConditionCheck}
-              ></Select>
-              {deviceConditionRequired && (
-                <p className="text-sm whitespace-nowrap cursor-pointer text-red">
-                  Please select this field
-                </p>
-              )}
-            </span>
-            <span>
-              <p
-                className="text-sm whitespace-nowrap underline cursor-pointer text-blue-600 hover:text-blue-800"
-                onClick={() => setConditionInfoPopup(true)}
-              >
-                What&apos;s this?
-              </p>
-            </span> */}
               <div>
                 <h3 className="">
                   {deviceConditionQuestion[questionIndex]?.title}
@@ -655,10 +582,6 @@ function AddEditListing({
                           return {
                             ...prev,
                             [questionIndex]: item?.title,
-                            // {
-                            //   ...prev[questionIndex],
-                            //   [index]: true,
-                            // },
                           };
                         });
                       }}
@@ -679,9 +602,11 @@ function AddEditListing({
                   onClick={() =>
                     setQuestionIndex(questionIndex > 0 ? questionIndex - 1 : 0)
                   }
-                  className={`${questionIndex > 0 && "hover:cursor-pointer"
-                    } p-2 flex justify-end items-center ${!questionIndex > 0 && "opacity-50"
-                    }`}
+                  className={`${
+                    questionIndex > 0 && "hover:cursor-pointer"
+                  } p-2 flex justify-end items-center ${
+                    !questionIndex > 0 && "opacity-50"
+                  }`}
                 >
                   <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
                     Back
@@ -695,17 +620,21 @@ function AddEditListing({
                           ? questionIndex + 1
                           : deviceConditionQuestion.length - 1
                       );
-                    questionIndex == 0 && conditionResults[0]?.toString() == "No" && calculateDeviceCondition();
+                    questionIndex == 0 &&
+                      conditionResults[0]?.toString() == "No" &&
+                      calculateDeviceCondition();
                     questionIndex == deviceConditionQuestion.length - 1 &&
                       calculateDeviceCondition();
                   }}
-                  className={`${!(questionIndex in conditionResults)
-                    ? "opacity-50"
-                    : "hover:cursor-pointer"
-                    } p-2 flex justify-end items-center`}
+                  className={`${
+                    !(questionIndex in conditionResults)
+                      ? "opacity-50"
+                      : "hover:cursor-pointer"
+                  } p-2 flex justify-end items-center`}
                 >
                   <span className="border-2 px-5 py-2 rounded-md bg-m-green text-white font-semibold hover:opacity-80 active:opacity-70 duration-300">
-                    {(questionIndex == deviceConditionQuestion.length - 1 || conditionResults[0]?.toString() == "No")
+                    {questionIndex == deviceConditionQuestion.length - 1 ||
+                    conditionResults[0]?.toString() == "No"
                       ? "Done"
                       : "Next"}
                   </span>
@@ -769,11 +698,10 @@ function AddEditListing({
                     return { label: item, value: item };
                   })}
                 ></Select>
-                <div className="h-14 w-16 bg-gray-200 rounded-r-lg inline-flex justify-center items-center hover:cursor-pointer"
+                <div
+                  className="h-14 w-16 bg-gray-200 rounded-r-lg inline-flex justify-center items-center hover:cursor-pointer"
                   onClick={handleNearme}
-                >
-                  {/* <BiCurrentLocation size={24} /> */}
-                </div>
+                ></div>
               </div>
               {locationRequired && (
                 <p className="text-sm whitespace-nowrap cursor-pointer text-red">
@@ -832,7 +760,9 @@ function AddEditListing({
         </p>
         <div className="grid grid-cols-4 gap-4 mb-8">
           <Checkbox
-            src={"https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.svg"}
+            src={
+              "https://d1tl44nezj10jx.cloudfront.net/assets/charging-station.svg"
+            }
             text="Charger"
             checked={charger}
             onClick={(e) => {
@@ -848,7 +778,9 @@ function AddEditListing({
             }}
           />
           <Checkbox
-            src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-box.svg"}
+            src={
+              "https://d1tl44nezj10jx.cloudfront.net/assets/original-box.svg"
+            }
             text="Original Box"
             checked={originalBox1}
             onClick={(e) => {
@@ -856,7 +788,9 @@ function AddEditListing({
             }}
           />
           <Checkbox
-            src={"https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png"}
+            src={
+              "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png"
+            }
             text="Original Bill"
             checked={showWarranty}
             onClick={(e) => {
@@ -870,8 +804,9 @@ function AddEditListing({
             {deviceWarrantyCheck?.map((item, index) => (
               <div
                 key={index}
-                className={`${warranty == item?.value ? "bg-gray-200" : "bg-white"
-                  } py-3 px-5 rounded-md hover:cursor-pointer hover:bg-gray-200 active:bg-gray-300 duration-300 border-2 border-gray-200 flex items-center justify-center`}
+                className={`${
+                  warranty == item?.value ? "bg-gray-200" : "bg-white"
+                } py-3 px-5 rounded-md hover:cursor-pointer hover:bg-gray-200 active:bg-gray-300 duration-300 border-2 border-gray-200 flex items-center justify-center`}
                 onClick={() => setWarranty(item.value)}
               >
                 <span>{item.label}</span>
@@ -903,7 +838,6 @@ function AddEditListing({
                   Enter price more than 1000
                 </span>
               )}
-
             </div>
             <div className="text-sm bg-gray-1f text-m-grey-1 py-2 justify-evenly items-center flex flex-col w-full rounded rounded-l-none">
               <span>Recommended Price</span>
@@ -995,8 +929,9 @@ export default AddEditListing;
 
 const Checkbox = ({ src, text, onClick, checked }) => (
   <div
-    className={`border rounded px-6 py-4 relative ${checked === "Y" && "bg-gray-ef"
-      } hover:cursor-pointer`}
+    className={`border rounded px-6 py-4 relative ${
+      checked === "Y" && "bg-gray-ef"
+    } hover:cursor-pointer`}
     onClick={onClick}
   >
     <div className="relative w-14 h-14 mx-auto">

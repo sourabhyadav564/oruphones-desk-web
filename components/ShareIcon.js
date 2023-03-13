@@ -2,33 +2,34 @@ import { prepareShareLink } from "api/axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
-export default function ShareIcon({data, ...rest }) {
-
-function shareListingInfo(data){
-  prepareShareLink(data.listingId,Cookies.get("info") || "Guest").then((response)=>
-  {
-    data?.status!="Active" ? toast.warning("This device is sold out"): sharePopupInfo(response?.dataObject.url,response?.dataObject.content);
-  });
-}
-
-function sharePopupInfo(url,content){
-
-  if (navigator.share) {
-    navigator.share({
-      title: 'Share link',
-      url: url,
-      text:content[1]?.shareContent
-    }).then(() => {
-      console.log('Thanks for sharing!');
-    })
-    .catch(console.error);
-  } else {
-    // fallback
+export default function ShareIcon({ data, ...rest }) {
+  function shareListingInfo(data) {
+    prepareShareLink(data.listingId, Cookies.get("info") || "Guest").then(
+      (response) => {
+        data?.status != "Active"
+          ? toast.warning("This device is sold out")
+          : sharePopupInfo(
+              response?.dataObject.url,
+              response?.dataObject.content
+            );
+      }
+    );
   }
-}
+
+  function sharePopupInfo(url, content) {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Share link",
+          url: url,
+          text: content[1]?.shareContent,
+        })
+        .then(() => {})
+        .catch(console.error);
+    }
+  }
 
   return (
-    
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 19.497 21"

@@ -65,7 +65,7 @@ export function getSessionId() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -89,7 +89,7 @@ export function getSearchResults(q) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -103,7 +103,7 @@ export function fetchBrands() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -115,7 +115,7 @@ export function fetchMenuItems() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -134,7 +134,7 @@ export function signUp(mobileNumber) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -155,7 +155,7 @@ export function otpValidate(data) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -169,7 +169,7 @@ export function fetchShopByPrice() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -183,7 +183,7 @@ export function fetchTopsellingmodels() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -215,7 +215,7 @@ export function fetchByMarketingName(
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -229,7 +229,7 @@ export function fetchByMakeList(makeName) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -249,7 +249,7 @@ export async function fetchMakeModelList(userUniqueId, sessionId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -269,7 +269,7 @@ export async function fetchModelList(userUniqueId, sessionId, make, searchModel)
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -293,7 +293,7 @@ export function getListingbyMake(location, makeName, userUniqueId, pageNumber, s
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -307,7 +307,7 @@ export function getUserUniqueId(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -321,7 +321,7 @@ export function addUserSearchLocation(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -335,7 +335,7 @@ export function addUserProfileLocation(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -372,7 +372,7 @@ export function uploadImage(
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -386,7 +386,7 @@ export function saveSellNowDeviceInfo(payLoad) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -400,7 +400,7 @@ export function saveUpdatedDeviceInfo(payLoad) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -420,7 +420,7 @@ export function fetchUserListings(userUniqueId, sessionId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -434,7 +434,7 @@ export function getRecommandedPrice(data) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -459,7 +459,7 @@ export function getListedDeviceInfo(listingid, userUniqueId, sessionId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -477,7 +477,7 @@ export function deteleListedDevice(deletePayload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -495,7 +495,7 @@ export function activeListedDevice(deletePayload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -509,7 +509,7 @@ export function pauseListingDevice(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -523,7 +523,7 @@ export function getGlobalCities(searchText) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -542,7 +542,7 @@ export function getUserProfile(countryCode, mobileNumber) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -556,7 +556,7 @@ export function updateUserDetails(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -570,7 +570,7 @@ export function getShowSerchFilters() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -584,7 +584,7 @@ export function updateAddress(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -615,7 +615,7 @@ export function detailWithUserInfo(
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -637,7 +637,7 @@ export function fetchSellerMobileNumber(listingid, userUniqueid) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -658,7 +658,7 @@ export function bestDealNearByYou(location, userUniqueId, pageNumber) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -690,7 +690,7 @@ export function shopByPriceRange(
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -705,7 +705,7 @@ export function addFavotie(payload) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -725,7 +725,7 @@ export function removeFavotie(listingId, userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -746,7 +746,7 @@ export function bestDealNearYouAll(location, userUniqueId, pageNumber, sortBy) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -762,7 +762,7 @@ export function fetchMyFavorites(userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -781,7 +781,7 @@ export function fetchSimilarProducts(payLoad, userUniqueId, pageNumber) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -800,7 +800,7 @@ export function sendverification(listingid, userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -821,7 +821,7 @@ export function searchFilter(payLoad, userUniqueId, pageNumber, sortBy) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -833,7 +833,7 @@ export function fetchWebLinkByShareId(shareId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -847,7 +847,7 @@ export function getTinyUrl() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -861,7 +861,7 @@ export function getExternalSellSourceData(payLoad) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -875,7 +875,7 @@ export function infoTemplates() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -887,7 +887,7 @@ export function getMenu() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -909,7 +909,7 @@ export function uploadUserProfilePic(userProfilePicData, userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -928,7 +928,7 @@ export function prepareShareLink(listingId, userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -942,7 +942,7 @@ export function getAllNotificationByUserd(userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -956,7 +956,7 @@ export function markAsRead(notificationId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -971,7 +971,7 @@ export function deleteNotification(notificationId, userUniqueId) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -985,7 +985,7 @@ export function addsubscription(email) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -999,7 +999,7 @@ export function contactUs(payLoad) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -1013,7 +1013,7 @@ export function fetchTopArticles() {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -1036,7 +1036,7 @@ export function shopByCategory(location, category, userUniqueId, pageNumber, sor
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }
@@ -1050,7 +1050,7 @@ export function logEventInfo(eventName) {
       return response.data;
     },
     (err) => {
-      console.log(err);
+      // console.log(err);
     }
   );
 }

@@ -1,12 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-// import SellStep1 from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_1.svg";
-// import SellStep2 from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_2.svg";
-// import SellStep3 from "https://d1tl44nezj10jx.cloudfront.net/assets/sell_step_3.svg";
-// import BuyStep1 from "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_1.svg";
-// import BuyStep2 from "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_2.svg";
-// import BuyStep3 from "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_3.png";
 import Carousel from "../Carousel";
 
 const sellStepsData = [

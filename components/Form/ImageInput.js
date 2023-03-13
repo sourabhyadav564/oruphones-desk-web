@@ -11,8 +11,7 @@ function ImageInput({ name, preview, clearImage, ...rest }) {
           style={{ border: "1px solid #0000001F", color: "#00000099" }}
         >
           <img src={preview} style={{ width: "auto", height: "100%" }} />
-          {/* <GrClose className="absolute top-2 right-2 text-sm cursor-pointer" onClick={clearImage} /> */}
-          <Image src={Cross} width={20} height={20}/> 
+          <Image src={Cross} width={20} height={20} />
         </label>
       ) : (
         <label

@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react";
 
 import Rupee1 from "@/assets/rupee3.svg";
-// import devicePlaceholder from "../../assets/stock_image.png";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import ImageSlider from "../ImageSlider";
 import LabelAndValue from "../LabelAndValue";
@@ -12,12 +11,7 @@ import AddFav from "../AddFav";
 import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccessPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import Cookies from "js-cookie";
-import VerifiedIcon from "../VerifiedIcon";
-import UnVerifiedIcon from "../UnVerifiedIcon";
 import ShareIcon from "../ShareIcon";
-// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
-
-
 import InfoCircle from "@/assets/infocircle2.svg";
 import InfoCircle1 from "@/assets/infocircle.svg";
 import Star from "@/assets/star1.svg";
@@ -25,17 +19,13 @@ import FillStar from "@/assets/star2.svg";
 import FillExclamation from "@/assets/fillexclamation.svg";
 import PassCheck from "@/assets/gcheck.svg";
 import Close from "@/assets/close.svg";
-
 import VerificationIcon from "../VerificationIcon";
 import SellerDetailsCard from "./SellerDetailsCard";
 import { deviceConditionQuestion } from "@/utils/constant";
 import ConditionOptionLarge2 from "../Condition/ConditionOptionLarge2";
-// import testpass from "../../assets/testpass.png";
-// import testfail from "../../assets/testFail.png";
 import Image from "next/image";
 import { useRef } from "react";
 import { useEffect } from "react";
-import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
 import * as Axios from "../../api/axios";
 import ComparisonTable from "../Table/ComparisonTable";
@@ -55,40 +45,30 @@ function ProductDetailsCard({ data, openFullImage }) {
   ] = useState(false);
   const [resData, setResData] = useState([]);
   const [listingid, setListingid] = useState(data?.listingId);
-
   const [deviceListingInfo, setDeviceListingInfo] = useState(data);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const [ListingResData, SetListingtResData] = useState([]);
   const [showNumber, setShowNumber] = useState(false);
   const [ImageError, setImageError] = useState(false);
-
-  const myRef = useRef(null);
 
   let filled =
     data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
       ? 5
       : data?.deviceCondition?.toLowerCase() == "Excellent".toLowerCase()
-        ? 4
-        : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
-          ? 3
-          : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
-            ? 2
-            : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
-              ? 1
-              : 5;
+      ? 4
+      : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
+      ? 3
+      : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
+      ? 2
+      : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
+      ? 1
+      : 5;
   let iconToShow = (index) => {
     if (index < filled) {
       return <Image src={FillStar} width={24} height={24} alt="" />;
     } else {
-      return <Image src={Star} width={22} height={22} alt="" />
-      // <BsStar className="text-black-7e" />;
+      return <Image src={Star} width={22} height={22} alt="" />;
     }
   };
-
-
-  // const executeScroll = () => {
-  //   myRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  // };
 
   const accessoriesList = [];
   if (data?.originalbox === "Y") {
@@ -100,15 +80,14 @@ function ProductDetailsCard({ data, openFullImage }) {
   if (data?.earphone === "Y") {
     accessoriesList.push("Earphones");
   }
-  useEffect(() => {
 
+  useEffect(() => {
     const interval = setInterval(() => {
       if (
         showLoginPopup == false &&
         performAction2 == true &&
         Cookies.get("userUniqueId") != undefined
       ) {
-
         setRequestVerificationSuccessPopup(true);
         clearInterval(interval);
       }
@@ -117,24 +96,19 @@ function ProductDetailsCard({ data, openFullImage }) {
 
   useEffect(() => {
     setDetailsData(data.similarListTable);
-  })
+  });
 
   useEffect(() => {
     if (openRequestVerificationSuccessPopup) {
       setListingid(data?.listingId);
       Axios.sendverification(
         listingid,
-        Cookies.get("userUniqueId") || "Guest",
-
+        Cookies.get("userUniqueId") || "Guest"
       ).then((response) => {
         setResData(response);
-        // if (response.status == "SUCCESS") {
-        //  setRequestVerificationSuccessPopup(true);
-        // }
       });
     }
   }, [openRequestVerificationSuccessPopup]);
-
 
   const handleClick = () => {
     if (Cookies.get("userUniqueId") === undefined) {
@@ -154,22 +128,21 @@ function ProductDetailsCard({ data, openFullImage }) {
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
-        <div className="space-x-4 relative lg:-right-2 md:right-20 flex items-center justify-end pr-4 -top-2 " >
+        <div className="space-x-4 relative lg:-right-2 md:right-20 flex items-center justify-end pr-4 -top-2 ">
           {!(data?.isOtherVendor === "Y") && (
             <Fragment>
               <div className="hover:scale-110">
-              <ShareIcon data={deviceListingInfo} width={16} height={16} />
+                <ShareIcon data={deviceListingInfo} width={16} height={16} />
               </div>
               <span className="pt-2 hover:scale-110 ">
-              <AddFav
-                data={deviceListingInfo}
-                setProducts={setDeviceListingInfo}
-              />
+                <AddFav
+                  data={deviceListingInfo}
+                  setProducts={setDeviceListingInfo}
+                />
               </span>
             </Fragment>
           )}
         </div>
-
         <div className="lg:flex lg:flex-col-2  m-auto justify-center w-full">
           <div className="col-span-1 lg:w-[600px] w-[400px] m-auto justify-center  pr-4">
             {(data?.images || data?.defaultImage || data?.imagePath) && (
@@ -177,20 +150,22 @@ function ProductDetailsCard({ data, openFullImage }) {
                 openFullImage={openFullImage}
                 data={deviceListingInfo}
                 images={
-                  (data?.images?.length && data?.images != "" && data?.images) ||
+                  (data?.images?.length &&
+                    data?.images != "" &&
+                    data?.images) ||
                   (data?.imagePath && {
                     fullImage: data?.imagePath,
                     thumbImage: data?.imagePath,
                   }) ||
-                  (data?.defaultImage.fullImage && data?.defaultImage.fullImage != "" && {
-                    fullImage: data?.defaultImage?.fullImage,
-                    thumbImage: data?.defaultImage?.fullImage,
-                  }) ||
-                  {
-                    // fullImage: Logo,
-                    // thumbImage: Logo,
-                    fullImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
-                    thumbImage: "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
+                  (data?.defaultImage.fullImage &&
+                    data?.defaultImage.fullImage != "" && {
+                      fullImage: data?.defaultImage?.fullImage,
+                      thumbImage: data?.defaultImage?.fullImage,
+                    }) || {
+                    fullImage:
+                      "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
+                    thumbImage:
+                      "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
                   }
                 }
               />
@@ -201,52 +176,10 @@ function ProductDetailsCard({ data, openFullImage }) {
               <h1 className="text-xl2FontSize font-Roboto-Bold text-black-20 pl-1">
                 {data?.marketingName} - {data?.deviceStorage}
               </h1>
-              {/* ({data?.color} {data?.deviceStorage})
-              {data?.deviceRam && <span>({data?.deviceRam + " RAM"})</span>} */}
-              {/* <h2 className="capitalize text-2xl font-semibold text-black-20">
-              ({data?.color && `${data?.color}, `}
-              {data?.deviceRam && data?.deviceRam + " RAM, "}
-              {data?.deviceStorage && (
-                <span>{data?.deviceStorage + " Storage"})</span>
-              )}
-            </h2> */}
-              {/* {(!(data?.isOtherVendor === "Y") && (
-              <div className="my-2">
-                {data?.verified ? (
-                  <div>
-                    <VerifiedIcon height={42} width={86} />
-                    <div className="hover:cursor-pointer text-blue-600 text-sm underline hover:text-blue-800">
-                      <span onClick={() => setOpenDeviceReport(true)}>
-                        {"Device Report"}
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <UnVerifiedIcon height={42} width={86} />
-                    <div className="hover:cursor-pointer text-blue-600 text-sm underline hover:text-blue-800">
-                      <span
-                        onClick={() => {
-                          Cookies.get("userUniqueId") === undefined
-                            ? setShowLoginPopup(true)
-                            : setRequestVerificationSuccessPopup(true);
-                        }}
-                      >
-                        {"Request Verification"}
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )) || <span className="h-5 block"></span>} */}
-              {/* <p className="block text-base text-m-grey-2">List price</p> */}
               <div className="flex flex-row justify-between">
                 <p className="font-Roboto-Bold text-xl4FontSize flex items-center ml-1 text-green2">
                   {data?.listingPrice &&
-                    // <BiRupee />
-                    <Image src={Rupee1} width={18} height={18} alt="" />
-                  }{" "}
-                  {numberWithCommas(data?.listingPrice || "")}
+                    "₹" + numberWithCommas(data?.listingPrice || "")}
                 </p>
                 <span
                   className="grid grid-cols-2 hover:cursor-pointer rounded-md py-1 px-4 w-[160pr] h-[40pr] opacity-bg-50 text-xs2FontSize"
@@ -256,10 +189,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                   }}
                 >
                   <div className="m-auto justify-center">
-                    <span
-                      className="font-Roboto-Light text-bx opacity-100 text-[#000] flex leading-tight items-center"
-                    // onClick={() => setOpenConditionInfo(true)}
-                    >
+                    <span className="font-Roboto-Light text-bx opacity-100 text-[#000] flex leading-tight items-center">
                       Condition{" "}
                     </span>
                     <div className="font-Roboto-Regular text-smallFontSize">
@@ -267,7 +197,6 @@ function ProductDetailsCard({ data, openFullImage }) {
                     </div>
                   </div>
                   <div className="flex text-bx space-x-[2.5px] m-auto justify-center ">
-                    { }
                     {Array(5)
                       .fill()
                       .map((_, index) => iconToShow(index))}
@@ -277,7 +206,6 @@ function ProductDetailsCard({ data, openFullImage }) {
               <div className="py-6">
                 {(data?.verified && (
                   <Fragment>
-                    {/* <VerifiedIcon width={75} height={32} /> */}
                     <div
                       className="flex m-auto justify-center text-white py-0.5 rounded-md px-7"
                       style={{ background: "#4CAF50" }}
@@ -287,13 +215,14 @@ function ProductDetailsCard({ data, openFullImage }) {
                         <p className=" font-Roboto-Regularitalic text-mediumFontSize self-center pr-1 ">
                           Verified
                         </p>
-                        {/* <BsInfoCircle
-                          size={12}
-                          className="ml-2 mt-3 hover:cursor-pointer"
-                          onClick={() => setOpenInfo(true)}
-                        /> */}
                         <div className="w-[13px] ml-0.5 mt-0.5">
-                        <Image src={InfoCircle1} width={13} height={13} alt="" onClick={() => setOpenInfo(true)} />
+                          <Image
+                            src={InfoCircle1}
+                            width={13}
+                            height={13}
+                            alt=""
+                            onClick={() => setOpenInfo(true)}
+                          />
                         </div>
                         <div className="pl-3 pt-2">
                           <div className="bg-gray-100 w-[0.5px] h-6 "></div>
@@ -301,97 +230,67 @@ function ProductDetailsCard({ data, openFullImage }) {
                       </div>
                       <div className=" flex items-center m-auto justify-center font-Roboto-Light text-smallFontSize">
                         <p>This phone is verified by ORUphones</p>
-                        <a href="#devicereport" className="text-m-green underline cursor-pointer pl-10 hover:opacity-80 hover:font-bold" >Device Report &gt;</a>
+                        <a
+                          href="#devicereport"
+                          className="text-m-green underline cursor-pointer pl-10 hover:opacity-80 hover:font-bold"
+                        >
+                          Device Report &gt;
+                        </a>
                       </div>
                     </div>
-                    {/* <span
-                    className="bg-white py-1 pr-2 rounded text-black-21 text-xs font-semibold"
-                    onClick={executeScroll}
-                  >
-                    Device Report
-                  </span> */}
                   </Fragment>
                 )) || (
-                    <Fragment>
-                      {/* <UnVerifiedIcon width={75} height={32} /> */}
-                      {data?.isOtherVendor === "N" && (
-                        <div className="w-full  py-2 space-x-2 text-center">
-                          <div
-                            className="flex py-2 rounded-md space-x-2 col-span-3"
-                            style={{ backgroundColor: "#F9C414" }}
-                          >
-                            <div className="whitespace-nowrap w-[100px] flex space-x-1 flex-1 pl-10">
-                              {/* <GoUnverified width={80} height={80} className="text-black self-center"/> */}
-
-                              <div className="flex space-x-1 items-center">
-                                <div className="w-[24px] mt-0.5">
-                                  <Image src={FillExclamation} width={24} height={24} alt="" />
-                                </div>
-                                {/* <AiFillExclamationCircle
-                                  size={20}
-                                  fill="white"
-                                  className="self-center text-black"
-                                /> */}
-                                {/* <UnVerifiedIcon /> */}
-
-                                <span className="flex text-xs2FontSize items-center font-Roboto-Regularitalic  self-center text-[#000944] italic uppercase">
-                                  <span> unverified  </span>
-                                  <span className="w-[13px] ml-2 mt-1">
-                                    <Image src={InfoCircle} width={15} height={15} alt="" onClick={() => setOpenInfo(true)} />
-                                  </span>
+                  <Fragment>
+                    {data?.isOtherVendor === "N" && (
+                      <div className="w-full  py-2 space-x-2 text-center">
+                        <div
+                          className="flex py-2 rounded-md space-x-2 col-span-3"
+                          style={{ backgroundColor: "#F9C414" }}
+                        >
+                          <div className="whitespace-nowrap w-[100px] flex space-x-1 flex-1 pl-10">
+                            <div className="flex space-x-1 items-center">
+                              <div className="w-[24px] mt-0.5">
+                                <Image
+                                  src={FillExclamation}
+                                  width={24}
+                                  height={24}
+                                  alt=""
+                                />
+                              </div>
+                              <span className="flex text-xs2FontSize items-center font-Roboto-Regularitalic  self-center text-[#000944] italic uppercase">
+                                <span> unverified </span>
+                                <span className="w-[13px] ml-2 mt-1">
+                                  <Image
+                                    src={InfoCircle}
+                                    width={15}
+                                    height={15}
+                                    alt=""
+                                    onClick={() => setOpenInfo(true)}
+                                  />
                                 </span>
-                              </div>
-                              {/* <BsInfoCircle
-                                size={18}
-                                className="ml-1 pt-2 hover:cursor-pointer"
-                                onClick={() => setOpenInfo(true)}
-                              /> */}
-
-                              <div className="pl-3">
-                                <div className="bg-gray-100 w-[1px] h-6 "></div>
-                              </div>
-                              {/* <span className="text-xs italic self-center uppercase"> unverified</span> */}
-                            </div>
-                            <div
-                              className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
-                              onClick={() => {
-                                // if (Cookies.get("userUniqueId") === undefined) {
-                                //   setPerformAction2(true);
-                                //   setShowLoginPopup(true);
-                                // } else {
-                                //   setRequestVerificationSuccessPopup(true);
-                                // }
-                                data?.status != "Active" ? toast.warning("This device is sold out") : handleClick()
-                              }}
-                            >
-                              <span
-                                className="underline font-Roboto-Light text-smallFontSize"
-                              // onClick={() =>
-                              >
-                                Click here to Request Verification
                               </span>
                             </div>
+                            <div className="pl-3">
+                              <div className="bg-gray-100 w-[1px] h-6 "></div>
+                            </div>
+                          </div>
+                          <div
+                            className="flex w-full items-center pr-10 justify-end hover:cursor-pointer"
+                            onClick={() => {
+                              data?.status != "Active"
+                                ? toast.warning("This device is sold out")
+                                : handleClick();
+                            }}
+                          >
+                            <span className="underline font-Roboto-Light text-smallFontSize">
+                              Click here to Request Verification
+                            </span>
                           </div>
                         </div>
-                      )}
-                      {/* <p className="flex items-center">
-                    <span
-                      className="underline text-xs"
-                      onClick={() =>
-                        !authenticated
-                          ? setOpenLoginPopup(true)
-                          : setOpenRequestVerificationSuccessPopup(true)
-                      }
-                    >
-                      Request Verification
-                    </span>
-                    <BsInfoCircle
-                      className="ml-1.5"
-                      onClick={() => setOpenVerificationInfo(true)}
-                    />
-                  </p> */}
-                    </Fragment>
-                  )}
+                      </div>
+                    )}
+                  </Fragment>
+                )}
               </div>
             </div>
             <div className="flex font-Roboto-Light text-mediumFontSize text-black mb-1">
@@ -475,7 +374,9 @@ function ProductDetailsCard({ data, openFullImage }) {
                     value={data?.verifiedDate || "Request Verification"}
                     showInfoPopup={() => setOpenInfo(true)}
                     showRequestVerificationSuccessPopup={() => {
-                      data?.status != "Active" ? toast.warning("This device is sold out") : handleClick()
+                      data?.status != "Active"
+                        ? toast.warning("This device is sold out")
+                        : handleClick();
                     }}
                     textAsLink={data?.verifiedDate != null ? false : true}
                     labelTextSize
@@ -493,22 +394,16 @@ function ProductDetailsCard({ data, openFullImage }) {
                     labelTextSize
                   />
                 }
-                {/* {(data?.cosmetic || data?.verified) && (
-                  <LabelAndValue
-                    label="Report"
-                    value={"Device Report"}
-                    onClick={executeScroll()}
-                    showDeviceReport={() => setOpenDeviceReport(true)}
-                    labelTextSize
-                  />
-                )} */}
               </div>
             )}
             <div className="pr-2 py-4 font-Roboto-Light text-smallFontSize">
               *This phone might be old or refurbished
             </div>
             <div className="pr-2">
-              <SellerDetailsCard data={data} comparisontableid="#Comparisontabl1" />
+              <SellerDetailsCard
+                data={data}
+                comparisontableid="#Comparisontabl1"
+              />
             </div>
           </div>
         </div>
@@ -545,7 +440,10 @@ function ProductDetailsCard({ data, openFullImage }) {
             )}
           </div>
           {data?.functionalTestResults && data?.verified && (
-            <div className="text-gray-20 font-Roboto-Light text-regularFontSize lg:my-3 py-9 " id="devicereport">
+            <div
+              className="text-gray-20 font-Roboto-Light text-regularFontSize lg:my-3 py-9 "
+              id="devicereport"
+            >
               <span>Device Verification Report</span>
               <div className="pb-4">
                 <div className="bg-gray-600 h-1 border-2 border-white"></div>
@@ -586,57 +484,63 @@ function ProductDetailsCard({ data, openFullImage }) {
         {data?.compareData && data?.compareData?.length > 0 && (
           <div id="Comparisontabl1">
             <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
-              Detailed Comparison Between Other Sellers for {data?.marketingName} ({data?.deviceStorage}{data?.make != "Apple" && "/" + data?.deviceRam}) - {data?.deviceCondition} Condition
+              Detailed Comparison Between Other Sellers for{" "}
+              {data?.marketingName} ({data?.deviceStorage}
+              {data?.make != "Apple" && "/" + data?.deviceRam}) -{" "}
+              {data?.deviceCondition} Condition
             </p>
-            {data && <div className="relative flex py-2">
-              <Image
-                src={
-                  ImageError
-                    ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
-                    : getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
-                }
-                onError={() => setImageError(true)}
-                className=""
-                // alt={`${
-                //   type[Math.floor(Math.random() * type.length)]
-                // } ${model} ${storage} like new `.toLowerCase()}
-                height="120"
-                width="90"
-              />
-              <div className="flex flex-col justify-end relative  left-6">
-                {/* <p className="font-bold text-dx text-[#2C2F45]">{data?.marketingName}</p> */}
-                <p className='font-Roboto-Bold text-tx text-[#000944]'>{data?.marketingName}</p>
+            {data && (
+              <div className="relative flex py-2">
+                <Image
+                  src={
+                    ImageError
+                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      : getDefaultImage(data?.marketingName) ||
+                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  }
+                  onError={() => setImageError(true)}
+                  className=""
+                  height="120"
+                  width="90"
+                />
+                <div className="flex flex-col justify-end relative  left-6">
+                  <p className="font-Roboto-Bold text-tx text-[#000944]">
+                    {data?.marketingName}
+                  </p>
 
-                {data?.make != "Apple" && (
-                  <p className="flex items-center space-x-1">
-
-                    {/* <CardHeading4 title="RAM :" /> */}
-                    <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>RAM :</p>
-                    <p className="font-Roboto-Bold text-jx pt-0.5 text-[#2C2F45]">
-                      {data?.deviceRam}
+                  {data?.make != "Apple" && (
+                    <p className="flex items-center space-x-1">
+                      <p className="font-Roboto-Medium text-ex text-[#000000] truncate">
+                        RAM :
+                      </p>
+                      <p className="font-Roboto-Bold text-jx pt-0.5 text-[#2C2F45]">
+                        {data?.deviceRam}
+                      </p>
                     </p>
-                  </p>
-                )}
+                  )}
 
-                <div className="flex space-x-1 items-center">
-                  <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Storage :</p>
-                  <p className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
-                    {data?.deviceStorage}
-                  </p>
-                </div>
+                  <div className="flex space-x-1 items-center">
+                    <p className="font-Roboto-Medium text-ex text-[#000000] truncate">
+                      Storage :
+                    </p>
+                    <p className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
+                      {data?.deviceStorage}
+                    </p>
+                  </div>
 
-                <div className="flex items-center space-x-1">
-                  <p className='font-Roboto-Medium text-ex text-[#000000] truncate'>Condition :</p>
-                  <p className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
-                    {data?.deviceCondition}
-                  </p>
+                  <div className="flex items-center space-x-1">
+                    <p className="font-Roboto-Medium text-ex text-[#000000] truncate">
+                      Condition :
+                    </p>
+                    <p className="font-Roboto-Bold text-jx text-[#2C2F45] pt-0.5">
+                      {data?.deviceCondition}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>}
+            )}
             <div className="bg-gray-600 h-1 border-2 border-white "></div>
-            <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row">
-
-            </div>
+            <div className="pt-2 font-Roboto-Bold text-m-green-1 text-xl2FontSize flex flex-row"></div>
             <div className="flex">
               <span className="text-smallFontSize font-Roboto-light">
                 *The products compared here are either used mobile phones,
@@ -644,57 +548,35 @@ function ProductDetailsCard({ data, openFullImage }) {
                 These are not new phones.
               </span>
             </div>
-            {/* <div className="flex flex-row"> */}
-            {/* {data?.make != "Apple" && (
-                <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
-                  Ram : {data?.deviceRam}
-                </div>
-              )} */}
-            {/* <div className="text-m-green-1 font-Roboto-Bold text-sm pr-1">
-                Storage : {data?.deviceStorage}
-              </div> */}
-            {/* <div className="text-m-green-1 font-Roboto-Bold text-sm">
-                Condition : {data?.deviceCondition}
-              </div> */}
-            {/* </div> */}
             {
               <ComparisonTable
                 data={data?.compareData}
-                listingId={
-                  data?.listingId !== undefined ? data?.listingId : []
-                }
+                listingId={data?.listingId !== undefined ? data?.listingId : []}
               />
             }
-            {/* {console.log("similar data length", data?.similarListTable.length)} */}
-
-            {data?.similarListTable && data?.similarListTable.length !== 0 && <div className="pt-16">
-              <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">You may also like these deals</p>
-              {
-                <ComparisonTable2
-                  data={
-                    data?.similarListTable && data?.similarListTable?.length > 0 ? data?.similarListTable : []
-                  }
-                  listingId={data?.listingId !== undefined ? data?.listingId : []}
-                />
-                // <ComparisonTable2
-                //   data={data.similarListTable}
-                //   listingId={
-                //     data.listingId !== undefined ? data?.listingId : []
-                //   }
-                // />
-              }
-            </div>
-              // ?
-              //   ""d
-              //    :
-
-
-            }
-
+            {data?.similarListTable && data?.similarListTable.length !== 0 && (
+              <div className="pt-16">
+                <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
+                  You may also like these deals
+                </p>
+                {
+                  <ComparisonTable2
+                    data={
+                      data?.similarListTable &&
+                      data?.similarListTable?.length > 0
+                        ? data?.similarListTable
+                        : []
+                    }
+                    listingId={
+                      data?.listingId !== undefined ? data?.listingId : []
+                    }
+                  />
+                }
+              </div>
+            )}
           </div>
         )}
         <ComparisonTable />
-
       </div>
       <DeviceVerificationReport
         open={openDeviceReport}
@@ -738,10 +620,8 @@ const TestListItem = ({ testName, testStatus }) => {
           {testStatus}
         </span>{" "}
         {testStatus === "PASS" ? (
-          // <VscPass className="text-green2" />
           <Image src={PassCheck} width={20} height={20} alt="" />
         ) : (
-          // <IoCloseCircleOutline className="text-red" />
           <Image src={Close} width={20} height={20} alt="" />
         )}
       </p>

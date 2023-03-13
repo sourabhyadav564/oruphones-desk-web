@@ -22,7 +22,6 @@ const settings = {
 };
 
 const Pricerange = () => {
-  // use loaction of auth user or default location
   const router = useRouter();
   const { min, max } = router.query;
   const [bestDeal, setBestDeal] = useState();
@@ -36,7 +35,6 @@ const Pricerange = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
-  const [products, setProducts] = useState([]);
   let intialPage = 0;
   let newPages = 0;
 
@@ -44,7 +42,6 @@ const Pricerange = () => {
     if (!isFilterApplied) {
       const fetchData = async () => {
         const priceRange = await Axios.shopByPriceRange(
-          // max === "above" ? "200000" : max,
           max,
           getSearchLocation,
           min,
@@ -56,7 +53,6 @@ const Pricerange = () => {
         setOtherListings(priceRange?.dataObject?.otherListings);
         setTotalProducts(priceRange?.dataObject?.totalProducts);
         setLoading(false);
-        // setPageNumber(pageNumber + 1);
       };
       if (min != undefined && max != undefined) {
         fetchData();
@@ -76,7 +72,6 @@ const Pricerange = () => {
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
           listingLocation: getSearchLocation,
-          // maxsellingPrice: max === "above" ? "200000" : max,
           maxsellingPrice: max,
           minsellingPrice: min,
           reqPage: "SBYP",
@@ -115,9 +110,6 @@ const Pricerange = () => {
         setLoading(true);
         Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", intialPage, applySort).then(
           (response) => {
-            // if (verification?.length > 0) {
-            //   payLoad.verification = verification;
-            // }
             setOtherListings(response?.dataObject?.otherListings);
             setBestDeal(response?.dataObject?.bestDeals);
             setTotalProducts(response?.dataObject?.totalProducts);
@@ -135,7 +127,6 @@ const Pricerange = () => {
     if (!isFilterApplied) {
       const fetchData = async () => {
         const priceRange = await Axios.shopByPriceRange(
-          // max === "above" ? "200000" : max,
           max,
           getSearchLocation,
           min,
@@ -143,7 +134,6 @@ const Pricerange = () => {
           newPages,
           applySort
         );
-        // setBestDeal(priceRange?.dataObject?.bestDeals);
         setOtherListings((products) => [
           ...products,
           ...priceRange?.dataObject?.otherListings,
@@ -158,7 +148,6 @@ const Pricerange = () => {
           );
         }
         setLoading(false);
-        // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       };
       if (min != undefined && max != undefined) {
@@ -179,7 +168,6 @@ const Pricerange = () => {
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
           listingLocation: getSearchLocation,
-          // maxsellingPrice: max === "above" ? "200000" : max,
           maxsellingPrice: max,
           minsellingPrice: min,
           reqPage: "SBYP",
@@ -215,12 +203,8 @@ const Pricerange = () => {
         if (verification?.length > 0) {
           payLoad.verified = verification.includes("all") ? [] : "verified";
         }
-        // setLoading(true);
         Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", newPages, applySort).then(
           (response) => {
-            // if (verification?.length > 0) {
-            //   payLoad.verification = verification;
-            // }
             if (newPages == 0) {
               setOtherListings(response?.dataObject?.otherListings);
             } else {
@@ -229,7 +213,6 @@ const Pricerange = () => {
                 ...response?.dataObject?.otherListings,
               ]);
             }
-            // setBestDeals([]);
             setTotalProducts(response?.dataObject?.totalProducts);
             if (newPages == 0) {
               setBestDeal(response?.dataObject?.bestDeals);
@@ -270,7 +253,6 @@ const Pricerange = () => {
       setIsFilterApplied(true);
       let payLoad = {
         listingLocation: getSearchLocation,
-        // maxsellingPrice: max === "above" ? "200000" : max,
         maxsellingPrice: max,
         minsellingPrice: min,
         reqPage: "SBYP",
@@ -309,10 +291,6 @@ const Pricerange = () => {
       setLoading(true);
       Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", intialPage, applySort).then(
         (response) => {
-          // if (verification?.length > 0) {
-          //   payLoad.verification = verification;
-          // }
-
           setOtherListings(response?.dataObject?.otherListings);
           setBestDeal(response?.dataObject?.bestDeals);
           setTotalProducts(response?.dataObject?.totalProducts);
@@ -321,8 +299,6 @@ const Pricerange = () => {
       );
     }
   }, [applyFilter, applySort]);
-
-  // const sortingProducts = getSortedProducts(applySort, otherListings);
 
   return (
     <main className="container py-4">
@@ -376,31 +352,5 @@ const Pricerange = () => {
     </main>
   );
 };
-
-function getSortedProducts(applySort, otherListings) {
-  var sortedProducts = otherListings ? [...otherListings] : [];
-  if (applySort && applySort === "Price: Low to High") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Price - High to Low") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Newest First") {
-    sortedProducts.sort((a, b) => {
-      return stringToDate(b.modifiedDate) - stringToDate(a.modifiedDate);
-    });
-  } else if (applySort && applySort === "Oldest First") {
-    sortedProducts.sort((a, b) => {
-      return stringToDate(a.modifiedDate) - stringToDate(b.modifiedDate);
-    });
-  }
-  return sortedProducts;
-}
 
 export default Pricerange;

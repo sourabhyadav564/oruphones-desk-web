@@ -3,10 +3,7 @@ import { Fragment, useEffect, useRef, useState, useContext } from "react";
 import Image from "next/image";
 import Close from "@/assets/cross.svg";
 import CurrentLocation from "@/assets/currentlocation.svg";
-
 import Select from "../Form/Select";
-
-// import bgImage from "https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png";
 import * as Axios from "../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import Cookies from "js-cookie";
@@ -19,38 +16,17 @@ function LocationPopup({ open, setOpen }) {
   const [citiesResponse2, setCitiesResponse2] = useState([]);
   const [searchLocationID, setSearchLocationID] = useState();
   const [searchText, setSearchText] = useState("");
-  // const searchBox = document.getElementById("searchBox");
-  // const [selectedCity, setSelectedCity] = useState();
   let cityInfo = [];
   const selectedCity = useRef();
-  const { userInfo, setCities, setUserInfo, setSearchLocation } =
-    useContext(AppContext);
+  const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
 
   const handleCityChange = (city) => {
     selectedCity.current = city;
-    // if (Cookies.get("userUniqueId") !== undefined) {
     cityInfo = citiesResponse.filter((item) => item.city === city);
-    let payLoad = {
-      city: selectedCity.current,
-      // country: cityInfo[0].country,
-      // state: cityInfo[0].state,
-      locationId: searchLocationID,
-      userUniqueId: Cookies.get("userUniqueId"),
-    };
-    // Axios.updateAddress(payLoad).then((res) => {
-    //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-    //     // setUserInfo(resp?.dataObject);
-    //     console.log("userProfile -> ", resp?.dataObject);
-    //   });
-    // });
-    // } else {
     setSearchLocation(selectedCity.current);
     localStorage.setItem("usedLocation", selectedCity.current);
-    // }
     setOpen(false);
   };
-
-  const [currentLocation, setCurrentLocation] = useState(false);
 
   const options = {
     enableHighAccuracy: true,
@@ -69,10 +45,7 @@ function LocationPopup({ open, setOpen }) {
     Geocode.setApiKey("AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w");
 
     Geocode.setLanguage("en");
-    // Geocode.setRegion("es");
-    // Geocode.setLocationType("ROOFTOP");
     Geocode.enableDebug();
-    // Get address from latitude & longitude.
     Geocode.fromLatLng(lat, lng).then(
       (response) => {
         let address = response?.plus_code?.compound_code;
@@ -101,9 +74,7 @@ function LocationPopup({ open, setOpen }) {
     setCities(citiesResponse?.dataObject);
   };
 
-
   const onError = (error) => {
-    // alert(error.message);
     setLocation({
       loaded: true,
       city: "India",
@@ -119,15 +90,6 @@ function LocationPopup({ open, setOpen }) {
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
   };
-
-  // useEffect(() => {
-  //   const initialState = localStorage.getItem("usedLocation");
-  //   if (!initialState || initialState == null) {
-  //     handleNearme();
-  //   } else {
-  //     setSearchLocation(initialState);
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (location.loaded && location.city && location.city.length > 0) {
@@ -146,11 +108,6 @@ function LocationPopup({ open, setOpen }) {
           locationId: searchID,
           userUniqueId: Cookies.get("userUniqueId"),
         };
-        // Axios.updateAddress(payLoad).then((res) => {
-        //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-        //     setUserInfo(resp.dataObject);
-        //   });
-        // });
       }
       setSearchLocation(location.city);
       localStorage.setItem("usedLocation", location.city);
@@ -241,19 +198,27 @@ function LocationPopup({ open, setOpen }) {
                     {" "}
                     Location{" "}
                   </span>
-                  {/* <GrClose
+                  <Image
+                    src={Close}
+                    width={28}
+                    height={28}
                     onClick={() => setOpen(false)}
-                    className="cursor-pointer"
-                  /> */}
-                   <Image src={Close} width={28} height={28} onClick={() => setOpen(false)}/>
+                  />
                 </div>
-                <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"} alt="location" layout="fill" />
+                <Image
+                  src={
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"
+                  }
+                  alt="location"
+                  layout="fill"
+                />
                 <div className="mx-auto w-72 flex flex-col h-full justify-center items-center">
                   <div className="flex flex-row w-72 justify-center items-center">
-                    <div className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
-                      onClick={handleNearme}>
-                      {/* <BiCurrentLocation size={22} /> */}
-                      <Image src={CurrentLocation} width={28} height={28}/>
+                    <div
+                      className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
+                      onClick={handleNearme}
+                    >
+                      <Image src={CurrentLocation} width={28} height={28} />
                     </div>
                     <div className="w-full">
                       <Select
@@ -275,8 +240,13 @@ function LocationPopup({ open, setOpen }) {
                       ></Select>
                     </div>
                   </div>
-                  <span className="my-5 block text-m-grey-1 text-xlFontSize font-Roboto-Light">or</span>
-                  <p className="text-lg text-black-20 text-xl2FontSize font-Roboto-Regular"> Pick from below </p>
+                  <span className="my-5 block text-m-grey-1 text-xlFontSize font-Roboto-Light">
+                    or
+                  </span>
+                  <p className="text-lg text-black-20 text-xl2FontSize font-Roboto-Regular">
+                    {" "}
+                    Pick from below{" "}
+                  </p>
                 </div>
               </div>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -284,12 +254,12 @@ function LocationPopup({ open, setOpen }) {
                   {citiesResponse &&
                     citiesResponse
                       .filter((item) => item.displayWithImage === "1")
-                      // .slice(0, 9)
                       .map((items) => (
                         <div
-                          className={`border hover:cursor-pointer rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${selectedCity.current === items.city &&
+                          className={`border hover:cursor-pointer rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${
+                            selectedCity.current === items.city &&
                             "border-m-green"
-                            }`}
+                          }`}
                           key={items.city}
                           onClick={() => handleCityChange(items.city)}
                         >

@@ -14,25 +14,18 @@ export const ApplicationContext = ({ children }) => {
   useEffect(() => {
     const fetchUserProfileData = async () => {
       if (Cookies.get("mobileNumber") !== undefined) {
-        const userProfile = await Axios.getUserProfile("91", Cookies.get("mobileNumber"));
-        
+        const userProfile = await Axios.getUserProfile(
+          "91",
+          Cookies.get("mobileNumber")
+        );
+
         setUserInfo(userProfile?.dataObject);
-      };
-    }
+      }
+    };
     fetchUserProfileData();
   }, [userLogged, refresh]);
 
   useEffect(() => {
-    // const searchLoc = userInfo?.userdetails?.address?.filter((items) => {
-    //   return items.addressType === "SearchLocation";
-    // });
-    // setSearchLocation(() => {
-    //   if (searchLoc && searchLoc.length >= 1) {
-    //     return searchLoc[0].city;
-    //   } else {
-    //     return "India";
-    //   }
-    // });
     localStorage.getItem("usedLocation");
   }, [userInfo]);
 

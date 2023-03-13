@@ -36,17 +36,4 @@ function ListingDetials() {
   );
 }
 
-// export async function getServerSideProps() {
-//   const brandsList = await Axios.fetchBrands();
-//   const fetchShopByPrice = await Axios.fetchShopByPrice();
-//   const fetchTopsellingmodels = await Axios.fetchTopsellingmodels();
-
-//   return {
-//     props: {
-//       brandsList: brandsList?.dataObject || [],
-//       fetchShopByPrice:fetchShopByPrice?.dataObject,
-//       fetchTopsellingmodels:fetchTopsellingmodels?.dataObject }
-//   }
-// }
-
 export default ListingDetials;

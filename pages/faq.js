@@ -1,18 +1,10 @@
-import parse from "html-react-parser";
 import { parse as nodeParser } from "node-html-parser";
-import Error from "next/error";
-import { infoTemplates } from "api/axios";
 import fetchStaticHTML from "api/fetchStaticHtml";
-// import faqImg from "https://d1tl44nezj10jx.cloudfront.net/assets/FAQs.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
 
-// function faq({ htmlText, error }) {
-//   if (error) {
-//     return <Error statusCode={404} />;
-//   }
 function faq() {
   const [htmlText1, setHtmlText1] = useState("");
 
@@ -21,26 +13,16 @@ function faq() {
   }, []);
 
   async function callStaticPages() {
-    // let staticDataPath;
-    // try {
-    //   const response = await infoTemplates();
-    //   staticDataPath = response?.dataObject;
-    // } catch (error) {
-    //   console.log(error);
-    // }
 
     var htmlText;
     try {
-      // const { serverUrl, templateUrls } = staticDataPath;
       const res = await fetchStaticHTML("/faq.html");
-      // const res = await fetchStaticHTML(serverUrl + templateUrls.VERIFICATION);
       const html = res.data;
       const doc = nodeParser(html);
       const body = doc.querySelector("body");
       htmlText = body.innerHTML;
       setHtmlText1(htmlText);
     } catch (err) {
-      console.log("getVerificationConent error", err);
     }
   }
 
@@ -62,7 +44,6 @@ function faq() {
             <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/FAQs.png"} width={230} height={163} alt="ORU faq "/>
           </div>
         </section>
-        {/* {parse(htmlText1)} */}
         <main className="px-6 my-4 ">
           <section class="faq pt-12">
             <p className="font-Roboto-Regular"><strong className="font-Semibold">Que. What is Oru?</strong><br /><strong className="font-Semibold">Ans.</strong> Oru is India&rsquo;s first and best online
@@ -222,42 +203,3 @@ function faq() {
 }
 
 export default faq;
-
-// export async function getServerSideProps() {
-//   let staticDataPath;
-//   try {
-//     const res = await infoTemplates();
-//     staticDataPath = res?.dataObject;
-//   } catch (error) {
-//     console.log(error);
-//     return {
-//       props: {
-//         error: true,
-//       },
-//     };
-//   }
-
-//   var htmlText;
-//   try {
-//     const { serverUrl, templateUrls } = staticDataPath;
-//     const res = await fetchStaticHTML(serverUrl + templateUrls.FAQ);
-//     const html = res.data;
-//     const doc = nodeParser(html);
-//     const body = doc.querySelector("body");
-//     htmlText = body.innerHTML;
-//   } catch (err) {
-//     console.log("getFAQConent error", err);
-//     return {
-//       props: {
-//         error: true,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {
-//       htmlText: htmlText,
-//     },
-//     // revalidate: 60*60*24, // In seconds
-//   };
-// }

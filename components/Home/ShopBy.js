@@ -1,11 +1,6 @@
 import React from "react";
 import CategoryCards from "../Cards/CategoryCards";
-import Carousel from "../Carousel";
 import Title from "../Title";
-// import bestSelling from "https://d1tl44nezj10jx.cloudfront.net/assets/bestselling.png";
-// import likeNew from "https://d1tl44nezj10jx.cloudfront.net/assets/like_new.png";
-// import verified from "https://d1tl44nezj10jx.cloudfront.net/assets/verified.png";
-// import warranty from "https://d1tl44nezj10jx.cloudfront.net/assets/warranty.png";
 
 const data = [
   {
@@ -33,14 +28,6 @@ const data = [
     urlPath: "Warranty",
   },
 ];
-
-const settings = {
-  dots: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-};
 
 function ShowBy() {
   return (

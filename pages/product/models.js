@@ -26,22 +26,12 @@ function AllModels() {
         applyFilter.brand.includes(items.make)
       );
     }
-    // if (applyFilter && applyFilter.condition && applyFilter.condition.length > 0) {
-    //   tempProducts = tempProducts.filter((items) => applyFilter.condition.includes(items.deviceCondition));
-    // }
     return tempProducts;
   }
 
   return (
     <main className="container py-4">
       <h1 className="sr-only">All Page</h1>
-      {/* <Filter setApplyFilter={setApplyFilter}>
-        <div className="grid grid-cols-4 gap-4">
-          {getFilteredValues().map((product, index) => (
-            <TopSellingCard key={`${index}-${product?.make}`} data={product} />
-          ))}
-        </div>
-      </Filter> */}
       {topsellingmodels && topsellingmodels.length > 0 ? (
         <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4">
           {topsellingmodels?.map((product, index) => (

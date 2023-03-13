@@ -1,11 +1,8 @@
 import Modal from ".";
 import Image from "next/image";
-// import home_logo from "../../assets/home_logo.svg";
-// import home_logo from "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg";
 import { Fragment, useState, useEffect, useContext, useRef } from "react";
 import TermAndConditionPopup from "./TermAndConditionPopup";
 import VerifyOtpPopup from "./VerifyOtpPopup";
-
 import * as Axios from "../../api/axios";
 
 function LoginPopup({ open, setOpen, redirect }) {
@@ -38,9 +35,7 @@ function LoginPopup({ open, setOpen, redirect }) {
     if (value && value.length === 10) {
       const response = await Axios.signUp(value);
       setIsVerifyStep(response?.status === "SUCCESS");
-      // inputRef.current.setCustomValidity("");
     } else {
-      // inputRef.current.checkValidity();
       inputRef.current.setCustomValidity("Please enter valid mobile number");
       inputRef.current.reportValidity();
     }
@@ -52,7 +47,15 @@ function LoginPopup({ open, setOpen, redirect }) {
         <Fragment>
           <div className="container max-w-xl grid place-items-center py-8">
             <div>
-              <Image src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"} alt="ORUPhones" width={100} height={40} className="md:w-96 w-60 h-96 " />
+              <Image
+                src={
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"
+                }
+                alt="ORUPhones"
+                width={100}
+                height={40}
+                className="md:w-96 w-60 h-96 "
+              />
             </div>
             <form
               onSubmit={handleSubmit}

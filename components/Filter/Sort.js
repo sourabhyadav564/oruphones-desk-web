@@ -14,7 +14,12 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
 
-export default function Sort({ sortOptions, setApplySort, setFilters,makeName }) {
+export default function Sort({
+  sortOptions,
+  setApplySort,
+  setFilters,
+  makeName,
+}) {
   const router = useRouter();
   const { filterOptions } = useFilterOptions();
   let tempFilters = filterOptions;
@@ -22,13 +27,17 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
   function handleOnChange(data) {
     setApplySort(data.name);
     sortOptions?.map((items) => {
-      return items.name === data.name ? (items.current = true) : (items.current = false);
+      return items.name === data.name
+        ? (items.current = true)
+        : (items.current = false);
     });
   }
 
   useEffect(() => {
     sortOptions?.map((items) => {
-      return items.name === "Featured" ? (items.current = true) : (items.current = false);
+      return items.name === "Featured"
+        ? (items.current = true)
+        : (items.current = false);
     });
     setApplySort("Featured");
   }, [router.pathname]);
@@ -40,9 +49,16 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
           <Menu as="div" className=" relative inline-block text-left ">
             <div>
               <Menu.Button className="group inline-flex justify-center px-4 py-2 rounded-md bg-white text-sm font-Roboto-Regular text-regularFontSize text-gray-700 hover:text-gray-900 border">
-                {(sortOptions && sortOptions.filter((i) => i.current)[0]?.name) || "Sort"}
-                {/* <GrFormDown className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" /> */}
-                <Image src={ArrowDown} width={20} height={20} alt="" className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
+                {(sortOptions &&
+                  sortOptions.filter((i) => i.current)[0]?.name) ||
+                  "Sort"}
+                <Image
+                  src={ArrowDown}
+                  width={20}
+                  height={20}
+                  alt=""
+                  className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                />
               </Menu.Button>
             </div>
 
@@ -63,8 +79,12 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
                         <a
                           onClick={(e) => handleOnChange(option)}
                           className={classNames(
-                            option.current ? "font-Roboto-Medium text-regularFontSize text-gray-900" : "text-gray-500 font-Roboto-Light",
-                            active ? "bg-gray-100 font-Roboto-Medium text-regularFontSize" : "",
+                            option.current
+                              ? "font-Roboto-Medium text-regularFontSize text-gray-900"
+                              : "text-gray-500 font-Roboto-Light",
+                            active
+                              ? "bg-gray-100 font-Roboto-Medium text-regularFontSize"
+                              : "",
                             "block px-4 py-2 text-sm"
                           )}
                         >
@@ -83,13 +103,16 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
             onClick={() => setMobileFiltersOpen(true)}
           >
             <span className="sr-only">Filters</span>
-            {/* <GrFormFilter className="w-5 h-5" aria-hidden="true" /> */}
-            <Image src={Filter} width={20} height={20} alt=""/>
+            <Image src={Filter} width={20} height={20} alt="" />
           </button>
         </div>
       </div>
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-        <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setMobileFiltersOpen}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 flex z-40 lg:hidden"
+          onClose={setMobileFiltersOpen}
+        >
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -119,12 +142,15 @@ export default function Sort({ sortOptions, setApplySort, setFilters,makeName })
                   onClick={() => setMobileFiltersOpen(false)}
                 >
                   <span className="sr-only">Close menu</span>
-                  {/* <AiOutlineClose className="h-6 w-6" aria-hidden="true" /> */}
-                  <Image src={Cross} width={10} height={10} alt=""/>
+                  <Image src={Cross} width={10} height={10} alt="" />
                 </button>
               </div>
-              <div className=""> 
-              <DesktopFilter filterOptions={tempFilters} setFilters={setFilters} key={makeName}/>
+              <div className="">
+                <DesktopFilter
+                  filterOptions={tempFilters}
+                  setFilters={setFilters}
+                  key={makeName}
+                />
               </div>
             </div>
           </Transition.Child>

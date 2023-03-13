@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Disclosure } from "@headlessui/react";
 import BrandFilter from "./BrandFilter";
 import ColorFilter from "./ColorFilter";
 import ConditionFilter from "./ConditionFilter";
@@ -11,9 +10,7 @@ import { useRouter } from "next/router";
 import ConditionInfoPopup from "../Popup/ConditionInfoPopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import RamFilter from "./RamFilter";
-import WarrantyPopup from "../Popup/WarrantyPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
-import { compareDocumentPosition } from "domutils";
 
 const DesktopFilter = ({ setFilters, filterOptions }) => {
   const [selectedBrand, setSelectedBrand] = useState();

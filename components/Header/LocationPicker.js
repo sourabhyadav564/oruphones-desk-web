@@ -3,7 +3,6 @@ import Geocode from "react-geocode";
 import { getCityFromResponse } from "@/utils/util";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import * as Axios from "../../api/axios";
 import { useContext } from "react";
 import AppContext from "@/context/ApplicationContext";
 
@@ -27,10 +26,7 @@ function LocationPicker() {
     Geocode.setApiKey("AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w");
 
     Geocode.setLanguage("en");
-    // Geocode.setRegion("es");
-    // Geocode.setLocationType("ROOFTOP");
     Geocode.enableDebug();
-    // Get address from latitude & longitude.
     Geocode.fromLatLng(lat, lng).then(
       (response) => {
         let address = response?.plus_code?.compound_code;
@@ -51,7 +47,6 @@ function LocationPicker() {
   };
 
   const onError = (error) => {
-    // alert(error.message);
     setLocation({
       loaded: true,
       city: "India",
@@ -89,18 +84,6 @@ function LocationPicker() {
         if (searchLocId) {
           searchID = searchLocId[0]?.locationId;
         }
-        let payLoad = {
-          city: location.city,
-          country: "India",
-          state: "",
-          locationId: searchID,
-          userUniqueId: Cookies.get("userUniqueId"),
-        };
-        // Axios.updateAddress(payLoad).then((res) => {
-        //   Axios.getUserProfile("91", Cookies.get("mobileNumber")).then((resp) => {
-        //     setUserInfo(resp.dataObject);
-        //   });
-        // });
       }
       setSearchLocation(location.city);
       localStorage.setItem("usedLocation", location.city);

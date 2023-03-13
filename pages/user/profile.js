@@ -17,7 +17,6 @@ function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let payload = {
-      // city: seletedCity,
       email: email || userInfo?.userdetails.email,
       mobileNumber: userInfo?.userdetails?.mobileNumber,
       userName: name || userInfo.userdetails.userName,

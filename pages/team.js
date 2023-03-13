@@ -1,7 +1,4 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
 import React from 'react'
-import TeamCard from '@/components/Cards/TeamCard'
 
 const data = [
     {
@@ -71,11 +68,12 @@ const data = [
 
 ]
 
-function team() {
+function Team() {
  
   return (
     <div className="container my-28  text-center">
-        <p className='text-[14px] font-Roboto-Regular'>Our team</p>
+        404 Page not found
+        {/* <p className='text-[14px] font-Roboto-Regular'>Our team</p>
         <p className='text-[36px] font-Roboto-Bold text-m-green opacity-0.6'>Leardership team</p>
         <p className='text-[18px] font-Roboto-Regular text-m-green'>We're building the future of software developement.</p>
         <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 my-4 justify-center m-auto'>    
@@ -84,9 +82,9 @@ function team() {
                     <TeamCard imgsrc={items.imgsrc} name={items.name} position={items.position} description={items.description} linkedInsrc={items.linkedInsrc}/>
                 </div>
             ))}
-        </div>
+        </div> */}
     </div>
   )
 }
 
-export default team
+export default Team

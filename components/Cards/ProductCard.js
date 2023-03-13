@@ -1,13 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
-
 import Rupee1 from "@/assets/rupee1.svg";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
 import AddFav from "../AddFav";
 import VerifiedIcon from "../VerifiedIcon";
-// import Logo from "@/assets/home_logo.svg"
-// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png";
-// import SoldOut from "https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png";
 import { useState } from "react";
 
 function ProductCard({ data, prodLink, setProducts }) {
@@ -29,7 +24,7 @@ function ProductCard({ data, prodLink, setProducts }) {
           />
         )}
       </span>
-      <div 
+      <div
         className="hover:cursor-pointer group"
         onClick={() =>
           window.open(
@@ -38,14 +33,6 @@ function ProductCard({ data, prodLink, setProducts }) {
           )
         }
       >
-        
-        {/* // <Link */}
-        {/* //   href={{ */}
-        {/* //     pathname: `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${prodLink ? data?.listingId : ""}`,
-    //     query: prodLink && { isOtherVendor: data?.isOtherVendor },
-    //     target: "_blank",
-    //   }}
-    // > */}
         <a>
           <div
             className="w-30 -z-1 rounded-lg shadow-lg group-hover:shadow-xl py-1 text-gray-900 bg-m-white group-hover:bg-gray-100"
@@ -79,10 +66,10 @@ function ProductCard({ data, prodLink, setProducts }) {
                 placeholder="blur"
                 minimumCacheTTL={3600}
                 priority={false}
-                unoptimized={false}
+                quality={25}
                 blurDataURL={
                   imageError
-                    ?getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||
@@ -100,7 +87,6 @@ function ProductCard({ data, prodLink, setProducts }) {
                 alt={`buy ${type[Math.floor(Math.random() * type.length)]} ${data?.marketingName
                   } ${data?.deviceStorage} ${data?.deviceCondition
                   }`.toLowerCase()}
-                // src={imageError ? Logo : img?.fullImage}
                 onError={() => setImageError(true)}
                 width={150}
                 height={150}
@@ -109,10 +95,9 @@ function ProductCard({ data, prodLink, setProducts }) {
             </div>
             <p className="font-semibold flex items-center text-m-grey-1 font-Roboto-Bold text-xlFontSize">
               {data?.listingPrice &&
-              // <FaRupeeSign size={16} />
-              <Image src={Rupee1} width={20} height={20} alt="" /> 
+                <Image src={Rupee1} width={20} height={20} alt="" />
               }
-              
+
               {numberWithCommas(data?.listingPrice || "")}
             </p>
             <div className="flex flex-col items-baseline pb-2 text-m-grey-2 flex-wrap w-full">
@@ -133,7 +118,6 @@ function ProductCard({ data, prodLink, setProducts }) {
               </div>
               <div className="justify-self-end flex justify-between pt-1 w-full uppercase font-Roboto-Light text-xsFontSize">
                 <span>{data?.listingLocation}</span>
-                {/* <span>{data?.modifiedDate}</span> */}
                 <span>{data?.listingDate}</span>
               </div>
             </div>
@@ -141,7 +125,6 @@ function ProductCard({ data, prodLink, setProducts }) {
         </a>
       </div>
     </div>
-    // </Link>
   );
 }
 

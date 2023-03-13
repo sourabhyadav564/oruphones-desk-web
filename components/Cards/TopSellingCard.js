@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Rupee1 from "@/assets/rupee1.svg";
 import { getDefaultImage, numberWithCommas } from "../../utils/util";
-// import Logo from "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
 import { useState } from "react";
 
 function TopSellingCard({ data }) {
@@ -37,6 +36,7 @@ function TopSellingCard({ data }) {
                 src={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
                 alt={alternate_text}
                 width={150}
+                quality={25}
                 height={150}
                 objectFit="contain" />
             </div>
@@ -45,14 +45,12 @@ function TopSellingCard({ data }) {
               <div className="justify-self-end">
                 <p className="text-smallFontSize font-Roboto-Light text-m-grey-1">Starting from</p>
                 <p className="font-Roboto-Bold flex items-center -ml-1 text-xlFontSize text-m-green">
-                  {(data?.startingFrom && 
-                  // <BiRupee />
-                  <Image src={Rupee1} width={20} height={20} alt="" /> 
+                  {(data?.startingFrom &&
+                    <Image src={Rupee1} width={20} height={20} alt="" />
                   ) || <>&nbsp;</>} {numberWithCommas(data?.startingFrom || "")}
                   {(data?.listingPrice &&
-                    //  <BiRupee />
-                     <Image src={Rupee1} width={20} height={20} alt="" /> 
-                     ) || <>&nbsp;</>} {numberWithCommas(data?.listingPrice || "")}
+                    <Image src={Rupee1} width={20} height={20} alt="" />
+                  ) || <>&nbsp;</>} {numberWithCommas(data?.listingPrice || "")}
                 </p>
               </div>
             </div>

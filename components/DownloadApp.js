@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-// import QRCode from "qrcode.react";
 import { useState } from "react";
-import * as Axios from "../api/axios";
 import AppleStore from "@/assets/apple_store.svg";
 import PlayStore from "@/assets/playstore.svg";
 import Image from "next/image";
@@ -12,12 +9,6 @@ function DownloadApp() {
   );
 
   const [qrValue2, setQrValue2] = useState("https://play.google.com/store/apps/details?id=com.oruphones.oru");
-
-  // useEffect(() => {
-  //   Axios.getTinyUrl().then((response) => {
-  //     setQrValue(response?.dataObject.tinyurl);
-  //   });
-  // }, []);
 
   return (
     <section className="w-full pt-5">
@@ -33,29 +24,12 @@ function DownloadApp() {
         </div>
         <div className="flex space-x-5 pt-4 sm:pt-0 justify-start">
           <div className="flex flex-col justify-end">
-            {/* <p className="text-black text-sm text-center pt-2">
-              Scan & Download ORUphones app now
-            </p> */}
-            {/* <QRCode
-              id="qr-gen"
-              value={qrValue1 || ""}
-              size={130}
-              level={"H"}
-              includeMargin={true}
-            /> */}
             <Image src={AppleStore||""} width={86} height={86} alt=""/>
             <a target={"_blank"} rel="noreferrer" href={qrValue1}>
               <p className="w-32 hover:scale-105 mt-2 h-10 bg-app-store bg-no-repeat bg-contain" />
             </a>
           </div>
           <div className="flex flex-col justify-end">
-            {/* <QRCode
-              id="qr-gen"
-              value={qrValue2 || ""}
-              size={130}
-              level={"H"}
-              includeMargin={true}
-            /> */}
             <Image src={PlayStore || "" } width={86} height={86} alt=""/>
             <a target={"_blank"} rel="noreferrer" href={qrValue2}>
               <p className="w-32 mt-2 hover:scale-105 h-10 bg-play-store bg-no-repeat bg-contain" />

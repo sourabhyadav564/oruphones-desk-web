@@ -26,8 +26,6 @@ export default function Modal({ open, setOpen, children, title }) {
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
           </Transition.Child>
-
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -45,10 +43,6 @@ export default function Modal({ open, setOpen, children, title }) {
           >
            <div className="relative inline-block bg-white rounded-lg text-left shadow-xl align-middle custom-scroll mx-8">
               <div className="absolute right-0 pt-4 px-6 sm:flex justify-between items-center">
-                {/* <GrClose
-                  onClick={() => setOpen(false)}
-                  className="cursor-pointer"
-                /> */}
                  <Image src={Close} width={28} height={28} onClick={() => setOpen(false)}/>
               </div>
               <div

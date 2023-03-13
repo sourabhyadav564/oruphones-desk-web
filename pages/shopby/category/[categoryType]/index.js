@@ -34,7 +34,6 @@ function CategoryPage() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
-  let intialPage = 0;
   let newPages = 0;
   const [title, setTitle] = useState(metaTags.BRANDS.title);
   const [description, setDescription] = useState(metaTags.BRANDS.description);
@@ -61,11 +60,18 @@ function CategoryPage() {
         }
 
         setLoading(false);
-        // setPageNumber(pageNumber + 1);
       });
     } else {
-      const { brand, condition, color, storage, Ram, warranty, verification, priceRange } =
-        applyFilter;
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        Ram,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
           listingLocation: getSearchLocation,
@@ -103,14 +109,21 @@ function CategoryPage() {
         if (color?.length > 0) {
           payLoad.color = color.includes("all") ? [] : color;
         }
-        if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
+        if (
+          warranty?.length > 0 &&
+          (router.query.categoryType != "brandWarranty" ||
+            router.query.categoryType != "sellerWarranty")
+        ) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         } else if (router.query.categoryType == "brandWarranty") {
           payLoad.warenty = "Brand Warranty";
         } else if (router.query.categoryType == "sellerWarranty") {
           payLoad.warenty = "Seller Warranty";
         }
-        if (verification?.length > 0 && router.query.categoryType != "verified") {
+        if (
+          verification?.length > 0 &&
+          router.query.categoryType != "verified"
+        ) {
           payLoad.verified = verification.includes("all") ? "" : "verified";
         } else if (router.query.categoryType == "verified") {
           payLoad.verified = "verified";
@@ -123,7 +136,6 @@ function CategoryPage() {
           applySort
         ).then((response) => {
           setProducts(response?.dataObject?.otherListings);
-          // setBestDeal([]);
           setTotalProducts(response?.dataObject?.totalProducts);
           setBestDeal(response?.dataObject?.bestDeals);
           setLoading(false);
@@ -145,9 +157,7 @@ function CategoryPage() {
         newPages,
         applySort
       ).then((response) => {
-
-         setLoading(false);
-        // setPageNumber(pageNumber + 1);
+        setLoading(false);
         setIsLoadingMore(false);
 
         if (response?.dataObject?.otherListings.length > 0) {
@@ -166,15 +176,20 @@ function CategoryPage() {
             (response && response?.dataObject?.totalProducts) || 0
           );
         }
-
-        // setLoading(false);
-        // setPageNumber(pageNumber + 1);
         setIsLoadingMore(false);
       });
     } else {
       setIsFilterApplied(true);
-      const { condition, color,brand, storage, Ram, warranty, verification, priceRange } =
-        applyFilter;
+      const {
+        condition,
+        color,
+        brand,
+        storage,
+        Ram,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
       if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
         let payLoad = {
           listingLocation: getSearchLocation,
@@ -188,7 +203,7 @@ function CategoryPage() {
           maxsellingPrice: 200000,
           minsellingPrice: 0,
           verified: "",
-          warenty: []
+          warenty: [],
         };
         if (brand?.length > 0) {
           payLoad.make = brand.includes("all") ? [] : brand;
@@ -208,17 +223,21 @@ function CategoryPage() {
         if (Ram?.length > 0) {
           payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
         }
-        // if (color?.length > 0) {
-        //   payLoad.color = color.includes("all") ? [] : color;
-        // }
-        if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
+        if (
+          warranty?.length > 0 &&
+          (router.query.categoryType != "brandWarranty" ||
+            router.query.categoryType != "sellerWarranty")
+        ) {
           payLoad.warenty = warranty.includes("all") ? [] : warranty;
         } else if (router.query.categoryType == "brandWarranty") {
           payLoad.warenty = "Brand Warranty";
         } else if (router.query.categoryType == "sellerWarranty") {
           payLoad.warenty = "Seller Warranty";
         }
-        if (verification?.length > 0 && router.query.categoryType != "verified") {
+        if (
+          verification?.length > 0 &&
+          router.query.categoryType != "verified"
+        ) {
           payLoad.verified = verification.includes("all") ? "" : "verified";
         } else if (router.query.categoryType == "verified") {
           payLoad.verified = "verified";
@@ -230,7 +249,6 @@ function CategoryPage() {
         ).then((response) => {
           setIsFilterApplied(true);
           setIsLoadingMore(false);
-          // setLoading(false);
           if (newPages == 0) {
             setProducts(response?.dataObject?.otherListings);
           } else {
@@ -239,7 +257,6 @@ function CategoryPage() {
               ...response?.dataObject?.otherListings,
             ]);
           }
-          // setBestDeals([]);
           setTotalProducts(response?.dataObject?.totalProducts);
           if (newPages == 0) {
             setBestDeal(response?.dataObject?.bestDeals);
@@ -248,7 +265,7 @@ function CategoryPage() {
               ...products,
               ...response?.dataObject?.bestDeals,
             ]);
-          };
+          }
         });
       }
     }
@@ -261,8 +278,16 @@ function CategoryPage() {
   }, [categoryType, getSearchLocation, applySort]);
 
   useEffect(() => {
-    const { brand, condition, color, storage, Ram, warranty, verification, priceRange } =
-      applyFilter;
+    const {
+      brand,
+      condition,
+      color,
+      storage,
+      Ram,
+      warranty,
+      verification,
+      priceRange,
+    } = applyFilter;
     if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
       setIsFilterApplied(true);
       let payLoad = {
@@ -277,7 +302,7 @@ function CategoryPage() {
         maxsellingPrice: 200000,
         minsellingPrice: 0,
         verified: "",
-        warenty: []
+        warenty: [],
       };
       if (brand?.length > 0) {
         payLoad.make = brand.includes("all") ? [] : brand;
@@ -286,8 +311,11 @@ function CategoryPage() {
         payLoad.minsellingPrice = priceRange.min;
         payLoad.maxsellingPrice = priceRange.max;
       }
-     
-      if ((condition?.length > 0 && router.query.categoryType != "like new") || (condition?.length > 0 && router.query.categoryType == "like%20new")) {
+
+      if (
+        (condition?.length > 0 && router.query.categoryType != "like new") ||
+        (condition?.length > 0 && router.query.categoryType == "like%20new")
+      ) {
         payLoad.deviceCondition = condition.includes("all") ? [] : condition;
       } else if (router.query.categoryType == "like new") {
         payLoad.deviceCondition = "Like New";
@@ -301,7 +329,11 @@ function CategoryPage() {
       if (color?.length > 0) {
         payLoad.color = color.includes("all") ? [] : color;
       }
-      if (warranty?.length > 0 && (router.query.categoryType != "brandWarranty" || router.query.categoryType != "sellerWarranty")) {
+      if (
+        warranty?.length > 0 &&
+        (router.query.categoryType != "brandWarranty" ||
+          router.query.categoryType != "sellerWarranty")
+      ) {
         payLoad.warenty = warranty.includes("all") ? [] : warranty;
       } else if (router.query.categoryType == "brandWarranty") {
         payLoad.warenty = "Brand Warranty";
@@ -310,10 +342,9 @@ function CategoryPage() {
       }
       if (verification?.length > 0 && router.query.categoryType != "verified") {
         payLoad.verified = verification.includes("all") ? "" : "verified";
-      } else
-        if (router.query.categoryType === "verified") {
-          payLoad.verified = "verified";
-        }
+      } else if (router.query.categoryType === "verified") {
+        payLoad.verified = "verified";
+      }
       setLoading(true);
 
       Axios.searchFilter(
@@ -321,8 +352,6 @@ function CategoryPage() {
         Cookies.get("userUniqueId") || "Guest",
         pageNumber
       ).then((response) => {
-
-        // setIsLoadingMore(false);
         setLoading(false);
         if (newPages == 0) {
           setProducts(response?.dataObject?.otherListings);
@@ -332,7 +361,6 @@ function CategoryPage() {
             ...response?.dataObject?.otherListings,
           ]);
         }
-        // setBestDeals([]);
         setTotalProducts(response?.dataObject?.totalProducts);
         if (newPages == 0) {
           setBestDeal(response?.dataObject?.bestDeals);
@@ -341,14 +369,10 @@ function CategoryPage() {
             ...products,
             ...response?.dataObject?.bestDeals,
           ]);
-        };
+        }
       });
     }
   }, [applyFilter, applySort]);
-
-  // const sortingProducts = useMemo(() => getSortedProducts(applySort, products), [applySort, products]);
-
-  // const sortingProducts = getSortedProducts(applySort, products);
 
   useEffect(() => {
     switch (categoryType) {
@@ -425,7 +449,6 @@ function CategoryPage() {
           listingsCount={products?.length + bestDeal?.length}
           setApplySort={setApplySort}
           setApplyFilter={setApplyFilter}
-        //   makeName={makeName}
         >
           {!isLoading && bestDeal && bestDeal.length > 0 && (
             <div className="mb-4">
@@ -449,14 +472,12 @@ function CategoryPage() {
           </h4>
           <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
             {!isLoading &&
-              isFinished === false && products && products.length > 0 ? (
+            isFinished === false &&
+            products &&
+            products.length > 0 ? (
               products?.map((product, index) => (
                 <div
                   key={index}
-                  onClick={() => {
-                    // setListingId(item.listingId);
-                    // setProductsData(products);
-                  }}
                 >
                   <ProductCard
                     data={product}
@@ -472,10 +493,12 @@ function CategoryPage() {
             )}
           </div>
           {!isLoading &&
-            isFinished === false && products?.length != totalProducts && (
+            isFinished === false &&
+            products?.length != totalProducts && (
               <span
-                className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
-                  } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+                className={`${
+                  isLoadingMore ? "w-[250px]" : "w-[150px]"
+                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
                 onClick={loadMoreData}
               >
                 <p className="block text-m-green font-semibold">
@@ -487,40 +510,6 @@ function CategoryPage() {
       </main>
     </>
   );
-}
-
-function getSortedProducts(applySort, products) {
-  var sortedProducts = products ? [...products] : [];
-  if (applySort && applySort === "Price - Low to High") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(a.listingPrice) - numberFromString(b.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Price - High to Low") {
-    sortedProducts.sort((a, b) => {
-      return (
-        numberFromString(b.listingPrice) - numberFromString(a.listingPrice)
-      );
-    });
-  } else if (applySort && applySort === "Newest First") {
-    sortedProducts.sort((a, b) => {
-      return (
-        a.updatedAt &&
-        b.updatedAt &&
-        stringToDate(b.updatedAt) - stringToDate(a.updatedAt)
-      );
-    });
-  } else if (applySort && applySort === "Oldest First") {
-    sortedProducts.sort((a, b) => {
-      return (
-        a.updatedAt &&
-        b.updatedAt &&
-        stringToDate(a.updatedAt) - stringToDate(b.updatedAt)
-      );
-    });
-  }
-  return sortedProducts;
 }
 
 export default CategoryPage;

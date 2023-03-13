@@ -1,18 +1,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Rupee from "@/assets/rupee1.svg"
+import Rupee from "@/assets/rupee1.svg";
 import { numberWithCommas } from "../../utils/util";
 import * as Axios from "../../api/axios";
 import RequestVerificationPopup from "../Popup/RequestVerificationPopup";
 import LoginPopup from "../Popup/LoginPopup";
 import RequestVerificationSuccessPopup from "../Popup/RequestVerificationSuccessPopup";
 import Cookies from "js-cookie";
-
-import RegUser from "@/assets/user1.svg"
+import RegUser from "@/assets/user1.svg";
 import GreaterThan from "@/assets/greaterthan.svg";
-// import first from "https://d1tl44nezj10jx.cloudfront.net/assets/first.png";
-// import second from "https://d1tl44nezj10jx.cloudfront.net/assets/second.png";
-// import third from "https://d1tl44nezj10jx.cloudfront.net/assets/third.png";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import { toast } from "react-toastify";
 
@@ -43,9 +39,6 @@ function SellerDetailsCard({ data, comparisontableid }) {
         Cookies.get("userUniqueId") || "Guest"
       ).then((response) => {
         setResData(response);
-        // if (response.status == "SUCCESS") {
-        //  setRequestVerificationSuccessPopup(true);
-        // }
       });
     }
   }, [openRequestVerificationPopup]);
@@ -64,8 +57,8 @@ function SellerDetailsCard({ data, comparisontableid }) {
       }
     }
   };
-  useEffect(() => {
 
+  useEffect(() => {
     if (
       showLoginPopup == false &&
       performAction == true &&
@@ -84,12 +77,8 @@ function SellerDetailsCard({ data, comparisontableid }) {
       Cookies.get("userUniqueId") !== undefined &&
       data?.isOtherVendor === "Y"
     ) {
-      // setPerformAction2(true);
-      // setProductLink(data?.productLink);
       openSellerWebSite(data?.vendorLink);
     }
-
-    // setPerformAction(false);
   }, [showLoginPopup]);
 
   useEffect(() => {
@@ -110,7 +99,6 @@ function SellerDetailsCard({ data, comparisontableid }) {
     }
   }, [showLoginPopup]);
   useEffect(() => {
-    // setShowNumber(false);
     if (
       !(data?.isOtherVendor === "Y") &&
       Cookies.get("userUniqueId") !== undefined &&
@@ -120,12 +108,10 @@ function SellerDetailsCard({ data, comparisontableid }) {
         data?.listingId,
         Cookies.get("userUniqueId")
       ).then((response) => {
-        // setContactSellerMobileNumber(response?.dataObject?.userdetails?.mobileNumber);
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
       });
     }
     setOtherSeller(data?.externalSource);
-
   }, [showNumber]);
 
   const openSellerWebSite = (e) => {
@@ -136,8 +122,6 @@ function SellerDetailsCard({ data, comparisontableid }) {
       window.open(e);
     }
   };
-
-
 
   return (
     <div className="seller-info">
@@ -151,14 +135,13 @@ function SellerDetailsCard({ data, comparisontableid }) {
         {data?.isOtherVendor === "N" || data?.isOtherVendor === null ? (
           <div className="flex flex-row justify-between">
             <div className="flex ">
-              {/* <CgProfile size={40} /> */}
               <Image src={RegUser} width={30} height={30} alt="" />
               <div className="pt-1">
-                <p className="pl-2 text-grey2 font-Roboto-Light text-smallFontSize leading-4">
+                <p className="pl-2 text-grey2 font-Roboto-Semibold text-mediumFontSize leading-4">
                   {" "}
                   {data?.listedBy}
                 </p>
-                <span className="pl-2 text-gray-2 font-Roboto-Medium text-mediumFontSize text-sm inline-block">
+                <span className="pl-2 text-gray-2 font-Roboto-Light text-smallFontSize text-sm inline-block">
                   {" "}
                   {data?.listingLocation}
                 </span>
@@ -167,9 +150,14 @@ function SellerDetailsCard({ data, comparisontableid }) {
             <span className="px-6">
               <div className="flex flex-row justify-between">
                 <button
-                  onClick={() => data?.status != "Active" ? toast.warning("This device is sold out") : handleClick()}
-                  className={`${!showNumber ? "bg-m-green text-white" : "text-m-green"
-                    } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
+                  onClick={() =>
+                    data?.status != "Active"
+                      ? toast.warning("This device is sold out")
+                      : handleClick()
+                  }
+                  className={`${
+                    !showNumber ? "bg-m-green text-white" : "text-m-green"
+                  } w-full shadow-xl border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded ml-12 items-end hover:bg-white hover:text-m-green-1 duration-500`}
                 >
                   {" "}
                   {showNumber ? contactSellerMobileNumber : "Contact Seller"}
@@ -228,8 +216,14 @@ function SellerDetailsCard({ data, comparisontableid }) {
                 isOtherVendor={data?.isOtherVendor}
               />
             ))}{" "}
-            {data?.compareData && data?.compareData.length > 0 &&
-              <a href={comparisontableid} className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold hover:opacity-70">See Details &gt;</a>}
+            {data?.compareData && data?.compareData.length > 0 && (
+              <a
+                href={comparisontableid}
+                className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold hover:opacity-70"
+              >
+                See Details &gt;
+              </a>
+            )}
           </div>{" "}
         </div>
       )}{" "}
@@ -270,8 +264,6 @@ const OtherSeller = ({
   listingId,
   isOtherVendor,
 }) => {
-
-
   let vendor = data.externalSourceImage.replaceAll(
     "https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/",
     ""
@@ -282,14 +274,10 @@ const OtherSeller = ({
     vendor = vendor.replaceAll("mbr_", "");
   }
 
-
-
   return (
     <>
-      {/* {data?.map((item, index) => ( */}
       <div
         className="my-1 py-1 px-4 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
-        // key={index}
         style={{ background: "#EFEFEF" }}
         onClick={() => {
           if (Cookies.get("userUniqueId") == undefined) {
@@ -307,83 +295,69 @@ const OtherSeller = ({
       >
         <div className="flex flex-col justify-center items-start">
           {" "}
-          {/* <span className="text-xs text-m-grey-2">Seller</span> */}
           <div className="my-1 w-64 flex">
             {" "}
-
-            {
-              // (data.externalSourceImage || data?.externalSourceImage=="")
-              data?.externalSourcePrice && (
-                <div className="flex flex-row gap-2">
-                  {index < 3 && (
-                    <Image
-                      src={
-                        index == 0
-                          ? "https://d1tl44nezj10jx.cloudfront.net/assets/first.png"
-                          : index == 1
-                            ? "https://d1tl44nezj10jx.cloudfront.net/assets/second.png"
-                            : index == 2 && "https://d1tl44nezj10jx.cloudfront.net/assets/third.png"
-                      }
-                      alt="icon"
-                      width={35}
-                      height={20}
-                      objectFit="contain"
-                      className=""
-                    />
-                  )}
-                  {/* <Image
-                                    src={data.externalSourceImage}
-                                    alt={vendor}
-                                    width={130}
-                                    height={50}
-                                    objectFit="contain"
-                                // style={{ height: 35, width: "auto" }}
-                                /> */}
-                  {data?.userName && data?.listingId != listingId ? (
+            {data?.externalSourcePrice && (
+              <div className="flex flex-row gap-2">
+                {index < 3 && (
+                  <Image
+                    src={
+                      index == 0
+                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/first.png"
+                        : index == 1
+                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/second.png"
+                        : index == 2 &&
+                          "https://d1tl44nezj10jx.cloudfront.net/assets/third.png"
+                    }
+                    alt="icon"
+                    width={35}
+                    height={20}
+                    objectFit="contain"
+                    className=""
+                  />
+                )}
+                {data?.userName && data?.listingId != listingId ? (
+                  <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
+                    {data?.userName}
+                  </p>
+                ) : data?.listingId == listingId && isOtherVendor == "N" ? (
+                  <div className="flex">
                     <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
                       {data?.userName}
                     </p>
-                  ) : data?.listingId == listingId && isOtherVendor == "N" ? (
-                    <div className="flex">
-                      <p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
-                        {data?.userName}
-                      </p>
-                      <p className="font-Roboto-Semibold opacity-30 py-1 text-smallFontSize pt-2 pl-1.5">(This Phone)</p>
-                    </div>
-                  ) : (
-                    <Image
-                      src={data?.externalSourceImage}
-                      alt={vendor}
-                      height={35}
-                      width={70}
-                      objectFit="contain"
-                    />
-                  )}
-                  {data?.listingId == listingId && isOtherVendor == "Y" && (
-                    <p className="font-Roboto-Semibold opacity-30 py-1 w-64">
-                      (This Phone){" "}
+                    <p className="font-Roboto-Semibold opacity-30 py-1 text-smallFontSize pt-2 pl-1.5">
+                      (This Phone)
                     </p>
-                  )}{" "}
-                </div>
-              )
-            }{" "}
+                  </div>
+                ) : (
+                  <Image
+                    src={data?.externalSourceImage}
+                    alt={vendor}
+                    height={35}
+                    width={70}
+                    objectFit="contain"
+                  />
+                )}
+                {data?.listingId == listingId && isOtherVendor == "Y" && (
+                  <p className="font-Roboto-Semibold opacity-30 py-1 w-64">
+                    (This Phone){" "}
+                  </p>
+                )}{" "}
+              </div>
+            )}{" "}
           </div>{" "}
         </div>{" "}
         <div className="flex flex-col items-center justify-center pr-4">
           {" "}
-          {/* <span className="text-xs text-m-grey-2">Price</span> */}
           {data.externalSourcePrice && (
             <span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
-              {/* <BiRupee />  */}
               <Image src={Rupee} width={20} height={20} />
               {numberWithCommas(data.externalSourcePrice)}{" "}
-              {/* <FaGreaterThan size={13} className="pl-1" /> */}
               <Image src={GreaterThan} width={15} height={15} />
             </span>
           )}{" "}
         </div>{" "}
       </div>{" "}
-      {/* ))} */}
     </>
   );
 };

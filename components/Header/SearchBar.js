@@ -1,5 +1,4 @@
 import { getSearchResults } from "api/axios";
-import Link from "next/link";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { Fragment } from "react";
@@ -75,29 +74,10 @@ function SearchBar() {
     }
   };
 
-  // if (brandsList.length === 0) {
-  // setBrands(JSON.parse(localStorage.getItem("brands")));
-  // } else {
-  //   localStorage.setItem("brands", JSON.stringify(brandsList));
-  //   Cookies.set("brands", true);
-  //   setBrands(brandsList);
-  // }
-
   return (
     <Fragment>
       <div className="flex-1 relative custom-scroll h-8" ref={ref}>
         <div className="flex w-full rounded bg-m-white-1 ">
-          {/* <select className="w-[104px] pr-6 py-1 h-10 rounded border-none m-auto  items-center text-m-green-1 font-normal bg-[#D9D9D9] text-xs" >
-            {brands.map((brand, index) => (
-              <option key={index} value={brand.make}
-                onClick={
-                  <Link href={{ pathname: `/product/buy-old-refurbished-used-mobiles/${brand?.make?.toLowerCase()}` }}>
-                  </Link>
-                }>
-                {brand.make}
-              </option>
-            ))}
-          </select> */}
           <input
             placeholder="Search with make and models . . ."
             onChange={handleChange}
@@ -107,10 +87,9 @@ function SearchBar() {
             }`}
             style={{ boxShadow: "0px 2px 3px #0000000A" }}
           />
-           <div className=" flex items-center px-4 cursor-pointer hover:bg-gray-200 hover:rounded-r-md">
-          {/* <BiSearch className="text-black-1" size={20} /> */}
-          <Image src={Search} width={20} height={20} alt=""/>
-        </div>
+          <div className=" flex items-center px-4 cursor-pointer hover:bg-gray-200 hover:rounded-r-md">
+            <Image src={Search} width={20} height={20} alt="" />
+          </div>
         </div>
         {searchResults && (
           <div
@@ -120,7 +99,6 @@ function SearchBar() {
               maxHeight: 400,
             }}
           >
-
             {searchResults.brandList && searchResults.brandList.length > 0 && (
               <p className="px-4 py-3 block border-b text-m-green">Brand</p>
             )}
@@ -178,7 +156,7 @@ function SearchBar() {
                   Not found
                 </ListItem>
               )}
-              <div>
+            <div>
               {recentSearch && showRecentSearch && recentSearch.length > 0 && (
                 <>
                   <p className="px-4 py-3 block border-b text-primary text-regularFontSize">
@@ -187,8 +165,7 @@ function SearchBar() {
                   <div>
                     {recentSearch.map((item) => (
                       <div className="ml-4  flex items-center hover:bg-gray-100">
-                        {/* <BiTimeFive className="w-5 h-5 ml-4 -mr-4 z-50"/> */}
-                        <Image src={Recent} width={20} height={20} alt=""/>
+                        <Image src={Recent} width={20} height={20} alt="" />
                         <ListItem
                           clicked={() => {
                             setInput("");
@@ -206,7 +183,6 @@ function SearchBar() {
             </div>
           </div>
         )}
-       
       </div>
     </Fragment>
   );
@@ -227,22 +203,21 @@ const ListItem = ({ make, makeLink, marketingName, children, clicked }) => {
   }
 
   const pastSearches = () => {
-    // let pastSearch = new Map();
     let pastSearch = [];
     if (localStorage.getItem("pastSearches")) {
       pastSearch = localStorage.getItem("pastSearches");
       pastSearch = JSON.parse(pastSearch);
-      pastSearch = pastSearch.filter((item) => item !== (marketingName || make));
+      pastSearch = pastSearch.filter(
+        (item) => item !== (marketingName || make)
+      );
     }
     if (pastSearch.length >= 5) {
       pastSearch.shift();
     }
     pastSearch.push(marketingName || make);
     localStorage.setItem("pastSearches", JSON.stringify(pastSearch));
-    // }
   };
   const handleClick = () => {
-    // setPastSearches(marketingName)
     clicked();
     pastSearches();
     window.open(
@@ -254,11 +229,7 @@ const ListItem = ({ make, makeLink, marketingName, children, clicked }) => {
   };
 
   return (
-    <div
-      onClick={() => handleClick()}
-      //  href={makeLink ? `/product/buy-old-refurbished-used-mobiles/${make}/` : `/product/buy-old-refurbished-used-mobiles/${make}/${marketingName}`}
-      className="hover:bg-gray-100"
-    >
+    <div onClick={() => handleClick()} className="hover:bg-gray-100">
       <a
         className="px-6 py-3 block border-b last:border-0 capitalize  cursor-pointer"
         onClick={clicked}

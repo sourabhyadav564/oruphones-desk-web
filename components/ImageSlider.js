@@ -4,25 +4,31 @@ import Slider from "react-slick";
 import Chevronleft from "@/assets/chevronleft.svg";
 import ChevronRight from "@/assets/chevronright.svg";
 
-// import Logo from "@/assets/oru_phones_logo.png"
-
-
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  // <BiChevronLeft {...rest} className={`prev ${className}`} />
-  <Image src={Chevronleft} width={32} height={32}   {...rest} className={`prev ${className}`}/>
+  <Image
+    src={Chevronleft}
+    width={32}
+    height={32}
+    {...rest}
+    className={`prev ${className}`}
+  />
 );
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  // <BiChevronRight {...rest} className={`next ${className}`} />
-  <Image src={ChevronRight} width={32} height={32}   {...rest} className={`prev ${className}`}/>
+  <Image
+    src={ChevronRight}
+    width={32}
+    height={32}
+    {...rest}
+    className={`prev ${className}`}
+  />
 );
 
-function ImageSlider({data, images, openFullImage }) {
+function ImageSlider({ data, images, openFullImage }) {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
-  const[imageError,setImageError]=useState(false);
-
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     setNav1(slider1);
@@ -50,9 +56,13 @@ function ImageSlider({data, images, openFullImage }) {
     nextArrow: <ArrowRight />,
   };
 
-  var type = ["old phone", "used", "refurbished"]
-  const alternate_text = (`buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} `).toLowerCase()
-  
+  var type = ["old phone", "used", "refurbished"];
+  const alternate_text = `buy ${
+    type[Math.floor(Math.random() * type.length)]
+  } ${data?.marketingName} ${data?.deviceStorage} ${
+    data?.deviceCondition
+  } `.toLowerCase();
+
   return (
     <React.Fragment>
       {Array.isArray(images) && images && (
@@ -66,14 +76,24 @@ function ImageSlider({data, images, openFullImage }) {
             .map((img, index) => (
               <Fragment key={index}>
                 <Image
-                  // src={img?.fullImage || Logo}
                   loading="lazy"
                   placeholder="blur"
                   priority={false}
                   unoptimized={false}
-                  blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
-                  src={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
-                  onError={()=>setImageError(true)}
+                  quality={100}
+                  blurDataURL={
+                    imageError
+                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      : img?.fullImage ||
+                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  }
+                  src={
+                    imageError
+                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      : img?.fullImage ||
+                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  }
+                  onError={() => setImageError(true)}
                   alt={alternate_text}
                   width={"100%"}
                   height={"90%"}
@@ -93,14 +113,24 @@ function ImageSlider({data, images, openFullImage }) {
         >
           <Fragment>
             <Image
-              // src={images?.fullImage || Logo}
-              src={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.fullImage ||"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+              src={
+                imageError
+                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  : images?.fullImage ||
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+              }
               loading="lazy"
               placeholder="blur"
               priority={false}
-              blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+              quality={100}
+              blurDataURL={
+                imageError
+                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  : images?.fullImage ||
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+              }
               unoptimized={false}
-              onError={()=>setImageError(true)}
+              onError={() => setImageError(true)}
               alt={alternate_text}
               width={"100%"}
               height={"90%"}
@@ -123,14 +153,26 @@ function ImageSlider({data, images, openFullImage }) {
               .map((img, index) => (
                 <Fragment key={index}>
                   <Image
-                    src={imageError?"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.thumbImage || img.fullImage  || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+                    src={
+                      imageError
+                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        : img?.thumbImage ||
+                          img.fullImage ||
+                          "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    }
                     loading="lazy"
                     placeholder="blur"
+                    quality={100}
                     priority={false}
                     unoptimized={false}
-                    blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : img?.thumbImage || img.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
-                    // src={imageError ? Logo : img?.fullImage}
-                    onError={()=>setImageError(true)}
+                    blurDataURL={
+                      imageError
+                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        : img?.thumbImage ||
+                          img.fullImage ||
+                          "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    }
+                    onError={() => setImageError(true)}
                     width={"100%"}
                     height={"100%"}
                     layout="responsive"
@@ -148,13 +190,26 @@ function ImageSlider({data, images, openFullImage }) {
             ref={(slider) => setSlider2(slider)}
           >
             <Image
-              src={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.thumbImage || images?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
-              onError={()=>setImageError(true)}
+              src={
+                imageError
+                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  : images?.thumbImage ||
+                    images?.fullImage ||
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+              }
+              onError={() => setImageError(true)}
               loading="lazy"
               placeholder="blur"
               priority={false}
+              quality={100}
               unoptimized={false}
-              blurDataURL={imageError ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : images?.thumbImage || images?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+              blurDataURL={
+                imageError
+                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  : images?.thumbImage ||
+                    images?.fullImage ||
+                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+              }
               width={"100%"}
               height={"100%"}
               layout="responsive"

@@ -1,5 +1,4 @@
 import React from "react";
-// import loader from "https://d1tl44nezj10jx.cloudfront.net/assets/loading.gif";
 import Image from "next/image";
 
 export default function Spinner() {

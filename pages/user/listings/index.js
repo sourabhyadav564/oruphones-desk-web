@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import ProfileListingTile from "../../../components/User/ProfileListingTile";
 import UserListingTab from "../../../components/User/UserListingTab";
 import UserProfile from "../../../components/User/UserProfile";
@@ -11,7 +10,6 @@ import Loader from "@/components/Loader/Loader";
 function Listings() {
   const [currentTab, setCurrentTab] = useState(0);
   const [userListings, setUserListing] = useState([]);
-
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,45 +34,34 @@ function Listings() {
         <UserListingTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <div className="lg:flex lg:flex-col grid grid-cols-2 gap-4 lg:space-y-4 px-4 my-4">
           {currentTab === 0
-            ? // userListings && userListings.sort((a, b) => b.date - a.date) && userListings.filter((item)=>{if(item.status === "Active"){return item}}).map((item, index) => (
-            userListings &&
-            userListings
-              .filter((item) => {
-                if (item.status === "Active") {
-                  return item;
-                }
-              })
-              .map((item, index) => (
-                <div
-                // href={`/user/listings/${item.listingId}`}
-                // key={index}
-                // passHref
-                >
-                  <a
-                  //  href=""
-                  >
-                    <ProfileListingTile data={item} />
-                  </a>
-                </div>
-              ))
+            ? userListings &&
+              userListings
+                .filter((item) => {
+                  if (item.status === "Active") {
+                    return item;
+                  }
+                })
+                .map((item, index) => (
+                  <div>
+                    <a>
+                      <ProfileListingTile data={item} />
+                    </a>
+                  </div>
+                ))
             : userListings &&
-            userListings
-              .filter((item) => {
-                if (item.status === "Paused" || item.status === "InActive") {
-                  return item;
-                }
-              })
-              .map((item, index) => (
-                <div
-                // href={`/user/listings/${item.listingId}`}
-                // key={index}
-                // passHref
-                >
-                  <a>
-                    <ProfileListingTile data={item} />
-                  </a>
-                </div>
-              ))}
+              userListings
+                .filter((item) => {
+                  if (item.status === "Paused" || item.status === "InActive") {
+                    return item;
+                  }
+                })
+                .map((item, index) => (
+                  <div>
+                    <a>
+                      <ProfileListingTile data={item} />
+                    </a>
+                  </div>
+                ))}
 
           {isLoading && (
             <div className="flex gap-4 col-span-2 h-60  items-center justify-center text-xlFontSize font-Roboto-Regular">

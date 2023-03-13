@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-// import loader from "https://d1tl44nezj10jx.cloudfront.net/assets/loading.gif";
 
 export default function Loader() {
   return (

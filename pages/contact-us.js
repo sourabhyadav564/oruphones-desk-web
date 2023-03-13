@@ -70,8 +70,6 @@ function contactUS() {
         <section className="my-6 grid grid-cols-3 gap-4 ">
           <div className="bg-white rounded p-4 border">
             <h2 className="text-black-20 font-bold my-2">Connect with us</h2>
-            {/* <span className="text-black-60">Give us a call</span>
-          <p className="text-xl text-black-20 mb-4"> +91 999 123 1234 </p> */}
             <span className="text-black-60">Send us an email</span>
             <p className="text-xl text-black-20 mb-4">contact@oruphones.com</p>
           </div>
@@ -155,21 +153,3 @@ function contactUS() {
 }
 
 export default contactUS;
-
-{
-  /* <Input
-                id="inputName"
-                inputClass={"w-full"}
-                defaultValue={userInfo?.userdetails?.userName || ""}
-                placeholder="Enter seller name ex: Ram, Mega Traders etc"
-                onChange={(e) => {
-                  setName(e.target.value);
-                  setNameValueRequired("");
-                }}
-                type="text"
-                maxLength="30"
-                errorClass={`border ${nameValueRequired}`}
-              >
-                Name
-              </Input> */
-}

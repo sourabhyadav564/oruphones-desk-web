@@ -42,9 +42,6 @@ const DeviceConditionCard = ({ condition, answer }) => {
           </div>
         </div>
       </div>
-      {/* <div className="col-span-1">
-        <p className="text-sm">{description}</p>
-      </div> */}
     </div>
   );
 };

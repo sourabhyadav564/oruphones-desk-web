@@ -1,4 +1,3 @@
-import Modal from ".";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 import { parse as nodeParser } from "node-html-parser";
@@ -13,19 +12,9 @@ function ConditionInfoPopup({ open, setOpen }) {
   }, []);
 
   async function callStaticPages() {
-    // let staticDataPath;
-    // try {
-    //   const response = await infoTemplates();
-    //   staticDataPath = response?.dataObject;
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     var htmlText;
     try {
-      // const { serverUrl, templateUrls } = staticDataPath;
       const res = await fetchStaticHTML("/condition.html");
-      // const res = await fetchStaticHTML(serverUrl + templateUrls.VERIFICATION);
       const html = res.data;
       const doc = nodeParser(html);
       const body = doc.querySelector("body");
@@ -47,7 +36,6 @@ function ConditionInfoPopup({ open, setOpen }) {
           </div>
         </div>
       </div>
-      {/* <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"></div> */}
     </Model2>
   );
 }

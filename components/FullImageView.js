@@ -1,29 +1,26 @@
 import Slider from "react-slick";
 import styles from "../styles/fullimageview.module.css";
-
 import Chevronleft from "@/assets/chevronleft.svg";
 import ChevronRight from "@/assets/chevronright.svg";
 import Cross from "@/assets/cross1.svg";
-
-
 import { useState } from "react";
 import Image from "next/image";
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  // <BiChevronLeft
-  //   {...rest}
-  //   className={`fullimage_prev prev ${className}`}
-  //   size={32}
-  // />
-  <Image src={Chevronleft} width={32} height={32}  className={`fullimage_prev prev ${className}`}/>
+  <Image
+    src={Chevronleft}
+    width={32}
+    height={32}
+    className={`fullimage_prev prev ${className}`}
+  />
 );
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  // <BiChevronRight
-  //   {...rest}
-  //   className={`fullimage_next  next ${className}`}
-  //   size={32}
-  // />
-  <Image src={ChevronRight} width={32} height={32}  className={`fullimage_prev prev ${className}`}/>
+  <Image
+    src={ChevronRight}
+    width={32}
+    height={32}
+    className={`fullimage_prev prev ${className}`}
+  />
 );
 
 function FullImageView({ open, close, images }) {
@@ -39,8 +36,14 @@ function FullImageView({ open, close, images }) {
   return (
     <section className={styles.imageview_container}>
       <div className="w-full h-20 flex justify-end p-4 text-white">
-        {/* <MdClose className="cursor-pointer" size={32} onClick={() => close()} /> */}
-        <Image src={Cross} width={36} height={36} alt="" className="cursor-pointer" onClick={() => close()}/>
+        <Image
+          src={Cross}
+          width={36}
+          height={36}
+          alt=""
+          className="cursor-pointer"
+          onClick={() => close()}
+        />
       </div>
       {images && (
         <Slider
@@ -69,7 +72,12 @@ function FullImageView({ open, close, images }) {
             .map((img, index) => (
               <div key={index} className={styles.image_wrapper}>
                 <img
-                  src={imageError?"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png":  img?.fullImage || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+                  src={
+                    imageError
+                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      : img?.fullImage ||
+                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  }
                   alt={index}
                   onError={() => {
                     setImageError(true);
@@ -78,18 +86,16 @@ function FullImageView({ open, close, images }) {
                 />
               </div>
             ))}
-            {console.log("images", images)}
-            {images[0]?.fullImage=="" && 
+          {images[0]?.fullImage == "" && (
             <div className={styles.image_wrapper}>
               <img
-              src={"https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
-              // onError={() => {
-              //   setImageError(true);
-              // }}
-              style={{ maxWidth: "40%", maxHeight: "70vh" }}
-            />
+                src={
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                }
+                style={{ maxWidth: "40%", maxHeight: "70vh" }}
+              />
             </div>
-            }
+          )}
         </Slider>
       )}
     </section>

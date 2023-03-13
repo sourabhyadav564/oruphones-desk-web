@@ -1,6 +1,5 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-// import Logo from "@/assets/oru_phones_logo.png";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { fetchByMarketingName } from "../../api/axios";
@@ -12,7 +11,8 @@ function ShopByModelCard({
   make,
   src,
   alt,
-  fallBackSrc = "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png".src,
+  fallBackSrc = "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+    .src,
 }) {
   const router = useRouter();
   const [imageError, setImageError] = useState(false);
@@ -22,23 +22,10 @@ function ShopByModelCard({
     setLoadingState(false);
   }, [router.pathname]);
 
-  const handleModelClick = () => {
-    fetchByMarketingName(
-      location,
-      data,
-      Cookies.get("userUniqueId") || "Guest",
-      0,
-      "Featured"
-    );
-  };
-
-
-
   return (
     <div>
       <div
         className="flex relative my-6 flex-col items-center justify-center hover:cursor-pointer"
-        // onClick={handleModelClick}
         onClick={() =>
           window.open(
             makeLink
@@ -52,9 +39,20 @@ function ShopByModelCard({
             loading="lazy"
             placeholder="blur"
             priority={false}
+            quality={10}
             unoptimized={false}
-            blurDataURL={imageError ? fallBackSrc : src || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
-            src={imageError ? fallBackSrc : src || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+            blurDataURL={
+              imageError
+                ? fallBackSrc
+                : src ||
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+            }
+            src={
+              imageError
+                ? fallBackSrc
+                : src ||
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+            }
             alt={alt}
             onError={() => setImageError(true)}
             width="40"

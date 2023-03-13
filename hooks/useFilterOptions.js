@@ -18,11 +18,6 @@ const initialState = [
     name: "Condition",
     options: [],
   },
-  // {
-  //   id: "color",
-  //   name: "Color",
-  //   options: [],
-  // },
   {
     id: "Ram",
     name: "Ram(GB)",
@@ -44,7 +39,6 @@ const initialState = [
     options: [
       { value: "all", label: "All", checked: false },
       { value: "verified", label: "Verified", checked: false },
-      // { value: "unverified", label: "Unverified", checked: false },
     ],
   },
 ];
@@ -58,22 +52,6 @@ const useFilterOptions = () => {
     getShowSerchFilters().then(
       (res) => {
         if (res?.status === "SUCCESS") {
-          // let tempFilters = filterOptions.map((item) => {
-          //   if (item.id === "condition") {
-          //     return {
-          //       ...item,
-          //       options: [
-          //         { value: "all", label: "All", checked: false },
-          //         ...res?.dataObject?.Conditions.map((items) => {
-          //           return { value: items, label: items, checked: false };
-          //         }),
-          //       ],
-          //     };
-          //   }
-          //   else {
-          //     return item;
-          //   }
-          // });
           let tempFilters = filterOptions.map((item) => {
             if (item.id === "brand") {
               return {
@@ -115,19 +93,7 @@ const useFilterOptions = () => {
                   }),
                 ],
               };
-            } 
-            // else if (item.id === "color") {
-            //   return {
-            //     ...item,
-            //     options: [
-            //       { value: "all", label: "All", checked: false },
-            //       ...res?.dataObject?.Color.map((items) => {
-            //         return { value: items, label: items, checked: false };
-            //       }),
-            //     ],
-            //   };
-            // } 
-            else if (item.id === "warranty") {
+            } else if (item.id === "warranty") {
               return {
                 ...item,
                 options: [

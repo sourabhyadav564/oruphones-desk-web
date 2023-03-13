@@ -5,7 +5,6 @@ import { makeState } from "atoms/globalState";
 
 function BrandCard({ data }) {
   const [make, setMake] = useRecoilState(makeState);
-
   if (data?.make.toLowerCase().includes("show")) {
     return (
       <Link href={`/brands`}>

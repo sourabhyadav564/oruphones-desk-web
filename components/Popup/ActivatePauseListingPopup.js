@@ -1,18 +1,11 @@
 import Modal from ".";
-import Select from "../Form/Select";
 import { useEffect, useState } from "react";
 import * as Axios from "../../api/axios";
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import Cookies from "js-cookie";
 
 function ActivatePauseListingPopup({ open, setOpen, data }) {
   const [callPause, setCallPause] = useState(null);
-
-  const optionsList = [
-    { value: "Sold my mobile", label: "Sold my mobile" },
-    // { value: 'Reason - 1', label: 'Reason - 1' },
-    // { value: 'Reason - 2', label: 'Reason - 2' },
-  ];
 
   useEffect(() => {
     if (callPause === "true") {
@@ -24,7 +17,6 @@ function ActivatePauseListingPopup({ open, setOpen, data }) {
       const fetchData = async () => {
         const pauseListingDevice = await Axios.pauseListingDevice(payLoad);
         if (pauseListingDevice.status === "SUCCESS") {
-          //router.push('/user/listings');
           router.reload();
         }
       };
