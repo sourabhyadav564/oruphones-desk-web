@@ -75,7 +75,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 src={frontImagePath}
                 alt={
                   data?.marketingName ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 style={{ width: "auto", height: "100%", objectFit: "contain" }}
               />
@@ -88,7 +88,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 src={
                   data?.defaultImage?.fullImage ||
                   data?.imagePath ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 alt={data?.marketingName}
                 style={{ width: "auto", height: "100%", objectFit: "contain" }}
@@ -102,7 +102,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 src={
                   data?.defaultImage?.fullImage ||
                   data?.imagePath ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 alt={data?.marketingName}
                 style={{ width: "auto", height: "100%", objectFit: "contain" }}
@@ -201,7 +201,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 src={frontImagePath}
                 alt={
                   data?.marketingName ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 style={{ width: "auto", height: "100%", objectFit: "contain" }}
               />
@@ -214,7 +214,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 src={
                   data?.defaultImage?.fullImage ||
                   data?.imagePath ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 alt={data?.marketingName}
                 style={{ width: "auto", height: "100%", objectFit: "contain" }}
@@ -228,7 +228,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
                 src={
                   data?.defaultImage?.fullImage ||
                   data?.imagePath ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 alt={data?.marketingName}
                 style={{ width: "auto", height: "100%", objectFit: "contain" }}

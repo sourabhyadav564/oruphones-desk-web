@@ -41,7 +41,7 @@ function HowtoSellPopup({ open, setOpen }) {
           <div className="flex items-center">
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/1.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/1.webp"
               }
               width={150}
               height={300}
@@ -58,7 +58,7 @@ function HowtoSellPopup({ open, setOpen }) {
             </p>
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/2.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/2.webp"
               }
               width={150}
               height={300}
@@ -69,7 +69,7 @@ function HowtoSellPopup({ open, setOpen }) {
           <div className="flex items-center">
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/3.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/3.webp"
               }
               width={150}
               height={300}
@@ -86,7 +86,7 @@ function HowtoSellPopup({ open, setOpen }) {
             </p>
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/4.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/4.webp"
               }
               width={150}
               height={300}
@@ -97,7 +97,7 @@ function HowtoSellPopup({ open, setOpen }) {
           <div className="flex items-center">
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/5.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/5.webp"
               }
               width={150}
               height={300}
@@ -114,7 +114,7 @@ function HowtoSellPopup({ open, setOpen }) {
             </p>
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/6.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/6.webp"
               }
               width={150}
               height={300}
@@ -125,7 +125,7 @@ function HowtoSellPopup({ open, setOpen }) {
           <div className="flex items-center">
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/7.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/7.webp"
               }
               width={150}
               height={300}
@@ -142,7 +142,7 @@ function HowtoSellPopup({ open, setOpen }) {
             </p>
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/10.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/10.webp"
               }
               width={150}
               height={300}
@@ -153,7 +153,7 @@ function HowtoSellPopup({ open, setOpen }) {
           <div className="flex items-center">
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/8.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/8.webp"
               }
               width={150}
               height={300}
@@ -170,7 +170,7 @@ function HowtoSellPopup({ open, setOpen }) {
             </p>
             <Image
               src={
-                "https://d1tl44nezj10jx.cloudfront.net/assets/sell_icons/9.png"
+                "https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_icons/9.webp"
               }
               width={150}
               height={300}

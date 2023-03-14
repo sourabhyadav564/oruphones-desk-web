@@ -2,7 +2,7 @@ export const servicesData = [
   {
     title: "Price Comparison (Beta) ",
     description: "Compare deals on Old, Refurbished and Used phones",
-    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/assets/services/prcomp.png",
+    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/web/assets/services/prcomp.svg",
     link: "/user/services/price-comparison",
   },
   {

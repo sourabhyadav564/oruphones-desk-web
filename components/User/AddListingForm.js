@@ -789,7 +789,7 @@ function AddEditListing({
           />
           <Checkbox
             src={
-              "https://d1tl44nezj10jx.cloudfront.net/assets/original-bill.png"
+              "https://d1tl44nezj10jx.cloudfront.net/web/assets/original-bill.svg"
             }
             text="Original Bill"
             checked={showWarranty}

@@ -207,7 +207,7 @@ function LocationPopup({ open, setOpen }) {
                 </div>
                 <Image
                   src={
-                    "https://d1tl44nezj10jx.cloudfront.net/assets/bg_loc.png"
+                    "https://d1tl44nezj10jx.cloudfront.net/web/assets/bg_loc.webp"
                   }
                   alt="location"
                   layout="fill"

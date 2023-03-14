@@ -6,22 +6,16 @@ import Cross from "@/assets/cross1.svg";
 import { useState } from "react";
 import Image from "next/image";
 
-const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  <Image
-    src={Chevronleft}
-    width={32}
-    height={32}
-    className={`fullimage_prev prev ${className}`}
-  />
-);
+const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>( 
+  <div className="absolute z-10 top-60 left-2  bg-gray-400  rounded-full p-1 flex ">
+<Image src={Chevronleft} width={24} height={24} alt="" {...rest} />
+</div>
+)
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  <Image
-    src={ChevronRight}
-    width={32}
-    height={32}
-    className={`fullimage_prev prev ${className}`}
-  />
-);
+  <div className="absolute z-10 top-60 right-2  bg-gray-400 flex p-1 rounded-full">
+<Image src={ChevronRight} width={24} height={24} alt="" {...rest} />
+</div>
+)
 
 function FullImageView({ open, close, images }) {
   const [imageError, setImageError] = useState(false);
@@ -49,7 +43,7 @@ function FullImageView({ open, close, images }) {
         <Slider
           speed={500}
           dots={true}
-          prevArrow={<ArrowLeft />}
+          prevArrow={<ArrowLeft/>}
           nextArrow={<ArrowRight />}
           appendDots={(dots) => {
             let temp = 0;
@@ -74,9 +68,9 @@ function FullImageView({ open, close, images }) {
                 <img
                   src={
                     imageError
-                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                       : img?.fullImage ||
-                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   }
                   alt={index}
                   onError={() => {
@@ -90,7 +84,7 @@ function FullImageView({ open, close, images }) {
             <div className={styles.image_wrapper}>
               <img
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
                 style={{ maxWidth: "40%", maxHeight: "70vh" }}
               />

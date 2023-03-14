@@ -145,7 +145,7 @@ function ProductDetailsCard({ data, openFullImage }) {
         </div>
         <div className="lg:flex lg:flex-col-2  m-auto justify-center w-full">
           <div className="col-span-1 lg:w-[600px] w-[400px] m-auto justify-center  pr-4">
-            {(data?.images || data?.defaultImage || data?.imagePath) && (
+          {!(data?.isOtherVendor === "Y") ? <> {(data?.images || data?.defaultImage || data?.imagePath) && (
               <ImageSlider
                 openFullImage={openFullImage}
                 data={deviceListingInfo}
@@ -169,7 +169,16 @@ function ProductDetailsCard({ data, openFullImage }) {
                   }
                 }
               />
-            )}
+            )}</> : <> {(data?.images || data?.defaultImage || data?.imagePath) && (
+              <ImageSlider
+                openFullImage={openFullImage}
+                data={deviceListingInfo}
+                images={
+                      "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                }
+              />
+            )}</>}
+           
           </div>
           <div className="col-span-2 lg:w-[700px] md:w-[80vw] w-[90vw] m-auto  pl-4 lg:pt-0 pt-8 ">
             <div className="mb-3 pr-2 ">

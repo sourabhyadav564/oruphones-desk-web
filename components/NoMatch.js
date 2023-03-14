@@ -8,7 +8,7 @@ function NoMatch({ text = "" }) {
       style={{ minHeight: "300px", height: "60vh" }}
     >
       <Image
-        src={"https://d1tl44nezj10jx.cloudfront.net/assets/noMatching.png"}
+        src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/noMatchingFound.webp"}
         width={600}
         height={400}
         alt={text}

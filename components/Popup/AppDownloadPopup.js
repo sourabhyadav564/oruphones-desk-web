@@ -61,7 +61,7 @@ function AppDownloadPopup({ open, setOpen }) {
               <div className="hidden md:block ">
                 <Image
                   src={
-                    "https://d1tl44nezj10jx.cloudfront.net/assets/app_download.png"
+                    "https://d1tl44nezj10jx.cloudfront.net/web/assets/app_download.webp"
                   }
                   alt="ORU close"
                   layout="fill"

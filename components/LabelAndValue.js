@@ -99,7 +99,7 @@ function LabelAndValue({
               />
             ) : label.toUpperCase().includes("REPORT") ? (
               <Image
-                src={"https://d1tl44nezj10jx.cloudfront.net/assets/box.png"}
+                src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/box.svg"}
                 alt="ORU REPORT"
                 width={25}
                 height={25}

@@ -37,7 +37,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
             <span className="text-xs mr-2 flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/calendar-3.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/calendar-3.svg"
                 }
                 width={15}
                 height={15}
@@ -115,7 +115,7 @@ const TestListItem = ({ testName, testStatus }) => {
           src={
             testStatus === "PASS"
               ? "https://d1tl44nezj10jx.cloudfront.net/assets/testpass.png"
-              : "https://d1tl44nezj10jx.cloudfront.net/assets/testFail.png"
+              : "https://d1tl44nezj10jx.cloudfront.net/web/assets/testFail.svg"
           }
           width={25}
           height={24}
@@ -137,7 +137,7 @@ const QuestionnaireResults = ({ question, result, childQuestions, index }) => {
           childQuestions.map((items, index1) => (
             <div key={index1} className="flex items-start pt-2">
               <Image
-                src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"}
+                src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/pass1.scg"}
                 width={15}
                 height={15}
                 alt={items}
@@ -149,7 +149,7 @@ const QuestionnaireResults = ({ question, result, childQuestions, index }) => {
         ) : (
           <div className="flex items-start pt-2">
             <Image
-              src={"https://d1tl44nezj10jx.cloudfront.net//assets/pass1.png"}
+              src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/pass1.svg"}
               width={15}
               height={15}
               alt={result}

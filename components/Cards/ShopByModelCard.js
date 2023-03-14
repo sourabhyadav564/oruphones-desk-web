@@ -11,7 +11,7 @@ function ShopByModelCard({
   make,
   src,
   alt,
-  fallBackSrc = "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+  fallBackSrc = "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
     .src,
 }) {
   const router = useRouter();
@@ -45,13 +45,13 @@ function ShopByModelCard({
               imageError
                 ? fallBackSrc
                 : src ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
             }
             src={
               imageError
                 ? fallBackSrc
                 : src ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
             }
             alt={alt}
             onError={() => setImageError(true)}

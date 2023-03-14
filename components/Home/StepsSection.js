@@ -81,7 +81,7 @@ const BuyStepsData = [
         credentials and verify the device.
       </span>
     ),
-    src: "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_3.png",
+    src: "https://d1tl44nezj10jx.cloudfront.net/assets/buy_step_3.svg",
     alt: "Verify Your Purchase",
     link: "#how_to_buy",
   },

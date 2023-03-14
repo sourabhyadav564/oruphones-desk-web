@@ -101,7 +101,7 @@ function BestDealsCard({ data, setProducts }) {
       <div className="flex justify-end items-end pr-20 pt-5 relative">
         <div className=" absolute z-10 top-4 right-44">
           {data?.status === "Sold_Out" ? <Image
-            src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
+            src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/soldout.svg"}
             width={"50"}
             height={"30"}
             objectFit="contain"
@@ -120,7 +120,7 @@ function BestDealsCard({ data, setProducts }) {
             width={140}
             height={190}
             quality={40}
-            src={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"}
+            src={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"}
             onError={() => setImageError(true)}
             objectFit="contain"
             alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}

@@ -42,7 +42,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/1.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/1.webp"
                 }
                 width={150}
                 height={300}
@@ -59,7 +59,7 @@ function HowtoUsePopup({ open, setOpen }) {
               </p>
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/2.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/2.webp"
                 }
                 width={150}
                 height={300}
@@ -73,7 +73,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/2.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/2.webp"
                 }
                 width={150}
                 height={300}
@@ -90,7 +90,7 @@ function HowtoUsePopup({ open, setOpen }) {
               </p>
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/4.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/4.webp"
                 }
                 width={150}
                 height={300}
@@ -107,7 +107,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/1.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/1.webp"
                 }
                 width={150}
                 height={300}
@@ -124,7 +124,7 @@ function HowtoUsePopup({ open, setOpen }) {
               </p>
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/5.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/5.webp"
                 }
                 width={150}
                 height={300}
@@ -138,7 +138,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/1.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/1.webp"
                 }
                 width={150}
                 height={300}
@@ -159,7 +159,7 @@ function HowtoUsePopup({ open, setOpen }) {
                 <div>
                   <Image
                     src={
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/6.png"
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/6.webp"
                     }
                     width={100}
                     height={150}
@@ -170,7 +170,7 @@ function HowtoUsePopup({ open, setOpen }) {
                 <div className="">
                   <Image
                     src={
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/7.png"
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/7.webp"
                     }
                     width={120}
                     height={200}
@@ -181,7 +181,7 @@ function HowtoUsePopup({ open, setOpen }) {
                 <div>
                   <Image
                     src={
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/8.png"
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/8.webp"
                     }
                     width={100}
                     height={150}
@@ -192,7 +192,7 @@ function HowtoUsePopup({ open, setOpen }) {
                 <div className="">
                   <Image
                     src={
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/9.png"
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/9.webp"
                     }
                     width={120}
                     height={200}
@@ -208,7 +208,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/10.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/10.webp"
                 }
                 width={150}
                 height={300}
@@ -227,7 +227,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/11.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/11.webp"
                 }
                 width={150}
                 height={300}
@@ -245,7 +245,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/12.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/12.webp"
                 }
                 width={150}
                 height={300}
@@ -263,7 +263,7 @@ function HowtoUsePopup({ open, setOpen }) {
               </p>
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/13.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/13.webp"
                 }
                 width={150}
                 height={300}
@@ -277,7 +277,7 @@ function HowtoUsePopup({ open, setOpen }) {
             <div className="flex items-center">
               <Image
                 src={
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/Oru_Guide/14.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/Oru_Guide/14.webp"
                 }
                 width={150}
                 height={300}

@@ -83,15 +83,15 @@ function ImageSlider({ data, images, openFullImage }) {
                   quality={100}
                   blurDataURL={
                     imageError
-                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                       : img?.fullImage ||
-                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   }
                   src={
                     imageError
-                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                       : img?.fullImage ||
-                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   }
                   onError={() => setImageError(true)}
                   alt={alternate_text}
@@ -115,9 +115,9 @@ function ImageSlider({ data, images, openFullImage }) {
             <Image
               src={
                 imageError
-                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   : images?.fullImage ||
-                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
               }
               loading="lazy"
               placeholder="blur"
@@ -125,9 +125,9 @@ function ImageSlider({ data, images, openFullImage }) {
               quality={100}
               blurDataURL={
                 imageError
-                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   : images?.fullImage ||
-                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
               }
               unoptimized={false}
               onError={() => setImageError(true)}
@@ -155,10 +155,10 @@ function ImageSlider({ data, images, openFullImage }) {
                   <Image
                     src={
                       imageError
-                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                         : img?.thumbImage ||
                           img.fullImage ||
-                          "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                          "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                     }
                     loading="lazy"
                     placeholder="blur"
@@ -167,10 +167,10 @@ function ImageSlider({ data, images, openFullImage }) {
                     unoptimized={false}
                     blurDataURL={
                       imageError
-                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                         : img?.thumbImage ||
                           img.fullImage ||
-                          "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                          "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                     }
                     onError={() => setImageError(true)}
                     width={"100%"}
@@ -192,10 +192,10 @@ function ImageSlider({ data, images, openFullImage }) {
             <Image
               src={
                 imageError
-                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   : images?.thumbImage ||
                     images?.fullImage ||
-                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
               }
               onError={() => setImageError(true)}
               loading="lazy"
@@ -205,10 +205,10 @@ function ImageSlider({ data, images, openFullImage }) {
               unoptimized={false}
               blurDataURL={
                 imageError
-                  ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   : images?.thumbImage ||
                     images?.fullImage ||
-                    "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
               }
               width={"100%"}
               height={"100%"}

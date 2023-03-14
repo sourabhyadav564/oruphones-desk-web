@@ -101,9 +101,9 @@ function ComparisonTable2(data, listingId) {
                     src={
                       imageError
                         ? getDefaultImage(item?.marketingName) ||
-                          "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                          "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                         : getDefaultImage(item?.marketingName) ||
-                          "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                          "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                     }
                     quality={10}
                     onError={() => setImageError(true)}

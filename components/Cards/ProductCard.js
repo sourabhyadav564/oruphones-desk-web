@@ -69,7 +69,7 @@ function ProductCard({ data, prodLink, setProducts }) {
                 quality={25}
                 blurDataURL={
                   imageError
-                    ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                    ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                     : data?.imagePath ||
                     data?.defaultImage?.fullImage ||
                     data?.images[0]?.fullImage ||

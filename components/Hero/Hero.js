@@ -21,7 +21,7 @@ export default function Hero() {
       <img
         className="hover:cursor-pointer"
         data-aos="fade-down"
-        src={"https://d1tl44nezj10jx.cloudfront.net/assets/banner_4.png"}
+        src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/banner_4.webp"}
         alt="BannerImage"
         priority
         onClick={() => handleClick()}

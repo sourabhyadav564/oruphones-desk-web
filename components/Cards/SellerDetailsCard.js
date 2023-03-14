@@ -303,11 +303,11 @@ const OtherSeller = ({
                   <Image
                     src={
                       index == 0
-                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/first.png"
+                        ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/first.svg"
                         : index == 1
-                        ? "https://d1tl44nezj10jx.cloudfront.net/assets/second.png"
+                        ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/second.svg"
                         : index == 2 &&
-                          "https://d1tl44nezj10jx.cloudfront.net/assets/third.png"
+                          "https://d1tl44nezj10jx.cloudfront.net/web/assets/third.svg"
                     }
                     alt="icon"
                     width={35}

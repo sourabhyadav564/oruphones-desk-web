@@ -22,7 +22,7 @@ function SellBuyFlow() {
             onClick={() => setOpenSell(true)}
           >
             <Image
-              src={"https://d1tl44nezj10jx.cloudfront.net/assets/sell.png"}
+              src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/sell.svg"}
               height={50}
               width={40}
               objectFit="contain m-auto justify-center flex"
@@ -36,7 +36,7 @@ function SellBuyFlow() {
             onClick={() => setOpenBuy(true)}
           >
             <Image
-              src={"https://d1tl44nezj10jx.cloudfront.net/assets/buy.png"}
+              src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/buy.svg"}
               height={50}
               width={40}
               objectFit="contain m-auto justify-center flex"
@@ -50,7 +50,7 @@ function SellBuyFlow() {
             onClick={() => setOpenUse(true)}
           >
             <Image
-              src={"https://d1tl44nezj10jx.cloudfront.net/assets/Book.png"}
+              src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/Book.svg"}
               height={50}
               width={40}
               objectFit="contain m-auto justify-center flex"
