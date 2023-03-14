@@ -41,7 +41,6 @@ function ShopByModelCard({
             priority={false}
             quality={10}
             unoptimized={false}
-<<<<<<< Updated upstream
             blurDataURL={
               imageError
                 ? fallBackSrc
@@ -54,10 +53,6 @@ function ShopByModelCard({
                 : src ||
                   "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
             }
-=======
-            blurDataURL={imageError ? fallBackSrc : src || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"}
-            src={imageError ? fallBackSrc : src || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"}
->>>>>>> Stashed changes
             alt={alt}
             onError={() => setImageError(true)}
             width="40"
