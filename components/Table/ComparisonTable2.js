@@ -10,6 +10,10 @@ import LoginPopup from "../Popup/LoginPopup";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
+import Star from "@/assets/star1.svg";
+import FillStar from "@/assets/star2.svg";
+import BrandWarrantyInfo from "../Popup/BrandWarrantyInfo";
+import SellerWarrantyInfo from "../Popup/SellerWarrantyInfo";
 
 function ComparisonTable2(data, listingId) {
   const [productData, setProductData] = useState([]);
@@ -22,8 +26,43 @@ function ComparisonTable2(data, listingId) {
   const [performAction1, setperformAction1] = useState(false);
   const [productLink, setProductLink] = useState("");
   const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
+  const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
+  const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
   const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
   const [openConditionInfo, setOpenConditionInfo] = useState(false);
+
+
+  let filled =
+    data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
+      ? 5
+      : data?.deviceCondition?.toLowerCase() == "Excellent".toLowerCase()
+      ? 4
+      : data?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
+      ? 3
+      : data?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
+      ? 2
+      : data?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
+      ? 1
+      : 5;
+
+
+  let iconToShow = (idx,index) => {
+    if (idx < (data?.data[index]?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
+    ? 5
+    : data?.data[index]?.deviceCondition?.toLowerCase() == "Excellent".toLowerCase()
+    ? 4
+    : data?.data[index]?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
+    ? 3
+    : data?.data[index]?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
+    ? 2
+    : data?.data[index]?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
+    ? 1
+    : 5)) {
+      return <Image src={FillStar} width={16} height={16} alt="" />;
+    } else {
+      return <Image src={Star} width={16} height={16} alt="" />;
+    }
+  };
 
   useEffect(() => {
     if (data?.data?.length > 0) {
@@ -57,6 +96,8 @@ function ComparisonTable2(data, listingId) {
       }
     }, 1000);
   }, [openLoginPopup]);
+
+  console.log("ddaatta : ", data);
 
   return (
     <div className="">
@@ -179,7 +220,7 @@ function ComparisonTable2(data, listingId) {
             </tr>
             <tr className="  font-Roboto-Regular text-cx sticky ">
               <th
-                className=" bg-white border px-4 py-2  sticky left-0 drop-shadow-2xl uppercase items-center cursor-pointer"
+                className=" bg-white border px-4 py-2  sticky z-10 left-0 drop-shadow-2xl uppercase items-center cursor-pointer"
                 onClick={() => setOpenConditionInfo(true)}
               >
                 <div className="flex">
@@ -208,6 +249,12 @@ function ComparisonTable2(data, listingId) {
                       : "border px-2 py-6  min-w-[13vw] font-Roboto-Light text-center "
                   }`}
                 >
+                   <div className=" flex text-bx space-x-[2.5px] m-auto justify-center ">
+                    {Array(5)
+                      .fill()
+                      .map((_, idx) => iconToShow(idx,index))}
+
+                  </div>
                   {item?.deviceCondition}
                 </th>
               ))}
@@ -243,7 +290,7 @@ function ComparisonTable2(data, listingId) {
             <tr className=" font-Roboto-Regular text-cx">
               <th
                 className=" sticky border left-0 bg-white px-4 py-2 drop-shadow-2xl uppercase cursor-pointer"
-                onClick={() => setOpenWarrantyInfo(true)}
+                onClick={() => setOpensellerWarrantyInfo(true)}
               >
                 <div className="flex ">
                   <Image
@@ -280,7 +327,7 @@ function ComparisonTable2(data, listingId) {
             <tr className=" font-Roboto-Regular text-cx">
               <th
                 className=" sticky left-0 bg-white border px-4 py-2 drop-shadow-2xl uppercase  items-center cursor-pointer"
-                onClick={() => setOpenWarrantyInfo(true)}
+                onClick={() =>  setOpenbrandWarrantyInfo(true)}
               >
                 <div className="flex">
                   <Image
@@ -517,6 +564,15 @@ function ComparisonTable2(data, listingId) {
       {openWarrantyInfo && (
         <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
       )}
+
+        {opensellerWarrantyInfo && (
+        <SellerWarrantyInfo open={opensellerWarrantyInfo} setOpen={setOpensellerWarrantyInfo} />
+      )}
+
+       {opensbrandWarrantyInfo && (
+        <BrandWarrantyInfo open={opensbrandWarrantyInfo} setOpen={setOpenbrandWarrantyInfo} />
+      )}
+
       {openVerificationInfo && (
         <VerifiedInfoPopup
           open={openVerificationInfo}

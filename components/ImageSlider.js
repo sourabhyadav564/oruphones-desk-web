@@ -4,24 +4,39 @@ import Slider from "react-slick";
 import Chevronleft from "@/assets/chevronleft.svg";
 import ChevronRight from "@/assets/chevronright.svg";
 
-const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-  <Image
-    src={Chevronleft}
-    width={32}
-    height={32}
-    {...rest}
-    className={`prev ${className}`}
-  />
-);
+// const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
+//   <div className="absolute">
+//   <Image
+//     src={Chevronleft}
+//     width={32}
+//     height={32}
+//     {...rest}
+//     className={`prev ${className}`}
+//   />
+//   </div>
+// );
+// const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
+//   <Image
+//     src={ChevronRight}
+//     width={32}
+//     height={32}
+//     {...rest}
+//     className={`prev ${className}`}
+//   />
+// );
+
+const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>( 
+  <div className="absolute z-10 top-16  left-2  bg-gray-300  rounded-full p-1 flex ">
+<Image src={Chevronleft} width={14} height={14} alt="" {...rest} />
+</div>
+)
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-  <Image
-    src={ChevronRight}
-    width={32}
-    height={32}
-    {...rest}
-    className={`prev ${className}`}
-  />
-);
+  <div className="absolute z-10 top-16 right-2  bg-gray-300 flex p-1 rounded-full">
+<Image src={ChevronRight} width={14} height={14} alt="" {...rest} />
+</div>
+)
+
+
 
 function ImageSlider({ data, images, openFullImage }) {
   const [nav1, setNav1] = useState(null);

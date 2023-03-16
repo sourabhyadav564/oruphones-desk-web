@@ -31,6 +31,8 @@ import * as Axios from "../../api/axios";
 import ComparisonTable from "../Table/ComparisonTable";
 import ComparisonTable2 from "../Table/ComparisonTable2";
 import { toast } from "react-toastify";
+import BrandWarrantyInfo from "../Popup/BrandWarrantyInfo";
+import SellerWarrantyInfo from "../Popup/SellerWarrantyInfo";
 
 function ProductDetailsCard({ data, openFullImage }) {
   const [performAction2, setPerformAction2] = useState(false);
@@ -49,6 +51,9 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showNumber, setShowNumber] = useState(false);
   const [ImageError, setImageError] = useState(false);
+  const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
+  const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
+  const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
 
   let filled =
     data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
@@ -177,7 +182,8 @@ function ProductDetailsCard({ data, openFullImage }) {
                       "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
                 }
               />
-            )}</>}
+            )}
+            </>}
            
           </div>
           <div className="col-span-2 lg:w-[700px] md:w-[80vw] w-[90vw] m-auto  pl-4 lg:pt-0 pt-8 ">
@@ -336,13 +342,13 @@ function ProductDetailsCard({ data, openFullImage }) {
                   label="Brand Warranty"
                   value={"Not Applicable"}
                   labelTextSize
-                  showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
+                  showWarrantyInfoPopup={() => setOpenbrandWarrantyInfo(true)}
                 />
                 <LabelAndValue
                   label="Seller Warranty"
                   value={data?.warranty || "--"}
                   labelTextSize
-                  showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
+                  showWarrantyInfoPopup={() => setOpensellerWarrantyInfo(true)}
                 />
                 <LabelAndValue
                   label="Color"
@@ -362,14 +368,15 @@ function ProductDetailsCard({ data, openFullImage }) {
                   <LabelAndValue
                     label="Brand Warranty"
                     value={data?.warranty || "--"}
-                    showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
+                    showWarrantyInfoPopup={() => setOpenbrandWarrantyInfo(true)}
                   />
+                  
                 }
                 <LabelAndValue
                   label="Seller Warranty"
                   value={"Not Applicable"}
                   labelTextSize
-                  showWarrantyInfoPopup={() => setWarrantyInfoPopup(true)}
+                  showWarrantyInfoPopup={() => setOpensellerWarrantyInfo(true)}
                 />
                 <LabelAndValue label="Color" value={data?.color || "--"} />
                 <LabelAndValue
@@ -587,6 +594,19 @@ function ProductDetailsCard({ data, openFullImage }) {
         )}
         <ComparisonTable />
       </div>
+
+      {openWarrantyInfo && (
+        <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
+      )}
+
+        {opensellerWarrantyInfo && (
+        <SellerWarrantyInfo open={opensellerWarrantyInfo} setOpen={setOpensellerWarrantyInfo} />
+      )}
+
+       {opensbrandWarrantyInfo && (
+        <BrandWarrantyInfo open={opensbrandWarrantyInfo} setOpen={setOpenbrandWarrantyInfo} />
+      )}
+                
       <DeviceVerificationReport
         open={openDeviceReport}
         setOpen={setOpenDeviceReport}

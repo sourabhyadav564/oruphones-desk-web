@@ -98,7 +98,7 @@ function BrandPage() {
         }
         Axios.fetchTopsellingmodels();
         makemodel = JSON.parse(localStorage.getItem("shopByModel"));
-        makemodel.map((item) => {
+        makemodel?.map((item) => {
           if (item.make == makeName) {
             setTitle(item.make);
             setDescription(item.make);

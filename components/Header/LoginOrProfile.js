@@ -27,7 +27,7 @@ function LoginOrProfile() {
     } else {
       setUserAuthenticated(false);
     }
-    return () => {};
+    return () => { };
   });
 
   useEffect(() => {
@@ -90,6 +90,8 @@ function LoginOrProfile() {
                       setUserInfo();
                     }}
                   />
+
+                  <NavListItem text="Report a problem" link="/report-a-problem" />
                 </div>
               </div>
             </div>
@@ -154,6 +156,9 @@ function LoginOrProfile() {
                         setShowLogin(true);
                       }}
                     />
+
+                    <NavListItem text="Report a problem" link="/report-a-problem" />
+
                   </div>
                 </div>
               </div>

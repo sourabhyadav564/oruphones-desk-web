@@ -120,18 +120,25 @@ function DesktopMenu({ menuItems }) {
               </Link>
             )
           )}
+          
+
           {authenticated ? (
             <div>
               <div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
                 NEW
               </div>
               <NavListItem text="Services" link="/user/services" />
+              {/* <div className=></div> */}
+              
             </div>
+            
           ) : (
             <div>
               <div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
                 NEW
               </div>
+
+
 
               <NavListItem
                 text="Services"
@@ -141,8 +148,11 @@ function DesktopMenu({ menuItems }) {
                   setItemLink("/user/services");
                 }}
               />
+            
             </div>
           )}
+
+           
         </Popover.Group>
       </span>
       <LoginPopup open={showLogin} setOpen={setShowLogin} />

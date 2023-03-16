@@ -1054,3 +1054,18 @@ export function logEventInfo(eventName) {
     }
   );
 }
+
+export function ReportIssue(Name,Email,Phone,issue,make,description,storage,ScheduleCall,callTime){
+  headers = {...headers, eventName: "REPORT_ISSUE"};
+  const DEFAULT_HEADER = {headers:{...headers}};
+  const API_ENDPOINT = BASE_URL + `/cscglobal/reportIssue?issueType=${issue}&description=${description+callTime}&email=${Email}&phone=${Phone}&name=${Name}&modelName=${make}&deviceStorage=${storage}&scheduleCall=${ScheduleCall}`;
+  console.log("schedule axios : ",ScheduleCall);
+  return Axios.post(API_ENDPOINT,DEFAULT_HEADER).then(
+    (response)=>{
+      return response.data;
+    },
+    (err)=>{
+      console.log(err);
+    }
+  )
+}
