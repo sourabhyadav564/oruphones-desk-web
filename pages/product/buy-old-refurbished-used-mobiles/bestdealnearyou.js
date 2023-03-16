@@ -9,6 +9,7 @@ import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 import { useRouter } from "next/router";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
   slidesToShow: 1,
@@ -295,21 +296,31 @@ function Bestdealnearyou() {
         setApplyFilter={setApplyFilter}
         makename={bestDeal[0]?.make}
       >
-        {!isLoading && bestDeal && bestDeal.length > 0 && (
-          <Carousel {...settings} className="bestDealCarousel z-0 ">
-            {bestDeal.map((items, index) => (
-              <BestDealsCard key={index} data={items} />
-            ))}
-          </Carousel>
+        {isLoading ? (
+          <ProductSkeletonCard isBestDeal={true} />
+        ) : (
+          !isLoading &&
+          bestDeal &&
+          bestDeal.length > 0 && (
+            <Carousel {...settings} className="bestDealCarousel z-0 ">
+              {bestDeal.map((items, index) => (
+                <BestDealsCard key={index} data={items} />
+              ))}
+            </Carousel>
+          )
         )}
         <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-8  mt-8">
           Total Products ({totalProducts})
         </h4>
         <div className="grid md:grid-cols-3 grid-cols-2 m-auto justify-center gap-4  mt-4">
-          {!isLoading &&
-          isFinished == false &&
-          products &&
-          products.length > 0 ? (
+          {isLoading ? (
+            Array(10)
+              .fill()
+              .map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+          ) : !isLoading &&
+            isFinished == false &&
+            products &&
+            products.length > 0 ? (
             products?.map((product, index) => (
               <ProductCard
                 key={index}

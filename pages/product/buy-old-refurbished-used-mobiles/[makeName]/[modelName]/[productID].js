@@ -5,8 +5,10 @@ import * as Axios from "../../../../../api/axios";
 import AppContext from "@/context/ApplicationContext";
 import FullImageView from "@/components/FullImageView";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
-function ProductDetails({ listingInfo, data }) {
+function ProductDetails() {
+  const router = useRouter();
   let [simliarProducts, setSimliarProducts] = useState([]);
   const { getSearchLocation } = useContext(AppContext);
   const [openImageFullView, setOpenImageFullView] = useState(false);
@@ -14,12 +16,28 @@ function ProductDetails({ listingInfo, data }) {
   const [totalProducts, setTotalProducts] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [listingInfo, setListingInfo] = useState(null);
+
+  useEffect(async () => {
+    const userUniqueId = Cookies.get("userUniqueId");
+    const sessionId =
+      Cookies.get("sessionId") != undefined
+        ? Cookies.get("sessionId")
+        : localStorage.getItem("sessionId");
+    const listingInfo = await Axios.detailWithUserInfo(
+      router.query.isOtherVendor,
+      router.query.productID,
+      userUniqueId || "Guest",
+      sessionId
+    );
+    setListingInfo(listingInfo?.dataObject);
+  }, [router.query]);
 
   const loadData = (intialPage) => {
     let payLoad = {
       listingLocation: getSearchLocation,
-      make: [listingInfo.make],
-      marketingName: [listingInfo.marketingName],
+      make: [listingInfo?.make],
+      marketingName: [listingInfo?.marketingName],
       reqPage: "TSM",
       color: [],
       deviceCondition: [],
@@ -95,11 +113,15 @@ function ProductDetails({ listingInfo, data }) {
       <p className="sr-only"> Product Details page </p>
       <section className="grid grid-cols-4 gap-4">
         <div className="bg-white col-span-5">
-          <ProductDetailsCard
-            key={listingInfo?.listingId}
-            data={listingInfo}
-            openFullImage={() => setOpenImageFullView(true)}
-          />
+          {listingInfo == null ? (
+            <ProductSkeleton />
+          ) : (
+            <ProductDetailsCard
+              key={listingInfo?.listingId}
+              data={listingInfo}
+              openFullImage={() => setOpenImageFullView(true)}
+            />
+          )}
         </div>
         <div className="col-span-4">
           <p
@@ -172,17 +194,52 @@ function ProductDetails({ listingInfo, data }) {
 
 export default ProductDetails;
 
-export async function getServerSideProps({ req, res, query }) {
-  const { userUniqueId, sessionId } = req.cookies;
-  const listingInfo = await Axios.detailWithUserInfo(
-    query.isOtherVendor,
-    query.productID,
-    userUniqueId || "Guest",
-    sessionId || ""
+const ProductSkeleton = () => {
+  return (
+    <div className="animate-pulse flex flex-col gap-4">
+      <div>
+        <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col">
+          <div className="flex flex-col">
+            <div className="lg:h-[300px] w-[250px] sm:h-[300px] h-[300px] justify-items-center mx-36 sm:mx-18 lg:mx-36 mt-14 bg-gray-300 rounded-md"></div>
+            <div className="flex flex-row">
+              <div className="lg:h-[100px] w-[60px] ml-36 mt-14 bg-gray-300 rounded-md"></div>
+              <div className="lg:h-[100px] w-[60px] ml-8 mt-14 bg-gray-300 rounded-md"></div>
+              <div className="lg:h-[100px] w-[60px] ml-8 mt-14 bg-gray-300 rounded-md"></div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 pl-4 w-full">
+            <div className="flex flex-col gap-6 pl-4 w-full pt-8">
+              <div className="flex flex-col gap-4 pl-4 h-3 p-4 w-72 bg-gray-300 rounded-md" />
+              <div className="flex flex-col gap-4 pl-4 h-3 p-4 bg-gray-300 rounded-md" />
+              <div className="flex flex-col gap-4 pl-4 h-3 p-3 bg-gray-300 rounded-md" />
+            </div>
+            <div className="flex flex-col gap-4 pl-4 pt-4">
+              <div className="flex flex-row gap-10">
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+              </div>
+              <div className="flex flex-row gap-10">
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+              </div>
+              <div className="flex flex-row gap-10">
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+                <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-48 bg-gray-300 rounded-md" />
+              </div>
+              <div className="flex flex-row gap-10 pt-12 items-stretch justify-between">
+                <div className="flex flex-row gap-4">
+                  <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-12 bg-gray-300 rounded-full" />
+                  <div className="flex flex-col gap-4 pl-4 h-3 p-6 w-32 bg-gray-300 rounded-md" />
+                </div>
+                <div className="flex flex-col gap-4 pl-16 h-3 p-6 w-60 space bg-gray-300 rounded-md" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-  return {
-    props: {
-      listingInfo: listingInfo?.dataObject || [],
-    },
-  };
-}
+};

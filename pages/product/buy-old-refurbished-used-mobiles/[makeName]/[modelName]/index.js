@@ -9,6 +9,7 @@ import * as Axios from "../../../../../api/axios";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
   slidesToShow: 1,
@@ -39,95 +40,114 @@ const Products = () => {
   let newPages = 0;
 
   const loadData = (intialPage) => {
-    if (modelName && !isFilterApplied) {
-      const fetchData = async () => {
-        const data = await Axios.fetchByMarketingName(
-          getSearchLocation,
-          modelName.replace("+", "%2B"),
-          Cookies.get("userUniqueId"),
-          intialPage,
-          applySort
-        );
-        if (data?.dataObject?.otherListings.length > -1) {
-          setProducts(data && data?.dataObject?.otherListings);
-        }
-        if (data?.dataObject?.bestDeals.length > -1) {
-          setBestDeals(data && data?.dataObject?.bestDeals);
-        }
-        if (data?.dataObject?.totalProducts > -1) {
-          setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
-        }
-        setLoading(false);
-      };
-      if (modelName) {
-        fetchData();
-      }
-    } else {
-      const {
-        brand,
-        condition,
-        color,
-        storage,
-        Ram,
-        warranty,
-        verification,
-        priceRange,
-      } = applyFilter;
-      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
-        if (makeName === "oneplus") {
-          makeName = "OnePlus";
-        } else {
-          makeName = String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
-        }
-        let payLoad = {
-          listingLocation: getSearchLocation,
-          make: brand?.length > 0 ? brand : [makeName],
-          marketingName: [String(modelName).replace("+", "%2B")],
-          reqPage: "BBNM",
-          color: [],
-          deviceCondition: [],
-          deviceStorage: [],
-          deviceRam: [],
-          maxsellingPrice: 200000,
-          minsellingPrice: 0,
-          verified: "",
-          warenty: [],
-          pageNumber: intialPage,
-        };
-        if (priceRange && priceRange.min && priceRange.max) {
-          payLoad.minsellingPrice = priceRange.min;
-          payLoad.maxsellingPrice = priceRange.max;
-        }
-        if (condition?.length > 0) {
-          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-        }
-        if (storage?.length > 0) {
-          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
-        }
-        if (Ram?.length > 0) {
-          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
-        }
-        if (color?.length > 0) {
-          payLoad.color = color.includes("all") ? [] : color;
-        }
-        if (warranty?.length > 0) {
-          payLoad.warenty = warranty.includes("all") ? [] : warranty;
-        }
-        if (verification?.length > 0) {
-          payLoad.verified = verification.includes("all") ? [] : "verified";
-        }
-        setLoading(true);
-        Axios.searchFilter(
-          payLoad,
-          Cookies.get("userUniqueId") || "Guest",
-          intialPage,
-          applySort
-        ).then((response) => {
-          setProducts(response?.dataObject?.otherListings);
-          setTotalProducts(response?.dataObject?.totalProducts);
-          setBestDeals(response?.dataObject?.bestDeals);
+    if (
+      makeName != undefined &&
+      makeName != "" &&
+      makeName != null &&
+      makeName != "undefined" &&
+      makeName != "null" &&
+      makeName != "Undefined" &&
+      modelName != undefined &&
+      modelName != "" &&
+      modelName != null &&
+      modelName != "undefined" &&
+      modelName != "null" &&
+      modelName != "Undefined"
+    ) {
+      if (modelName && !isFilterApplied) {
+        const fetchData = async () => {
+          const data = await Axios.fetchByMarketingName(
+            getSearchLocation,
+            modelName.replace("+", "%2B"),
+            Cookies.get("userUniqueId"),
+            intialPage,
+            applySort
+          );
+          if (data?.dataObject?.otherListings.length > -1) {
+            setProducts(data && data?.dataObject?.otherListings);
+          }
+          if (data?.dataObject?.bestDeals.length > -1) {
+            setBestDeals(data && data?.dataObject?.bestDeals);
+          }
+          if (data?.dataObject?.totalProducts > -1) {
+            setTotalProducts((data && data?.dataObject?.totalProducts) || 0);
+          }
           setLoading(false);
-        });
+        };
+        if (modelName) {
+          fetchData();
+        }
+      } else {
+        const {
+          brand,
+          condition,
+          color,
+          storage,
+          Ram,
+          warranty,
+          verification,
+          priceRange,
+        } = applyFilter;
+        if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+          if (makeName === "oneplus") {
+            makeName = "OnePlus";
+          } else {
+            makeName =
+              String(makeName).charAt(0).toUpperCase() +
+              String(makeName).slice(1);
+          }
+          let payLoad = {
+            listingLocation: getSearchLocation,
+            make: brand?.length > 0 ? brand : [makeName],
+            marketingName: [String(modelName).replace("+", "%2B")],
+            reqPage: "BBNM",
+            color: [],
+            deviceCondition: [],
+            deviceStorage: [],
+            deviceRam: [],
+            maxsellingPrice: 200000,
+            minsellingPrice: 0,
+            verified: "",
+            warenty: [],
+            pageNumber: intialPage,
+          };
+          if (priceRange && priceRange.min && priceRange.max) {
+            payLoad.minsellingPrice = priceRange.min;
+            payLoad.maxsellingPrice = priceRange.max;
+          }
+          if (condition?.length > 0) {
+            payLoad.deviceCondition = condition.includes("all")
+              ? []
+              : condition;
+          }
+          if (storage?.length > 0) {
+            payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+          }
+          if (Ram?.length > 0) {
+            payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
+          }
+          if (color?.length > 0) {
+            payLoad.color = color.includes("all") ? [] : color;
+          }
+          if (warranty?.length > 0) {
+            payLoad.warenty = warranty.includes("all") ? [] : warranty;
+          }
+          if (verification?.length > 0) {
+            payLoad.verified = verification.includes("all") ? [] : "verified";
+          }
+          setLoading(true);
+          Axios.searchFilter(
+            payLoad,
+            Cookies.get("userUniqueId") || "Guest",
+            intialPage,
+            applySort
+          ).then((response) => {
+            setProducts(response?.dataObject?.otherListings);
+            setTotalProducts(response?.dataObject?.totalProducts);
+            setBestDeals(response?.dataObject?.bestDeals);
+            setLoading(false);
+          });
+        }
       }
     }
   };
@@ -136,7 +156,7 @@ const Products = () => {
     newPages = pageNumber + 1;
     setPageNumber(newPages);
     setIsLoadingMore(true);
-   
+
     if (modelName && !isFilterApplied) {
       const fetchData = async () => {
         const data = await Axios.fetchByMarketingName(
@@ -250,78 +270,108 @@ const Products = () => {
   };
 
   useEffect(() => {
-    intialPage = 0;
-    setPageNumber(intialPage);
-    loadData(intialPage);
-  }, [modelName, getSearchLocation,applySort]);
+    if (
+      makeName != undefined &&
+      makeName != "" &&
+      makeName != null &&
+      makeName != "undefined" &&
+      makeName != "null" &&
+      makeName != "Undefined" &&
+      modelName != undefined &&
+      modelName != "" &&
+      modelName != null &&
+      modelName != "undefined" &&
+      modelName != "null" &&
+      modelName != "Undefined"
+    ) {
+      intialPage = 0;
+      setPageNumber(intialPage);
+      loadData(intialPage);
+    }
+  }, [modelName, getSearchLocation, applySort]);
 
   useEffect(() => {
-    const {
-      brand,
-      condition,
-      color,
-      storage,
-      Ram,
-      warranty,
-      verification,
-      priceRange,
-    } = applyFilter;
-    if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
-      setIsFilterApplied(true);
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = makeName?.charAt(0).toUpperCase() + makeName?.slice(1);
+    if (
+      makeName != undefined &&
+      modelName != undefined &&
+      makeName != null &&
+      modelName != null &&
+      makeName != "" &&
+      modelName != "" &&
+      makeName != "undefined" &&
+      modelName != "undefined" &&
+      makeName != "Undefined" &&
+      modelName != "Undefined" &&
+      makeName != "null" &&
+      modelName != "null"
+    ) {
+      const {
+        brand,
+        condition,
+        color,
+        storage,
+        Ram,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        setIsFilterApplied(true);
+        if (makeName === "oneplus") {
+          makeName = "OnePlus";
+        } else {
+          makeName = makeName?.charAt(0).toUpperCase() + makeName?.slice(1);
+        }
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          make: brand?.length > 0 ? brand : [makeName],
+          marketingName: [modelName?.replace("+", "%2B")],
+          reqPage: "BBNM",
+          color: [],
+          deviceCondition: [],
+          deviceStorage: [],
+          deviceRam: [],
+          maxsellingPrice: 200000,
+          minsellingPrice: 0,
+          verified: "",
+          warenty: [],
+          pageNumber: intialPage,
+        };
+        if (priceRange && priceRange.min && priceRange.max) {
+          payLoad.minsellingPrice = priceRange.min;
+          payLoad.maxsellingPrice = priceRange.max;
+        }
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (Ram?.length > 0) {
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
+        }
+        if (color?.length > 0) {
+          payLoad.color = color.includes("all") ? [] : color;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        setLoading(true);
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          intialPage,
+          applySort
+        ).then((response) => {
+          setProducts(response?.dataObject?.otherListings);
+          setTotalProducts(response?.dataObject?.totalProducts);
+          setBestDeals(response?.dataObject?.bestDeals);
+          setLoading(false);
+        });
       }
-      let payLoad = {
-        listingLocation: getSearchLocation,
-        make: brand?.length > 0 ? brand : [makeName],
-        marketingName: [modelName?.replace("+", "%2B")],
-        reqPage: "BBNM",
-        color: [],
-        deviceCondition: [],
-        deviceStorage: [],
-        deviceRam: [],
-        maxsellingPrice: 200000,
-        minsellingPrice: 0,
-        verified: "",
-        warenty: [],
-        pageNumber: intialPage,
-      };
-      if (priceRange && priceRange.min && priceRange.max) {
-        payLoad.minsellingPrice = priceRange.min;
-        payLoad.maxsellingPrice = priceRange.max;
-      }
-      if (condition?.length > 0) {
-        payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-      }
-      if (storage?.length > 0) {
-        payLoad.deviceStorage = storage.includes("all") ? [] : storage;
-      }
-      if (Ram?.length > 0) {
-        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
-      }
-      if (color?.length > 0) {
-        payLoad.color = color.includes("all") ? [] : color;
-      }
-      if (warranty?.length > 0) {
-        payLoad.warenty = warranty.includes("all") ? [] : warranty;
-      }
-      if (verification?.length > 0) {
-        payLoad.verified = verification.includes("all") ? [] : "verified";
-      }
-      setLoading(true);
-      Axios.searchFilter(
-        payLoad,
-        Cookies.get("userUniqueId") || "Guest",
-        intialPage,
-        applySort
-      ).then((response) => {
-        setProducts(response?.dataObject?.otherListings);
-        setTotalProducts(response?.dataObject?.totalProducts);
-        setBestDeals(response?.dataObject?.bestDeals);
-        setLoading(false);
-      });
     }
   }, [applyFilter, applySort]);
 
@@ -333,32 +383,40 @@ const Products = () => {
         setApplySort={setApplySort}
         setApplyFilter={setApplyFilter}
       >
-        {!isLoading && bestDeals && bestDeals.length > 0 && (
-          <div className="mb-4">
-            <Carousel
-              {...settings}
-              key={bestDeals.length > 0 ? bestDeals[0] : -1}
-            >
-              {bestDeals.map((items, index) => (
-                <BestDealsCard
-                  key={index}
-                  data={items}
-                  setProducts={setBestDeals}
-                  className="bestDealCarousel"
-                />
-              ))}
-            </Carousel>
-          </div>
+        {isLoading ? (
+          <ProductSkeletonCard isBestDeal={true} />
+        ) : (
+          !isLoading &&
+          bestDeals &&
+          bestDeals.length > 0 && (
+            <div className="mb-4">
+              <Carousel
+                {...settings}
+                key={bestDeals.length > 0 ? bestDeals[0] : -1}
+              >
+                {bestDeals.map((items, index) => (
+                  <BestDealsCard
+                    key={index}
+                    data={items}
+                    setProducts={setBestDeals}
+                    className="bestDealCarousel"
+                  />
+                ))}
+              </Carousel>
+            </div>
+          )
         )}
         <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-8">
           Total Products ({totalProducts})
         </h4>
         <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
-          {!isLoading && products && products.length > 0 ? (
+          {isLoading ? (
+            Array(10)
+              .fill()
+              .map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+          ) : !isLoading && products && products.length > 0 ? (
             products?.map((product, index) => (
-              <div
-                key={index}
-              >
+              <div key={index}>
                 <ProductCard
                   data={product}
                   prodLink
@@ -368,7 +426,7 @@ const Products = () => {
             ))
           ) : (
             <div className="col-span-3 h-96 items-center flex justify-center ">
-              {isLoading ? "Loading..." : <NoMatch/>}
+              {isLoading ? "Loading..." : <NoMatch />}
             </div>
           )}
         </div>

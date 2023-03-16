@@ -6,14 +6,12 @@ import * as Axios from "../../../../api/axios";
 import Carousel from "@/components/Carousel";
 import ProductCard from "@/components/Cards/ProductCard";
 import AppContext from "@/context/ApplicationContext";
-import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
-import { useRecoilValue } from "recoil";
-import { makeState } from "atoms/globalState";
 import ShopByBrandSection from "@/components/ShopByBrandSection";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
   slidesToShow: 1,
@@ -42,175 +40,255 @@ function BrandPage() {
   const [description, setDescription] = useState(metaTags.BRANDS.description);
   let intialPage = 0;
   let newPages = 0;
-  let brandResult = [];
 
-  const loadData = (intialPage) => {
-    if (!isFilterApplied) {
-      const getMakeModel = async () => {
-        brandResult = await getMakeModel(
-          Cookies.get("userUniqueId") || "Guest",
-          Cookies.get("sessionId") != undefined
-            ? Cookies.get("sessionId")
-            : localStorage.getItem("sessionId") != undefined
-            ? localStorage.getItem("sessionId")
-            : ""
-        );
-      };
-      let makemodel;
-      if (localStorage.getItem("shopByModel") != undefined) {
-        if (makeName === "oneplus") {
-          makeName = "OnePlus";
-        } else if (makeName === "lg") {
-          makeName = "LG";
-        } else if (makeName === "htc") {
-          makeName = "HTC";
-        } else if (makeName === "zte") {
-          makeName = "ZTE";
-        } else {
-          makeName =
-            String(makeName).charAt(0).toUpperCase() +
-            String(makeName).slice(1);
-        }
-
-        makemodel = JSON.parse(localStorage.getItem("shopByModel"));
-        makemodel.map((item) => {
-          if (item.make == makeName) {
-            setTitle(item.make);
-            setDescription(item.make);
-            // setshopbymodel(item.models);
-            if (shopByModel == []) {
-              setShopByModel(JSON.stringify(item.marketingName));
-            } else {
-              setShopByModel((shopByModel) => [
-                ...shopByModel,
-                JSON.stringify(item.marketingName),
-              ]);
-            }
-          }
-        });
+  useEffect(async () => {
+    let makemodel;
+    setShopByModel([]);
+    if (localStorage.getItem("shopByModel") != undefined) {
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else if (makeName === "lg") {
+        makeName = "LG";
+      } else if (makeName === "htc") {
+        makeName = "HTC";
+      } else if (makeName === "zte") {
+        makeName = "ZTE";
       } else {
-        if (makeName === "oneplus") {
-          makeName = "OnePlus";
-        } else {
-          makeName =
-            String(makeName).charAt(0).toUpperCase() +
-            String(makeName).slice(1);
-        }
-        Axios.fetchTopsellingmodels();
-        makemodel = JSON.parse(localStorage.getItem("shopByModel"));
-        makemodel?.map((item) => {
-          if (item.make == makeName) {
-            setTitle(item.make);
-            setDescription(item.make);
-            if (shopByModel == []) {
-              setShopByModel(JSON.stringify(item.marketingName));
-            } else {
-              setShopByModel((shopByModel) => [
-                ...shopByModel,
-                JSON.stringify(item.marketingName),
-              ]);
-            }
-          }
-        });
+        makeName =
+          String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
       }
-      if (makemodel != undefined) {
-        makemodel.map((item) => {
-          if (item.make == makeName) {
-            setTitle(item.make);
-            setDescription(item.make);
-            if (shopByModel == []) {
-              setShopByModel(JSON.stringify(item.marketingName));
-            } else {
-              setShopByModel((shopByModel) => [
-                ...shopByModel,
-                JSON.stringify(item.marketingName),
-              ]);
-            }
+
+      makemodel = JSON.parse(localStorage.getItem("shopByModel"));
+      makemodel?.map((item) => {
+        if (item.make == makeName) {
+          if (shopByModel == []) {
+            setShopByModel(JSON.stringify(item.marketingName));
+          } else {
+            setShopByModel((shopByModel) => [
+              ...shopByModel,
+              JSON.stringify(item.marketingName),
+            ]);
           }
-        });
-      }
-    }
-
-    if (makeName && !isFilterApplied) {
-      Axios.getListingbyMake(
-        getSearchLocation,
-        makeName,
-        Cookies.get("userUniqueId") || "Guest",
-        intialPage,
-        applySort
-      ).then((response) => {
-        if (response?.dataObject?.otherListings.length > -1) {
-          setProducts((response && response?.dataObject?.otherListings) || []);
         }
-        if (response?.dataObject?.bestDeals.length > -1) {
-          setBestDeal((response && response?.dataObject?.bestDeals) || []);
-        }
-        if (response?.dataObject?.totalProducts > -1) {
-          setTotalProducts(
-            (response && response?.dataObject?.totalProducts) || 0
-          );
-        }
-
-        setLoading(false);
       });
     } else {
-      const {
-        brand,
-        condition,
-        storage,
-        Ram,
-        warranty,
-        verification,
-        priceRange,
-      } = applyFilter;
-      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
-        if (makeName === "oneplus") {
-          makeName = "OnePlus";
+      if (makeName === "oneplus") {
+        makeName = "OnePlus";
+      } else if (makeName === "lg") {
+        makeName = "LG";
+      } else if (makeName === "htc") {
+        makeName = "HTC";
+      } else if (makeName === "zte") {
+        makeName = "ZTE";
+      } else {
+        makeName =
+          String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
+      }
+      let response2 = await Axios.fetchTopsellingmodels();
+      localStorage.setItem("shopByModel", JSON.stringify(response2?.allModels));
+      makemodel = response2?.allModels;
+      makemodel?.map((item) => {
+        if (item.make == makeName) {
+          if (shopByModel == []) {
+            setShopByModel(JSON.stringify(item.marketingName));
+          } else {
+            setShopByModel((shopByModel) => [
+              ...shopByModel,
+              JSON.stringify(item.marketingName),
+            ]);
+          }
+        }
+      });
+    }
+    if (makemodel != undefined) {
+      makemodel.map((item) => {
+        if (item.make == makeName) {
+          if (shopByModel == []) {
+            setShopByModel(JSON.stringify(item.marketingName));
+          } else {
+            setShopByModel((shopByModel) => [
+              ...shopByModel,
+              JSON.stringify(item.marketingName),
+            ]);
+          }
+        }
+      });
+    }
+  }, [makeName]);
+
+  const loadData = async (intialPage) => {
+    if (
+      makeName != undefined &&
+      makeName != "" &&
+      makeName != null &&
+      makeName != "undefined" &&
+      makeName != "null" &&
+      makeName != "Undefined"
+    ) {
+      if (!isFilterApplied) {
+        let makemodel;
+        if (localStorage.getItem("shopByModel") != undefined) {
+          if (makeName === "oneplus") {
+            makeName = "OnePlus";
+          } else if (makeName === "lg") {
+            makeName = "LG";
+          } else if (makeName === "htc") {
+            makeName = "HTC";
+          } else if (makeName === "zte") {
+            makeName = "ZTE";
+          } else {
+            makeName =
+              String(makeName).charAt(0).toUpperCase() +
+              String(makeName).slice(1);
+          }
+
+          makemodel = JSON.parse(localStorage.getItem("shopByModel"));
+          makemodel?.map((item) => {
+            if (item.make == makeName) {
+              if (shopByModel == []) {
+                setShopByModel(JSON.stringify(item.marketingName));
+              } else {
+                setShopByModel((shopByModel) => [
+                  ...shopByModel,
+                  JSON.stringify(item.marketingName),
+                ]);
+              }
+            }
+          });
         } else {
-          makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+          if (makeName === "oneplus") {
+            makeName = "OnePlus";
+          } else if (makeName === "lg") {
+            makeName = "LG";
+          } else if (makeName === "htc") {
+            makeName = "HTC";
+          } else if (makeName === "zte") {
+            makeName = "ZTE";
+          } else {
+            makeName =
+              String(makeName).charAt(0).toUpperCase() +
+              String(makeName).slice(1);
+          }
+          let response2 = await Axios.fetchTopsellingmodels();
+          localStorage.setItem(
+            "shopByModel",
+            JSON.stringify(response2?.allModels)
+          );
+          makemodel = response2?.allModels;
+          makemodel?.map((item) => {
+            if (item.make == makeName) {
+              if (shopByModel == []) {
+                setShopByModel(JSON.stringify(item.marketingName));
+              } else {
+                setShopByModel((shopByModel) => [
+                  ...shopByModel,
+                  JSON.stringify(item.marketingName),
+                ]);
+              }
+            }
+          });
         }
-        let payLoad = {
-          listingLocation: getSearchLocation,
-          make: brand?.length > 0 ? brand : [makeName],
-          reqPage: "BRAND",
-          deviceCondition: [],
-          deviceStorage: [],
-          deviceRam: [],
-          maxsellingPrice: 200000,
-          minsellingPrice: 0,
-          verified: "",
-          warenty: [],
-          pageNumber: intialPage,
-        };
-        if (priceRange && priceRange.min && priceRange.max) {
-          payLoad.minsellingPrice = priceRange.min;
-          payLoad.maxsellingPrice = priceRange.max;
+        if (makemodel != undefined) {
+          makemodel.map((item) => {
+            if (item.make == makeName) {
+              if (shopByModel == []) {
+                setShopByModel(JSON.stringify(item.marketingName));
+              } else {
+                setShopByModel((shopByModel) => [
+                  ...shopByModel,
+                  JSON.stringify(item.marketingName),
+                ]);
+              }
+            }
+          });
         }
-        if (condition?.length > 0) {
-          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-        }
-        if (storage?.length > 0) {
-          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
-        }
-        if (Ram?.length > 0) {
-          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
-        }
-        if (warranty?.length > 0) {
-          payLoad.warenty = warranty.includes("all") ? [] : warranty;
-        }
-        if (verification?.length > 0) {
-          payLoad.verified = verification.includes("all") ? [] : "verified";
-        }
-        Axios.searchFilter(
-          payLoad,
+      }
+
+      if (makeName && !isFilterApplied) {
+        Axios.getListingbyMake(
+          getSearchLocation,
+          makeName,
           Cookies.get("userUniqueId") || "Guest",
           intialPage,
           applySort
         ).then((response) => {
-          setProducts(response?.dataObject?.otherListings);
-          setTotalProducts(response?.dataObject?.totalProducts);
-          setBestDeal(response?.dataObject?.bestDeals);
+          if (response?.dataObject?.otherListings.length > -1) {
+            setProducts(
+              (response && response?.dataObject?.otherListings) || []
+            );
+          }
+          if (response?.dataObject?.bestDeals.length > -1) {
+            setBestDeal((response && response?.dataObject?.bestDeals) || []);
+          }
+          if (response?.dataObject?.totalProducts > -1) {
+            setTotalProducts(
+              (response && response?.dataObject?.totalProducts) || 0
+            );
+          }
+
+          setLoading(false);
         });
+      } else {
+        const {
+          brand,
+          condition,
+          storage,
+          Ram,
+          warranty,
+          verification,
+          priceRange,
+        } = applyFilter;
+        if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+          if (makeName === "oneplus") {
+            makeName = "OnePlus";
+          } else {
+            makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+          }
+          let payLoad = {
+            listingLocation: getSearchLocation,
+            make: brand?.length > 0 ? brand : [makeName],
+            reqPage: "BRAND",
+            deviceCondition: [],
+            deviceStorage: [],
+            deviceRam: [],
+            maxsellingPrice: 200000,
+            minsellingPrice: 0,
+            verified: "",
+            warenty: [],
+            pageNumber: intialPage,
+          };
+          if (priceRange && priceRange.min && priceRange.max) {
+            payLoad.minsellingPrice = priceRange.min;
+            payLoad.maxsellingPrice = priceRange.max;
+          }
+          if (condition?.length > 0) {
+            payLoad.deviceCondition = condition.includes("all")
+              ? []
+              : condition;
+          }
+          if (storage?.length > 0) {
+            payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+          }
+          if (Ram?.length > 0) {
+            payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
+          }
+          if (warranty?.length > 0) {
+            payLoad.warenty = warranty.includes("all") ? [] : warranty;
+          }
+          if (verification?.length > 0) {
+            payLoad.verified = verification.includes("all") ? [] : "verified";
+          }
+          Axios.searchFilter(
+            payLoad,
+            Cookies.get("userUniqueId") || "Guest",
+            intialPage,
+            applySort
+          ).then((response) => {
+            setProducts(response?.dataObject?.otherListings);
+            setTotalProducts(response?.dataObject?.totalProducts);
+            setBestDeal(response?.dataObject?.bestDeals);
+          });
+        }
       }
     }
   };
@@ -329,71 +407,89 @@ function BrandPage() {
   };
 
   useEffect(() => {
-    intialPage = 0;
-    newPages = 0;
-    setPageNumber(intialPage);
-    loadData(intialPage);
+    if (
+      makeName != undefined &&
+      makeName != "" &&
+      makeName != null &&
+      makeName != "undefined" &&
+      makeName != "null" &&
+      makeName != "Undefined"
+    ) {
+      intialPage = 0;
+      newPages = 0;
+      setPageNumber(intialPage);
+      loadData(intialPage);
+    }
   }, [makeName, getSearchLocation, applySort]);
 
   useEffect(() => {
-    const {
-      brand,
-      condition,
-      Ram,
-      storage,
-      warranty,
-      verification,
-      priceRange,
-    } = applyFilter;
-    if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
-      setIsFilterApplied(true);
-      if (makeName === "oneplus") {
-        makeName = "OnePlus";
-      } else {
-        makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+    if (
+      makeName != undefined &&
+      makeName != null &&
+      makeName != "" &&
+      makeName != "undefined" &&
+      makeName != "Undefined" &&
+      makeName != "null"
+    ) {
+      const {
+        brand,
+        condition,
+        Ram,
+        storage,
+        warranty,
+        verification,
+        priceRange,
+      } = applyFilter;
+      if (Object.keys(applyFilter).some((i) => applyFilter[i])) {
+        setIsFilterApplied(true);
+        if (makeName === "oneplus") {
+          makeName = "OnePlus";
+        } else {
+          makeName = makeName.charAt(0).toUpperCase() + makeName.slice(1);
+        }
+        let payLoad = {
+          listingLocation: getSearchLocation,
+          make: brand?.length > 0 ? brand : [makeName],
+          reqPage: "BRAND",
+          deviceCondition: [],
+          deviceStorage: [],
+          deviceRam: [],
+          maxsellingPrice: 200000,
+          minsellingPrice: 0,
+          verified: "",
+          warenty: [],
+          pageNumber: intialPage,
+        };
+        if (priceRange && priceRange.min && priceRange.max) {
+          payLoad.minsellingPrice = priceRange.min;
+          payLoad.maxsellingPrice = priceRange.max;
+        }
+        if (condition?.length > 0) {
+          payLoad.deviceCondition = condition.includes("all") ? [] : condition;
+        }
+        if (storage?.length > 0) {
+          payLoad.deviceStorage = storage.includes("all") ? [] : storage;
+        }
+        if (Ram?.length > 0) {
+          payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
+        }
+        if (warranty?.length > 0) {
+          payLoad.warenty = warranty.includes("all") ? [] : warranty;
+        }
+        if (verification?.length > 0) {
+          payLoad.verified = verification.includes("all") ? [] : "verified";
+        }
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          intialPage,
+          applySort
+        ).then((response) => {
+          setProducts(response?.dataObject?.otherListings);
+          setTotalProducts(response?.dataObject?.totalProducts);
+          setBestDeal(response?.dataObject?.bestDeals);
+        });
       }
-      let payLoad = {
-        listingLocation: getSearchLocation,
-        make: brand?.length > 0 ? brand : [makeName],
-        reqPage: "BRAND",
-        deviceCondition: [],
-        deviceStorage: [],
-        deviceRam: [],
-        maxsellingPrice: 200000,
-        minsellingPrice: 0,
-        verified: "",
-        warenty: [],
-        pageNumber: intialPage,
-      };
-      if (priceRange && priceRange.min && priceRange.max) {
-        payLoad.minsellingPrice = priceRange.min;
-        payLoad.maxsellingPrice = priceRange.max;
-      }
-      if (condition?.length > 0) {
-        payLoad.deviceCondition = condition.includes("all") ? [] : condition;
-      }
-      if (storage?.length > 0) {
-        payLoad.deviceStorage = storage.includes("all") ? [] : storage;
-      }
-      if (Ram?.length > 0) {
-        payLoad.deviceRam = Ram.includes("all") ? [] : Ram;
-      }
-      if (warranty?.length > 0) {
-        payLoad.warenty = warranty.includes("all") ? [] : warranty;
-      }
-      if (verification?.length > 0) {
-        payLoad.verified = verification.includes("all") ? [] : "verified";
-      }
-      Axios.searchFilter(
-        payLoad,
-        Cookies.get("userUniqueId") || "Guest",
-        intialPage,
-        applySort
-      ).then((response) => {
-        setProducts(response?.dataObject?.otherListings);
-        setTotalProducts(response?.dataObject?.totalProducts);
-        setBestDeal(response?.dataObject?.bestDeals);
-      });
     }
   }, [applyFilter, applySort]);
 
@@ -474,24 +570,30 @@ function BrandPage() {
           setApplyFilter={setApplyFilter}
           makeName={makeName}
         >
-          {!isLoading && bestDeal && bestDeal.length > 0 && (
-            <div className="mb-4 ">
-              <Carousel
-                {...settings}
-                key={bestDeal.length > 0 ? bestDeal[0] : -1}
-                className="bestDealCarousel"
-              >
-                {bestDeal.map((items, index) => (
-                  <BestDealsCard
-                    key={index}
-                    data={items}
-                    setProducts={setBestDeal}
-                  />
-                ))}
-              </Carousel>
-            </div>
+          {isLoading ? (
+            <ProductSkeletonCard isBestDeal={true} />
+          ) : (
+            !isLoading &&
+            bestDeal &&
+            bestDeal.length > 0 && (
+              <div className="mb-4 ">
+                <Carousel
+                  {...settings}
+                  key={bestDeal.length > 0 ? bestDeal[0] : -1}
+                  className="bestDealCarousel"
+                >
+                  {bestDeal.map((items, index) => (
+                    <BestDealsCard
+                      key={index}
+                      data={items}
+                      setProducts={setBestDeal}
+                    />
+                  ))}
+                </Carousel>
+              </div>
+            )
           )}
-          {
+          {shopByModel && shopByModel.length > 0 && (
             <div className="font-Roboto-Semibold text-xlFontSize">
               <p className="opacity-50">Shop By Model</p>
               <ShopByBrandSection
@@ -499,12 +601,16 @@ function BrandPage() {
                 shopbymakedata={makeName}
               />
             </div>
-          }
+          )}
           <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
             Total Products ({totalProducts})
           </h4>
           <div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-            {!isLoading && isFinished == false && products.length > 0 ? (
+            {isLoading ? (
+              Array(10)
+                .fill()
+                .map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+            ) : !isLoading && isFinished == false && products.length > 0 ? (
               products?.map((product, index) => (
                 <div key={index}>
                   <ProductCard

@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
-
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
   slidesToShow: 1,
@@ -108,14 +108,17 @@ const Pricerange = () => {
           payLoad.verified = verification.includes("all") ? [] : "verified";
         }
         setLoading(true);
-        Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", intialPage, applySort).then(
-          (response) => {
-            setOtherListings(response?.dataObject?.otherListings);
-            setBestDeal(response?.dataObject?.bestDeals);
-            setTotalProducts(response?.dataObject?.totalProducts);
-            setLoading(false);
-          }
-        );
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          intialPage,
+          applySort
+        ).then((response) => {
+          setOtherListings(response?.dataObject?.otherListings);
+          setBestDeal(response?.dataObject?.bestDeals);
+          setTotalProducts(response?.dataObject?.totalProducts);
+          setLoading(false);
+        });
       }
     }
   };
@@ -203,29 +206,32 @@ const Pricerange = () => {
         if (verification?.length > 0) {
           payLoad.verified = verification.includes("all") ? [] : "verified";
         }
-        Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", newPages, applySort).then(
-          (response) => {
-            if (newPages == 0) {
-              setOtherListings(response?.dataObject?.otherListings);
-            } else {
-              setOtherListings((products) => [
-                ...products,
-                ...response?.dataObject?.otherListings,
-              ]);
-            }
-            setTotalProducts(response?.dataObject?.totalProducts);
-            if (newPages == 0) {
-              setBestDeal(response?.dataObject?.bestDeals);
-            } else {
-              setBestDeal((products) => [
-                ...products,
-                ...response?.dataObject?.bestDeals,
-              ]);
-            };
-            setLoading(false);
-            setIsLoadingMore(false);
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          newPages,
+          applySort
+        ).then((response) => {
+          if (newPages == 0) {
+            setOtherListings(response?.dataObject?.otherListings);
+          } else {
+            setOtherListings((products) => [
+              ...products,
+              ...response?.dataObject?.otherListings,
+            ]);
           }
-        );
+          setTotalProducts(response?.dataObject?.totalProducts);
+          if (newPages == 0) {
+            setBestDeal(response?.dataObject?.bestDeals);
+          } else {
+            setBestDeal((products) => [
+              ...products,
+              ...response?.dataObject?.bestDeals,
+            ]);
+          }
+          setLoading(false);
+          setIsLoadingMore(false);
+        });
       }
     }
   };
@@ -289,14 +295,17 @@ const Pricerange = () => {
         payLoad.verified = verification.includes("all") ? [] : "verified";
       }
       setLoading(true);
-      Axios.searchFilter(payLoad, Cookies.get("userUniqueId") || "Guest", intialPage, applySort).then(
-        (response) => {
-          setOtherListings(response?.dataObject?.otherListings);
-          setBestDeal(response?.dataObject?.bestDeals);
-          setTotalProducts(response?.dataObject?.totalProducts);
-          setLoading(false);
-        }
-      );
+      Axios.searchFilter(
+        payLoad,
+        Cookies.get("userUniqueId") || "Guest",
+        intialPage,
+        applySort
+      ).then((response) => {
+        setOtherListings(response?.dataObject?.otherListings);
+        setBestDeal(response?.dataObject?.bestDeals);
+        setTotalProducts(response?.dataObject?.totalProducts);
+        setLoading(false);
+      });
     }
   }, [applyFilter, applySort]);
 
@@ -304,24 +313,33 @@ const Pricerange = () => {
     <main className="container py-4">
       <h1 className="sr-only">Listing nearme</h1>
       <Filter setApplyFilter={setApplyFilter} setApplySort={setApplySort}>
-        {!isLoading && bestDeal && bestDeal.length > 0 && (
-          <Carousel {...settings}>
-            {bestDeal.map((items, index) => (
-              <BestDealsCard
-                key={index}
-                data={items}
-                setProducts={setBestDeal}
-                className="bestDealCarousel"
-              />
-            ))}
-          </Carousel>
+        {isLoading ? (
+          <ProductSkeletonCard isBestDeal={true} />
+        ) : (
+          !isLoading &&
+          bestDeal &&
+          bestDeal.length > 0 && (
+            <Carousel {...settings}>
+              {bestDeal.map((items, index) => (
+                <BestDealsCard
+                  key={index}
+                  data={items}
+                  setProducts={setBestDeal}
+                  className="bestDealCarousel"
+                />
+              ))}
+            </Carousel>
+          )
         )}
         <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
           Total Products ({totalProducts})
         </h4>
         <div className="grid md:grid-cols-3 grid-cols-2 gap-4 mt-3">
-          {!isLoading &&
-            isFinished == false && otherListings.length > 0 ? (
+          {isLoading ? (
+            Array(10)
+              .fill()
+              .map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+          ) : !isLoading && isFinished == false && otherListings.length > 0 ? (
             otherListings?.map((product, index) => (
               <ProductCard
                 key={index}
@@ -332,15 +350,17 @@ const Pricerange = () => {
             ))
           ) : (
             <div className="col-span-3 h-96 items-center flex justify-center ">
-              {isLoading ? "Loading..." : <NoMatch/>}
+              {isLoading ? "Loading..." : <NoMatch />}
             </div>
           )}
         </div>
         {!isLoading &&
-          isFinished == false && otherListings.length != totalProducts && (
+          isFinished == false &&
+          otherListings.length != totalProducts && (
             <span
-              className={`${isLoadingMore ? "w-[250px]" : "w-[150px]"
-                } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+              className={`${
+                isLoadingMore ? "w-[250px]" : "w-[150px]"
+              } rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
               onClick={loadMoreData}
             >
               <p className="block text-m-green font-semibold">

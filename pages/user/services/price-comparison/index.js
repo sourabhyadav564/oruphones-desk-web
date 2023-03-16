@@ -12,6 +12,7 @@ import AppDownloadPopup from "@/components/Popup/AppDownloadPopup";
 import useFilterOptions from "hooks/useFilterOptions";
 import { useRouter } from "next/router";
 import ProductCard from "@/components/Cards/ProductCard";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 function Index({ isFromEdit, brandsList }) {
   const router = useRouter();
@@ -426,7 +427,13 @@ function Index({ isFromEdit, brandsList }) {
                         Best Deals
                       </div>
                       <div className="grid md:grid-cols-3 grid-cols-2  gap-4 mt-4">
-                        {!loading ? (
+                        {loading ? (
+                          Array(3)
+                            .fill()
+                            .map((_, index) => (
+                              <ProductSkeletonCard isTopSelling={true} />
+                            ))
+                        ) : !loading && products && products?.length > 0 ? (
                           products?.map((product, index) => (
                             <ProductCard
                               key={index}

@@ -100,7 +100,7 @@ function ProductDetailsCard({ data, openFullImage }) {
   }, [showLoginPopup]);
 
   useEffect(() => {
-    setDetailsData(data.similarListTable);
+    setDetailsData(data?.similarListTable);
   });
 
   useEffect(() => {

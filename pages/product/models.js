@@ -7,7 +7,6 @@ import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 import Link from "next/link";
 
 function AllModels() {
-  const [applyFilter, setApplyFilter] = useState({});
   const [topsellingmodels, setTopsellingmodels] = useState([]);
 
   useEffect(() => {
@@ -15,19 +14,12 @@ function AllModels() {
       const data = await Axios.fetchTopsellingmodels();
       setTopsellingmodels(data.dataObject);
     };
-
-    fetchData();
-  }, []);
-
-  function getFilteredValues() {
-    const tempProducts = topsellingmodels;
-    if (applyFilter && applyFilter.brand && applyFilter.brand.length > 0) {
-      tempProducts = tempProducts.filter((items) =>
-        applyFilter.brand.includes(items.make)
-      );
+    if (localStorage.getItem("top_models") != undefined) {
+      setTopsellingmodels(JSON.parse(localStorage.getItem("top_models")));
+    } else {
+      fetchData();
     }
-    return tempProducts;
-  }
+  }, []);
 
   return (
     <main className="container py-4">
@@ -37,10 +29,15 @@ function AllModels() {
           {topsellingmodels?.map((product, index) => (
             <TopSellingCard key={`${index}-${product?.make}`} data={product} />
           ))}
-          <Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`} passHref>
+          <Link
+            href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}
+            passHref
+          >
             <a>
               <div className="w-full h-full hover:bg-gray-100 group   rounded-md shadow-md hover:shadow-lg  p-4 bg-m-white flex justify-center items-center">
-                <p className="block group-hover:scale-110 text-m-green">{"Show All"}</p>
+                <p className="block group-hover:scale-110 text-m-green">
+                  {"Show All"}
+                </p>
               </div>
             </a>
           </Link>

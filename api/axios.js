@@ -24,18 +24,15 @@ let headers = {
 
 Axios.interceptors.request.use(
   async (request) => {
-
     return request;
   },
   (err) => {
-
     return Promise.reject(err);
   }
 );
 
 Axios.interceptors.response.use(
   async (response) => {
-
     if (response?.data?.status === "SESSION_INVALID") {
       headers = { ...headers, eventName: "NA" };
       const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
@@ -46,17 +43,19 @@ Axios.interceptors.response.use(
       }
       Cookies.set("sessionId", result?.data?.dataObject?.sessionId);
       window.location.reload();
-
     }
     return response;
   },
   async (error) => {
-
     return Promise.reject(error);
   }
 );
 
 export function getSessionId() {
+  console.log(
+    "getSessionId",
+    headers
+  );
   headers = { ...headers, eventName: "NA" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
@@ -125,8 +124,8 @@ export function signUp(mobileNumber) {
   const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.post(
     BASE_URL +
-    "/login/otp/generate?countryCode=91&mobileNumber=" +
-    mobileNumber,
+      "/login/otp/generate?countryCode=91&mobileNumber=" +
+      mobileNumber,
     {},
     DEFAULT_HEADER
   ).then(
@@ -144,10 +143,10 @@ export function otpValidate(data) {
   const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.post(
     BASE_URL +
-    "/login/otp/validate?countryCode=91&mobileNumber=" +
-    data.mobile.split("-")[1] +
-    "&otp=" +
-    data.otp,
+      "/login/otp/validate?countryCode=91&mobileNumber=" +
+      data.mobile.split("-")[1] +
+      "&otp=" +
+      data.otp,
     {},
     DEFAULT_HEADER
   ).then(
@@ -180,6 +179,10 @@ export function fetchTopsellingmodels() {
   const API_ENDPOINT = BASE_URL + "/home/topselling/models";
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
+      localStorage.setItem(
+        "shopByModel",
+        JSON.stringify(response?.data?.allModels)
+      );
       return response.data;
     },
     (err) => {
@@ -209,7 +212,9 @@ export function fetchByMarketingName(
     "&userUniqueId=" +
     userUniqueId +
     "&pageNumber=" +
-    pageNumber + `&sortBy=` + sortBy;
+    pageNumber +
+    `&sortBy=` +
+    sortBy;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -245,7 +250,10 @@ export async function fetchMakeModelList(userUniqueId, sessionId) {
   const API_ENDPOINT = BASE_URL + "/master/makemodellist";
   return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
-      localStorage.setItem("make_models", JSON.stringify(response.data.dataObject))
+      localStorage.setItem(
+        "make_models",
+        JSON.stringify(response.data.dataObject)
+      );
       return response.data;
     },
     (err) => {
@@ -254,7 +262,12 @@ export async function fetchMakeModelList(userUniqueId, sessionId) {
   );
 }
 
-export async function fetchModelList(userUniqueId, sessionId, make, searchModel) {
+export async function fetchModelList(
+  userUniqueId,
+  sessionId,
+  make,
+  searchModel
+) {
   headers = {
     ...headers,
     eventName: "GET_MODEL_LIST",
@@ -262,7 +275,8 @@ export async function fetchModelList(userUniqueId, sessionId, make, searchModel)
     sessionId: sessionId,
   };
   const DEFAULT_HEADER = { headers: { ...headers } };
-  const API_ENDPOINT = BASE_URL + "/master/modellist?make=" + make + "&searchModel=" + searchModel;
+  const API_ENDPOINT =
+    BASE_URL + "/master/modellist?make=" + make + "&searchModel=" + searchModel;
   return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       // localStorage.setItem("make_models", JSON.stringify(response.data.dataObject))
@@ -274,7 +288,13 @@ export async function fetchModelList(userUniqueId, sessionId, make, searchModel)
   );
 }
 
-export function getListingbyMake(location, makeName, userUniqueId, pageNumber, sortBy) {
+export function getListingbyMake(
+  location,
+  makeName,
+  userUniqueId,
+  pageNumber,
+  sortBy
+) {
   headers = { ...headers, eventName: `BRAND_SELECTED ${makeName}` };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
@@ -286,7 +306,9 @@ export function getListingbyMake(location, makeName, userUniqueId, pageNumber, s
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber + `&sortBy=` + sortBy;
+    pageNumber +
+    `&sortBy=` +
+    sortBy;
 
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
@@ -426,7 +448,11 @@ export function fetchUserListings(userUniqueId, sessionId) {
 }
 
 export function getRecommandedPrice(data) {
-  headers = { ...headers, eventName: "FETCH_RECOMMENDED_PRICE", userUniqueId: 0 };
+  headers = {
+    ...headers,
+    eventName: "FETCH_RECOMMENDED_PRICE",
+    userUniqueId: 0,
+  };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/global/recomanded/price`;
   return Axios.post(API_ENDPOINT, JSON.stringify(data), DEFAULT_HEADER).then(
@@ -517,7 +543,8 @@ export function pauseListingDevice(payload) {
 export function getGlobalCities(searchText) {
   headers = { ...headers, eventName: "FETCH_CITIES" };
   const DEFAULT_HEADER = { headers: { ...headers } };
-  const API_ENDPOINT = BASE_URL + `/global/cities?limited=true&searchText=` + searchText;
+  const API_ENDPOINT =
+    BASE_URL + `/global/cities?limited=true&searchText=` + searchText;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -620,9 +647,6 @@ export function detailWithUserInfo(
   );
 }
 
-
-
-
 export function fetchSellerMobileNumber(listingid, userUniqueid) {
   headers = { ...headers, eventName: "GET_SELLER_CONTACT", userUniqueId: 0 };
   const DEFAULT_HEADER = { headers: { ...headers } };
@@ -652,7 +676,8 @@ export function bestDealNearByYou(location, userUniqueId, pageNumber) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber + `&sortBy=`;
+    pageNumber +
+    `&sortBy=`;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -684,7 +709,9 @@ export function shopByPriceRange(
     `&userUniqueId=` +
     listingid +
     `&pageNumber=` +
-    pageNumber + `&sortBy=` + sortBy;
+    pageNumber +
+    `&sortBy=` +
+    sortBy;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -740,7 +767,9 @@ export function bestDealNearYouAll(location, userUniqueId, pageNumber, sortBy) {
     `&userUniqueId=` +
     userUniqueId +
     `&pageNumber=` +
-    pageNumber + `&sortBy=` + sortBy;
+    pageNumber +
+    `&sortBy=` +
+    sortBy;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -758,7 +787,10 @@ export function fetchMyFavorites(userUniqueId) {
     BASE_URL + `/favorite/fetch?userUniqueId=` + userUniqueId;
   return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
     (response) => {
-      localStorage.setItem("favoriteList", response?.data?.dataObject?.map((item) => item?.listingId));
+      localStorage.setItem(
+        "favoriteList",
+        response?.data?.dataObject?.map((item) => item?.listingId)
+      );
       return response.data;
     },
     (err) => {
@@ -853,7 +885,11 @@ export function getTinyUrl() {
 }
 
 export function getExternalSellSourceData(payLoad) {
-  headers = { ...headers, eventName: "GET_EXTERNAL_SELL_SOURCE", userUniqueId: 0 };
+  headers = {
+    ...headers,
+    eventName: "GET_EXTERNAL_SELL_SOURCE",
+    userUniqueId: 0,
+  };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + `/device/price/externalsellsource`;
   return Axios.post(API_ENDPOINT, payLoad, DEFAULT_HEADER).then(
@@ -901,7 +937,7 @@ export function uploadUserProfilePic(userProfilePicData, userUniqueId) {
     ...headers,
     eventName: "UPLOAD_PROFILE_PIC",
     "Content-Type": "multipart/form-data",
-    userUniqueId: 0
+    userUniqueId: 0,
   };
   const MULTIPART_HEADER = { headers: { ...headers } };
   return Axios.post(API_ENDPOINT, userProfilePicData, MULTIPART_HEADER).then(
@@ -965,7 +1001,11 @@ export function deleteNotification(notificationId, userUniqueId) {
   headers = { ...headers, eventName: "NOTIFICATION_REMOVED" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT =
-    BASE_URL + `/notification/remove?id=` + notificationId + "&userUniqueId=" + userUniqueId;
+    BASE_URL +
+    `/notification/remove?id=` +
+    notificationId +
+    "&userUniqueId=" +
+    userUniqueId;
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       return response.data;
@@ -1018,7 +1058,13 @@ export function fetchTopArticles() {
   );
 }
 
-export function shopByCategory(location, category, userUniqueId, pageNumber, sortBy) {
+export function shopByCategory(
+  location,
+  category,
+  userUniqueId,
+  pageNumber,
+  sortBy
+) {
   const API_ENDPOINT =
     BASE_URL +
     `/home/listings/category?location=` +
@@ -1028,7 +1074,9 @@ export function shopByCategory(location, category, userUniqueId, pageNumber, sor
     `&pageNumber=` +
     pageNumber +
     `&userUniqueId=` +
-    userUniqueId + `&sortBy=` + sortBy;
+    userUniqueId +
+    `&sortBy=` +
+    sortBy;
   headers = { ...headers, eventName: "FETCH_TOP_ARTICLES" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(

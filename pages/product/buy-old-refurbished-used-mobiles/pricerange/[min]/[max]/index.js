@@ -9,6 +9,7 @@ import AppContext from "@/context/ApplicationContext";
 import { useContext } from "react";
 import { numberFromString, stringToDate } from "@/utils/util";
 import Cookies from "js-cookie";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
   slidesToShow: 1,
@@ -105,21 +106,32 @@ const Pricerange = () => {
     <main className="container py-4">
       <h1 className="sr-only">Listing nearme</h1>
       <Filter setApplyFilter={setApplyFilter} setApplySort={setApplySort}>
-        {!isLoading && bestDeal && bestDeal.length > 0 && (
-          <Carousel {...settings}>
-            {bestDeal.map((items, index) => (
-              <BestDealsCard
-                key={index}
-                data={items}
-                setProducts={setBestDeal}
-                className="bestDealCarousel"
-              />
-            ))}
-          </Carousel>
+        {isLoading ? (
+          <ProductSkeletonCard isBestDeal={true} />
+        ) : (
+          !isLoading &&
+          bestDeal &&
+          bestDeal.length > 0 && (
+            <Carousel {...settings}>
+              {bestDeal.map((items, index) => (
+                <BestDealsCard
+                  key={index}
+                  data={items}
+                  setProducts={setBestDeal}
+                  className="bestDealCarousel"
+                />
+              ))}
+            </Carousel>
+          )
         )}
         <div className="grid grid-cols-3 gap-4 mt-3">
-          {!isLoading &&
-            isFinished == false && otherListings.length != totalProducts ? (
+          {isLoading ? (
+            Array(10)
+              .fill()
+              .map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+          ) : !isLoading &&
+            isFinished == false &&
+            otherListings.length != totalProducts ? (
             otherListings?.map((product, index) => (
               <ProductCard
                 key={index}

@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import NoMatch from "@/components/NoMatch";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
+import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
   slidesToShow: 1,
@@ -450,35 +451,43 @@ function CategoryPage() {
           setApplySort={setApplySort}
           setApplyFilter={setApplyFilter}
         >
-          {!isLoading && bestDeal && bestDeal.length > 0 && (
-            <div className="mb-4">
-              <Carousel
-                {...settings}
-                key={bestDeal.length > 0 ? bestDeal[0] : -1}
-                className="bestDealCarousel"
-              >
-                {bestDeal.map((items, index) => (
-                  <BestDealsCard
-                    key={index}
-                    data={items}
-                    setProducts={setBestDeal}
-                  />
-                ))}
-              </Carousel>
-            </div>
+          {isLoading ? (
+            <ProductSkeletonCard isBestDeal={true} />
+          ) : (
+            !isLoading &&
+            bestDeal &&
+            bestDeal.length > 0 && (
+              <div className="mb-4">
+                <Carousel
+                  {...settings}
+                  key={bestDeal.length > 0 ? bestDeal[0] : -1}
+                  className="bestDealCarousel"
+                >
+                  {bestDeal.map((items, index) => (
+                    <BestDealsCard
+                      key={index}
+                      data={items}
+                      setProducts={setBestDeal}
+                    />
+                  ))}
+                </Carousel>
+              </div>
+            )
           )}
           <h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
             Total Products ({totalProducts})
           </h4>
           <div className="grid md:grid-cols-3 grid-cols-2 gap-4">
-            {!isLoading &&
-            isFinished === false &&
-            products &&
-            products.length > 0 ? (
+            {isLoading ? (
+              Array(10)
+                .fill()
+                .map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+            ) : !isLoading &&
+              isFinished === false &&
+              products &&
+              products.length > 0 ? (
               products?.map((product, index) => (
-                <div
-                  key={index}
-                >
+                <div key={index}>
                   <ProductCard
                     data={product}
                     prodLink

@@ -7,12 +7,14 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 function BestDealsCard({ data, setProducts }) {
-
-  var type = ["old phone", "used", "refurbished"]
-  const soldout = (`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition} soldout`).toLowerCase();
+  var type = ["old phone", "used", "refurbished"];
+  const soldout = `bestdeals buy ${
+    type[Math.floor(Math.random() * type.length)]
+  } ${data?.marketingName} ${data?.deviceStorage} ${
+    data?.deviceCondition
+  } soldout`.toLowerCase();
   const [imageError, setImageError] = useState(false);
   return (
-
     <div
       className=" bg-white h-[300px] rounded-lg py-2 text-m-grey-2 mb-6 bg-gradient-to-l from-m-white to-m-green "
       style={{ boxShadow: "0px 2px 3px #0000000A" }}
@@ -25,14 +27,14 @@ function BestDealsCard({ data, setProducts }) {
           Best Deals
         </p>
         <div>
-          {!(data?.isOtherVendor === "Y" && Cookies.get("userUniqueId") == undefined) && (
-            <AddFav data={data} setProducts={setProducts} />
-          )}
+          {!(
+            data?.isOtherVendor === "Y" &&
+            Cookies.get("userUniqueId") == undefined
+          ) && <AddFav data={data} setProducts={setProducts} />}
         </div>
       </div>
       <div className="flex justify-between items-center absolute">
         <div className=" justify-between items-center">
-
           <div className="pt-5 mx-6 pl-5 text-m-white">
             <span className="flex ">
               <span className="md:mx-6 mx-2">
@@ -51,24 +53,21 @@ function BestDealsCard({ data, setProducts }) {
                   {data?.deviceStorage}
                 </div>
               </span>
-              {data?.deviceRam && <span className=" md:mx-6 mx-2">
-                <div className="font-Roboto-Light md:text-smallFontSize text-xs2FontSize">
-                  RAM
-                </div>
-                <div className=" font-Roboto-Medium md:text-regularFontSize text-mediumFontSize">
-                  {data?.deviceRam}
-                </div>
-              </span>}
+              {data?.deviceRam && (
+                <span className=" md:mx-6 mx-2">
+                  <div className="font-Roboto-Light md:text-smallFontSize text-xs2FontSize">
+                    RAM
+                  </div>
+                  <div className=" font-Roboto-Medium md:text-regularFontSize text-mediumFontSize">
+                    {data?.deviceRam}
+                  </div>
+                </span>
+              )}
             </span>
           </div>
           <div className="relative pt-5 pl-16 ">
-            <p
-              className="font-Roboto-Bold flex items-center -ml-1 text-yellow2 md:text-[28px] text-[24px]"
-
-            >
-              {data?.listingPrice &&
-                <p className="">₹</p>
-              }{" "}
+            <p className="font-Roboto-Bold flex items-center -ml-1 text-yellow2 md:text-[28px] text-[24px]">
+              {data?.listingPrice && <p className="">₹</p>}{" "}
               {numberWithCommas(data?.listingPrice || "")}
             </p>
             <div className="font-Roboto-Regular text-white md:text-regularFontSize text-mediumFontSize">
@@ -80,11 +79,14 @@ function BestDealsCard({ data, setProducts }) {
             <div className="flex absolute pt-4 z-50">
               <div className="">
                 <div
-                  onClick={() => window.open(
-                    `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${data?.isOtherVendor}`,
-                    "_blank",)}
+                  onClick={() =>
+                    window.open(
+                      `/product/buy-old-refurbished-used-mobiles/${data.make}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${data?.isOtherVendor}`,
+                      "_blank"
+                    )
+                  }
                 >
-                  <div className="flex items-center items-center md:text-regularFontSizete text-smallFontSize font-Roboto-Semibold bg-m-white text-m-green md:py-2 py-1 md:px-4 px-2 md:rounded-lg rounded-md hover:bg-yellow-500 hover:cursor-pointer duration-500">
+                  <div className="flex items-center md:text-regularFontSizete text-smallFontSize font-Roboto-Semibold bg-m-white text-m-green md:py-2 py-1 md:px-4 px-2 md:rounded-lg rounded-md hover:bg-yellow-500 hover:cursor-pointer duration-500">
                     <div>View Deal </div>
                     <div className="pt-0.5">
                       <Image src={ChevronRight} width={10} height={10} />
@@ -94,19 +96,22 @@ function BestDealsCard({ data, setProducts }) {
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
       <div className="flex justify-end items-end pr-20 pt-5 relative">
         <div className=" absolute z-10 top-4 right-44">
-          {data?.status === "Sold_Out" ? <Image
-            src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/soldout.svg"}
-            width={"50"}
-            height={"30"}
-            objectFit="contain"
-            alt={soldout}
-          /> : data?.verified ? <VerifiedIcon width={60} height={29} /> : (
+          {data?.status === "Sold_Out" ? (
+            <Image
+              src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
+              width={"50"}
+              height={"30"}
+              objectFit="contain"
+              alt={soldout}
+            />
+          ) : data?.verified ? (
+            <VerifiedIcon width={60} height={29} />
+          ) : (
             <span className="h-9 block" />
           )}
         </div>
@@ -114,16 +119,34 @@ function BestDealsCard({ data, setProducts }) {
           <Image
             loading="lazy"
             priority={false}
-            blurDataURL={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"}
+            blurDataURL={
+              imageError
+                ? getDefaultImage(data?.marketingName) ||
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
+                : data?.imagePath ||
+                  getDefaultImage(data?.marketingName) ||
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
+            }
             placeholder="blur"
             className="flex rounded-[20px]"
             width={140}
             height={190}
             quality={40}
-            src={imageError ? getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg" : data?.imagePath || getDefaultImage(data?.marketingName) || "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"}
+            src={
+              imageError
+                ? getDefaultImage(data?.marketingName) ||
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                : data?.imagePath ||
+                  getDefaultImage(data?.marketingName) ||
+                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+            }
             onError={() => setImageError(true)}
             objectFit="contain"
-            alt={(`bestdeals buy ${type[Math.floor((Math.random() * type.length))]} ${data?.marketingName} ${data?.deviceStorage} ${data?.deviceCondition}`).toLowerCase()}
+            alt={`bestdeals buy ${
+              type[Math.floor(Math.random() * type.length)]
+            } ${data?.marketingName} ${data?.deviceStorage} ${
+              data?.deviceCondition
+            }`.toLowerCase()}
           />
         </div>
       </div>

@@ -21,7 +21,7 @@ function ConditionInfoPopup({ open, setOpen }) {
       htmlText = body.innerHTML;
       setHtmlText1(htmlText);
     } catch (err) {
-      console.log("getVerificationConent error", err);
+      // console.log("getVerificationConent error", err);
     }
   }
 

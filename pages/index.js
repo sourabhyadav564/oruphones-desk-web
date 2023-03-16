@@ -25,14 +25,7 @@ export default function Home() {
   const [topsellingmodels, setTopsellingmodels] = useState([]);
 
   useEffect(async () => {
-    Cookies.set("sessionId", sessionId);
-    localStorage.setItem("sessionId", sessionId);
     const make_models = Cookies.get("make_models");
-    let sessionId, top_models;
-    const session = await Axios.getSessionId();
-    sessionId = session?.dataObject?.sessionId;
-    Cookies.set("sessionId", sessionId);
-    localStorage.setItem("sessionId", sessionId);
     let brandsList;
     let data = [];
     if (localStorage.getItem("brands") != undefined) {
@@ -47,14 +40,25 @@ export default function Home() {
 
     let fetchTopsellingmodels;
     let shopByModel;
-    data = await Axios.fetchTopsellingmodels();
-    fetchTopsellingmodels = data?.dataObject;
-    shopByModel = data?.allModels;
-    localStorage.setItem("top_models", JSON.stringify(fetchTopsellingmodels));
-    Cookies.set("top_models", true);
-    setTopsellingmodels(fetchTopsellingmodels);
-    if (shopbyModel?.length > 0) {
-      localStorage.setItem("shopByModel", JSON.stringify(shopByModel));
+    if (
+      !localStorage.getItem("top_models") ||
+      localStorage.getItem("top_models") == undefined
+    ) {
+      data = await Axios.fetchTopsellingmodels();
+      fetchTopsellingmodels = data?.dataObject;
+      shopByModel = data?.allModels;
+      localStorage.setItem("top_models", JSON.stringify(fetchTopsellingmodels));
+      Cookies.set("top_models", true);
+      setTopsellingmodels(fetchTopsellingmodels);
+      if (shopByModel?.length > 0) {
+        localStorage.setItem("shopByModel", JSON.stringify(shopByModel));
+      }
+      if (fetchTopsellingmodels?.length > 0) {
+        localStorage.setItem(
+          "top_models",
+          JSON.stringify(fetchTopsellingmodels)
+        );
+      }
     }
   }, []);
 
