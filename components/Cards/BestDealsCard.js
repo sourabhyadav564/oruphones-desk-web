@@ -103,7 +103,7 @@ function BestDealsCard({ data, setProducts }) {
         <div className=" absolute z-10 top-4 right-44">
           {data?.status === "Sold_Out" ? (
             <Image
-              src={"https://d1tl44nezj10jx.cloudfront.net/assets/soldout.png"}
+              src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/soldout.svg"}
               width={"50"}
               height={"30"}
               objectFit="contain"
@@ -135,10 +135,10 @@ function BestDealsCard({ data, setProducts }) {
             src={
               imageError
                 ? getDefaultImage(data?.marketingName) ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 : data?.imagePath ||
                   getDefaultImage(data?.marketingName) ||
-                  "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                  "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
             }
             onError={() => setImageError(true)}
             objectFit="contain"

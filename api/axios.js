@@ -1,4 +1,3 @@
-import ComparisonTable from "@/components/Table/ComparisonTable";
 import Axios from "axios";
 import Cookies from "js-cookie";
 

@@ -1,13 +1,16 @@
-import Input from '@/components/Form/Input1';
+import Input from '@/components/Form/Input';
 import MySelect from '@/components/Form/Select';
 import Select from '@/components/Form/Select';
 import React, { Fragment, useEffect, useState } from 'react';
 import * as Axios from "../api/axios";
 import Cookies from "js-cookie"
 import ProductCard from '@/components/Cards/ProductCard';
+import { toast } from "react-toastify";
+import { useRouter } from 'next/router';
+
 
 function Report_a_problem() {
-
+    const router = useRouter();
     const [make, setMake] = useState(null);
     const [makeOptions, setMakeOptions] = useState([]);
     const [marketingName, setmarketingName] = useState(null);
@@ -23,7 +26,7 @@ function Report_a_problem() {
     const [check, setCheck] = useState(false);
     const [description, setDescription] = useState('');
     const [ScheduleCall, setScheduleCall] = useState(false);
-
+    const [required, setRequired] = useState(false);
     useEffect(async () => {
         const data = await Axios.fetchModelList(
             Cookies.get("userUniqueId") || "Guest",
@@ -41,7 +44,6 @@ function Report_a_problem() {
             setMakeOptions(makeModelLists);
         }
     }, []);
-
 
     const setSearchModelList = async (e) => {
         const models = await Axios.fetchModelList(
@@ -89,15 +91,32 @@ function Report_a_problem() {
             ScheduleCall:ScheduleCall
         }   
 
-        console.log("data :: ",Name, Email, Phone, issue, make, description, storage,ScheduleCall,callTime)
-       
+        setErrormsg(true)
         Axios.ReportIssue(Name, Email, Phone, issue, make, description, storage,ScheduleCall,callTime).then((res) => {
             setReportData(res);
-            console.log("api ScheduleCall", ScheduleCall);
+            toast.warning("You reported successfully!!");
+            router.back()
+            setMake(null)
+            setmarketingName(null)
+            setStorage(null)
+            setName("")
+            setEmail("")
+            setPhone("")
+            setCallTime("")
+            setCheck(false);
+            setDescription('')
+            setScheduleCall(false);
+
+        }).catch((err)=>{
+            toast.error("Please fill all the fields in the report.");
         })
     }
 
-    // console.log("response", Response);
+    const requiredFields = ()=>{
+        if(!required){
+            toast.warning("Please fill Issue Type. ");
+        }
+    }
 
 
     return (
@@ -166,18 +185,20 @@ function Report_a_problem() {
                                 ? "Select.."
                                 : { label: issue, value: issue }
                         }
-                        // star="*"
+                        star="*"
+                        onfocus={requiredFields}
                         labelName="Issue Type"
                         onChange={(e) => {
                             setIssue(e.value);
+                            setRequired(true)
                         }}
-                        required
                         options={issueTypeOption?.map((item) => {
                             return { label: item, value: item };
                         })}
-                    ></MySelect>
-                </div>
+                    ></MySelect>    
 
+                </div>
+            
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-4 my-4'>
                     <Input
                         type="text"
@@ -185,6 +206,9 @@ function Report_a_problem() {
                         name="username"
                         minLength="30"
                         maxLength="500"
+                        lableclass={"bg-white"}
+                        borderclass={"border-[#00000020] opacity-90"}
+                        inputClass={"py-3"}
                         onChange={(e) => {
                             setDescription(e.target.value);
                         }}
@@ -196,7 +220,11 @@ function Report_a_problem() {
                         type="email"
                         placeholder="Enter an Email"
                         name="Email"
-                        onChange={(e) => {
+                        lableclass={"bg-white"}
+                        inputClass={"py-3"}
+                        borderclass={"border-[#00000020] opacity-90"}
+                       
+                         onChange={(e) => {
                             setEmail(e.target.value);
                         }}
                         required
@@ -210,6 +238,10 @@ function Report_a_problem() {
                         type="number"
                         placeholder="Enter Your Phone Number"
                         name="Phone"
+                        lableclass={"bg-white"}
+                        borderclass={"border-[#00000020] opacity-90"}
+                        inputClass={"py-3"}
+                        required
                         onChange={(e) => {
                             setPhone(e.target.value);
                         }}
@@ -221,6 +253,10 @@ function Report_a_problem() {
                         type="text"
                         placeholder="Enter Your Name"
                         name="Name"
+                        lableclass={"bg-white "}
+                        borderclass={"border-[#00000020] opacity-90"}
+                        inputClass={"py-3"}
+                        required
                         onChange={(e) => {
                             setName(e.target.value);
                         }}
@@ -229,10 +265,6 @@ function Report_a_problem() {
                     </Input>
 
                 </div>
-
-
-
-
 
                 <div className='my-4'>
                     <div className='my-4'>
@@ -243,7 +275,7 @@ function Report_a_problem() {
                         <div className='py-4 flex items-center gap-2' >
                             <input type="checkbox" className="appearance-none checked:bg-m-green  focus:ring-0 "  value={ScheduleCall}  onChange={(e)=>{
                                 if(e.target.checked){
-                                    console.log("checked");
+                                    console.log("checked"); 
                                     setCheck(!check);
                                     setScheduleCall(!ScheduleCall);
                                 } else{
@@ -256,7 +288,7 @@ function Report_a_problem() {
                             <p>Schedule a call back</p>
                         </div>
                     </label>
-                    {!check ? "" :
+                    {!check ? "" : 
                         <form className='gap-2'><div className='items-center'> <label> <input type="radio" className='checked:bg-m-green border  focus:ring-0 ' value={" 09:00AM-12:00PM"}
                         name="time" onChange={(e) => {
                             if(e.target.checked){
@@ -290,7 +322,7 @@ function Report_a_problem() {
 
                         }}/> 06:00PM-09:00PM </label> </div></form>}
                 </div>
-                <button className='border w-full py-1 rounded-full font-Roboto-Semibold text-white bg-m-green'>Submit</button>
+                <button className='border w-full py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={requiredFields}>Submit</button>
 
             </form>
         </Fragment>

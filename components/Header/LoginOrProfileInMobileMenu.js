@@ -82,6 +82,7 @@ function LoginOrProfileInMobileMenu() {
                       setUserInfo();
                     }}
                   />
+                    <NavListItem text="Report a problem" link="/reportIssue" />
                 </div>
               </div>
             </div>
@@ -142,6 +143,7 @@ function LoginOrProfileInMobileMenu() {
                         setShowLogin(true);
                       }}
                     />
+                      <NavListItem text="Report a problem" link="/reportIssue" />
                   </div>
                 </div>
               </div>

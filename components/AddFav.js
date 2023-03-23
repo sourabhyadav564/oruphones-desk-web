@@ -107,8 +107,8 @@ function AddFav({ data, setProducts, ...rest }) {
         onClick={(e) => {
           e.preventDefault();
           handleFavoties(data);
-          className = "hover:scale-110";
         }}
+        className = "hover:scale-110"
       />
     ) : (
       <Image
@@ -118,8 +118,8 @@ function AddFav({ data, setProducts, ...rest }) {
         onClick={(e) => {
           e.preventDefault();
           handleFavoties(data);
-          className = "hover:scale-110 ";
         }}
+        className = "hover:scale-110 "
       />
     )
   );

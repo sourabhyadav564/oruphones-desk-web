@@ -168,9 +168,9 @@ function ProductDetailsCard({ data, openFullImage }) {
                       thumbImage: data?.defaultImage?.fullImage,
                     }) || {
                     fullImage:
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg",
                     thumbImage:
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png",
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg",
                   }
                 }
               />
@@ -179,7 +179,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 openFullImage={openFullImage}
                 data={deviceListingInfo}
                 images={
-                      "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                 }
               />
             )}
@@ -510,9 +510,9 @@ function ProductDetailsCard({ data, openFullImage }) {
                 <Image
                   src={
                     ImageError
-                      ? "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                      ? "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                       : getDefaultImage(data?.marketingName) ||
-                        "https://d1tl44nezj10jx.cloudfront.net/assets/oru_phones_logo.png"
+                        "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   }
                   onError={() => setImageError(true)}
                   className=""

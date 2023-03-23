@@ -10,6 +10,7 @@ import { getAllNotificationByUserd } from "api/axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
+
 function LoginOrProfile() {
   const router = useRouter();
   const [showLogin, setShowLogin] = React.useState(false);
@@ -91,7 +92,7 @@ function LoginOrProfile() {
                     }}
                   />
 
-                  <NavListItem text="Report a problem" link="/report-a-problem" />
+                  <NavListItem text="Report a problem" link="/reportIssue" />
                 </div>
               </div>
             </div>
@@ -157,7 +158,7 @@ function LoginOrProfile() {
                       }}
                     />
 
-                    <NavListItem text="Report a problem" link="/report-a-problem" />
+                    <NavListItem text="Report a problem" link="/reportIssue" />
 
                   </div>
                 </div>
