@@ -69,9 +69,13 @@ function LocationPopup({ open, setOpen }) {
 
   const onLocChange = async (e) => {
     setSearchText(e);
-    const citiesResponse = await Axios.getGlobalCities(e);
-    setCitiesResponse2(citiesResponse?.dataObject);
-    setCities(citiesResponse?.dataObject);
+    const response = await Axios.getGlobalCities(e);
+    let india = response.dataObject.filter((item) => item.city === "India");
+    let otherCities = response.dataObject.filter(
+      (item) => item.city !== "India"
+    );
+    setCitiesResponse2(india.concat(otherCities));
+    setCities(india.concat(otherCities));
   };
 
   const onError = (error) => {
@@ -231,11 +235,9 @@ function LocationPopup({ open, setOpen }) {
                         ref={selectedCity}
                         options={
                           citiesResponse2 &&
-                          citiesResponse2
-                            ?.sort((a, b) => a.city.localeCompare(b.city))
-                            ?.map((items, index) => {
-                              return { label: items.city, value: items.city };
-                            })
+                          citiesResponse2?.map((items, index) => {
+                            return { label: items.city, value: items.city };
+                          })
                         }
                       ></Select>
                     </div>

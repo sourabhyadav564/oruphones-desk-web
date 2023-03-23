@@ -31,7 +31,6 @@ function ComparisonTable2(data, listingId) {
   const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
   const [openConditionInfo, setOpenConditionInfo] = useState(false);
 
-
   let filled =
     data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
       ? 5
@@ -45,19 +44,26 @@ function ComparisonTable2(data, listingId) {
       ? 1
       : 5;
 
-
-  let iconToShow = (idx,index) => {
-    if (idx < (data?.data[index]?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
-    ? 5
-    : data?.data[index]?.deviceCondition?.toLowerCase() == "Excellent".toLowerCase()
-    ? 4
-    : data?.data[index]?.deviceCondition?.toLowerCase() == "Good".toLowerCase()
-    ? 3
-    : data?.data[index]?.deviceCondition?.toLowerCase() == "Fair".toLowerCase()
-    ? 2
-    : data?.data[index]?.deviceCondition?.toLowerCase() == "Needs Repair".toLowerCase()
-    ? 1
-    : 5)) {
+  let iconToShow = (idx, index) => {
+    if (
+      idx <
+      (data?.data[index]?.deviceCondition?.toLowerCase() ==
+      "Like New".toLowerCase()
+        ? 5
+        : data?.data[index]?.deviceCondition?.toLowerCase() ==
+          "Excellent".toLowerCase()
+        ? 4
+        : data?.data[index]?.deviceCondition?.toLowerCase() ==
+          "Good".toLowerCase()
+        ? 3
+        : data?.data[index]?.deviceCondition?.toLowerCase() ==
+          "Fair".toLowerCase()
+        ? 2
+        : data?.data[index]?.deviceCondition?.toLowerCase() ==
+          "Needs Repair".toLowerCase()
+        ? 1
+        : 5)
+    ) {
       return <Image src={FillStar} width={16} height={16} alt="" />;
     } else {
       return <Image src={Star} width={16} height={16} alt="" />;
@@ -161,7 +167,7 @@ function ComparisonTable2(data, listingId) {
               </th>
               {productData?.map((item, index) => (
                 <th
-                  className="px-6 py-3 min-w-[13vw] bg-m-green-1 border-[1px] border-r-gray text-center hover:opacity-90 text-center cursor-pointer"
+                  className="px-6 py-3 min-w-[13vw] bg-m-green-1 border-[1px] border-r-gray hover:opacity-90 text-center cursor-pointer"
                   onClick={() => {
                     if (Cookies.get("userUniqueId") == undefined) {
                       setProductLink(
@@ -249,11 +255,10 @@ function ComparisonTable2(data, listingId) {
                       : "border px-2 py-6  min-w-[13vw] font-Roboto-Light text-center "
                   }`}
                 >
-                   <div className=" flex text-bx space-x-[2.5px] m-auto justify-center ">
+                  <div className=" flex text-bx space-x-[2.5px] m-auto justify-center ">
                     {Array(5)
                       .fill()
-                      .map((_, idx) => iconToShow(idx,index))}
-
+                      .map((_, idx) => iconToShow(idx, index))}
                   </div>
                   {item?.deviceCondition}
                 </th>
@@ -327,7 +332,7 @@ function ComparisonTable2(data, listingId) {
             <tr className=" font-Roboto-Regular text-cx">
               <th
                 className=" sticky left-0 bg-white border px-4 py-2 drop-shadow-2xl uppercase  items-center cursor-pointer"
-                onClick={() =>  setOpenbrandWarrantyInfo(true)}
+                onClick={() => setOpenbrandWarrantyInfo(true)}
               >
                 <div className="flex">
                   <Image
@@ -565,12 +570,18 @@ function ComparisonTable2(data, listingId) {
         <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
       )}
 
-        {opensellerWarrantyInfo && (
-        <SellerWarrantyInfo open={opensellerWarrantyInfo} setOpen={setOpensellerWarrantyInfo} />
+      {opensellerWarrantyInfo && (
+        <SellerWarrantyInfo
+          open={opensellerWarrantyInfo}
+          setOpen={setOpensellerWarrantyInfo}
+        />
       )}
 
-       {opensbrandWarrantyInfo && (
-        <BrandWarrantyInfo open={opensbrandWarrantyInfo} setOpen={setOpenbrandWarrantyInfo} />
+      {opensbrandWarrantyInfo && (
+        <BrandWarrantyInfo
+          open={opensbrandWarrantyInfo}
+          setOpen={setOpenbrandWarrantyInfo}
+        />
       )}
 
       {openVerificationInfo && (

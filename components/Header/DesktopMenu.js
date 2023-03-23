@@ -86,14 +86,10 @@ function DesktopMenu({ menuItems }) {
         <Image src={Location} width={14} height={15} alt="" />
         <span
           className="text-white font-Roboto-Semibold items-center "
-          location={`${getSearchLocation} ${
-            getSearchLocation != "India" ? " ,India" : ""
-          }`}
+          location={`${getSearchLocation}`}
           color={"white"}
           fontsize={"mediumFontSize"}
-        >{`${getSearchLocation} ${
-          getSearchLocation != "India" ? " ,India" : ""
-        }`}</span>
+        >{`${getSearchLocation}`}</span>
       </span>
       <span>
         <Popover.Group className=" container hidden lg:flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
@@ -120,7 +116,6 @@ function DesktopMenu({ menuItems }) {
               </Link>
             )
           )}
-          
 
           {authenticated ? (
             <div>
@@ -129,16 +124,12 @@ function DesktopMenu({ menuItems }) {
               </div>
               <NavListItem text="Services" link="/user/services" />
               {/* <div className=></div> */}
-              
             </div>
-            
           ) : (
             <div>
               <div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
                 NEW
               </div>
-
-
 
               <NavListItem
                 text="Services"
@@ -148,11 +139,8 @@ function DesktopMenu({ menuItems }) {
                   setItemLink("/user/services");
                 }}
               />
-            
             </div>
           )}
-
-           
         </Popover.Group>
       </span>
       <LoginPopup open={showLogin} setOpen={setShowLogin} />
@@ -166,7 +154,7 @@ export default DesktopMenu;
 const NavListItem = ({ text, link, onClick }) => (
   <Link href={link || "#"} passHref>
     <a
-      className="text-m-white px-4 opacity-100  hover:opacity-60 font-light px-2"
+      className="text-m-white opacity-100  hover:opacity-60 font-light px-2"
       onClick={onClick}
     >
       {text}
