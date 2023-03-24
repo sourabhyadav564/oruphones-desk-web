@@ -8,6 +8,8 @@ import LoginPopup from "../Popup/LoginPopup";
 import ThisPhonePopup from "../Popup/ThisPhonePopup";
 import VerifiedInfoPopup from "../Popup/VerifiedInfoPopup";
 import WarrantyInfo from "../Popup/WarrantyInfo";
+import BrandWarrantyInfo from "../Popup/BrandWarrantyInfo";
+import SellerWarrantyInfo from "../Popup/SellerWarrantyInfo";
 
 function ComparisonTable(data, listingId) {
   const [productData, setProductData] = useState([]);
@@ -29,6 +31,8 @@ function ComparisonTable(data, listingId) {
   const [thisPhonePopup, setThisPhonePopup] = useState(false);
   const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
   const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
+  const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
+  const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -81,7 +85,7 @@ function ComparisonTable(data, listingId) {
                 <th
                   scope="col"
                   class="px-6 py-3 bg-m-green-1 border-[1px] border-r-gray text-center"
-                  onClick={() => setOpenWarrantyInfo(true)}
+                  onClick={() => setOpenbrandWarrantyInfo(true)}
                 >
                   <div className="flex justify-center items-center hover:cursor-pointer">
                     <p className="">Brand Warranty</p>
@@ -95,7 +99,7 @@ function ComparisonTable(data, listingId) {
                 >
                   <div
                     className=" flex justify-center items-center hover:cursor-pointer"
-                    onClick={() => setOpenWarrantyInfo(true)}
+                    onClick={() => setOpensellerWarrantyInfo(true)}
                   >
                     <p className="">Seller Warranty</p>
                     <Image src={InfoCircle} width={15} height={15} />
@@ -273,8 +277,12 @@ function ComparisonTable(data, listingId) {
           </table>
         </div>
       )}
-      {openWarrantyInfo && (
-        <WarrantyInfo open={openWarrantyInfo} setOpen={setOpenWarrantyInfo} />
+     {opensellerWarrantyInfo && (
+        <SellerWarrantyInfo open={opensellerWarrantyInfo} setOpen={setOpensellerWarrantyInfo} />
+      )}
+
+       {opensbrandWarrantyInfo && (
+        <BrandWarrantyInfo open={opensbrandWarrantyInfo} setOpen={setOpenbrandWarrantyInfo} />
       )}
       {openVerificationInfo && (
         <VerifiedInfoPopup

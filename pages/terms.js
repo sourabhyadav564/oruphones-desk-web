@@ -43,7 +43,7 @@ function Termscondition() {
             Mobilicis India Private Limited
           </p>
         </section>
-        <main className="px-4 my-8  pt-10 font-open-sans">
+        <main className="px-4 my-8  pt-10 font-open-sans text-justify">
           <section class="condition ">
             <h1 className="font-Roboto-Semibold text-xlFontSize text-center pb-6">
               Terms of Service

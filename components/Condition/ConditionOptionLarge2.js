@@ -26,7 +26,7 @@ const ConditionOptionLarge2 = ({
     >
       <span className="flex items-center space-x-3">
         <div className="w-[20px]">
-          <Image src={InfoCircle} width={18} height={18} />
+          <Image src={InfoCircle} width={16} height={16} />
         </div>
         <p className="font-semibold">{title}</p>
       </span>
@@ -36,12 +36,14 @@ const ConditionOptionLarge2 = ({
         conditionResults?.[questionIndex] == title &&
         option2.map((option, index) => (
           <div className="flex items-center space-x-3 p-1 ml-5" key={index}>
-            <span>
-              <div className="w-[10px]">
-                <Image src={InfoCircle} width={10} height={10} />
-              </div>
-            </span>
-            <p>{option}</p>
+            <div className="border border-black p-0.5  rounded-full ">
+              {/* <GoPrimitiveDot className="text-nx " /> */}
+              <div className="border border-black  rounded-full "></div>
+            </div>
+            <p className="items-center">
+              
+               {option}
+              </p>
           </div>
         ))}
     </div>

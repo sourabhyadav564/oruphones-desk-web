@@ -44,8 +44,8 @@ function faq() {
             <Image src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/FAQs.svg"} width={230} height={163} alt="ORU faq "/>
           </div>
         </section>
-        <main className="px-6 my-4 ">
-          <section class="faq pt-12">
+        <main className="px-6 my-4">
+          <section class="faq pt-12 text-justify">
             <p className="font-Roboto-Regular"><strong className="font-Semibold">Que. What is Oru?</strong><br /><strong className="font-Semibold">Ans.</strong> Oru is India&rsquo;s first and best online
               platform where you can buy and sell a variety of refurbished mobiles from the comfort of your home. Our
               latest A.I. tech and review team gets you the best of deals for your mobile and the best of mobiles in an

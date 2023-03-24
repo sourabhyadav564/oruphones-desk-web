@@ -35,7 +35,7 @@ function PrivacyPolicy() {
           content={metaTags.PRIVACY.description}
         />
       </Head>
-      <main className="container my-8">
+      <main className="container my-8 text-center">
         <section className="p-6 mt-12 mb-6 text-black-20 text-center">
           <h1 className="font-bold text-2xl uppercase">
             Mobilicis India Private Limited

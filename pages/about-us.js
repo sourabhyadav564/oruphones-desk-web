@@ -34,14 +34,14 @@ function Aboutus() {
           content={metaTags.ABOUT_US.description}
         />
       </Head>
-      <main className="container my-8">
+      <main className="container my-8 justify-evenly">
         <section className="bg-m-green h-52 py-8 px-12 flex items-center shadow rounded-md mb-4">
           <h1 className="text-6xl font-Roboto-Bold text-m-grey-5">
             {" "}
             About Us{" "}
           </h1>
         </section>
-        <div className="content mt-8">
+        <div className="content mt-8 text-justify">
           <div className="font-Roboto-Medium mt-6 text-xlFontSize ">
             ORUphones is India's first ever online marketplace exclusively built
             for buying and selling Certified Old, Refurbished & Used phones. Our

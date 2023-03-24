@@ -69,9 +69,9 @@ function ProductDetailsCard({ data, openFullImage }) {
       : 5;
   let iconToShow = (index) => {
     if (index < filled) {
-      return <Image src={FillStar} width={24} height={24} alt="" />;
+      return <div className="text-yellow-400 text-mediumFontSize">★</div>;
     } else {
-      return <Image src={Star} width={22} height={22} alt="" />;
+      return <div className="text-gray-400 text-mediumFontSize">★</div>;
     }
   };
 

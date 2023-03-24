@@ -64,10 +64,10 @@ function ComparisonTable2(data, listingId) {
         ? 1
         : 5)
     ) {
-      return <Image src={FillStar} width={16} height={16} alt="" />;
-    } else {
-      return <Image src={Star} width={16} height={16} alt="" />;
-    }
+        return <div className="text-yellow-400 text-mediumFontSize">★</div>;
+      } else {
+        return <div className="text-gray-400 text-mediumFontSize">★</div>;
+      }
   };
 
   useEffect(() => {

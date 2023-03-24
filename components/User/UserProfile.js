@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 
 function UserProfile({ children, className }) {
   const { userInfo, setUserInfo } = useContext(AppContext);
+  const [open,setOpen] =useState(false); 
   const { logout } = useContext(AuthContext);
   const [inputImage, setInputImage] = useState(
     userInfo?.userdetails?.profilePicPath
@@ -63,6 +64,7 @@ function UserProfile({ children, className }) {
               <label
                 htmlFor="IMG"
                 className="block w-full h-full relative rounded-full"
+                onClick={()=>setOpen(true)}
               >
                 <Image
                   src={
