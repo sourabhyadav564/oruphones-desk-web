@@ -6,7 +6,7 @@ import * as Axios from "../api/axios";
 import Cookies from "js-cookie"
 import { toast } from "react-toastify";
 import { useRouter } from 'next/router';
-
+import ReportIssuePopup from "@/components/Popup/ReportIssuePopup";
 
 function Report_a_problem() {
     const router = useRouter();
@@ -26,6 +26,7 @@ function Report_a_problem() {
     const [description, setDescription] = useState('');
     const [ScheduleCall, setScheduleCall] = useState(false);
     const [required, setRequired] = useState(false);
+    const [openReportIssuePopup, setOpenReportIssuePopup] = useState(false);
     useEffect(async () => {
         const data = await Axios.fetchModelList(
             Cookies.get("userUniqueId") || "Guest",
@@ -101,7 +102,7 @@ function Report_a_problem() {
                 storage !== ""
             ) {
                 setReportData(res);
-                toast.warning("You reported successfully!!");
+                // toast.warning("You reported successfully!!");
                 router.back()
                 setMake(null)
                 setmarketingName(null)
@@ -333,9 +334,10 @@ function Report_a_problem() {
                             }} /> 06:00PM-09:00PM </label> </div></form>}
                 </div>
                 <div className='flex justify-center'>
-                    <button className='border w-4/12  py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={requiredFields}>Submit</button>
+                    <button className='border w-4/12  py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={()=>{requiredFields; setOpenReportIssuePopup(true);}}>Submit</button>
                 </div>
             </form>
+            <ReportIssuePopup open={openReportIssuePopup} setOpen={setOpenReportIssuePopup}/>
         </Fragment>
     )
 }

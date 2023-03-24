@@ -33,6 +33,8 @@ function ProductDetails() {
     setListingInfo(listingInfo?.dataObject);
   }, [router.query]);
 
+  console.log("listingInfo : ",listingInfo);
+
   const loadData = (intialPage) => {
     let payLoad = {
       listingLocation: getSearchLocation,

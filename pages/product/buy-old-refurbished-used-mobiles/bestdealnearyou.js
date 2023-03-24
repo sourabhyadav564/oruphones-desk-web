@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import ProductSkeletonCard from "@/components/Cards/ProductSkeletonCard";
 
 const settings = {
-  slidesToShow: 1,
+  slidesToShow: 1, 
   slidesToScroll: 1,
   dots: true,
   arrows: true,
