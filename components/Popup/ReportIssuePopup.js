@@ -17,15 +17,15 @@ function ReportIssuePopup({ open, setOpen }) {
           </div>
           <div className="mb-2 mt-4  flex items-center  border border-m-green font-Roboto-Semibold text-regularFontSize uppercase px-12 py-2 rounded bg-m-green text-white  ">
             
-            <Link 
-            href="/"
+            <div 
+            // href="/"
             className=""
-            //   onClick={() => {
-            //     setOpen(false);
-            //   }}
+              onClick={() => {
+                setOpen(false);
+              }}
             >
               OK
-            </Link>
+            </div>
           </div>
         </div>
       </Modal2>

@@ -131,7 +131,7 @@ function Report_a_problem() {
 
     return (
         <Fragment>
-            <form className='container my-8' onSubmit={handleSubmit}>
+            <form className='container my-8' onSubmit={()=>{handleSubmit; setOpenReportIssuePopup(true);}}>
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-4 my-4'>
                     <MySelect
                         star="*"
@@ -334,7 +334,7 @@ function Report_a_problem() {
                             }} /> 06:00PM-09:00PM </label> </div></form>}
                 </div>
                 <div className='flex justify-center'>
-                    <button className='border w-4/12  py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={()=>{requiredFields; setOpenReportIssuePopup(true);}}>Submit</button>
+                    <button className='border w-4/12  py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={requiredFields}>Submit</button>
                 </div>
             </form>
             <ReportIssuePopup open={openReportIssuePopup} setOpen={setOpenReportIssuePopup}/>
