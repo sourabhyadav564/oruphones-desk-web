@@ -80,9 +80,10 @@ function contactUS() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
+                required
               >
                 {" "}
-                Name{" "}
+                Name<span className='text-red opacity-60'>*</span>
               </Input>
               {name == "" && (
                 <p className="text-sm whitespace-nowrap cursor-pointer text-red">
@@ -96,9 +97,10 @@ function contactUS() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                required
               >
                 {" "}
-                Email ID{" "}
+                Email ID<span className='text-red opacity-60'>*</span>
               </Input>
               {email == "" && (
                 <p className="text-sm whitespace-nowrap cursor-pointer text-red">
@@ -112,9 +114,10 @@ function contactUS() {
                 onChange={(e) => {
                   setMobile(e.target.value);
                 }}
+                required
               >
                 {" "}
-                Mobile No{" "}
+                Mobile No<span className='text-red opacity-60'>*</span>
               </Input>
               {mobile == "" && (
                 <p className="text-sm whitespace-nowrap cursor-pointer text-red">
@@ -130,8 +133,9 @@ function contactUS() {
                 onChange={(e) => {
                   setMessage(e.target.value);
                 }}
+                required
               >
-                Message
+                Message<span className='text-red opacity-60'>*</span>
               </TextArea>
               {message == "" && (
                 <p className="text-sm whitespace-nowrap cursor-pointer text-red">

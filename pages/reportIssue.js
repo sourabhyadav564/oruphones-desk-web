@@ -246,9 +246,12 @@ function Report_a_problem() {
 
                 <div className='grid md:grid-cols-2 grid-cols-1 my-4 gap-4'>
                     <Input
-                        type="number"
+                         type="text"
+                         maxLength={10}
+                        pattern="[0-9]*"
+                        prefix="+91-"
                         placeholder="Enter Your Phone Number"
-                        name="Phone"
+                        name="Phone"                       
                         lableclass={"bg-white"}
                         borderclass={"border-[#00000130] opacity-90"}
                         inputClass={"py-3"}
@@ -264,6 +267,7 @@ function Report_a_problem() {
                         type="text"
                         placeholder="Enter Your Name"
                         name="Name"
+                        minLength="3"
                         lableclass={"bg-white "}
                         borderclass={"border-[#00000130] opacity-90"}
                         inputClass={"py-3"}

@@ -187,7 +187,7 @@ const Footer = () => {
     <footer className="mx-auto bg-gradient-to-b from-m-green to-m-black py-16 xl:px-20 lg:px-12 sm:px-6 px-4">
       <div>
         <div className="lg:pl-24 lg:pr-28 px-8 pb-20 flex flex-col items-center justify-center text-regularFontSize font-Roboto-Regular">
-          <p className="text-white  tracking-[0.15em] leading-8">
+          <p className="text-white  tracking-[0.15em] leading-8 text-justify">
             {brandData &&
               brandData.map((brand, index) => (
                 <a
