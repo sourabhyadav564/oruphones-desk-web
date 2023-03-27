@@ -1,6 +1,6 @@
 import React from "react";
 
-function TeamCard({ imgsrc, name, position, description, qualification }) {
+function teamCard({ imgsrc, name, position, description, qualification }) {
   return (
     <div className="bg-gray-100 grayscale saturate-50 hover:bg-m-green hover:text-white hover:grayscale-0 overflow-y-scroll no-scrollbar py-8 mt-8 border rounded-md drop-shadow flex flex-row h-72 px-4 pl-12">
       <div className="w-[600px] pt-6">
@@ -24,4 +24,4 @@ function TeamCard({ imgsrc, name, position, description, qualification }) {
 } 
 
 
-export default TeamCard;
+export default teamCard;
