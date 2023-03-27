@@ -21,6 +21,7 @@ function TeamCard({ imgsrc, name, position, description, qualification }) {
       </div>
     </div>
   );
-}
+} 
+
 
 export default TeamCard;
