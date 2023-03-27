@@ -12,6 +12,16 @@ function contactUS() {
   const [mobile, setMobile] = useState();
   const [message, setMessage] = useState();
 
+  const validateEmail = (email) => {
+    if (/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(email)) {
+      setEmail(email);
+      return true;
+    } else {
+      toast.warning(`Please enter valid email address`, { toastId: "018" });
+      return false;
+    }
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
     let payload = {
@@ -30,12 +40,14 @@ function contactUS() {
       mobile != "" &&
       mobile != undefined
     ) {
-      contactUs(payload).then((response) => {
-        toast.info(response?.reason, {
-          position: toast.POSITION.TOP_CENTER,
+      if (validateEmail(email)) {
+        contactUs(payload).then((response) => {
+          toast.info(response?.reason, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+          window.location.reload();
         });
-        window.location.reload();
-      });
+      }
     } else {
       if (name == undefined) {
         setName("");
@@ -51,6 +63,7 @@ function contactUS() {
       }
     }
   }
+
 
   return (
     <>
