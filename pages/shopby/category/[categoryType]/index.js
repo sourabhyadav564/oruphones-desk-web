@@ -350,31 +350,32 @@ function CategoryPage() {
         payLoad.verified = "verified";
       }
       setLoading(true);
-
-      Axios.searchFilter(
-        payLoad,
-        Cookies.get("userUniqueId") || "Guest",
-        pageNumber
-      ).then((response) => {
-        setLoading(false);
-        if (newPages == 0) {
-          setProducts(response?.dataObject?.otherListings);
-        } else {
-          setProducts((products) => [
-            ...products,
-            ...response?.dataObject?.otherListings,
-          ]);
-        }
-        setTotalProducts(response?.dataObject?.totalProducts);
-        if (newPages == 0) {
-          setBestDeal(response?.dataObject?.bestDeals);
-        } else {
-          setBestDeal((products) => [
-            ...products,
-            ...response?.dataObject?.bestDeals,
-          ]);
-        }
-      });
+        if((applySort !== undefined) && (applySort)){
+        Axios.searchFilter(
+          payLoad,
+          Cookies.get("userUniqueId") || "Guest",
+          pageNumber
+        ).then((response) => {
+          setLoading(false);
+          if (newPages == 0) {
+            setProducts(response?.dataObject?.otherListings);
+          } else {
+            setProducts((products) => [
+              ...products,
+              ...response?.dataObject?.otherListings,
+            ]);
+          }
+          setTotalProducts(response?.dataObject?.totalProducts);
+          if (newPages == 0) {
+            setBestDeal(response?.dataObject?.bestDeals);
+          } else {
+            setBestDeal((products) => [
+              ...products,
+              ...response?.dataObject?.bestDeals,
+            ]);
+          }
+        });
+      }
     }
   }, [applyFilter, applySort]);
 
