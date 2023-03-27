@@ -3,7 +3,7 @@ import fetchStaticHTML from "api/fetchStaticHtml";
 import { useEffect, useState } from "react";
 import { metaTags } from "@/utils/constant";
 import Head from "next/head";
-import TeamCard from "@/components/Cards/TeamCard";
+import TeamCard from "@/components/Cards/teamCard";
 
 function Aboutus() {
   const [htmlText1, setHtmlText1] = useState("");
@@ -73,7 +73,7 @@ function Aboutus() {
           content={metaTags.ABOUT_US.description}
         />
       </Head>
-      <main className="container my-8">
+      <main className="container my-8 bg-loginBg px-0">
         <section className="bg-m-green h-52 py-8 px-12 flex items-center shadow rounded-md mb-4">
           <div className="pt-2">
             <h1 className="text-6xl font-Roboto-Bold text-m-grey-5">
@@ -86,31 +86,33 @@ function Aboutus() {
             </span>
           </div>
         </section>
-        <div className="content my-12">
+        <div className="content my-12 shadow-xl border-2 rounded-lg">
           <span className="font-Roboto-Bold text-m-green underline mt-6 text-xl2FontSize ">
             ORUphones
           </span>
           <span className="font-Roboto-Light mt-6 text-justify">
             {" "}
             - A tech start-up, India's first-ever online C2C marketplace
-            dedicated to buying and selling Old, Refurbished & Used phones. In
-            2020, only 20 million units of used smartphones were traded while
+            dedicated to buying and selling Old, Refurbished & Used phones.
+            <br />
+            In 2020, only 20 million units of used smartphones were traded while
             there were more than 100 million smartphones just left idle at home,
             sitting in drawers. The cumulative second-hand market will reach 245
             million units by 2025 of which only about 20% units will be traded
-            despite the strong demand for used smartphones in India. We aim to
-            bring those unused second-hand smartphones to the market so that
-            “Smartphone owners (sellers)” reap profits by selling their unused
-            assets and buyers can afford their desired smartphones. This is
-            achievable with our strong technology stack and a dedicated team of
-            professionals.
+            despite the strong demand for used smartphones in India.
+            <br />
+            We aim to bring those unused second-hand smartphones to the market
+            so that “Smartphone owners (sellers)” reap profits by selling their
+            unused assets and buyers can afford their desired smartphones.
+            <br /> This is achievable with our strong technology stack and a
+            dedicated team of professionals.
           </span>
         </div>
-        <div className="container mt-4">
+        <div className="mt-4">
           <p className="font-Roboto-Bold text-xl4FontSize text-m-green underline px-2 mb-3">
             ORU Team
           </p>
-          <div className="grid grid-cols-2 text-justify">
+          <div className="grid grid-cols-2 gap-x-8 text-justify">
             {data.map((items, index) => (
               <div key={index}>
                 <TeamCard
@@ -124,7 +126,7 @@ function Aboutus() {
             ))}
           </div>
         </div>
-        <div className="container mt-4">
+        <div className="container mt-8  shadow-xl border-2 rounded-lg">
           <p className="font-Roboto-Bold text-xl4FontSize text-m-green underline px-2">
             ORU Vision
           </p>
@@ -135,8 +137,8 @@ function Aboutus() {
             and a dedicated team of professionals who are seasoned and
             understand the needs of the global market.
           </p>
-        </div>
-        <div className="container mt-2 pl-3">
+          {/* </div> */}
+          {/* <div className="container mt-2 pl-3"> */}
           <p className="font-Roboto-Medium mt-4 text-gx px-2 text-justify">
             ORUphones is India’s first ever online marketplace exclusively built
             for buying and selling Certified Old, Refurbished & Used phones. Our
@@ -213,7 +215,7 @@ function Aboutus() {
         <br />
         <div className="container mt-4">
           <p className="font-Roboto-Bold text-xl4FontSize text-m-green underline px-2 mb-3">
-            ORU Office
+            Office
           </p>
           <div className="flex flex-row">
             <div className="pt-4 px-2">
@@ -225,9 +227,12 @@ function Aboutus() {
               ></img>
             </div>
             <p className="font-Roboto-Medium mt-2 text-gx px-2 pb-4 justify-evenly">
-              Registered Office: Mobilicis India Private Limited, A-66, Scheme
-              No. 10, Near Jain Temple, Alwar - 301001, Rajasthan, India,
-              Support-
+              Registered Office:{" "}
+              <span className="font-Roboto-Bold text-xlFontSize">
+                Mobilicis India Private Limited, A-66
+              </span>
+              ,Scheme No. 10, Near Jain Temple, Alwar - 301001, Rajasthan,
+              India, Support-
               <br></br>
               +91-9660398594 | CIN: U72900RJ2022PTC079442 . Date of
               incorporation: 02-FEB-2022. Person who may be contacted in case of
