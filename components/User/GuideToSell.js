@@ -4,13 +4,13 @@ function GuideToSell() {
   return (
     <div>
       <div className="relative w-full h-40">
-        <Image src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_your_phone.svg"} alt="ORU devices" layout="fill" />
+        <Image src={"https://d1tl44nezj10jx.cloudfront.net/web/assets/sell_device_banner.webp"} alt="ORU devices" layout="fill" />
       </div>
       <div className="px-4 py-6 text-sm">
         <p className="font-semibold capitalize text-m-green py-3">
           Add your device
         </p>
-        <span className="text-m-grey-1 mb-4 block">
+        <span className="text-m-grey-1 mb-4 block text-justify">
           To sell your device, the first step is to add your device on the
           platform. For that, you need to fill in all the required details of
           your device. The details include brand, model, storage, color, and
@@ -25,7 +25,7 @@ function GuideToSell() {
         <p className="font-semibold capitalize text-m-green py-3">
           Device Verification
         </p>
-        <span className="text-m-grey-1 mb-4 block">
+        <span className="text-m-grey-1 mb-4 block text-justify">
           After adding your device, the device will be given a listing in the
           &lsquo;My listings&rsquo; option in your account. Reach out to that
           listing and click on the green &lsquo;Verify&rsquo; button at the
@@ -38,7 +38,7 @@ function GuideToSell() {
           analysis, the device will receive a &lsquo;Verified&rsquo; badge.
         </span>
         <p className="font-semibold capitalize text-m-green py-3">Get Cash</p>
-        <span className="text-m-grey-1 mb-4 block">
+        <span className="text-m-grey-1 mb-4 block text-justify">
           After the verification, the A.I. will give your device a grade and a
           price range to you. You can price your mobile based on this range.
           After successful verification, your listing will begin to be shown on

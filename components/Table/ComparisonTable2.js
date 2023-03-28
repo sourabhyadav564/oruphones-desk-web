@@ -103,7 +103,6 @@ function ComparisonTable2(data, listingId) {
     }, 1000);
   }, [openLoginPopup]);
 
-  console.log("ddaatta : ", data);
 
   return (
     <div className="">

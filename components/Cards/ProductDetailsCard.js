@@ -570,7 +570,7 @@ function ProductDetailsCard({ data, openFullImage }) {
                 listingId={data?.listingId !== undefined ? data?.listingId : []}
               />
             }
-            {data?.similarListTable && data?.similarListTable.length !== 0 && (
+            {data?.similarListTable && data?.similarListTable.length > 0 && (
               <div className="pt-16">
                 <p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
                   You may also like these deals

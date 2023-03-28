@@ -619,16 +619,31 @@ export function detailWithUserInfo(
   isOtherVendor,
   listingid,
   userUniqueId,
-  sessionId
+  sessionId,
+  isLimited
 ) {
-  const API_ENDPOINT =
+  let API_ENDPOINT;
+  console.log("isLimited",isLimited);
+  if(isLimited){
+    API_ENDPOINT =
     BASE_URL +
     `/device/listing/detailwithuserinfo?isOtherVendor=` +
     isOtherVendor +
     "&listingid=" +
     listingid +
     `&userUniqueId=` +
-    userUniqueId;
+    userUniqueId+`&isLimited=`+isLimited;
+  }else{
+  API_ENDPOINT =
+  BASE_URL +
+  `/device/listing/detailwithuserinfo?isOtherVendor=` +
+  isOtherVendor +
+  "&listingid=" +
+  listingid +
+  `&userUniqueId=` +
+  userUniqueId;
+  }
+
   headers = {
     ...headers,
     eventName: "PRODUCT_DETAIL_WITH_SELLER_DETAIL",

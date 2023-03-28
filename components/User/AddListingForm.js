@@ -108,8 +108,9 @@ function AddEditListing({
   }, [cities]);
 
   useEffect(() => {
-    let makeData = makeOptions.filter((item) => item.make === make);
+    let makeData = makeOptions.sort((a,b)=>a.make > b.make ? 1 : -1 ).filter((item) => item.make === make);
     if (makeData && makeData.length > 0) {
+      
       setModelOptions(makeData && makeData[0]?.models);
       setmarketingName(null);
       setStorage(null);
@@ -122,20 +123,27 @@ function AddEditListing({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [make]);
 
-  useEffect(() => {
-    let makeData = makeOptions.filter((item) => item.make === make);
-    if (makeData && makeData.length > 0) {
-      setModelOptions(makeData && makeData[0]?.models);
-      setmarketingName(null);
-      setStorage(null);
-      setColor(null);
-      setDeviceCondition(null);
-      setShow(false);
-      setConditionResults({});
-      setQuestionIndex(0);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [make]);
+  // useEffect(() => {
+  //   let makeData = makeOptions.filter((item) => item.make === make);
+  //   if (makeData && makeData.length > 0) {
+  //     setModelOptions(makeData && makeData[0]?.models);
+  //     setmarketingName(null);
+  //     setStorage(null);
+  //     setColor(null);
+  //     setDeviceCondition(null);
+  //     setShow(false);
+  //     setConditionResults({});
+  //     setQuestionIndex(0);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [make]);
+
+  useEffect(async()=>{
+      await Axios.fetchModelList((response)=>{
+        console.log("response",response);
+      })
+  },[])
+
 
   useEffect(() => {
     if (numberFromString(sellPrice) >= 1000) {

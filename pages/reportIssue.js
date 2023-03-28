@@ -290,16 +290,13 @@ function Report_a_problem() {
                         <div className='py-4 flex items-center gap-2' >
                             <input type="checkbox" className="appearance-none checked:bg-m-green  focus:ring-0 " value={ScheduleCall} onChange={(e) => {
                                 if (e.target.checked) {
-                                    console.log("checked");
+                                   
                                     setCheck(!check);
                                     setScheduleCall(!ScheduleCall);
-                                } else {
-                                    console.log("uncheckedchecked");
                                 }
-
-                                console.log("data::", ScheduleCall);
+                               
                             }} />
-                            {/* {console.log("Schedule time : ", !ScheduleCall)} */}
+                           
                             <p>Schedule a call back</p>
                         </div>
                     </label>
@@ -308,7 +305,6 @@ function Report_a_problem() {
                             name="time" onChange={(e) => {
                                 if (e.target.checked) {
                                     setCallTime(e.target.value);
-                                    console.log("calltime", callTime);
                                 }
 
                             }} /> 09:00AM-12:00PM </label></div>
@@ -316,7 +312,6 @@ function Report_a_problem() {
                             <div className='items-center'><label> <input type="radio" name="time" className='checked:bg-m-green  focus:ring-0 ' value={"12:00PM-03:00PM"} onChange={(e) => {
                                 if (e.target.checked) {
                                     setCallTime(e.target.value);
-                                    console.log("calltime", callTime);
                                 }
 
                             }} /> 12:00PM-03:00PM </label></div>
@@ -324,7 +319,6 @@ function Report_a_problem() {
                             <div className='items-center'><label> <input type="radio" name="time" className='checked:bg-m-green  focus:ring-0 ' value={" 03:00PM-06:00PM "} onChange={(e) => {
                                 if (e.target.checked) {
                                     setCallTime(e.target.value);
-                                    console.log("calltime", callTime);
                                 }
 
                             }} /> 03:00PM-06:00PM </label></div>
@@ -332,7 +326,6 @@ function Report_a_problem() {
                             <div className='items-center'><label> <input type="radio" name="time" className='checked:bg-m-green  focus:ring-0 ' value={"06:00PM-09:00PM"} onChange={(e) => {
                                 if (e.target.checked) {
                                     setCallTime(e.target.value);
-                                    console.log("calltime", callTime);
                                 }
 
                             }} /> 06:00PM-09:00PM </label> </div></form>}

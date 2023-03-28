@@ -17,6 +17,7 @@ function ProductDetails() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [listingInfo, setListingInfo] = useState(null);
+  const [loaddata, setLoaddata] = useState(false);
 
   useEffect(async () => {
     const userUniqueId = Cookies.get("userUniqueId");
@@ -24,16 +25,30 @@ function ProductDetails() {
       Cookies.get("sessionId") != undefined
         ? Cookies.get("sessionId")
         : localStorage.getItem("sessionId");
-    const listingInfo = await Axios.detailWithUserInfo(
-      router.query.isOtherVendor,
-      router.query.productID,
-      userUniqueId || "Guest",
-      sessionId
-    );
-    setListingInfo(listingInfo?.dataObject);
+      
+      if(router.query.productID) {
+        const isLimited = true;
+        await Axios.detailWithUserInfo(
+          router.query.isOtherVendor,
+          router.query.productID,
+          userUniqueId || "Guest",
+          sessionId,
+          isLimited
+        ).then(async(response)=>{
+          setListingInfo(response?.dataObject);
+          await Axios.detailWithUserInfo(
+            router.query.isOtherVendor,
+            router.query.productID,
+            userUniqueId || "Guest",
+            sessionId,
+          ).then((response)=>{
+            setListingInfo(response?.dataObject);
+          });
+        })
+      }
   }, [router.query]);
+  
 
-  console.log("listingInfo : ",listingInfo);
 
   const loadData = (intialPage) => {
     let payLoad = {
