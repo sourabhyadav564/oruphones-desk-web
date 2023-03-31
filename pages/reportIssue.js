@@ -27,6 +27,40 @@ function Report_a_problem() {
     const [ScheduleCall, setScheduleCall] = useState(false);
     const [required, setRequired] = useState(false);
     const [openReportIssuePopup, setOpenReportIssuePopup] = useState(false);
+
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            Axios.getUserProfile(
+                "91",
+                Cookies.get("mobileNumber")
+            ).then((response) => {
+                console.log("response : ", response?.dataObject?.userdetails);
+                setName(response?.dataObject?.userdetails?.userName);
+                setEmail(response?.dataObject?.userdetails?.email);
+                setPhone(response?.dataObject?.userdetails?.mobileNumber)
+
+            });
+            clearInterval(interval);
+        }, 0);
+    }, [])
+
+    useEffect(async () => {
+        const models = await Axios.fetchModelList(
+            Cookies.get("userUniqueId"),
+            Cookies.get("sessionId"),
+            make,
+            ""
+        );
+        if (models?.dataObject[0]?.models) {
+            const sortedModels = models.dataObject[0].models.sort((a, b) => {
+                return a.marketingname.localeCompare(b.marketingname);
+            });
+            setModelOptions(sortedModels);
+        }
+    }, [make])
+
+
     useEffect(async () => {
         const data = await Axios.fetchModelList(
             Cookies.get("userUniqueId") || "Guest",
@@ -45,21 +79,6 @@ function Report_a_problem() {
         }
     }, []);
 
-    const setSearchModelList = async (e) => {
-        const models = await Axios.fetchModelList(
-            Cookies.get("userUniqueId"),
-            Cookies.get("sessionId"),
-            make,
-            e
-        );
-        if (models?.dataObject[0]?.models) {
-            const sortedModels = models.dataObject[0].models.sort((a, b) => {
-                return a.marketingname.localeCompare(b.marketingname);
-            });
-            setModelOptions(sortedModels);
-        }
-    };
-
 
     useEffect(() => {
         modelOptions?.map((item) => {
@@ -77,50 +96,50 @@ function Report_a_problem() {
         "Other",
     ]
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const payload = {
-            name: Name,
-            email: Email,
-            phone: Phone,
-            issueType: issue,
-            modelName: make,
-            description: description,
-            storage: storage,
-            callTime: callTime,
-            ScheduleCall: ScheduleCall
+    const validateEmail = (email) => {
+        if (/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(email)) {
+            setEmail(email);
+            return true;
+        } else {
+            toast.warning(`Please enter valid email address`, { toastId: "018" });
+            return false;
         }
+    };
 
-        Axios.ReportIssue(Name, Email, Phone, issue, make, description, storage, ScheduleCall, callTime).then((res) => {
-            if (
-                Name !== "" &&
-                Email !== "" &&
-                Phone !== "" &&
-                issue !== "" &&
-                make !== "" &&
-                description !== "" &&
-                storage !== ""
-            ) {
-                setReportData(res);
-                // toast.warning("You reported successfully!!");
-                router.back()
-                setMake(null)
-                setmarketingName(null)
-                setStorage(null)
-                setName("")
-                setEmail("")
-                setPhone("")
-                setCallTime("")
-                setCheck(false);
-                setDescription('')
-                setScheduleCall(false);
+    const handleSubmit = () => {
+        if (
+            Name  &&
+            Email  &&
+            Phone  &&
+            issue  &&
+            marketingName  &&
+            description  &&
+            storage 
+        ) {
+            if (validateEmail(Email)) {
+                Axios.ReportIssue(Name, Email, Phone, issue, marketingName, description, storage, ScheduleCall, callTime, Cookies.get("sessionId")).then((res) => {
+                    setReportData(res);
+                    // toast.warning("You reported successfully!!");
+                    // router.back()
+                    setMake(null)
+                    setmarketingName(null)
+                    setStorage(null)
+                    setName("")
+                    setEmail("")
+                    setPhone("")
+                    setCallTime("")
+                    setCheck(false);
+                    setDescription('')
+                    setScheduleCall(false);
+                    setOpenReportIssuePopup(true);
+                }).catch((err) => {
+                    toast.error("Please fill all the fields in the report.");
+                })
             }
-            else {
-                toast.warning(`Please enter valid details`, { toastId: "017" });
-            }
-        }).catch((err) => {
-            toast.error("Please fill all the fields in the report.");
-        })
+        }
+        else {
+            toast.warning(`Please enter valid details`, { toastId: "017" });
+        }
     }
 
     const requiredFields = () => {
@@ -131,7 +150,7 @@ function Report_a_problem() {
 
     return (
         <Fragment>
-            <form className='container my-8' onSubmit={()=>{handleSubmit; setOpenReportIssuePopup(true);}}>
+            <div className='container my-8' >
                 <div className='grid md:grid-cols-2 grid-cols-1 gap-4 my-4'>
                     <MySelect
                         star="*"
@@ -167,9 +186,6 @@ function Report_a_problem() {
                                 value: item.marketingname,
                             };
                         })}
-                        onInputChange={(e) => {
-                            setSearchModelList(e);
-                        }}
                     ></MySelect>
                 </div>
 
@@ -196,7 +212,7 @@ function Report_a_problem() {
                                 : { label: issue, value: issue }
                         }
                         star="*"
-                        onfocus={requiredFields}
+                        // onfocus={requiredFields}
                         labelName="Issue Type"
                         onChange={(e) => {
                             setIssue(e.value);
@@ -232,6 +248,7 @@ function Report_a_problem() {
                         placeholder="Enter an Email"
                         name="Email"
                         lableclass={"bg-white"}
+                        defaultValue={Email}
                         inputClass={"py-3"}
                         borderclass={"border-[#00000130] opacity-90"}
 
@@ -246,13 +263,14 @@ function Report_a_problem() {
 
                 <div className='grid md:grid-cols-2 grid-cols-1 my-4 gap-4'>
                     <Input
-                         type="text"
-                         maxLength={10}
+                        type="text"
+                        maxLength={10}
                         pattern="[0-9]*"
                         prefix="+91-"
                         placeholder="Enter Your Phone Number"
-                        name="Phone"                       
+                        name="Phone"
                         lableclass={"bg-white"}
+                        defaultValue={Phone}
                         borderclass={"border-[#00000130] opacity-90"}
                         inputClass={"py-3"}
                         required
@@ -269,6 +287,7 @@ function Report_a_problem() {
                         name="Name"
                         minLength="3"
                         lableclass={"bg-white "}
+                        defaultValue={Name}
                         borderclass={"border-[#00000130] opacity-90"}
                         inputClass={"py-3"}
                         required
@@ -287,16 +306,18 @@ function Report_a_problem() {
                     <div className='my-4'>
                     </div>
                     <label>
-                        <div className='py-4 flex items-center gap-2' >
+                        <div className='py-4 flex items-center gap-2'>
                             <input type="checkbox" className="appearance-none checked:bg-m-green  focus:ring-0 " value={ScheduleCall} onChange={(e) => {
                                 if (e.target.checked) {
-                                   
-                                    setCheck(!check);
+
+                                    setCheck(true);
                                     setScheduleCall(!ScheduleCall);
+                                } else {
+                                    setCheck(false);
                                 }
-                               
+
                             }} />
-                           
+
                             <p>Schedule a call back</p>
                         </div>
                     </label>
@@ -331,10 +352,10 @@ function Report_a_problem() {
                             }} /> 06:00PM-09:00PM </label> </div></form>}
                 </div>
                 <div className='flex justify-center'>
-                    <button className='border w-4/12  py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={requiredFields}>Submit</button>
+                    <button className='border w-4/12  py-1 rounded-full font-Roboto-Semibold text-white bg-m-green' onClick={() => { handleSubmit() }}>Submit</button>
                 </div>
-            </form>
-            <ReportIssuePopup open={openReportIssuePopup} setOpen={setOpenReportIssuePopup}/>
+            </div>
+            <ReportIssuePopup open={openReportIssuePopup} setOpen={setOpenReportIssuePopup} />
         </Fragment>
     )
 }

@@ -14,7 +14,7 @@ let headers = {
     typeof window !== "undefined"
       ? localStorage.getItem("sessionId")
       : Cookies.get("sessionId") || "",
-  devicePlatform: "Desktop Web",
+  deviceplatform: "Desktop Web",
   location:
     typeof window !== "undefined" ? localStorage.getItem("usedLocation") : "",
 };
@@ -1117,12 +1117,12 @@ export function logEventInfo(eventName) {
   );
 }
 
-export function ReportIssue(Name,Email,Phone,issue,make,description,storage,ScheduleCall,callTime){
-  headers = {...headers, eventName: "REPORT_ISSUE"};
+export function ReportIssue(Name,Email,Phone,issue,modelName,description,storage,ScheduleCall,callTime, sessionId){
+  headers = {...headers, eventName: "REPORT_ISSUE",userUniqueId: 0, sessionId: sessionId||"",};
   const DEFAULT_HEADER = {headers:{...headers}};
-  const API_ENDPOINT = BASE_URL + `/cscglobal/reportIssue?issueType=${issue}&description=${description+callTime}&email=${Email}&phone=${Phone}&name=${Name}&modelName=${make}&deviceStorage=${storage}&scheduleCall=${ScheduleCall}`;
-  console.log("schedule axios : ",ScheduleCall);
-  return Axios.post(API_ENDPOINT,DEFAULT_HEADER).then(
+  const API_ENDPOINT = BASE_URL + `/cscglobal/reportIssue?issueType=${issue}&description=${description+". Call Scheduled Time: "+callTime}&email=${Email}&phone=${Phone}&name=${Name}&modelName=${modelName}&deviceStorage=${storage}&scheduleCall=${ScheduleCall}`;
+  console.log("schedule axios : ",API_ENDPOINT, DEFAULT_HEADER);
+  return Axios.post(API_ENDPOINT,{},DEFAULT_HEADER).then(
     (response)=>{
       return response.data;
     },
