@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 import { toast } from "react-toastify";
 import { useRouter } from 'next/router';
 import ReportIssuePopup from "@/components/Popup/ReportIssuePopup";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Report_a_problem() {
     const router = useRouter();
@@ -39,13 +40,13 @@ function Report_a_problem() {
                 setName(response?.dataObject?.userdetails?.userName);
                 setEmail(response?.dataObject?.userdetails?.email);
                 setPhone(response?.dataObject?.userdetails?.mobileNumber)
-
             });
             clearInterval(interval);
         }, 0);
     }, [])
 
     useEffect(async () => {
+        if(make){
         const models = await Axios.fetchModelList(
             Cookies.get("userUniqueId"),
             Cookies.get("sessionId"),
@@ -58,26 +59,27 @@ function Report_a_problem() {
             });
             setModelOptions(sortedModels);
         }
+    }
     }, [make])
 
 
-    useEffect(async () => {
-        const data = await Axios.fetchModelList(
-            Cookies.get("userUniqueId") || "Guest",
-            Cookies.get("sessionId") != undefined
-                ? Cookies.get("sessionId")
-                : localStorage.getItem("sessionId") || "",
-            "",
-            ""
-        );
-        let makeModelLists = data?.dataObject;
-        if (makeModelLists) {
-            makeModelLists.sort((a, b) => {
-                return a.make.localeCompare(b.make);
-            });
-            setMakeOptions(makeModelLists);
-        }
-    }, []);
+    // useEffect(async () => {
+    //     const data = await Axios.fetchModelList(
+    //         Cookies.get("userUniqueId") || "Guest",
+    //         Cookies.get("sessionId") != undefined
+    //             ? Cookies.get("sessionId")
+    //             : localStorage.getItem("sessionId") || "",
+    //         "",
+    //         ""
+    //     );
+    //     let makeModelLists = data?.dataObject;
+    //     if (makeModelLists) {
+    //         makeModelLists.sort((a, b) => {
+    //             return a.make.localeCompare(b.make);
+    //         });
+    //         setMakeOptions(makeModelLists);
+    //     }
+    // }, []);
 
 
     useEffect(() => {
@@ -101,7 +103,9 @@ function Report_a_problem() {
             setEmail(email);
             return true;
         } else {
-            toast.warning(`Please enter valid email address`, { toastId: "018" });
+            toast.warning(`Please enter valid email address`,  { toastId: "021", 
+                position: toast.POSITION.TOP_CENTER,
+              });
             return false;
         }
     };
@@ -133,18 +137,24 @@ function Report_a_problem() {
                     setScheduleCall(false);
                     setOpenReportIssuePopup(true);
                 }).catch((err) => {
-                    toast.error("Please fill all the fields in the report.");
+                    toast.error("Please fill all the fields in the report.",{ toastId: "020" , 
+                        position: toast.POSITION.TOP_CENTER,
+                      });
                 })
             }
         }
         else {
-            toast.warning(`Please enter valid details`, { toastId: "017" });
+            toast.warning(`Please enter valid details`, { toastId: "017" , 
+                position: toast.POSITION.TOP_CENTER,
+              });
         }
     }
 
     const requiredFields = () => {
         if (!required) {
-            toast.warning("Please fill Issue Type.");
+            toast.warning("Please fill Issue Type.",{toastId:"019", 
+                position: toast.POSITION.TOP_CENTER,
+              });
         }
     }
 

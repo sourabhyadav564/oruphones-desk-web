@@ -31,13 +31,13 @@ function LoginOrProfile() {
     return () => { };
   });
 
-  useEffect(() => {
-    getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
-      setNotifications(response?.dataObject?.notifications);
+  // useEffect(() => {
+  //   getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
+  //     setNotifications(response?.dataObject?.notifications);
 
-      setUnreadNotificationsCount(response?.dataObject?.unReadCount);
-    });
-  }, []);
+  //     setUnreadNotificationsCount(response?.dataObject?.unReadCount);
+  //   });
+  // }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -91,7 +91,6 @@ function LoginOrProfile() {
                       setUserInfo();
                     }}
                   />
-
                   <NavListItem text="Report a problem" link="/reportIssue" />
                 </div>
               </div>

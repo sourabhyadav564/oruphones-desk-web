@@ -53,7 +53,7 @@ function ImageSlider({ data, images, openFullImage }) {
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     arrows: false,
     fade: true,
