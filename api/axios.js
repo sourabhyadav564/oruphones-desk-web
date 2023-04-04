@@ -172,16 +172,25 @@ export function fetchShopByPrice() {
   );
 }
 
-export function fetchTopsellingmodels() {
+export function fetchTopsellingmodels(isLimited) {
   headers = { ...headers, eventName: `GET_TOP_SELLING_MODELS` };
   const DEFAULT_HEADER = { headers: { ...headers } };
-  const API_ENDPOINT = BASE_URL + "/home/topselling/models";
+  let API_ENDPOINT;
+  if(isLimited == false) 
+  {
+    API_ENDPOINT = BASE_URL + "/home/topselling/models?isLimited=" + isLimited;
+  }
+  else
+  {
+    API_ENDPOINT = BASE_URL + "/home/topselling/models";
+  }
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
       localStorage.setItem(
         "shopByModel",
         JSON.stringify(response?.data?.allModels)
       );
+      localStorage.setItem("top_models", JSON.stringify(response?.data?.dataObject));
       return response.data;
     },
     (err) => {

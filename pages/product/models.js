@@ -11,8 +11,14 @@ function AllModels() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await Axios.fetchTopsellingmodels();
-      setTopsellingmodels(data.dataObject);
+      await Axios.fetchTopsellingmodels(
+      ).then(async (res) => {
+        setTopsellingmodels(res?.dataObject);
+        await Axios.fetchTopsellingmodels(false).then((res) => {
+          setTopsellingmodels(res?.dataObject);
+        });
+      }
+      );
     };
     if (localStorage.getItem("top_models") != undefined) {
       setTopsellingmodels(JSON.parse(localStorage.getItem("top_models")));
