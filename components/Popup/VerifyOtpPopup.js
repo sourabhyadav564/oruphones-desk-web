@@ -65,7 +65,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 
   return (
     <div className="container max-w-xl grid place-items-center">
-      <div>
+      <div className="pt-10">
         <Image
           src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"}
           alt="ORUphones"

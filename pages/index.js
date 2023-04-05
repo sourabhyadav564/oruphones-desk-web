@@ -14,6 +14,7 @@ import { metaTags } from "@/utils/constant";
 import Head from "next/head";
 import ShowBy from "@/components/Home/ShopBy";
 import SellBuyFlow from "@/components/SellBuyFlow";
+import TopCarousel from "@/components/TopCarousel";
 
 export default function Home() {
   const router = useRouter();
@@ -71,7 +72,8 @@ export default function Home() {
         <meta property="og:description" content={metaTags.HOME.description} />
       </Head>
       <main>
-        <Hero />
+        {/* <Hero /> */}
+        <TopCarousel/>
         <TopBrand brandsList={brands} />
         <TopDeals location={getSearchLocation} />
         <ShowBy />

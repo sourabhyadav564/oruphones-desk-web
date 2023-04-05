@@ -242,3 +242,8 @@ input::-webkit-inner-spin-button {
       }
   }
 }
+
+.swiper-button-next ,.swiper-button-prev {
+  /* turn image to grey */
+  -webkit-filter: grayscale(100%);
+}

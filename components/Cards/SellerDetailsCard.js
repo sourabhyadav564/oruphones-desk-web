@@ -111,7 +111,6 @@ function SellerDetailsCard({ data, comparisontableid }) {
         setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
       });
     }
-    setOtherSeller(data?.externalSource);
   }, [showNumber]);
 
   const openSellerWebSite = (e) => {
@@ -192,7 +191,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
           </div>
         )}
       </div>
-      {otherSeller && otherSeller.length > 0 && (
+      {data?.externalSource && data?.externalSource.length > 0 && (
         <div className="pr-2">
           <p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">
             {" "}
@@ -204,7 +203,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
           </div>{" "}
           <div className="flex flex-col overflow-y-auto">
             {" "}
-            {otherSeller.map((items, index) => (
+            {data?.externalSource.map((items, index) => (
               <OtherSeller
                 index={index}
                 data={items}
