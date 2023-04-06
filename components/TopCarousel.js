@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LoginPopup from "../components/Popup/LoginPopup";
 import Cookies from "js-cookie";
-import banner_2 from "@/assets/banner_web_2.webp";
-import banner_3 from "@/assets/banner_web_3.webp";
 import Carousel from "./Carousel";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 
@@ -31,13 +29,13 @@ const slides = [
   {
     name: "article_image",
     link: "https://www.oruphones.com/blog",
-    src: banner_2,
+    src: "https://d1tl44nezj10jx.cloudfront.net/web/assets/banner_web_2.webp",
     id: 2,
   },
   {
     name: "prc_comp_bnr",
     link: "https://www.oruphones.com/user/services/price-comparison",
-    src: banner_3,
+    src: "https://d1tl44nezj10jx.cloudfront.net/web/assets/banner_web_3.webp",
     id: 3,
   },
 ];
@@ -97,7 +95,7 @@ const TopCarousel = () => {
                     alt={item.name}
                     width={"7680px"}
                     height={"1920px"}
-                    className="bannerShadow"
+                    className="bannerShadow object-contain"
                     data-aos="fade-down"
                   />
                 </div>

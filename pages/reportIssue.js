@@ -63,23 +63,23 @@ function Report_a_problem() {
     }, [make])
 
 
-    // useEffect(async () => {
-    //     const data = await Axios.fetchModelList(
-    //         Cookies.get("userUniqueId") || "Guest",
-    //         Cookies.get("sessionId") != undefined
-    //             ? Cookies.get("sessionId")
-    //             : localStorage.getItem("sessionId") || "",
-    //         "",
-    //         ""
-    //     );
-    //     let makeModelLists = data?.dataObject;
-    //     if (makeModelLists) {
-    //         makeModelLists.sort((a, b) => {
-    //             return a.make.localeCompare(b.make);
-    //         });
-    //         setMakeOptions(makeModelLists);
-    //     }
-    // }, []);
+    useEffect(async () => {
+        const data = await Axios.fetchModelList(
+            Cookies.get("userUniqueId") || "Guest",
+            Cookies.get("sessionId") != undefined
+                ? Cookies.get("sessionId")
+                : localStorage.getItem("sessionId") || "",
+            "",
+            ""
+        );
+        let makeModelLists = data?.dataObject;
+        if (makeModelLists) {
+            makeModelLists.sort((a, b) => {
+                return a.make.localeCompare(b.make);
+            });
+            setMakeOptions(makeModelLists);
+        }
+    }, []);
 
 
     useEffect(() => {
