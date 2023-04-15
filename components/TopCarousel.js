@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LoginPopup from "../components/Popup/LoginPopup";
 import Cookies from "js-cookie";
+import Banner_2 from "@/assets/banner_web_2.png";
+import Banner_3 from "@/assets/banner_web_3.png";
 import Carousel from "./Carousel";
 import AppDownloadPopup from "./Popup/AppDownloadPopup";
 
@@ -29,13 +31,13 @@ const slides = [
   {
     name: "article_image",
     link: "https://www.oruphones.com/blog",
-    src: "https://d1tl44nezj10jx.cloudfront.net/web/assets/banner_web_2.webp",
+    src: Banner_2,
     id: 2,
   },
   {
     name: "prc_comp_bnr",
     link: "https://www.oruphones.com/user/services/price-comparison",
-    src: "https://d1tl44nezj10jx.cloudfront.net/web/assets/banner_web_3.webp",
+    src: Banner_3,
     id: 3,
   },
 ];
@@ -147,7 +149,7 @@ const TopCarousel = () => {
                       data-aos="zoom-out-up"
                     >
                       <div>
-                        <div className="px-4 py-12 rounded-[5px] ">
+                        <div className="px-4 py-7 rounded-[5px] ">
                           <a
                             className="flex h-7 text-mediumFontSize font-Roboto-Semibold justify-center py-7 items-center px-16 rounded-[5px] bg-gradient-to-b from-[#FFDe59] to-[#FFDE59]"
                             onClick={() => handleClick()}
