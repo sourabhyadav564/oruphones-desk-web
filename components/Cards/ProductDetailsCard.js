@@ -34,7 +34,7 @@ import { toast } from "react-toastify";
 import BrandWarrantyInfo from "../Popup/BrandWarrantyInfo";
 import SellerWarrantyInfo from "../Popup/SellerWarrantyInfo";
 
-function ProductDetailsCard({ data, openFullImage }) {
+function ProductDetailsCard({ data, openFullImage,onDataContext }) {
   const [performAction2, setPerformAction2] = useState(false);
   const [openDeviceReport, setOpenDeviceReport] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
@@ -54,6 +54,8 @@ function ProductDetailsCard({ data, openFullImage }) {
   const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
   const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
   const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
+  const length = 0;
+
 
   let filled =
     data?.deviceCondition?.toLowerCase() == "Like New".toLowerCase()
@@ -130,6 +132,10 @@ function ProductDetailsCard({ data, openFullImage }) {
     }
   };
 
+  const handleContext = (data)=>{
+    onDataContext(data);
+  }
+
   return (
     <Fragment>
       <div className=" p-2 relative w-full">
@@ -154,6 +160,7 @@ function ProductDetailsCard({ data, openFullImage }) {
               <ImageSlider
                 openFullImage={openFullImage}
                 data={deviceListingInfo}
+                onDataContext={handleContext}
                 images={
                   (data?.images?.length &&
                     data?.images != "" &&

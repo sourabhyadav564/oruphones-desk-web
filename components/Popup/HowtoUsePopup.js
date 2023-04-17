@@ -17,7 +17,7 @@ function HowtoUsePopup({ open, setOpen }) {
   return (
     <div>
       <Modal open={open} setOpen={setOpen} title={"ORU Guide"}>
-        <div className="px-16  m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar ">
+        <div className="px-16 py-16 m-auto justify-center h-[80vh] overflow-y-scroll mostly-customized-scrollbar ">
           <div className="flex pb-8 justify-start items-center">
             <div className="flex flex-col items-center justify-center m-auto">
               <Image src={AppleStore} width={96} height={96} alt="" />

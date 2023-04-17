@@ -3,7 +3,7 @@ import styles from "../styles/fullimageview.module.css";
 import Chevronleft from "@/assets/chevronleft.svg";
 import ChevronRight from "@/assets/chevronright.svg";
 import Cross from "@/assets/cross1.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) =>( 
@@ -17,8 +17,17 @@ const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
 </div>
 )
 
-function FullImageView({ open, close, images }) {
+function shiftArray(arr, n) {
+  const shiftAmount = n % arr.length; // ensure n is within range of array length
+  const shiftedArray = arr.slice(shiftAmount).concat(arr.slice(0, shiftAmount));
+  return shiftedArray;
+}
+
+
+function FullImageView({ open, close, images, currentslide }) {
   const [imageError, setImageError] = useState(false);
+  // const t = useContext(MyContext)
+
   if (!open) {
     return null;
   }
@@ -26,6 +35,11 @@ function FullImageView({ open, close, images }) {
   if (!Array.isArray(images)) {
     images = [images];
   }
+
+  let dotes = images;
+  
+  images = shiftArray(images,currentslide);
+  
 
   return (
     <section className={styles.imageview_container}>
@@ -40,7 +54,7 @@ function FullImageView({ open, close, images }) {
         />
       </div>
       {images && (
-        <Slider
+         <Slider
           speed={500}
           dots={true}
           prevArrow={<ArrowLeft/>}
@@ -54,16 +68,16 @@ function FullImageView({ open, close, images }) {
             });
             return (
               <span style={{ color: "white" }}>
-                {images?.length === 1
+                {dotes?.length === 1
                   ? `1 / 1 `
-                  : `${temp} / ${images?.length}`}
+                  : `${currentslide+temp} / ${images?.length}`}
               </span>
             );
           }}
         >
           {images
             .filter((i) => i?.fullImage)
-            .map((img, index) => (
+            .map((img,index) => (
               <div key={index} className={styles.image_wrapper}>
                 <img
                   src={
@@ -72,7 +86,6 @@ function FullImageView({ open, close, images }) {
                       : img?.fullImage ||
                         "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
                   }
-                  alt={index}
                   onError={() => {
                     setImageError(true);
                   }}
