@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment,createContext } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import Chevronleft from "@/assets/chevronleft.svg";
@@ -37,8 +37,7 @@ const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
 )
 
 
-
-function ImageSlider({ data, images, openFullImage }) {
+function ImageSlider({ data, images, openFullImage,onDataContext }) {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
@@ -48,8 +47,20 @@ function ImageSlider({ data, images, openFullImage }) {
   useEffect(() => {
     setNav1(slider1);
     setNav2(slider2);
-  });
+   let MyContext = createContext(slider1?.innerSlider?.asNavForIndex)
+    MyContext  = MyContext?._currentValue;
 
+    if(MyContext==undefined){
+      onDataContext(0);
+    }else{
+      onDataContext(MyContext);
+    }
+  });
+  
+
+
+
+  
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -118,6 +129,8 @@ function ImageSlider({ data, images, openFullImage }) {
                   objectFit="contain"
                   onClick={() => openFullImage && openFullImage()}
                 />
+
+             
               </Fragment>
             ))}
         </Slider>

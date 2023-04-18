@@ -9,6 +9,7 @@ const sortOptions = [
   { name: "Price - High to Low", href: "#", current: false },
   { name: "Newest First", href: "#", current: false },
  // { name: "Oldest First", href: "#", current: false },
+  // { name: "Oldest First", href: "#", current: false },
   { name: "Featured", href: "#", current: true },
 ];
 

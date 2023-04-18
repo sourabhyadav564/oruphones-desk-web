@@ -18,6 +18,7 @@ function ProductDetails() {
   const [isFinished, setIsFinished] = useState(false);
   const [listingInfo, setListingInfo] = useState(null);
   const [loaddata, setLoaddata] = useState(false);
+  const [contextData, setContextData] = useState('');
 
   useEffect(async () => {
     const userUniqueId = Cookies.get("userUniqueId");
@@ -125,6 +126,12 @@ function ProductDetails() {
     return item.listingId != listingInfo?.listingId;
   });
 
+  const handleOnDataContext = (data)=>{
+    setContextData(data);
+  }
+
+
+
   return (
     <main className="container my-6">
       <p className="sr-only"> Product Details page </p>
@@ -137,6 +144,7 @@ function ProductDetails() {
               key={listingInfo?.listingId}
               data={listingInfo}
               openFullImage={() => setOpenImageFullView(true)}
+              onDataContext= {handleOnDataContext}
             />
           )}
         </div>
@@ -179,9 +187,10 @@ function ProductDetails() {
             )}
         </div>
       </section>
-      <FullImageView
+      <FullImageView 
         open={openImageFullView}
         close={() => setOpenImageFullView(false)}
+        currentslide={contextData}
         images={
           (listingInfo?.images?.length && listingInfo?.images) ||
           (listingInfo?.defaultImage?.fullImage && [

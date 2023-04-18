@@ -37,8 +37,8 @@ import Loader from "@/components/Loader/Loader";
         
             <div className="bg-white px-4 py-2 flex flex-col rounded-lg  px-20 font-Roboto-Semibold ">
             <p >{item?.src}-Report</p>
-            <p >ReportID:{item?.reportId}</p>
-            <p className=" pb-4">Generated On:{item?.createdAt}</p>
+            <p >ReportID: {item?.reportId}</p>
+            <p className=" pb-4">Generated On: {item?.createdAt}</p>
             <button onClick={()=>{
               window.open(item?.filePath)
             }} className=" border-2 border-primary px-4  text-tx text-primary-light
@@ -51,7 +51,6 @@ import Loader from "@/components/Loader/Loader";
         {Myreports && Myreports.length == 0 && myReportSelected == true && <div className="flex justify-center items-center h-96">
           <p className="text-2xl font-Roboto-Medium">No Reports Found</p>
         </div>}     
-      
      </>
     );
   }
