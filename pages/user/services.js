@@ -19,11 +19,11 @@ function Services() {
           {servicesData && servicesData.length > 0 ? (
             servicesData.map((item, index) => (
               <div>
-              {index==0 ?(<div>
+              {index<=1 ?(<div>
                 <a
                 href={item.link}
                 key={index}
-                className={`${index==0?("bg-gray-200 bg-opacity-60"):("bg-white")} border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
+                className={`${index<=1?("bg-gray-200 bg-opacity-60"):("bg-white")} border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
               >
                 <div className="p-4">
                   <Image
@@ -42,7 +42,7 @@ function Services() {
               </div>):(<div>
                 <a
                 key={index}
-                className={`${index==0?("bg-gray-200 "):("bg-white")} opacity-70 border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
+                className={`${index<=1?("bg-gray-200 "):("bg-white")} opacity-70 border py-2 px-4 pl-0 flex items-center rounded shadow mb-3 hover:cursor-pointer`}
               onClick={handleClick}
               >
                 <div className="p-4">
