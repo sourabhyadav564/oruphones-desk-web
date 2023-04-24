@@ -5,12 +5,12 @@ export const servicesData = [
     imgSrc: "https://d1tl44nezj10jx.cloudfront.net/web/assets/services/prcomp.svg",
     link: "/user/services/price-comparison",
   },
-  {
-    title: "Grade Your Phone (Beta)",
-    description: "Run diagnostics and answer a few question to get a grade for your device",
-    imgSrc: "https://d1tl44nezj10jx.cloudfront.net/web/assets/services/grade.svg",
-    link:"/user/services/price-comparison/gradeYourPhone"
-  },
+  // {
+  //   title: "Grade Your Phone (Beta)",
+  //   description: "Run diagnostics and answer a few question to get a grade for your device",
+  //   imgSrc: "https://d1tl44nezj10jx.cloudfront.net/web/assets/services/grade.svg",
+  //   link:"/user/services/price-comparison/gradeYourPhone"
+  // },
   {
     title: "Data Transfer to other devices",
     description:

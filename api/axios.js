@@ -51,10 +51,7 @@ Axios.interceptors.response.use(
 );
 
 export function getSessionId() {
-  console.log(
-    "getSessionId",
-    headers
-  );
+  console.log("getSessionId", headers);
   headers = { ...headers, eventName: "NA" };
   const DEFAULT_HEADER = { headers: { ...headers } };
   const API_ENDPOINT = BASE_URL + "/api/auth/sessionid";
@@ -105,13 +102,7 @@ export function fetchBrands() {
     }
   );
 }
-export async function gradePhone(
-  reportID,
-  sessionID,
-  userUniqueId,
-  getMine
-)
-{
+export async function gradePhone(reportID, sessionID, userUniqueId, getMine) {
   headers = {
     ...headers,
     eventName: "GRADE_PHONE",
@@ -120,12 +111,9 @@ export async function gradePhone(
   };
   const DEFAULT_HEADER = { headers: { ...headers } };
   let API_ENDPOINT;
-  if(getMine && Cookies.get("userUniqueId"))
-  {
-    API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}&userUniqueId=${userUniqueId}&getMine=${getMine}`
-  }
-  else
-  {
+  if (getMine && Cookies.get("userUniqueId")) {
+    API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}&userUniqueId=${userUniqueId}&getMine=${getMine}`;
+  } else {
     API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}`;
   }
   const response = await Axios.get(API_ENDPOINT, DEFAULT_HEADER);
@@ -202,12 +190,9 @@ export function fetchTopsellingmodels(isLimited) {
   headers = { ...headers, eventName: `GET_TOP_SELLING_MODELS` };
   const DEFAULT_HEADER = { headers: { ...headers } };
   let API_ENDPOINT;
-  if(isLimited == false) 
-  {
+  if (isLimited == false) {
     API_ENDPOINT = BASE_URL + "/home/topselling/models?isLimited=" + isLimited;
-  }
-  else
-  {
+  } else {
     API_ENDPOINT = BASE_URL + "/home/topselling/models";
   }
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
@@ -216,7 +201,10 @@ export function fetchTopsellingmodels(isLimited) {
         "shopByModel",
         JSON.stringify(response?.data?.allModels)
       );
-      localStorage.setItem("top_models", JSON.stringify(response?.data?.dataObject));
+      localStorage.setItem(
+        "top_models",
+        JSON.stringify(response?.data?.dataObject)
+      );
       return response.data;
     },
     (err) => {
@@ -658,25 +646,27 @@ export function detailWithUserInfo(
   isLimited
 ) {
   let API_ENDPOINT;
-  console.log("isLimited",isLimited);
-  if(isLimited){
+  console.log("isLimited", isLimited);
+  if (isLimited) {
     API_ENDPOINT =
-    BASE_URL +
-    `/device/listing/detailwithuserinfo?isOtherVendor=` +
-    isOtherVendor +
-    "&listingid=" +
-    listingid +
-    `&userUniqueId=` +
-    userUniqueId+`&isLimited=`+isLimited;
-  }else{
-  API_ENDPOINT =
-  BASE_URL +
-  `/device/listing/detailwithuserinfo?isOtherVendor=` +
-  isOtherVendor +
-  "&listingid=" +
-  listingid +
-  `&userUniqueId=` +
-  userUniqueId;
+      BASE_URL +
+      `/device/listing/detailwithuserinfo?isOtherVendor=` +
+      isOtherVendor +
+      "&listingid=" +
+      listingid +
+      `&userUniqueId=` +
+      userUniqueId +
+      `&isLimited=` +
+      isLimited;
+  } else {
+    API_ENDPOINT =
+      BASE_URL +
+      `/device/listing/detailwithuserinfo?isOtherVendor=` +
+      isOtherVendor +
+      "&listingid=" +
+      listingid +
+      `&userUniqueId=` +
+      userUniqueId;
   }
 
   headers = {
@@ -1152,17 +1142,67 @@ export function logEventInfo(eventName) {
   );
 }
 
-export function ReportIssue(Name,Email,Phone,issue,modelName,description,storage,ScheduleCall,callTime, sessionId){
-  headers = {...headers, eventName: "REPORT_ISSUE",userUniqueId: 0, sessionId: sessionId||"",};
-  const DEFAULT_HEADER = {headers:{...headers}};
-  const API_ENDPOINT = BASE_URL + `/cscglobal/reportIssue?issueType=${issue}&description=${description+". Call Scheduled Time: "+callTime}&email=${Email}&phone=${Phone}&name=${Name}&modelName=${modelName}&deviceStorage=${storage}&scheduleCall=${ScheduleCall}`;
-  console.log("schedule axios : ",API_ENDPOINT, DEFAULT_HEADER);
-  return Axios.post(API_ENDPOINT,{},DEFAULT_HEADER).then(
-    (response)=>{
+export function ReportIssue(
+  Name,
+  Email,
+  Phone,
+  issue,
+  modelName,
+  description,
+  storage,
+  ScheduleCall,
+  callTime,
+  sessionId
+) {
+  headers = {
+    ...headers,
+    eventName: "REPORT_ISSUE",
+    userUniqueId: 0,
+    sessionId: sessionId || "",
+  };
+  const DEFAULT_HEADER = { headers: { ...headers } };
+  const API_ENDPOINT =
+    BASE_URL +
+    `/cscglobal/reportIssue?issueType=${issue}&description=${
+      description + ". Call Scheduled Time: " + callTime
+    }&email=${Email}&phone=${Phone}&name=${Name}&modelName=${modelName}&deviceStorage=${storage}&scheduleCall=${ScheduleCall}`;
+  return Axios.post(API_ENDPOINT, {}, DEFAULT_HEADER).then(
+    (response) => {
       return response.data;
     },
-    (err)=>{
+    (err) => {
       console.log(err);
     }
-  )
+  );
+}
+
+export function AttachId(userUniqueId, referralCode, sessionID) {
+  headers = {
+    ...headers,
+    eventName: "ID_LINKED",
+    userUniqueId: 0,
+    sessionId: sessionID || "",
+  };
+  const DEFAULT_HEADER = { headers: { ...headers } };
+  const API_ENDPOINT =
+    BASE_URL +
+    `/global/agent/oruMitra/attach?referralCode=${referralCode}&userUniqueId=${userUniqueId}`;
+  return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then((response) => {
+    return response.data;
+  });
+}
+
+export async function DetachId(userUniqueId, sessionID) {
+  headers = {
+    ...headers,
+    eventName: "DETACH_ID",
+    userUniqueId: 0,
+    sessionId: sessionID || "",
+  };
+  const DEFAULT_HEADER = { headers: { ...headers } };
+  const API_ENDPOINT =
+    BASE_URL + `/global/agent/oruMitra/detach?userUniqueId=${userUniqueId}`;
+  return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then((response) => {
+    return response.data;
+  });
 }
