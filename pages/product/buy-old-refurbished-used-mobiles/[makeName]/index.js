@@ -17,7 +17,7 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed:4000,
+  autoplaySpeed: 4000,
   pauseOnHover: true,
   dots: true,
   arrows: true,
@@ -87,7 +87,7 @@ function BrandPage() {
         makeName =
           String(makeName).charAt(0).toUpperCase() + String(makeName).slice(1);
       }
-      let response2 = await Axios.fetchTopsellingmodels();
+      let response2 = await Axios.fetchTopsellingmodels(false);
       localStorage.setItem("shopByModel", JSON.stringify(response2?.allModels));
       makemodel = response2?.allModels;
       makemodel?.map((item) => {
@@ -172,7 +172,7 @@ function BrandPage() {
               String(makeName).charAt(0).toUpperCase() +
               String(makeName).slice(1);
           }
-          let response2 = await Axios.fetchTopsellingmodels();
+          let response2 = await Axios.fetchTopsellingmodels(false);
           localStorage.setItem(
             "shopByModel",
             JSON.stringify(response2?.allModels)
