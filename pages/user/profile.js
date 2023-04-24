@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Input from "../../components/Form/Input";
 import UserProfile from "../../components/User/UserProfile";
 import * as Axios from "../../api/axios";
@@ -14,13 +14,15 @@ function Profile() {
   const [oruMitraId, setOruMitraId] = useState();
   const mobileNumber = useRef(Cookies.get("mobileNumber"));
   const [saveChange, setSaveChange] = useState(false);
-
+  const [link, setLink] = useState(false);
+  console.log("setUserInfo : ",userInfo?.userdetails?.associatedWith);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     let payload = {
-      email: email || userInfo?.userdetails.email,
+      email: email || userInfo?.userdetails?.email ,
       mobileNumber: userInfo?.userdetails?.mobileNumber,
-      userName: name || userInfo.userdetails.userName,
+      userName: name || userInfo.userdetails?.userName,
       userUniqueId: Cookies.get("userUniqueId"),
     };
 
@@ -33,6 +35,55 @@ function Profile() {
       });
     });
   };
+
+  const handleLink = ()=>{
+    Axios.AttachId(
+      userInfo?.userdetails?.userUniqueId,
+      oruMitraId,
+      Cookies.get("sessionId")
+    ).then((res) => {
+      if (res?.reason == "ORU-Mitra attached successfully") {
+        setLink(true);
+        toast.info("ORU-Mitra ID Linked Successfully", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        // Axios.getUserProfile("91", mobileNumber?.current).then(
+        //   (resp) => {
+        //     setUserInfo(resp.dataObject);
+        //   }
+        // );
+      }
+      else{
+        toast.error(res?.reason, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    })
+  }
+
+  const toInputUppercase = (e) => {
+    e.target.value = ("" + e.target.value).toUpperCase();
+  };
+
+  
+  const handleDeLink = ()=>{
+    Axios.DetachId(
+      userInfo?.userdetails?.userUniqueId,
+      Cookies.get("sessionId")
+    ).then((res) => {
+      setLink(false)
+      toast.info("ORU-Mitra ID Delinked Successfully", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      
+      setOruMitraId();
+      // Axios.getUserProfile("91", mobileNumber?.current).then(
+      //   (resp) => {
+      //     setUserInfo(resp.dataObject);
+      //   }
+      // ); 
+    });
+  }
 
   return (
     <UserProfile className="mb-10">
@@ -78,67 +129,30 @@ function Profile() {
             Email ID
           </Input>
           <span className="block" />
+          
           <div className="flex flex-row space-x-2">
             <Input
-              type="email"
+              type="text"
               defaultValue={userInfo?.userdetails?.associatedWith}
+              onInput={toInputUppercase} 
               onChange={(e) => {
-                // setSaveChange(true);
                 setOruMitraId(e.target.value);
               }}
             >
               ORU-Mitra ID
             </Input>
-            {!userInfo?.userdetails?.associatedWith &&
-            userInfo?.userdetails?.associatedWith != "" ? (
+
+            {!userInfo?.userdetails?.associatedWith  && userInfo?.userdetails?.associatedWith == ""   ? (
               <button
                 className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
-                onClick={(e) => {
-                  e.preventDefault();
-                  Axios.AttachId(
-                    userInfo?.userdetails?.userUniqueId,
-                    oruMitraId,
-                    Cookies.get("sessionId")
-                  ).then((res) => {
-                    if (res?.reason == "ORU-Mitra attached successfully") {
-                      toast.info("ORU-Mitra ID Linked Successfully", {
-                        position: toast.POSITION.TOP_CENTER,
-                      });
-                      Axios.getUserProfile("91", mobileNumber?.current).then(
-                        (resp) => {
-                          setUserInfo(resp.dataObject);
-                        }
-                      );
-                    }
-                    else{
-                      toast.error(res?.reason, {
-                        position: toast.POSITION.TOP_CENTER,
-                      });
-                    }
-                  });
-                }}
+                onClick={handleLink}
               >
                 Link
               </button>
             ) : (
               <button
                 className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
-                onClick={(e) => {
-                  e.preventDefault();
-                  Axios.DetachId(
-                    userInfo?.userdetails?.userUniqueId,
-                    Cookies.get("sessionId")
-                  ).then((res) => {
-                    toast.info("ORU-Mitra ID Delinked Successfully", {
-                      position: toast.POSITION.TOP_CENTER,
-                    });
-                    Axios.getUserProfile("91", mobileNumber?.current).then(
-                      (resp) => {
-                        setUserInfo(resp.dataObject);
-                      }
-                    );
-                  });
-                }}
+                onClick={handleDeLink}
               >
                 Delink
               </button>
