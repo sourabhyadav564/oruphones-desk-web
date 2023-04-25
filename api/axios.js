@@ -190,17 +190,23 @@ export function fetchTopsellingmodels(isLimited) {
   headers = { ...headers, eventName: `GET_TOP_SELLING_MODELS` };
   const DEFAULT_HEADER = { headers: { ...headers } };
   let API_ENDPOINT;
+  let API_ENDPOINT2 = BASE_URL + "/home/topselling/models?isLimited=false";
   if (isLimited == false) {
     API_ENDPOINT = BASE_URL + "/home/topselling/models?isLimited=" + isLimited;
   } else {
     API_ENDPOINT = BASE_URL + "/home/topselling/models";
   }
+
+
   return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
     (response) => {
-      localStorage.setItem(
-        "shopByModel",
-        JSON.stringify(response?.data?.allModels)
-      );
+      Axios.get(API_ENDPOINT2, DEFAULT_HEADER).then(
+        (response) => {
+          localStorage.setItem(
+            "shopByModel",
+            JSON.stringify(response?.data?.allModels,)
+          );
+        })
       localStorage.setItem(
         "top_models",
         JSON.stringify(response?.data?.dataObject)

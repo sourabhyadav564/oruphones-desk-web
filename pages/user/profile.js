@@ -131,7 +131,9 @@ function Profile() {
           <span className="block" />
           
           <div className="flex flex-row space-x-2">
-            <Input
+            {!userInfo?.userdetails?.associatedWith  && userInfo?.userdetails?.associatedWith == ""  || userInfo?.userdetails?.associatedWith == undefined ?
+            (
+              <Input
               type="text"
               defaultValue={userInfo?.userdetails?.associatedWith}
               onInput={toInputUppercase} 
@@ -141,8 +143,22 @@ function Profile() {
             >
               ORU-Mitra ID
             </Input>
+            ): (
+              <Input
+              type="text"
+              defaultValue={userInfo?.userdetails?.associatedWith}
+              onInput={toInputUppercase} 
+              onChange={(e) => {
+                setOruMitraId(e.target.value);
+              }}
+              disabled
+            >
+              ORU-Mitra ID
+            </Input>
+            ) }
+           
 
-            {!userInfo?.userdetails?.associatedWith  && userInfo?.userdetails?.associatedWith == ""   ? (
+            {!userInfo?.userdetails?.associatedWith  && userInfo?.userdetails?.associatedWith == ""  || userInfo?.userdetails?.associatedWith == undefined ? (
               <button
                 className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
                 onClick={handleLink}
@@ -153,7 +169,7 @@ function Profile() {
               <button
                 className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
                 onClick={handleDeLink}
-              >
+              > 
                 Delink
               </button>
             )}

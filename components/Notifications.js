@@ -15,7 +15,7 @@ export default function Notifications() {
   const innerRef = useRef();
   const [showNotification, setShowNotification] = useState(false);
   const [openAppDownload, setOpenAppDownload] = useState(false);
-  const [notifications, setNotifications] = useState();
+  const [notifications, setNotifications] = useState(0);
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState();
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export default function Notifications() {
       setNotifications(response?.dataObject?.notifications);
       setUnreadNotificationsCount(response?.dataObject?.unReadCount);
     });
-
     const checkIfClickedOutside = (e) => {
       if (innerRef.current && !innerRef.current.contains(e.target)) {
         setShowNotification(false);
@@ -45,6 +44,7 @@ export default function Notifications() {
       );
     }
   }, [showNotification]);
+
 
   function redirectTo(data) {
     setShowNotification(false);
@@ -76,7 +76,7 @@ export default function Notifications() {
         />
         {
           <span className="absolute -top-1 ml-5 bg-yellow2 w-6 text-xs2FontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
-            {unreadNotificationsCount == 0 ? <></> : unreadNotificationsCount}
+            {notifications?.length == 0 ? <></> : notifications?.length}
           </span>
         }
       </div>
@@ -122,6 +122,7 @@ export default function Notifications() {
   );
 }
 
+
 const NotificationsItem = ({
   id,
   text,
@@ -132,37 +133,35 @@ const NotificationsItem = ({
   setNotifications,
 }) => (
   <div
-    className={`hover:cursor-pointer flex w-full border-b border-white py-2 px-4 ${
-      isUnRead ? "bg-gray-100" : ""
-    }`}
+  className={`hover:cursor-pointer flex w-full border-b border-white py-2 px-4 ${
+    isUnRead ? "bg-gray-100" : ""
+  }`}
   >
     <div
       className="w-12 h-12 rounded-2xl flex-shrink-0 mr-4 flex justify-center items-center"
       style={{ background: "#EFEFEF" }}
       onClick={onClick}
-    >
+      >
       <Image
         src={"https://d1tl44nezj10jx.cloudfront.net/assets/logo_square.svg"}
         width={30}
         height={30}
         alt="ORUphones notification"
-      />
+        />
     </div>
     <div>
       <div className="flex flex-row ">
         <p
           className="text-sm text-m-grey-1 break-words text-mediumFontSize font-Roboto-Semibold pr-2"
           onClick={onClick}
-        >
+          >
           {" "}
           {text}{" "}
         </p>
         <div
           className="flex  w-20  items-center hover:text-m-green "
           onClick={() => {
-            setNotifications(
-              notifications.filter((item) => item.notificationId !== id)
-            );
+            setNotifications(notifications.filter((item) => item.notificationId !== id), notifications?.length-1);
             deleteNotification(id, Cookies.get("userUniqueId")).then(
               (response) => {},
               (error) => {}
