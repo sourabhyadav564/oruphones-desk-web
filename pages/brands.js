@@ -29,7 +29,9 @@ function brands({ brandsList }) {
             ))}
           </div>
         </section>
+        <div className="-mb-16 pt-8">
         <DownloadApp />
+        </div>
       </main>
     </>
   );
