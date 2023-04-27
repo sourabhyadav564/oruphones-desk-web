@@ -184,6 +184,7 @@ function ProductDetailsCard({ data, openFullImage,onDataContext }) {
             )}</> : <> {(data?.images || data?.defaultImage || data?.imagePath) && (
               <ImageSlider
                 openFullImage={openFullImage}
+                onDataContext={handleContext}
                 data={deviceListingInfo}
                 images={
                       "https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg"
