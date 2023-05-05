@@ -85,10 +85,9 @@ function DesktopMenu({ menuItems }) {
       >
         <Image src={Location} width={14} height={15} alt="" />
         <span
-          className="text-white font-Roboto-Semibold items-center "
+          className="text-white font-Roboto-Semibold items-center text-mediumFontSize"
           location={`${getSearchLocation}`}
           color={"white"}
-          fontsize={"mediumFontSize"}
         >{`${getSearchLocation}`}</span>
       </span>
       <span>

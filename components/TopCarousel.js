@@ -1,6 +1,5 @@
 import Image from "next/image";
 import CarouselWithPagination from "@/components/CarouselWithPagination";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LoginPopup from "../components/Popup/LoginPopup";
@@ -87,6 +86,7 @@ const TopCarousel = () => {
             item.link && item.id == 1 ? (
               <div
                 className="flex justify-center relative"
+                key = {item.id}
                 onClick={() => {
                   setShowAppDownloadPopup(true);
                 }}
@@ -107,6 +107,7 @@ const TopCarousel = () => {
               <a
                 className="flex justify-center relative mix-blend-overlay"
                 href={item.id != 3 && item.link}
+                key = {item.id}
               >
                 <Image
                   src={item.src}

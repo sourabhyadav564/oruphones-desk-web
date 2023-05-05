@@ -1,5 +1,5 @@
 import Modal from ".";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 import { parse as nodeParser } from "node-html-parser";
 import { infoTemplates } from "api/axios";
@@ -15,7 +15,6 @@ function TermsconditionPopup({ open, setOpen }) {
     apiCall();
   }, []);
 
-  const cancelButtonRef = useRef(null);
   return (
     <Modal open={open} setOpen={setOpen} title={"Terms & Conditions"}>
       <div
@@ -43,7 +42,6 @@ async function callFetchStaticHTML() {
   }
 
   try {
-    const { serverUrl, templateUrls } = staticDataPath;
     const res = await fetchStaticHTML("/terms_conditions.html");
     const html = res.data;
     const doc = nodeParser(html);
