@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import TopBrand from '../components/Home/TopBrand';
 import TopDeals from '../components/Home/TopDeals';
 import DownloadApp from '../components/DownloadApp';
@@ -13,14 +12,18 @@ import TopCarousel from '@/components/TopCarousel';
 
 export async function getStaticProps() {
 	let brands = await Axios.fetchBrands();
+	let bestDeals = await Axios.bestDealNearByYou('India', 'Guest', 0);
+	console.log('bestDeals', bestDeals);
 	return {
 		props: {
 			brands: brands?.dataObject,
+			bestDeals: bestDeals?.dataObject?.otherListings,
+			location: 'India',
 		},
 		revalidate: 24 * 60 * 60,
 	};
 }
-export default function Home({ brands }) {
+export default function Home({ brands, bestDeals, location }) {
 	return (
 		<>
 			<Head>
@@ -30,10 +33,9 @@ export default function Home({ brands }) {
 				<meta property="og:description" content={metaTags.HOME.description} />
 			</Head>
 			<main>
-				{/* <Hero /> */}
 				<TopCarousel />
 				<TopBrand brandsList={brands} />
-				<TopDeals location={'India'} />
+				<TopDeals location={location} bestDeals={bestDeals} />
 				<ShowBy />
 				<SellBuyFlow />
 				<DownloadApp />
