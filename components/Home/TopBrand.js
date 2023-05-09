@@ -22,7 +22,7 @@ function TopBrand({ brandsList }) {
             {Array(14)
               .fill()
               .map((_, index) => (
-                <div className="rounded-md shadow hover:shadow-md p-4 pb-6 bg-m-white w-[140px] h-[100px] space-y-3 mx-2">
+                <div className="rounded-md shadow hover:shadow-md p-4 pb-6 bg-m-white w-[140px] h-[100px] space-y-3 mx-2" key={index}>
                   <div className="text-center">
                     <Skeleton circle width={60} height={60} />
                   </div>
