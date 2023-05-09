@@ -28,7 +28,7 @@ function TopDeals({ location }) {
 					setBeatDeals(
 						[
 							...response?.dataObject?.bestDeals,
-							...response?.dataObject?.otherListings
+							...response?.dataObject?.otherListings,
 						] || []
 					);
 					setLoading(false);
@@ -83,7 +83,8 @@ function TopDeals({ location }) {
 							.map((_, index) => (
 								<div
 									key={index}
-									className="rounded-md shadow hover:shadow-md p-4 pb-6 bg-m-white w-[200px] h-[260px] space-y-3 mx-2">
+									className="rounded-md shadow hover:shadow-md p-4 pb-6 bg-m-white w-[200px] h-[260px] space-y-3 mx-2"
+								>
 									<div className="text-center">
 										<Skeleton circle width={120} height={120} />
 										<div className="flex flex-col items-start pt-5">
@@ -104,9 +105,10 @@ function TopDeals({ location }) {
 						isLoadingMore ? 'w-full' : 'w-full '
 					}  flex justify-center items-center  hover:cursor-pointer`}
 					href={{
-						pathname: `/product/buy-old-refurbished-used-mobiles/bestdealnearyou`
+						pathname: `/product/buy-old-refurbished-used-mobiles/bestdealnearyou`,
 					}}
-					passHref>
+					passHref
+				>
 					<p className="flex justify-center w-full items-center font-semibold p-5 text-m-blue hover:underline hover:opacity-60 hover:cursor-pointer">
 						{isLoadingMore ? 'Fetching more products...' : 'View All >'}
 					</p>

@@ -2,7 +2,7 @@ module.exports = {
 	mode: 'jit',
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
-		'./components/**/*.{js,ts,jsx,tsx}'
+		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	darkMode: 'media',
 	theme: {
@@ -12,7 +12,7 @@ module.exports = {
 			'Roboto-Light': ['Roboto-Light', 'sans-serif'],
 			'Roboto-Regular': ['Roboto-Regular', 'sans-serif'],
 			'Roboto-Regularitalic': ['Roboto-Regularitalic', 'sans-serif'],
-			'Roboto-Medium': ['Roboto-Medium', 'sans-serif']
+			'Roboto-Medium': ['Roboto-Medium', 'sans-serif'],
 		},
 		extend: {
 			fontSize: {
@@ -26,11 +26,11 @@ module.exports = {
 				mediumFontSize: '14px',
 				smallFontSize: '12px',
 				xs2FontSize: '10px',
-				xsFontSize: '8px'
+				xsFontSize: '8px',
 			},
 			colors: {
 				red: {
-					DEFAULT: '#FF0000'
+					DEFAULT: '#FF0000',
 				},
 				'm-green': '#2c2f44',
 				'm-green-1': '#2C2F45',
@@ -64,7 +64,7 @@ module.exports = {
 				'm-blue-1': '#000944',
 				yellow2: '#F9C414',
 				green2: '#4CAF50',
-				grey2: '#878787'
+				grey2: '#878787',
 			},
 			backgroundImage: {
 				'sell-step':
@@ -84,21 +84,21 @@ module.exports = {
 				'play-store':
 					"url('https://d1tl44nezj10jx.cloudfront.net/assets/play_store.png')",
 				'bg-mask-1':
-					"url('https://d1tl44nezj10jx.cloudfront.net/assets/bg_mask_1.svg')"
+					"url('https://d1tl44nezj10jx.cloudfront.net/assets/bg_mask_1.svg')",
 			},
 			spacing: {
-				'4rem': '4px, 4px, 4px,4px'
+				'4rem': '4px, 4px, 4px,4px',
 			},
 			fontFamily: {
-				'open-sans': '"Open Sans", Helvetica, Arial, sans-serif'
+				'open-sans': '"Open Sans", Helvetica, Arial, sans-serif',
 			},
 			transformOrigin: {
-				0: '0%'
+				0: '0%',
 			},
 			zIndex: {
-				'-1': '-1'
+				'-1': '-1',
 			},
-			display: ['group-hover', 'group-focus']
+			display: ['group-hover', 'group-focus'],
 		},
 		container: {
 			center: true,
@@ -106,12 +106,12 @@ module.exports = {
 			screens: {
 				lg: '1024px',
 				xl: '1200px',
-				'2xl': '1200px'
-			}
-		}
+				'2xl': '1200px',
+			},
+		},
 	},
 	variants: {
-		extend: {}
+		extend: {},
 	},
-	plugins: [require('@tailwindcss/forms')]
+	plugins: [require('@tailwindcss/forms')],
 };

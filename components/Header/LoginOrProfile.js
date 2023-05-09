@@ -171,7 +171,8 @@ const NavListItem = ({ text, link, onClick }) => (
 	<Link href={link || '#'} passHref>
 		<a
 			className="px-4 py-2 my-1 font-Roboto-Regular hover:bg-gray-100 rounded text-black-60"
-			onClick={onClick}>
+			onClick={onClick}
+		>
 			{text}
 		</a>
 	</Link>
