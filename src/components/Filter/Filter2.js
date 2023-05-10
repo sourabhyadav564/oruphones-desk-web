@@ -1,7 +1,7 @@
 import React from 'react';
 import Sort from './Sort';
 import DesktopFilter from './DesktopFilter2';
-import useFilterOptions from 'hooks/useFilterOptions';
+import useFilterOptions from '@/hooks/useFilterOptions';
 import { useRouter } from 'next/router';
 
 const sortOptions = [

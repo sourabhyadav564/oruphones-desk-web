@@ -1,5 +1,5 @@
 import { parse as nodeParser } from 'node-html-parser';
-import fetchStaticHTML from 'api/fetchStaticHtml';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { metaTags } from '@/utils/constant';

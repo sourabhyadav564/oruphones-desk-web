@@ -3,7 +3,7 @@ import TermAndConditionPopup from '@/components/Popup/TermAndConditionPopup';
 import AddListingForm from '@/components/User/AddListingForm';
 import GuideToSell from '@/components/User/GuideToSell';
 import { useEffect, useState } from 'react';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
 
 function AddListing({ brandsList }) {

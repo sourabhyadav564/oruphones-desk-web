@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { numberWithCommas } from '../../utils/util';
 import IconLabelValue from './IconLableValue';
 import AppDownloadPopup from '../Popup/AppDownloadPopup';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import { useRouter } from 'next/router';
 import VerifiedIcon from '../VerifiedIcon';
 import UnVerifiedIcon from '../UnVerifiedIcon';

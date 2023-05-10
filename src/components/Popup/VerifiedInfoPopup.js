@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 import { parse as nodeParser } from 'node-html-parser';
-import fetchStaticHTML from 'api/fetchStaticHtml';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
 import Model2 from './Model2';
 
 function VerifiedInfoPopup({ open, setOpen }) {

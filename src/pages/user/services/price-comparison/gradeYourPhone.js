@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import React from 'react';
 import Input from '@/components/Form/Input';
-import { gradePhone } from '../api/axios';
+import { gradePhone } from '@/api/axios';
 import Cookies from 'js-cookie';
 import AppDownloadPopup from '../../../../components/Popup/AppDownloadPopup';
 import { useRouter } from 'next/router';

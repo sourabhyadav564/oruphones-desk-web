@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Input from '../../components/Form/Input';
 import UserProfile from '../../components/User/UserProfile';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import { useState, useContext } from 'react';
 import AppContext from '@/context/ApplicationContext';
 import { toast } from 'react-toastify';

@@ -4,7 +4,7 @@ import Input from '../Form/Input';
 import { useState, useEffect, useContext } from 'react';
 import ImageInput from '../Form/ImageInput';
 import { numberWithCommas, numberFromString } from '../../utils/util';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
 import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
 import LoginPopup from '../Popup/LoginPopup';

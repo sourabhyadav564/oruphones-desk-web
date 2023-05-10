@@ -1,7 +1,7 @@
 import BestDealsCard from '@/components/Cards/BestDealsCard';
 import Filter from '@/components/Filter';
 import React, { useState, useEffect, useContext } from 'react';
-import * as Axios from '../../../../api/axios';
+import * as Axios from '@/api/axios';
 import Carousel from '@/components/Carousel';
 import ProductCard from '@/components/Cards/ProductCard';
 import AppContext from '@/context/ApplicationContext';

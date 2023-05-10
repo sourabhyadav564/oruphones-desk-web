@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TopSellingCard from '../../components/Cards/TopSellingCard';
 import Filter from '../../components/Filter';
 
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
 import Link from 'next/link';
 

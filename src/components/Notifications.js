@@ -6,7 +6,7 @@ import {
 	deleteNotification,
 	getAllNotificationByUserd,
 	markAsRead,
-} from '../api/axios';
+} from '@/api/axios';
 import AppDownloadPopup from './Popup/AppDownloadPopup';
 import Cookies from 'js-cookie';
 import Trash from '@/assets/trash.svg';

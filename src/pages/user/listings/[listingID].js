@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import ListingDetailsCard from '../../../components/Cards/ListingDetailsCard';
-import * as Axios from '../../../../api/axios';
+import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
 
 function ListingDetials() {

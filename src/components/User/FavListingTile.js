@@ -3,7 +3,7 @@ import Rupee from '@/assets/rupee1.svg';
 import { useState, useEffect } from 'react';
 import { getDefaultImage, numberWithCommas } from '../../utils/util';
 import IconLabelValue from './IconLableValue';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
 import OutlineHeart from '@/assets/heartfill.svg';
 function FavListingTile({ data, setProducts }) {

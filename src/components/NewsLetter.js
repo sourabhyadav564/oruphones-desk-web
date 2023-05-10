@@ -1,4 +1,4 @@
-import { addsubscription } from '../api/axios';
+import { addsubscription } from '@/api/axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 

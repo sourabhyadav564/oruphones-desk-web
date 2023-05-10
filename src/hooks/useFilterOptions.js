@@ -1,4 +1,4 @@
-import { getShowSerchFilters } from '../api/axios';
+import { getShowSerchFilters } from '@/api/axios';
 import { useEffect, useRef, useState } from 'react';
 
 const initialState = [

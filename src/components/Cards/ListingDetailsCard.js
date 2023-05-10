@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { numberWithCommas } from '../../utils/util';
 import ImageSlider from '../ImageSlider';
 import LabelAndValue from '../LabelAndValue';
@@ -9,7 +8,7 @@ import DeviceVerificationReport from '../Popup/DeviceVerificationReport';
 import ActivatePauseListing from '../Popup/ActivatePauseListingPopup';
 import DeleteListingPopup from '../Popup/DeleteListingPopup';
 import AppDownloadPopup from '../Popup/AppDownloadPopup';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import ActivateListingPopup from '../Popup/ActivateListingPopup';
 import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
 import VerifiedIcon from '../VerifiedIcon';

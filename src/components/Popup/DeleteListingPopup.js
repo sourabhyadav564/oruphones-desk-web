@@ -1,6 +1,6 @@
 import Modal from '.';
 import router from 'next/router';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 import Select from '../Form/Select';

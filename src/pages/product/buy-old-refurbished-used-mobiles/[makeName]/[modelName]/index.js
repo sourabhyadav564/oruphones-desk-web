@@ -5,7 +5,7 @@ import BestDealsCard from '@/components/Cards/BestDealsCard';
 import ProductCard from '@/components/Cards/ProductCard';
 import Filter from '@/components/Filter';
 import AppContext from '@/context/ApplicationContext';
-import * as Axios from '../../../../../../api/axios';
+import * as Axios from '@/api/axios';
 import { numberFromString, stringToDate } from '@/utils/util';
 import Cookies from 'js-cookie';
 import NoMatch from '@/components/NoMatch';

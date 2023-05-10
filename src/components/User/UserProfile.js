@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react';
 import AppContext from '@/context/ApplicationContext';
 import AuthContext from '@/context/AuthContext';
 import { useState } from 'react';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
 
 function UserProfile({ children, className }) {

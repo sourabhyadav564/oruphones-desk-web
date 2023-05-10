@@ -7,7 +7,7 @@ import Filter from '@/assets/filter.svg';
 
 import DesktopFilter from './DesktopFilter';
 import { useRouter } from 'next/router';
-import useFilterOptions from 'hooks/useFilterOptions';
+import useFilterOptions from '@/hooks/useFilterOptions';
 import Image from 'next/image';
 
 const classNames = (...classes) => {

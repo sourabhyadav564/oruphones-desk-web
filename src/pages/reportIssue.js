@@ -2,7 +2,7 @@ import Input from '@/components/Form/Input';
 import MySelect from '@/components/Form/Select';
 import Select from '@/components/Form/Select';
 import React, { Fragment, useEffect, useState } from 'react';
-import * as Axios from '../../api/axios';
+import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';

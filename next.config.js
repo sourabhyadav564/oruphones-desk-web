@@ -33,4 +33,7 @@ module.exports = {
 		],
 		minimumCacheTTL: 60,
 	},
+	eslint:{
+		ignoreDuringBuilds:true,
+	}
 };

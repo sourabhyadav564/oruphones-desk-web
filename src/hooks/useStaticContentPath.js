@@ -1,4 +1,4 @@
-import * as Axios from '../../api/axios';
+import * as Axios from '@/api/axios';
 import { useState } from 'react';
 
 const fetchApi = () => {

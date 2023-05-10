@@ -1,4 +1,4 @@
-import { prepareShareLink } from '../api/axios';
+import { prepareShareLink } from '@/api/axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 

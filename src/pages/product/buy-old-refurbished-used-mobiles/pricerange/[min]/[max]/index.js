@@ -4,7 +4,7 @@ import Carousel from '@/components/Carousel';
 import Filter from '@/components/Filter';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import * as Axios from '../../../../../../../api/axios';
+import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
 import { useContext } from 'react';
 import { numberFromString, stringToDate } from '@/utils/util';

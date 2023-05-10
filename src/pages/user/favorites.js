@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import UserProfile from '../../components/User/UserProfile';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import FavListingTile from '@/components/User/FavListingTile';
 import Cookies from 'js-cookie';
 import Loader from '@/components/Loader/Loader';

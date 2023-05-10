@@ -1,4 +1,4 @@
-import { getSearchResults } from '../../api/axios';
+import { getSearchResults } from '@/api/axios';
 import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { Fragment } from 'react';

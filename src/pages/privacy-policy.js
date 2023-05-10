@@ -1,6 +1,6 @@
 import parse from 'html-react-parser';
 import { parse as nodeParser } from 'node-html-parser';
-import fetchStaticHTML from 'api/fetchStaticHtml';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
 import { useEffect, useState } from 'react';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';

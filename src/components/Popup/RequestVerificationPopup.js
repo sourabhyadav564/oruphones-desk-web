@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import Modal2 from './Model2';
 import Alert from '@/assets/alert.svg';
 
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import RequestVerificationSuccessPopup from './RequestVerificationSuccessPopup';
 import { useState } from 'react';
 import Image from 'next/image';

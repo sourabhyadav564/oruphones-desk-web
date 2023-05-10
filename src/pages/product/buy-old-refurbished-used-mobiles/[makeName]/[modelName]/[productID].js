@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import ProductCard from '../../../../../components/Cards/ProductCard';
 import ProductDetailsCard from '../../../../../components/Cards/ProductDetailsCard';
-import * as Axios from '../../../../../../api/axios';
+import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
 import FullImageView from '@/components/FullImageView';
 import Cookies from 'js-cookie';

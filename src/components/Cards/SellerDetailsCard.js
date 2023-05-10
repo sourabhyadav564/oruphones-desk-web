@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Rupee from '@/assets/rupee1.svg';
 import { numberWithCommas } from '../../utils/util';
-import * as Axios from '../../../api/axios';
+import * as Axios from '@/api/axios';
 import RequestVerificationPopup from '../Popup/RequestVerificationPopup';
 import LoginPopup from '../Popup/LoginPopup';
 import RequestVerificationSuccessPopup from '../Popup/RequestVerificationSuccessPopup';
