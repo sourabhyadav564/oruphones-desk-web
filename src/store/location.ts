@@ -1,4 +1,3 @@
-import { atomWithStorage } from 'jotai/utils';
 import { atom } from 'jotai';
 import Geocode from 'react-geocode';
 import setLocation from '@/utils/fetchers/setLocation';
@@ -7,7 +6,7 @@ const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
 export const locationAtom = atom<string | null>(null);
 const readLocationAtom = atom((get) => get(locationAtom));
-const updateLocationAtom = atom(null, async (_get, set, location: string) => {
+export const updateLocationAtom = atom(null, async (_get, set, location: string) => {
 	console.log("idk ",location)
 	await setLocation(location);
 	set(locationAtom, location);

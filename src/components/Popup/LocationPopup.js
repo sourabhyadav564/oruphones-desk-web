@@ -8,7 +8,11 @@ import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
 import Cookies from 'js-cookie';
 import { useAtom } from 'jotai';
-import { locationAtom, updateLocationLatLongAtom } from '@/store/location';
+import {
+	locationAtom,
+	updateLocationAtom,
+	updateLocationLatLongAtom,
+} from '@/store/location';
 
 function LocationPopup({ open, setOpen }) {
 	const cancelButtonRef = useRef(null);
@@ -20,8 +24,9 @@ function LocationPopup({ open, setOpen }) {
 	const selectedCity = useRef();
 	const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
 
-	const [location, setLocation] = useAtom(locationAtom);
-	const [_, setLatLong] = useAtom(updateLocationLatLongAtom);
+	const [location] = useAtom(locationAtom);
+	const [, setLocation] = useAtom(updateLocationAtom);
+	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 
 	const handleCityChange = (city) => {
 		setLocation(city);

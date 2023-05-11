@@ -13,7 +13,7 @@ import SellNowBtn from './SellNowBtn';
 import Cookies from 'js-cookie';
 import LocationPicker from './LocationPicker';
 import { useAtom } from 'jotai';
-import readLocationAtom, { updateLocationLatLongAtom } from '@/store/location';
+import { updateLocationAtom, updateLocationLatLongAtom } from '@/store/location';
 
 const options = {
 	enableHighAccuracy: true,
@@ -24,12 +24,12 @@ const options = {
 function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const [location] = useAtom(readLocationAtom);
-	const [_, setLocation] = useAtom(updateLocationLatLongAtom);
+	const [,setLocation] = useAtom(updateLocationAtom);
+	const [_, setLocationLatLong] = useAtom(updateLocationLatLongAtom);
 	const { userInfo, setUserInfo, setSearchLocation } = useContext(AppContext);
 
 	const onSuccess = async (location) => {
-		await updateLocationLatLongAtom(location);
+		await setLocationLatLong(location);
 	};
 
 	const onError = (error) => {

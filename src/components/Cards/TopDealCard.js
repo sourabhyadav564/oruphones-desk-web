@@ -6,7 +6,7 @@ import VerifiedIcon from '../VerifiedIcon';
 import AddFav from '../AddFav';
 import { useState } from 'react';
 
-function TopDealCard({ data, setProducts, prodLink }) {
+function TopDealCard({ data, setProducts }) {
 	const [imageError, setImageError] = useState(false);
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (

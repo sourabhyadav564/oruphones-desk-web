@@ -16,19 +16,23 @@ import { locationAtom } from '@/store/location';
 import { getCookie, setCookie } from 'cookies-next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	let brands = await Axios.fetchBrands();
-	let bestDeals = await Axios.bestDealNearByYou('India', 'Guest', 0);
 	// check if cookie is present
-	const cookie = getCookie('location', ctx) as string;
+	let cookie = getCookie('location', ctx) as string;
 	if (!cookie) {
 		// set cookie to India
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
+		cookie = 'India';
 	}
+	// TODO: fetch both async simultaneously
+	let brands = await Axios.fetchBrands();
+	// TODO: Refactor relevant backend with pagination/ truncation
+	let bestDeals = await Axios.bestDealNearByYou(cookie, 'Guest', 0);
+	console.log('bestDeals', bestDeals.dataObject.otherListings[0]);
 	return {
 		props: {
 			brands: brands?.dataObject,
 			bestDeals: bestDeals?.dataObject?.otherListings,
-			location: cookie || 'India',
+			location: cookie,
 		},
 	};
 };

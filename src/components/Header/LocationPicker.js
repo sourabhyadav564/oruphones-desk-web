@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import { useContext } from 'react';
 import AppContext from '@/context/ApplicationContext';
 import { useAtom } from 'jotai';
-import readLocationAtom, { updateLocationLatLongAtom } from '@/store/location';
+import readLocationAtom, { updateLocationLatLongAtom, updateLocationAtom } from '@/store/location';
 
 const options = {
 	enableHighAccuracy: true,
@@ -15,8 +15,9 @@ const options = {
 };
 
 function LocationPicker() {
-	const [location, setLocation] = useAtom(readLocationAtom);
-	const [_, setLatLong] = useAtom(updateLocationLatLongAtom);
+	const [location] = useAtom(readLocationAtom);
+	const [,setLocation] = useAtom(updateLocationAtom);
+	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 	const { userInfo, setUserInfo, setSearchLocation } = useContext(AppContext);
 
 	const onSuccess = async (location) => {
