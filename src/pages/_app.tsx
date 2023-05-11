@@ -9,6 +9,8 @@ import { RecoilRoot } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AppProps } from 'next/app';
+import SEO from '@/data/seoOptions';
+import { DefaultSeo } from 'next-seo';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
@@ -19,6 +21,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					<ApplicationContext>
 						<RecoilRoot>
 							<Header />
+							<DefaultSeo {...SEO} />
 							<Component {...pageProps} />
 							<Footer />
 						</RecoilRoot>
