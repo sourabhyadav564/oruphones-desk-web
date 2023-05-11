@@ -9,25 +9,36 @@ import Head from 'next/head';
 import ShowBy from '@/components/Home/ShopBy';
 import SellBuyFlow from '@/components/SellBuyFlow';
 import TopCarousel from '@/components/TopCarousel';
-import { InferGetStaticPropsType, GetStaticProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useAtom } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
+import { locationAtom } from '@/store/location';
+import { getCookie, setCookie } from 'cookies-next';
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	let brands = await Axios.fetchBrands();
 	let bestDeals = await Axios.bestDealNearByYou('India', 'Guest', 0);
+	// check if cookie is present
+	const cookie = getCookie('location', ctx) as string;
+	if (!cookie) {
+		// set cookie to India
+		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
+	}
 	return {
 		props: {
 			brands: brands?.dataObject,
 			bestDeals: bestDeals?.dataObject?.otherListings,
-			location: 'India',
+			location: cookie || 'India',
 		},
-		revalidate: 24 * 60 * 60,
 	};
 };
 export default function Home({
 	brands,
 	bestDeals,
 	location,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+	useHydrateAtoms([[locationAtom, location]]);
+	const [locationVal] = useAtom(locationAtom);
 	return (
 		<>
 			<Head>
@@ -39,7 +50,7 @@ export default function Home({
 			<main>
 				<TopCarousel />
 				<TopBrand brandsList={brands} />
-				<TopDeals location={location} bestDeals={bestDeals} />
+				<TopDeals location={locationVal} bestDeals={bestDeals} />
 				<ShowBy />
 				<SellBuyFlow />
 				<DownloadApp />

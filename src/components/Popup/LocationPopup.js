@@ -7,8 +7,8 @@ import Select from '../Form/Select';
 import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
 import Cookies from 'js-cookie';
-import Geocode from 'react-geocode';
-import { getCityFromResponse } from '@/utils/util';
+import { useAtom } from 'jotai';
+import { locationAtom, updateLocationLatLongAtom } from '@/store/location';
 
 function LocationPopup({ open, setOpen }) {
 	const cancelButtonRef = useRef(null);
@@ -20,11 +20,11 @@ function LocationPopup({ open, setOpen }) {
 	const selectedCity = useRef();
 	const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
 
+	const [location, setLocation] = useAtom(locationAtom);
+	const [_, setLatLong] = useAtom(updateLocationLatLongAtom);
+
 	const handleCityChange = (city) => {
-		selectedCity.current = city;
-		cityInfo = citiesResponse.filter((item) => item.city === city);
-		setSearchLocation(selectedCity.current);
-		localStorage.setItem('usedLocation', selectedCity.current);
+		setLocation(city);
 		setOpen(false);
 	};
 
@@ -34,37 +34,9 @@ function LocationPopup({ open, setOpen }) {
 		maximumAge: 0,
 	};
 
-	const [location, setLocation] = useState({
-		loaded: false,
-		city: '',
-	});
-
 	const onSuccess = async (location) => {
-		let lat = location.coords.latitude;
-		let lng = location.coords.longitude;
-		Geocode.setApiKey('AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w');
-
-		Geocode.setLanguage('en');
-		Geocode.enableDebug();
-		Geocode.fromLatLng(lat, lng).then(
-			(response) => {
-				let address = response?.plus_code?.compound_code;
-				address = getCityFromResponse(address);
-				setLocation({
-					loaded: true,
-					city: address,
-				});
-				setOpen(false);
-			},
-			(error) => {
-				console.error(error);
-				setLocation({
-					loaded: true,
-					city: 'India',
-				});
-				setOpen(false);
-			}
-		);
+		await setLatLong(location);
+		setOpen(false);
 	};
 
 	const onLocChange = async (e) => {
@@ -79,10 +51,7 @@ function LocationPopup({ open, setOpen }) {
 	};
 
 	const onError = (error) => {
-		setLocation({
-			loaded: true,
-			city: 'India',
-		});
+		setLocation('India');
 	};
 
 	const handleNearme = async () => {
@@ -96,7 +65,7 @@ function LocationPopup({ open, setOpen }) {
 	};
 
 	useEffect(() => {
-		if (location.loaded && location.city && location.city.length > 0) {
+		if (location && location.city && location.city.length > 0) {
 			if (Cookies.get('userUniqueId') !== undefined) {
 				let searchID = 0;
 				let searchLocId = userInfo?.address?.filter((items) => {

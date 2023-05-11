@@ -12,6 +12,8 @@ import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
 import Cookies from 'js-cookie';
 import LocationPicker from './LocationPicker';
+import { useAtom } from 'jotai';
+import readLocationAtom, { updateLocationLatLongAtom } from '@/store/location';
 
 const options = {
 	enableHighAccuracy: true,
@@ -22,46 +24,16 @@ const options = {
 function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const { getSearchLocation } = useContext(AppContext);
-	const [currentLocation, setCurrentLocation] = useState(false);
-
-	const [location, setLocation] = useState({
-		loaded: false,
-		city: '',
-	});
+	const [location] = useAtom(readLocationAtom);
+	const [_, setLocation] = useAtom(updateLocationLatLongAtom);
 	const { userInfo, setUserInfo, setSearchLocation } = useContext(AppContext);
 
 	const onSuccess = async (location) => {
-		let lat = location.coords.latitude;
-		let lng = location.coords.longitude;
-		Geocode.setApiKey('AIzaSyAh6-hbxmUdNaznjA9c05kXi65Vw3xBl3w');
-
-		Geocode.setLanguage('en');
-		Geocode.enableDebug();
-		Geocode.fromLatLng(lat, lng).then(
-			(response) => {
-				let address = response?.plus_code?.compound_code;
-				address = getCityFromResponse(address);
-				setLocation({
-					loaded: true,
-					city: address,
-				});
-			},
-			(error) => {
-				console.error(error);
-				setLocation({
-					loaded: true,
-					city: 'India',
-				});
-			}
-		);
+		await updateLocationLatLongAtom(location);
 	};
 
 	const onError = (error) => {
-		setLocation({
-			loaded: true,
-			city: 'India',
-		});
+		setLocation('India')
 	};
 
 	const handleNearme = async () => {
@@ -73,22 +45,6 @@ function Header() {
 		}
 		navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 	};
-
-	useEffect(() => {
-		if (location.loaded && location.city && location.city.length > 0) {
-			if (Cookies.get('userUniqueId') !== undefined) {
-				let searchID = 0;
-				let searchLocId = userInfo?.address?.filter((items) => {
-					return items.addressType === 'SearchLocation';
-				});
-				if (searchLocId) {
-					searchID = searchLocId[0]?.locationId;
-				}
-			}
-			setSearchLocation(location.city);
-			localStorage.setItem('usedLocation', location.city);
-		}
-	}, [location]);
 
 	return (
 		<header>

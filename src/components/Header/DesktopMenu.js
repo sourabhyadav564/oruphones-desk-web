@@ -9,6 +9,8 @@ import Location from '@/assets/location.svg';
 import Cookies from 'js-cookie';
 import LoginPopup from '../Popup/LoginPopup';
 import { useRouter } from 'next/router';
+import { useAtom } from 'jotai';
+import readLocationAtom from '@/store/location';
 
 const menus = [
 	{
@@ -45,11 +47,11 @@ const menus = [
 function DesktopMenu() {
 	const router = useRouter();
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const { getSearchLocation } = useContext(AppContext);
 	const [authenticated, setauthenticated] = useState(false);
 	const [showLogin, setShowLogin] = useState(false);
 	const [ItemLink, setItemLink] = useState('');
 	const [performAction, setPerformAction] = useState(false);
+	const [location] = useAtom(readLocationAtom);
 
 	useEffect(() => {
 		if (Cookies.get('userUniqueId') !== undefined) {
@@ -86,9 +88,8 @@ function DesktopMenu() {
 				<Image src={Location} width={14} height={15} alt="" />
 				<span
 					className="text-white font-Roboto-Semibold items-center text-mediumFontSize"
-					location={`${getSearchLocation}`}
 					color={'white'}
-				>{`${getSearchLocation}`}</span>
+				>{`${location}`}</span>
 			</span>
 			<span>
 				<Popover.Group className=" container hidden lg:flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
