@@ -13,6 +13,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { locationAtom } from '@/store/location';
+import { topDealsAtom } from '@/store/topDeals';
 import { getCookie, setCookie } from 'cookies-next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -25,8 +26,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 	// TODO: fetch both async simultaneously
 	let brands = await Axios.fetchBrands();
-	// TODO: Refactor relevant backend with pagination/ truncation
+	// TODO: Refactor relevant backend with pagination/ truncation, until then, send first 20 results
 	let bestDeals = await Axios.bestDealNearByYou(cookie, 'Guest', 0);
+	// if length is < 20, return, else slice
+	const sliceLength = 10;
+	if (bestDeals.dataObject.otherListings.length > sliceLength) {
+		bestDeals.dataObject.otherListings =
+			bestDeals.dataObject.otherListings.slice(0, sliceLength);
+	}
 	console.log('bestDeals', bestDeals.dataObject.otherListings[0]);
 	return {
 		props: {
@@ -41,8 +48,12 @@ export default function Home({
 	bestDeals,
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	useHydrateAtoms([[locationAtom, location]]);
+	useHydrateAtoms([
+		[locationAtom, location],
+		[topDealsAtom, bestDeals],
+	]);
 	const [locationVal] = useAtom(locationAtom);
+	const [topDeals] = useAtom(topDealsAtom);
 	return (
 		<>
 			<Head>
@@ -54,7 +65,7 @@ export default function Home({
 			<main>
 				<TopCarousel />
 				<TopBrand brandsList={brands} />
-				<TopDeals location={locationVal} bestDeals={bestDeals} />
+				<TopDeals location={locationVal} bestDeals={topDeals} />
 				<ShowBy />
 				<SellBuyFlow />
 				<DownloadApp />
