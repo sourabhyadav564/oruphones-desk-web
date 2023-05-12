@@ -10,7 +10,10 @@ function TopDealCard({ data, setProducts }) {
 	const [imageError, setImageError] = useState(false);
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (
-			<Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}>
+			<Link
+				legacyBehavior
+				href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}
+			>
 				<a className="w-full h-full rounded-md  shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
 					<p className="block text-m-green">{'Show All'}</p>
 				</a>

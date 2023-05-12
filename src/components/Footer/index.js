@@ -206,17 +206,17 @@ const Footer = () => {
 					<p className="font-Roboto-Semibold text-xlFontSize">
 						Customer Service
 					</p>
-					<Link href="/privacy-policy">
+					<Link legacyBehavior href="/privacy-policy">
 						<a className="hover:scale-125 hover:opacity-70 hover:pl-4 duration-300 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
 							Privacy policy
 						</a>
 					</Link>
-					<Link href="/terms">
+					<Link legacyBehavior href="/terms">
 						<a className="hover:scale-125 hover:opacity-70 duration-300 hover:pl-4 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
 							Terms of service
 						</a>
 					</Link>
-					<Link href="/faq">
+					<Link legacyBehavior href="/faq">
 						<a className="hover:scale-125 hover:opacity-70 duration-300 hover:pl-2 mt-4 max-w-max font-Roboto-Light text-regularFontSize">
 							FAQs
 						</a>
@@ -224,7 +224,7 @@ const Footer = () => {
 				</div>
 				<div className="flex flex-col">
 					<p className="font-Roboto-Semibold text-xlFontSize">Links</p>
-					<Link href="https://www.oruphones.com/blog/">
+					<Link legacyBehavior href="https://www.oruphones.com/blog/">
 						<a
 							className="hover:scale-125 hover:opacity-70 duration-300 hover:pl-1  mt-4 max-w-max font-Roboto-Light text-regularFontSize"
 							target="_blank"
@@ -232,12 +232,12 @@ const Footer = () => {
 							Blog
 						</a>
 					</Link>
-					<Link href="/about-us">
+					<Link legacyBehavior href="/about-us">
 						<a className="hover:scale-125 hover:opacity-70 duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">
 							About Us
 						</a>
 					</Link>
-					<Link href="/contact-us">
+					<Link legacyBehavior href="/contact-us">
 						<a className="hover:scale-125 hover:opacity-70 duration-300 hover:pl-2  mt-4 max-w-max font-Roboto-Light text-regularFontSize">
 							Contact Us
 						</a>

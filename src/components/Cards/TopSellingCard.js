@@ -13,7 +13,7 @@ function TopSellingCard({ data }) {
 
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (
-			<Link href={`/product/models`} passHref>
+			<Link legacyBehavior href={`/product/models`} passHref>
 				<a>
 					<div className="w-full h-full rounded-md shadow hover:shadow-md p-4 bg-m-white flex justify-center items-center">
 						<p className="block text-m-green">{'Show All'}</p>

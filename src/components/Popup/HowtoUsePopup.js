@@ -21,13 +21,13 @@ function HowtoUsePopup({ open, setOpen }) {
 					<div className="flex pb-8 justify-start items-center">
 						<div className="flex flex-col items-center justify-center m-auto">
 							<Image src={AppleStore} width={96} height={96} alt="" />
-							<Link href={qrValue1}>
+							<Link legacyBehavior href={qrValue1}>
 								<a className="w-32 h-10 bg-app-store bg-contain mt-2"></a>
 							</Link>
 						</div>
 						<div className="flex flex-col items-center justify-center m-auto">
 							<Image src={PlayStore} width={96} height={96} alt="" />
-							<Link href={qrValue2}>
+							<Link legacyBehavior href={qrValue2}>
 								<a className="w-32 h-10 bg-play-store bg-contain mt-2"></a>
 							</Link>
 						</div>

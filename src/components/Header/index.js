@@ -13,7 +13,10 @@ import SellNowBtn from './SellNowBtn';
 import Cookies from 'js-cookie';
 import LocationPicker from './LocationPicker';
 import { useAtom } from 'jotai';
-import { updateLocationAtom, updateLocationLatLongAtom } from '@/store/location';
+import {
+	updateLocationAtom,
+	updateLocationLatLongAtom,
+} from '@/store/location';
 
 const options = {
 	enableHighAccuracy: true,
@@ -24,7 +27,7 @@ const options = {
 function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const [,setLocation] = useAtom(updateLocationAtom);
+	const [, setLocation] = useAtom(updateLocationAtom);
 	const [_, setLocationLatLong] = useAtom(updateLocationLatLongAtom);
 	const { userInfo, setUserInfo, setSearchLocation } = useContext(AppContext);
 
@@ -33,7 +36,7 @@ function Header() {
 	};
 
 	const onError = (error) => {
-		setLocation('India')
+		setLocation('India');
 	};
 
 	const handleNearme = async () => {
@@ -49,7 +52,7 @@ function Header() {
 	return (
 		<header>
 			<div className=" container lg:w-10/12 w-full h-16 bg-m-white bg-no-repeat  flex justify-center items-center opacity-100 px-0 py-0 ">
-				<Link href="/">
+				<Link legacyBehavior href="/">
 					<a className="h-9 md:w-[75px] px-32 pr-0 py-[14px] mr-4 lg:mr-8 block relative">
 						<Image
 							src={

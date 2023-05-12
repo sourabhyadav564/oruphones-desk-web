@@ -18,7 +18,7 @@ function ListingAddedPopup({ open, setOpen, data }) {
 					verify the device in order to sell it quickly.
 				</p>
 				<div className="mb-4 mt-8 flex justify-center w-full">
-					<Link href="/user/listings" passHref>
+					<Link legacyBehavior href="/user/listings" passHref>
 						<a>
 							<button className="border border-m-green w-52 px-4 py-2 rounded text-m-green">
 								{' '}
