@@ -112,13 +112,13 @@ function AppDownloadPopup({ open, setOpen }) {
 									<div className="flex flex-col items-center justify-center pl-4">
 										<Image src={AppleStore} width={96} height={96} alt="" />
 
-										<Link legacyBehavior href={qrValue1}>
+										<Link href={qrValue1}>
 											<a className="w-32 h-10 bg-app-store bg-contain"></a>
 										</Link>
 									</div>
 									<div className="flex flex-col items-center justify-center pl-4">
 										<Image src={PlayStore} width={96} height={96} alt="" />
-										<Link legacyBehavior href={qrValue2}>
+										<Link href={qrValue2}>
 											<a className="w-32 h-10 bg-play-store bg-contain"></a>
 										</Link>
 									</div>

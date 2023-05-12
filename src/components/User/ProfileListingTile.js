@@ -144,7 +144,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 					{data?.status === 'Active' &&
 					data?.verified &&
 					!data?.deviceImagesAvailable ? (
-						<Link legacyBehavior href="#">
+						<Link href="#">
 							<a
 								className="text-xs cursor-pointer self-end min-w-max"
 								style={{ color: '#00A483' }}
@@ -156,7 +156,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 					) : (
 						data?.status === 'Active' &&
 						!data?.verified && (
-							<Link legacyBehavior href="#" passHref>
+							<Link href="#" passHref>
 								<p
 									className="text-xs cursor-pointer self-end"
 									style={{ color: '#00A483' }}
@@ -168,7 +168,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 						)
 					)}
 					{data?.status === 'Paused' && !data?.verified && (
-						<Link legacyBehavior href="#" passHref>
+						<Link href="#" passHref>
 							<p
 								className="text-xs cursor-pointer self-end"
 								style={{ color: '#00A483' }}
@@ -270,7 +270,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 					{data?.status === 'Active' &&
 					data?.verified &&
 					!data?.deviceImagesAvailable ? (
-						<Link legacyBehavior href="#">
+						<Link href="#">
 							<a
 								className="text-xs cursor-pointer self-center lg:py-0 py-2   min-w-max"
 								style={{ color: '#00A483' }}
@@ -282,7 +282,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 					) : (
 						data?.status === 'Active' &&
 						!data?.verified && (
-							<Link legacyBehavior href="#" passHref>
+							<Link href="#" passHref>
 								<p
 									className="text-xs cursor-pointer self-center lg:py-0 py-2 "
 									style={{ color: '#00A483' }}
@@ -294,7 +294,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 						)
 					)}
 					{data?.status === 'Paused' && !data?.verified && (
-						<Link legacyBehavior href="#" passHref>
+						<Link href="#" passHref>
 							<p
 								className="text-xs cursor-pointer self-center lg:py-0 py-2"
 								style={{ color: '#00A483' }}

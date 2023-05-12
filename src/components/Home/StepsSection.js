@@ -122,7 +122,7 @@ const StepComp = ({ title, data }) => (
 								>
 									{item.description}
 								</p>
-								<Link legacyBehavior href={item.link} passHref>
+								<Link href={item.link} passHref>
 									<a className="text-m-black font-bold">Learn more...</a>
 								</Link>
 							</div>

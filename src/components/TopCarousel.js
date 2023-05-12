@@ -96,8 +96,8 @@ const TopCarousel = () => {
 									<Image
 										src={item.src}
 										alt={item.name}
-										width={7680}
-										height={1920}
+										width={'7680px'}
+										height={'1920px'}
 										className="bannerShadow object-contain"
 										data-aos="fade-down"
 										priority={true}
@@ -105,7 +105,7 @@ const TopCarousel = () => {
 								</div>
 							</div>
 						) : (
-							// <Link legacyBehavior href={item.link}>
+							// <Link href={item.link}>
 							<a
 								className="flex justify-center relative mix-blend-overlay"
 								href={item.id != 3 && item.link}
@@ -114,8 +114,8 @@ const TopCarousel = () => {
 								<Image
 									src={item.src}
 									alt={item.name}
-									width={7680}
-									height={1920}
+									width={'7680px'}
+									height={'1920px'}
 									className="bannerShadow"
 									data-aos="fade-down"
 								></Image>
@@ -129,7 +129,7 @@ const TopCarousel = () => {
                       className="w-full flex rounded-[5px] h-12 justify-center"
                       data-aos="zoom-out-up"
                     >
-                      <Link legacyBehavior href={"https://www.oruphones.com/blog"}>
+                      <Link href={"https://www.oruphones.com/blog"}>
                         <div className="px-4 pt-16 rounded-[5px]">
                           <a
                             className="flex h-7 text-xlFontSize font-Roboto-Semibold justify-center py-6 items-center px-16 rounded-[5px] bg-gradient-to-b to-[#2c2f44] from-[#ffffff]"

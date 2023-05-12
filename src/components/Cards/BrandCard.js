@@ -7,7 +7,7 @@ function BrandCard({ data }) {
 	const [make, setMake] = useRecoilState(makeState);
 	if (data?.make.toLowerCase().includes('show')) {
 		return (
-			<Link legacyBehavior href={`/brands`}>
+			<Link href={`/brands`}>
 				<a className="w-36 h-[91px] rounded opacity-100 bg-no-repeat p-4 bg-m-white flex justify-center hover:bg-gray-100 group items-center shadow-md">
 					<p className="block text-m-grey-2 font-Roboto-Regular text-regularFontSize w-[89px] pl-2.5 h-5 group-hover:scale-110">
 						View All &gt;

@@ -144,7 +144,7 @@ export default UserProfile;
 const NavListItem = ({ text, link, onClick }) => {
 	const router = useRouter();
 	return (
-		<Link legacyBehavior href={link} passHref>
+		<Link href={link} passHref>
 			<a
 				className={`px-4 py-2 my-1 font-Roboto-Light  text-mediumFontSize hover:bg-gray-100 rounded text-black-60 ${
 					router.pathname == link && 'bg-gray-100'

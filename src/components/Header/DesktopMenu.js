@@ -103,11 +103,7 @@ function DesktopMenu() {
 												open ? '' : 'text-opacity-90'
 											}text-m-white px-4 opacity-100 hover:opacity-60  font-light `}
 										>
-											<Link
-												legacyBehavior
-												key={index}
-												href={{ pathname: item.chlink }}
-											>
+											<Link key={index} href={{ pathname: item.chlink }}>
 												<span> {item.name} </span>
 											</Link>
 										</Popover.Button>
@@ -115,7 +111,7 @@ function DesktopMenu() {
 								)}
 							</Popover>
 						) : (
-							<Link legacyBehavior href={item.href} key={item.name} passHref>
+							<Link href={item.href} key={item.name} passHref>
 								<a className="px-4 hover:opacity-60">{item.name}</a>
 							</Link>
 						)
@@ -156,7 +152,7 @@ function DesktopMenu() {
 export default DesktopMenu;
 
 const NavListItem = ({ text, link, onClick }) => (
-	<Link legacyBehavior href={link || '#'} passHref>
+	<Link href={link || '#'} passHref>
 		<a
 			className="text-m-white opacity-100  hover:opacity-60 font-light px-2"
 			onClick={onClick}

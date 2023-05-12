@@ -5,7 +5,7 @@ function ArticleCard({ title, src, href, viewAll }) {
 	if (viewAll) {
 		const common = 'https://www.oruphones.com/blog/';
 		return (
-			<Link legacyBehavior href={`${common}`}>
+			<Link href={`${common}`}>
 				<a
 					className="w-full h-full rounded-md shadow hover:shadow-md flex flex-col justify-center items-center text-m-green bg-m-white"
 					target="_blank"
@@ -16,7 +16,7 @@ function ArticleCard({ title, src, href, viewAll }) {
 		);
 	}
 	return (
-		<Link legacyBehavior href={`${href}`}>
+		<Link href={`${href}`}>
 			<a
 				className="w-full h-full rounded-md shadow hover:shadow-md flex flex-col items-center bg-m-white"
 				target="_blank"

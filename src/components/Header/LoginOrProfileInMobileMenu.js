@@ -156,7 +156,7 @@ function LoginOrProfileInMobileMenu() {
 export default LoginOrProfileInMobileMenu;
 
 const NavListItem = ({ text, link, onClick }) => (
-	<Link legacyBehavior href={link || '#'} passHref>
+	<Link href={link || '#'} passHref>
 		<a
 			className="px-4 py-2 my-1 font-Roboto-Regular hover:bg-gray-100 rounded text-black-60"
 			onClick={onClick}
