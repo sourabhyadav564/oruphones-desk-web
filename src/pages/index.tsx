@@ -34,7 +34,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		bestDeals.dataObject.otherListings =
 			bestDeals.dataObject.otherListings.slice(0, sliceLength);
 	}
-	console.log('bestDeals', bestDeals.dataObject.otherListings[0]);
 	return {
 		props: {
 			brands: brands?.dataObject,
