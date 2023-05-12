@@ -1,19 +1,16 @@
-import { atomsWithQuery } from 'jotai-tanstack-query';
 import type IDeal from '@/types/Deal';
 import * as Axios from '@/api/axios';
 import { locationAtom } from '@/store/location';
+import { atom } from 'jotai';
 
-export const [topDealsAtom] = atomsWithQuery<IDeal[] | null>((get) => {
-	return {
-		queryKey: ['topDeals', get(locationAtom)],
-		queryFn: async () => {
-			const data = await Axios.bestDealNearByYou(get(locationAtom), 'Guest', 0);
-			let bestDeals = data.dataObject.otherListings;
-			if (bestDeals.length > 10) {
-				bestDeals = bestDeals.slice(0, 10);
-			}
-			return bestDeals;
-		},
-		suspense: false,
-	};
+export const topDealsAtom = atom<IDeal[] | null>(null);
+export const topDealsQueryAtom = atom(null, async (get, set, location: string) => {
+	let bestDeals = await Axios.bestDealNearByYou(location, 'Guest', 0);
+	// if length is < 20, return, else slice
+	const sliceLength = 10;
+	if (bestDeals.dataObject.otherListings.length > sliceLength) {
+		bestDeals.dataObject.otherListings =
+			bestDeals.dataObject.otherListings.slice(0, sliceLength);
+	}
+	set(topDealsAtom, bestDeals.dataObject.otherListings);
 });
