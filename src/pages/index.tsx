@@ -15,6 +15,7 @@ import { useHydrateAtoms } from 'jotai/utils';
 import { locationAtom } from '@/store/location';
 import { topDealsAtom } from '@/store/topDeals';
 import { getCookie, setCookie } from 'cookies-next';
+import getHomeListings from '@/utils/fetchers/getHomeListings';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	// check if cookie is present
@@ -26,18 +27,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 	// TODO: fetch both async simultaneously
 	let brands = await Axios.fetchBrands();
-	// TODO: Refactor relevant backend with pagination/ truncation, until then, send first 20 results
-	let bestDeals = await Axios.bestDealNearByYou(cookie, 'Guest', 0);
-	// if length is < 20, return, else slice
 	const sliceLength = 10;
-	if (bestDeals.dataObject.otherListings.length > sliceLength) {
-		bestDeals.dataObject.otherListings =
-			bestDeals.dataObject.otherListings.slice(0, sliceLength);
-	}
+	let bestDeals = await getHomeListings(cookie, sliceLength);
 	return {
 		props: {
-			brands: brands?.dataObject,
-			bestDeals: bestDeals?.dataObject?.otherListings,
+			brands: brands?.dataObject || null,
+			bestDeals: bestDeals,
 			location: cookie,
 		},
 	};

@@ -67,7 +67,7 @@ module.exports = {
 	async rewrites() {
 		return [
 			{
-				source: '/url/:path*',
+				source: '/backend/:path*',
 				destination: `${backendURL}/:path*`,
 			},
 		];
