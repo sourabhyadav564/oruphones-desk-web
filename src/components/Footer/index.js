@@ -6,16 +6,11 @@ import pinterest from '@/assets/pinterest.svg';
 import linkedin from '@/assets/linkedIn.svg';
 import youtube from '@/assets/yt.svg';
 import twitter from '@/assets/twitter.svg';
-
-import { addListingBrandState } from '../../atoms/globalState';
-import { useRecoilState } from 'recoil';
 import AppDownloadPopup from '../Popup/AppDownloadPopup';
 import { useState } from 'react';
 import Image from 'next/image';
 
 const Footer = () => {
-	const [addListingBrand, setAddListingBrand] =
-		useRecoilState(addListingBrandState);
 	const [openAppDownload, setOpenAppDownload] = useState(false);
 	const [qrValue1, setQrValue1] = useState(
 		'https://apps.apple.com/in/app/oruphones/id1629378420'

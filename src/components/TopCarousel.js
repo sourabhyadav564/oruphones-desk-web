@@ -6,8 +6,8 @@ import LoginPopup from '../components/Popup/LoginPopup';
 import Cookies from 'js-cookie';
 import Banner_2 from '@/assets/banner_web_2.png';
 import Banner_3 from '@/assets/banner_web_3.png';
-import Carousel from './Carousel';
 import AppDownloadPopup from './Popup/AppDownloadPopup';
+import { SwiperSlide } from 'swiper/react';
 
 const settings = {
 	slidesToShow: 1,
@@ -74,7 +74,6 @@ const TopCarousel = () => {
 	}, [openLoginPopup, performAction, router]);
 	return (
 		<section>
-			{/* this section uses both react-slick and swiper */}
 			<CarouselWithPagination
 				slidesPerView={1}
 				autoplay={{
@@ -82,12 +81,11 @@ const TopCarousel = () => {
 					disableOnInteraction: false,
 				}}
 			>
-				<Carousel top={'top-44'} {...settings}>
-					{slides.map((item) =>
-						item.link && item.id == 1 ? (
+				{slides.map((item) => (
+					<SwiperSlide key={item.id}>
+						{item.link && item.id == 1 ? (
 							<div
 								className="flex justify-center relative"
-								key={item.id}
 								onClick={() => {
 									setShowAppDownloadPopup(true);
 								}}
@@ -105,7 +103,6 @@ const TopCarousel = () => {
 								</div>
 							</div>
 						) : (
-							// <Link href={item.link}>
 							<a
 								className="flex justify-center relative mix-blend-overlay"
 								href={item.id != 3 && item.link}
@@ -118,30 +115,7 @@ const TopCarousel = () => {
 									height={'1920px'}
 									className="bannerShadow"
 									data-aos="fade-down"
-								></Image>
-								{/* <div className="banner_gradient"></div> */}
-								{/* {item.id == 2 && (
-                  <div
-                    className="w-full absolute left-0 right-0 md:bottom-16 -bottom-2 px-5 flex items-center justify-center"
-                    style={{ fontSize: 10 }}
-                  >
-                    <div
-                      className="w-full flex rounded-[5px] h-12 justify-center"
-                      data-aos="zoom-out-up"
-                    >
-                      <Link href={"https://www.oruphones.com/blog"}>
-                        <div className="px-4 pt-16 rounded-[5px]">
-                          <a
-                            className="flex h-7 text-xlFontSize font-Roboto-Semibold justify-center py-6 items-center px-16 rounded-[5px] bg-gradient-to-b to-[#2c2f44] from-[#ffffff]"
-                            onClick={() => setLoadingState(true)}
-                          >
-                            {item.id == 2 && <p>VISIT</p>}
-                          </a>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                )} */}
+								/>
 								{item.id == 3 && (
 									<div
 										className="w-full absolute left-0 right-0 md:bottom-16 -bottom-2 px-5 flex items-center justify-center"
@@ -165,10 +139,9 @@ const TopCarousel = () => {
 									</div>
 								)}
 							</a>
-							// </Link>
-						)
-					)}
-				</Carousel>
+						)}
+					</SwiperSlide>
+				))}
 			</CarouselWithPagination>
 			<LoginPopup open={openLoginPopup} setOpen={setOpenLoginPopup} />
 			<AppDownloadPopup

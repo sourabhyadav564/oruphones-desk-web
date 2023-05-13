@@ -4,6 +4,7 @@ import '../../node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
 SwiperCore.use([Navigation]);
 SwiperCore.use([Pagination]);
@@ -18,7 +19,8 @@ function CarouselWithPagination({ children, autoplay, ...rest }) {
 			//   pagination={{ clickable: true }}
 			navigation={true}
 			modules={[Pagination, Navigation, Autoplay]}
-			className="mySwiper "
+			className="mySwiper select-none"
+			loop={true}
 			{...rest}
 		>
 			{children}

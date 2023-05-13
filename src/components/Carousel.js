@@ -1,4 +1,3 @@
-import Slider from 'react-slick';
 import Chevronleft from '@/assets/chevronleft.svg';
 import Chevronright from '@/assets/chevronright.svg';
 import Image from 'next/image';
@@ -19,20 +18,5 @@ const ArrowRight = ({ className, currentSlide, slideCount, top, ...rest }) => (
 );
 
 export default function Carousel({ children, className, top, ...rest }) {
-	var settings = {
-		arrows: true,
-		slidesToShow: 2,
-		slidesToScroll: 1,
-		...rest,
-		prevArrow: <ArrowLeft top={top} />,
-		nextArrow: <ArrowRight top={top} />,
-	};
-	return (
-		<Slider
-			className={`carousel ${className ? className : ''} z-0`}
-			{...settings}
-		>
-			{children}
-		</Slider>
-	);
+	return <>{children}</>;
 }

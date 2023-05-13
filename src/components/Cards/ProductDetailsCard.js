@@ -1,6 +1,4 @@
 import { Fragment, useState } from 'react';
-
-import Rupee1 from '@/assets/rupee3.svg';
 import { getDefaultImage, numberWithCommas } from '../../utils/util';
 import ImageSlider from '../ImageSlider';
 import LabelAndValue from '../LabelAndValue';

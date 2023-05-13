@@ -1,8 +1,6 @@
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import Select from '@/components/Form/Select';
-import { useRecoilValue } from 'recoil';
-import { addListingBrandSelector } from '@/atoms/globalState';
 import Cookies from 'js-cookie';
 // import { Axios } from 'axios';
 import * as Axios from '@/api/axios';
@@ -22,11 +20,9 @@ function Index({ isFromEdit, brandsList }) {
 		{ name: 'image-3' },
 		{ name: 'image-4' },
 	];
-	const [searchModel, setSearchModel] = useState('');
 	const [showpage, setShowpage] = useState(0);
 	const [makeRequired, setMakeRequired] = useState('');
 	const [makeRequired2, setMakeRequired2] = useState('');
-	const brandName = useRecoilValue(addListingBrandSelector);
 	const [makeOptions, setMakeOptions] = useState(brandsList);
 	const [makeOptions2, setMakeOptions2] = useState(brandsList);
 	const [modelOptions, setModelOptions] = useState([]);
@@ -55,7 +51,6 @@ function Index({ isFromEdit, brandsList }) {
 	const [active, setactive] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const [products, setProducts] = useState([]);
-	const [bestDeal, setBestDeal] = useState([]);
 	const [PriceShow, setPriceShow] = useState(false);
 	const [PriceProduct, setPriceProduct] = useState(false);
 	const [loading, setLoading] = useState(true);

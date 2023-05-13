@@ -1,51 +1,19 @@
 import React, { useState, useEffect, Fragment, createContext } from 'react';
 import Image from 'next/image';
-import Slider from 'react-slick';
 import Chevronleft from '@/assets/chevronleft.svg';
 import ChevronRight from '@/assets/chevronright.svg';
-
-// const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-//   <div className="absolute">
-//   <Image
-//     src={Chevronleft}
-//     width={32}
-//     height={32}
-//     {...rest}
-//     className={`prev ${className}`}
-//   />
-//   </div>
-// );
-// const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-//   <Image
-//     src={ChevronRight}
-//     width={32}
-//     height={32}
-//     {...rest}
-//     className={`prev ${className}`}
-//   />
-// );
-
-const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-	<div className="absolute z-10 top-16  left-2  bg-gray-300  rounded-full p-1 flex ">
-		<Image src={Chevronleft} width={14} height={14} alt="" {...rest} />
-	</div>
-);
-const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-	<div className="absolute z-10 top-16 right-2  bg-gray-300 flex p-1 rounded-full">
-		<Image src={ChevronRight} width={14} height={14} alt="" {...rest} />
-	</div>
-);
+import { Swiper, SwiperSlide } from 'swiper/react';
+import '../../node_modules/swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
 function ImageSlider({ data, images, openFullImage, onDataContext }) {
-	const [nav1, setNav1] = useState(null);
-	const [nav2, setNav2] = useState(null);
 	const [slider1, setSlider1] = useState(null);
-	const [slider2, setSlider2] = useState(null);
 	const [imageError, setImageError] = useState(false);
 
 	useEffect(() => {
-		setNav1(slider1);
-		setNav2(slider2);
 		let MyContext = createContext(slider1?.innerSlider?.asNavForIndex);
 		MyContext = MyContext?._currentValue;
 
@@ -54,7 +22,7 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 		} else {
 			onDataContext(MyContext);
 		}
-	}, [onDataContext, slider1, slider2]);
+	}, [onDataContext, slider1]);
 
 	const settingsMain = {
 		slidesToShow: 1,
@@ -64,19 +32,7 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 		arrows: false,
 		fade: true,
 		asNavFor: '.slider-nav',
-	};
-
-	const settingsThumbs = {
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		arrows: true,
-		asNavFor: '.slider-for',
-		dots: false,
-		infinite: false,
-		swipeToSlide: true,
-		focusOnSelect: true,
-		prevArrow: <ArrowLeft />,
-		nextArrow: <ArrowRight />,
+		slidesPerView: 1,
 	};
 
 	var type = ['old phone', 'used', 'refurbished'];
@@ -87,13 +43,9 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 	} `.toLowerCase();
 
 	return (
-		<React.Fragment>
+		<SwiperSlide>
 			{Array.isArray(images) && images && (
-				<Slider
-					{...settingsMain}
-					asNavFor={nav2}
-					ref={(slider) => setSlider1(slider)}
-				>
+				<Swiper {...settingsMain} onSwiper={setSlider1}>
 					{images
 						.filter((i) => i.fullImage)
 						.map((img, index) => (
@@ -118,22 +70,17 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 									}
 									onError={() => setImageError(true)}
 									alt={alternate_text}
-									width={'100%'}
-									height={'90%'}
-									layout="responsive"
+									layout="fill"
 									objectFit="contain"
 									onClick={() => openFullImage && openFullImage()}
+									className="w-full h-full"
 								/>
 							</Fragment>
 						))}
-				</Slider>
+				</Swiper>
 			)}
 			{!Array.isArray(images) && images && (
-				<Slider
-					{...settingsMain}
-					asNavFor={nav2}
-					ref={(slider) => setSlider1(slider)}
-				>
+				<Swiper {...settingsMain} onSwiper={setSlider1}>
 					<Fragment>
 						<Image
 							src={
@@ -155,22 +102,17 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 							unoptimized={false}
 							onError={() => setImageError(true)}
 							alt={alternate_text}
-							width={'100%'}
-							height={'90%'}
-							layout="responsive"
+							layout="fill"
 							objectFit="contain"
 							onClick={() => openFullImage && openFullImage()}
+							className="w-full h-full"
 						/>
 					</Fragment>
-				</Slider>
+				</Swiper>
 			)}
 			<div className="thumbnail-slider-wrap">
 				{Array.isArray(images) && images && (
-					<Slider
-						{...settingsThumbs}
-						asNavFor={nav1}
-						ref={(slider) => setSlider2(slider)}
-					>
+					<Swiper {...settingsMain} onSwiper={setSlider1}>
 						{images
 							.filter((i) => i.fullImage)
 							.map((img, index) => (
@@ -196,22 +138,17 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 												  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 										}
 										onError={() => setImageError(true)}
-										width={'100%'}
-										height={'100%'}
-										layout="responsive"
+										layout="fill"
 										objectFit="contain"
 										alt={alternate_text}
+										className="w-full h-full"
 									/>
 								</Fragment>
 							))}
-					</Slider>
+					</Swiper>
 				)}
 				{!Array.isArray(images) && images && (
-					<Slider
-						{...settingsThumbs}
-						asNavFor={nav1}
-						ref={(slider) => setSlider2(slider)}
-					>
+					<Swiper {...settingsMain} onSwiper={setSlider1}>
 						<Image
 							src={
 								imageError
@@ -233,16 +170,15 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 									  images?.fullImage ||
 									  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 							}
-							width={'100%'}
-							height={'100%'}
-							layout="responsive"
+							layout="fill"
 							objectFit="contain"
 							alt={alternate_text}
+							className="w-full h-full"
 						/>
-					</Slider>
+					</Swiper>
 				)}
 			</div>
-		</React.Fragment>
+		</SwiperSlide>
 	);
 }
 

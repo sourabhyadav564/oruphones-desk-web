@@ -1,4 +1,5 @@
-import moment from 'moment';
+import * as dayjs from 'dayjs';
+dayjs().format();
 import { deviceDefaultImage } from './constant';
 
 export function numberWithCommas(s) {
@@ -32,7 +33,7 @@ export function numberFromString(x) {
 }
 
 export const stringToDate = (dateString) => {
-	let new_data_string = moment(dateString).format('L');
+	let new_data_string = dayjs(dateString).format('MM/DD/YYYY').toString();
 	const [day, month, year] = new_data_string?.split('/');
 	return new Date([month, day, year].join('/'));
 };

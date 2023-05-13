@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRecoilState } from 'recoil';
-import { makeState } from '@/atoms/globalState';
+import { atomWithStorage } from 'jotai/utils';
+import { useAtom } from 'jotai';
 
+const makeAtom = atomWithStorage('makeState', '');
 function BrandCard({ data }) {
-	const [make, setMake] = useRecoilState(makeState);
+	const [_, setMake] = useAtom(makeAtom);
 	if (data?.make.toLowerCase().includes('show')) {
 		return (
 			<Link href={`/brands`}>

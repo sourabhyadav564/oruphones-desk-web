@@ -14,8 +14,6 @@ import ConditionOptionLarge from '../Condition/ConditionOptionLarge';
 import DeviceConditionCard from '../Condition/DeviceConditionCard';
 import Geocode from 'react-geocode';
 import { getCityFromResponse } from '@/utils/util';
-import { addListingBrandSelector } from '../../atoms/globalState';
-import { useRecoilValue } from 'recoil';
 
 function AddEditListing({
 	data,
@@ -36,7 +34,7 @@ function AddEditListing({
 		{ name: 'image-3' },
 		{ name: 'image-4' },
 	];
-	const brandName = useRecoilValue(addListingBrandSelector);
+	const [brandName, setBrandName] = useState('Select...');
 	const [images, setImages] = useState(initialState);
 	const [makeOptions, setMakeOptions] = useState(brandsList);
 	const [modelOptions, setModelOptions] = useState([]);
@@ -79,13 +77,6 @@ function AddEditListing({
 		}, 500);
 	}, [brandsList, brandName]);
 
-	const deviceConditionCheck = [
-		{ value: 'Like New', label: 'Like New' },
-		{ value: 'Excellent', label: 'Excellent' },
-		{ value: 'Good', label: 'Good' },
-		{ value: 'Fair', label: 'Fair' },
-	];
-
 	const deviceWarrantyCheck = [
 		{ value: 'zero', label: '0-3 Months Ago' },
 		{ value: 'four', label: '4-6 Months Ago' },
@@ -123,21 +114,6 @@ function AddEditListing({
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [make]);
-
-	// useEffect(() => {
-	//   let makeData = makeOptions.filter((item) => item.make === make);
-	//   if (makeData && makeData.length > 0) {
-	//     setModelOptions(makeData && makeData[0]?.models);
-	//     setmarketingName(null);
-	//     setStorage(null);
-	//     setColor(null);
-	//     setDeviceCondition(null);
-	//     setShow(false);
-	//     setConditionResults({});
-	//     setQuestionIndex(0);
-	//   }
-	//   // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [make]);
 
 	useEffect(() => {
 		(async () => {
@@ -446,9 +422,6 @@ function AddEditListing({
 				model: marketingName,
 				cosmetic: conditionResults,
 			};
-			const saveSellNowDeviceInfoRes = await Axios.saveSellNowDeviceInfo(
-				payload
-			);
 			setRefresh((prev) => !prev);
 			openPopup();
 		}

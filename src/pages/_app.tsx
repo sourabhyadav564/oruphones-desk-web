@@ -4,7 +4,6 @@ import '../styles/globals.css';
 import '../styles/react-slick/react-slick.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { ApplicationContext } from '../context/ApplicationContext';
-import { RecoilRoot } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AppProps } from 'next/app';
@@ -37,16 +36,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<ApplicationContext>
 					<QueryClientProvider client={queryClient}>
 						<ReactQueryDevtools />
-						<RecoilRoot>
-							<Provider>
-								<HydrateAtoms>
-									<Header />
-									<DefaultSeo {...SEO} />
-									<Component {...pageProps} />
-									<Footer />
-								</HydrateAtoms>
-							</Provider>
-						</RecoilRoot>
+						<Provider>
+							<HydrateAtoms>
+								<Header />
+								<DefaultSeo {...SEO} />
+								<Component {...pageProps} />
+								<Footer />
+							</HydrateAtoms>
+						</Provider>
 					</QueryClientProvider>
 				</ApplicationContext>
 				<ToastContainer
