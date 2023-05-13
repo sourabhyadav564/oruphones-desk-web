@@ -1,12 +1,11 @@
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import Geocode from 'react-geocode';
 import setLocation from '@/utils/fetchers/setLocation';
 import { topDealsQueryAtom } from '@/store/topDeals';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
-export const locationAtom = atomWithStorage<string | null>('location', null);
+export const locationAtom = atom<string>('India');
 const readLocationAtom = atom((get) => get(locationAtom));
 export const updateLocationAtom = atom(
 	null,
