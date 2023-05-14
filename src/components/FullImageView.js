@@ -1,4 +1,9 @@
-import Slider from 'react-slick';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import '../../node_modules/swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 import styles from '../styles/fullimageview.module.css';
 import Chevronleft from '@/assets/chevronleft.svg';
 import ChevronRight from '@/assets/chevronright.svg';
@@ -39,6 +44,17 @@ function FullImageView({ open, close, images, currentslide }) {
 
 	images = shiftArray(images, currentslide);
 
+		const settingsMain = {
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			autoplay: false,
+			autoplaySpeed: 3000,
+			arrows: false,
+			fade: true,
+			asNavFor: '.slider-nav',
+			slidesPerView: 1,
+		};
+
 	return (
 		<section className={styles.imageview_container}>
 			<div className="w-full h-20 flex justify-end p-4 text-white">
@@ -52,11 +68,9 @@ function FullImageView({ open, close, images, currentslide }) {
 				/>
 			</div>
 			{images && (
-				<Slider
-					speed={500}
-					dots={true}
-					prevArrow={<ArrowLeft />}
-					nextArrow={<ArrowRight />}
+				<Swiper
+					{...settingsMain}
+					className="w-full h-[75%]"
 					appendDots={(dots) => {
 						let temp = 0;
 						dots.map((item, index) => {
@@ -89,6 +103,9 @@ function FullImageView({ open, close, images, currentslide }) {
 										setImageError(true);
 									}}
 									style={{ maxWidth: '80%', maxHeight: '70vh' }}
+									layout="fill"
+									objectFit="contain"
+									className="w-full h-full object-contain hover:cursor-pointer"
 								/>
 							</div>
 						))}
@@ -100,10 +117,13 @@ function FullImageView({ open, close, images, currentslide }) {
 									'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 								}
 								style={{ maxWidth: '40%', maxHeight: '70vh' }}
+								layout="fill"
+								objectFit="contain"
+								className="w-full h-full object-contain hover:cursor-pointer"
 							/>
 						</div>
 					)}
-				</Slider>
+				</Swiper>
 			)}
 		</section>
 	);

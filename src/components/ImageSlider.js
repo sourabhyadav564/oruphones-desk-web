@@ -1,7 +1,5 @@
 import React, { useState, useEffect, Fragment, createContext } from 'react';
 import Image from 'next/image';
-import Chevronleft from '@/assets/chevronleft.svg';
-import ChevronRight from '@/assets/chevronright.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import '../../node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
@@ -43,9 +41,16 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 	} `.toLowerCase();
 
 	return (
-		<SwiperSlide>
+		<SwiperSlide
+			className="w-full h-full flex flex-col items-center justify-center"
+			onClick={() => openFullImage && openFullImage()}
+		>
 			{Array.isArray(images) && images && (
-				<Swiper {...settingsMain} onSwiper={setSlider1}>
+				<Swiper
+					{...settingsMain}
+					onSwiper={setSlider1}
+					className="w-full h-[75%]"
+				>
 					{images
 						.filter((i) => i.fullImage)
 						.map((img, index) => (
@@ -73,14 +78,18 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 									layout="fill"
 									objectFit="contain"
 									onClick={() => openFullImage && openFullImage()}
-									className="w-full h-full"
+									className="w-full h-full object-contain hover:cursor-pointer"
 								/>
 							</Fragment>
 						))}
 				</Swiper>
 			)}
 			{!Array.isArray(images) && images && (
-				<Swiper {...settingsMain} onSwiper={setSlider1}>
+				<Swiper
+					{...settingsMain}
+					onSwiper={setSlider1}
+					className="w-full h-[75%]"
+				>
 					<Fragment>
 						<Image
 							src={
@@ -105,12 +114,12 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 							layout="fill"
 							objectFit="contain"
 							onClick={() => openFullImage && openFullImage()}
-							className="w-full h-full"
+							className="w-full h-full object-contain hover:cursor-pointer"
 						/>
 					</Fragment>
 				</Swiper>
 			)}
-			<div className="thumbnail-slider-wrap">
+			<div className="thumbnail-slider-wrap w-full h-[20%] col-span-1">
 				{Array.isArray(images) && images && (
 					<Swiper {...settingsMain} onSwiper={setSlider1}>
 						{images
@@ -141,14 +150,18 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 										layout="fill"
 										objectFit="contain"
 										alt={alternate_text}
-										className="w-full h-full"
+										className="w-[90%] h-[90%] object-contain"
 									/>
 								</Fragment>
 							))}
 					</Swiper>
 				)}
 				{!Array.isArray(images) && images && (
-					<Swiper {...settingsMain} onSwiper={setSlider1}>
+					<Swiper
+						{...settingsMain}
+						onSwiper={setSlider1}
+						className="w-full h-full"
+					>
 						<Image
 							src={
 								imageError
@@ -173,7 +186,7 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 							layout="fill"
 							objectFit="contain"
 							alt={alternate_text}
-							className="w-full h-full"
+							className="w-full h-full object-contain"
 						/>
 					</Swiper>
 				)}

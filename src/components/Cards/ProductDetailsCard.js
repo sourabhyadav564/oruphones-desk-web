@@ -148,8 +148,8 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 						</Fragment>
 					)}
 				</div>
-				<div className="lg:flex lg:flex-col-2  m-auto justify-center w-full">
-					<div className="col-span-1 lg:w-[600px] w-[400px] m-auto justify-center  pr-4">
+				<div className="lg:flex lg:flex-col-2 justify-center w-full">
+					<div className="col-span-1 lg:w-[600px] w-[400px] justify-center pr-4">
 						{!(data?.isOtherVendor === 'Y') ? (
 							<>
 								{' '}
@@ -525,8 +525,9 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 									}
 									onError={() => setImageError(true)}
 									className=""
-									height="120"
-									width="90"
+									height={120}
+									width={90}
+									alt="marketingName"
 								/>
 								<div className="flex flex-col justify-end relative  left-6">
 									<p className="font-Roboto-Bold text-tx text-[#000944]">
