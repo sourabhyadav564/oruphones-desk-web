@@ -615,7 +615,7 @@ function BrandPage() {
 						{isLoading ? (
 							Array(10)
 								.fill()
-								.map((_, index) => <ProductSkeletonCard isTopSelling={true} />)
+								.map((_, index) => <ProductSkeletonCard isTopSelling={true} key={index}/>)
 						) : !isLoading && isFinished == false && products.length > 0 ? (
 							products?.map((product, index) => (
 								<div key={index}>

@@ -1,7 +1,6 @@
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../styles/globals.css';
-import '../styles/react-slick/react-slick.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { ApplicationContext } from '../context/ApplicationContext';
 import { ToastContainer } from 'react-toastify';

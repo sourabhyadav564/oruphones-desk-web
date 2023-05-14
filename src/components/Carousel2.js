@@ -1,4 +1,9 @@
-import Slider from 'react-slick';
+import { Swiper } from 'swiper/react';
+import '../../node_modules/swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 import Chevronleft from '@/assets/chevronleft.svg';
 import Chevronright from '@/assets/chevronright.svg';
 import Image from 'next/image';
@@ -24,11 +29,11 @@ export default function Carousel2({ children, className, ...rest }) {
 		nextArrow: <ArrowRight />,
 	};
 	return (
-		<Slider
+		<Swiper
 			className={`carousel ${className ? className : ''} z-0`}
 			{...settings}
 		>
 			{children}
-		</Slider>
+		</Swiper>
 	);
 }
