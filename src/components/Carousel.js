@@ -1,22 +1,35 @@
 import Chevronleft from '@/assets/chevronleft.svg';
 import Chevronright from '@/assets/chevronright.svg';
 import Image from 'next/image';
+import { Swiper } from 'swiper/react';
+import SwiperCore, { Pagination, Navigation, Autoplay, Ally, ArrowLeft, ArrowRight } from 'swiper';
+import '../../node_modules/swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
-const ArrowLeft = ({ className, currentSlide, slideCount, top, ...rest }) => (
-	<div
-		className={`absolute z-10 top-32 left-2 ${top} bg-gray-400 rounded-full p-1 flex`}
-	>
-		<Image src={Chevronleft} width={10} height={10} alt="" {...rest} />
-	</div>
-);
-const ArrowRight = ({ className, currentSlide, slideCount, top, ...rest }) => (
-	<div
-		className={`absolute z-10 top-32 right-2 ${top} bg-gray-400 flex p-1 rounded-full`}
-	>
-		<Image src={Chevronright} width={10} height={10} alt="" {...rest} />
-	</div>
-);
+const swiperOptions = {
+	slidesPerView: 1,
+	spaceBetween: 10,
+	autoplay: {
+		delay: 5000,
+		disableOnInteraction: false,
+	},
+	pagination: {
+		clickable: true,
+	},
+	navigation: {
+		ArrowLeft,
+		ArrowRight,
+	},
+	modules: [Pagination, Navigation, Autoplay],
+};
 
-export default function Carousel({ children, className, top, ...rest }) {
-	return <>{children}</>;
+export default function Carousel({ children, className, ...rest }) {
+	return (
+		<Swiper {...swiperOptions} {...rest} className="w-full h-5/6">
+			{children}
+		</Swiper>
+	);
 }

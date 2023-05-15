@@ -1,4 +1,4 @@
-export default interface IDeal {
+type TDeal= {
   _id: string;
   deviceCondition: string;
   deviceStorage: string;
@@ -12,3 +12,5 @@ export default interface IDeal {
   imagePath: string; // needs clarification
   listingPrice: number;
 }
+
+export default TDeal;

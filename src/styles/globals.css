@@ -245,3 +245,7 @@ input::-webkit-inner-spin-button {
 	/* turn image to grey */
 	-webkit-filter: grayscale(100%);
 }
+
+.swiper-pagination-horizontal {
+	padding-top: 1.5rem;
+}

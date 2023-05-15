@@ -22,8 +22,6 @@ const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
 export default function Carousel2({ children, className, ...rest }) {
 	var settings = {
 		arrows: true,
-		slidesToShow: 2,
-		slidesToScroll: 1,
 		...rest,
 		prevArrow: <ArrowLeft />,
 		nextArrow: <ArrowRight />,

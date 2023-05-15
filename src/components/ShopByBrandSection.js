@@ -6,6 +6,7 @@ import { getDefaultImage } from '@/utils/util';
 const settings = {
 	slidesToShow: 3,
 	slidesToScroll: 3,
+	slidesPerView: 3,
 	dots: false,
 	arrows: true,
 	infinite: false,
@@ -20,10 +21,10 @@ function ShopByBrandSection({
 		<section className="m-auto items-center">
 			<Carousel {...settings} className="">
 				{shopbymodeldata?.map((item) => (
-					<SwiperSlide key={item?.make}>
+					<SwiperSlide key={item?.model}>
 						<ShopByModelCard
-							data={item.replace(/"/g, '')}
-							src={getDefaultImage(item.replace(/"/g, ''))}
+							data={item.model}
+							src={item.image}
 							make={shopbymakedata}
 						/>
 					</SwiperSlide>

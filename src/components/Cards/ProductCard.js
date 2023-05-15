@@ -5,7 +5,7 @@ import AddFav from '../AddFav';
 import VerifiedIcon from '../VerifiedIcon';
 import { useState } from 'react';
 
-function ProductCard({ data, prodLink, setProducts }) {
+function ProductCard({ data, prodLink, setProducts = () => {} }) {
 	var type = ['old phone', 'used', 'refurbished'];
 	const soldout = ` buy ${type[Math.floor(Math.random() * type.length)]} ${
 		data?.marketingName

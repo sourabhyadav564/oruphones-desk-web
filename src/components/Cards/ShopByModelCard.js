@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 function ShopByModelCard({
 	data,
-	location,
 	makeLink,
 	make,
 	src,
@@ -12,13 +10,7 @@ function ShopByModelCard({
 	fallBackSrc = 'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 		.src,
 }) {
-	const router = useRouter();
 	const [imageError, setImageError] = useState(false);
-	const [loadingState, setLoadingState] = useState(false);
-
-	useEffect(() => {
-		setLoadingState(false);
-	}, [router.pathname]);
 
 	return (
 		<div>

@@ -2,7 +2,11 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const ProductSkeletonCard = ({ popular, isTopSelling, isBestDeal }) => {
+const ProductSkeletonCard = ({
+	popular = false,
+	isTopSelling = true,
+	isBestDeal = true,
+}) => {
 	if (isBestDeal) {
 		return (
 			<div className="rounded-md shadow hover:shadow-md p-4 pb-6 bg-gradient-to-l from-m-white to-m-green  w-[900px] h-[260px] space-y-3 mx-2 mb-2">

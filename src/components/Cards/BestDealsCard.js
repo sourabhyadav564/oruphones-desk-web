@@ -6,7 +6,7 @@ import ChevronRight from '@/assets/chevronright.svg';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 
-function BestDealsCard({ data, setProducts }) {
+function BestDealsCard({ data }) {
 	var type = ['old phone', 'used', 'refurbished'];
 	const soldout = `bestdeals buy ${
 		type[Math.floor(Math.random() * type.length)]
@@ -30,7 +30,7 @@ function BestDealsCard({ data, setProducts }) {
 					{!(
 						data?.isOtherVendor === 'Y' &&
 						Cookies.get('userUniqueId') == undefined
-					) && <AddFav data={data} setProducts={setProducts} />}
+					) && <AddFav data={data} setProducts={null} />}
 				</div>
 			</div>
 			<div className="flex justify-between items-center absolute">

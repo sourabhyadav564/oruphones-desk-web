@@ -8,18 +8,16 @@ const sortOptions = [
 	{ name: 'Price - Low to High', href: '#', current: false },
 	{ name: 'Price - High to Low', href: '#', current: false },
 	{ name: 'Newest First', href: '#', current: false },
-	// { name: "Oldest First", href: "#", current: false },
-	// { name: "Oldest First", href: "#", current: false },
 	{ name: 'Featured', href: '#', current: true },
 ];
 
 function Filter({
 	listingsCount,
 	children,
-	setApplySort,
-	setApplyFilter,
-	makeName,
-	makename,
+	setApplySort=()=>{},
+	setApplyFilter=()=>{},
+	makeName='Apple',
+	makename=null,
 }) {
 	const { filterOptions } = useFilterOptions();
 	const router = useRouter();
