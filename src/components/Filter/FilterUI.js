@@ -23,22 +23,15 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 				if (value === 'all') {
 					setter(optionObj?.options.map((i) => i.value));
 				} else {
-					setter((prev) => {
-						return prev?.length + 2 === optionObj?.options.length
-							? [...prev, value, 'all']
-							: (prev && [...prev, value]) || [value];
-					});
+					const computed = [...selected, value];
+					setter(computed);
 				}
 			} else {
 				if (value === 'all') {
 					setter([]);
 				} else {
-					setter(
-						(prev) =>
-							prev &&
-							prev.length > 0 &&
-							prev?.filter((item) => item !== value && item !== 'all')
-					);
+					const computed = selected.filter((i) => i !== value);
+					setter(computed);
 				}
 			}
 		}
@@ -63,6 +56,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 											e.preventDefault();
 											openPopup();
 										}}
+										alt="someImageidk"
 									/>
 								)}
 							</p>

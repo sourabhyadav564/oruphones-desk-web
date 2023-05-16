@@ -1,11 +1,13 @@
 type TListingFilter = {
+	listingLocation?: string;
 	page?: number;
-	make?: string;
-	model?: string;
-	condition?: string;
-	storage?: string;
-	warranty?: string;
+	make?: string[];
+	model?: string[];
+	condition?: string[];
+	storage?: string[];
+	warranty?: string[];
 	verified?: boolean;
+	priceRange?: number[];
 	limit?: number;
 };
 

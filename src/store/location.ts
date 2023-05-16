@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 import Geocode from 'react-geocode';
 import setLocation from '@/utils/fetchers/setLocation';
 import { topDealsQueryAtom } from '@/store/topDeals';
+import filterAtom from '@/store/productFilter';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
@@ -9,10 +10,11 @@ export const locationAtom = atom<string>('India');
 const readLocationAtom = atom((get) => get(locationAtom));
 export const updateLocationAtom = atom(
 	null,
-	async (_get, set, location: string) => {
+	async (get, set, location: string) => {
 		console.log('idk ', location);
 		await setLocation(location);
 		set(topDealsQueryAtom, location);
+		set(filterAtom, { ...get(filterAtom), listingLocation: location });
 		set(locationAtom, location);
 	}
 );

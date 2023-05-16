@@ -1,10 +1,10 @@
-function PriceFilter({ options, router, setPriceRange }) {
+function PriceFilter({ options, router, priceRange, setPriceRange }) {
 	const { min, max } = router.query;
 	const handleMinChange = (e) => {
-		setPriceRange((prev) => ({ ...prev, min: parseInt(e.target.value) }));
+		setPriceRange([+e.target.value, priceRange[1]]);
 	};
 	const handleMaxChange = (e) => {
-		setPriceRange((prev) => ({ ...prev, max: parseInt(e.target.value) }));
+		setPriceRange([priceRange[0], +e.target.value]);
 	};
 
 	if (router && router?.pathname === '/product/models') {

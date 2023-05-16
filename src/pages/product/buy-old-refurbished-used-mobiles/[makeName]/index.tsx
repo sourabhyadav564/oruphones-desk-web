@@ -20,12 +20,16 @@ import {
 	useInfiniteQuery,
 	QueryClient,
 	dehydrate,
+	useQuery,
 } from '@tanstack/react-query';
 import { SwiperSlide } from 'swiper/react';
 import getModels from '@/utils/fetchers/getModels';
 import { useAtom, useAtomValue } from 'jotai';
 import filterAtom, { filterPageAtom } from '@/store/productFilter';
 import { useHydrateAtoms } from 'jotai/utils';
+import { useInView } from 'react-intersection-observer';
+import { getCookie, setCookie } from 'cookies-next';
+import { locationAtom } from '@/store/location';
 
 type TPageProps = {
 	makeName: string;
@@ -34,6 +38,7 @@ type TPageProps = {
 	filters: TListingFilter;
 	count: number;
 	dehydratedState: any;
+	location: string;
 };
 
 const settings = {
@@ -49,6 +54,12 @@ const settings = {
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
+	let cookie = getCookie('location', ctx) as string;
+	if (!cookie) {
+		// set cookie to India
+		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
+		cookie = 'India';
+	}
 	let makeName = ctx.query.makeName as string;
 	makeName = makeName
 		.split(' ')
@@ -56,20 +67,24 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		.join(' ');
 
 	let filters: TListingFilter = {
-		make: makeName as string,
+		make: [makeName as string],
+		listingLocation: cookie,
 		limit: 11,
 	};
 	const queryClient = new QueryClient();
-	let infiniteDeals=await queryClient.fetchInfiniteQuery({
+	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
 			const data = await getFilteredListings({ ...filters, page: 1 });
 			return data.slice(5);
 		},
 	});
-	const bestDeals=infiniteDeals.pages[0].slice(0,5);
-	console.log(bestDeals);
-	let count = await getFilteredListingsCount(filters);
+	const bestDeals = infiniteDeals.pages[0].slice(0, 5);
+	// let count = await getFilteredListingsCount(filters);
+	let count = await queryClient.fetchQuery({
+		queryKey: ['filtered-listings-count', filters],
+		queryFn: () => getFilteredListingsCount(filters)
+	});
 	let models = await getModels(makeName);
 	return {
 		props: {
@@ -79,25 +94,32 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			filters,
 			count,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+			location: cookie,
 		},
 	};
 };
 
+// TODO: Back to top button/ floating filter menu
 function BrandPage({
 	makeName,
 	bestDeals,
 	models,
 	filters,
 	count,
+	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([
 		[filterAtom, { ...filters, limit: 12 }],
 		[filterPageAtom, 1],
+		[locationAtom, location],
 	]);
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
 	const filterData = useAtomValue(filterAtom);
 	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
+	const [locationVal] = useAtom(locationAtom);
+
+	// TODO: Add deferring of loading of products, waiting for filter to settle
 	const {
 		isLoading,
 		data,
@@ -112,7 +134,6 @@ function BrandPage({
 				...filterData,
 				page: pageParam,
 			});
-			console.log(data);
 			return data;
 		},
 		getNextPageParam: (lastPage) => {
@@ -120,6 +141,23 @@ function BrandPage({
 				return undefined;
 			}
 			return filterPage;
+		},
+	});
+	const {
+		isLoading: isCountLoading,
+		data: countData,
+	} = useQuery({
+		queryKey: ['filtered-listings-count', filterData],
+		queryFn: () => getFilteredListingsCount(filterData),
+	});
+	const { ref } = useInView({
+		triggerOnce: false,
+		threshold: 0.45,
+		onChange: (inView) => {
+			if (inView) {
+				setFilterPage(filterPage + 1);
+				fetchNextPage();
+			}
 		},
 	});
 	useEffect(() => {
@@ -193,10 +231,7 @@ function BrandPage({
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">{`${makeName} Page`}</h1>
-				<Filter
-					listingsCount={count}
-					makeName={makeName}
-				>
+				<Filter listingsCount={countData || 0} makeName={makeName}>
 					{isLoading ? (
 						<ProductSkeletonCard isBestDeal={true} />
 					) : (
@@ -228,7 +263,10 @@ function BrandPage({
 						</div>
 					)}
 					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
-						Total Products ({count})
+						Total Products ({JSON.stringify(filterData)})
+					</h4>
+					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
+						{`Total Products (${countData || 0})`}
 					</h4>
 					<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
 						{data?.pages.map((page, idx1) => {
@@ -246,11 +284,10 @@ function BrandPage({
 						})}
 					</div>
 					<button
+						ref={ref}
 						disabled={isFetchingNextPage || isError}
 						onClick={() => {
-							console.log('Clicked');
 							setFilterPage(filterPage + 1);
-							console.log(filterPage);
 							fetchNextPage();
 						}}
 						className={`${
