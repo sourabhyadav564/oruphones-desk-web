@@ -11,7 +11,10 @@ function PriceFilter({ options, router, setPriceRange }) {
 		return null;
 	}
 	return (
-		<div key={options?.id} className="border-b border-gray-200 py-4">
+		<div
+			key={options?.id}
+			className="border-b border-gray-200 py-4  cursor-pointer select-none"
+		>
 			<h3 className="flow-root">
 				<span className="lg:font-Roboto-Regular font-Roboto-Semibold lg:text-regularFontSize text-smallFontSize  text-m-green">
 					{options?.name}

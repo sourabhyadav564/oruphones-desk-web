@@ -45,7 +45,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 	};
 
 	return (
-		<Disclosure defaultOpen as="div" className="border-b border-gray-200 py-4">
+		<Disclosure defaultOpen as="div" className="border-b border-gray-200 py-4 ">
 			{({ open }) => (
 				<Fragment>
 					<h3 className="-my-3 flow-root">
@@ -80,7 +80,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 							{optionObj?.options.map((option, optionIdx) => (
 								<div
 									key={option.value}
-									className="flex items-center font-Roboto-Light text-smallFontSize"
+									className="flex items-center font-Roboto-Light text-smallFontSize select-none"
 								>
 									<input
 										id={`filter-${optionObj?.id}-${optionIdx}`}
@@ -91,7 +91,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 										}
 										disabled={option?.disabled}
 										onChange={(e) => handleChange(e, option.value)}
-										className="h-4 w-4 border-gray-300 rounded text-m-green focus:ring-transparent"
+										className="h-4 w-4 border-gray-300 rounded text-m-green focus:ring-transparent  cursor-pointer select-none"
 									/>
 									<label
 										htmlFor={`filter-${optionObj?.id}-${optionIdx}`}

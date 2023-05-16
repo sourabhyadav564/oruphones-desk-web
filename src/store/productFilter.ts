@@ -1,8 +1,7 @@
-import { atomWithStorage } from "jotai/utils";
-import type  TListingFilter  from "@/types/ListingFilter";
+import type TListingFilter from '@/types/ListingFilter';
+import { atom } from 'jotai';
 
-const filterAtom = atomWithStorage<TListingFilter>('productFilters',{
-  page: 1,
-});
+const filterAtom = atom<TListingFilter>({});
+export const filterPageAtom =atom<number>(1);
 
 export default filterAtom;

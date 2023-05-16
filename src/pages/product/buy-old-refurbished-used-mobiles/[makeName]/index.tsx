@@ -3,27 +3,37 @@ import Filter from '@/components/Filter';
 import React, { useState, useEffect } from 'react';
 import Carousel from '@/components/Carousel';
 import ProductCard from '@/components/Cards/ProductCard';
-import NoMatch from '@/components/NoMatch';
+// import NoMatch from '@/components/NoMatch';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 import ShopByBrandSection from '@/components/ShopByBrandSection';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import getFilteredListings from '@/utils/fetchers/filteredFetch';
-import TListingFilter, { TListingReturnFilter, Tmodel } from '@/types/ListingFilter';
-import { useQuery } from '@tanstack/react-query';
+import getFilteredListings, {
+	getFilteredListingsCount,
+} from '@/utils/fetchers/filteredFetch';
+import TListingFilter, {
+	TListingReturnFilter,
+	Tmodel,
+} from '@/types/ListingFilter';
+import {
+	useInfiniteQuery,
+	QueryClient,
+	dehydrate,
+} from '@tanstack/react-query';
 import { SwiperSlide } from 'swiper/react';
 import getModels from '@/utils/fetchers/getModels';
-import { useAtomValue } from 'jotai';
-import filterAtom from '@/store/productFilter';
+import { useAtom, useAtomValue } from 'jotai';
+import filterAtom, { filterPageAtom } from '@/store/productFilter';
 import { useHydrateAtoms } from 'jotai/utils';
 
 type TPageProps = {
 	makeName: string;
-	products: TListingReturnFilter[];
 	bestDeals: TListingReturnFilter[];
 	models: Tmodel[];
 	filters: TListingFilter;
+	count: number;
+	dehydratedState: any;
 };
 
 const settings = {
@@ -45,42 +55,72 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(' ');
 
-	const filters: TListingFilter = {
+	let filters: TListingFilter = {
 		make: makeName as string,
-		page: 1,
 		limit: 11,
 	};
-	let products: TListingReturnFilter[] = await getFilteredListings(filters);
-	console.log('length: ', products.length);
+	const queryClient = new QueryClient();
+	let infiniteDeals=await queryClient.fetchInfiniteQuery({
+		queryKey: ['filtered-listings', filters],
+		queryFn: async () => {
+			const data = await getFilteredListings({ ...filters, page: 1 });
+			return data.slice(5);
+		},
+	});
+	const bestDeals=infiniteDeals.pages[0].slice(0,5);
+	console.log(bestDeals);
+	let count = await getFilteredListingsCount(filters);
 	let models = await getModels(makeName);
-	const bestDeals = products.slice(0, 5);
-	products = products.slice(5);
 	return {
 		props: {
 			makeName,
-			products,
 			bestDeals,
 			models,
-			filters
+			filters,
+			count,
+			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 		},
 	};
 };
 
 function BrandPage({
 	makeName,
-	products,
 	bestDeals,
 	models,
-	filters
+	filters,
+	count,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	useHydrateAtoms([[filterAtom, filters]]);
+	useHydrateAtoms([
+		[filterAtom, { ...filters, limit: 12 }],
+		[filterPageAtom, 1],
+	]);
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
 	const filterData = useAtomValue(filterAtom);
-	const { data, isLoading, isError } = useQuery({
-		queryKey: ['listings', { make: makeName }, { filter: filterData }],
-		queryFn: () => getFilteredListings(filterData),
-		initialData: products,
+	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
+	const {
+		isLoading,
+		data,
+		isError,
+		hasNextPage,
+		fetchNextPage,
+		isFetchingNextPage,
+	} = useInfiniteQuery({
+		queryKey: ['filtered-listings', filterData],
+		queryFn: async ({ pageParam }) => {
+			const data = await getFilteredListings({
+				...filterData,
+				page: pageParam,
+			});
+			console.log(data);
+			return data;
+		},
+		getNextPageParam: (lastPage) => {
+			if (lastPage.length < (filters.limit || 12)) {
+				return undefined;
+			}
+			return filterPage;
+		},
 	});
 	useEffect(() => {
 		switch (makeName) {
@@ -154,7 +194,7 @@ function BrandPage({
 			<main className="container py-4">
 				<h1 className="sr-only">{`${makeName} Page`}</h1>
 				<Filter
-					listingsCount={products?.length + bestDeals?.length}
+					listingsCount={count}
 					makeName={makeName}
 				>
 					{isLoading ? (
@@ -163,7 +203,7 @@ function BrandPage({
 						!isLoading &&
 						bestDeals &&
 						bestDeals.length > 0 && (
-							<div className="w-full h-1/4">
+							<div className="w-full h-80">
 								<Carousel
 									{...settings}
 									key={bestDeals.length > 0 ? bestDeals.length : -1}
@@ -188,39 +228,37 @@ function BrandPage({
 						</div>
 					)}
 					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
-						Total Products ({products?.length + bestDeals?.length})
+						Total Products ({count})
 					</h4>
 					<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-						{isLoading ? (
-							Array(10).map((_, index) => (
-								<ProductSkeletonCard isTopSelling={true} key={index} />
-							))
-						) : !isLoading && !isError && products.length > 0 ? (
-							products?.map((product, index) => (
-								<div key={index}>
-									<ProductCard data={product} prodLink />
-								</div>
-							))
-						) : (
-							<div className="col-span-3 pt-20 h-96 items-center flex justify-center ">
-								{isLoading ? 'Loading...' : <NoMatch />}
-							</div>
-						)}
+						{data?.pages.map((page, idx1) => {
+							return (
+								<React.Fragment key={idx1}>
+									{page.map((product, idx2) => {
+										return (
+											<div key={idx2}>
+												<ProductCard data={product} prodLink />
+											</div>
+										);
+									})}
+								</React.Fragment>
+							);
+						})}
 					</div>
-					{/* {!isLoading &&
-						isFinished === false &&
-						products.length != totalProducts && (
-							<span
-								className={`${
-									isLoadingMore ? 'w-[250px]' : 'w-[150px]'
-								} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-								onClick={loadMoreData}
-							>
-								<p className="block text-m-green font-semibold">
-									{isLoadingMore ? 'Fetching more products...' : 'Load More'}
-								</p>
-							</span>
-						)} */}
+					<button
+						disabled={isFetchingNextPage || isError}
+						onClick={() => {
+							console.log('Clicked');
+							setFilterPage(filterPage + 1);
+							console.log(filterPage);
+							fetchNextPage();
+						}}
+						className={`${
+							!hasNextPage && 'hidden'
+						} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
+					>
+						Next page
+					</button>
 				</Filter>
 			</main>
 		</>

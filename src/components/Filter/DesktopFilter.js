@@ -91,7 +91,7 @@ const DesktopFilter = ({ setFilters, filterOptions }) => {
 
 	return (
 		<form className="block bg-m-white p-6 rounded shadow">
-			<h3 className="sr-only">Filtes</h3>
+			<h3 className="sr-only">Filters</h3>
 			{filterOptions &&
 				filterOptions.map((section) =>
 					section?.id === 'price' ? (
