@@ -8,8 +8,9 @@ import styles from '../styles/fullimageview.module.css';
 import Chevronleft from '@/assets/chevronleft.svg';
 import ChevronRight from '@/assets/chevronright.svg';
 import Cross from '@/assets/cross1.svg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
+import { Navigation, Pagination } from 'swiper';
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
 	<div className="absolute z-10 top-60 left-2  bg-gray-400  rounded-full p-1 flex ">
@@ -40,20 +41,27 @@ function FullImageView({ open, close, images, currentslide }) {
 		images = [images];
 	}
 
-	let dotes = images;
-
 	images = shiftArray(images, currentslide);
 
-		const settingsMain = {
-			slidesToShow: 1,
-			slidesToScroll: 1,
-			autoplay: false,
-			autoplaySpeed: 3000,
-			arrows: false,
-			fade: true,
-			asNavFor: '.slider-nav',
-			slidesPerView: 1,
-		};
+	const settingsMain = {
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: false,
+		autoplaySpeed: 3000,
+		arrows: false,
+		fade: true,
+		asNavFor: '.slider-nav',
+		slidesPerView: 1,
+		dots: true,
+		pagination: {
+			clickable: true
+		},
+		navigation: {
+			ArrowLeft,
+			ArrowRight,
+		},
+		modules: [Pagination, Navigation],
+	};
 
 	return (
 		<section className={styles.imageview_container}>
@@ -70,27 +78,13 @@ function FullImageView({ open, close, images, currentslide }) {
 			{images && (
 				<Swiper
 					{...settingsMain}
-					className="w-full h-[75%]"
-					appendDots={(dots) => {
-						let temp = 0;
-						dots.map((item, index) => {
-							if (item.props.className === 'slick-active') {
-								temp = index + 1;
-							}
-						});
-						return (
-							<span style={{ color: 'white' }}>
-								{dotes?.length === 1
-									? `1 / 1 `
-									: `${currentslide + temp} / ${images?.length}`}
-							</span>
-						);
-					}}
+					className="w-full h-[85%]"
+					paginationStyle={{ bottom: 60 }}
 				>
 					{images
 						.filter((i) => i?.fullImage)
 						.map((img, index) => (
-							<div key={index} className={styles.image_wrapper}>
+							<SwiperSlide key={index} className={`${styles.image_wrapper}`}>
 								<Image
 									alt="ORU Phones Logo"
 									src={
@@ -105,9 +99,9 @@ function FullImageView({ open, close, images, currentslide }) {
 									style={{ maxWidth: '80%', maxHeight: '70vh' }}
 									layout="fill"
 									objectFit="contain"
-									className="w-full h-full object-contain hover:cursor-pointer"
+									className="object-contain hover:cursor-pointer"
 								/>
-							</div>
+							</SwiperSlide>
 						))}
 					{images[0]?.fullImage == '' && (
 						<div className={styles.image_wrapper}>

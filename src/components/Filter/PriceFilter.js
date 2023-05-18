@@ -1,5 +1,4 @@
 function PriceFilter({ options, router, priceRange, setPriceRange }) {
-	const { min, max } = router.query;
 	const handleMinChange = (e) => {
 		setPriceRange([+e.target.value, priceRange[1]]);
 	};
@@ -25,8 +24,8 @@ function PriceFilter({ options, router, priceRange, setPriceRange }) {
 					type="number"
 					className="w-full rounded h-10 text-sm sm:h-8"
 					min={300}
-					placeholder={min}
-					disabled={min === undefined ? false : true}
+					placeholder={0}
+					// disabled={min === undefined ? false : true}
 					style={{ border: '1px solid #e4e3e3' }}
 					onChange={(e) => handleMinChange(e, options)}
 				/>
@@ -34,8 +33,8 @@ function PriceFilter({ options, router, priceRange, setPriceRange }) {
 					type="number"
 					className="w-full rounded h-10 text-sm sm:h-8"
 					max={300}
-					placeholder={max}
-					disabled={max === undefined ? false : true}
+					placeholder={999999}
+					// disabled={max === undefined ? false : true}
 					style={{ border: '1px solid #e4e3e3' }}
 					onChange={(e) => handleMaxChange(e, options)}
 				/>

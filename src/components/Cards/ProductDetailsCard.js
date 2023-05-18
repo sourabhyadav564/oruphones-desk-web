@@ -152,7 +152,6 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 					<div className="col-span-1 lg:w-[600px] w-[400px] justify-center pr-4">
 						{!(data?.isOtherVendor === 'Y') ? (
 							<>
-								{' '}
 								{(data?.images || data?.defaultImage || data?.imagePath) && (
 									<ImageSlider
 										openFullImage={openFullImage}

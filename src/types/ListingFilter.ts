@@ -11,16 +11,60 @@ type TListingFilter = {
 	limit?: number;
 };
 
+export type TListingFilterWithID = {
+	listingId: string;
+	listingLocation?: string;
+	page?: number;
+	make?: string[];
+	model?: string[];
+	condition?: string[];
+	storage?: string[];
+	warranty?: string[];
+	verified?: boolean;
+	priceRange?: number[];
+	limit?: number;
+};
+
 export type TListingReturnFilter = {
 	_id?: string;
 	deviceCondition?: string;
-	defaultImage?: string;
+	// defaultImage?: string;
 	listingLocation?: string;
 	listingPrice?: number;
 	marketingName?: string;
 	model?: string;
 	listingDate?: string;
 	listedBy?: string;
+	images?: {
+		thumbImage: string;
+		fullImage: string;
+		isVarified: string;
+	}[];
+	defaultImage: {
+		fullImage: string;
+	};
+	imagePath: string;
+	deviceStorage?: string;
+	charger?: string;
+	earphone?: string;
+	originalBox?: string;
+	deviceRam?: string;
+	functionalTestResults?: {
+		commandName: string;
+		startDateTime: string;
+		displayName: string;
+		testStatus: string;
+		endDateTime: string;
+	}[];
+	notionalPercentage?: number;
+	warranty?: string;
+	cosmetic?: {
+		0: string;
+		1: string;
+		2: string;
+	};
+
+	count?: number;
 };
 
 export type Tmodel = {

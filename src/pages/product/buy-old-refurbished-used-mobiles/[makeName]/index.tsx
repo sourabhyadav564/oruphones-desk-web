@@ -9,9 +9,7 @@ import Head from 'next/head';
 import ShopByBrandSection from '@/components/ShopByBrandSection';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import getFilteredListings, {
-	getFilteredListingsCount,
-} from '@/utils/fetchers/filteredFetch';
+import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import TListingFilter, {
 	TListingReturnFilter,
 	Tmodel,
@@ -20,7 +18,6 @@ import {
 	useInfiniteQuery,
 	QueryClient,
 	dehydrate,
-	useQuery,
 } from '@tanstack/react-query';
 import { SwiperSlide } from 'swiper/react';
 import getModels from '@/utils/fetchers/getModels';
@@ -36,7 +33,6 @@ type TPageProps = {
 	bestDeals: TListingReturnFilter[];
 	models: Tmodel[];
 	filters: TListingFilter;
-	count: number;
 	dehydratedState: any;
 	location: string;
 };
@@ -76,15 +72,10 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
 			const data = await getFilteredListings({ ...filters, page: 1 });
-			return data.slice(5);
+			return data;
 		},
 	});
-	const bestDeals = infiniteDeals.pages[0].slice(0, 5);
-	// let count = await getFilteredListingsCount(filters);
-	let count = await queryClient.fetchQuery({
-		queryKey: ['filtered-listings-count', filters],
-		queryFn: () => getFilteredListingsCount(filters)
-	});
+	const bestDeals = infiniteDeals.pages[0].data.slice(0, 5);
 	let models = await getModels(makeName);
 	return {
 		props: {
@@ -92,7 +83,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			bestDeals,
 			models,
 			filters,
-			count,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 			location: cookie,
 		},
@@ -105,7 +95,6 @@ function BrandPage({
 	bestDeals,
 	models,
 	filters,
-	count,
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([
@@ -117,7 +106,6 @@ function BrandPage({
 	const [description, setDescription] = useState<string>('Description');
 	const filterData = useAtomValue(filterAtom);
 	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
-	const [locationVal] = useAtom(locationAtom);
 
 	// TODO: Add deferring of loading of products, waiting for filter to settle
 	const {
@@ -137,18 +125,12 @@ function BrandPage({
 			return data;
 		},
 		getNextPageParam: (lastPage) => {
-			if (lastPage.length < (filters.limit || 12)) {
+			console.log(lastPage);
+			if (lastPage.data.length < (filters.limit || 12)) {
 				return undefined;
 			}
 			return filterPage;
 		},
-	});
-	const {
-		isLoading: isCountLoading,
-		data: countData,
-	} = useQuery({
-		queryKey: ['filtered-listings-count', filterData],
-		queryFn: () => getFilteredListingsCount(filterData),
 	});
 	const { ref } = useInView({
 		triggerOnce: false,
@@ -231,28 +213,23 @@ function BrandPage({
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">{`${makeName} Page`}</h1>
-				<Filter listingsCount={countData || 0} makeName={makeName}>
-					{isLoading ? (
-						<ProductSkeletonCard isBestDeal={true} />
-					) : (
-						!isLoading &&
-						bestDeals &&
-						bestDeals.length > 0 && (
-							<div className="w-full h-80">
-								<Carousel
-									{...settings}
-									key={bestDeals.length > 0 ? bestDeals.length : -1}
-									className="bestDealCarousel"
-								>
-									{bestDeals.map((items, index) => (
-										<SwiperSlide key={index}>
-											<BestDealsCard data={items} />
-										</SwiperSlide>
-									))}
-								</Carousel>
-							</div>
-						)
-					)}
+				<Filter
+					listingsCount={data?.pages[0].totalCount || 0}
+					makeName={makeName}
+				>
+					<div className="w-full h-80">
+						<Carousel
+							{...settings}
+							key={bestDeals.length > 0 ? bestDeals.length : -1}
+							className="bestDealCarousel"
+						>
+							{bestDeals.map((items, index) => (
+								<SwiperSlide key={index}>
+									<BestDealsCard data={items} />
+								</SwiperSlide>
+							))}
+						</Carousel>
+					</div>
 					{models?.length > 0 && (
 						<div className="font-Roboto-Semibold text-xlFontSize">
 							<p className="opacity-50">Shop By Model</p>
@@ -266,13 +243,13 @@ function BrandPage({
 						Total Products ({JSON.stringify(filterData)})
 					</h4>
 					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
-						{`Total Products (${countData || 0})`}
+						{`Total Products (${data?.pages[0].totalCount || 0})`}
 					</h4>
 					<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
 						{data?.pages.map((page, idx1) => {
 							return (
 								<React.Fragment key={idx1}>
-									{page.map((product, idx2) => {
+									{page.data.map((product, idx2) => {
 										return (
 											<div key={idx2}>
 												<ProductCard data={product} prodLink />

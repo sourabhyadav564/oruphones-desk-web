@@ -11,12 +11,20 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 
 		if (optionObj && optionObj.id === 'verification') {
 			if (checked) {
-				setter((prev) => (prev && [...prev, value]) || [value]);
+				if (value === 'all') {
+					const computed = optionObj?.options.map((i) => i.value);
+					setter(computed);
+				} else {
+					const computed = [...selected, value];
+					setter(computed);
+				}
 			} else {
-				setter(
-					(prev) =>
-						prev && prev.length > 0 && prev?.filter((item) => item !== value)
-				);
+				if (value === 'all') {
+					setter([]);
+				} else {
+					const computed = selected.filter((i) => i !== value);
+					setter(computed);
+				}
 			}
 		} else {
 			if (checked) {

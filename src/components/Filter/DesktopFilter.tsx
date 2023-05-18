@@ -14,6 +14,8 @@ import WarrantyInfo from '../Popup/WarrantyInfo';
 import filterAtom from '@/store/productFilter';
 import { atom, useAtom, useSetAtom } from 'jotai';
 
+// TODO: implement warranty filter logic
+
 const selectedBrandAtom = atom<string[]>([]);
 const selectedBrandRWAtom = atom(
 	(get) => get(selectedBrandAtom),
@@ -89,9 +91,9 @@ const selectedVerificationRWAtom = atom(
 		set(selectedVerificationAtom, update);
 		set(filterAtom, (prev) => ({
 			...prev,
-			...(update?.length > 0
-				? { verification: update }
-				: { verification: undefined }),
+			...(update.length > 0 && update.includes('verified')
+				? { verified: true }
+				: { verified: undefined }),
 		}));
 	}
 );
@@ -102,7 +104,9 @@ const selectedPriceRangeRWAtom = atom(
 		set(selectedPriceRangeAtom, update);
 		set(filterAtom, (prev) => ({
 			...prev,
-			...(update?.length > 0 ? { price: update } : { price: undefined }),
+			...(update?.length > 0
+				? { priceRange: update }
+				: { priceRange: undefined }),
 		}));
 	}
 );
@@ -148,7 +152,7 @@ const DesktopFilter = ({ filterOptions }: any) => {
 						<PriceFilter
 							options={section}
 							key={section?.id}
-							priceRange = {selectedPriceRange}
+							priceRange={selectedPriceRange}
 							setPriceRange={setSelectedPriceRange}
 							router={router}
 						/>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment, createContext } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import '../../node_modules/swiper/swiper-bundle.css';
@@ -6,21 +6,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import { Controller, EffectFade, Navigation, Pagination } from 'swiper';
 
-function ImageSlider({ data, images, openFullImage, onDataContext }) {
-	const [slider1, setSlider1] = useState(null);
+function ImageSlider({ data, images, openFullImage }) {
+	const [controlledSwiper, setControlledSwiper] = useState(null);
 	const [imageError, setImageError] = useState(false);
-
-	useEffect(() => {
-		let MyContext = createContext(slider1?.innerSlider?.asNavForIndex);
-		MyContext = MyContext?._currentValue;
-
-		if (MyContext == undefined) {
-			onDataContext(0);
-		} else {
-			onDataContext(MyContext);
-		}
-	}, [onDataContext, slider1]);
 
 	const settingsMain = {
 		slidesToShow: 1,
@@ -31,6 +21,7 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 		fade: true,
 		asNavFor: '.slider-nav',
 		slidesPerView: 1,
+		modules: [Pagination, Navigation, EffectFade],
 	};
 
 	var type = ['old phone', 'used', 'refurbished'];
@@ -41,20 +32,18 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 	} `.toLowerCase();
 
 	return (
-		<SwiperSlide
-			className="w-full h-full flex flex-col items-center justify-center"
-			onClick={() => openFullImage && openFullImage()}
-		>
+		<SwiperSlide className="w-full h-full flex flex-col items-center justify-center">
 			{Array.isArray(images) && images && (
 				<Swiper
 					{...settingsMain}
-					onSwiper={setSlider1}
-					className="w-full h-[75%]"
+					onSwiper={setControlledSwiper}
+					className="c0 w-full h-[75%]"
+					effect="fade"
 				>
 					{images
 						.filter((i) => i.fullImage)
 						.map((img, index) => (
-							<Fragment key={index}>
+							<SwiperSlide key={index}>
 								<Image
 									loading="lazy"
 									placeholder="blur"
@@ -77,10 +66,14 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 									alt={alternate_text}
 									layout="fill"
 									objectFit="contain"
-									onClick={() => openFullImage && openFullImage()}
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										openFullImage && openFullImage();
+									}}
 									className="w-full h-full object-contain hover:cursor-pointer"
 								/>
-							</Fragment>
+							</SwiperSlide>
 						))}
 				</Swiper>
 			)}
@@ -88,9 +81,9 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 				<Swiper
 					{...settingsMain}
 					onSwiper={setSlider1}
-					className="w-full h-[75%]"
+					className="c1 w-full h-[75%]"
 				>
-					<Fragment>
+					<SwiperSlide>
 						<Image
 							src={
 								imageError
@@ -116,16 +109,24 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 							onClick={() => openFullImage && openFullImage()}
 							className="w-full h-full object-contain hover:cursor-pointer"
 						/>
-					</Fragment>
+					</SwiperSlide>
 				</Swiper>
 			)}
 			<div className="thumbnail-slider-wrap w-full h-[20%] col-span-1">
 				{Array.isArray(images) && images && (
-					<Swiper {...settingsMain} onSwiper={setSlider1}>
+					<Swiper
+						{...settingsMain}
+						slidesPerView={5}
+						slidesToShow={5}
+						spaceBetween={10}
+						centeredSlides={false}
+						centerInsufficientSlides={true}
+						className="mt-4 c2 w-[75%] h-full"
+					>
 						{images
 							.filter((i) => i.fullImage)
 							.map((img, index) => (
-								<Fragment key={index}>
+								<SwiperSlide key={index} onClick={()=>controlledSwiper.slideTo(index)}>
 									<Image
 										src={
 											imageError
@@ -150,44 +151,46 @@ function ImageSlider({ data, images, openFullImage, onDataContext }) {
 										layout="fill"
 										objectFit="contain"
 										alt={alternate_text}
-										className="w-[90%] h-[90%] object-contain"
+										className="w-[90%] h-[90%] object-contain cursor-pointer"
 									/>
-								</Fragment>
+								</SwiperSlide>
 							))}
 					</Swiper>
 				)}
 				{!Array.isArray(images) && images && (
 					<Swiper
 						{...settingsMain}
-						onSwiper={setSlider1}
-						className="w-full h-full"
+						slidesPerView={4}
+						className="c3 w-full h-full"
 					>
-						<Image
-							src={
-								imageError
-									? 'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-									: images?.thumbImage ||
-									  images?.fullImage ||
-									  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-							}
-							onError={() => setImageError(true)}
-							loading="lazy"
-							placeholder="blur"
-							priority={false}
-							quality={100}
-							unoptimized={false}
-							blurDataURL={
-								imageError
-									? 'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-									: images?.thumbImage ||
-									  images?.fullImage ||
-									  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-							}
-							layout="fill"
-							objectFit="contain"
-							alt={alternate_text}
-							className="w-full h-full object-contain"
-						/>
+						<SwiperSlide>
+							<Image
+								src={
+									imageError
+										? 'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+										: images?.thumbImage ||
+										  images?.fullImage ||
+										  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+								}
+								onError={() => setImageError(true)}
+								loading="lazy"
+								placeholder="blur"
+								priority={false}
+								quality={100}
+								unoptimized={false}
+								blurDataURL={
+									imageError
+										? 'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+										: images?.thumbImage ||
+										  images?.fullImage ||
+										  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+								}
+								layout="fill"
+								objectFit="contain"
+								alt={alternate_text}
+								className="w-full h-full object-contain"
+							/>
+						</SwiperSlide>
 					</Swiper>
 				)}
 			</div>
