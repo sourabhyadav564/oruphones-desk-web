@@ -80,7 +80,6 @@ function ImageSlider({ data, images, openFullImage }) {
 			{!Array.isArray(images) && images && (
 				<Swiper
 					{...settingsMain}
-					onSwiper={setSlider1}
 					className="c1 w-full h-[75%]"
 				>
 					<SwiperSlide>

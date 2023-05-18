@@ -7,15 +7,36 @@ import { getCookie, setCookie } from 'cookies-next';
 import { useHydrateAtoms } from 'jotai/utils';
 import { locationAtom } from '@/store/location';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
-import {
-	getListingByID,
-} from '@/utils/fetchers/filteredFetch';
+import { getListingByID } from '@/utils/fetchers/filteredFetch';
 import { useQuery } from '@tanstack/react-query';
 
 type TPageProps = {
 	location: string;
 	productID: string;
 	dehydratedState: any;
+};
+
+const returnFilter = {
+	_id: 1,
+	deviceCondition: 1,
+	defaultImage: 1,
+	listingLocation: 1,
+	listingPrice: 1,
+	marketingName: 1,
+	model: 1,
+	listingDate: 1,
+	listedBy: 1,
+	listingId: 1,
+	images: 1,
+	imagePath: 1,
+	isOtherVendor: 1,
+	deviceStorage: 1,
+	charger: 1,
+	earphone: 1,
+	originalBox: 1,
+	deviceRam: 1,
+	warranty: 1,
+	cosmetic: 1,
 };
 
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
@@ -33,9 +54,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let productdata = await queryClient.fetchQuery({
 		queryKey: ['product-listing', productID],
 		queryFn: async () => {
-			const data = await getListingByID({
-				listingId: productID as string,
-			});
+			const data = await getListingByID(
+				{
+					listingId: productID as string,
+				},
+				returnFilter as any
+			);
 			return data;
 		},
 	});
@@ -61,9 +85,12 @@ function ProductDetails({
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['product-listing', productID],
 		queryFn: async () => {
-			const data = await getListingByID({
-				listingId: productID as string,
-			});
+			const data = await getListingByID(
+				{
+					listingId: productID as string,
+				},
+				returnFilter as any
+			);
 			return data;
 		},
 	});
@@ -133,7 +160,7 @@ function ProductDetails({
 							fullImage: data?.imagePath,
 							thumbImage: data?.imagePath,
 						},
-					]) 
+					])
 					// ||
 					// (data?.vendorLogo && [
 					// 	{
