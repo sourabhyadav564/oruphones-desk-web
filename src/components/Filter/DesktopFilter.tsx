@@ -12,7 +12,7 @@ import VerifiedInfoPopup from '../Popup/VerifiedInfoPopup';
 import RamFilter from './RamFilter';
 import WarrantyInfo from '../Popup/WarrantyInfo';
 import filterAtom from '@/store/productFilter';
-import { atom, useAtom, useSetAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 
 // TODO: implement warranty filter logic
 
@@ -112,7 +112,7 @@ const selectedPriceRangeRWAtom = atom(
 );
 
 //TODO: map types for filterOptions
-const DesktopFilter = ({ filterOptions }: any) => {
+const DesktopFilter = ({ filterOptions, defaultBrands }: any) => {
 	// const [selectedBrand, setSelectedBrand] = useState([]);
 	// const [selectedCondition, setSelectedCondition] = useState();
 	// const [selectedColor, setSelectedColor] = useState();
@@ -158,7 +158,7 @@ const DesktopFilter = ({ filterOptions }: any) => {
 						/>
 					) : section?.id === 'brand' ? (
 						<BrandFilter
-							options={section}
+							options={defaultBrands}
 							key={section?.id}
 							setter={setSelectedBrand}
 							selected={selectedBrand}

@@ -2,6 +2,7 @@ import FilterUI from './FilterUI';
 
 function BrandFilter({ options, router, ...rest }) {
 	const { makeName } = router.query;
+	console.log('options', options);
 	let optionObj;
 	if (makeName !== null && makeName !== undefined) {
 		optionObj = {

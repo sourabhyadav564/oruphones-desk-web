@@ -12,7 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { detailWithUserInfo } from '@/api/axios';
 import { fetchSimilarProducts } from '@/api/axios';
-import { useAtom, useAtomValue } from 'jotai';
+import {  useAtomValue } from 'jotai';
 
 type TPageProps = {
 	location: string;

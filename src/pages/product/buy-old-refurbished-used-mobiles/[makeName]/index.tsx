@@ -21,13 +21,12 @@ import {
 } from '@tanstack/react-query';
 import { SwiperSlide } from 'swiper/react';
 import getModels from '@/utils/fetchers/getModels';
-import { useAtom, useAtomValue } from 'jotai';
-import filterAtom, { filterPageAtom } from '@/store/productFilter';
+import { atom, useAtom } from 'jotai';
+import filterAtom from '@/store/productFilter';
 import { useHydrateAtoms } from 'jotai/utils';
 import { useInView } from 'react-intersection-observer';
 import { getCookie, setCookie } from 'cookies-next';
 import { locationAtom } from '@/store/location';
-import { useRouter } from 'next/router';
 import useDebounce from '@/hooks/useDebounce';
 
 type TPageProps = {
@@ -48,6 +47,8 @@ const settings = {
 	dots: true,
 	arrows: true,
 };
+
+const filterPageAtom = atom<number>(1);
 
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
@@ -99,7 +100,6 @@ function BrandPage({
 	filters,
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	const router = useRouter();
 	useHydrateAtoms([
 		[filterAtom, { ...filters, limit: 12 }],
 		[filterPageAtom, 1],
@@ -111,7 +111,6 @@ function BrandPage({
 	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
 	const debouncedFilterData = useDebounce(filterData, 750);
 
-	// TODO: Add deferring of loading of products, waiting for filter to settle
 	const {
 		isLoading,
 		data,
@@ -226,12 +225,13 @@ function BrandPage({
 				<Filter
 					listingsCount={data?.pages[0].totalCount || 0}
 					makeName={makeName}
+					defaultBrands={[makeName]}
 				>
-					<div className="w-full h-80">
+					<div className="w-full h-[21rem]">
 						<Carousel
 							{...settings}
 							key={bestDeals.length > 0 ? bestDeals.length : -1}
-							className="bestDealCarousel"
+							className="bestDealCarousel h-full"
 						>
 							{bestDeals.map((items, index) => (
 								<SwiperSlide key={index}>

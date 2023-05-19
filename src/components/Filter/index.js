@@ -11,13 +11,24 @@ const sortOptions = [
 	{ name: 'Featured', href: '#', current: true },
 ];
 
+const brandsToOptions = (brands) => {
+	let options = brands.map((brand) => ({
+		value: brand,
+		label: brand,
+		active: true,
+		disabled: false,
+	}));
+	return { id: 'brand', name: 'Brand', options };
+};
+
 function Filter({
 	listingsCount,
 	children,
-	setApplySort=()=>{},
-	setApplyFilter=()=>{},
-	makeName='Apple',
-	makename=null,
+	setApplySort = () => {},
+	setApplyFilter = () => {},
+	makeName = 'Apple',
+	makename = null,
+	defaultBrands = ['Apple'],
 }) {
 	const { filterOptions } = useFilterOptions();
 	const router = useRouter();
@@ -171,6 +182,7 @@ function Filter({
 							setFilters={setApplyFilter}
 							filterOptions={tempFilters}
 							key={makeName}
+							defaultBrands={brandsToOptions(defaultBrands)}
 						/>
 					</div>
 					<div className="col-span-3">{children}</div>

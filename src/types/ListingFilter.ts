@@ -76,4 +76,5 @@ export type Tmodel = {
 	image: string;
 };
 
+
 export default TListingFilter;

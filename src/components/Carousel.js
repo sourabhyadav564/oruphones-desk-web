@@ -2,7 +2,14 @@ import Chevronleft from '@/assets/chevronleft.svg';
 import Chevronright from '@/assets/chevronright.svg';
 import Image from 'next/image';
 import { Swiper } from 'swiper/react';
-import SwiperCore, { Pagination, Navigation, Autoplay, Ally, ArrowLeft, ArrowRight } from 'swiper';
+import SwiperCore, {
+	Pagination,
+	Navigation,
+	Autoplay,
+	Ally,
+	ArrowLeft,
+	ArrowRight,
+} from 'swiper';
 import '../../node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -28,7 +35,11 @@ const swiperOptions = {
 
 export default function Carousel({ children, className, ...rest }) {
 	return (
-		<Swiper {...swiperOptions} {...rest} className="w-full h-5/6">
+		<Swiper
+			{...swiperOptions}
+			{...rest}
+			className={`w-full h-5/6 ${className}`}
+		>
 			{children}
 		</Swiper>
 	);
