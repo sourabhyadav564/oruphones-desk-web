@@ -78,7 +78,7 @@ function ProductCard({ data, prodLink, setProducts = () => {} }) {
 										  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 										: data?.imagePath ||
 										  data?.defaultImage?.fullImage ||
-										  data?.images[0]?.fullImage ||
+										  (data?.images && data.images[0]?.fullImage) ||
 										  getDefaultImage(data?.marketingName) ||
 										  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 								}
@@ -88,7 +88,7 @@ function ProductCard({ data, prodLink, setProducts = () => {} }) {
 										  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 										: data?.imagePath ||
 										  data?.defaultImage?.fullImage ||
-										  data?.images[0]?.fullImage ||
+										  (data?.images && data.images[0]?.fullImage) ||
 										  getDefaultImage(data?.marketingName) ||
 										  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 								}

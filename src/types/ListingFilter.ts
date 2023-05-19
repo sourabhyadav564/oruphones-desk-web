@@ -9,6 +9,10 @@ type TListingFilter = {
 	verified?: boolean;
 	priceRange?: number[];
 	limit?: number;
+	sort?: {
+		price?: number;
+		date?: number;
+	};
 };
 
 export type TListingFilterWithID = {
@@ -26,7 +30,7 @@ export type TListingFilterWithID = {
 };
 
 export type TListingReturnFilter = {
-	_id?: string;
+	listingId?: string;
 	deviceCondition?: string;
 	// defaultImage?: string;
 	listingLocation?: string;

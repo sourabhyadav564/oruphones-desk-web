@@ -27,6 +27,7 @@ import { useHydrateAtoms } from 'jotai/utils';
 import { useInView } from 'react-intersection-observer';
 import { getCookie, setCookie } from 'cookies-next';
 import { locationAtom } from '@/store/location';
+import { useRouter } from 'next/router';
 
 type TPageProps = {
 	makeName: string;
@@ -76,7 +77,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		},
 	});
 	const bestDeals = infiniteDeals.pages[0].data.slice(0, 5);
-	let models = await getModels(makeName);
+	let models = await getModels(makeName, 20);
 	return {
 		props: {
 			makeName,
@@ -97,6 +98,7 @@ function BrandPage({
 	filters,
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+	const router = useRouter();
 	useHydrateAtoms([
 		[filterAtom, { ...filters, limit: 12 }],
 		[filterPageAtom, 1],
@@ -104,7 +106,7 @@ function BrandPage({
 	]);
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
-	const filterData = useAtomValue(filterAtom);
+	const [filterData, setFilterData] = useAtom(filterAtom);
 	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
 
 	// TODO: Add deferring of loading of products, waiting for filter to settle
@@ -125,8 +127,7 @@ function BrandPage({
 			return data;
 		},
 		getNextPageParam: (lastPage) => {
-			console.log(lastPage);
-			if (lastPage.data.length < (filters.limit || 12)) {
+			if (lastPage?.data.length < (filters.limit || 12)) {
 				return undefined;
 			}
 			return filterPage;
@@ -202,6 +203,13 @@ function BrandPage({
 				break;
 		}
 	}, [makeName]);
+
+	// update brand name in filter if changed
+	useEffect(() => {
+		if (filterData?.make && filterData.make[0] === makeName) return;
+		setFilterData({ ...filterData, make: [makeName] });
+		console.log('Spark!');
+	}, [makeName, setFilterData, filterData]);
 
 	return (
 		<>

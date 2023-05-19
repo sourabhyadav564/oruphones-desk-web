@@ -6,10 +6,27 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
-import { Controller, EffectFade, Navigation, Pagination } from 'swiper';
+import {
+	Controller,
+	EffectFade,
+	Navigation,
+	Pagination,
+	type Swiper as TSwiper,
+} from 'swiper';
+import type { TListingReturnFilter } from '@/types/ListingFilter';
 
-function ImageSlider({ data, images, openFullImage }) {
-	const [controlledSwiper, setControlledSwiper] = useState(null);
+function ImageSlider({
+	data,
+	images,
+	openFullImage,
+}: {
+	data: TListingReturnFilter;
+	images: any;
+	openFullImage?: any;
+}) {
+	const [controlledSwiper, setControlledSwiper] = useState<
+		TSwiper | undefined
+	>();
 	const [imageError, setImageError] = useState(false);
 
 	const settingsMain = {
@@ -36,9 +53,9 @@ function ImageSlider({ data, images, openFullImage }) {
 			{Array.isArray(images) && images && (
 				<Swiper
 					{...settingsMain}
-					onSwiper={setControlledSwiper}
 					className="c0 w-full h-[75%]"
 					effect="fade"
+					onSwiper={setControlledSwiper}
 				>
 					{images
 						.filter((i) => i.fullImage)
@@ -78,10 +95,7 @@ function ImageSlider({ data, images, openFullImage }) {
 				</Swiper>
 			)}
 			{!Array.isArray(images) && images && (
-				<Swiper
-					{...settingsMain}
-					className="c1 w-full h-[75%]"
-				>
+				<Swiper {...settingsMain} className="c1 w-full h-[75%]">
 					<SwiperSlide>
 						<Image
 							src={
@@ -116,7 +130,6 @@ function ImageSlider({ data, images, openFullImage }) {
 					<Swiper
 						{...settingsMain}
 						slidesPerView={5}
-						slidesToShow={5}
 						spaceBetween={10}
 						centeredSlides={false}
 						centerInsufficientSlides={true}
@@ -125,7 +138,10 @@ function ImageSlider({ data, images, openFullImage }) {
 						{images
 							.filter((i) => i.fullImage)
 							.map((img, index) => (
-								<SwiperSlide key={index} onClick={()=>controlledSwiper.slideTo(index)}>
+								<SwiperSlide
+									key={index}
+									onClick={() => controlledSwiper?.slideTo(index)}
+								>
 									<Image
 										src={
 											imageError
@@ -159,8 +175,11 @@ function ImageSlider({ data, images, openFullImage }) {
 				{!Array.isArray(images) && images && (
 					<Swiper
 						{...settingsMain}
-						slidesPerView={4}
-						className="c3 w-full h-full"
+						slidesPerView={5}
+						spaceBetween={10}
+						centeredSlides={false}
+						centerInsufficientSlides={true}
+						className="mt-4 c3 w-[75%] h-full"
 					>
 						<SwiperSlide>
 							<Image

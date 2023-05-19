@@ -1,4 +1,4 @@
-export default async function getModels(make: string) {
+export default async function getModels(make: string, limit?: number) {
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/models`,
 		{
@@ -6,7 +6,7 @@ export default async function getModels(make: string) {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ make }),
+			body: JSON.stringify({ make, count: limit }),
 		}
 	);
 	const resp = await response.json();

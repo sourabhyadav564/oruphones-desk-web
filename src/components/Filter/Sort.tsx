@@ -9,38 +9,72 @@ import DesktopFilter from './DesktopFilter';
 import { useRouter } from 'next/router';
 import useFilterOptions from '@/hooks/useFilterOptions';
 import Image from 'next/image';
+import { atom, useAtom } from 'jotai';
+import filterAtom from '@/store/productFilter';
 
-const classNames = (...classes) => {
+const sortsAtom = atom<string>('Featured');
+const sortsAtomRW = atom(
+	(get) => get(sortsAtom),
+	(get, set, update: string) => {
+		set(sortsAtom, update);
+		let tempUpdate:
+			| {
+					price?: number;
+					date?: number;
+			  }
+			| undefined;
+		switch (update) {
+			case 'Featured': {
+				tempUpdate = undefined;
+				break;
+			}
+			case 'Price - High to Low': {
+				tempUpdate = {
+					price: -1,
+				};
+				break;
+			}
+			case 'Price - Low to High': {
+				tempUpdate = {
+					price: 1,
+				};
+				break;
+			}
+			case 'Newest First': {
+				tempUpdate = {
+					date: -1,
+				};
+				break;
+			}
+		}
+		set(filterAtom, (prev) => ({
+			...prev,
+			sort: tempUpdate,
+		}));
+	}
+);
+
+const classNames = (...classes:any) => {
 	return classes.filter(Boolean).join(' ');
 };
 
 export default function Sort({
 	sortOptions,
-	setApplySort,
 	setFilters,
 	makeName,
+}: {
+	sortOptions: any;
+	setFilters: any;
+	makeName: string;
 }) {
-	const router = useRouter();
+	const [sorts, setSorts] = useAtom(sortsAtomRW);
 	const { filterOptions } = useFilterOptions();
 	let tempFilters = filterOptions;
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-	function handleOnChange(data) {
-		setApplySort(data.name);
-		sortOptions?.map((items) => {
-			return items.name === data.name
-				? (items.current = true)
-				: (items.current = false);
-		});
+	function handleOnChange(data: any) {
+		setSorts(data.name);
+		console.log(data);
 	}
-
-	useEffect(() => {
-		sortOptions?.map((items) => {
-			return items.name === 'Featured'
-				? (items.current = true)
-				: (items.current = false);
-		});
-		setApplySort('Featured');
-	}, [router.pathname]);
 
 	return (
 		<Fragment>
@@ -49,9 +83,7 @@ export default function Sort({
 					<Menu as="div" className=" relative inline-block text-left ">
 						<div>
 							<Menu.Button className="group inline-flex justify-center px-4 py-2 rounded-md bg-white text-sm font-Roboto-Regular text-regularFontSize text-gray-700 hover:text-gray-900 border">
-								{(sortOptions &&
-									sortOptions.filter((i) => i.current)[0]?.name) ||
-									'Sort'}
+								{sorts || 'Sort'}
 								<Image
 									src={ArrowDown}
 									width={20}
@@ -73,7 +105,7 @@ export default function Sort({
 						>
 							<Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-2xl bg-white focus:outline-none">
 								<div className="py-1">
-									{sortOptions.map((option) => (
+									{sortOptions.map((option:any) => (
 										<Menu.Item key={option.name}>
 											{({ active }) => (
 												<a
