@@ -48,19 +48,20 @@ export async function getListingByID(
 }
 
 export async function getSimilarListings(
-	filter: TListingFilter,
+	filter: TListingFilterWithID,
 	returnFilter?: TListingReturnFilter
-): Promise<{ data: TListingReturnFilter[]; totalCount: number }>{
+): Promise<{ data: TListingReturnFilter[]; totalCount: number }> {
 	const content = {
 		filter,
-		...(returnFilter ? { returnFilter }:{
-			listingId: 1,
-			deviceCondition: 1,
-			
-		}),
+		...(returnFilter
+			? { returnFilter }
+			: {
+					listingId: 1,
+					deviceCondition: 1,
+			  }),
 	};
 	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter`,
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter/getSimilar`,
 		{
 			method: 'POST',
 			headers: {
@@ -70,5 +71,6 @@ export async function getSimilarListings(
 		}
 	);
 	const resp = await response.json();
+	console.log('fecther: ', resp.data);
 	return resp.data;
 }

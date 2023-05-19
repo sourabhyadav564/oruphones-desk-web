@@ -54,7 +54,7 @@ const sortsAtomRW = atom(
 	}
 );
 
-const classNames = (...classes:any) => {
+const classNames = (...classes: any) => {
 	return classes.filter(Boolean).join(' ');
 };
 
@@ -73,7 +73,7 @@ export default function Sort({
 	const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 	function handleOnChange(data: any) {
 		setSorts(data.name);
-		console.log(data);
+		// Set active
 	}
 
 	return (
@@ -105,20 +105,19 @@ export default function Sort({
 						>
 							<Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-2xl bg-white focus:outline-none">
 								<div className="py-1">
-									{sortOptions.map((option:any) => (
+									{sortOptions.map((option: any) => (
 										<Menu.Item key={option.name}>
 											{({ active }) => (
 												<a
 													onClick={(e) => handleOnChange(option)}
-													className={classNames(
-														option.current
-															? 'font-Roboto-Medium text-regularFontSize text-gray-900'
-															: 'text-gray-500 font-Roboto-Light',
-														active
+													className={`${
+														option.name === sorts
 															? 'bg-gray-100 font-Roboto-Medium text-regularFontSize'
-															: '',
-														'block px-4 py-2 text-sm'
-													)}
+															: 'text-gray-700'
+													} ${
+														active &&
+														'bg-gray-100 font-Roboto-Medium text-regularFontSize'
+													} block px-4 py-2 text-sm`}
 												>
 													{option.name}
 												</a>

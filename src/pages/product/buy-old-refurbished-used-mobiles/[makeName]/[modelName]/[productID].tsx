@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ProductCard from '../../../../../components/Cards/ProductCard';
 import ProductDetailsCard from '../../../../../components/Cards/ProductDetailsCard';
 import FullImageView from '@/components/FullImageView';
@@ -9,12 +9,38 @@ import { locationAtom } from '@/store/location';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
 import { getListingByID } from '@/utils/fetchers/filteredFetch';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { detailWithUserInfo } from '@/api/axios';
+import { fetchSimilarProducts } from '@/api/axios';
+import { useAtom, useAtomValue } from 'jotai';
 
 type TPageProps = {
 	location: string;
 	productID: string;
 	dehydratedState: any;
 };
+
+// const VENDORS = {
+// 	6: 'Amazon',
+// 	7: 'Quikr',
+// 	8: 'Cashify',
+// 	9: '2Gud',
+// 	10: 'Budli',
+// 	11: 'Paytm',
+// 	12: 'Yaantra',
+// 	13: 'Sahivalue',
+// 	14: 'Shopcluse',
+// 	15: 'Xtracover',
+// 	16: 'Mobigarage',
+// 	17: 'Instacash',
+// 	18: 'Cashforphone',
+// 	19: 'Recycledevice',
+// 	20: 'Quickmobile',
+// 	21: 'mbr_Buyblynk',
+// 	22: 'mbr_Electronicbazaar',
+// 	23: 'Flipkart',
+// 	26: 'OLX',
+// };
 
 const returnFilter = {
 	_id: 1,
@@ -49,7 +75,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		cookie = 'India';
 	}
 	const productID = ctx.params!.productID as string;
-	console.log('ProductID: ', productID);
 	const queryClient = new QueryClient();
 	let productdata = await queryClient.fetchQuery({
 		queryKey: ['product-listing', productID],
@@ -63,7 +88,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	console.log('Product Data: ', productdata);
 	return {
 		props: {
 			location: cookie,
@@ -78,10 +102,12 @@ function ProductDetails({
 	productID,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([[locationAtom, location]]);
-	let [simliarProducts, setSimliarProducts] = useState([]);
+	const [simliarProducts, setSimliarProducts] = useState<any>([]);
 	const [openImageFullView, setOpenImageFullView] = useState(false);
 	const [contextData, setContextData] = useState('');
-
+	const [listingInfo, setListingInfo] = useState<any>(null);
+	const locationVal = useAtomValue(locationAtom);
+	const router = useRouter();
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['product-listing', productID],
 		queryFn: async () => {
@@ -94,6 +120,92 @@ function ProductDetails({
 			return data;
 		},
 	});
+	useEffect(() => {
+		const resolverFunction = async () => {
+			if (router.query.productID) {
+				const isLimited = true;
+				await detailWithUserInfo(
+					router.query.isOtherVendor,
+					router.query.productID,
+					'Guest',
+					"6459be69282f201c8763619e",
+					isLimited
+				).then(async (response) => {
+					setListingInfo(response?.dataObject);
+					await detailWithUserInfo(
+						router.query.isOtherVendor,
+						router.query.productID,
+						'Guest',
+						'6459be69282f201c8763619e'
+					).then((response) => {
+						setListingInfo(response?.dataObject);
+					});
+				});
+			}
+		};
+		resolverFunction();
+	}, [router.query]);
+
+	const loadData = useCallback(
+		(intialPage: number) => {
+			let payLoad = {
+				listingLocation: locationVal,
+				make: [listingInfo?.make],
+				marketingName: [listingInfo?.marketingName],
+				reqPage: 'TSM',
+				color: [],
+				deviceCondition: [],
+				deviceStorage: [],
+				deviceRam: [],
+				maxsellingPrice: 200000,
+				minsellingPrice: 0,
+				verified: '',
+				warenty: [],
+			};
+			fetchSimilarProducts(payLoad, 'Guest', intialPage).then((response) => {
+				setSimliarProducts(
+					response?.dataObject?.otherListings?.filter((items: any) => {
+						return items.listingId != listingInfo.listingId;
+					})
+				);
+			});
+		},
+		[locationVal, listingInfo]
+	);
+
+	const loadMoreData = () => {
+		let payLoad = {
+			listingLocation: locationVal,
+			make: [listingInfo.make],
+			marketingName: [listingInfo.marketingName],
+			reqPage: 'TSM',
+			color: [],
+			deviceCondition: [],
+			deviceStorage: [],
+			deviceRam: [],
+			maxsellingPrice: 200000,
+			minsellingPrice: 0,
+			verified: '',
+			warenty: [],
+		};
+
+		fetchSimilarProducts(payLoad, 'Guest', 1).then((response) => {
+			let data = response?.dataObject?.otherListings?.filter((items: any) => {
+				return items.listingId != listingInfo.listingId;
+			});
+			setSimliarProducts((products: any) => [...products, ...data]);
+
+			let tempSimilarProds = simliarProducts?.filter((item: any) => {
+				return item.listingId != listingInfo?.listingId;
+			});
+		});
+	};
+
+	useEffect(() => {
+		let intialPage = 0;
+		loadData(intialPage);
+	}, [listingInfo, loadData]);
+
 	return (
 		<main className="container my-6">
 			<p className="sr-only"> Product Details page </p>
@@ -115,12 +227,12 @@ function ProductDetails({
 						Similar Products ({simliarProducts?.length || 0})
 					</p>
 					<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
-						{/* {simliarProducts && simliarProducts.length > 0 ? (
-							simliarProducts?.map((product, index) => (
+						{simliarProducts && simliarProducts.length > 0 ? (
+							simliarProducts?.map((product: any, index: number) => (
 								<ProductCard
 									key={index}
 									data={product}
-									setProducts={setSimliarProducts}
+									setProducts={setSimliarProducts as any}
 									prodLink
 								/>
 							))
@@ -128,7 +240,7 @@ function ProductDetails({
 							<div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">
 								There are no similar products
 							</div>
-						)} */}
+						)}
 					</div>
 					{/* {simliarProducts &&
 						simliarProducts.length > 0 &&

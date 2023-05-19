@@ -1,1 +1,2 @@
 - [ ] BUG: Landing page -> Brand page, 0 entries breaks SSR. (Nothing brand example)
+- [ ] Make city selection more consistent

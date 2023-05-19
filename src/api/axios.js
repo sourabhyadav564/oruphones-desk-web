@@ -650,7 +650,7 @@ export function detailWithUserInfo(
 		API_ENDPOINT =
 			BASE_URL +
 			`/device/listing/detailwithuserinfo?isOtherVendor=` +
-			isOtherVendor +
+			'N' +
 			'&listingid=' +
 			listingid +
 			`&userUniqueId=` +
@@ -661,7 +661,7 @@ export function detailWithUserInfo(
 		API_ENDPOINT =
 			BASE_URL +
 			`/device/listing/detailwithuserinfo?isOtherVendor=` +
-			isOtherVendor +
+			'N' +
 			'&listingid=' +
 			listingid +
 			`&userUniqueId=` +

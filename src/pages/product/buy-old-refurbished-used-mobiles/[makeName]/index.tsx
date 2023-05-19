@@ -261,12 +261,19 @@ function BrandPage({
 										return (
 											<div key={idx2}>
 												<ProductCard data={product} prodLink />
+												{/* <ProductSkeletonCard /> */}
 											</div>
 										);
 									})}
 								</React.Fragment>
 							);
 						})}
+						{isFetchingNextPage &&
+							Array.from({ length: 12 }).map((_, idx) => (
+								<div key={idx}>
+									<ProductSkeletonCard key={idx} />
+								</div>
+							))}
 					</div>
 					<button
 						ref={ref}
@@ -279,7 +286,7 @@ function BrandPage({
 							!hasNextPage && 'hidden'
 						} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
 					>
-						Next page
+						{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
 					</button>
 				</Filter>
 			</main>
