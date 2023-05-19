@@ -28,6 +28,7 @@ import { useInView } from 'react-intersection-observer';
 import { getCookie, setCookie } from 'cookies-next';
 import { locationAtom } from '@/store/location';
 import { useRouter } from 'next/router';
+import useDebounce from '@/hooks/useDebounce';
 
 type TPageProps = {
 	makeName: string;
@@ -108,6 +109,7 @@ function BrandPage({
 	const [description, setDescription] = useState<string>('Description');
 	const [filterData, setFilterData] = useAtom(filterAtom);
 	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
+	const debouncedFilterData = useDebounce(filterData, 750);
 
 	// TODO: Add deferring of loading of products, waiting for filter to settle
 	const {
@@ -118,7 +120,7 @@ function BrandPage({
 		fetchNextPage,
 		isFetchingNextPage,
 	} = useInfiniteQuery({
-		queryKey: ['filtered-listings', filterData],
+		queryKey: ['filtered-listings', debouncedFilterData],
 		queryFn: async ({ pageParam }) => {
 			const data = await getFilteredListings({
 				...filterData,
@@ -248,7 +250,7 @@ function BrandPage({
 						</div>
 					)}
 					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
-						Total Products ({JSON.stringify(filterData)})
+						Total Products ({JSON.stringify(debouncedFilterData)})
 					</h4>
 					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
 						{`Total Products (${data?.pages[0].totalCount || 0})`}
