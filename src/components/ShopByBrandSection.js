@@ -9,14 +9,11 @@ const settings = {
 	slidesPerView: 3,
 	dots: false,
 	arrows: true,
-	infinite: false,
+	loop: false,
 	swipeToSlide: true,
 };
 
-function ShopByBrandSection({
-	shopbymodeldata,
-	shopbymakedata,
-}) {
+function ShopByBrandSection({ shopbymodeldata, shopbymakedata }) {
 	return (
 		<section className="m-auto items-center">
 			<Carousel {...settings} className="">

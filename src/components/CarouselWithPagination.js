@@ -9,14 +9,10 @@ import 'swiper/css/autoplay';
 SwiperCore.use([Navigation]);
 SwiperCore.use([Pagination]);
 
-function CarouselWithPagination({ children, autoplay, ...rest }) {
+function CarouselWithPagination({ children, ...rest }) {
 	return (
 		<Swiper
-			autoplay={autoplay}
-			id="main"
-			tag="div"
-			wrapperTag="ul"
-			//   pagination={{ clickable: true }}
+			pagination={{ clickable: true }}
 			navigation={true}
 			modules={[Pagination, Navigation, Autoplay]}
 			className="mySwiper select-none"

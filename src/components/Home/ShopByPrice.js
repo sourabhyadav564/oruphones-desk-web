@@ -4,7 +4,7 @@ import Title from '../Title';
 
 const settings = {
 	dots: false,
-	infinite: false,
+	loop: false,
 	speed: 500,
 	slidesToShow: 6,
 	slidesToScroll: 1,

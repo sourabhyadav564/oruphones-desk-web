@@ -6,7 +6,7 @@ const data = [1, 2, 3, 4, 5, 6];
 
 const settings = {
 	dots: false,
-	infinite: false,
+	loop: false,
 	speed: 500,
 	slidesToShow: 4,
 	slidesToScroll: 1,

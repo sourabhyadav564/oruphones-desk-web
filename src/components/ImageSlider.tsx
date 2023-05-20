@@ -7,7 +7,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import {
-	Controller,
 	EffectFade,
 	Navigation,
 	Pagination,
@@ -34,7 +33,10 @@ function ImageSlider({
 		slidesToScroll: 1,
 		autoplay: false,
 		autoplaySpeed: 3000,
-		arrows: false,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
 		fade: true,
 		asNavFor: '.slider-nav',
 		slidesPerView: 1,

@@ -8,16 +8,22 @@ import Banner_2 from '@/assets/banner_web_2.png';
 import Banner_3 from '@/assets/banner_web_3.png';
 import AppDownloadPopup from './Popup/AppDownloadPopup';
 import { SwiperSlide } from 'swiper/react';
+import Link from 'next/link';
 
 const settings = {
-	slidesToShow: 1,
-	slidesToScroll: 1,
-	autoplay: true,
-	autoplaySpeed: 4000,
-	pauseOnHover: true,
-	// dots: true,
-	arrows: true,
-	infinite: true,
+	slidesPerView: 1,
+	autoplay: {
+		delay: 5000,
+		pauseOnHover: true,
+	},
+	navigation: {
+		nextEl: '.swiper-button-next',
+		prevEl: '.swiper-button-prev',
+	},
+	pagination: {
+		clickable: true,
+	},
+	loop: true,
 };
 
 const slides = [
@@ -74,13 +80,7 @@ const TopCarousel = () => {
 	}, [openLoginPopup, performAction, router]);
 	return (
 		<section>
-			<CarouselWithPagination
-				slidesPerView={1}
-				autoplay={{
-					delay: 4000,
-					disableOnInteraction: false,
-				}}
-			>
+			<CarouselWithPagination {...settings}>
 				{slides.map((item) => (
 					<SwiperSlide key={item.id}>
 						{item.link && item.id == 1 ? (
@@ -103,42 +103,45 @@ const TopCarousel = () => {
 								</div>
 							</div>
 						) : (
-							<a
+							<Link
 								className="flex justify-center relative mix-blend-overlay"
-								href={item.id != 3 && item.link}
+								href={item.id != 3 ? item.link : '#'}
 								key={item.id}
+								passHref
 							>
-								<Image
-									src={item.src}
-									alt={item.name}
-									width={'7680px'}
-									height={'1920px'}
-									className="bannerShadow"
-									data-aos="fade-down"
-								/>
-								{item.id == 3 && (
-									<div
-										className="w-full absolute left-0 right-0 md:bottom-16 -bottom-2 px-5 flex items-center justify-center"
-										style={{ fontSize: 10 }}
-									>
+								<>
+									<Image
+										src={item.src}
+										alt={item.name}
+										width={'7680px'}
+										height={'1920px'}
+										className="bannerShadow"
+										data-aos="fade-down"
+									/>
+									{item.id == 3 && (
 										<div
-											className="w-full flex rounded-[5px] h-12 justify-center "
-											data-aos="zoom-out-up"
+											className="w-full absolute left-0 right-0 md:bottom-16 -bottom-2 px-5 flex items-center justify-center"
+											style={{ fontSize: 10 }}
 										>
-											<div>
-												<div className="px-4 py-7 rounded-[5px] ">
-													<a
-														className="flex h-7 text-mediumFontSize font-Roboto-Semibold justify-center py-7 items-center px-16 rounded-[5px] bg-gradient-to-b from-[#FFDe59] to-[#FFDE59]"
-														onClick={() => handleClick()}
-													>
-														{item.id == 3 && <p>COMPARE PRICE</p>}
-													</a>
+											<div
+												className="w-full flex rounded-[5px] h-12 justify-center "
+												data-aos="zoom-out-up"
+											>
+												<div>
+													<div className="px-4 py-7 rounded-[5px] ">
+														<a
+															className="flex h-7 text-mediumFontSize font-Roboto-Semibold justify-center py-7 items-center px-16 rounded-[5px] bg-gradient-to-b from-[#FFDe59] to-[#FFDE59]"
+															onClick={() => handleClick()}
+														>
+															{item.id == 3 && <p>COMPARE PRICE</p>}
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								)}
-							</a>
+									)}
+								</>
+							</Link>
 						)}
 					</SwiperSlide>
 				))}

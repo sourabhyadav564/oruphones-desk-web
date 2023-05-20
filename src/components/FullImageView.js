@@ -48,13 +48,16 @@ function FullImageView({ open, close, images, currentslide }) {
 		slidesToScroll: 1,
 		autoplay: false,
 		autoplaySpeed: 3000,
-		arrows: false,
+		navigation: {
+			ArrowLeft,
+			ArrowRight,
+		},
 		fade: true,
 		asNavFor: '.slider-nav',
 		slidesPerView: 1,
 		dots: true,
 		pagination: {
-			clickable: true
+			clickable: true,
 		},
 		navigation: {
 			ArrowLeft,

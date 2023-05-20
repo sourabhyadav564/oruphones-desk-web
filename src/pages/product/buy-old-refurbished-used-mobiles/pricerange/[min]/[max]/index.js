@@ -19,7 +19,7 @@ const settings = {
 	pauseOnHover: true,
 	dots: true,
 	arrows: true,
-	infinite: true,
+	loop: true,
 	swipeToSlide: true,
 };
 
