@@ -61,7 +61,7 @@ function DeviceVerificationReport({ open, setOpen, data }) {
 						{data && data?.cosmetic && (
 							<div>
 								{deviceConditionQuestion.map((item, index) => (
-									<div>
+									<div key={index}>
 										<span className="text-lg font-semibold text-black">
 											{data?.cosmetic[index] != undefined && item?.title}
 										</span>

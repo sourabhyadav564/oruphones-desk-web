@@ -51,7 +51,6 @@ function FullImageView({ open, close, images, currentslide }) {
 			ArrowRight,
 		},
 		fade: true,
-		asNavFor: '.slider-nav',
 		slidesPerView: 1,
 		dots: true,
 		pagination: {

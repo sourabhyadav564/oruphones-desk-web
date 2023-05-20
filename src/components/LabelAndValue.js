@@ -113,7 +113,7 @@ function LabelAndValue({
 				<span className="flex flex-col pl-2">
 					<div className="flex items-start justify-start">
 						{showInfoPopup ? (
-							<p
+							<div
 								className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2"
 								style={{ color: '#878787' }}
 							>
@@ -125,11 +125,12 @@ function LabelAndValue({
 										height={10}
 										className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2"
 										onClick={showInfoPopup}
+										alt={'TODO'}
 									/>
 								</div>
-							</p>
+							</div>
 						) : showConditionInfoPopup ? (
-							<p
+							<div
 								className=" text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2"
 								style={{ color: '#878787' }}
 							>
@@ -141,11 +142,12 @@ function LabelAndValue({
 										height={10}
 										className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2"
 										onClick={showConditionInfoPopup}
+										alt={'TODO'}
 									/>
 								</div>
-							</p>
+							</div>
 						) : showWarrantyInfoPopup ? (
-							<p
+							<div
 								className="text-smallFontSize font-Roboto-Light whitespace-nowrap flex items-center ml-2"
 								style={{ color: '#878787' }}
 							>
@@ -157,9 +159,10 @@ function LabelAndValue({
 										height={10}
 										className="text-smallFontSize font-Roboto-Light cursor-pointer ml-2"
 										onClick={showWarrantyInfoPopup}
+										alt={'TODO'}
 									/>
 								</div>
-							</p>
+							</div>
 						) : (
 							<span
 								className="text-smallFontSize font-Roboto-Light whitespace-nowrap ml-2"
@@ -174,11 +177,11 @@ function LabelAndValue({
 						style={{ color: '#373737' }}
 					>
 						{showDeviceReport ? (
-							<p className="text-smallFontSize font-Roboto-Medium whitespace-nowrap underline cursor-pointer text-blue-600 hover:text-blue-800">
+							<div className="text-smallFontSize font-Roboto-Medium whitespace-nowrap underline cursor-pointer text-blue-600 hover:text-blue-800">
 								{value}
-							</p>
+							</div>
 						) : showInfoPopup ? (
-							<p
+							<div
 								className={
 									textAsLink
 										? 'text-smallFontSize font-Roboto-Medium whitespace-nowrap underline cursor-pointer text-blue-600 hover:text-blue-800'
@@ -187,9 +190,9 @@ function LabelAndValue({
 								onClick={showRequestVerificationSuccessPopup}
 							>
 								{value}
-							</p>
+							</div>
 						) : (
-							<p
+							<div
 								className={
 									labelTextSize
 										? 'text-smallFontSize font-Roboto-Medium whitespace-nowrap'
@@ -197,7 +200,7 @@ function LabelAndValue({
 								}
 							>
 								{value}
-							</p>
+							</div>
 						)}
 					</div>
 				</span>

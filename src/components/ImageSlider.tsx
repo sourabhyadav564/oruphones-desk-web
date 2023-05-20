@@ -38,7 +38,6 @@ function ImageSlider({
 			arrows: true,
 		},
 		fade: true,
-		asNavFor: '.slider-nav',
 		slidesPerView: 1,
 		modules: [Pagination, Navigation, EffectFade],
 	};

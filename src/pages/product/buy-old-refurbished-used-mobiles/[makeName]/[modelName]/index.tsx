@@ -1,18 +1,12 @@
 import Carousel from '@/components/Carousel';
-import { useRouter } from 'next/router';
 import { useState, useEffect, useContext, Fragment } from 'react';
 import BestDealsCard from '@/components/Cards/BestDealsCard';
 import ProductCard from '@/components/Cards/ProductCard';
 import Filter from '@/components/Filter';
-import AppContext from '@/context/ApplicationContext';
-import * as Axios from '@/api/axios';
 import NoMatch from '@/components/NoMatch';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
 import { atom, useAtom } from 'jotai';
-import TListingFilter, {
-	TListingReturnFilter,
-	Tmodel,
-} from '@/types/ListingFilter';
+import TListingFilter, { TListingReturnFilter } from '@/types/ListingFilter';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getCookie, setCookie } from 'cookies-next';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
@@ -25,7 +19,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { metaTags } from '@/utils/constant';
 import { SwiperSlide } from 'swiper/react';
-import ShopByBrandSection from '@/components/ShopByBrandSection';
 import Head from 'next/head';
 
 type TPageProps = {
@@ -38,13 +31,14 @@ type TPageProps = {
 };
 
 const settings = {
-	slidesToShow: 1,
-	slidesToScroll: 1,
-	autoplay: true,
-	autoplaySpeed: 4000,
-	pauseOnHover: true,
-	dots: true,
-	arrows: true,
+	slidesPerView: 1,
+	autoplay: {
+		delay: 5000,
+	},
+	navigation: {
+		dots: true,
+		arrows: true,
+	},
 };
 
 const filterPageAtom = atom<number>(1);
