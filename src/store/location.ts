@@ -1,8 +1,8 @@
 import { atom } from 'jotai';
 import Geocode from 'react-geocode';
-import setLocation from '@/utils/fetchers/setLocation';
 import { topDealsQueryAtom } from '@/store/topDeals';
 import filterAtom from '@/store/productFilter';
+import { setCookie } from 'cookies-next';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
@@ -12,7 +12,7 @@ export const updateLocationAtom = atom(
 	null,
 	async (get, set, location: string) => {
 		console.log('idk ', location);
-		await setLocation(location);
+		setCookie('location', location);
 		set(topDealsQueryAtom, location);
 		set(filterAtom, { ...get(filterAtom), listingLocation: location });
 		set(locationAtom, location);
@@ -34,7 +34,7 @@ export const updateLocationLatLongAtom = atom(
 			location.coords.latitude,
 			location.coords.longitude
 		);
-		const city = res.results[0].formatted_address.split(',').slice(-3)[0];
+		const city = res.results[0].address_components[4].long_name;
 		const noWhiteSpaceCity = city.replace(/\s/g, '');
 		set(updateLocationAtom, noWhiteSpaceCity);
 	}

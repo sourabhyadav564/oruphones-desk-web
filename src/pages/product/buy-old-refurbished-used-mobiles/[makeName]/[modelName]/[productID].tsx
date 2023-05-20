@@ -10,37 +10,17 @@ import { QueryClient, dehydrate } from '@tanstack/query-core';
 import { getListingByID } from '@/utils/fetchers/filteredFetch';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { detailWithUserInfo } from '@/api/axios';
-import { fetchSimilarProducts } from '@/api/axios';
-import {  useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
+import { getSimilarListings } from '@/utils/fetchers/filteredFetch';
+import Link from 'next/link';
 
 type TPageProps = {
 	location: string;
 	productID: string;
 	dehydratedState: any;
+	make: string | undefined;
+	model: string | undefined;
 };
-
-// const VENDORS = {
-// 	6: 'Amazon',
-// 	7: 'Quikr',
-// 	8: 'Cashify',
-// 	9: '2Gud',
-// 	10: 'Budli',
-// 	11: 'Paytm',
-// 	12: 'Yaantra',
-// 	13: 'Sahivalue',
-// 	14: 'Shopcluse',
-// 	15: 'Xtracover',
-// 	16: 'Mobigarage',
-// 	17: 'Instacash',
-// 	18: 'Cashforphone',
-// 	19: 'Recycledevice',
-// 	20: 'Quickmobile',
-// 	21: 'mbr_Buyblynk',
-// 	22: 'mbr_Electronicbazaar',
-// 	23: 'Flipkart',
-// 	26: 'OLX',
-// };
 
 const returnFilter = {
 	_id: 1,
@@ -50,6 +30,7 @@ const returnFilter = {
 	listingPrice: 1,
 	marketingName: 1,
 	model: 1,
+	make: 1,
 	listingDate: 1,
 	listedBy: 1,
 	listingId: 1,
@@ -76,7 +57,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	}
 	const productID = ctx.params!.productID as string;
 	const queryClient = new QueryClient();
-	let productdata = await queryClient.fetchQuery({
+	const prod = await queryClient.fetchQuery({
 		queryKey: ['product-listing', productID],
 		queryFn: async () => {
 			const data = await getListingByID(
@@ -88,11 +69,14 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
+	const { make, model } = prod;
 	return {
 		props: {
 			location: cookie,
 			productID,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+			make,
+			model,
 		},
 	};
 };
@@ -100,6 +84,8 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 function ProductDetails({
 	location,
 	productID,
+	make,
+	model,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([[locationAtom, location]]);
 	const [simliarProducts, setSimliarProducts] = useState<any>([]);
@@ -107,7 +93,6 @@ function ProductDetails({
 	const [contextData, setContextData] = useState('');
 	const [listingInfo, setListingInfo] = useState<any>(null);
 	const locationVal = useAtomValue(locationAtom);
-	const router = useRouter();
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['product-listing', productID],
 		queryFn: async () => {
@@ -120,96 +105,23 @@ function ProductDetails({
 			return data;
 		},
 	});
-	useEffect(() => {
-		const resolverFunction = async () => {
-			if (router.query.productID) {
-				const isLimited = true;
-				await detailWithUserInfo(
-					router.query.isOtherVendor,
-					router.query.productID,
-					'Guest',
-					"6459be69282f201c8763619e",
-					isLimited
-				).then(async (response) => {
-					setListingInfo(response?.dataObject);
-					await detailWithUserInfo(
-						router.query.isOtherVendor,
-						router.query.productID,
-						'Guest',
-						'6459be69282f201c8763619e'
-					).then((response) => {
-						setListingInfo(response?.dataObject);
-					});
+	const { data: similarProducts, isLoading: similarProductsLoading } = useQuery(
+		{
+			queryKey: ['similar-products', productID],
+			queryFn: async () => {
+				const data = await getSimilarListings({
+					listingId: productID as string,
+					limit: 20,
+					...(locationVal !== 'India' && { listingLocation: locationVal }),
 				});
-			}
-		};
-		resolverFunction();
-	}, [router.query]);
-
-	const loadData = useCallback(
-		(intialPage: number) => {
-			let payLoad = {
-				listingLocation: locationVal,
-				make: [listingInfo?.make],
-				marketingName: [listingInfo?.marketingName],
-				reqPage: 'TSM',
-				color: [],
-				deviceCondition: [],
-				deviceStorage: [],
-				deviceRam: [],
-				maxsellingPrice: 200000,
-				minsellingPrice: 0,
-				verified: '',
-				warenty: [],
-			};
-			fetchSimilarProducts(payLoad, 'Guest', intialPage).then((response) => {
-				setSimliarProducts(
-					response?.dataObject?.otherListings?.filter((items: any) => {
-						return items.listingId != listingInfo.listingId;
-					})
-				);
-			});
-		},
-		[locationVal, listingInfo]
+				return data;
+			},
+		}
 	);
-
-	const loadMoreData = () => {
-		let payLoad = {
-			listingLocation: locationVal,
-			make: [listingInfo.make],
-			marketingName: [listingInfo.marketingName],
-			reqPage: 'TSM',
-			color: [],
-			deviceCondition: [],
-			deviceStorage: [],
-			deviceRam: [],
-			maxsellingPrice: 200000,
-			minsellingPrice: 0,
-			verified: '',
-			warenty: [],
-		};
-
-		fetchSimilarProducts(payLoad, 'Guest', 1).then((response) => {
-			let data = response?.dataObject?.otherListings?.filter((items: any) => {
-				return items.listingId != listingInfo.listingId;
-			});
-			setSimliarProducts((products: any) => [...products, ...data]);
-
-			let tempSimilarProds = simliarProducts?.filter((item: any) => {
-				return item.listingId != listingInfo?.listingId;
-			});
-		});
-	};
-
-	useEffect(() => {
-		let intialPage = 0;
-		loadData(intialPage);
-	}, [listingInfo, loadData]);
 
 	return (
 		<main className="container my-6">
 			<p className="sr-only"> Product Details page </p>
-			{/* {JSON.stringify(data?.images)} */}
 			<section className="grid grid-cols-4 gap-4">
 				<div className="bg-white col-span-5">
 					<ProductDetailsCard
@@ -224,11 +136,11 @@ function ProductDetails({
 						className="text-m-black font-Roboto-Light text-regularFontSize my-3"
 						style={{ fontSize: 21 }}
 					>
-						Similar Products ({simliarProducts?.length || 0})
+						Similar Products ({similarProducts?.totalCount || 0})
 					</p>
 					<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
-						{simliarProducts && simliarProducts.length > 0 ? (
-							simliarProducts?.map((product: any, index: number) => (
+						{similarProducts && similarProducts.data.length > 0 ? (
+							similarProducts?.data.map((product: any, index: number) => (
 								<ProductCard
 									key={index}
 									data={product}
@@ -242,20 +154,23 @@ function ProductDetails({
 							</div>
 						)}
 					</div>
-					{/* {simliarProducts &&
-						simliarProducts.length > 0 &&
-						isFinished == false && (
-							<span
-								className={`${
-									isLoadingMore ? 'w-[250px]' : 'w-[150px]'
-								} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
-								onClick={loadMoreData}
+					{similarProducts &&
+						similarProducts.data.length > 0 &&
+						make &&
+						model && (
+							<Link
+								href={`/product/buy-old-refurbished-used-mobiles/${make}/${model}`}
+								passHref
 							>
-								<p className="block text-m-green font-semibold">
-									{isLoadingMore ? 'Fetching more products...' : 'Load More'}
+								<p
+									className={`${
+										isLoading ? 'w-[250px]' : 'w-[150px]'
+									} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+								>
+									{isLoading ? 'Fetching products...' : 'Load More'}
 								</p>
-							</span>
-						)} */}
+							</Link>
+						)}
 				</div>
 			</section>
 			<FullImageView

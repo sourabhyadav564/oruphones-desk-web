@@ -9,9 +9,7 @@ import { AppProps } from 'next/app';
 import SEO from '@/data/seoOptions';
 import { DefaultSeo } from 'next-seo';
 import { Provider } from 'jotai';
-import { queryClientAtom } from 'jotai-tanstack-query';
-import { useHydrateAtoms } from 'jotai/react/utils'; // for SSR support
-import { PropsWithChildren, useState } from 'react';
+import {  useState } from 'react';
 import {
 	Hydrate,
 	QueryClient,
@@ -33,10 +31,6 @@ export default function MyApp({
 	pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
 	const [queryClient] = useState(() => new QueryClient(queryClientOptions));
-	const HydrateAtoms = ({ children }: PropsWithChildren<{}>) => {
-		useHydrateAtoms([[queryClientAtom, queryClient]]);
-		return <>{children}</>;
-	};
 	return (
 		<>
 			<AuthProvider>
@@ -45,12 +39,10 @@ export default function MyApp({
 						<Hydrate state={pageProps.dehydratedState}>
 							<ReactQueryDevtools />
 							<Provider>
-								<HydrateAtoms>
 									<Header />
 									<DefaultSeo {...SEO} />
 									<Component {...pageProps} />
 									<Footer />
-								</HydrateAtoms>
 							</Provider>
 						</Hydrate>
 					</QueryClientProvider>

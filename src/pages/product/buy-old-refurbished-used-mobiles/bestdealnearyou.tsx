@@ -22,6 +22,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { SwiperSlide } from 'swiper/react';
 import getMakes from '@/utils/fetchers/getMakes';
+import NoMatch from '@/components/NoMatch';
 
 const settings = {
 	slidesToShow: 1,
@@ -166,59 +167,61 @@ function Bestdealnearyou({
 							))}
 						</Carousel>
 					</div>
-					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
-						{JSON.stringify(filterData)}<br/>
-						{`Total Products (${
-							isLoading || isFetchingNextPage || !data?.pages[0]
-								? 0
-								: data?.pages[0].totalCount || 0
-						})`}
-					</h4>
-					<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-						{data?.pages[0]
-							? data?.pages.map((page, idx1) => {
-									return (
-										<React.Fragment key={idx1}>
-											{page.data?.map((product, idx2) => {
-												return (
-													<div key={idx2}>
-														<ProductCard data={product} prodLink />
-														{/* <ProductSkeletonCard /> */}
-													</div>
-												);
-											})}
-										</React.Fragment>
-									);
-							  })
-							: null}
-						{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
-							<div className="text-center w-full">
-								<h1 className="text-2xl font-Roboto-Semibold">
-									No Products Found
-								</h1>
-							</div>
-						)}
-						{isFetchingNextPage &&
-							Array.from({ length: 12 }).map((_, idx) => (
-								<div key={idx}>
-									<ProductSkeletonCard key={idx} />
-								</div>
-							))}
-					</div>
+					{(!data || !data.pages[0]) && <NoMatch />}
 					{data?.pages[0] && (
-						<button
-							ref={ref}
-							disabled={isFetchingNextPage || isError}
-							onClick={() => {
-								setFilterPage(filterPage + 1);
-								fetchNextPage();
-							}}
-							className={`${
-								!hasNextPage && 'hidden'
-							} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
-						>
-							{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
-						</button>
+						<>
+							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
+								{`Total Products (${
+									isLoading || isFetchingNextPage || !data?.pages[0]
+										? 0
+										: data?.pages[0].totalCount || 0
+								})`}
+							</h4>
+							<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+								{data?.pages[0]
+									? data?.pages.map((page, idx1) => {
+											return (
+												<React.Fragment key={idx1}>
+													{page.data?.map((product, idx2) => {
+														return (
+															<div key={idx2}>
+																<ProductCard data={product} prodLink />
+																{/* <ProductSkeletonCard /> */}
+															</div>
+														);
+													})}
+												</React.Fragment>
+											);
+									  })
+									: null}
+								{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
+									<div className="text-center w-full">
+										<h1 className="text-2xl font-Roboto-Semibold">
+											No Products Found
+										</h1>
+									</div>
+								)}
+								{isFetchingNextPage &&
+									Array.from({ length: 12 }).map((_, idx) => (
+										<div key={idx}>
+											<ProductSkeletonCard key={idx} />
+										</div>
+									))}
+							</div>
+							<button
+								ref={ref}
+								disabled={isFetchingNextPage || isError}
+								onClick={() => {
+									setFilterPage(filterPage + 1);
+									fetchNextPage();
+								}}
+								className={`${
+									!hasNextPage && 'hidden'
+								} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
+							>
+								{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
+							</button>
+						</>
 					)}
 				</Filter>
 			</main>

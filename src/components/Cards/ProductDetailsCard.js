@@ -446,7 +446,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 						{data && data?.cosmetic && (
 							<div className=" lg:flex  lg:flex-row-3  mx-2">
 								{deviceConditionQuestion.map((item, index) => (
-									<div className="px-2">
+									<div className="px-2" key={index}>
 										<span className="text-regularFontSize font-Roboto-Bold text-black truncate">
 											{data?.cosmetic[index] != undefined && item?.title}
 										</span>

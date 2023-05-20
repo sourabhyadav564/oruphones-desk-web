@@ -69,7 +69,6 @@ function ProductCard({ data, prodLink, setProducts = () => {} }) {
 							<Image
 								loading="lazy"
 								placeholder="blur"
-								minimumCacheTTL={3600}
 								priority={false}
 								quality={25}
 								blurDataURL={

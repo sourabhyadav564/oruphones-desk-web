@@ -1,39 +1,37 @@
-import BestDealsCard from '@/components/Cards/BestDealsCard';
-import Filter from '@/components/Filter';
-import React, { useState, useEffect } from 'react';
 import Carousel from '@/components/Carousel';
+import { useRouter } from 'next/router';
+import { useState, useEffect, useContext, Fragment } from 'react';
+import BestDealsCard from '@/components/Cards/BestDealsCard';
 import ProductCard from '@/components/Cards/ProductCard';
-// import NoMatch from '@/components/NoMatch';
-import { metaTags } from '@/utils/constant';
-import Head from 'next/head';
-import ShopByBrandSection from '@/components/ShopByBrandSection';
+import Filter from '@/components/Filter';
+import AppContext from '@/context/ApplicationContext';
+import * as Axios from '@/api/axios';
+import NoMatch from '@/components/NoMatch';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import getFilteredListings from '@/utils/fetchers/filteredFetch';
+import { atom, useAtom } from 'jotai';
 import TListingFilter, {
 	TListingReturnFilter,
 	Tmodel,
 } from '@/types/ListingFilter';
-import {
-	useInfiniteQuery,
-	QueryClient,
-	dehydrate,
-} from '@tanstack/react-query';
-import { SwiperSlide } from 'swiper/react';
-import getModels from '@/utils/fetchers/getModels';
-import { atom, useAtom } from 'jotai';
-import filterAtom from '@/store/productFilter';
-import { useHydrateAtoms } from 'jotai/utils';
-import { useInView } from 'react-intersection-observer';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { getCookie, setCookie } from 'cookies-next';
+import { QueryClient, dehydrate } from '@tanstack/query-core';
+import getFilteredListings from '@/utils/fetchers/filteredFetch';
+import { useHydrateAtoms } from 'jotai/utils';
+import filterAtom from '@/store/productFilter';
 import { locationAtom } from '@/store/location';
 import useDebounce from '@/hooks/useDebounce';
-import NoMatch from '@/components/NoMatch';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+import { metaTags } from '@/utils/constant';
+import { SwiperSlide } from 'swiper/react';
+import ShopByBrandSection from '@/components/ShopByBrandSection';
+import Head from 'next/head';
 
 type TPageProps = {
 	makeName: string;
+	modelName: string;
 	bestDeals: TListingReturnFilter[];
-	models: Tmodel[];
 	filters: TListingFilter;
 	dehydratedState: any;
 	location: string;
@@ -61,6 +59,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		cookie = 'India';
 	}
 	let makeName = ctx.query.makeName as string;
+	let modelName = ctx.query.modelName as string;
 	makeName = makeName
 		.split(' ')
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -68,6 +67,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 
 	let filters: TListingFilter = {
 		make: [makeName as string],
+		model: [modelName as string],
 		listingLocation: cookie,
 		limit: 11,
 	};
@@ -79,13 +79,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	const bestDeals = infiniteDeals.pages[0].data.slice(0, 5);
-	let models = await getModels(makeName, 20);
+	const bestDeals = infiniteDeals?.pages[0]?.data?.slice(0, 5) || null;
 	return {
 		props: {
 			makeName,
+			modelName,
 			bestDeals,
-			models,
 			filters,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 			location: cookie,
@@ -93,12 +92,10 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	};
 };
 
-// TODO: Back to top button/ floating filter menu
-// TODO: Replace text with NoMatch component
-function BrandPage({
+function Products({
 	makeName,
+	modelName,
 	bestDeals,
-	models,
 	filters,
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -235,7 +232,7 @@ function BrandPage({
 					<div className="w-full h-[21rem]">
 						<Carousel
 							{...settings}
-							key={bestDeals.length > 0 ? bestDeals.length : -1}
+							key={bestDeals?.length > 0 ? bestDeals.length : -1}
 							className="bestDealCarousel h-full"
 						>
 							{bestDeals.map((items, index) => (
@@ -248,15 +245,6 @@ function BrandPage({
 					{(!data || !data.pages[0]) && <NoMatch />}
 					{data?.pages[0] && (
 						<>
-							{models?.length > 0 && (
-								<div className="font-Roboto-Semibold text-xlFontSize">
-									<p className="opacity-50">Shop By Model</p>
-									<ShopByBrandSection
-										shopbymodeldata={models}
-										shopbymakedata={makeName}
-									/>
-								</div>
-							)}
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
 								{`Total Products (${
 									isLoading || isFetchingNextPage || !data?.pages[0]
@@ -268,7 +256,7 @@ function BrandPage({
 								{data?.pages[0]
 									? data?.pages.map((page, idx1) => {
 											return (
-												<React.Fragment key={idx1}>
+												<Fragment key={idx1}>
 													{page.data?.map((product, idx2) => {
 														return (
 															<div key={idx2}>
@@ -277,7 +265,7 @@ function BrandPage({
 															</div>
 														);
 													})}
-												</React.Fragment>
+												</Fragment>
 											);
 									  })
 									: null}
@@ -295,7 +283,6 @@ function BrandPage({
 										</div>
 									))}
 							</div>
-
 							<button
 								ref={ref}
 								disabled={isFetchingNextPage || isError}
@@ -317,4 +304,4 @@ function BrandPage({
 	);
 }
 
-export default BrandPage;
+export default Products;

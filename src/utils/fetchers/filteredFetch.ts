@@ -53,12 +53,7 @@ export async function getSimilarListings(
 ): Promise<{ data: TListingReturnFilter[]; totalCount: number }> {
 	const content = {
 		filter,
-		...(returnFilter
-			? { returnFilter }
-			: {
-					listingId: 1,
-					deviceCondition: 1,
-			  }),
+		...(returnFilter && { returnFilter }),
 	};
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter/getSimilar`,

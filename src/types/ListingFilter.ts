@@ -37,6 +37,7 @@ export type TListingReturnFilter = {
 	listingPrice?: number;
 	marketingName?: string;
 	model?: string;
+	make?: string;
 	listingDate?: string;
 	listedBy?: string;
 	images?: {

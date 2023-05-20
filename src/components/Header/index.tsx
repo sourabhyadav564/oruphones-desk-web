@@ -1,19 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 import DesktopMenu from './DesktopMenu';
-import Geocode from 'react-geocode';
 import MobileMenu from './MobileMenu';
 import LoginOrProfile from './LoginOrProfile';
 import LocationPopup from '../Popup/LocationPopup';
 import AppContext from '@/context/ApplicationContext';
 import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
-import Cookies from 'js-cookie';
 import LocationPicker from './LocationPicker';
 import { useAtom } from 'jotai';
-import { updateLocationAtom, updateLocationLatLongAtom } from '@/store/location';
+import {
+	updateLocationAtom,
+	updateLocationLatLongAtom,
+} from '@/store/location';
+import { toast } from 'react-toastify';
 
 const options = {
 	enableHighAccuracy: true,
@@ -24,16 +26,16 @@ const options = {
 function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const [,setLocation] = useAtom(updateLocationAtom);
+	const [, setLocation] = useAtom(updateLocationAtom);
 	const [_, setLocationLatLong] = useAtom(updateLocationLatLongAtom);
-	const { userInfo, setUserInfo, setSearchLocation } = useContext(AppContext);
 
-	const onSuccess = async (location) => {
-		await setLocationLatLong(location);
+	const onSuccess = async (location: GeolocationPosition) => {
+		await setLocationLatLong(location as any);
 	};
 
-	const onError = (error) => {
-		setLocation('India')
+	const onError = (error: { code: number; message: string }) => {
+		toast.error(error.message);
+		setLocation('India');
 	};
 
 	const handleNearme = async () => {
