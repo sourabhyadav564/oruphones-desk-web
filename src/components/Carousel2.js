@@ -26,8 +26,6 @@ export default function Carousel2({ children, className, ...rest }) {
 			ArrowRight,
 		},
 		...rest,
-		prevArrow: <ArrowLeft />,
-		nextArrow: <ArrowRight />,
 	};
 	return (
 		<Swiper

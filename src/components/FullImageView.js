@@ -44,8 +44,6 @@ function FullImageView({ open, close, images, currentslide }) {
 	images = shiftArray(images, currentslide);
 
 	const settingsMain = {
-		slidesToShow: 1,
-		slidesToScroll: 1,
 		autoplay: false,
 		autoplaySpeed: 3000,
 		navigation: {

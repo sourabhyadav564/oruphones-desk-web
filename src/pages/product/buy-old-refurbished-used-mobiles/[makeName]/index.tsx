@@ -40,13 +40,14 @@ type TPageProps = {
 };
 
 const settings = {
-	slidesToShow: 1,
-	slidesToScroll: 1,
-	autoplay: true,
-	autoplaySpeed: 4000,
-	pauseOnHover: true,
-	dots: true,
-	arrows: true,
+	slidesPerView: 1,
+	autoplay: {
+		delay: 5000,
+	},
+	navigation: {
+		dots: true,
+		arrows: true,
+	},
 };
 
 const filterPageAtom = atom<number>(1);
@@ -235,10 +236,10 @@ function BrandPage({
 					<div className="w-full h-[21rem]">
 						<Carousel
 							{...settings}
-							key={bestDeals.length > 0 ? bestDeals.length : -1}
+							key={bestDeals?.length > 0 ? bestDeals.length : -1}
 							className="bestDealCarousel h-full"
 						>
-							{bestDeals.map((items, index) => (
+							{bestDeals?.map((items, index) => (
 								<SwiperSlide key={index}>
 									<BestDealsCard data={items} />
 								</SwiperSlide>

@@ -20,12 +20,12 @@ function BestDealsCard({ data }) {
 			style={{ boxShadow: '0px 2px 3px #0000000A' }}
 		>
 			<div className="text-sm text-white font-light flex justify-between items-center mr-4">
-				<p
+				<div
 					className="bg-yellow-500 md:py-1.5 md:px-4 py-1 px-2 rounded-r font-Roboto-Semibold md:text-regularFontSize"
 					style={{ marginLeft: '0.5px' }}
 				>
 					Best Deals
-				</p>
+				</div>
 				<div>
 					{!(
 						data?.isOtherVendor === 'Y' &&
@@ -66,10 +66,10 @@ function BestDealsCard({ data }) {
 						</span>
 					</div>
 					<div className="relative pt-5 pl-16 ">
-						<p className="font-Roboto-Bold flex items-center -ml-1 text-yellow2 md:text-[28px] text-[24px]">
+						<div className="font-Roboto-Bold flex items-center -ml-1 text-yellow2 md:text-[28px] text-[24px]">
 							{data?.listingPrice && <p className="">₹</p>}{' '}
 							{numberWithCommas(data?.listingPrice || '')}
-						</p>
+						</div>
 						<div className="font-Roboto-Regular text-white md:text-regularFontSize text-mediumFontSize">
 							{data?.marketingName}
 						</div>
@@ -113,7 +113,7 @@ function BestDealsCard({ data }) {
 							width={'50'}
 							height={'30'}
 							objectFit="contain"
-							alt={soldout}
+							alt={'TODO: Something stable'}
 						/>
 					) : data?.verified ? (
 						<VerifiedIcon width={60} height={29} />
@@ -148,11 +148,7 @@ function BestDealsCard({ data }) {
 						}
 						onError={() => setImageError(true)}
 						objectFit="contain"
-						alt={`bestdeals buy ${
-							type[Math.floor(Math.random() * type.length)]
-						} ${data?.marketingName} ${data?.deviceStorage} ${
-							data?.deviceCondition
-						}`.toLowerCase()}
+						alt={'TODO: Something stable'}
 					/>
 				</div>
 			</div>

@@ -3,11 +3,13 @@ import Carousel from '../Carousel';
 import Title from '../Title';
 
 const settings = {
-	dots: false,
-	loop: false,
-	speed: 500,
-	slidesToShow: 6,
-	slidesToScroll: 1,
+	navigation: {
+		dots: true,
+	},
+	autoplay: {
+		delay: 5000,
+	},
+	slidesPerView: 6,
 };
 
 function ShopByPrice({ fetchShopByPrice }) {

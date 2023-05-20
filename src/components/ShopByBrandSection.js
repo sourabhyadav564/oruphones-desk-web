@@ -4,13 +4,12 @@ import Carousel from './Carousel2';
 import { getDefaultImage } from '@/utils/util';
 
 const settings = {
-	slidesToShow: 3,
-	slidesToScroll: 3,
 	slidesPerView: 3,
-	dots: false,
-	arrows: true,
+	navigation: {
+		dots: true,
+		arrows: true,
+	},
 	loop: false,
-	swipeToSlide: true,
 };
 
 function ShopByBrandSection({ shopbymodeldata, shopbymakedata }) {

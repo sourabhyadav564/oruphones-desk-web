@@ -235,7 +235,7 @@ function Products({
 							key={bestDeals?.length > 0 ? bestDeals.length : -1}
 							className="bestDealCarousel h-full"
 						>
-							{bestDeals.map((items, index) => (
+							{bestDeals?.map((items, index) => (
 								<SwiperSlide key={index}>
 									<BestDealsCard data={items} />
 								</SwiperSlide>

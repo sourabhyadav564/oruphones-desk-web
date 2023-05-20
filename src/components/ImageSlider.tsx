@@ -29,13 +29,13 @@ function ImageSlider({
 	const [imageError, setImageError] = useState(false);
 
 	const settingsMain = {
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: false,
-		autoplaySpeed: 3000,
+		autoplay: {
+			delay: 5000,
+		},
 		navigation: {
 			nextEl: '.swiper-button-next',
 			prevEl: '.swiper-button-prev',
+			arrows: true,
 		},
 		fade: true,
 		asNavFor: '.slider-nav',
