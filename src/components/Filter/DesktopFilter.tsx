@@ -23,7 +23,7 @@ const selectedBrandRWAtom = atom(
 		set(selectedBrandAtom, update);
 		set(filterAtom, (prev) => ({
 			...prev,
-			...(update?.length > 0 ? { brand: update } : { brand: undefined }),
+			...(update?.length > 0 ? { make: update } : { make: undefined }),
 		}));
 	}
 );

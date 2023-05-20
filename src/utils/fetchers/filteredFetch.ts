@@ -71,6 +71,5 @@ export async function getSimilarListings(
 		}
 	);
 	const resp = await response.json();
-	console.log('fecther: ', resp.data);
 	return resp.data;
 }

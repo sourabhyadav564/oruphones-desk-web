@@ -145,7 +145,14 @@ function Bestdealnearyou({
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">Best Deal Near You Page</h1>
-				<Filter listingsCount={data?.pages[0].totalCount || 0} defaultBrands={allMakes}>
+				<Filter
+					listingsCount={
+						isLoading || isFetchingNextPage || !data?.pages[0]
+							? 0
+							: data?.pages[0].totalCount || 0
+					}
+					defaultBrands={allMakes}
+				>
 					<div className="w-full h-[21rem]">
 						<Carousel
 							{...settings}
@@ -160,24 +167,37 @@ function Bestdealnearyou({
 						</Carousel>
 					</div>
 					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
-						{JSON.stringify(filterData)}
-						{`Total Products (${data?.pages[0].totalCount || 0})`}
+						{JSON.stringify(filterData)}<br/>
+						{`Total Products (${
+							isLoading || isFetchingNextPage || !data?.pages[0]
+								? 0
+								: data?.pages[0].totalCount || 0
+						})`}
 					</h4>
 					<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-						{data?.pages.map((page, idx1) => {
-							return (
-								<React.Fragment key={idx1}>
-									{page.data.map((product, idx2) => {
-										return (
-											<div key={idx2}>
-												<ProductCard data={product} prodLink />
-												{/* <ProductSkeletonCard /> */}
-											</div>
-										);
-									})}
-								</React.Fragment>
-							);
-						})}
+						{data?.pages[0]
+							? data?.pages.map((page, idx1) => {
+									return (
+										<React.Fragment key={idx1}>
+											{page.data?.map((product, idx2) => {
+												return (
+													<div key={idx2}>
+														<ProductCard data={product} prodLink />
+														{/* <ProductSkeletonCard /> */}
+													</div>
+												);
+											})}
+										</React.Fragment>
+									);
+							  })
+							: null}
+						{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
+							<div className="text-center w-full">
+								<h1 className="text-2xl font-Roboto-Semibold">
+									No Products Found
+								</h1>
+							</div>
+						)}
 						{isFetchingNextPage &&
 							Array.from({ length: 12 }).map((_, idx) => (
 								<div key={idx}>
@@ -185,19 +205,21 @@ function Bestdealnearyou({
 								</div>
 							))}
 					</div>
-					<button
-						ref={ref}
-						disabled={isFetchingNextPage || isError}
-						onClick={() => {
-							setFilterPage(filterPage + 1);
-							fetchNextPage();
-						}}
-						className={`${
-							!hasNextPage && 'hidden'
-						} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
-					>
-						{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
-					</button>
+					{data?.pages[0] && (
+						<button
+							ref={ref}
+							disabled={isFetchingNextPage || isError}
+							onClick={() => {
+								setFilterPage(filterPage + 1);
+								fetchNextPage();
+							}}
+							className={`${
+								!hasNextPage && 'hidden'
+							} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
+						>
+							{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
+						</button>
+					)}
 				</Filter>
 			</main>
 		</>
