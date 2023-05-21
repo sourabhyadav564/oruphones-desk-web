@@ -37,6 +37,10 @@ function ImageSlider({
 			prevEl: '.swiper-button-prev',
 			arrows: true,
 		},
+		pagination: {
+			dot: true,
+			clickable: true,
+		},
 		fade: true,
 		slidesPerView: 1,
 		modules: [Pagination, Navigation, EffectFade],

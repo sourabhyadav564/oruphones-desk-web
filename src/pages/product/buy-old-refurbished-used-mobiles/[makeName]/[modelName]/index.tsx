@@ -220,32 +220,32 @@ function Products({
 				<meta property="og:description" content={description} />
 			</Head>
 			<main className="container py-4">
-				<h1 className="sr-only">{`${makeName} Page`}</h1>
-				<Filter
-					listingsCount={
-						isLoading || isFetchingNextPage || !data?.pages[0]
-							? 0
-							: data?.pages[0].totalCount || 0
-					}
-					makeName={makeName}
-					defaultBrands={[makeName]}
-				>
-					<div className="w-full h-[21rem]">
-						<Carousel
-							{...settings}
-							key={bestDeals?.length > 0 ? bestDeals.length : -1}
-							className="bestDealCarousel h-full"
+				<h1 className="sr-only">{`${makeName} | ${modelName} Page`}</h1>
+				{bestDeals ? (
+					<>
+						<Filter
+							listingsCount={
+								isLoading || isFetchingNextPage || !data?.pages[0]
+									? 0
+									: data?.pages[0].totalCount || 0
+							}
+							makeName={makeName}
+							defaultBrands={[makeName]}
 						>
-							{bestDeals?.map((items, index) => (
-								<SwiperSlide key={index}>
-									<BestDealsCard data={items} />
-								</SwiperSlide>
-							))}
-						</Carousel>
-					</div>
-					{(!data || !data.pages[0]) && <NoMatch />}
-					{data?.pages[0] && (
-						<>
+							<div className="w-full h-[21rem]">
+								<Carousel
+									{...settings}
+									key={bestDeals?.length > 0 ? bestDeals.length : -1}
+									className="bestDealCarousel h-full"
+								>
+									{bestDeals?.map((items, index) => (
+										<SwiperSlide key={index}>
+											<BestDealsCard data={items} />
+										</SwiperSlide>
+									))}
+								</Carousel>
+							</div>
+							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
 								{`Total Products (${
 									isLoading || isFetchingNextPage || !data?.pages[0]
@@ -253,53 +253,69 @@ function Products({
 										: data?.pages[0].totalCount || 0
 								})`}
 							</h4>
-							<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-								{data?.pages[0]
-									? data?.pages.map((page, idx1) => {
-											return (
-												<Fragment key={idx1}>
-													{page.data?.map((product, idx2) => {
-														return (
-															<div key={idx2}>
-																<ProductCard data={product} prodLink />
-																{/* <ProductSkeletonCard /> */}
-															</div>
-														);
-													})}
-												</Fragment>
-											);
-									  })
-									: null}
-								{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
-									<div className="text-center w-full">
-										<h1 className="text-2xl font-Roboto-Semibold">
-											No Products Found
-										</h1>
-									</div>
-								)}
-								{isFetchingNextPage &&
-									Array.from({ length: 12 }).map((_, idx) => (
+							{(!data || !data.pages[0]) && isLoading && (
+								<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+									{Array.from({ length: 12 }).map((_, idx) => (
 										<div key={idx}>
 											<ProductSkeletonCard key={idx} />
 										</div>
 									))}
-							</div>
-							<button
-								ref={ref}
-								disabled={isFetchingNextPage || isError}
-								onClick={() => {
-									setFilterPage(filterPage + 1);
-									fetchNextPage();
-								}}
-								className={`${
-									!hasNextPage && 'hidden'
-								} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
-							>
-								{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
-							</button>
-						</>
-					)}
-				</Filter>
+								</div>
+							)}
+
+							{data?.pages[0] && (
+								<>
+									<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+										{data?.pages[0]
+											? data?.pages.map((page, idx1) => {
+													return (
+														<Fragment key={idx1}>
+															{page.data?.map((product, idx2) => {
+																return (
+																	<div key={idx2}>
+																		<ProductCard data={product} prodLink />
+																		{/* <ProductSkeletonCard /> */}
+																	</div>
+																);
+															})}
+														</Fragment>
+													);
+											  })
+											: null}
+										{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
+											<div className="text-center w-full">
+												<h1 className="text-2xl font-Roboto-Semibold">
+													No Products Found
+												</h1>
+											</div>
+										)}
+										{isFetchingNextPage &&
+											Array.from({ length: 12 }).map((_, idx) => (
+												<div key={idx}>
+													<ProductSkeletonCard key={idx} />
+												</div>
+											))}
+									</div>
+									<button
+										ref={ref}
+										disabled={isFetchingNextPage || isError}
+										onClick={() => {
+											setFilterPage(filterPage + 1);
+											fetchNextPage();
+										}}
+										className={`${
+											!hasNextPage && 'hidden'
+										} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
+									>
+										{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
+									</button>
+								</>
+							)}
+						</Filter>
+					</>
+				) : (
+					<h1 className="mt-0">No deals available near your location yet.</h1>
+				)}
 			</main>
 		</>
 	);

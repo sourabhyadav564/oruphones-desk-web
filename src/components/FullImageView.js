@@ -76,15 +76,11 @@ function FullImageView({ open, close, images, currentslide }) {
 				/>
 			</div>
 			{images && (
-				<Swiper
-					{...settingsMain}
-					className="w-full h-[85%]"
-					paginationStyle={{ bottom: 60 }}
-				>
+				<Swiper {...settingsMain} className="w-full h-[80%]">
 					{images
 						.filter((i) => i?.fullImage)
 						.map((img, index) => (
-							<SwiperSlide key={index} className={`${styles.image_wrapper}`}>
+							<SwiperSlide key={index}>
 								<Image
 									alt="ORU Phones Logo"
 									src={
@@ -96,24 +92,21 @@ function FullImageView({ open, close, images, currentslide }) {
 									onError={() => {
 										setImageError(true);
 									}}
-									style={{ maxWidth: '80%', maxHeight: '70vh' }}
 									layout="fill"
-									objectFit="contain"
-									className="object-contain hover:cursor-pointer"
+									className="object-contain hover:cursor-pointer p-20"
 								/>
 							</SwiperSlide>
 						))}
 					{images[0]?.fullImage == '' && (
-						<div className={styles.image_wrapper}>
+						<div>
 							<Image
 								alt="ORU Phones Logo"
 								src={
 									'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 								}
-								style={{ maxWidth: '40%', maxHeight: '70vh' }}
 								layout="fill"
 								objectFit="contain"
-								className="w-full h-full object-contain hover:cursor-pointer"
+								className="w-full h-full object-contain hover:cursor-pointer p-20"
 							/>
 						</div>
 					)}

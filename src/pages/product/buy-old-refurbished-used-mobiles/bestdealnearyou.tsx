@@ -84,13 +84,13 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	const bestDeals = infiniteDeals.pages[0].data.slice(0, 5);
+	const bestDeals = infiniteDeals.pages[0]?.data?.slice(0, 5) || null;
 	const allMakes = await getMakes();
 	// cache this SSR response
-	ctx.res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=3600, stale-while-revalidate=59' // cached for 1 hour, revalidate after 1 minute
-	);
+	// ctx.res.setHeader(
+	// 	'Cache-Control',
+	// 	'public, s-maxage=3600, stale-while-revalidate=59' // cached for 1 hour, revalidate after 1 minute
+	// );
 	return {
 		props: {
 			bestDeals,
@@ -176,30 +176,30 @@ function Bestdealnearyou({
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">Best Deal Near You Page</h1>
-				<Filter
-					listingsCount={
-						isLoading || isFetchingNextPage || !data?.pages[0]
-							? 0
-							: data?.pages[0].totalCount || 0
-					}
-					defaultBrands={allMakes}
-				>
-					<div className="w-full h-[21rem]">
-						<Carousel
-							{...settings}
-							key={bestDeals.length > 0 ? bestDeals.length : -1}
-							className="bestDealCarousel h-full"
+				{bestDeals ? (
+					<>
+						<Filter
+							listingsCount={
+								isLoading || isFetchingNextPage || !data?.pages[0]
+									? 0
+									: data?.pages[0].totalCount || 0
+							}
+							defaultBrands={allMakes}
 						>
-							{bestDeals.map((items, index) => (
-								<SwiperSlide key={index}>
-									<BestDealsCard data={items} />
-								</SwiperSlide>
-							))}
-						</Carousel>
-					</div>
-					{(!data || !data.pages[0]) && <NoMatch />}
-					{data?.pages[0] && (
-						<>
+							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
+							<div className="w-full h-[21rem]">
+								<Carousel
+									{...settings}
+									key={bestDeals.length > 0 ? bestDeals.length : -1}
+									className="bestDealCarousel h-full"
+								>
+									{bestDeals.map((items, index) => (
+										<SwiperSlide key={index}>
+											<BestDealsCard data={items} />
+										</SwiperSlide>
+									))}
+								</Carousel>
+							</div>
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
 								{/* {`Filter: ${JSON.stringify(filterData)}`}
 								<br /> */}
@@ -209,53 +209,68 @@ function Bestdealnearyou({
 										: data?.pages[0].totalCount || 0
 								})`}
 							</h4>
-							<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-								{data?.pages[0]
-									? data?.pages.map((page, idx1) => {
-											return (
-												<React.Fragment key={idx1}>
-													{page.data?.map((product, idx2) => {
-														return (
-															<div key={idx2}>
-																<ProductCard data={product} prodLink />
-																{/* <ProductSkeletonCard /> */}
-															</div>
-														);
-													})}
-												</React.Fragment>
-											);
-									  })
-									: null}
-								{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
-									<div className="text-center w-full">
-										<h1 className="text-2xl font-Roboto-Semibold">
-											No Products Found
-										</h1>
-									</div>
-								)}
-								{isFetchingNextPage &&
-									Array.from({ length: 12 }).map((_, idx) => (
+							{(!data || !data.pages[0]) && isLoading && (
+								<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+									{Array.from({ length: 12 }).map((_, idx) => (
 										<div key={idx}>
 											<ProductSkeletonCard key={idx} />
 										</div>
 									))}
-							</div>
-							<button
-								ref={ref}
-								disabled={isFetchingNextPage || isError}
-								onClick={() => {
-									setFilterPage(filterPage + 1);
-									fetchNextPage();
-								}}
-								className={`${
-									!hasNextPage && 'hidden'
-								} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
-							>
-								{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
-							</button>
-						</>
-					)}
-				</Filter>
+								</div>
+							)}
+							{data?.pages[0] && (
+								<>
+									<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+										{data?.pages[0]
+											? data?.pages.map((page, idx1) => {
+													return (
+														<React.Fragment key={idx1}>
+															{page.data?.map((product, idx2) => {
+																return (
+																	<div key={idx2}>
+																		<ProductCard data={product} prodLink />
+																		{/* <ProductSkeletonCard /> */}
+																	</div>
+																);
+															})}
+														</React.Fragment>
+													);
+											  })
+											: null}
+										{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
+											<div className="text-center w-full">
+												<h1 className="text-2xl font-Roboto-Semibold">
+													No Products Found
+												</h1>
+											</div>
+										)}
+										{isFetchingNextPage &&
+											Array.from({ length: 12 }).map((_, idx) => (
+												<div key={idx}>
+													<ProductSkeletonCard key={idx} />
+												</div>
+											))}
+									</div>
+									<button
+										ref={ref}
+										disabled={isFetchingNextPage || isError}
+										onClick={() => {
+											setFilterPage(filterPage + 1);
+											fetchNextPage();
+										}}
+										className={`${
+											!hasNextPage && 'hidden'
+										} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
+									>
+										{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
+									</button>
+								</>
+							)}
+						</Filter>
+					</>
+				) : (
+					<h1 className="mt-0">No deals available near your location yet.</h1>
+				)}
 			</main>
 		</>
 	);

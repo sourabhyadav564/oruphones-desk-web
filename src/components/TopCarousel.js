@@ -17,10 +17,10 @@ const settings = {
 		pauseOnHover: true,
 	},
 	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
+		arrows: true,
 	},
 	pagination: {
+		dots: true,
 		clickable: true,
 	},
 	loop: true,

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProductCard from '../../../../../components/Cards/ProductCard';
 import ProductDetailsCard from '../../../../../components/Cards/ProductDetailsCard';
 import FullImageView from '@/components/FullImageView';
@@ -12,6 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { getSimilarListings } from '@/utils/fetchers/filteredFetch';
 import Link from 'next/link';
+import Head from 'next/head';
 
 type TPageProps = {
 	location: string;
@@ -68,7 +69,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	console.log('Listed By: ', prod.isOtherVendor);
 	const { make, model } = prod;
 	ctx.res.setHeader(
 		'Cache-Control',
@@ -95,7 +95,6 @@ function ProductDetails({
 	const [simliarProducts, setSimliarProducts] = useState<any>([]);
 	const [openImageFullView, setOpenImageFullView] = useState(false);
 	const [contextData, setContextData] = useState('');
-	const [listingInfo, setListingInfo] = useState<any>(null);
 	const locationVal = useAtomValue(locationAtom);
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['product-listing', productID],
@@ -124,88 +123,101 @@ function ProductDetails({
 	);
 
 	return (
-		<main className="container my-6">
-			<p className="sr-only"> Product Details page </p>
-			<section className="grid grid-cols-4 gap-4">
-				<div className="bg-white col-span-5">
-					<ProductDetailsCard
-						key={productID}
-						data={data}
-						openFullImage={() => setOpenImageFullView(true)}
-						onDataContext={setContextData}
-					/>
-				</div>
-				<div className="col-span-4">
-					<p
-						className="text-m-black font-Roboto-Light text-regularFontSize my-3"
-						style={{ fontSize: 21 }}
-					>
-						Similar Products ({similarProducts?.totalCount || 0})
-					</p>
-					<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
-						{similarProducts && similarProducts.data.length > 0 ? (
-							similarProducts?.data.map((product: any, index: number) => (
-								<ProductCard
-									key={index}
-									data={product}
-									setProducts={setSimliarProducts as any}
-									prodLink
-								/>
-							))
-						) : (
-							<div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">
-								There are no similar products
-							</div>
-						)}
+		<>
+			<Head>
+				<title>{data?.marketingName || 'Product Details'} | OruPhones</title>
+				<meta
+					name="description"
+					content={`Buy ${data?.marketingName} at the best price in ${data?.listingLocation} from OruPhones. ${data?.marketingName} is available in ${data?.deviceStorage}GB and ${data?.deviceRam}GB RAM.`}
+				/>
+				<meta
+					name="keywords"
+					content={`${data?.marketingName}, ${data?.marketingName} price, ${data?.marketingName} price in ${data?.listingLocation}, ${data?.marketingName} price in India, ${data?.marketingName} price in ${data?.listingLocation} ${data?.deviceStorage}GB ${data?.deviceRam}GB RAM, ${data?.marketingName} price in India ${data?.deviceStorage}GB ${data?.deviceRam}GB RAM, ${data?.marketingName} price in ${data?.listingLocation} ${data?.deviceStorage}GB, ${data?.marketingName} price in India ${data?.deviceStorage}GB, ${data?.marketingName} price in ${data?.listingLocation} ${data?.deviceRam}GB RAM, ${data?.marketingName} price in India ${data?.deviceRam}GB RAM, ${data?.marketingName} price in ${data?.listingLocation} ${data?.deviceStorage}, ${data?.marketingName} price in India ${data?.deviceStorage}, ${data?.marketingName} price in ${data?.listingLocation} ${data?.deviceRam}, ${data?.marketingName} price in India ${data?.deviceRam}`}
+				/>
+			</Head>
+			<main className="container my-6">
+				<p className="sr-only"> Product Details page </p>
+				<section className="grid grid-cols-4 gap-4">
+					<div className="bg-white col-span-5">
+						<ProductDetailsCard
+							key={productID}
+							data={data}
+							openFullImage={() => setOpenImageFullView(true)}
+							onDataContext={setContextData}
+						/>
 					</div>
-					{similarProducts &&
-						similarProducts.data.length > 0 &&
-						make &&
-						model && (
-							<Link
-								href={`/product/buy-old-refurbished-used-mobiles/${make}/${model}`}
-								passHref
-							>
-								<p
-									className={`${
-										isLoading ? 'w-[250px]' : 'w-[150px]'
-									} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+					<div className="col-span-4">
+						<p
+							className="text-m-black font-Roboto-Light text-regularFontSize my-3"
+							style={{ fontSize: 21 }}
+						>
+							Similar Products ({similarProducts?.totalCount || 0})
+						</p>
+						<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
+							{similarProducts && similarProducts.data.length > 0 ? (
+								similarProducts?.data.map((product: any, index: number) => (
+									<ProductCard
+										key={index}
+										data={product}
+										setProducts={setSimliarProducts as any}
+										prodLink
+									/>
+								))
+							) : (
+								<div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">
+									There are no similar products
+								</div>
+							)}
+						</div>
+						{similarProducts &&
+							similarProducts.data.length > 0 &&
+							make &&
+							model && (
+								<Link
+									href={`/product/buy-old-refurbished-used-mobiles/${make}/${model}`}
+									passHref
 								>
-									{isLoading ? 'Fetching products...' : 'Load More'}
-								</p>
-							</Link>
-						)}
-				</div>
-			</section>
-			<FullImageView
-				open={openImageFullView}
-				close={() => setOpenImageFullView(false)}
-				currentslide={contextData}
-				images={
-					(data?.images?.length && data?.images) ||
-					(data?.defaultImage?.fullImage && [
-						{ fullImage: data?.defaultImage?.fullImage },
-					]) ||
-					(data?.imagePath && [
-						{
-							fullImage: data?.imagePath,
-							thumbImage: data?.imagePath,
-						},
-					])
-					// ||
-					// (data?.vendorLogo && [
-					// 	{
-					// 		fullImage:
-					// 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-					// 				?.src,
-					// 		thumbImage:
-					// 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-					// 				?.src,
-					// 	},
-					// ])
-				}
-			/>
-		</main>
+									<p
+										className={`${
+											isLoading ? 'w-[250px]' : 'w-[150px]'
+										} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
+									>
+										{isLoading ? 'Fetching products...' : 'Load More'}
+									</p>
+								</Link>
+							)}
+					</div>
+				</section>
+				<FullImageView
+					open={openImageFullView}
+					close={() => setOpenImageFullView(false)}
+					currentslide={contextData}
+					images={
+						(data?.images?.length && data?.images) ||
+						(data?.defaultImage?.fullImage && [
+							{ fullImage: data?.defaultImage?.fullImage },
+						]) ||
+						(data?.imagePath && [
+							{
+								fullImage: data?.imagePath,
+								thumbImage: data?.imagePath,
+							},
+						])
+						// ||
+						// (data?.vendorLogo && [
+						// 	{
+						// 		fullImage:
+						// 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+						// 				?.src,
+						// 		thumbImage:
+						// 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+						// 				?.src,
+						// 	},
+						// ])
+					}
+				/>
+			</main>
+		</>
 	);
 }
 
