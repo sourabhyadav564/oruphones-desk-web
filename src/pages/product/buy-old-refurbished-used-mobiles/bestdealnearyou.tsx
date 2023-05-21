@@ -25,13 +25,17 @@ import getMakes from '@/utils/fetchers/getMakes';
 import NoMatch from '@/components/NoMatch';
 
 const settings = {
-	slidesToShow: 1,
-	autoplay: true,
-	autoplaySpeed: 4000,
-	pauseOnHover: true,
-	dots: true,
-	arrows: true,
-	dotsWrapperStyle: { marginBottom: 20 },
+	slidesPerView: 1,
+	navigation: {
+		arrows: true,
+	},
+	pagination: {
+		dots: true,
+	},
+	autoplay: {
+		delay: 5000,
+	},
+	loop: true,
 };
 
 type TPageProps = {

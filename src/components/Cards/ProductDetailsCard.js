@@ -149,7 +149,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 					)}
 				</div>
 				<div className="lg:flex lg:flex-col-2 justify-center w-full">
-					<div className="col-span-1 lg:w-[600px] w-[400px] justify-center pr-4">
+					<div className="col-span-1 lg:w-[600px] w-[400px] h-[28rem] justify-center pr-4 w-full">
 						{!(data?.isOtherVendor === 'Y') ? (
 							<>
 								{(data?.images || data?.defaultImage || data?.imagePath) && (

@@ -23,7 +23,6 @@ function SellerDetailsCard({ data, comparisontableid }) {
 	const [showLoginPopup, setShowLoginPopup] = useState(false);
 	const [openRequestVerificationPopup, setRequestVerificationPopup] =
 		useState(false);
-	const [otherSeller, setOtherSeller] = useState([]);
 	const [
 		openRequestVerificationSuccessPopup,
 		setOpenRequestVerificationSuccessPopup,

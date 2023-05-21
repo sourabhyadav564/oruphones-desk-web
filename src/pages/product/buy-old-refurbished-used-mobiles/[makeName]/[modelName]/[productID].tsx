@@ -69,6 +69,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
+	console.log('Listed By: ', prod.isOtherVendor);
 	const { make, model } = prod;
 	ctx.res.setHeader(
 		'Cache-Control',

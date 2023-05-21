@@ -32,13 +32,16 @@ type TPageProps = {
 
 const settings = {
 	slidesPerView: 1,
+	navigation: {
+		arrows: true,
+	},
+	pagination: {
+		dots: true,
+	},
 	autoplay: {
 		delay: 5000,
 	},
-	navigation: {
-		dots: true,
-		arrows: true,
-	},
+	loop: true,
 };
 
 const filterPageAtom = atom<number>(1);

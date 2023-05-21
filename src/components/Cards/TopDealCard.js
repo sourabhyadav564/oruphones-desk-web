@@ -37,9 +37,7 @@ function TopDealCard({ data, setProducts }) {
 					window.open(
 						`/product/buy-old-refurbished-used-mobiles/${
 							data?.marketingName.split(' ')[0]
-						}/${data?.marketingName}/${data?.listingId}?isOtherVendor=${
-							data?.isOtherVendor
-						}`,
+						}/${data?.marketingName}/${data?.listingId}`,
 						'_blank'
 					)
 				}

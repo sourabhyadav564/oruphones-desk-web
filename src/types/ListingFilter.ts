@@ -48,6 +48,7 @@ export type TListingReturnFilter = {
 	defaultImage: {
 		fullImage: string;
 	};
+	isOtherVendor?: boolean;
 	imagePath: string;
 	deviceStorage?: string;
 	charger?: string;
@@ -76,6 +77,5 @@ export type Tmodel = {
 	model: string;
 	image: string;
 };
-
 
 export default TListingFilter;
