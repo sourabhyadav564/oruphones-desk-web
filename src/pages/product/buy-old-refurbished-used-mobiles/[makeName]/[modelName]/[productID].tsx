@@ -70,6 +70,10 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		},
 	});
 	const { make, model } = prod;
+	ctx.res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
+	);
 	return {
 		props: {
 			location: cookie,
