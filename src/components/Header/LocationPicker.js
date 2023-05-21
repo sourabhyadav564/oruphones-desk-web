@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import Geocode from 'react-geocode';
-import { getCityFromResponse } from '@/utils/util';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useContext } from 'react';

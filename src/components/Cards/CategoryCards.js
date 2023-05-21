@@ -51,8 +51,9 @@ const CategoryCards = ({ data, priceRange }) => {
 				<div className="shadow  drop-shadow hover:bg-gray-200  rounded-lg w-40 h-28 px-1.5 py-1.5 sm:px-1.5 bg-m-white grid grid-cols-2 gap-1">
 					{priceRangeData.map((item, index) => (
 						<Link
-							href={`/shopby/pricerange/${item.min}/${item.max}`}
+							href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou?minPrice=${item.min}&maxPrice=${item.max}`}
 							key={index}
+							passHref
 						>
 							<p className="flex flex-col items-center hover:scale-105 justify-center rounded-md bg-m-grey-8 opacity-100 hover:cursor-pointer font-light text-m-green-1 text-xs">
 								{item.bracket}{' '}
@@ -67,7 +68,7 @@ const CategoryCards = ({ data, priceRange }) => {
 		return (
 			<>
 				<div onClick={() => setOpenWarrantyPopup(true)}>
-					<a className="shadow drop-shadow hover:bg-gray-100  hover:cursor-pointer rounded-lg w-32  h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
+					<div className="shadow drop-shadow hover:bg-gray-100  hover:cursor-pointer rounded-lg w-32  h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">
 						<Image
 							src={data?.imagePath}
 							alt={data?.make}
@@ -78,7 +79,7 @@ const CategoryCards = ({ data, priceRange }) => {
 						<span className="text-smallFontSize font-Roboto-Regular text-center pt-2">
 							{data.text}
 						</span>
-					</a>
+					</div>
 				</div>
 				<WarrantyPopup
 					open={openWarrantyPopup}
@@ -96,7 +97,11 @@ const CategoryCards = ({ data, priceRange }) => {
 						data?.urlPath === 'Bestselling'
 							? '/product/models'
 							: data?.urlPath != 'Warranty' &&
-							  `/shopby/category/${data?.urlPath?.toLowerCase()}`,
+							  `/product/buy-old-refurbished-used-mobiles/bestdealnearyou`,
+					query: data?.urlPath !== 'Warranty' &&
+						data?.urlPath !== 'Bestselling' && {
+							[data?.query]: data?.queryValue,
+						},
 				}}
 			>
 				<a className="shadow hover:bg-gray-100  drop-shadow rounded-lg w-32 h-28 px-10 py-2 sm:px-4 bg-m-white text-m-grey-7 text-xs  flex flex-col items-center self-center justify-center relative">

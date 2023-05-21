@@ -1,6 +1,6 @@
 import BestDealsCard from '@/components/Cards/BestDealsCard';
 import Filter from '@/components/Filter';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Carousel from '@/components/Carousel';
 import ProductCard from '@/components/Cards/ProductCard';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
@@ -153,6 +153,12 @@ function Bestdealnearyou({
 			}
 		},
 	});
+
+	useEffect(() => {
+		console.log('Spark!');
+		setFilterData({ ...filters, limit: 12 });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>

@@ -15,13 +15,17 @@ const data = [
 		text: 'Verified Devices Only',
 		imagePath:
 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/verified-mobils.svg',
-		urlPath: 'Verified',
+		urlPath: 'verified=true',
+		query: 'verified',
+		queryValue: 'true',
 	},
 	{
 		id: 2,
 		text: 'Like New Condition',
 		imagePath: 'https://d1tl44nezj10jx.cloudfront.net/web/assets/like-new.svg',
-		urlPath: 'Like New',
+		urlPath: 'condition=Like%20New',
+		query: 'condition',
+		queryValue: 'Like New',
 	},
 	{
 		id: 4,

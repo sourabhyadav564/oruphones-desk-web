@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { Popover } from '@headlessui/react';
 import Image from 'next/image';
 import LocationPopup from '../Popup/LocationPopup';
-import { useContext } from 'react';
-import AppContext from '@/context/ApplicationContext';
 import Location from '@/assets/location.svg';
 import Cookies from 'js-cookie';
 import LoginPopup from '../Popup/LoginPopup';

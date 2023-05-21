@@ -9,7 +9,6 @@ import { locationAtom } from '@/store/location';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
 import { getListingByID } from '@/utils/fetchers/filteredFetch';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
 import { useAtomValue } from 'jotai';
 import { getSimilarListings } from '@/utils/fetchers/filteredFetch';
 import Link from 'next/link';
