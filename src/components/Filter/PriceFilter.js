@@ -25,6 +25,7 @@ function PriceFilter({ options, router, priceRange, setPriceRange }) {
 					className="w-full rounded h-10 text-sm sm:h-8"
 					min={300}
 					placeholder={0}
+					value={priceRange[0]}
 					// disabled={min === undefined ? false : true}
 					style={{ border: '1px solid #e4e3e3' }}
 					onChange={(e) => handleMinChange(e, options)}
@@ -34,6 +35,7 @@ function PriceFilter({ options, router, priceRange, setPriceRange }) {
 					className="w-full rounded h-10 text-sm sm:h-8"
 					max={300}
 					placeholder={999999}
+					value={priceRange[1]}
 					// disabled={max === undefined ? false : true}
 					style={{ border: '1px solid #e4e3e3' }}
 					onChange={(e) => handleMaxChange(e, options)}

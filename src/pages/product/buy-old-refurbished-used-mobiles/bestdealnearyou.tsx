@@ -51,10 +51,26 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
 		cookie = 'India';
 	}
-
+	// account for possible query params
+	const { verified, condition, warranty, minPrice, maxPrice } = ctx.query as {
+		verified: string | undefined;
+		condition: string | undefined;
+		warranty: string | undefined;
+		minPrice: string | undefined;
+		maxPrice: string | undefined;
+	};
 	let filters: TListingFilter = {
 		listingLocation: cookie,
 		limit: 11,
+		...(verified && { verified: verified === 'true' }),
+		...(condition && { condition: [condition] }),
+		...(warranty && { warranty: [warranty] }),
+		...(minPrice && {
+			priceRange: [
+				parseInt(minPrice) || 0,
+				parseInt(maxPrice as string) || 999999,
+			],
+		}),
 	};
 	const queryClient = new QueryClient();
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
@@ -170,6 +186,8 @@ function Bestdealnearyou({
 					{data?.pages[0] && (
 						<>
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
+								{/* {`Filter: ${JSON.stringify(filterData)}`}
+								<br /> */}
 								{`Total Products (${
 									isLoading || isFetchingNextPage || !data?.pages[0]
 										? 0

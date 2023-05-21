@@ -3,7 +3,6 @@ import Filter from '@/components/Filter';
 import React, { useState, useEffect } from 'react';
 import Carousel from '@/components/Carousel';
 import ProductCard from '@/components/Cards/ProductCard';
-// import NoMatch from '@/components/NoMatch';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 import ShopByBrandSection from '@/components/ShopByBrandSection';
@@ -208,7 +207,7 @@ function BrandPage({
 		}
 	}, [makeName]);
 
-	// update brand name in filter if changed
+	// update brand name in filter if changed, (hydrate Atom doesnt work in rerenders, only in first render)
 	useEffect(() => {
 		if (filterData?.make && filterData.make[0] === makeName) return;
 		setFilterData({ ...filterData, make: [makeName] });

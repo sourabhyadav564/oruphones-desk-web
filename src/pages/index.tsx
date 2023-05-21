@@ -25,10 +25,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
 		cookie = 'India';
 	}
-	// TODO: fetch both async simultaneously
-	let brands = await Axios.fetchBrands();
 	const sliceLength = 10;
-	let bestDeals = await getHomeListings(cookie, sliceLength);
+	const [brands, bestDeals] = await Promise.all([
+		Axios.fetchBrands(),
+		getHomeListings(cookie, sliceLength),
+	]);
+	// cache this SSR response
+	ctx.res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
+	);
 	return {
 		props: {
 			brands: brands?.dataObject || null,
