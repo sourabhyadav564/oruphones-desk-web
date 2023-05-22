@@ -212,6 +212,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
 								setThisPhonePopup={setThisPhonePopup}
 								listingId={data?.listingId}
 								isOtherVendor={data?.isOtherVendor}
+								key={index}
 							/>
 						))}{' '}
 						{data?.compareData && data?.compareData.length > 0 && (

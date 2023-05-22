@@ -49,7 +49,6 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 	const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
 	const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
 	const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
-	const length = 0;
 
 	let filled =
 		data?.deviceCondition?.toLowerCase() == 'Like New'.toLowerCase()
@@ -94,10 +93,6 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 			}
 		}, 1000);
 	}, [showLoginPopup]);
-
-	useEffect(() => {
-		setDetailsData(data?.similarListTable);
-	});
 
 	useEffect(() => {
 		if (openRequestVerificationSuccessPopup) {

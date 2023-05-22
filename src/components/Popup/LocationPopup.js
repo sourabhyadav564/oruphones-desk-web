@@ -5,26 +5,21 @@ import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
 import Select from '../Form/Select';
 import * as Axios from '@/api/axios';
-import AppContext from '@/context/ApplicationContext';
-import Cookies from 'js-cookie';
 import { useAtom } from 'jotai';
 import {
-	locationAtom,
 	updateLocationAtom,
 	updateLocationLatLongAtom,
+	citiesAtom,
 } from '@/store/location';
 
 function LocationPopup({ open, setOpen }) {
 	const cancelButtonRef = useRef(null);
 	const [citiesResponse, setCitiesResponse] = useState([]);
 	const [citiesResponse2, setCitiesResponse2] = useState([]);
-	const [searchLocationID, setSearchLocationID] = useState();
 	const [searchText, setSearchText] = useState('');
-	let cityInfo = [];
 	const selectedCity = useRef();
-	const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
-
-	const [location] = useAtom(locationAtom);
+	// const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
+	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 
@@ -52,10 +47,9 @@ function LocationPopup({ open, setOpen }) {
 			(item) => item.city !== 'India'
 		);
 		setCitiesResponse2(india.concat(otherCities));
-		setCities(india.concat(otherCities));
 	};
 
-	const onError = (error) => {
+	const onError = () => {
 		setLocation('India');
 	};
 
@@ -70,57 +64,15 @@ function LocationPopup({ open, setOpen }) {
 	};
 
 	useEffect(() => {
-		if (location && location.city && location.city.length > 0) {
-			if (Cookies.get('userUniqueId') !== undefined) {
-				let searchID = 0;
-				let searchLocId = userInfo?.address?.filter((items) => {
-					return items.addressType === 'SearchLocation';
-				});
-				if (searchLocId) {
-					searchID = searchLocId[0]?.locationId;
-				}
-				let payLoad = {
-					city: location.city,
-					country: 'India',
-					state: '',
-					locationId: searchID,
-					userUniqueId: Cookies.get('userUniqueId'),
-				};
-			}
-			setSearchLocation(location.city);
-			localStorage.setItem('usedLocation', location.city);
-		}
-	}, [location]);
-
-	useEffect(() => {
-		let searchID = searchLocationID;
-		let searchLocId = userInfo?.userdetails?.address?.filter((items) => {
-			return items.addressType === 'SearchLocation';
-		});
-		if (searchLocId) {
-			searchID = searchLocId[0]?.locationId;
-		}
-		setSearchLocationID(searchID);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userInfo?.userdetails?.address]);
-
-	useEffect(() => {
-		if (
-			localStorage.getItem('cities') != undefined &&
-			JSON.parse(localStorage.getItem('cities'))?.length > 0
-		) {
-			setCitiesResponse(JSON.parse(localStorage.getItem('cities')));
-			setCities(JSON.parse(localStorage.getItem('cities')));
+		if (cities) {
+			setCitiesResponse(cities);
+			setCities(cities);
 		} else {
 			const fetchData = async () => {
 				try {
 					const citiesResponse = await Axios.getGlobalCities(searchText);
 					setCitiesResponse(citiesResponse?.dataObject);
 					setCities(citiesResponse?.dataObject);
-					localStorage.setItem(
-						'cities',
-						JSON.stringify(citiesResponse?.dataObject)
-					);
 				} catch (err) {
 					console.error(err);
 					setCities([]);

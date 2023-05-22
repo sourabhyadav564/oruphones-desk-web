@@ -27,14 +27,6 @@ function LoginOrProfile() {
 		return () => {};
 	});
 
-	// useEffect(() => {
-	//   getAllNotificationByUserd(Cookies.get("userUniqueId")).then((response) => {
-	//     setNotifications(response?.dataObject?.notifications);
-
-	//     setUnreadNotificationsCount(response?.dataObject?.unReadCount);
-	//   });
-	// }, []);
-
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (
@@ -49,6 +41,7 @@ function LoginOrProfile() {
 			}
 		}, 1000);
 	}, [showLogin]);
+	
 	if (userAuthenticated) {
 		return (
 			<div className="flex space-x-1 items-center h-full w-20 mt-1 z-50">

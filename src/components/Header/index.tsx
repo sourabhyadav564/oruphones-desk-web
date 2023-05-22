@@ -9,7 +9,6 @@ import LocationPopup from '../Popup/LocationPopup';
 import AppContext from '@/context/ApplicationContext';
 import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
-import LocationPicker from './LocationPicker';
 import { useAtom } from 'jotai';
 import {
 	updateLocationAtom,
@@ -87,7 +86,6 @@ function Header() {
 			<DesktopMenu />
 			<MobileMenu isOpen={isOpen} />
 			<LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
-			<LocationPicker />
 		</header>
 	);
 }

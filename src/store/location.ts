@@ -3,6 +3,7 @@ import Geocode from 'react-geocode';
 import { topDealsQueryAtom } from '@/store/topDeals';
 import filterAtom from '@/store/productFilter';
 import { setCookie } from 'cookies-next';
+import { atomWithStorage } from 'jotai/utils';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
@@ -39,5 +40,7 @@ export const updateLocationLatLongAtom = atom(
 		set(updateLocationAtom, noWhiteSpaceCity);
 	}
 );
+
+export const citiesAtom = atomWithStorage<any>('cities', undefined);
 
 export default readLocationAtom;

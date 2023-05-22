@@ -1,5 +1,5 @@
 import Carousel from '@/components/Carousel';
-import { useState, useEffect, useContext, Fragment } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import BestDealsCard from '@/components/Cards/BestDealsCard';
 import ProductCard from '@/components/Cards/ProductCard';
 import Filter from '@/components/Filter';
