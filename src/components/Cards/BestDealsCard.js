@@ -114,6 +114,7 @@ function BestDealsCard({ data }) {
 							height={'30'}
 							objectFit="contain"
 							alt={'TODO: Something stable'}
+							priority
 						/>
 					) : data?.verified ? (
 						<VerifiedIcon width={60} height={29} />
@@ -124,7 +125,7 @@ function BestDealsCard({ data }) {
 				<div className="relative flex justify-end items-end">
 					<Image
 						loading="lazy"
-						priority={false}
+						priority
 						blurDataURL={
 							imageError
 								? getDefaultImage(data?.marketingName) ||

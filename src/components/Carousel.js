@@ -1,9 +1,5 @@
 import { Swiper } from 'swiper/react';
-import Chevronleft from '@/assets/chevronleft.svg';
-import Chevronright from '@/assets/chevronright.svg';
-import Image from 'next/image';
-import SwiperCore, {
-	Ally,
+import {
 	ArrowLeft,
 	ArrowRight,
 	Autoplay,
@@ -27,8 +23,7 @@ const swiperOptions = {
 		clickable: true,
 	},
 	navigation: {
-		ArrowLeft,
-		ArrowRight,
+		arrows: true,
 	},
 	modules: [Pagination, Navigation, Autoplay],
 };
