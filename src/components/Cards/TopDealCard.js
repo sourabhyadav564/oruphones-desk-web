@@ -1,10 +1,10 @@
+import { useState } from 'react';
+import Rupee1 from '@/assets/rupee1.svg';
+import AddFav from '@/components/AddFav';
+import VerifiedIcon from '@/components/VerifiedIcon';
+import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Image from 'next/image';
 import Link from 'next/link';
-import Rupee1 from '@/assets/rupee1.svg';
-import { getDefaultImage, numberWithCommas } from '../../utils/util';
-import VerifiedIcon from '../VerifiedIcon';
-import AddFav from '../AddFav';
-import { useState } from 'react';
 
 function TopDealCard({ data, setProducts }) {
 	const [imageError, setImageError] = useState(false);

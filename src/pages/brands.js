@@ -1,7 +1,7 @@
 import React from 'react';
-import BrandCard from '../components/Cards/BrandCard';
-import DownloadApp from '../components/DownloadApp';
 import * as Axios from '@/api/axios';
+import BrandCard from '@/components/Cards/BrandCard';
+import DownloadApp from '@/components/DownloadApp';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 

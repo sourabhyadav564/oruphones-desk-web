@@ -1,22 +1,22 @@
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import '../styles/globals.css';
-import { AuthProvider } from '@/context/AuthContext';
-import { ApplicationContext } from '../context/ApplicationContext';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import '@/styles/globals.css';
 import { ToastContainer } from 'react-toastify';
+import { ApplicationContext } from '@/context/ApplicationContext';
+import { AuthProvider } from '@/context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
-import { AppProps } from 'next/app';
-import SEO from '@/data/seoOptions';
-import { DefaultSeo } from 'next-seo';
-import { Provider } from 'jotai';
-import {  useState } from 'react';
 import {
+	DehydratedState,
 	Hydrate,
 	QueryClient,
 	QueryClientProvider,
-	DehydratedState,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'; // is not part of the build bundle, purely for Dev purposes
+import { useState } from 'react';
+import SEO from '@/data/seoOptions';
+import { Provider } from 'jotai';
+import { DefaultSeo } from 'next-seo';
+import { AppProps } from 'next/app';
 
 const queryClientOptions = {
 	defaultOptions: {
@@ -39,10 +39,10 @@ export default function MyApp({
 						<Hydrate state={pageProps.dehydratedState}>
 							<ReactQueryDevtools />
 							<Provider>
-									<Header />
-									<DefaultSeo {...SEO} />
-									<Component {...pageProps} />
-									<Footer />
+								<Header />
+								<DefaultSeo {...SEO} />
+								<Component {...pageProps} />
+								<Footer />
 							</Provider>
 						</Hydrate>
 					</QueryClientProvider>

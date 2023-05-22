@@ -1,16 +1,16 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Rupee from '@/assets/rupee1.svg';
-import { numberWithCommas } from '../../utils/util';
-import * as Axios from '@/api/axios';
-import RequestVerificationPopup from '../Popup/RequestVerificationPopup';
-import LoginPopup from '../Popup/LoginPopup';
-import RequestVerificationSuccessPopup from '../Popup/RequestVerificationSuccessPopup';
-import Cookies from 'js-cookie';
-import RegUser from '@/assets/user1.svg';
-import GreaterThan from '@/assets/greaterthan.svg';
-import ThisPhonePopup from '../Popup/ThisPhonePopup';
 import { toast } from 'react-toastify';
+import * as Axios from '@/api/axios';
+import GreaterThan from '@/assets/greaterthan.svg';
+import Rupee from '@/assets/rupee1.svg';
+import RegUser from '@/assets/user1.svg';
+import LoginPopup from '@/components/Popup/LoginPopup';
+import RequestVerificationPopup from '@/components/Popup/RequestVerificationPopup';
+import RequestVerificationSuccessPopup from '@/components/Popup/RequestVerificationSuccessPopup';
+import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
+import { numberWithCommas } from '@/utils/util';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function SellerDetailsCard({ data, comparisontableid }) {
 	const [thisPhonePopup, setThisPhonePopup] = useState(false);

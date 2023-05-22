@@ -1,9 +1,9 @@
-import Modal from '.';
-import { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
-import { parse as nodeParser } from 'node-html-parser';
+import { useEffect, useState } from 'react';
 import { infoTemplates } from '@/api/axios';
 import fetchStaticHTML from '@/api/fetchStaticHtml';
+import { parse as nodeParser } from 'node-html-parser';
+import Modal from '.';
 
 function TermsconditionPopup({ open, setOpen }) {
 	const [htmlContent, setHtmlContent] = useState('<p></h1>');

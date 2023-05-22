@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
-import LoginPopup from '../Popup/LoginPopup';
+import React, { useContext, useEffect, useState } from 'react';
 import RegUser from '@/assets/user1.svg';
-import Link from 'next/link';
-import AuthContext from '@/context/AuthContext';
+import Notifications from '@/components/Notifications';
+import LoginPopup from '@/components/Popup/LoginPopup';
 import AppContext from '@/context/ApplicationContext';
-import Notifications from '../Notifications';
+import AuthContext from '@/context/AuthContext';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function LoginOrProfile() {
 	const router = useRouter();
@@ -41,7 +41,7 @@ function LoginOrProfile() {
 			}
 		}, 1000);
 	}, [showLogin]);
-	
+
 	if (userAuthenticated) {
 		return (
 			<div className="flex space-x-1 items-center h-full w-20 mt-1 z-50">

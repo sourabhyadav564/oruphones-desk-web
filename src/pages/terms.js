@@ -1,8 +1,8 @@
-import { parse as nodeParser } from 'node-html-parser';
 import { useEffect, useState } from 'react';
 import fetchStaticHTML from '@/api/fetchStaticHtml';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
+import { parse as nodeParser } from 'node-html-parser';
 
 function Termscondition() {
 	const [htmlText1, setHtmlText1] = useState('');

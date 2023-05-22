@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import Notification from '@/assets/notification.svg';
-import router from 'next/router';
+import AppDownloadPopup from './Popup/AppDownloadPopup';
 import {
 	deleteNotification,
 	getAllNotificationByUserd,
 	markAsRead,
 } from '@/api/axios';
-import AppDownloadPopup from './Popup/AppDownloadPopup';
-import Cookies from 'js-cookie';
+import Notification from '@/assets/notification.svg';
 import Trash from '@/assets/trash.svg';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
+import router from 'next/router';
 
 export default function Notifications() {
 	const innerRef = useRef();

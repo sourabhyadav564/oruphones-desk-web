@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import { useState } from 'react';
 import Fb from '@/assets/fb.svg';
 import gmail from '@/assets/gmail.svg';
 import instagram from '@/assets/ig.svg';
-import pinterest from '@/assets/pinterest.svg';
 import linkedin from '@/assets/linkedIn.svg';
-import youtube from '@/assets/yt.svg';
+import pinterest from '@/assets/pinterest.svg';
 import twitter from '@/assets/twitter.svg';
-import AppDownloadPopup from '../Popup/AppDownloadPopup';
-import { useState } from 'react';
+import youtube from '@/assets/yt.svg';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
 	const [openAppDownload, setOpenAppDownload] = useState(false);

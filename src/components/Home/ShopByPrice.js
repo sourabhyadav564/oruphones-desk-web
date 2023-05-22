@@ -1,6 +1,6 @@
-import ShopByPriceCard from '../Cards/ShopByPriceCard';
-import Carousel from '../Carousel';
-import Title from '../Title';
+import Carousel from '@/Carousel';
+import ShopByPriceCard from '@/components/Cards/ShopByPriceCard';
+import Title from '@/components/Title';
 
 const settings = {
 	navigation: {

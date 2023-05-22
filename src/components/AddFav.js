@@ -1,12 +1,11 @@
-import Cookies from 'js-cookie';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import OutlineHeartBlack from '@/assets/heart_black.svg';
-import OutlineHeart from '@/assets/heartoutline.svg';
-import FillHeart from '@/assets/heartfill.svg';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import * as Axios from '@/api/axios';
 import LoginPopup from './Popup/LoginPopup';
+import * as Axios from '@/api/axios';
+import OutlineHeartBlack from '@/assets/heart_black.svg';
+import FillHeart from '@/assets/heartfill.svg';
+import OutlineHeart from '@/assets/heartoutline.svg';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function AddFav({ data, setProducts, ...rest }) {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Sort from './Sort';
 import DesktopFilter from './DesktopFilter';
+import Sort from './Sort';
 import useFilterOptions from '@/hooks/useFilterOptions';
 import { useRouter } from 'next/router';
 

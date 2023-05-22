@@ -1,11 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useRef } from 'react';
+import { Fragment, useRef, useState } from 'react';
+import AppleStore from '@/assets/apple_store.svg';
+import Close from '@/assets/cross.svg';
+import PlayStore from '@/assets/playstore.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import Close from '@/assets/cross.svg';
-import AppleStore from '@/assets/apple_store.svg';
-import PlayStore from '@/assets/playstore.svg';
-import { useState } from 'react';
 
 function AppDownloadPopup({ open, setOpen }) {
 	const cancelButtonRef = useRef(null);

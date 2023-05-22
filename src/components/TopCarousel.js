@@ -1,14 +1,14 @@
-import Image from 'next/image';
-import CarouselWithPagination from '@/components/CarouselWithPagination';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import LoginPopup from '../components/Popup/LoginPopup';
-import Cookies from 'js-cookie';
+import { SwiperSlide } from 'swiper/react';
+import AppDownloadPopup from './Popup/AppDownloadPopup';
 import Banner_2 from '@/assets/banner_web_2.png';
 import Banner_3 from '@/assets/banner_web_3.png';
-import AppDownloadPopup from './Popup/AppDownloadPopup';
-import { SwiperSlide } from 'swiper/react';
+import CarouselWithPagination from '@/components/CarouselWithPagination';
+import LoginPopup from '@/components/Popup/LoginPopup';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const settings = {
 	slidesPerView: 1,

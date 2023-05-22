@@ -1,6 +1,7 @@
-import * as dayjs from 'dayjs';
-dayjs().format();
 import { deviceDefaultImage } from './constant';
+import * as dayjs from 'dayjs';
+
+dayjs().format();
 
 export function numberWithCommas(s) {
 	s = s?.toString().replace(/(\d)(?=(\d\d)+\d$)/g, '$1,');

@@ -1,8 +1,8 @@
-import TopDealCard from '../Cards/TopDealCard';
-import Title from '../Title';
+import TopDealCard from '@/components/Cards/TopDealCard';
+import Title from '@/components/Title';
 import 'react-loading-skeleton/dist/skeleton.css';
-import LocationPopup from '../Popup/LocationPopup';
 import { useState } from 'react';
+import LocationPopup from '@/components/Popup/LocationPopup';
 
 function TopDeals({ bestDeals, location }) {
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);

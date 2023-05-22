@@ -1,16 +1,16 @@
+import { Swiper } from 'swiper/react';
 import Chevronleft from '@/assets/chevronleft.svg';
 import Chevronright from '@/assets/chevronright.svg';
 import Image from 'next/image';
-import { Swiper } from 'swiper/react';
 import SwiperCore, {
-	Pagination,
-	Navigation,
-	Autoplay,
 	Ally,
 	ArrowLeft,
 	ArrowRight,
+	Autoplay,
+	Navigation,
+	Pagination,
 } from 'swiper';
-import '../../node_modules/swiper/swiper-bundle.css';
+import '@/node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';

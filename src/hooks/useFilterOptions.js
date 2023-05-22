@@ -1,5 +1,5 @@
-import { getShowSerchFilters } from '@/api/axios';
 import { useEffect, useRef, useState } from 'react';
+import { getShowSerchFilters } from '@/api/axios';
 
 const initialState = [
 	{

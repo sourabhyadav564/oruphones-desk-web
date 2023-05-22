@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import LoginPopup from '../Popup/LoginPopup';
+import React, { useContext, useEffect, useState } from 'react';
 import RegUser from '@/assets/user2.svg';
-import Link from 'next/link';
-import AuthContext from '@/context/AuthContext';
+import LoginPopup from '@/components/Popup/LoginPopup';
 import AppContext from '@/context/ApplicationContext';
+import AuthContext from '@/context/AuthContext';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function LoginOrProfileInMobileMenu() {
 	const router = useRouter();

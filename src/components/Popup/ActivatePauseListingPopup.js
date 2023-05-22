@@ -1,8 +1,8 @@
-import Modal from '.';
 import { useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import router from 'next/router';
 import Cookies from 'js-cookie';
+import router from 'next/router';
+import Modal from '.';
 
 function ActivatePauseListingPopup({ open, setOpen, data }) {
 	const [callPause, setCallPause] = useState(null);

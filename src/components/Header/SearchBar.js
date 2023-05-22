@@ -1,9 +1,7 @@
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { getSearchResults } from '@/api/axios';
-import { useRef } from 'react';
-import { useEffect, useState } from 'react';
-import { Fragment } from 'react';
-import Search from '@/assets/search.svg';
 import Recent from '@/assets/recent.svg';
+import Search from '@/assets/search.svg';
 import Image from 'next/image';
 
 function SearchBar() {

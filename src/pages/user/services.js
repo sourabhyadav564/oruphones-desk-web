@@ -1,9 +1,9 @@
-import UserProfile from '../../components/User/UserProfile';
+import { useState } from 'react';
 import Loader from '@/components/Loader/Loader';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
+import UserProfile from '@/components/User/UserProfile';
 import { servicesData } from '@/utils/constant';
 import Image from 'next/image';
-import { useState } from 'react';
-import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 
 function Services() {
 	const [openAppDownload, setOpenAppDownload] = useState(false);

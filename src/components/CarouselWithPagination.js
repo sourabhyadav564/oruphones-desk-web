@@ -1,6 +1,6 @@
 import { Swiper } from 'swiper/react';
-import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
-import '../../node_modules/swiper/swiper-bundle.css';
+import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
+import '@/node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';

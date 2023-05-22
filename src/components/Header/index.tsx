@@ -1,20 +1,19 @@
-import React, { useState, useContext } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-
+import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import DesktopMenu from './DesktopMenu';
-import MobileMenu from './MobileMenu';
 import LoginOrProfile from './LoginOrProfile';
-import LocationPopup from '../Popup/LocationPopup';
-import AppContext from '@/context/ApplicationContext';
+import MobileMenu from './MobileMenu';
 import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
-import { useAtom } from 'jotai';
+import LocationPopup from '@/components/Popup/LocationPopup';
+import AppContext from '@/context/ApplicationContext';
 import {
 	updateLocationAtom,
 	updateLocationLatLongAtom,
 } from '@/store/location';
-import { toast } from 'react-toastify';
+import { useAtom } from 'jotai';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const options = {
 	enableHighAccuracy: true,

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
-import { parse as nodeParser } from 'node-html-parser';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
+import { useEffect, useState } from 'react';
 import Model2 from './Model2';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
+import { parse as nodeParser } from 'node-html-parser';
 
 function ConditionInfoPopup({ open, setOpen }) {
 	const [htmlText1, setHtmlText1] = useState('');

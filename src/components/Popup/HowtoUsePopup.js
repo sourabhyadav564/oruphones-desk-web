@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Modal from '.';
-import Image from 'next/image';
 import AppleStore from '@/assets/apple_store.svg';
 import PlayStore from '@/assets/playstore.svg';
+import Image from 'next/image';
 import Link from 'next/link';
+import Modal from '.';
 
 function HowtoUsePopup({ open, setOpen }) {
 	const [qrValue1, setQrValue1] = useState(

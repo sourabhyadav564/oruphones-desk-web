@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import BrandFilter from './BrandFilter';
 import ColorFilter from './ColorFilter';
 import ConditionFilter from './ConditionFilter';
-import StorageFilter from './StorageFilter';
 import PriceFilter from './PriceFilter';
-import WarrantyFilter from './WarrantyFilter';
-import VerificationFilter from './VerificationFilter';
-import { useRouter } from 'next/router';
-import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
-import VerifiedInfoPopup from '../Popup/VerifiedInfoPopup';
 import RamFilter from './RamFilter';
-import WarrantyInfo from '../Popup/WarrantyInfo';
+import StorageFilter from './StorageFilter';
+import VerificationFilter from './VerificationFilter';
+import WarrantyFilter from './WarrantyFilter';
+import ConditionInfoPopup from '@/components/Popup/ConditionInfoPopup';
+import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
+import WarrantyInfo from '@/components/Popup/WarrantyInfo';
+import { useRouter } from 'next/router';
 
 const DesktopFilter = ({ setFilters, filterOptions }) => {
 	const [selectedBrand, setSelectedBrand] = useState();

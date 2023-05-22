@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import Image from 'next/image';
-import { numberWithCommas } from '../../utils/util';
-import ImageSlider from '../ImageSlider';
-import LabelAndValue from '../LabelAndValue';
-import VerifiedInfoPopup from '../Popup/VerifiedInfoPopup';
-import DeviceVerificationReport from '../Popup/DeviceVerificationReport';
-import ActivatePauseListing from '../Popup/ActivatePauseListingPopup';
-import DeleteListingPopup from '../Popup/DeleteListingPopup';
-import AppDownloadPopup from '../Popup/AppDownloadPopup';
 import * as Axios from '@/api/axios';
-import ActivateListingPopup from '../Popup/ActivateListingPopup';
-import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
-import VerifiedIcon from '../VerifiedIcon';
-import UnVerifiedIcon from '../UnVerifiedIcon';
+import ImageSlider from '@/components/ImageSlider';
+import LabelAndValue from '@/components/LabelAndValue';
+import ActivateListingPopup from '@/components/Popup/ActivateListingPopup';
+import ActivatePauseListing from '@/components/Popup/ActivatePauseListingPopup';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
+import ConditionInfoPopup from '@/components/Popup/ConditionInfoPopup';
+import DeleteListingPopup from '@/components/Popup/DeleteListingPopup';
+import DeviceVerificationReport from '@/components/Popup/DeviceVerificationReport';
+import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
+import VerifiedIcon from '@/components/VerifiedIcon';
+import UnVerifiedIcon from '@/UnVerifiedIcon';
+import { numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function ListingDetailsCard({ data }) {
 	const [openDeviceReport, setOpenDeviceReport] = useState(false);

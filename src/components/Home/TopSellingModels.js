@@ -1,6 +1,7 @@
-import Title from '../Title';
-import Carousel from '../Carousel';
-import TopSellingCard from '../Cards/TopSellingCard';
+import Carousel from '@/Carousel';
+import TopSellingCard from '@/components/Cards/TopSellingCard';
+import Title from '@/components/Title';
+
 const settings = {
 	dots: false,
 	loop: false,

@@ -1,7 +1,7 @@
-import fetchStaticHTML from '@/api/fetchStaticHtml';
+import parse from 'html-react-parser';
 import { useEffect, useState } from 'react';
 import Modal2 from './Model2';
-import parse from 'html-react-parser';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
 import { parse as nodeParser } from 'node-html-parser';
 
 function WarrantyInfo({ open, setOpen }) {

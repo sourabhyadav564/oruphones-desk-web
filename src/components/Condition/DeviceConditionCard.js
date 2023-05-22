@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { deviceConditionResult } from '../../utils/constant';
 import InfoCircle from '@/assets/infocircle2.svg';
+import { deviceConditionResult } from '@/utils/constant';
 import Image from 'next/image';
 
 const DeviceConditionCard = ({ condition, answer }) => {

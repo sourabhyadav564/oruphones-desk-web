@@ -1,15 +1,14 @@
+import React, { useEffect, useState } from 'react';
+import InfoCircle from '@/assets/infocircle.svg';
+import BrandWarrantyInfo from '@/components/Popup/BrandWarrantyInfo';
+import LoginPopup from '@/components/Popup/LoginPopup';
+import SellerWarrantyInfo from '@/components/Popup/SellerWarrantyInfo';
+import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
+import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
+import WarrantyInfo from '@/components/Popup/WarrantyInfo';
 import { numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import InfoCircle from '@/assets/infocircle.svg';
-import LoginPopup from '../Popup/LoginPopup';
-import ThisPhonePopup from '../Popup/ThisPhonePopup';
-import VerifiedInfoPopup from '../Popup/VerifiedInfoPopup';
-import WarrantyInfo from '../Popup/WarrantyInfo';
-import BrandWarrantyInfo from '../Popup/BrandWarrantyInfo';
-import SellerWarrantyInfo from '../Popup/SellerWarrantyInfo';
 
 function ComparisonTable(data, listingId) {
 	const [productData, setProductData] = useState([]);

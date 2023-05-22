@@ -1,6 +1,6 @@
+import { toast } from 'react-toastify';
 import { prepareShareLink } from '@/api/axios';
 import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
 
 export default function ShareIcon({ data, ...rest }) {
 	function shareListingInfo(data) {

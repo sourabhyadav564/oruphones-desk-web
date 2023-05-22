@@ -1,6 +1,6 @@
 import type IDeal from '@/types/Deal';
-import { atom } from 'jotai';
 import getHomeListings from '@/utils/fetchers/getHomeListings';
+import { atom } from 'jotai';
 
 export const topDealsAtom = atom<IDeal[] | null>(null);
 export const topDealsQueryAtom = atom(

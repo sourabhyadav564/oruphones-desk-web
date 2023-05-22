@@ -1,16 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useRef, useState, useContext } from 'react';
-import Image from 'next/image';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
+import * as Axios from '@/api/axios';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
-import Select from '../Form/Select';
-import * as Axios from '@/api/axios';
-import { useAtom } from 'jotai';
+import Select from '@/components/Form/Select';
 import {
+	citiesAtom,
 	updateLocationAtom,
 	updateLocationLatLongAtom,
-	citiesAtom,
 } from '@/store/location';
+import { useAtom } from 'jotai';
+import Image from 'next/image';
 
 function LocationPopup({ open, setOpen }) {
 	const cancelButtonRef = useRef(null);

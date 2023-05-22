@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
-import LoginPopup from '../Popup/LoginPopup';
-import AppDownloadPopup from '../Popup/AppDownloadPopup';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
+import LoginPopup from '@/components/Popup/LoginPopup';
+import { useRouter } from 'next/router';
 
 function SellNowBtn() {
 	const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);

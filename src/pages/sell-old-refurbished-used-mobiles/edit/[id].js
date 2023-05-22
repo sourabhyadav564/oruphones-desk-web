@@ -1,11 +1,11 @@
-import EditListingForm from '@/components/User/EditListingForm';
-import GuideToSell from '@/components/User/GuideToSell';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import { useState, useEffect } from 'react';
 import ListingAddedPopup from '@/components/Popup/ListingAddedPopup';
 import TermAndConditionPopup from '@/components/Popup/TermAndConditionPopup';
+import EditListingForm from '@/components/User/EditListingForm';
+import GuideToSell from '@/components/User/GuideToSell';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 function EditListing({ brandsList }) {
 	const [brands, setBrands] = useState([]);

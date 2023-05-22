@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import UserProfile from '../../components/User/UserProfile';
+import { useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import FavListingTile from '@/components/User/FavListingTile';
-import Cookies from 'js-cookie';
 import Loader from '@/components/Loader/Loader';
+import FavListingTile from '@/components/User/FavListingTile';
+import UserProfile from '@/components/User/UserProfile';
+import Cookies from 'js-cookie';
+import Link from 'next/link';
 
 function Favorites() {
 	const [myFavList, setMyFavList] = useState();

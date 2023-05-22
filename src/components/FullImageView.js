@@ -1,14 +1,14 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import '../../node_modules/swiper/swiper-bundle.css';
+import '@/node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
-import styles from '../styles/fullimageview.module.css';
+import { useState } from 'react';
 import Chevronleft from '@/assets/chevronleft.svg';
 import ChevronRight from '@/assets/chevronright.svg';
 import Cross from '@/assets/cross1.svg';
-import { useState } from 'react';
+import styles from '@/styles/fullimageview.module.css';
 import Image from 'next/image';
 import { Navigation, Pagination } from 'swiper';
 

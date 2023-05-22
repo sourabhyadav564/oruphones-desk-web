@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { atomWithStorage } from 'jotai/utils';
 import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const makeAtom = atomWithStorage('makeState', '');
 function BrandCard({ data }) {

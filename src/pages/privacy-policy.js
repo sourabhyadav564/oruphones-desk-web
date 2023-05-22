@@ -1,9 +1,9 @@
 import parse from 'html-react-parser';
-import { parse as nodeParser } from 'node-html-parser';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
 import { useEffect, useState } from 'react';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
+import { parse as nodeParser } from 'node-html-parser';
 
 function PrivacyPolicy() {
 	const [htmlText1, setHtmlText1] = useState('');

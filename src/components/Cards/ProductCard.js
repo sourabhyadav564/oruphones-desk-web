@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Rupee1 from '@/assets/rupee1.svg';
-import { getDefaultImage, numberWithCommas } from '../../utils/util';
-import AddFav from '../AddFav';
-import VerifiedIcon from '../VerifiedIcon';
 import { useState } from 'react';
+import Rupee1 from '@/assets/rupee1.svg';
+import AddFav from '@/components/AddFav';
+import VerifiedIcon from '@/components/VerifiedIcon';
+import { getDefaultImage, numberWithCommas } from '@/utils/util';
+import Image from 'next/image';
 
 function ProductCard({ data, prodLink, setProducts = () => {} }) {
 	var type = ['old phone', 'used', 'refurbished'];

@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import { getDefaultImage, numberWithCommas } from '../../utils/util';
-import AddFav from '../AddFav';
-import VerifiedIcon from '../VerifiedIcon';
-import ChevronRight from '@/assets/chevronright.svg';
 import { useState } from 'react';
+import ChevronRight from '@/assets/chevronright.svg';
+import AddFav from '@/components/AddFav';
+import VerifiedIcon from '@/components/VerifiedIcon';
+import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function BestDealsCard({ data }) {
 	var type = ['old phone', 'used', 'refurbished'];

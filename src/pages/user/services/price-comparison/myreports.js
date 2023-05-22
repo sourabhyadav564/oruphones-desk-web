@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { gradePhone } from '@/api/axios';
-import Cookies from 'js-cookie';
 import Loader from '@/components/Loader/Loader';
+import Cookies from 'js-cookie';
 
 function myReports() {
 	const [Myreports, setMyreports] = useState();

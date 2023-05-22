@@ -1,11 +1,11 @@
-import { Fragment } from 'react';
 import { Disclosure } from '@headlessui/react';
+import { Fragment } from 'react';
+import { selectedBrandRWAtom } from './DesktopFilter';
+import InfoCircle from '@/assets/infocircle2.svg';
 import Minus from '@/assets/minus.svg';
 import Plus from '@/assets/plus.svg';
-import InfoCircle from '@/assets/infocircle2.svg';
-import Image from 'next/image';
-import { selectedBrandRWAtom } from './DesktopFilter';
 import { useAtomValue } from 'jotai';
+import Image from 'next/image';
 
 function FilterUI({ optionObj, setter, selected, openPopup }) {
 	const readBrand = useAtomValue(selectedBrandRWAtom);

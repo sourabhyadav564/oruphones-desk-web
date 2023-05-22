@@ -1,18 +1,20 @@
-import { useState } from 'react';
-import ProductCard from '../../../../../components/Cards/ProductCard';
-import ProductDetailsCard from '../../../../../components/Cards/ProductDetailsCard';
-import FullImageView from '@/components/FullImageView';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getCookie, setCookie } from 'cookies-next';
-import { useHydrateAtoms } from 'jotai/utils';
-import { locationAtom } from '@/store/location';
-import { QueryClient, dehydrate } from '@tanstack/query-core';
-import { getListingByID } from '@/utils/fetchers/filteredFetch';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import ProductCard from '@/components/Cards/ProductCard';
+import ProductDetailsCard from '@/components/Cards/ProductDetailsCard';
+import FullImageView from '@/components/FullImageView';
+import { locationAtom } from '@/store/location';
+import {
+	getListingByID,
+	getSimilarListings,
+} from '@/utils/fetchers/filteredFetch';
+import { dehydrate, QueryClient } from '@tanstack/query-core';
+import { getCookie, setCookie } from 'cookies-next';
 import { useAtomValue } from 'jotai';
-import { getSimilarListings } from '@/utils/fetchers/filteredFetch';
-import Link from 'next/link';
+import { useHydrateAtoms } from 'jotai/utils';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 
 type TPageProps = {
 	location: string;

@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import Modal2 from './Model2';
-import { useState, useEffect } from 'react';
-import Loader from '../Loader/Loader';
 import Alert from '@/assets/alert.svg';
 import gcheck from '@/assets/gcheck.svg';
+import Loader from '@/components/Loader/Loader';
 import Image from 'next/image';
 
 function RequestVerificationSuccessPopup({ open, setOpen, data }) {

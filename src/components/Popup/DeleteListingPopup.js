@@ -1,9 +1,9 @@
-import Modal from '.';
-import router from 'next/router';
-import * as Axios from '@/api/axios';
-import Cookies from 'js-cookie';
 import { useState } from 'react';
-import Select from '../Form/Select';
+import * as Axios from '@/api/axios';
+import Select from '@/components/Form/Select';
+import Cookies from 'js-cookie';
+import router from 'next/router';
+import Modal from '.';
 
 function DeleteListingPopup({ open, setOpen, data }) {
 	const [deleteReason, setDeleteReason] = useState();

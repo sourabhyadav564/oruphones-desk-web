@@ -1,15 +1,14 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import Select from '@/components/Form/Select';
-import Cookies from 'js-cookie';
+import React, { useEffect, useState } from 'react';
 // import { Axios } from 'axios';
 import * as Axios from '@/api/axios';
-import { numberWithCommas } from '@/utils/util';
-import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
-import { useRouter } from 'next/router';
 import ProductCard from '@/components/Cards/ProductCard';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
+import Select from '@/components/Form/Select';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
+import { numberWithCommas } from '@/utils/util';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 function Index({ isFromEdit, brandsList }) {
 	const router = useRouter();

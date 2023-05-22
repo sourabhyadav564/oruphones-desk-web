@@ -1,8 +1,8 @@
+import { useState } from 'react';
+import Rupee1 from '@/assets/rupee1.svg';
+import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Image from 'next/image';
 import Link from 'next/link';
-import Rupee1 from '@/assets/rupee1.svg';
-import { getDefaultImage, numberWithCommas } from '../../utils/util';
-import { useState } from 'react';
 
 function TopSellingCard({ data }) {
 	const [imageError, setImageError] = useState(false);

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import ProfileListingTile from '../../../components/User/ProfileListingTile';
-import UserListingTab from '../../../components/User/UserListingTab';
-import UserProfile from '../../../components/User/UserProfile';
+import { useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import router from 'next/router';
-import Cookies from 'js-cookie';
 import Loader from '@/components/Loader/Loader';
+import ProfileListingTile from '@/components/User/ProfileListingTile';
+import UserListingTab from '@/components/User/UserListingTab';
+import UserProfile from '@/components/User/UserProfile';
+import Cookies from 'js-cookie';
+import router from 'next/router';
 
 function Listings() {
 	const [currentTab, setCurrentTab] = useState(0);

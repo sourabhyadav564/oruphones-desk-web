@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import React from 'react';
-import Input from '@/components/Form/Input';
 import { gradePhone } from '@/api/axios';
+import Input from '@/components/Form/Input';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 import Cookies from 'js-cookie';
-import AppDownloadPopup from '../../../../components/Popup/AppDownloadPopup';
 import { useRouter } from 'next/router';
 
 function Index() {

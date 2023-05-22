@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
-import Image from 'next/image';
+import { useContext, useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import AuthContext from '../../context/AuthContext';
 import AppContext from '@/context/ApplicationContext';
+import AuthContext from '@/context/AuthContext';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function VerifyOtpPopup({ setOpen, data, redirect }) {
 	const [formData, setFormData] = useState({ ...data });

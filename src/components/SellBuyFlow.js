@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import React from 'react';
-import { useState } from 'react';
-import HowtoSellPopup from './Popup/HowtoSellPopup';
+import React, { useState } from 'react';
 import HowtoBuyPopup from './Popup/HowtoBuyPopup';
+import HowtoSellPopup from './Popup/HowtoSellPopup';
 import HowtoUsePopup from './Popup/HowtoUsePopup';
+import Image from 'next/image';
 
 function SellBuyFlow() {
 	const [openSell, setOpenSell] = useState(false);

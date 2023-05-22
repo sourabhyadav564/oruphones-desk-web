@@ -1,6 +1,6 @@
 import React from 'react';
-import BrandCard from '../Cards/BrandCard';
 import Skeleton from 'react-loading-skeleton';
+import BrandCard from '@/components/Cards/BrandCard';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 function TopBrand({ brandsList }) {

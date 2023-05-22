@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import Rupee1 from '@/assets/rupee1.svg';
+import Image from 'next/image';
+import Link from 'next/link';
 
 function ShopByPriceCard({ src, min, max }) {
 	if (max && max.toString().toLowerCase().includes('above')) {

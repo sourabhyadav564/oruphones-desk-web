@@ -1,21 +1,21 @@
-import TopBrand from '../components/Home/TopBrand';
-import TopDeals from '../components/Home/TopDeals';
-import DownloadApp from '../components/DownloadApp';
-import HomeContent from '../components/Home/HomeContent';
-import NewsLetter from '../components/NewsLetter';
 import * as Axios from '@/api/axios';
-import { metaTags } from '@/utils/constant';
-import Head from 'next/head';
+import DownloadApp from '@/components/DownloadApp';
+import HomeContent from '@/components/Home/HomeContent';
 import ShowBy from '@/components/Home/ShopBy';
+import TopBrand from '@/components/Home/TopBrand';
+import TopDeals from '@/components/Home/TopDeals';
+import NewsLetter from '@/components/NewsLetter';
 import SellBuyFlow from '@/components/SellBuyFlow';
 import TopCarousel from '@/components/TopCarousel';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useAtom } from 'jotai';
-import { useHydrateAtoms } from 'jotai/utils';
 import { locationAtom } from '@/store/location';
 import { topDealsAtom } from '@/store/topDeals';
-import { getCookie, setCookie } from 'cookies-next';
+import { metaTags } from '@/utils/constant';
 import getHomeListings from '@/utils/fetchers/getHomeListings';
+import { getCookie, setCookie } from 'cookies-next';
+import { useAtom } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	// check if cookie is present

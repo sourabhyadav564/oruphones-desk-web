@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import Rupee from '@/assets/rupee1.svg';
-import { useState, useEffect, useCallback } from 'react';
-import { numberWithCommas } from '../../utils/util';
+import { useCallback, useEffect, useState } from 'react';
 import IconLabelValue from './IconLableValue';
-import AppDownloadPopup from '../Popup/AppDownloadPopup';
 import * as Axios from '@/api/axios';
-import { useRouter } from 'next/router';
-import VerifiedIcon from '../VerifiedIcon';
-import UnVerifiedIcon from '../UnVerifiedIcon';
+import Rupee from '@/assets/rupee1.svg';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
+import VerifiedIcon from '@/components/VerifiedIcon';
+import UnVerifiedIcon from '@/UnVerifiedIcon';
+import { numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function ProfileListingTile({ data, fromMyFav, setProducts }) {
 	const router = useRouter();

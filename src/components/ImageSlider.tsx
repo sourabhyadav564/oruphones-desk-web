@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import '../../node_modules/swiper/swiper-bundle.css';
+import Image from 'next/image';
+import '@/node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
-import {
-	EffectFade,
-	Navigation,
-	Pagination,
-	type Swiper as TSwiper,
-} from 'swiper';
 import type { TListingReturnFilter } from '@/types/ListingFilter';
+import type { Swiper as TSwiper } from 'swiper';
+import { EffectFade, Navigation, Pagination } from 'swiper';
 
 function ImageSlider({
 	data,

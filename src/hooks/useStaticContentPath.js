@@ -1,5 +1,5 @@
-import * as Axios from '@/api/axios';
 import { useState } from 'react';
+import * as Axios from '@/api/axios';
 
 const fetchApi = () => {
 	let data;

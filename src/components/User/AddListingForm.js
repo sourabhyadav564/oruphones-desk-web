@@ -1,19 +1,22 @@
-import Image from 'next/image';
-import Select from '../Form/Select';
-import Input from '../Form/Input';
-import { useState, useEffect, useContext } from 'react';
-import ImageInput from '../Form/ImageInput';
-import { numberWithCommas, numberFromString } from '../../utils/util';
-import * as Axios from '@/api/axios';
-import AppContext from '@/context/ApplicationContext';
-import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
-import LoginPopup from '../Popup/LoginPopup';
-import Cookies from 'js-cookie';
-import { deviceConditionQuestion } from '@/utils/constant';
-import ConditionOptionLarge from '../Condition/ConditionOptionLarge';
-import DeviceConditionCard from '../Condition/DeviceConditionCard';
+import { useContext, useEffect, useState } from 'react';
 import Geocode from 'react-geocode';
-import { getCityFromResponse } from '@/utils/util';
+import * as Axios from '@/api/axios';
+import ConditionOptionLarge from '@/components/Condition/ConditionOptionLarge';
+import DeviceConditionCard from '@/components/Condition/DeviceConditionCard';
+import ImageInput from '@/components/Form/ImageInput';
+import Input from '@/components/Form/Input';
+import Select from '@/components/Form/Select';
+import ConditionInfoPopup from '@/components/Popup/ConditionInfoPopup';
+import LoginPopup from '@/components/Popup/LoginPopup';
+import AppContext from '@/context/ApplicationContext';
+import { deviceConditionQuestion } from '@/utils/constant';
+import {
+	getCityFromResponse,
+	numberFromString,
+	numberWithCommas,
+} from '@/utils/util';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function AddEditListing({
 	data,

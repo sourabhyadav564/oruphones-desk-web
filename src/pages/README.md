@@ -1,4 +1,4 @@
-# _app.tsx
+# \_app.tsx
 
 - Added Jotai provider, evenually to replace contextProvider.
 - Added RTK Query provider, global state management for fetches that share the same key.
@@ -9,7 +9,6 @@
 - ShowBy component modified to use only /product/buy-old-refurbished-used-mobiles/bestdealnearyou with query params for filters.
 - SSR preloads the data based on location cookie.
 - Uses V2 endpoints in `getHomeListings.ts`.
-
 
 # Expected behaviour
 

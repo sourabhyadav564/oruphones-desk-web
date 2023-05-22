@@ -1,8 +1,8 @@
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { contactUs } from '@/api/axios';
 import Input from '@/components/Form/Input';
 import TextArea from '@/components/Form/TextArea';
-import { useState } from 'react';
-import { contactUs } from '@/api/axios';
-import { toast } from 'react-toastify';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 

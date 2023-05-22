@@ -1,10 +1,9 @@
-import Cookies from 'js-cookie';
-import Modal2 from './Model2';
-import Alert from '@/assets/alert.svg';
-
-import * as Axios from '@/api/axios';
-import RequestVerificationSuccessPopup from './RequestVerificationSuccessPopup';
 import { useState } from 'react';
+import Modal2 from './Model2';
+import RequestVerificationSuccessPopup from './RequestVerificationSuccessPopup';
+import * as Axios from '@/api/axios';
+import Alert from '@/assets/alert.svg';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function RequestVerificationPopup({

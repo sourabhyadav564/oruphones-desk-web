@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Model3 from './Model3';
+import Link from 'next/link';
 
 function WarrantyPopup({ open, setOpen, data, redirect }) {
 	const warrantycarddata = [

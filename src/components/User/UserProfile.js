@@ -1,12 +1,11 @@
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
 import AuthContext from '@/context/AuthContext';
-import { useState } from 'react';
-import * as Axios from '@/api/axios';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function UserProfile({ children, className }) {
 	const { userInfo, setUserInfo } = useContext(AppContext);

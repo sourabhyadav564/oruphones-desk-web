@@ -1,10 +1,10 @@
-import { parse as nodeParser } from 'node-html-parser';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
 import { useEffect, useState } from 'react';
+import fetchStaticHTML from '@/api/fetchStaticHtml';
+import TeamCard from '@/components/Cards/teamCard';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
-import TeamCard from '@/components/Cards/teamCard';
 import Image from 'next/image';
+import { parse as nodeParser } from 'node-html-parser';
 
 function Aboutus() {
 	const [htmlText1, setHtmlText1] = useState('');

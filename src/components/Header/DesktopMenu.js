@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Popover } from '@headlessui/react';
-import Image from 'next/image';
-import LocationPopup from '../Popup/LocationPopup';
+import { useEffect, useState } from 'react';
 import Location from '@/assets/location.svg';
-import Cookies from 'js-cookie';
-import LoginPopup from '../Popup/LoginPopup';
-import { useRouter } from 'next/router';
-import { useAtom } from 'jotai';
+import LocationPopup from '@/components/Popup/LocationPopup';
+import LoginPopup from '@/components/Popup/LoginPopup';
 import readLocationAtom from '@/store/location';
+import { useAtom } from 'jotai';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const menus = [
 	{

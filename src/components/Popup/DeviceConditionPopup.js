@@ -1,10 +1,8 @@
-import { deviceConditionQuestion } from '@/utils/constant';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import ConditionOptionLarge from '../Condition/ConditionOptionLarge';
-import DeviceConditionCard from '../Condition/DeviceConditionCard';
+import React, { useEffect, useState } from 'react';
 import Model3 from './Model3';
+import ConditionOptionLarge from '@/components/Condition/ConditionOptionLarge';
+import DeviceConditionCard from '@/components/Condition/DeviceConditionCard';
+import { deviceConditionQuestion } from '@/utils/constant';
 
 function DeviceConditionPopup({
 	open,

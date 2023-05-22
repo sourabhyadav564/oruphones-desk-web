@@ -1,7 +1,7 @@
+import ConditionOptionLarge2 from '@/components/Condition/ConditionOptionLarge2';
+import { deviceConditionQuestion } from '@/utils/constant';
 import Image from 'next/image';
 import Modal from '.';
-import { deviceConditionQuestion } from '@/utils/constant';
-import ConditionOptionLarge2 from '../Condition/ConditionOptionLarge2';
 
 function DeviceVerificationReport({ open, setOpen, data }) {
 	const setDate = data?.verifiedDate ? data?.verifiedDate : data?.listingDate;

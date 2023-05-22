@@ -1,13 +1,13 @@
-import Image from 'next/image';
-import Select from '../Form/Select';
-import Input from '../Form/Input';
-import { useState, useEffect, useContext } from 'react';
-import ImageInput from '../Form/ImageInput';
-import { numberWithCommas, numberFromString } from '../../utils/util';
+import { useContext, useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import Cookies from 'js-cookie';
+import ImageInput from '@/components/Form/ImageInput';
+import Input from '@/components/Form/Input';
+import Select from '@/components/Form/Select';
+import DeviceConditionPopup from '@/components/Popup/DeviceConditionPopup';
 import AppContext from '@/context/ApplicationContext';
-import DeviceConditionPopup from '../Popup/DeviceConditionPopup';
+import { numberFromString, numberWithCommas } from '@/utils/util';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function EditListingForm({ id, openPopup, openTCPopup, brandsList }) {
 	const initialState = [

@@ -1,6 +1,6 @@
-import { addsubscription } from '@/api/axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { addsubscription } from '@/api/axios';
 
 export default function NewsLetter() {
 	const [email, setEmail] = useState();

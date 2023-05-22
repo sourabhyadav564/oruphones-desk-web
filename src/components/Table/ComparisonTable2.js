@@ -1,19 +1,19 @@
+import React, { useEffect, useState } from 'react';
+import InfoCircle from '@/assets/infocircle2.svg';
+import Location from '@/assets/location2.svg';
+import Star from '@/assets/star1.svg';
+import FillStar from '@/assets/star2.svg';
+import UserProfile from '@/assets/user1.svg';
+import BrandWarrantyInfo from '@/components/Popup/BrandWarrantyInfo';
+import ConditionInfoPopup from '@/components/Popup/ConditionInfoPopup';
+import LoginPopup from '@/components/Popup/LoginPopup';
+import SellerWarrantyInfo from '@/components/Popup/SellerWarrantyInfo';
+import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
+import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
+import WarrantyInfo from '@/components/Popup/WarrantyInfo';
 import { getDefaultImage } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import InfoCircle from '@/assets/infocircle2.svg';
-import UserProfile from '@/assets/user1.svg';
-import Location from '@/assets/location2.svg';
-import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
-import LoginPopup from '../Popup/LoginPopup';
-import ThisPhonePopup from '../Popup/ThisPhonePopup';
-import VerifiedInfoPopup from '../Popup/VerifiedInfoPopup';
-import WarrantyInfo from '../Popup/WarrantyInfo';
-import Star from '@/assets/star1.svg';
-import FillStar from '@/assets/star2.svg';
-import BrandWarrantyInfo from '../Popup/BrandWarrantyInfo';
-import SellerWarrantyInfo from '../Popup/SellerWarrantyInfo';
 
 function ComparisonTable2(data, listingId) {
 	const [productData, setProductData] = useState([]);

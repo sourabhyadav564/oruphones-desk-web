@@ -1,33 +1,33 @@
+import {
+	dehydrate,
+	QueryClient,
+	useInfiniteQuery,
+} from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { SwiperSlide } from 'swiper/react';
 import BestDealsCard from '@/components/Cards/BestDealsCard';
-import Filter from '@/components/Filter';
-import React, { useState, useEffect } from 'react';
-import Carousel from '@/components/Carousel';
 import ProductCard from '@/components/Cards/ProductCard';
-import { metaTags } from '@/utils/constant';
-import Head from 'next/head';
-import ShopByBrandSection from '@/components/ShopByBrandSection';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import getFilteredListings from '@/utils/fetchers/filteredFetch';
+import Carousel from '@/components/Carousel';
+import Filter from '@/components/Filter';
+import NoMatch from '@/components/NoMatch';
+import ShopByBrandSection from '@/components/ShopByBrandSection';
+import useDebounce from '@/hooks/useDebounce';
+import { locationAtom } from '@/store/location';
+import filterAtom from '@/store/productFilter';
 import TListingFilter, {
 	TListingReturnFilter,
 	Tmodel,
 } from '@/types/ListingFilter';
-import {
-	useInfiniteQuery,
-	QueryClient,
-	dehydrate,
-} from '@tanstack/react-query';
-import { SwiperSlide } from 'swiper/react';
+import { metaTags } from '@/utils/constant';
+import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import getModels from '@/utils/fetchers/getModels';
-import { atom, useAtom } from 'jotai';
-import filterAtom from '@/store/productFilter';
-import { useHydrateAtoms } from 'jotai/utils';
-import { useInView } from 'react-intersection-observer';
 import { getCookie, setCookie } from 'cookies-next';
-import { locationAtom } from '@/store/location';
-import useDebounce from '@/hooks/useDebounce';
-import NoMatch from '@/components/NoMatch';
+import { atom, useAtom } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
 
 type TPageProps = {
 	makeName: string;

@@ -1,16 +1,14 @@
+import { Dialog, Menu, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
-import { Menu, Transition, Dialog } from '@headlessui/react';
-
-import Cross from '@/assets/cross.svg';
-import ArrowDown from '@/assets/arrow-drop-down.svg';
-import Filter from '@/assets/filter.svg';
-
 import DesktopFilter from './DesktopFilter';
-import { useRouter } from 'next/router';
+import ArrowDown from '@/assets/arrow-drop-down.svg';
+import Cross from '@/assets/cross.svg';
+import Filter from '@/assets/filter.svg';
 import useFilterOptions from '@/hooks/useFilterOptions';
-import Image from 'next/image';
-import { atom, useAtom } from 'jotai';
 import filterAtom from '@/store/productFilter';
+import { atom, useAtom } from 'jotai';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const sortsAtom = atom<string>('Featured');
 const sortsAtomRW = atom(

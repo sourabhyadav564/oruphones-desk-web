@@ -1,4 +1,4 @@
-import { ENV } from '../utils/util';
+import { ENV } from '@/utils/util';
 
 let config = {};
 

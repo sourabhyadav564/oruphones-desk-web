@@ -1,8 +1,8 @@
-import { atom } from 'jotai';
 import Geocode from 'react-geocode';
-import { topDealsQueryAtom } from '@/store/topDeals';
 import filterAtom from '@/store/productFilter';
+import { topDealsQueryAtom } from '@/store/topDeals';
 import { setCookie } from 'cookies-next';
+import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;

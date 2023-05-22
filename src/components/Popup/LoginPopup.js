@@ -1,9 +1,9 @@
-import Modal from '.';
-import Image from 'next/image';
-import { Fragment, useState, useEffect, useContext, useRef } from 'react';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import TermAndConditionPopup from './TermAndConditionPopup';
 import VerifyOtpPopup from './VerifyOtpPopup';
 import * as Axios from '@/api/axios';
+import Image from 'next/image';
+import Modal from '.';
 
 function LoginPopup({ open, setOpen, redirect }) {
 	const [openTermAndCondPopup, setOpenTermAndCondPopup] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
-import CategoryCards from '../Cards/CategoryCards';
-import Title from '../Title';
+import CategoryCards from '@/components/Cards/CategoryCards';
+import Title from '@/components/Title';
 
 const data = [
 	{

@@ -1,6 +1,6 @@
-import Modal from '.';
 import { useEffect, useState } from 'react';
 import router from 'next/router';
+import Modal from '.';
 
 function ActivateListingPopup({ open, setOpen, data }) {
 	const [activateListing, setActivateListing] = useState(null);

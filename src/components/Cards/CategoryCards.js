@@ -1,8 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
+import WarrantyPopup from '@/components/Popup/WarrantyPopup';
 import Image from 'next/image';
-import WarrantyPopup from '../Popup/WarrantyPopup';
-import { useState } from 'react';
+import Link from 'next/link';
 
 const CategoryCards = ({ data, priceRange }) => {
 	const [openWarrantyPopup, setOpenWarrantyPopup] = useState(false);

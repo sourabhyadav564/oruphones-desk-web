@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
-import AppDownloadPopup from '../Popup/AppDownloadPopup';
+import React, { useState } from 'react';
+import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 
 export default function Hero() {
 	const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);

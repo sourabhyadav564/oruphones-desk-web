@@ -1,5 +1,5 @@
 import { Swiper } from 'swiper/react';
-import '../../node_modules/swiper/swiper-bundle.css';
+import '@/node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';

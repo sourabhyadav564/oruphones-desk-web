@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import InfoCircle from '@/assets/infocircle2.svg';
+import Image from 'next/image';
 
 function LabelAndValue({
 	label,

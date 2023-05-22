@@ -1,11 +1,12 @@
-import Image from 'next/image';
-import Rupee from '@/assets/rupee1.svg';
-import { useState, useEffect } from 'react';
-import { getDefaultImage, numberWithCommas } from '../../utils/util';
+import { useEffect, useState } from 'react';
 import IconLabelValue from './IconLableValue';
 import * as Axios from '@/api/axios';
-import Cookies from 'js-cookie';
 import OutlineHeart from '@/assets/heartfill.svg';
+import Rupee from '@/assets/rupee1.svg';
+import { getDefaultImage, numberWithCommas } from '@/utils/util';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
+
 function FavListingTile({ data, setProducts }) {
 	const [frontImagePath, setFrontImagePath] = useState();
 	const [imageError, setImageError] = useState(false);

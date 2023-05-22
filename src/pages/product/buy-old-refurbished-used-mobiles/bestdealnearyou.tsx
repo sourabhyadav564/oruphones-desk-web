@@ -1,28 +1,28 @@
-import BestDealsCard from '@/components/Cards/BestDealsCard';
-import Filter from '@/components/Filter';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
-import Carousel from '@/components/Carousel';
+import { useInView } from 'react-intersection-observer';
+import { SwiperSlide } from 'swiper/react';
+import BestDealsCard from '@/components/Cards/BestDealsCard';
 import ProductCard from '@/components/Cards/ProductCard';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
+import Carousel from '@/components/Carousel';
+import Filter from '@/components/Filter';
+import NoMatch from '@/components/NoMatch';
+import useDebounce from '@/hooks/useDebounce';
+import { locationAtom } from '@/store/location';
+import filterAtom from '@/store/productFilter';
 import TListingFilter, {
 	TListingReturnFilter,
 	Tmodel,
 } from '@/types/ListingFilter';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getCookie, setCookie } from 'cookies-next';
-import { QueryClient, dehydrate } from '@tanstack/query-core';
 import getFilteredListings from '@/utils/fetchers/filteredFetch';
-import Head from 'next/head';
-import { useHydrateAtoms } from 'jotai/utils';
-import { locationAtom } from '@/store/location';
-import filterAtom from '@/store/productFilter';
-import { atom, useAtom } from 'jotai';
-import useDebounce from '@/hooks/useDebounce';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useInView } from 'react-intersection-observer';
-import { SwiperSlide } from 'swiper/react';
 import getMakes from '@/utils/fetchers/getMakes';
-import NoMatch from '@/components/NoMatch';
+import { dehydrate, QueryClient } from '@tanstack/query-core';
+import { getCookie, setCookie } from 'cookies-next';
+import { atom, useAtom } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
 
 const settings = {
 	slidesPerView: 1,
