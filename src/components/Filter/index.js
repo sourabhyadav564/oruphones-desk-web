@@ -15,7 +15,7 @@ const brandsToOptions = (brands) => {
 	let options = brands.map((brand) => ({
 		value: brand,
 		label: brand,
-		active: true,
+		active: false,
 		disabled: false,
 	}));
 	return { id: 'brand', name: 'Brand', options };
@@ -26,9 +26,9 @@ function Filter({
 	children,
 	setApplySort = () => {},
 	setApplyFilter = () => {},
-	makeName = 'Apple',
 	makename = null,
 	defaultBrands = ['Apple'],
+	makeName = 'Placeholder',
 }) {
 	const { filterOptions } = useFilterOptions();
 	const router = useRouter();

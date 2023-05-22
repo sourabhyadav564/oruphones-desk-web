@@ -155,8 +155,8 @@ function Bestdealnearyou({
 	});
 
 	useEffect(() => {
-		console.log('Spark!');
-		setFilterData({ ...filters, limit: 12 });
+		console.log('Spark!', filters);
+		setFilterData({ ...filters, limit: 12, make: undefined });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

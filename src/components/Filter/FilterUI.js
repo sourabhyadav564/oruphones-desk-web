@@ -4,8 +4,11 @@ import Minus from '@/assets/minus.svg';
 import Plus from '@/assets/plus.svg';
 import InfoCircle from '@/assets/infocircle2.svg';
 import Image from 'next/image';
+import { selectedBrandRWAtom } from './DesktopFilter';
+import { useAtomValue } from 'jotai';
 
 function FilterUI({ optionObj, setter, selected, openPopup }) {
+	const readBrand = useAtomValue(selectedBrandRWAtom);
 	const handleChange = (e, value) => {
 		const { checked } = e.target;
 
@@ -89,7 +92,11 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 										name={`${optionObj?.id}`}
 										type="checkbox"
 										checked={
-											selected?.includes(option.value) || option?.checked
+											selected?.includes(option.value) ||
+											readBrand?.includes(
+												option.value.charAt(0).toUpperCase() +
+													option.value.slice(1)
+											)
 										}
 										disabled={option?.disabled}
 										onChange={(e) => handleChange(e, option.value)}

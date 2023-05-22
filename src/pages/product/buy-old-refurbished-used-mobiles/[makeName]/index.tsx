@@ -217,9 +217,11 @@ function BrandPage({
 
 	// update brand name in filter if changed, (hydrate Atom doesnt work in rerenders, only in first render)
 	useEffect(() => {
-		if (filterData?.make && filterData.make[0] === makeName) return;
-		setFilterData({ ...filterData, make: [makeName] });
-	}, [makeName, setFilterData, filterData]);
+		console.log('updated filter data: ', filterData);
+		if (filterData?.make?.[0] === makeName) return;
+		setFilterData({ ...filters, make: [makeName] });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>

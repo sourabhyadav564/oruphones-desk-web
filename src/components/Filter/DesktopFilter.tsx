@@ -9,14 +9,13 @@ import VerificationFilter from './VerificationFilter';
 import { useRouter } from 'next/router';
 import ConditionInfoPopup from '../Popup/ConditionInfoPopup';
 import VerifiedInfoPopup from '../Popup/VerifiedInfoPopup';
-import RamFilter from './RamFilter';
 import WarrantyInfo from '../Popup/WarrantyInfo';
 import filterAtom from '@/store/productFilter';
 import { atom, useAtom } from 'jotai';
 
 // TODO: implement warranty filter logic
 
-const selectedBrandRWAtom = atom(
+export const selectedBrandRWAtom = atom(
 	(get) => get(filterAtom)?.make || [],
 	(get, set, update: string[]) => {
 		set(filterAtom, (prev) => ({
