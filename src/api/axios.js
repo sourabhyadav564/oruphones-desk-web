@@ -271,10 +271,10 @@ export async function fetchMakeModelList(userUniqueId, sessionId) {
 	const API_ENDPOINT = BASE_URL + '/master/makemodellist';
 	return await Axios.get(API_ENDPOINT, DEFAULT_HEADER).then(
 		(response) => {
-			localStorage.setItem(
-				'make_models',
-				JSON.stringify(response.data.dataObject)
-			);
+			// localStorage.setItem(
+			// 	'make_models',
+			// 	JSON.stringify(response.data.dataObject)
+			// );
 			return response.data;
 		},
 		(err) => {

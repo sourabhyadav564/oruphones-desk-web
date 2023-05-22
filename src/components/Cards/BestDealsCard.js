@@ -124,7 +124,6 @@ function BestDealsCard({ data }) {
 				</div>
 				<div className="relative flex justify-end items-end">
 					<Image
-						loading="lazy"
 						priority
 						blurDataURL={
 							imageError

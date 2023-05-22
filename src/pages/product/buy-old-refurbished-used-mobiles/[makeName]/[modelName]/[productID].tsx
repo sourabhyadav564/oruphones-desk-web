@@ -8,6 +8,7 @@ import {
 	getListingByID,
 	getSimilarListings,
 } from '@/utils/fetchers/filteredFetch';
+import getLeaderboard from '@/utils/fetchers/getLeaderboard';
 import { dehydrate, QueryClient } from '@tanstack/query-core';
 import { getCookie, setCookie } from 'cookies-next';
 import { useAtomValue } from 'jotai';
@@ -72,10 +73,15 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		},
 	});
 	const { make, model } = prod;
-	ctx.res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
-	);
+	const productLeaderboard = await queryClient.fetchQuery({
+		queryKey: ['product-leaderboard', make, model],
+		queryFn: () => getLeaderboard({ listingId: productID as string }),
+	});
+	console.log(productLeaderboard);
+	// ctx.res.setHeader(
+	// 	'Cache-Control',
+	// 	'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
+	// );
 	return {
 		props: {
 			location: cookie,
