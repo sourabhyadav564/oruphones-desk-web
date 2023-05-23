@@ -85,4 +85,8 @@ module.exports = withBundleAnalyzer({
 			  ]
 			: [];
 	},
+	compiler: {
+		removeConsole: true,
+	},
+	swcMinify: true,
 });

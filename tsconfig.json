@@ -28,7 +28,8 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"src/components/Filter/index.js"
+		"src/**/*.ts",
+		"src/**/*.tsx"
 	],
 	"exclude": ["node_modules"]
 }
