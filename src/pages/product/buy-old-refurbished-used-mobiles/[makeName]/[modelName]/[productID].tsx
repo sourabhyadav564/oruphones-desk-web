@@ -4,6 +4,7 @@ import ProductCard from '@/components/Cards/ProductCard';
 import ProductDetailsCard from '@/components/Cards/ProductDetailsCard';
 import FullImageView from '@/components/FullImageView';
 import { locationAtom } from '@/store/location';
+import { TListingReturnFilter } from '@/types/ListingFilter';
 import {
 	getListingByID,
 	getSimilarListings,
@@ -11,7 +12,7 @@ import {
 import getLeaderboard from '@/utils/fetchers/getLeaderboard';
 import { dehydrate, QueryClient } from '@tanstack/query-core';
 import { getCookie, setCookie } from 'cookies-next';
-import { useAtomValue } from 'jotai';
+import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
@@ -23,6 +24,7 @@ type TPageProps = {
 	dehydratedState: any;
 	make: string | undefined;
 	model: string | undefined;
+	leaderBoard: TListingReturnFilter[];
 };
 
 const returnFilter = {
@@ -77,7 +79,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		queryKey: ['product-leaderboard', make, model],
 		queryFn: () => getLeaderboard({ listingId: productID as string }),
 	});
-	console.log(productLeaderboard);
 	// ctx.res.setHeader(
 	// 	'Cache-Control',
 	// 	'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
@@ -89,21 +90,28 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 			make,
 			model,
+			leaderBoard: productLeaderboard,
 		},
 	};
 };
 
+export const leaderBoardAtom = atom<TListingReturnFilter[]>([]);
+export const dealsYouMayLikeAtom = atom<TListingReturnFilter[]>([]);
 function ProductDetails({
 	location,
 	productID,
 	make,
 	model,
+	leaderBoard,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	useHydrateAtoms([[locationAtom, location]]);
-	const [simliarProducts, setSimliarProducts] = useState<any>([]);
+	useHydrateAtoms([
+		[locationAtom, location],
+		[leaderBoardAtom, leaderBoard],
+	]);
 	const [openImageFullView, setOpenImageFullView] = useState(false);
 	const [contextData, setContextData] = useState('');
 	const locationVal = useAtomValue(locationAtom);
+	const setDealsYouMayLike = useSetAtom(dealsYouMayLikeAtom);
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['product-listing', productID],
 		queryFn: async () => {
@@ -123,9 +131,40 @@ function ProductDetails({
 				const data = await getSimilarListings({
 					listingId: productID as string,
 					limit: 20,
-					...(locationVal !== 'India' && { listingLocation: locationVal }),
+					make: ['yes' as string],
+					model: ['yes' as string],
+					condition: ['yes' as string],
+					storage: ['yes' as string],
 				});
 				return data;
+			},
+		}
+	);
+	const { data: dealsYouMayLike, isLoading: dealsYouMayLikeLoading } = useQuery(
+		{
+			queryKey: ['deals-you-may-like', productID],
+			queryFn: async () => {
+				const returnFilter = {
+					listingPrice: 1,
+					listingId: 1,
+					marketingName: 1,
+					defaultImage: 1,
+					listingLocation: 1,
+					deviceStorage: 1,
+					deviceCondition: 1,
+					warranty: 1,
+					listedBy: 1,
+					verified: 1,
+				};
+				const data = await getSimilarListings({
+					includeSelf: true,
+					listingId: productID as string,
+					limit: 5,
+					...(locationVal !== 'India' && { listingLocation: locationVal }),
+					...(make && { make: [make] }),
+				});
+				setDealsYouMayLike(data?.data);
+				return data.data;
 			},
 		}
 	);
@@ -164,12 +203,7 @@ function ProductDetails({
 						<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
 							{similarProducts && similarProducts.data.length > 0 ? (
 								similarProducts?.data.map((product: any, index: number) => (
-									<ProductCard
-										key={index}
-										data={product}
-										setProducts={setSimliarProducts as any}
-										prodLink
-									/>
+									<ProductCard key={index} data={product} prodLink />
 								))
 							) : (
 								<div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">

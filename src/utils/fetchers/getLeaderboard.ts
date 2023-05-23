@@ -1,6 +1,11 @@
-import type { TListingFilterWithID } from '@/types/ListingFilter';
+import type {
+	TListingFilterWithID,
+	TListingReturnFilter,
+} from '@/types/ListingFilter';
 
-export default async function getLeaderboard(filter: TListingFilterWithID) {
+export default async function getLeaderboard(
+	filter: TListingFilterWithID
+): Promise<TListingReturnFilter[]> {
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter/getSimilarLeaderboard`,
 		{
@@ -11,7 +16,6 @@ export default async function getLeaderboard(filter: TListingFilterWithID) {
 			body: JSON.stringify({ filter: { listingId: filter.listingId } }),
 		}
 	);
-	console.log(response);
 	const resp = await response.json();
 	return resp.data;
 }

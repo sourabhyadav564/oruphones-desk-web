@@ -115,6 +115,7 @@ function ComparisonTable2(data, listingId) {
 							{productData?.map((item, index) => (
 								<th
 									className="px-6 py-3 text-center cursor-pointer"
+									key={index}
 									onClick={() => {
 										if (Cookies.get('userUniqueId') == undefined) {
 											setProductLink(
@@ -166,6 +167,7 @@ function ComparisonTable2(data, listingId) {
 							{productData?.map((item, index) => (
 								<th
 									className="px-6 py-3 min-w-[13vw] bg-m-green-1 border-[1px] border-r-gray hover:opacity-90 text-center cursor-pointer"
+									key={index}
 									onClick={() => {
 										if (Cookies.get('userUniqueId') == undefined) {
 											setProductLink(
@@ -211,6 +213,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280]  min-w-[13vw] bg-opacity-5 border border-gray-300 text-yellow2'
@@ -247,6 +250,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -280,6 +284,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -308,7 +313,7 @@ function ComparisonTable2(data, listingId) {
 									/>
 									<div className="pl-2 flex items-center ">
 										{' '}
-										<span className="pr-1"> Seller's warranty </span>{' '}
+										<span className="pr-1"> {`Seller's warranty`} </span>{' '}
 										<span>
 											<Image src={InfoCircle} width={12} height={12} alt="" />
 										</span>
@@ -317,6 +322,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -350,6 +356,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -384,6 +391,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -434,6 +442,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -475,6 +484,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -494,6 +504,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'
@@ -537,6 +548,7 @@ function ComparisonTable2(data, listingId) {
 							</th>
 							{productData?.map((item, index) => (
 								<th
+									key={index}
 									className={`${
 										item?.listingId == thisPhoneListingId
 											? 'text-center bg-[#6b7280] min-w-[13vw] bg-opacity-5 border border-gray-300'

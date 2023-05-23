@@ -13,6 +13,7 @@ type TListingFilter = {
 		price?: number;
 		date?: number;
 	};
+	includeSelf?: boolean;
 };
 
 export type TListingFilterWithID = {
@@ -27,6 +28,11 @@ export type TListingFilterWithID = {
 	verified?: boolean;
 	priceRange?: number[];
 	limit?: number;
+	sort?: {
+		price?: number;
+		date?: number;
+	};
+	includeSelf?: boolean;
 };
 
 export type TListingReturnFilter = {
@@ -53,7 +59,7 @@ export type TListingReturnFilter = {
 	deviceStorage?: string;
 	charger?: string;
 	earphone?: string;
-	originalBox?: string;
+	originalbox?: string;
 	deviceRam?: string;
 	functionalTestResults?: {
 		commandName: string;
@@ -69,8 +75,11 @@ export type TListingReturnFilter = {
 		1: string;
 		2: string;
 	};
-
+	verified?: boolean;
 	count?: number;
+	vendorName?: string;
+	vendorImage?: string;
+	vendorLink?: string;
 };
 
 export type Tmodel = {

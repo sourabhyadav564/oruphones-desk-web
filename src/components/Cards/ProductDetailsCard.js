@@ -23,12 +23,19 @@ import ShareIcon from '@/components/ShareIcon';
 import ComparisonTable from '@/components/Table/ComparisonTable';
 import ComparisonTable2 from '@/components/Table/ComparisonTable2';
 import VerificationIcon from '@/components/VerificationIcon';
+import {
+	dealsYouMayLikeAtom,
+	leaderBoardAtom,
+} from '@/pages/product/buy-old-refurbished-used-mobiles/[makeName]/[modelName]/[productID]';
 import { deviceConditionQuestion } from '@/utils/constant';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
+import { useAtomValue } from 'jotai';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function ProductDetailsCard({ data, openFullImage, onDataContext }) {
+	const leaderBoard = useAtomValue(leaderBoardAtom);
+	const dealsYouMayLike = useAtomValue(dealsYouMayLikeAtom);
 	const [performAction2, setPerformAction2] = useState(false);
 	const [openDeviceReport, setOpenDeviceReport] = useState(false);
 	const [openInfo, setOpenInfo] = useState(false);
@@ -143,7 +150,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 					)}
 				</div>
 				<div className="lg:flex lg:flex-col-2 justify-center w-full">
-					<div className="col-span-1 lg:w-[600px] h-[28rem] justify-center pr-4 w-full">
+					<div className="col-span-1 lg:w-[600px] h-[32rem] my-auto justify-center pr-4 w-full">
 						{!(data?.isOtherVendor === 'Y') ? (
 							<>
 								{(data?.images || data?.defaultImage || data?.imagePath) && (
@@ -499,7 +506,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 						</div>
 					</div>
 				</div>
-				{data?.compareData && data?.compareData?.length > 0 && (
+				{leaderBoard.length > 0 && (
 					<div id="Comparisontabl1">
 						<p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
 							Detailed Comparison Between Other Sellers for{' '}
@@ -507,7 +514,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 							{data?.make != 'Apple' && '/' + data?.deviceRam}) -{' '}
 							{data?.deviceCondition} Condition
 						</p>
-						{data && (
+						{leaderBoard && (
 							<div className="relative flex py-2">
 								<Image
 									src={
@@ -569,23 +576,18 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 						</div>
 						{
 							<ComparisonTable
-								data={data?.compareData}
+								data={leaderBoard}
 								listingId={data?.listingId !== undefined ? data?.listingId : []}
 							/>
 						}
-						{data?.similarListTable && data?.similarListTable.length > 0 && (
+						{dealsYouMayLike?.length > 0 && (
 							<div className="pt-16">
 								<p className="text-normal FontSize pt-6 pr-2 text-black-20 font-Roboto-Light border-b  border-black  capitalize mb-4 pb-1">
 									You may also like these deals
 								</p>
 								{
 									<ComparisonTable2
-										data={
-											data?.similarListTable &&
-											data?.similarListTable?.length > 0
-												? data?.similarListTable
-												: []
-										}
+										data={dealsYouMayLike}
 										listingId={
 											data?.listingId !== undefined ? data?.listingId : []
 										}
@@ -595,7 +597,6 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 						)}
 					</div>
 				)}
-				<ComparisonTable />
 			</div>
 
 			{openWarrantyInfo && (

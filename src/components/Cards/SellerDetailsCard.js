@@ -8,11 +8,14 @@ import LoginPopup from '@/components/Popup/LoginPopup';
 import RequestVerificationPopup from '@/components/Popup/RequestVerificationPopup';
 import RequestVerificationSuccessPopup from '@/components/Popup/RequestVerificationSuccessPopup';
 import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
+import { leaderBoardAtom } from '@/pages/product/buy-old-refurbished-used-mobiles/[makeName]/[modelName]/[productID]';
 import { numberWithCommas } from '@/utils/util';
+import { useAtomValue } from 'jotai';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function SellerDetailsCard({ data, comparisontableid }) {
+	const leaderBoard = useAtomValue(leaderBoardAtom);
 	const [thisPhonePopup, setThisPhonePopup] = useState(false);
 	const [productLink, setProductLink] = useState('');
 	const [performAction, setPerformAction] = useState(false);
@@ -190,7 +193,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
 					</div>
 				)}
 			</div>
-			{data?.externalSource && data?.externalSource.length > 0 && (
+			{leaderBoard?.length > 0 && (
 				<div className="pr-2">
 					<p className="text-mediumFontSize pt-6 pr-2 text-black-20 font-Roboto-Light capitalize mb-2">
 						{' '}
@@ -202,7 +205,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
 					</div>{' '}
 					<div className="flex flex-col overflow-y-auto">
 						{' '}
-						{data?.externalSource.map((items, index) => (
+						{leaderBoard.map((items, index) => (
 							<OtherSeller
 								index={index}
 								data={items}
@@ -215,7 +218,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
 								key={index}
 							/>
 						))}{' '}
-						{data?.compareData && data?.compareData.length > 0 && (
+						{leaderBoard?.length > 0 && (
 							<a
 								href={comparisontableid}
 								className="flex justify-end p-2 text-m-green text-mediumFontSize underline cursor-pointer pl-4 font-Roboto-Semibold hover:opacity-70"
@@ -263,7 +266,7 @@ const OtherSeller = ({
 	listingId,
 	isOtherVendor,
 }) => {
-	let vendor = data.externalSourceImage.replaceAll(
+	let vendor = data.vendorImage.replaceAll(
 		'https://zenrodeviceimages.s3.us-west-2.amazonaws.com/vendors/',
 		''
 	);
@@ -281,14 +284,14 @@ const OtherSeller = ({
 				onClick={() => {
 					if (Cookies.get('userUniqueId') == undefined) {
 						setShowLoginPopup(true);
-						setProductLink(data?.productLink);
+						setProductLink(data?.vendorLink);
 						setPerformAction2(true);
 					} else if (data?.listingId == listingId && isOtherVendor == 'N') {
 						setThisPhonePopup(true);
 					} else if (data?.listingId != listingId) {
-						window.open(data?.productLink, '_blank');
+						window.open(data?.vendorLink, '_blank');
 					} else {
-						window.open(data?.productLink, '_blank');
+						window.open(data?.vendorLink, '_blank');
 					}
 				}}
 			>
@@ -296,7 +299,7 @@ const OtherSeller = ({
 					{' '}
 					<div className="my-1 w-64 flex">
 						{' '}
-						{data?.externalSourcePrice && (
+						{data?.listingPrice && (
 							<div className="flex flex-row gap-2">
 								{index < 3 && (
 									<Image
@@ -315,14 +318,14 @@ const OtherSeller = ({
 										className=""
 									/>
 								)}
-								{data?.userName && data?.listingId != listingId ? (
+								{data?.listedBy && data?.listingId != listingId ? (
 									<p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
-										{data?.userName}
+										{data?.listedBy}
 									</p>
 								) : data?.listingId == listingId && isOtherVendor == 'N' ? (
 									<div className="flex">
 										<p className="font-Roboto-Semibold opacity-30 py-1 text-regularFontSize">
-											{data?.userName}
+											{data?.listedBy}
 										</p>
 										<p className="font-Roboto-Semibold opacity-30 py-1 text-smallFontSize pt-2 pl-1.5">
 											(This Phone)
@@ -330,7 +333,7 @@ const OtherSeller = ({
 									</div>
 								) : (
 									<Image
-										src={data?.externalSourceImage}
+										src={data?.vendorImage}
 										alt={vendor}
 										height={35}
 										width={70}
@@ -348,10 +351,10 @@ const OtherSeller = ({
 				</div>{' '}
 				<div className="flex flex-col items-center justify-center pr-4">
 					{' '}
-					{data.externalSourcePrice && (
+					{data.listingPrice && (
 						<span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
 							<Image src={Rupee} width={20} height={20} />
-							{numberWithCommas(data.externalSourcePrice)}{' '}
+							{numberWithCommas(data.listingPrice)}{' '}
 							<Image src={GreaterThan} width={15} height={15} />
 						</span>
 					)}{' '}
