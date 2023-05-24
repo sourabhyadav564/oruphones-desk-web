@@ -30,6 +30,6 @@
 		"**/*.tsx",
 		"src/**/*.ts",
 		"src/**/*.tsx"
-	],
+, "src/components/Form/Select.jsx"	],
 	"exclude": ["node_modules"]
 }

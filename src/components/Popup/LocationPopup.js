@@ -13,7 +13,6 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 
 function LocationPopup({ open, setOpen }) {
-	const cancelButtonRef = useRef(null);
 	const [citiesResponse, setCitiesResponse] = useState([]);
 	const [citiesResponse2, setCitiesResponse2] = useState([]);
 	const [searchText, setSearchText] = useState('');
@@ -88,7 +87,7 @@ function LocationPopup({ open, setOpen }) {
 			<Dialog
 				as="div"
 				className="fixed z-20 inset-0 overflow-y-auto mx-8"
-				initialFocus={cancelButtonRef}
+				initialFocus={null}
 				onClose={setOpen}
 			>
 				<div className="flex items-center justify-center min-h-screen ">
@@ -133,6 +132,7 @@ function LocationPopup({ open, setOpen }) {
 										width={28}
 										height={28}
 										onClick={() => setOpen(false)}
+										alt={'close'}
 									/>
 								</div>
 								<Image
