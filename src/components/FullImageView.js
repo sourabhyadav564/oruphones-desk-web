@@ -50,7 +50,6 @@ function FullImageView({ open, close, images, currentslide }) {
 			ArrowLeft,
 			ArrowRight,
 		},
-		fade: true,
 		slidesPerView: 1,
 		dots: true,
 		pagination: {

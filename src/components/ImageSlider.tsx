@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
 import type { TListingReturnFilter } from '@/types/ListingFilter';
 import type { Swiper as TSwiper } from 'swiper';
 import { EffectFade, Navigation, Pagination } from 'swiper';
@@ -28,17 +29,15 @@ function ImageSlider({
 		autoplay: {
 			delay: 5000,
 		},
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-			arrows: true,
-		},
+		navigation: true,
 		pagination: {
 			dot: true,
 			clickable: true,
 		},
-		fade: true,
 		slidesPerView: 1,
+		fadeEffect: {
+			crossFade: true,
+		},
 		modules: [Pagination, Navigation, EffectFade],
 	};
 
