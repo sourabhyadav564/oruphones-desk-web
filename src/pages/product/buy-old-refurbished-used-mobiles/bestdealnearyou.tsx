@@ -186,7 +186,6 @@ function Bestdealnearyou({
 							}
 							defaultBrands={allMakes}
 						>
-							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 							<div className="w-full h-[21rem]">
 								<Carousel
 									{...settings}
@@ -209,6 +208,7 @@ function Bestdealnearyou({
 										: data?.pages[0].totalCount || 0
 								})`}
 							</h4>
+							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 							{(!data || !data.pages[0]) && isLoading && (
 								<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
 									{Array.from({ length: 12 }).map((_, idx) => (

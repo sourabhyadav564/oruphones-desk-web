@@ -28,14 +28,29 @@ export const updateLocationLatLongAtom = atom(
 	) => {
 		Geocode.setApiKey(GEOCODE_API_KEY);
 		Geocode.setLanguage('en');
-		Geocode.setRegion('en');
+		Geocode.setRegion('IN');
+		Geocode.setLocationType('ROOFTOP');
 		Geocode.enableDebug();
 		// Get city from latidude & longitude.
 		const res = await Geocode.fromLatLng(
 			location.coords.latitude,
 			location.coords.longitude
 		);
-		const city = res.results[0].address_components[4].long_name;
+		const address = res.results[0].formatted_address;
+		let city;
+		for (let i = 0; i < res.results[0].address_components.length; i++) {
+			for (
+				let j = 0;
+				j < res.results[0].address_components[i].types.length;
+				j++
+			) {
+				switch (res.results[0].address_components[i].types[j]) {
+					case 'locality':
+						city = res.results[0].address_components[i].long_name;
+						break;
+				}
+			}
+		}
 		const noWhiteSpaceCity = city.replace(/\s/g, '');
 		set(updateLocationAtom, noWhiteSpaceCity);
 	}
