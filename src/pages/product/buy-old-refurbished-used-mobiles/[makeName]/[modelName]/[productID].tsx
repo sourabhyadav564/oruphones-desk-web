@@ -221,10 +221,10 @@ function ProductDetails({
 								>
 									<p
 										className={`${
-											isLoading ? 'w-[250px]' : 'w-[150px]'
+											similarProductsLoading ? 'w-[250px]' : 'w-[150px]'
 										} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
 									>
-										{isLoading ? 'Fetching products...' : 'Load More'}
+										{similarProductsLoading ? 'Fetching products...' : 'Load More'}
 									</p>
 								</Link>
 							)}
@@ -245,17 +245,6 @@ function ProductDetails({
 								thumbImage: data?.imagePath,
 							},
 						])
-						// ||
-						// (data?.vendorLogo && [
-						// 	{
-						// 		fullImage:
-						// 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-						// 				?.src,
-						// 		thumbImage:
-						// 			'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-						// 				?.src,
-						// 	},
-						// ])
 					}
 				/>
 			</main>

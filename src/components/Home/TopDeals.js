@@ -25,8 +25,11 @@ function TopDeals({ bestDeals, location }) {
 								setProducts={() => null}
 							/>
 						))}
+			</div>
+			<div className="w-full md:w-1/4 m-auto p-4 drop-shadow-xl">
 				<TopDealCard data={{ name: 'show all' }} />
 			</div>
+
 			<LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
 		</section>
 	);

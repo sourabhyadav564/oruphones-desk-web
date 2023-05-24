@@ -257,7 +257,6 @@ function BrandPage({
 									))}
 								</Carousel>
 							</div>
-							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 							{models?.length > 0 && (
 								<div className="font-Roboto-Semibold text-xlFontSize">
 									<p className="opacity-50">Shop By Model</p>
@@ -275,6 +274,7 @@ function BrandPage({
 										: data?.pages[0].totalCount || 0
 								})`}
 							</h4>
+							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 
 							{(!data || !data.pages[0]) && isLoading && (
 								<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">

@@ -150,7 +150,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 					)}
 				</div>
 				<div className="lg:flex lg:flex-col-2 justify-center w-full">
-					<div className="col-span-1 lg:w-[600px] h-[32rem] my-auto justify-center pr-4 w-full">
+					<div className="col-span-1 lg:w-[600px] h-[40rem] my-auto justify-center pr-4 w-full">
 						{!(data?.isOtherVendor === 'Y') ? (
 							<>
 								{(data?.images || data?.defaultImage || data?.imagePath) && (
@@ -440,7 +440,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 									Device Cosmetic Report
 								</h2>
 								<div className="pb-4">
-									<div className="bg-gray-600 h-1 border-2"></div>
+									<div className="bg-gray-600 h-1 border-2 border-white"/> 
 								</div>
 							</>
 						)}
