@@ -1,4 +1,3 @@
-import * as Axios from '@/api/axios';
 import DownloadApp from '@/components/DownloadApp';
 import HomeContent from '@/components/Home/HomeContent';
 import ShowBy from '@/components/Home/ShopBy';
@@ -10,7 +9,8 @@ import TopCarousel from '@/components/TopCarousel';
 import { locationAtom } from '@/store/location';
 import { topDealsAtom } from '@/store/topDeals';
 import { metaTags } from '@/utils/constant';
-import getHomeListings from '@/utils/fetchers/getHomeListings';
+import getHomeBrands from '@/utils/fetchers/index/getHomeBrands';
+import getHomeListings from '@/utils/fetchers/index/getHomeListings';
 import { getCookie, setCookie } from 'cookies-next';
 import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
-		Axios.fetchBrands(),
+		getHomeBrands(),
 		getHomeListings(cookie, sliceLength),
 	]);
 	// cache this SSR response
@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	);
 	return {
 		props: {
-			brands: brands?.dataObject || null,
+			brands: brands || null,
 			bestDeals: bestDeals,
 			location: cookie,
 		},

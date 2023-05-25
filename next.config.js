@@ -85,8 +85,12 @@ module.exports = withBundleAnalyzer({
 			  ]
 			: [];
 	},
-	compiler: {
-		removeConsole: true,
-	},
+	...(process.env.production
+		? {
+				compiler: {
+					removeConsole: true,
+				},
+		  }
+		: {}),
 	swcMinify: true,
 });
