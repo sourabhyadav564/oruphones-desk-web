@@ -1,29 +1,9 @@
-import { useEffect, useState } from 'react';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
+/* eslint-disable react/no-unescaped-entities */
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 import Image from 'next/image';
-import { parse as nodeParser } from 'node-html-parser';
 
 function faq() {
-	const [htmlText1, setHtmlText1] = useState('');
-
-	useEffect(() => {
-		callStaticPages();
-	}, []);
-
-	async function callStaticPages() {
-		var htmlText;
-		try {
-			const res = await fetchStaticHTML('/faq.html');
-			const html = res.data;
-			const doc = nodeParser(html);
-			const body = doc.querySelector('body');
-			htmlText = body.innerHTML;
-			setHtmlText1(htmlText);
-		} catch (err) {}
-	}
-
 	return (
 		<>
 			<Head>
@@ -48,7 +28,7 @@ function faq() {
 					</div>
 				</section>
 				<main className="px-6 my-4">
-					<section class="faq pt-12 text-justify">
+					<section className="faq pt-12 text-justify">
 						<p className="font-Roboto-Regular">
 							<strong className="font-Semibold">Que. What is Oru?</strong>
 							<br />
@@ -59,7 +39,7 @@ function faq() {
 							deals for your mobile and the best of mobiles in an amazing price.
 						</p>
 						<br />
-						<p class>
+						<p className="font-Roboto-Regular">
 							ORU is India&rsquo;s first ever online marketplace dedicated for
 							buying &amp; selling old, refurbished and used
 							mobiles/smartphones. Our goal is to make used phones trading more

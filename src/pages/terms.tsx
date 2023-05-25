@@ -1,28 +1,8 @@
-import { useEffect, useState } from 'react';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
+/* eslint-disable react/no-unescaped-entities */
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
-import { parse as nodeParser } from 'node-html-parser';
 
 function Termscondition() {
-	const [htmlText1, setHtmlText1] = useState('');
-
-	useEffect(() => {
-		callStaticPages();
-	}, []);
-
-	async function callStaticPages() {
-		var htmlText;
-		try {
-			const res = await fetchStaticHTML('/terms_conditions.html');
-			const html = res.data;
-			const doc = nodeParser(html);
-			const body = doc.querySelector('body');
-			htmlText = body.innerHTML;
-			setHtmlText1(htmlText);
-		} catch (err) {}
-	}
-
 	return (
 		<>
 			<Head>
@@ -44,7 +24,7 @@ function Termscondition() {
 					</p>
 				</section>
 				<main className="px-4 my-8  pt-10 font-open-sans text-justify">
-					<section class="condition ">
+					<section className="condition ">
 						<h1 className="font-Roboto-Semibold text-xlFontSize text-center pb-6">
 							Terms of Service
 						</h1>
@@ -144,7 +124,7 @@ function Termscondition() {
 								2. Description of Content Policy and Services
 							</p>
 							<p className="font-Roboto-Regular text-regularFontSize">
-								<ol list="none">
+								<ol>
 									<li>
 										I. ORUphones is an advanced generation of online
 										classifieds. We behave as a platform that allows our users,

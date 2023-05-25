@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
 import TeamCard from '@/components/Cards/teamCard';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 import Image from 'next/image';
-import { parse as nodeParser } from 'node-html-parser';
 
 function Aboutus() {
-	const [htmlText1, setHtmlText1] = useState('');
 
 	const data = [
 		{
@@ -46,22 +42,6 @@ function Aboutus() {
 			qualification: 'B.Tech - RTU(Rajasthan)',
 		},
 	];
-
-	useEffect(() => {
-		callStaticPages();
-	}, []);
-
-	async function callStaticPages() {
-		var htmlText;
-		try {
-			const res = await fetchStaticHTML('/about-us.html');
-			const html = res.data;
-			const doc = nodeParser(html);
-			const body = doc.querySelector('body');
-			htmlText = body.innerHTML;
-			setHtmlText1(htmlText);
-		} catch (err) {}
-	}
 
 	return (
 		<>
