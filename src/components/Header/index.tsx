@@ -53,7 +53,6 @@ function Header() {
 				</div>
 			</div>
 			<DesktopMenu />
-			{/* <MobileMenu isOpen={isOpen} /> */}
 			{isOpen && (
 				<DynamicLocationPopup open={isOpen} setOpen={setIsOpen} />
 			)}

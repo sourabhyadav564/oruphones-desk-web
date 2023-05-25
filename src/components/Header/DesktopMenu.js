@@ -1,14 +1,28 @@
 import { Popover } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import Location from '@/assets/location.svg';
-import LocationPopup from '@/components/Popup/LocationPopup';
-import LoginPopup from '@/components/Popup/LoginPopup';
 import readLocationAtom from '@/store/location';
 import { useAtom } from 'jotai';
 import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+const DynamicLoginPopup = dynamic(
+	() => import('@/components/Popup/LoginPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
+const DynamicLocationPopup = dynamic(
+	() => import('@/components/Popup/LocationPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
 
 const menus = [
 	{
@@ -141,8 +155,15 @@ function DesktopMenu() {
 					)}
 				</Popover.Group>
 			</span>
-			<LoginPopup open={showLogin} setOpen={setShowLogin} />
-			<LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
+			{showLogin && (
+				<DynamicLoginPopup open={showLogin} setOpen={setShowLogin} />
+			)}
+			{openLocationPopup && (
+				<DynamicLocationPopup
+					open={openLocationPopup}
+					setOpen={setOpenLocationPopup}
+				/>
+			)}
 		</nav>
 	);
 }

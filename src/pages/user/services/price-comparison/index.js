@@ -8,17 +8,8 @@ import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 import { numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 function Index({ isFromEdit, brandsList }) {
-	const router = useRouter();
-
-	const initialState = [
-		{ name: 'image-1' },
-		{ name: 'image-2' },
-		{ name: 'image-3' },
-		{ name: 'image-4' },
-	];
 	const [showpage, setShowpage] = useState(0);
 	const [makeRequired, setMakeRequired] = useState('');
 	const [makeRequired2, setMakeRequired2] = useState('');

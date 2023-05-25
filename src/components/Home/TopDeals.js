@@ -2,8 +2,12 @@ import TopDealCard from '@/components/Cards/TopDealCard';
 import Title from '@/components/Title';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useState } from 'react';
-import LocationPopup from '@/components/Popup/LocationPopup';
+import dynamic from 'next/dynamic';
 
+const DynamicLocationPopup = dynamic(
+	() => import('@/components/Popup/LocationPopup'),
+	{ ssr: false, loading: () => <p>Loading...</p> }
+);
 function TopDeals({ bestDeals, location }) {
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
 	return (
@@ -30,7 +34,12 @@ function TopDeals({ bestDeals, location }) {
 				<TopDealCard data={{ name: 'show all' }} />
 			</div>
 
-			<LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
+			{openLocationPopup && (
+				<DynamicLocationPopup
+					open={openLocationPopup}
+					setOpen={setOpenLocationPopup}
+				/>
+			)}
 		</section>
 	);
 }

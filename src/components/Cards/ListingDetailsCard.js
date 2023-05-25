@@ -2,18 +2,44 @@ import { useState } from 'react';
 import * as Axios from '@/api/axios';
 import ImageSlider from '@/components/ImageSlider';
 import LabelAndValue from '@/components/LabelAndValue';
-import ActivateListingPopup from '@/components/Popup/ActivateListingPopup';
-import ActivatePauseListing from '@/components/Popup/ActivatePauseListingPopup';
 import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
-import ConditionInfoPopup from '@/components/Popup/ConditionInfoPopup';
-import DeleteListingPopup from '@/components/Popup/DeleteListingPopup';
 import DeviceVerificationReport from '@/components/Popup/DeviceVerificationReport';
 import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
 import UnVerifiedIcon from '@/components/UnVerifiedIcon';
 import VerifiedIcon from '@/components/VerifiedIcon';
 import { numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+
+const DynamicConditionInfoPopup = dynamic(
+	() => import('@/components/Popup/ConditionInfoPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
+const DynamicActivateListingPopup = dynamic(
+	() => import('@/components/Popup/ActivateListingPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
+const DynamicActivatePauseListing = dynamic(
+	() => import('@/components/Popup/ActivatePauseListingPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
+const DynamicDeletePopup = dynamic(
+	() => import('@/components/Popup/DeleteListingPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
 
 function ListingDetailsCard({ data }) {
 	const [openDeviceReport, setOpenDeviceReport] = useState(false);
@@ -86,7 +112,7 @@ function ListingDetailsCard({ data }) {
 							className="font-semibold flex items-center -ml-1 text-m-grey-1"
 							style={{ fontSize: 42 }}
 						>
-							{data?.listingPrice && <BiRupee />}{' '}
+							{/* {data?.listingPrice && <BiRupee />}{' '} */}
 							{numberWithCommas(data?.listingPrice || '')}
 						</p>
 					</div>
@@ -191,26 +217,34 @@ function ListingDetailsCard({ data }) {
 				setOpen={setOpenDeviceReport}
 				data={data}
 			/>
-			<ConditionInfoPopup
-				open={openConditionInfoPopup}
-				setOpen={setConditionInfoPopup}
-				data={data}
-			/>
-			<ActivatePauseListing
-				open={openActivatePausePopup}
-				setOpen={setOpenActivatePausePopup}
-				data={data?.listingId}
-			/>
-			<DeleteListingPopup
-				open={openDeletePopup}
-				setOpen={setDeletePopup}
-				data={data}
-			/>
-			<ActivateListingPopup
-				open={openActivatePopup}
-				setOpen={setOpenActivatePopup}
-				data={'true'}
-			/>
+			{openConditionInfoPopup && (
+				<DynamicConditionInfoPopup
+					open={openConditionInfoPopup}
+					setOpen={setConditionInfoPopup}
+					data={data}
+				/>
+			)}
+			{openActivatePausePopup && (
+				<DynamicActivatePauseListing
+					open={openActivatePausePopup}
+					setOpen={setOpenActivatePausePopup}
+					data={data?.listingId}
+				/>
+			)}
+			{openDeletePopup && (
+				<DynamicDeletePopup
+					open={openDeletePopup}
+					setOpen={setDeletePopup}
+					data={data}
+				/>
+			)}
+			{openActivatePopup && (
+				<DynamicActivateListingPopup
+					open={openActivatePopup}
+					setOpen={setOpenActivatePopup}
+					data={'true'}
+				/>
+			)}
 		</div>
 	);
 }

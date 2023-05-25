@@ -14,7 +14,6 @@ const DynamicListingAddedPopup = dynamic(
 	() => import('@/components/Popup/ListingAddedPopup'),
 	{ ssr: false, loading: () => <p>Loading...</p> }
 );
-
 function AddListing({ brandsList }) {
 	const [brands, setBrands] = useState([]);
 
