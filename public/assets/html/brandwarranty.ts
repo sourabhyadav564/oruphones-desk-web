@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+const brandWarranty = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -14,25 +14,24 @@
 	<body>
 		<section class="warranty">
 			<h1>Device Warranty</h1>
-			<h2>Seller Warranty:</h2>
+			<h2>Brand Warranty:</h2>
 			<p>
-				Provided by the seller when you purchase the product online. Please note
-				that it is provided by the seller and NOT by the manufacturer. In case
-				of any defect, you can only contact the seller. You cannot go to the
-				authorized service centre of the company.
+				This is the Manufacturer’s Warranty that is provided by the
+				manufacturer. It is valid and can be trusted. You get this type of
+				warranty when you directly purchase from the manufacturer or an
+				authorized retailer.
 			</p>
 			<br />
 			<p>
-				For example, platforms like Amazon, and Flipkart, aren't sellers.
-				They're just a platform for sellers. If the seller is in Chennai, the
-				seller's warranty will be valid only in Chennai. So, you have to go to
-				Chennai to claim the warranty.
+				Customers will be given a specific time period, within which if the
+				device malfunctions, the device will be repaired from brand-authorized
+				service centres and returned to buyers. A brand new phone usually comes
+				with a 12-month warranty.
 			</p>
 			<br />
 			<p>
-				This kind of warranty cannot be fully trusted unless the seller has a
-				large network of repair shops across the country with authentic and
-				genuine spare parts and skilled professionals.
+				Brand warranties usually cover manufacturing defects and hardware
+				malfunctions but do not cover damage from unforeseen incidents.
 			</p>
 		</section>
 		<style>
@@ -65,4 +64,6 @@
 			}
 		</style>
 	</body>
-</html>
+</html>`;
+
+export default brandWarranty;

@@ -1,29 +1,7 @@
-import parse from 'html-react-parser';
-import { useEffect, useState } from 'react';
-import fetchStaticHTML from '@/api/fetchStaticHtml';
+import htmlString from '@/public/assets/html/new_privacy_policy';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
-import { parse as nodeParser } from 'node-html-parser';
-
 function PrivacyPolicy() {
-	const [htmlText1, setHtmlText1] = useState('');
-
-	useEffect(() => {
-		callStaticPages();
-	}, []);
-
-	async function callStaticPages() {
-		var htmlText;
-		try {
-			const res = await fetchStaticHTML('/new_privacy_policy.html');
-			const html = res.data;
-			const doc = nodeParser(html);
-			const body = doc.querySelector('body');
-			htmlText = body.innerHTML;
-			setHtmlText1(htmlText);
-		} catch (err) {}
-	}
-
 	return (
 		<>
 			<Head>
@@ -42,7 +20,7 @@ function PrivacyPolicy() {
 					</h1>
 					<p>Privacy Policy of www.oruphones.com</p>
 				</section>
-				{parse(htmlText1)}
+				<div dangerouslySetInnerHTML={{ __html: htmlString }} />
 			</main>
 		</>
 	);

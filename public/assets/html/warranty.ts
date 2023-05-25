@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+const warrantyString=`<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -85,4 +85,6 @@
 			}
 		</style>
 	</body>
-</html>
+</html>`;
+
+export default warrantyString;

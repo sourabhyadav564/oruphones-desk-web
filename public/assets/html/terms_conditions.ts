@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+const termsConditionsString=`<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -1164,61 +1164,7 @@
 				</div>
 			</section>
 		</main>
-		<style>
-			body {
-				background: #f9f9f9 0% 0% no-repeat padding-box;
-			}
-
-			.termCondition {
-				background: #ffffff 0% 0% no-repeat padding-box;
-				box-shadow: 0px 2px 3px #0000000a;
-				border-radius: 8px;
-				opacity: 1;
-				padding: 1rem;
-			}
-
-			.termCondition p,
-			.termCondition ol li {
-				text-align: left;
-				font: normal normal normal 16px Open Sans;
-				letter-spacing: 0px;
-				color: #606060;
-			}
-
-			.termCondition p {
-				display: block;
-				margin-block-start: 1em;
-				margin-block-end: 1em;
-				margin-inline-start: 0px;
-				margin-inline-end: 0px;
-			}
-
-			.termCondition ol {
-				margin: 0.25rem 0;
-				display: block;
-				list-style-type: decimal;
-				margin-block-start: 1em;
-				margin-block-end: 1em;
-				margin-inline-start: 0px;
-				margin-inline-end: 0px;
-				padding-inline-start: 40px;
-			}
-
-			.termCondition h1,
-			.termCondition h2,
-			.termCondition h3,
-			.termCondition h4 {
-				text-align: left;
-				font: normal normal bold 16px Open Sans;
-				letter-spacing: 0px;
-				color: #606060;
-				display: block;
-				margin-block-start: 0.83em;
-				margin-block-end: 0.83em;
-				margin-inline-start: 0px;
-				margin-inline-end: 0px;
-				font-weight: bold;
-			}
-		</style>
 	</body>
-</html>
+</html>`;
+
+export default termsConditionsString;

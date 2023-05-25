@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+const verificationString=`<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -62,4 +62,6 @@
 			}
 		</style>
 	</body>
-</html>
+</html>`;
+
+export default verificationString;

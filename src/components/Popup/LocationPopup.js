@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useContext, useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import * as Axios from '@/api/axios';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
@@ -81,9 +81,8 @@ function LocationPopup({ open, setOpen }) {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
 	return (
-		<Transition.Root show={open} as={Fragment}>
+		<Transition.Root show={open} as={Fragment} appear={true}>
 			<Dialog
 				as="div"
 				className="fixed z-20 inset-0 overflow-y-auto mx-8"

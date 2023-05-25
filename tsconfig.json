@@ -19,6 +19,7 @@
 			"@/node_modules/*": ["./node_modules/*"],
 			"@/components/*": ["src/components/*"],
 			"@/assets/*": ["public/assets/*"],
+			"@/public/*": ["public/*"],
 			"@/utils/*": ["src/utils/*"],
 			"@/context/*": ["src/context/*"],
 			"@/*": ["src/*"]
@@ -29,7 +30,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"src/**/*.ts",
-		"src/**/*.tsx"
-, "src/components/Form/Select.jsx"	],
+		"src/**/*.tsx",
+		"src/components/Form/Select.jsx"
+	],
 	"exclude": ["node_modules"]
 }

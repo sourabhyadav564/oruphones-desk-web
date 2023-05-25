@@ -1,51 +1,21 @@
-import React, { useContext, useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react';
 import DesktopMenu from './DesktopMenu';
 import LoginOrProfile from './LoginOrProfile';
-import MobileMenu from './MobileMenu';
 import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
-import LocationPopup from '@/components/Popup/LocationPopup';
-import AppContext from '@/context/ApplicationContext';
-import {
-	updateLocationAtom,
-	updateLocationLatLongAtom,
-} from '@/store/location';
-import { useAtom } from 'jotai';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const options = {
-	enableHighAccuracy: true,
-	timeout: 5000,
-	maximumAge: 0,
-};
-
+const DynamicLocationPopup = dynamic(
+	() => import('@/components/Popup/LocationPopup'),
+	{
+		ssr: false,
+		loading: () => <p>Loading...</p>,
+	}
+);
 function Header() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const [, setLocation] = useAtom(updateLocationAtom);
-	const [_, setLocationLatLong] = useAtom(updateLocationLatLongAtom);
-
-	const onSuccess = async (location: GeolocationPosition) => {
-		await setLocationLatLong(location as any);
-	};
-
-	const onError = (error: { code: number; message: string }) => {
-		toast.error(error.message);
-		setLocation('India');
-	};
-
-	const handleNearme = async () => {
-		if (!('geolocation' in navigator)) {
-			onError({
-				code: 0,
-				message: 'Geolocation not supported',
-			});
-		}
-		navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-	};
-
 	return (
 		<header>
 			<div className=" container lg:w-10/12 w-full h-16 bg-m-white bg-no-repeat  flex justify-center items-center opacity-100 px-0 py-0 ">
@@ -83,8 +53,10 @@ function Header() {
 				</div>
 			</div>
 			<DesktopMenu />
-			<MobileMenu isOpen={isOpen} />
-			<LocationPopup open={openLocationPopup} setOpen={setOpenLocationPopup} />
+			{/* <MobileMenu isOpen={isOpen} /> */}
+			{isOpen && (
+				<DynamicLocationPopup open={isOpen} setOpen={setIsOpen} />
+			)}
 		</header>
 	);
 }
