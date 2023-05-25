@@ -1,10 +1,19 @@
 import { useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
-import ListingAddedPopup from '@/components/Popup/ListingAddedPopup';
-import TermAndConditionPopup from '@/components/Popup/TermAndConditionPopup';
 import AddListingForm from '@/components/User/AddListingForm';
 import GuideToSell from '@/components/User/GuideToSell';
 import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
+
+const DynamicTermAndCondition = dynamic(
+	() => import('@/components/Popup/TermAndConditionPopup'),
+	{ ssr: false, loading: () => <p>Loading...</p> }
+);
+
+const DynamicListingAddedPopup = dynamic(
+	() => import('@/components/Popup/ListingAddedPopup'),
+	{ ssr: false, loading: () => <p>Loading...</p> }
+);
 
 function AddListing({ brandsList }) {
 	const [brands, setBrands] = useState([]);
@@ -33,8 +42,10 @@ function AddListing({ brandsList }) {
 			<div className="bg-white rounded rounded-t-lg shadow">
 				<GuideToSell />
 			</div>
-			<ListingAddedPopup open={open} setOpen={setOpen} />
-			<TermAndConditionPopup open={openTCPopup} setOpen={setOpenTCPopup} />
+			{open && <DynamicListingAddedPopup open={open} setOpen={setOpen} />}
+			{openTCPopup && (
+				<DynamicTermAndCondition open={openTCPopup} setOpen={setOpenTCPopup} />
+			)}
 		</main>
 	);
 }

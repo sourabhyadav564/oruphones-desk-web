@@ -1,9 +1,14 @@
-import { Fragment, useContext, useEffect, useRef, useState } from 'react';
-import TermAndConditionPopup from './TermAndConditionPopup';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import VerifyOtpPopup from './VerifyOtpPopup';
 import * as Axios from '@/api/axios';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Modal from '.';
+
+const DynamicTermsAndCondition = dynamic(
+	() => import('./TermAndConditionPopup'),
+	{ ssr: false, loading: () => <p>Loading...</p> }
+);
 
 function LoginPopup({ open, setOpen, redirect }) {
 	const [openTermAndCondPopup, setOpenTermAndCondPopup] = useState(false);
@@ -124,10 +129,12 @@ function LoginPopup({ open, setOpen, redirect }) {
 							</button>
 						</form>
 					</div>
-					<TermAndConditionPopup
-						open={openTermAndCondPopup}
-						setOpen={setOpenTermAndCondPopup}
-					/>
+					{open && (
+						<DynamicTermsAndCondition
+							open={openTermAndCondPopup}
+							setOpen={setOpenTermAndCondPopup}
+						/>
+					)}
 				</Fragment>
 			) : (
 				<VerifyOtpPopup setOpen={setOpen} data={formData} redirect={redirect} />
