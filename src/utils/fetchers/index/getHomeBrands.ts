@@ -8,7 +8,6 @@ export default async function getHomeBrands() {
 			}
 		);
 		const json = await res.json();
-		console.log('fetcher: ', json.dataObject);
 		return json.dataObject;
 	} catch (e) {
 		console.log(e);
