@@ -31,10 +31,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		getHomeListings(cookie, sliceLength),
 	]);
 	// cache this SSR response
-	ctx.res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
-	);
+	// ctx.res.setHeader(
+	// 	'Cache-Control',
+	// 	'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
+	// );
 	return {
 		props: {
 			brands: brands || null,
