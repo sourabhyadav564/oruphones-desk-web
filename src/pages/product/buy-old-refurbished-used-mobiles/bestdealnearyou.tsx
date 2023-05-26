@@ -87,10 +87,10 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	const bestDeals = infiniteDeals.pages[0]?.data?.slice(0, 5) || null;
 	const allMakes = await getMakes();
 	// cache this SSR response
-	ctx.res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=3600, stale-while-revalidate=59' // cached for 1 hour, revalidate after 1 minute
-	);
+	// ctx.res.setHeader(
+	// 	'Cache-Control',
+	// 	'public, s-maxage=3600, stale-while-revalidate=59' // cached for 1 hour, revalidate after 1 minute
+	// );
 	return {
 		props: {
 			bestDeals,
