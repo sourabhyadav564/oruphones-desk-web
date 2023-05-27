@@ -7,7 +7,7 @@ import { atomWithStorage } from 'jotai/utils';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
-export const locationAtom = atom<string>('India');
+export const locationAtom = atomWithStorage<string>('location', 'India');
 const readLocationAtom = atom((get) => get(locationAtom));
 export const updateLocationAtom = atom(
 	null,

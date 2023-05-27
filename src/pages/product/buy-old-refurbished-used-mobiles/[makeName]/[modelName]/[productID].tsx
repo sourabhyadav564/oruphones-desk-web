@@ -11,7 +11,6 @@ import {
 } from '@/utils/fetchers/filteredFetch';
 import getLeaderboard from '@/utils/fetchers/getLeaderboard';
 import { dehydrate, QueryClient } from '@tanstack/query-core';
-import { getCookie, setCookie } from 'cookies-next';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -19,7 +18,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 type TPageProps = {
-	location: string;
 	productID: string;
 	dehydratedState: any;
 	make: string | undefined;
@@ -55,12 +53,6 @@ const returnFilter = {
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
-	let cookie = getCookie('location', ctx) as string;
-	if (!cookie) {
-		// set cookie to India
-		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
-		cookie = 'India';
-	}
 	const productID = ctx.params!.productID as string;
 	const queryClient = new QueryClient();
 	const prod = await queryClient.fetchQuery({
@@ -80,13 +72,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		queryKey: ['product-leaderboard', make, model],
 		queryFn: () => getLeaderboard({ listingId: productID as string }),
 	});
-	// ctx.res.setHeader(
-	// 	'Cache-Control',
-	// 	'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
-	// );
+	ctx.res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
+	);
 	return {
 		props: {
-			location: cookie,
 			productID,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 			make,
@@ -99,14 +90,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 export const leaderBoardAtom = atom<TListingReturnFilter[]>([]);
 export const dealsYouMayLikeAtom = atom<TListingReturnFilter[]>([]);
 function ProductDetails({
-	location,
 	productID,
 	make,
 	model,
 	leaderBoard,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([
-		[locationAtom, location],
 		[leaderBoardAtom, leaderBoard],
 	]);
 	const [openImageFullView, setOpenImageFullView] = useState(false);
