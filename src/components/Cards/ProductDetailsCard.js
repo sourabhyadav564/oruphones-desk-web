@@ -138,13 +138,10 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 					{!(data?.isOtherVendor === 'Y') && (
 						<Fragment>
 							<div className="hover:scale-110">
-								<ShareIcon data={deviceListingInfo} width={16} height={16} />
+								<ShareIcon data={data} width={16} height={16} />
 							</div>
 							<span className="pt-2 hover:scale-110 ">
-								<AddFav
-									data={deviceListingInfo}
-									setProducts={setDeviceListingInfo}
-								/>
+								<AddFav data={data} setProducts={setDeviceListingInfo} />
 							</span>
 						</Fragment>
 					)}
@@ -440,7 +437,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 									Device Cosmetic Report
 								</h2>
 								<div className="pb-4">
-									<div className="bg-gray-600 h-1 border-2 border-white"/> 
+									<div className="bg-gray-600 h-1 border-2 border-white" />
 								</div>
 							</>
 						)}

@@ -44,6 +44,7 @@ export type TListingReturnFilter = {
 	marketingName?: string;
 	model?: string;
 	make?: string;
+	status?: string;
 	listingDate?: string;
 	listedBy?: string;
 	images?: {

@@ -1,31 +1,31 @@
 import { toast } from 'react-toastify';
 import { prepareShareLink } from '@/api/axios';
-import Cookies from 'js-cookie';
 
 export default function ShareIcon({ data, ...rest }) {
+	console.log(data);
 	function shareListingInfo(data) {
-		prepareShareLink(data.listingId, Cookies.get('info') || 'Guest').then(
-			(response) => {
-				data?.status != 'Active'
-					? toast.warning('This device is sold out')
-					: sharePopupInfo(
-							response?.dataObject.url,
-							response?.dataObject.content
-					  );
-			}
-		);
+		prepareShareLink(data.listingId, 'Guest').then((response) => {
+			data?.status != 'Active'
+				? toast.warning('This device is sold out')
+				: sharePopupInfo(
+						response?.dataObject.url,
+						response?.dataObject.content
+				  );
+		});
 	}
 
 	function sharePopupInfo(url, content) {
+		console.log('Getting here');
 		if (navigator.share) {
+			console.log('Getting here 2');
 			navigator
 				.share({
 					title: 'Share link',
 					url: url,
 					text: content[1]?.shareContent,
 				})
-				.then(() => {})
-				.catch(console.error);
+				.then(() => console.log('Successful share'))
+				.catch((error) => console.log('Error sharing', error));
 		}
 	}
 
