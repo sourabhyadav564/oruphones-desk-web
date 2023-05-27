@@ -35,7 +35,7 @@ const slides = [
 	},
 	{
 		name: 'article_image',
-		link: 'https://www.oruphones.com/blog',
+		link: 'https://www.oruphones.com/blog/',
 		src: Banner_2,
 		id: 2,
 	},
@@ -104,12 +104,12 @@ const TopCarousel = () => {
 							</div>
 						) : (
 							<Link
-								className="flex justify-center relative mix-blend-overlay"
+								className="flex justify-center relative mix-blend-overlay cursor-pointer"
 								href={item.id != 3 ? item.link : '#'}
 								key={item.id}
 								passHref
 							>
-								<>
+								<div className="flex justify-center items-center">
 									<Image
 										src={item.src}
 										alt={item.name}
@@ -128,9 +128,9 @@ const TopCarousel = () => {
 												data-aos="zoom-out-up"
 											>
 												<div>
-													<div className="px-4 py-7 rounded-[5px] ">
+													<div className="px-4 py-7 rounded-[5px]">
 														<a
-															className="flex h-7 text-mediumFontSize font-Roboto-Semibold justify-center py-7 items-center px-16 rounded-[5px] bg-gradient-to-b from-[#FFDe59] to-[#FFDE59]"
+															className="flex h-7 text-mediumFontSize font-Roboto-Semibold justify-center py-7 items-center px-16 rounded-[5px] bg-gradient-to-b from-[#FFDe59] to-[#FFDE59] cursor-pointer"
 															onClick={() => handleClick()}
 														>
 															{item.id == 3 && <p>COMPARE PRICE</p>}
@@ -140,7 +140,7 @@ const TopCarousel = () => {
 											</div>
 										</div>
 									)}
-								</>
+								</div>
 							</Link>
 						)}
 					</SwiperSlide>

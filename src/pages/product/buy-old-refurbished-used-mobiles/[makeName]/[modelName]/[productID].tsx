@@ -95,9 +95,7 @@ function ProductDetails({
 	model,
 	leaderBoard,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	useHydrateAtoms([
-		[leaderBoardAtom, leaderBoard],
-	]);
+	useHydrateAtoms([[leaderBoardAtom, leaderBoard]]);
 	const [openImageFullView, setOpenImageFullView] = useState(false);
 	const [contextData, setContextData] = useState('');
 	const locationVal = useAtomValue(locationAtom);
@@ -214,7 +212,9 @@ function ProductDetails({
 											similarProductsLoading ? 'w-[250px]' : 'w-[150px]'
 										} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5`}
 									>
-										{similarProductsLoading ? 'Fetching products...' : 'Load More'}
+										{similarProductsLoading
+											? 'Fetching products...'
+											: 'Load More'}
 									</p>
 								</Link>
 							)}

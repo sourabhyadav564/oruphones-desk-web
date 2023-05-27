@@ -93,7 +93,7 @@ module.exports = withBundleAnalyzer({
 		  }
 		: {}),
 	swcMinify: true,
-	experimental:{
+	experimental: {
 		scrollRestoration: true,
-	}
+	},
 });

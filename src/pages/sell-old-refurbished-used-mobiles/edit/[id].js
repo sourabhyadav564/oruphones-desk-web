@@ -3,8 +3,8 @@ import * as Axios from '@/api/axios';
 import EditListingForm from '@/components/User/EditListingForm';
 import GuideToSell from '@/components/User/GuideToSell';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 const DynamicTermAndCondition = dynamic(
 	() => import('@/components/Popup/TermAndConditionPopup'),

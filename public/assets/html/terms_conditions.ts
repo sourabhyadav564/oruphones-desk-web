@@ -1,4 +1,4 @@
-const termsConditionsString=`<!DOCTYPE html>
+const termsConditionsString = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />

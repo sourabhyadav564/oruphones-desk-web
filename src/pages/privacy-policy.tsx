@@ -1,6 +1,7 @@
 import htmlString from '@/public/assets/html/new_privacy_policy';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
+
 function PrivacyPolicy() {
 	return (
 		<>

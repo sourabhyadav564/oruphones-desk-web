@@ -2,7 +2,6 @@ import { toast } from 'react-toastify';
 import { prepareShareLink } from '@/api/axios';
 
 export default function ShareIcon({ data, ...rest }) {
-	console.log(data);
 	function shareListingInfo(data) {
 		prepareShareLink(data.listingId, 'Guest').then((response) => {
 			data?.status != 'Active'
@@ -15,9 +14,7 @@ export default function ShareIcon({ data, ...rest }) {
 	}
 
 	function sharePopupInfo(url, content) {
-		console.log('Getting here');
 		if (navigator.share) {
-			console.log('Getting here 2');
 			navigator
 				.share({
 					title: 'Share link',

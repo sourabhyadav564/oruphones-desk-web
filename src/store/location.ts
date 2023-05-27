@@ -12,7 +12,6 @@ const readLocationAtom = atom((get) => get(locationAtom));
 export const updateLocationAtom = atom(
 	null,
 	async (get, set, location: string) => {
-		console.log('idk ', location);
 		setCookie('location', location);
 		set(topDealsQueryAtom, location);
 		set(filterAtom, { ...get(filterAtom), listingLocation: location });

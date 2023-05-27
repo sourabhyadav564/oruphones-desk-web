@@ -53,9 +53,7 @@ function Header() {
 				</div>
 			</div>
 			<DesktopMenu />
-			{isOpen && (
-				<DynamicLocationPopup open={isOpen} setOpen={setIsOpen} />
-			)}
+			{isOpen && <DynamicLocationPopup open={isOpen} setOpen={setIsOpen} />}
 		</header>
 	);
 }

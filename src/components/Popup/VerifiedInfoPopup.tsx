@@ -1,7 +1,10 @@
 import Model2 from './Model2';
 import verificationString from '@/assets/html/verification';
 
-function VerifiedInfoPopup({ open, setOpen }:{
+function VerifiedInfoPopup({
+	open,
+	setOpen,
+}: {
 	open: boolean;
 	setOpen: Function;
 }) {

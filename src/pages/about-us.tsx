@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 function Aboutus() {
-
 	const data = [
 		{
 			imgsrc: 'https://d1tl44nezj10jx.cloudfront.net/team/kido.webp',

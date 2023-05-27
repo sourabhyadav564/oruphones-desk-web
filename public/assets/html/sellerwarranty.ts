@@ -1,4 +1,4 @@
-const sellerWarrantyString=`<!DOCTYPE html>
+const sellerWarrantyString = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
