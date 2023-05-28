@@ -46,6 +46,8 @@ function Profile() {
 				toast.info('ORU-Mitra ID Linked Successfully', {
 					position: toast.POSITION.TOP_CENTER,
 				});
+				setLink(false);
+
 				// Axios.getUserProfile("91", mobileNumber?.current).then(
 				//   (resp) => {
 				//     setUserInfo(resp.dataObject);
@@ -161,6 +163,7 @@ function Profile() {
 							<button
 								className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
 								onClick={handleLink}
+								type='button'
 							>
 								Link
 							</button>
@@ -168,6 +171,8 @@ function Profile() {
 							<button
 								className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
 								onClick={handleDeLink}
+								type='button'
+
 							>
 								Delink
 							</button>
@@ -176,10 +181,12 @@ function Profile() {
 					<span className="block"></span>
 					<div className=" grid  grid-cols-1 gap-8 ">
 						<button
+						    type='submit'
 							className={` px-12 rounded text-white text-regularFontSize font-Roboto-Semibold uppercase py-2 ${
 								saveChange ? 'bg-m-green' : 'bg-gray-1'
 							} hover:bg-m-green`}
 						>
+
 							Save
 						</button>
 						<button></button>
