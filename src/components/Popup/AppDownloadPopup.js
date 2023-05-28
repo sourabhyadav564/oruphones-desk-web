@@ -69,12 +69,9 @@ function AppDownloadPopup({ open, setOpen }) {
 							</div>
 
 							<div className="md:absolute md:right-3 md:top-0 text-white flex justify-end mr-4 mt-4 ">
-								<Image
-									src={Close}
-									width={28}
-									height={28}
-									onClick={() => setOpen(false)}
-								/>
+								<button onClick={() => setOpen(false)}>
+									<Image src={Close} width={28} height={28} />
+								</button>
 							</div>
 							<div className="z-20 relative px-8 py-4  md:w-8/12 text-black-20">
 								<p className="font-Roboto-Bold text-xl2FontSize mb-4">
