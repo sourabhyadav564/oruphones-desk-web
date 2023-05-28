@@ -48,6 +48,7 @@ const returnFilter = {
 	warranty: 1,
 	cosmetic: 1,
 	status: 1,
+	verified: 1,
 };
 
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
