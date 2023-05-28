@@ -18,6 +18,7 @@ function Listings() {
 				Cookies.get('userUniqueId'),
 				Cookies.get('sessionId') || localStorage.getItem('sessionId')
 			);
+			console.log(fetchUserListings)
 			setUserListing(fetchUserListings?.dataObject);
 			setLoading(false);
 		};

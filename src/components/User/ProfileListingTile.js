@@ -106,6 +106,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 								}
 								alt={data?.marketingName}
 								style={{ width: 'auto', height: '100%', objectFit: 'contain' }}
+								width={100} height={300}
 							/>
 						</div>
 					)}
@@ -117,7 +118,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 						</p>
 						<p className="flex items-center font-Roboto-Bold text-xl2FontSize text-m-grey-1">
 							{data?.listingPrice && (
-								<Image src={Rupee} width={20} height={20} alt="rupee" />
+								<Image src={Rupee} width={20} height={20} alt="rupee"/>
 							)}{' '}
 							{numberWithCommas(data?.listingPrice || '')}
 						</p>
@@ -204,6 +205,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 									'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 								}
 								style={{ width: 'auto', height: '100%', objectFit: 'contain' }}
+								layout='fill'
 							/>
 						</div>
 					)}
@@ -218,6 +220,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 								}
 								alt={data?.marketingName}
 								style={{ width: 'auto', height: '100%', objectFit: 'contain' }}
+								layout='fill'
 							/>
 						</div>
 					)}
@@ -232,6 +235,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 								}
 								alt={data?.marketingName}
 								style={{ width: 'auto', height: '100%', objectFit: 'contain' }}
+								layout='fill'
 							/>
 						</div>
 					)}
@@ -243,7 +247,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 						</p>
 						<p className="flex items-center font-Roboto-Bold md:text-xl2FontSize text-xlFontSize -ml-1 text-m-grey-1">
 							{data?.listingPrice && (
-								<Image src={Rupee} width={20} height={20} alt="rupee" />
+								<Image src={Rupee} width={20} height={20} alt="rupee"  />
 							)}{' '}
 							{numberWithCommas(data?.listingPrice || '')}
 						</p>
