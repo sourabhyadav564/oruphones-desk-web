@@ -94,7 +94,7 @@ const CategoryCards = ({ data, priceRange }) => {
 				href={{
 					pathname:
 						data?.urlPath === 'Bestselling'
-							? '/product/buy-old-refurbished-used-mobiles/bestdealnearyou'
+							? '/product/models'
 							: data?.urlPath != 'Warranty' &&
 							  `/product/buy-old-refurbished-used-mobiles/bestdealnearyou`,
 					query: data?.urlPath !== 'Warranty' &&

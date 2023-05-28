@@ -198,16 +198,6 @@ export function fetchTopsellingmodels(isLimited) {
 	}
 
 	return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then((response) => {
-		Axios.get(API_ENDPOINT2, DEFAULT_HEADER).then((response) => {
-			localStorage.setItem(
-				'shopByModel',
-				JSON.stringify(response?.data?.allModels)
-			);
-		});
-		localStorage.setItem(
-			'top_models',
-			JSON.stringify(response?.data?.dataObject)
-		);
 		return response.data;
 	});
 }
