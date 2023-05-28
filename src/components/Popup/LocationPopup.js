@@ -82,7 +82,7 @@ function LocationPopup({ open, setOpen }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
-		<Transition.Root show={open} as={Fragment} appear={true}>
+		<Transition.Root appear={true} show={open} as={Fragment} appear={true}>
 			<Dialog
 				as="div"
 				className="fixed z-20 inset-0 overflow-y-auto mx-8"

@@ -136,7 +136,7 @@ export default function Sort({
 					</button>
 				</div>
 			</div>
-			<Transition.Root show={mobileFiltersOpen} as={Fragment}>
+			<Transition.Root appear={true} show={mobileFiltersOpen} as={Fragment}>
 				<Dialog
 					as="div"
 					className="fixed inset-0 flex z-40 lg:hidden"

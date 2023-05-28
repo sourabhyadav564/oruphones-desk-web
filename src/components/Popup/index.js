@@ -7,7 +7,7 @@ export default function Modal({ open, setOpen, children, title }) {
 	const cancelButtonRef = useRef(null);
 
 	return (
-		<Transition.Root show={open} as={Fragment}>
+		<Transition.Root appear={true} show={open} as={Fragment}>
 			<Dialog
 				as="div"
 				className="fixed  z-10 inset-0 overflow-y-auto"

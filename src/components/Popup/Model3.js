@@ -7,7 +7,7 @@ export default function Model3({ open, setOpen, children, title }) {
 	const cancelButtonRef = useRef(null);
 
 	return (
-		<Transition.Root show={open} as={Fragment}>
+		<Transition.Root appear={true} show={open} as={Fragment}>
 			<Dialog
 				as="div"
 				className="fixed z-10 inset-0 w-full"
