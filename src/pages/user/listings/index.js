@@ -5,6 +5,7 @@ import ProfileListingTile from '@/components/User/ProfileListingTile';
 import UserListingTab from '@/components/User/UserListingTab';
 import UserProfile from '@/components/User/UserProfile';
 import Cookies from 'js-cookie';
+import Head from 'next/head';
 import router from 'next/router';
 
 function Listings() {
@@ -18,7 +19,7 @@ function Listings() {
 				Cookies.get('userUniqueId'),
 				Cookies.get('sessionId') || localStorage.getItem('sessionId')
 			);
-			console.log(fetchUserListings)
+			console.log(fetchUserListings);
 			setUserListing(fetchUserListings?.dataObject);
 			setLoading(false);
 		};
@@ -31,6 +32,10 @@ function Listings() {
 
 	return (
 		<>
+			<Head>
+				<title>My Listings | Oruphones</title>
+				<meta name="description" content="My Listings | Oruphones" />
+			</Head>
 			<UserProfile>
 				<UserListingTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
 				<div className="lg:flex lg:flex-col grid grid-cols-2 gap-4 lg:space-y-4 px-4 my-4">
@@ -43,7 +48,7 @@ function Listings() {
 									}
 								})
 								.map((item, index) => (
-									<div>
+									<div key={index}>
 										<a>
 											<ProfileListingTile data={item} />
 										</a>
@@ -57,7 +62,7 @@ function Listings() {
 									}
 								})
 								.map((item, index) => (
-									<div>
+									<div key={index}>
 										<a>
 											<ProfileListingTile data={item} />
 										</a>

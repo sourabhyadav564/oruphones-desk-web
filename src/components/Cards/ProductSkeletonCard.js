@@ -4,20 +4,20 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 const ProductSkeletonCard = ({
 	popular = false,
-	isTopSelling = true,
-	isBestDeal = true,
+	isTopSelling = false,
+	isBestDeal = false,
 }) => {
 	if (isBestDeal) {
 		return (
-			<div data-aos="fade-up" className="relative my-1">
-				<div className="text-right flex flex-col-reverse items-center justify-between px-8">
+			<div className="rounded-md shadow hover:shadow-md p-4 pb-6 bg-gradient-to-l from-m-white to-m-green  w-[900px] h-[260px] space-y-3 mx-2 mb-2">
+				<div className="text-right flex flex-row items-center justify-between px-8">
 					<div className="flex flex-col items-start pt-5">
 						<Skeleton width={150} height={20} />
 						<Skeleton width={100} height={20} />
 						<Skeleton width={50} height={20} />
 						<Skeleton className="mt-12 rounded-2xl" width={100} height={40} />
 					</div>
-					<Skeleton width={150} height={150} />
+					<Skeleton width={120} height={200} />
 				</div>
 			</div>
 		);

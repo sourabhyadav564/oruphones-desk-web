@@ -7,12 +7,6 @@ import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function BestDealsCard({ data }) {
-	var type = ['old phone', 'used', 'refurbished'];
-	const soldout = `bestdeals buy ${
-		type[Math.floor(Math.random() * type.length)]
-	} ${data?.marketingName} ${data?.deviceStorage} ${
-		data?.deviceCondition
-	} soldout`.toLowerCase();
 	const [imageError, setImageError] = useState(false);
 	return (
 		<div
@@ -93,7 +87,12 @@ function BestDealsCard({ data }) {
 									<div className="flex items-center md:text-regularFontSizete text-smallFontSize font-Roboto-Semibold bg-m-white text-m-green md:py-2 py-1 md:px-4 px-2 md:rounded-lg rounded-md hover:bg-yellow-500 hover:cursor-pointer duration-500">
 										<div>View Deal </div>
 										<div className="pt-0.5">
-											<Image src={ChevronRight} width={10} height={10} />
+											<Image
+												src={ChevronRight}
+												width={10}
+												height={10}
+												alt="View Deal Button"
+											/>
 										</div>
 									</div>
 								</div>
@@ -125,24 +124,28 @@ function BestDealsCard({ data }) {
 				<div className="relative flex justify-end items-end">
 					<Image
 						priority
-						blurDataURL={
-							imageError
-								? getDefaultImage(data?.marketingName) ||
-								  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-								: data?.imagePath ||
-								  getDefaultImage(data?.marketingName) ||
-								  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
-						}
 						placeholder="blur"
 						className="flex rounded-[20px]"
 						width={140}
 						height={190}
 						quality={40}
+						blurDataURL={
+							imageError
+								? getDefaultImage(data?.marketingName) ||
+								  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+								: data?.imagePath ||
+								  data?.defaultImage?.fullImage ||
+								  (data?.images && data.images[0]?.fullImage) ||
+								  getDefaultImage(data?.marketingName) ||
+								  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
+						}
 						src={
 							imageError
 								? getDefaultImage(data?.marketingName) ||
 								  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 								: data?.imagePath ||
+								  data?.defaultImage?.fullImage ||
+								  (data?.images && data.images[0]?.fullImage) ||
 								  getDefaultImage(data?.marketingName) ||
 								  'https://d1tl44nezj10jx.cloudfront.net/web/assets/oru_phones_logo.svg'
 						}

@@ -182,22 +182,26 @@ function Bestdealnearyou({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: data?.pages[0].totalCount || 0
+									: Math.min(data?.pages[0].totalCount - 5, 0) || 0
 							}
 							defaultBrands={allMakes}
 						>
 							<div className="w-full h-[21rem]">
-								<Carousel
-									{...settings}
-									key={bestDeals.length > 0 ? bestDeals.length : -1}
-									className="bestDealCarousel h-full"
-								>
-									{bestDeals.map((items, index) => (
-										<SwiperSlide key={index}>
-											<BestDealsCard data={items} />
-										</SwiperSlide>
-									))}
-								</Carousel>
+								{isLoading ? (
+									<ProductSkeletonCard isBestDeal={true} />
+								) : (
+									<Carousel
+										{...settings}
+										key={data!.pages[0].data.length > 0 ? bestDeals.length : -1}
+										className="bestDealCarousel h-full"
+									>
+										{data!.pages[0].data.slice(0, 5).map((items, index) => (
+											<SwiperSlide key={index}>
+												<BestDealsCard data={items} />
+											</SwiperSlide>
+										))}
+									</Carousel>
+								)}
 							</div>
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
 								{/* {`Filter: ${JSON.stringify(filterData)}`}
@@ -226,6 +230,9 @@ function Bestdealnearyou({
 													return (
 														<React.Fragment key={idx1}>
 															{page.data?.map((product, idx2) => {
+																if (idx1 === 0 && idx2 < 5) {
+																	return null;
+																}
 																return (
 																	<div key={idx2}>
 																		<ProductCard data={product} prodLink />

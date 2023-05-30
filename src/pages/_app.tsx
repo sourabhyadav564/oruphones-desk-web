@@ -22,6 +22,7 @@ const queryClientOptions = {
 	defaultOptions: {
 		queries: {
 			staleTime: Infinity,
+			refetchOnWindowFocus: false,
 		},
 	},
 };
