@@ -117,7 +117,7 @@ function Bestdealnearyou({
 	]);
 	const [filterData, setFilterData] = useAtom(filterAtom);
 	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
-	const debouncedFilterData = useDebounce(filterData, 750);
+	const debouncedFilterData = useDebounce(filterData, 400);
 
 	const {
 		isLoading,
@@ -182,27 +182,31 @@ function Bestdealnearyou({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: Math.min(data?.pages[0].totalCount - 5, 0) || 0
+									: Math.max(data?.pages[0].totalCount - 5, 0) || 0
 							}
 							defaultBrands={allMakes}
 						>
-							<div className="w-full h-[21rem]">
-								{isLoading ? (
-									<ProductSkeletonCard isBestDeal={true} />
-								) : (
-									<Carousel
-										{...settings}
-										key={data!.pages[0].data.length > 0 ? bestDeals.length : -1}
-										className="bestDealCarousel h-full"
-									>
-										{data!.pages[0].data.slice(0, 5).map((items, index) => (
-											<SwiperSlide key={index}>
-												<BestDealsCard data={items} />
-											</SwiperSlide>
-										))}
-									</Carousel>
-								)}
-							</div>
+							{(isLoading || data?.pages[0]) && (
+								<div className="w-full h-[21rem]">
+									{isLoading && <ProductSkeletonCard isBestDeal={true} />}
+									{data?.pages[0] && (
+										<Carousel
+											{...settings}
+											key={
+												data!.pages[0].data.length > 0 ? bestDeals.length : -1
+											}
+											className="bestDealCarousel h-full"
+										>
+											{data!.pages[0].data.slice(0, 5).map((items, index) => (
+												<SwiperSlide key={index}>
+													<BestDealsCard data={items} />
+												</SwiperSlide>
+											))}
+										</Carousel>
+										// <ProductSkeletonCard isBestDeal={true} />
+									)}
+								</div>
+							)}
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
 								{/* {`Filter: ${JSON.stringify(filterData)}`}
 								<br /> */}

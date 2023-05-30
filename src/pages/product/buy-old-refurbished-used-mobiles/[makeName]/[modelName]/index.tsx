@@ -227,25 +227,29 @@ function Products({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: data?.pages[0].totalCount || 0
+									: Math.max(data?.pages[0].totalCount - 5, 0) || 0
 							}
 							makeName={makeName}
 							defaultBrands={[makeName]}
 						>
-							<div className="w-full h-[21rem]">
-								<Carousel
-									{...settings}
-									key={bestDeals?.length > 0 ? bestDeals.length : -1}
-									className="bestDealCarousel h-full"
-								>
-									{bestDeals?.map((items, index) => (
-										<SwiperSlide key={index}>
-											<BestDealsCard data={items} />
-										</SwiperSlide>
-									))}
-								</Carousel>
-							</div>
-							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
+							{(isLoading || data?.pages[0]) && (
+								<div className="w-full h-[21rem]">
+									{isLoading && <ProductSkeletonCard isBestDeal={true} />}
+									{data?.pages[0] && (
+										<Carousel
+											{...settings}
+											key={bestDeals?.length > 0 ? bestDeals.length : -1}
+											className="bestDealCarousel h-full"
+										>
+											{data!.pages[0].data.slice(0, 5).map((items, index) => (
+												<SwiperSlide key={index}>
+													<BestDealsCard data={items} />
+												</SwiperSlide>
+											))}
+										</Carousel>
+									)}
+								</div>
+							)}
 							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
 								{`Total Products (${
 									isLoading || isFetchingNextPage || !data?.pages[0]
@@ -253,6 +257,7 @@ function Products({
 										: data?.pages[0].totalCount || 0
 								})`}
 							</h4>
+							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 							{(!data || !data.pages[0]) && isLoading && (
 								<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
 									{Array.from({ length: 12 }).map((_, idx) => (
@@ -271,6 +276,9 @@ function Products({
 													return (
 														<Fragment key={idx1}>
 															{page.data?.map((product, idx2) => {
+																if (idx1 === 0 && idx2 < 5) {
+																	return null;
+																}
 																return (
 																	<div key={idx2}>
 																		<ProductCard data={product} prodLink />

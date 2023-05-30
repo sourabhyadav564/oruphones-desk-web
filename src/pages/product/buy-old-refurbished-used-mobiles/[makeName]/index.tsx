@@ -238,24 +238,29 @@ function BrandPage({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: data?.pages[0].totalCount || 0
+									: Math.max(data?.pages[0].totalCount - 5, 0) || 0
 							}
 							makeName={makeName}
 							defaultBrands={[makeName]}
 						>
-							<div className="w-full h-[21rem]">
-								<Carousel
-									{...settings}
-									key={bestDeals?.length > 0 ? bestDeals.length : -1}
-									className="bestDealCarousel h-full"
-								>
-									{bestDeals?.map((items, index) => (
-										<SwiperSlide key={index}>
-											<BestDealsCard data={items} />
-										</SwiperSlide>
-									))}
-								</Carousel>
-							</div>
+							{(isLoading || data?.pages[0]) && (
+								<div className="w-full h-[21rem]">
+									{isLoading && <ProductSkeletonCard isBestDeal={true} />}
+									{data?.pages[0] && (
+										<Carousel
+											{...settings}
+											key={bestDeals?.length > 0 ? bestDeals.length : -1}
+											className="bestDealCarousel h-full"
+										>
+											{data!.pages[0].data.slice(0, 5).map((items, index) => (
+												<SwiperSlide key={index}>
+													<BestDealsCard data={items} />
+												</SwiperSlide>
+											))}
+										</Carousel>
+									)}
+								</div>
+							)}
 							{models?.length > 0 && (
 								<div className="font-Roboto-Semibold text-xlFontSize">
 									<p className="opacity-50">Shop By Model</p>
@@ -292,6 +297,9 @@ function BrandPage({
 													return (
 														<React.Fragment key={idx1}>
 															{page.data?.map((product, idx2) => {
+																if (idx1 === 0 && idx2 < 5) {
+																	return null;
+																}
 																return (
 																	<div key={idx2}>
 																		<ProductCard data={product} prodLink />

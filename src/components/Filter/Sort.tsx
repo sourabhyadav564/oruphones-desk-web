@@ -8,13 +8,22 @@ import useFilterOptions from '@/hooks/useFilterOptions';
 import filterAtom from '@/store/productFilter';
 import { atom, useAtom } from 'jotai';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
-const sortsAtom = atom<string>('Featured');
 const sortsAtomRW = atom(
-	(get) => get(sortsAtom),
+	(get) => {
+		const sort = get(filterAtom)?.sort;
+		if (sort) {
+			if (sort.price === 1) {
+				return 'Price - Low to High';
+			} else if (sort.price === -1) {
+				return 'Price - High to Low';
+			} else if (sort.date === -1) {
+				return 'Newest First';
+			}
+		}
+		return 'Featured';
+	},
 	(get, set, update: string) => {
-		set(sortsAtom, update);
 		let tempUpdate:
 			| {
 					price?: number;
@@ -51,10 +60,6 @@ const sortsAtomRW = atom(
 		}));
 	}
 );
-
-const classNames = (...classes: any) => {
-	return classes.filter(Boolean).join(' ');
-};
 
 export default function Sort({
 	sortOptions,
