@@ -165,7 +165,6 @@ const DesktopFilter = ({ filterOptions, defaultBrands }: any) => {
 							router={router}
 							setter={setSelectedRam}
 							selected={selectedRam}
-							openPopup={() => setWarrantyPopup(true)}
 						/>
 					) : section?.id === 'verification' ? (
 						<VerificationFilter
