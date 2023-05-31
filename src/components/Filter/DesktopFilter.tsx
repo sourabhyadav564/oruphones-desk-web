@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 export const selectedBrandRWAtom = atom(
 	(get) => get(filterAtom)?.make || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0 ? { make: update } : { make: undefined }),
 		}));
@@ -28,7 +28,7 @@ export const selectedBrandRWAtom = atom(
 export const selectedConditionRWAtom = atom(
 	(get) => get(filterAtom)?.condition || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0
 				? { condition: update }
@@ -39,7 +39,7 @@ export const selectedConditionRWAtom = atom(
 const selectedStorageRWAtom = atom(
 	(get) => get(filterAtom)?.storage || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0 ? { storage: update } : { storage: undefined }),
 		}));
@@ -48,7 +48,7 @@ const selectedStorageRWAtom = atom(
 const selectedWarrantyRWAtom = atom(
 	(get) => get(filterAtom)?.warranty || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0 ? { warranty: update } : { warranty: undefined }),
 		}));
@@ -56,9 +56,9 @@ const selectedWarrantyRWAtom = atom(
 );
 
 const selectedRamRWAtom = atom(
-	(get) => get(filterAtom)?.Ram || [],
+	(get) => get(filterAtom)?.ram || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0 ? { Ram: update } : { Ram: undefined }),
 		}));
@@ -67,7 +67,7 @@ const selectedRamRWAtom = atom(
 const selectedVerificationRWAtom = atom(
 	(get) => (get(filterAtom)?.verified ? ['verified'] : []),
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update.length > 0 && update.includes('verified')
 				? { verified: true }
@@ -78,7 +78,7 @@ const selectedVerificationRWAtom = atom(
 const selectedPriceRangeRWAtom = atom(
 	(get) => get(filterAtom)?.priceRange || [],
 	(get, set, update: number[]) => {
-		set(filterAtom, (prev: any) => ({
+		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0
 				? { priceRange: update }

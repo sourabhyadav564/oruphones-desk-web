@@ -13,7 +13,6 @@ import { locationAtom } from '@/store/location';
 import filterAtom from '@/store/productFilter';
 import TListingFilter, {
 	TListingReturnFilter,
-	Tmodel,
 } from '@/types/ListingFilter';
 import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import getMakes from '@/utils/fetchers/getMakes';
@@ -133,8 +132,7 @@ function Bestdealnearyou({
 		},
 		getNextPageParam: (lastPage, allPages) => {
 			const currentRecordCount = allPages.length * (filterData.limit || 12);
-			console.log(currentRecordCount);
-			if (currentRecordCount >= (allPages[0].totalCount || 0)) {
+			if (currentRecordCount >= (allPages[0]?.totalCount || 0)) {
 				return undefined;
 			}
 			const currentPage = allPages.length;

@@ -15,7 +15,7 @@ import { metaTags } from '@/utils/constant';
 import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import { dehydrate, QueryClient } from '@tanstack/query-core';
 import { getCookie, setCookie } from 'cookies-next';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
@@ -123,8 +123,7 @@ function Products({
 		},
 		getNextPageParam: (lastPage, allPages) => {
 			const currentRecordCount = allPages.length * (filterData.limit || 12);
-			console.log(currentRecordCount);
-			if (currentRecordCount >= (allPages[0].totalCount || 0)) {
+			if (currentRecordCount >= (allPages[0]?.totalCount || 0)) {
 				return undefined;
 			}
 			const currentPage = allPages.length;
