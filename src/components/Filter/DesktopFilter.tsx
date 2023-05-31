@@ -60,7 +60,7 @@ const selectedRamRWAtom = atom(
 	(get, set, update: string[]) => {
 		set(filterAtom, (prev) => ({
 			...prev,
-			...(update?.length > 0 ? { Ram: update } : { Ram: undefined }),
+			...(update?.length > 0 ? { ram: update } : { ram: undefined }),
 		}));
 	}
 );
