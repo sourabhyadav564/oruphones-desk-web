@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	};
 	let filters: TListingFilter = {
 		listingLocation: cookie,
-		limit: 11,
+		limit: 12,
 		...(verified && { verified: verified === 'true' }),
 		...(condition && { condition: [condition] }),
 		...(warranty && { warranty: [warranty] }),
@@ -102,8 +102,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	};
 };
 
-const filterPageAtom = atom<number>(1);
-
 function Bestdealnearyou({
 	bestDeals,
 	allMakes,
@@ -112,11 +110,9 @@ function Bestdealnearyou({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([
 		[locationAtom, location],
-		[filterAtom, { ...filters, limit: 12 }],
-		[filterPageAtom, 1],
+		[filterAtom, filters],
 	]);
 	const [filterData, setFilterData] = useAtom(filterAtom);
-	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
 	const debouncedFilterData = useDebounce(filterData, 400);
 
 	const {
@@ -131,15 +127,18 @@ function Bestdealnearyou({
 		queryFn: async ({ pageParam }) => {
 			const data = await getFilteredListings({
 				...filterData,
-				page: pageParam,
+				page: pageParam || 1,
 			});
 			return data;
 		},
-		getNextPageParam: (lastPage) => {
-			if (lastPage?.data.length < (filters.limit || 12)) {
+		getNextPageParam: (lastPage, allPages) => {
+			const currentRecordCount = allPages.length * (filterData.limit || 12);
+			console.log(currentRecordCount);
+			if (currentRecordCount >= (allPages[0].totalCount || 0)) {
 				return undefined;
 			}
-			return filterPage;
+			const currentPage = allPages.length;
+			return currentPage + 1;
 		},
 	});
 
@@ -148,7 +147,6 @@ function Bestdealnearyou({
 		threshold: 0.45,
 		onChange: (inView) => {
 			if (inView) {
-				setFilterPage(filterPage + 1);
 				fetchNextPage();
 			}
 		},
@@ -182,7 +180,7 @@ function Bestdealnearyou({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: Math.max(data?.pages[0].totalCount - 5, 0) || 0
+									: Math.max(data?.pages[0].totalCount, 0) || 0
 							}
 							defaultBrands={allMakes}
 						>
@@ -266,7 +264,6 @@ function Bestdealnearyou({
 										ref={ref}
 										disabled={isFetchingNextPage || isError}
 										onClick={() => {
-											setFilterPage(filterPage + 1);
 											fetchNextPage();
 										}}
 										className={`${

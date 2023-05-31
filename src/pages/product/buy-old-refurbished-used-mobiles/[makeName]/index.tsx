@@ -13,7 +13,6 @@ import Carousel from '@/components/Carousel';
 import Filter from '@/components/Filter';
 import NoMatch from '@/components/NoMatch';
 import ShopByBrandSection from '@/components/ShopByBrandSection';
-import useDebounce from '@/hooks/useDebounce';
 import { locationAtom } from '@/store/location';
 import filterAtom from '@/store/productFilter';
 import TListingFilter, {
@@ -52,8 +51,6 @@ const settings = {
 	loop: true,
 };
 
-const filterPageAtom = atom<number>(1);
-
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
@@ -72,7 +69,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let filters: TListingFilter = {
 		make: [makeName as string],
 		listingLocation: cookie,
-		limit: 11,
+		limit: 12,
 	};
 	const queryClient = new QueryClient();
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
@@ -84,11 +81,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	});
 	const bestDeals = infiniteDeals.pages[0]?.data?.slice(0, 5) || null;
 	let models = await getModels(makeName, 20);
-	// cache this SSR response
-	// ctx.res.setHeader(
-	// 	'Cache-Control',
-	// 	'public, s-maxage=3600, stale-while-revalidate=59' // cached for 1 hour, revalidate after 1 minute
-	// );
 	return {
 		props: {
 			makeName,
@@ -111,15 +103,12 @@ function BrandPage({
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([
-		[filterAtom, { ...filters, limit: 12 }],
-		[filterPageAtom, 1],
+		[filterAtom, filters],
 		[locationAtom, location],
 	]);
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
 	const [filterData, setFilterData] = useAtom(filterAtom);
-	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
-	const debouncedFilterData = useDebounce(filterData, 750);
 
 	const {
 		isLoading,
@@ -129,19 +118,22 @@ function BrandPage({
 		fetchNextPage,
 		isFetchingNextPage,
 	} = useInfiniteQuery({
-		queryKey: ['filtered-listings', debouncedFilterData],
+		queryKey: ['filtered-listings', filterData],
 		queryFn: async ({ pageParam }) => {
 			const data = await getFilteredListings({
 				...filterData,
-				page: pageParam,
+				page: pageParam || 1,
 			});
 			return data;
 		},
-		getNextPageParam: (lastPage) => {
-			if (lastPage?.data.length < (filters.limit || 12)) {
+		getNextPageParam: (lastPage, allPages) => {
+			const currentRecordCount = allPages.length * (filterData.limit || 12);
+			console.log(currentRecordCount);
+			if (currentRecordCount >= (allPages[0].totalCount || 0)) {
 				return undefined;
 			}
-			return filterPage;
+			const currentPage = allPages.length;
+			return currentPage + 1;
 		},
 	});
 	const { ref } = useInView({
@@ -149,7 +141,6 @@ function BrandPage({
 		threshold: 0.45,
 		onChange: (inView) => {
 			if (inView) {
-				setFilterPage(filterPage + 1);
 				fetchNextPage();
 			}
 		},
@@ -238,7 +229,7 @@ function BrandPage({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: Math.max(data?.pages[0].totalCount - 5, 0) || 0
+									: Math.max(data?.pages[0].totalCount, 0) || 0
 							}
 							makeName={makeName}
 							defaultBrands={[makeName]}
@@ -330,7 +321,6 @@ function BrandPage({
 										ref={ref}
 										disabled={isFetchingNextPage || isError}
 										onClick={() => {
-											setFilterPage(filterPage + 1);
 											fetchNextPage();
 										}}
 										className={`${

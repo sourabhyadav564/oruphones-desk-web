@@ -8,7 +8,6 @@ import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
 import Carousel from '@/components/Carousel';
 import Filter from '@/components/Filter';
 import NoMatch from '@/components/NoMatch';
-import useDebounce from '@/hooks/useDebounce';
 import { locationAtom } from '@/store/location';
 import filterAtom from '@/store/productFilter';
 import TListingFilter, { TListingReturnFilter } from '@/types/ListingFilter';
@@ -44,8 +43,6 @@ const settings = {
 	loop: true,
 };
 
-const filterPageAtom = atom<number>(1);
-
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
@@ -66,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		make: [makeName as string],
 		model: [modelName as string],
 		listingLocation: cookie,
-		limit: 11,
+		limit: 12,
 	};
 	const queryClient = new QueryClient();
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
@@ -101,15 +98,12 @@ function Products({
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	useHydrateAtoms([
-		[filterAtom, { ...filters, limit: 12 }],
-		[filterPageAtom, 1],
+		[filterAtom, filters],
 		[locationAtom, location],
 	]);
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
 	const [filterData, setFilterData] = useAtom(filterAtom);
-	const [filterPage, setFilterPage] = useAtom(filterPageAtom);
-	const debouncedFilterData = useDebounce(filterData, 750);
 
 	const {
 		isLoading,
@@ -119,19 +113,22 @@ function Products({
 		fetchNextPage,
 		isFetchingNextPage,
 	} = useInfiniteQuery({
-		queryKey: ['filtered-listings', debouncedFilterData],
+		queryKey: ['filtered-listings', filterData],
 		queryFn: async ({ pageParam }) => {
 			const data = await getFilteredListings({
 				...filterData,
-				page: pageParam,
+				page: pageParam || 1,
 			});
 			return data;
 		},
-		getNextPageParam: (lastPage) => {
-			if (lastPage?.data.length < (filters.limit || 12)) {
+		getNextPageParam: (lastPage, allPages) => {
+			const currentRecordCount = allPages.length * (filterData.limit || 12);
+			console.log(currentRecordCount);
+			if (currentRecordCount >= (allPages[0].totalCount || 0)) {
 				return undefined;
 			}
-			return filterPage;
+			const currentPage = allPages.length;
+			return currentPage + 1;
 		},
 	});
 	const { ref } = useInView({
@@ -139,7 +136,6 @@ function Products({
 		threshold: 0.45,
 		onChange: (inView) => {
 			if (inView) {
-				setFilterPage(filterPage + 1);
 				fetchNextPage();
 			}
 		},
@@ -227,7 +223,7 @@ function Products({
 							listingsCount={
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: Math.max(data?.pages[0].totalCount - 5, 0) || 0
+									: Math.max(data?.pages[0].totalCount, 0) || 0
 							}
 							makeName={makeName}
 							defaultBrands={[makeName]}
@@ -308,7 +304,6 @@ function Products({
 										ref={ref}
 										disabled={isFetchingNextPage || isError}
 										onClick={() => {
-											setFilterPage(filterPage + 1);
 											fetchNextPage();
 										}}
 										className={`${
