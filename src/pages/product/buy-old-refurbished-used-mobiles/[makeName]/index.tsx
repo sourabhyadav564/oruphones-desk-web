@@ -222,119 +222,113 @@ function BrandPage({
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">{`${makeName} Page`}</h1>
-				{bestDeals ? (
-					<>
-						<Filter
-							listingsCount={
-								isLoading || isFetchingNextPage || !data?.pages[0]
-									? 0
-									: Math.max(data?.pages[0].totalCount, 0) || 0
-							}
-							makeName={makeName}
-							defaultBrands={[makeName]}
-						>
-							{(isLoading || data?.pages[0]) && (
-								<div className="w-full h-[21rem]">
-									{isLoading && <ProductSkeletonCard isBestDeal={true} />}
-									{data?.pages[0] && (
-										<Carousel
-											{...settings}
-											key={bestDeals?.length > 0 ? bestDeals.length : -1}
-											className="bestDealCarousel h-full"
-										>
-											{data!.pages[0].data.slice(0, 5).map((items, index) => (
-												<SwiperSlide key={index}>
-													<BestDealsCard data={items} />
-												</SwiperSlide>
-											))}
-										</Carousel>
-									)}
-								</div>
+				<Filter
+					listingsCount={
+						isLoading || isFetchingNextPage || !data?.pages[0]
+							? 0
+							: Math.max(data?.pages[0].totalCount, 0) || 0
+					}
+					makeName={makeName}
+					defaultBrands={[makeName]}
+				>
+					{(isLoading || data?.pages[0]) && (
+						<div className="w-full h-[21rem]">
+							{isLoading && <ProductSkeletonCard isBestDeal={true} />}
+							{data?.pages[0] && (
+								<Carousel
+									{...settings}
+									key={bestDeals?.length > 0 ? bestDeals.length : -1}
+									className="bestDealCarousel h-full"
+								>
+									{data!.pages[0].data.slice(0, 5).map((items, index) => (
+										<SwiperSlide key={index}>
+											<BestDealsCard data={items} />
+										</SwiperSlide>
+									))}
+								</Carousel>
 							)}
-							{models?.length > 0 && (
-								<div className="font-Roboto-Semibold text-xlFontSize">
-									<p className="opacity-50">Shop By Model</p>
-									<ShopByBrandSection
-										shopbymodeldata={models}
-										shopbymakedata={makeName}
-									/>
+						</div>
+					)}
+					{models?.length > 0 && (
+						<div className="font-Roboto-Semibold text-xlFontSize">
+							<p className="opacity-50">Shop By Model</p>
+							<ShopByBrandSection
+								shopbymodeldata={models}
+								shopbymakedata={makeName}
+							/>
+						</div>
+					)}
+
+					<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
+						{`Total Products (${
+							isLoading || isFetchingNextPage || !data?.pages[0]
+								? 0
+								: data?.pages[0].totalCount || 0
+						})`}
+					</h4>
+					{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
+
+					{(!data || !data.pages[0]) && isLoading && (
+						<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+							{Array.from({ length: 12 }).map((_, idx) => (
+								<div key={idx}>
+									<ProductSkeletonCard key={idx} />
 								</div>
-							)}
-
-							<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 md:py-8 py-4 mb-4">
-								{`Total Products (${
-									isLoading || isFetchingNextPage || !data?.pages[0]
-										? 0
-										: data?.pages[0].totalCount || 0
-								})`}
-							</h4>
-							{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
-
-							{(!data || !data.pages[0]) && isLoading && (
-								<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-									{Array.from({ length: 12 }).map((_, idx) => (
+							))}
+						</div>
+					)}
+					{data?.pages[0] && (
+						<>
+							<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
+								{data?.pages[0]
+									? data?.pages.map((page, idx1) => {
+											return (
+												<React.Fragment key={idx1}>
+													{page.data?.map((product, idx2) => {
+														if (idx1 === 0 && idx2 < 5) {
+															return null;
+														}
+														return (
+															<div key={idx2}>
+																<ProductCard data={product} prodLink />
+																{/* <ProductSkeletonCard /> */}
+															</div>
+														);
+													})}
+												</React.Fragment>
+											);
+									  })
+									: null}
+								{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
+									<div className="text-center w-full">
+										<h1 className="text-2xl font-Roboto-Semibold">
+											No Products Found
+										</h1>
+									</div>
+								)}
+								{isFetchingNextPage &&
+									Array.from({ length: 12 }).map((_, idx) => (
 										<div key={idx}>
 											<ProductSkeletonCard key={idx} />
 										</div>
 									))}
-								</div>
-							)}
-							{data?.pages[0] && (
-								<>
-									<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
-										{data?.pages[0]
-											? data?.pages.map((page, idx1) => {
-													return (
-														<React.Fragment key={idx1}>
-															{page.data?.map((product, idx2) => {
-																if (idx1 === 0 && idx2 < 5) {
-																	return null;
-																}
-																return (
-																	<div key={idx2}>
-																		<ProductCard data={product} prodLink />
-																		{/* <ProductSkeletonCard /> */}
-																	</div>
-																);
-															})}
-														</React.Fragment>
-													);
-											  })
-											: null}
-										{!isLoading && !isFetchingNextPage && !data?.pages[0] && (
-											<div className="text-center w-full">
-												<h1 className="text-2xl font-Roboto-Semibold">
-													No Products Found
-												</h1>
-											</div>
-										)}
-										{isFetchingNextPage &&
-											Array.from({ length: 12 }).map((_, idx) => (
-												<div key={idx}>
-													<ProductSkeletonCard key={idx} />
-												</div>
-											))}
-									</div>
+							</div>
 
-									<button
-										ref={ref}
-										disabled={isFetchingNextPage || isError}
-										onClick={() => {
-											fetchNextPage();
-										}}
-										className={`${
-											!hasNextPage && 'hidden'
-										} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
-									>
-										{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
-									</button>
-								</>
-							)}
-						</Filter>
-					</>
-				) : (
-					<h1 className="mt-0">No deals available near your location yet.</h1>
-				)}
+							<button
+								ref={ref}
+								disabled={isFetchingNextPage || isError}
+								onClick={() => {
+									fetchNextPage();
+								}}
+								className={`${
+									!hasNextPage && 'hidden'
+								} rounded-md shadow hover:drop-shadow-lg p-4 bg-m-white flex justify-center items-center hover:cursor-pointer mt-5 disabled:opacity-10`}
+							>
+								{`${isFetchingNextPage ? 'Loading...' : 'Next page'}`}
+							</button>
+						</>
+					)}
+				</Filter>
 			</main>
 		</>
 	);
