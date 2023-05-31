@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import BrandFilter from './BrandFilter';
-import ColorFilter from './ColorFilter';
 import ConditionFilter from './ConditionFilter';
 import PriceFilter from './PriceFilter';
 import RamFilter from './RamFilter';

@@ -36,7 +36,6 @@ const settings = {
 };
 
 type TPageProps = {
-	bestDeals: TListingReturnFilter[];
 	allMakes: string[];
 	filters: TListingFilter;
 	dehydratedState: any;
@@ -81,7 +80,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	const bestDeals = infiniteDeals.pages[0]?.data?.slice(0, 5) || null;
 	const allMakes = await getMakes();
 	// cache this SSR response
 	// ctx.res.setHeader(
@@ -90,7 +88,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	// );
 	return {
 		props: {
-			bestDeals,
 			allMakes,
 			filters,
 			location: cookie,
@@ -100,7 +97,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 };
 
 function Bestdealnearyou({
-	bestDeals,
 	allMakes,
 	filters,
 	location,
@@ -185,7 +181,11 @@ function Bestdealnearyou({
 								{data?.pages[0] && (
 									<Carousel
 										{...settings}
-										key={data!.pages[0].data.length > 0 ? bestDeals.length : -1}
+										key={
+											data!.pages[0].data.length > 0
+												? data!.pages[0].data.length
+												: -1
+										}
 										className="bestDealCarousel h-full"
 									>
 										{data!.pages[0].data.slice(0, 5).map((items, index) => (

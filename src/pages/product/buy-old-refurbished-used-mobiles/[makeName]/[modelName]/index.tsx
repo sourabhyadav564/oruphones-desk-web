@@ -23,7 +23,6 @@ import Head from 'next/head';
 type TPageProps = {
 	makeName: string;
 	modelName: string;
-	bestDeals: TListingReturnFilter[];
 	filters: TListingFilter;
 	dehydratedState: any;
 	location: string;
@@ -73,7 +72,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	const bestDeals = infiniteDeals?.pages[0]?.data?.slice(0, 5) || null;
 	// ctx.res.setHeader(
 	// 	'Cache-Control',
 	// 	'public, s-maxage=3600, stale-while-revalidate=59' // cached for 1 hour, revalidate after 1 minute
@@ -82,7 +80,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		props: {
 			makeName,
 			modelName,
-			bestDeals,
 			filters,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 			location: cookie,
@@ -93,7 +90,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 function Products({
 	makeName,
 	modelName,
-	bestDeals,
 	filters,
 	location,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -231,7 +227,11 @@ function Products({
 							{data?.pages[0] && (
 								<Carousel
 									{...settings}
-									key={bestDeals?.length > 0 ? bestDeals.length : -1}
+									key={
+										data!.pages[0].data.length > 0
+											? data!.pages[0].data.length
+											: -1
+									}
 									className="bestDealCarousel h-full"
 								>
 									{data!.pages[0].data.slice(0, 5).map((items, index) => (

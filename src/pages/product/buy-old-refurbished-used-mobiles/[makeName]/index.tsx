@@ -30,7 +30,6 @@ import Head from 'next/head';
 
 type TPageProps = {
 	makeName: string;
-	bestDeals: TListingReturnFilter[];
 	models: Tmodel[];
 	filters: TListingFilter;
 	dehydratedState: any;
@@ -79,12 +78,10 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 			return data;
 		},
 	});
-	const bestDeals = infiniteDeals.pages[0]?.data?.slice(0, 5) || null;
 	let models = await getModels(makeName, 20);
 	return {
 		props: {
 			makeName,
-			bestDeals,
 			models,
 			filters,
 			dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
@@ -97,7 +94,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 // TODO: Replace text with NoMatch component
 function BrandPage({
 	makeName,
-	bestDeals,
 	models,
 	filters,
 	location,
@@ -237,7 +233,11 @@ function BrandPage({
 							{data?.pages[0] && (
 								<Carousel
 									{...settings}
-									key={bestDeals?.length > 0 ? bestDeals.length : -1}
+									key={
+										data!.pages[0].data.length > 0
+											? data!.pages[0].data.length
+											: -1
+									}
 									className="bestDealCarousel h-full"
 								>
 									{data!.pages[0].data.slice(0, 5).map((items, index) => (
