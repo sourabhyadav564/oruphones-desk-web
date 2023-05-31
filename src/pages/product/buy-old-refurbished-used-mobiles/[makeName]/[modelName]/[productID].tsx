@@ -9,7 +9,8 @@ import {
 	getListingByID,
 	getSimilarListings,
 } from '@/utils/fetchers/filteredFetch';
-import getLeaderboard from '@/utils/fetchers/getLeaderboard';
+import getLeaderboard from '@/utils/fetchers/productPage/getLeaderboard';
+import getSimilarTable from '@/utils/fetchers/productPage/getSimilarTable';
 import { dehydrate, QueryClient } from '@tanstack/query-core';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
@@ -50,6 +51,7 @@ const returnFilter = {
 	status: 1,
 	verified: 1,
 	verifiedDate: 1,
+	functionalTestResults: 1,
 };
 
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
@@ -134,27 +136,14 @@ function ProductDetails({
 		{
 			queryKey: ['deals-you-may-like', productID],
 			queryFn: async () => {
-				const returnFilter = {
-					listingPrice: 1,
-					listingId: 1,
-					marketingName: 1,
-					defaultImage: 1,
-					listingLocation: 1,
-					deviceStorage: 1,
-					deviceCondition: 1,
-					warranty: 1,
-					listedBy: 1,
-					verified: 1,
-				};
-				const data = await getSimilarListings({
+				const data = await getSimilarTable({
 					includeSelf: true,
 					listingId: productID as string,
 					limit: 5,
-					...(locationVal !== 'India' && { listingLocation: locationVal }),
-					...(make && { make: [make] }),
 				});
-				setDealsYouMayLike(data?.data);
-				return data.data;
+				console.log('Table: ', data);
+				setDealsYouMayLike(data);
+				return data;
 			},
 		}
 	);
