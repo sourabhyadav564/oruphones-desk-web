@@ -49,6 +49,7 @@ const returnFilter = {
 	cosmetic: 1,
 	status: 1,
 	verified: 1,
+	verifiedDate: 1,
 };
 
 export const getServerSideProps: GetServerSideProps<TPageProps> = async (
