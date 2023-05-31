@@ -54,7 +54,7 @@ const sortsAtomRW = atom(
 				break;
 			}
 		}
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			sort: tempUpdate,
 		}));
