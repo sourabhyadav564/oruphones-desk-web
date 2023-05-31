@@ -3,6 +3,7 @@ import BrandFilter from './BrandFilter';
 import ColorFilter from './ColorFilter';
 import ConditionFilter from './ConditionFilter';
 import PriceFilter from './PriceFilter';
+import RamFilter from './RamFilter';
 import StorageFilter from './StorageFilter';
 import VerificationFilter from './VerificationFilter';
 import WarrantyFilter from './WarrantyFilter';
@@ -18,7 +19,7 @@ import { useRouter } from 'next/router';
 export const selectedBrandRWAtom = atom(
 	(get) => get(filterAtom)?.make || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			...(update?.length > 0 ? { make: update } : { make: undefined }),
 		}));
@@ -27,7 +28,7 @@ export const selectedBrandRWAtom = atom(
 export const selectedConditionRWAtom = atom(
 	(get) => get(filterAtom)?.condition || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			...(update?.length > 0
 				? { condition: update }
@@ -38,7 +39,7 @@ export const selectedConditionRWAtom = atom(
 const selectedStorageRWAtom = atom(
 	(get) => get(filterAtom)?.storage || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			...(update?.length > 0 ? { storage: update } : { storage: undefined }),
 		}));
@@ -47,16 +48,26 @@ const selectedStorageRWAtom = atom(
 const selectedWarrantyRWAtom = atom(
 	(get) => get(filterAtom)?.warranty || [],
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			...(update?.length > 0 ? { warranty: update } : { warranty: undefined }),
+		}));
+	}
+);
+
+const selectedRamRWAtom = atom(
+	(get) => get(filterAtom)?.Ram || [],
+	(get, set, update: string[]) => {
+		set(filterAtom, (prev: any) => ({
+			...prev,
+			...(update?.length > 0 ? { Ram: update } : { Ram: undefined }),
 		}));
 	}
 );
 const selectedVerificationRWAtom = atom(
 	(get) => (get(filterAtom)?.verified ? ['verified'] : []),
 	(get, set, update: string[]) => {
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			...(update.length > 0 && update.includes('verified')
 				? { verified: true }
@@ -67,7 +78,7 @@ const selectedVerificationRWAtom = atom(
 const selectedPriceRangeRWAtom = atom(
 	(get) => get(filterAtom)?.priceRange || [],
 	(get, set, update: number[]) => {
-		set(filterAtom, (prev) => ({
+		set(filterAtom, (prev: any) => ({
 			...prev,
 			...(update?.length > 0
 				? { priceRange: update }
@@ -92,6 +103,8 @@ const DesktopFilter = ({ filterOptions, defaultBrands }: any) => {
 	const [selectedPriceRange, setSelectedPriceRange] = useAtom(
 		selectedPriceRangeRWAtom
 	);
+	const [selectedRam, setSelectedRam] = useAtom(selectedRamRWAtom);
+
 	const [openConditionPopup, setOpenConditionPopup] = useState(false);
 	const [openVerificationPopup, setOpenVerificationPopup] = useState(false);
 	const [openWarrantyPopup, setWarrantyPopup] = useState(false);
@@ -143,6 +156,15 @@ const DesktopFilter = ({ filterOptions, defaultBrands }: any) => {
 							setter={setSelectedWarranty}
 							selected={selectedWarranty}
 							router={router}
+							openPopup={() => setWarrantyPopup(true)}
+						/>
+					) : section?.id === 'Ram' ? (
+						<RamFilter
+							options={section}
+							key={section?.id}
+							router={router}
+							setter={setSelectedRam}
+							selected={selectedRam}
 							openPopup={() => setWarrantyPopup(true)}
 						/>
 					) : section?.id === 'verification' ? (

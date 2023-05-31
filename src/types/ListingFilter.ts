@@ -1,4 +1,5 @@
 type TListingFilter = {
+	Ram: string[];
 	listingLocation?: string;
 	page?: number;
 	make?: string[];

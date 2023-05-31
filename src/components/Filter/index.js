@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DesktopFilter from './DesktopFilter';
 import Sort from './Sort';
 import useFilterOptions from '@/hooks/useFilterOptions';
@@ -33,6 +33,27 @@ function Filter({
 	const { filterOptions } = useFilterOptions();
 	const router = useRouter();
 	let tempFilters = filterOptions;
+
+	useEffect(() => {
+		if (router.action === 'POP') {
+			// User pressed back button
+			setApplyFilter([
+				// Set the default filter to "Featured"
+				{
+					id: 'featured',
+					options: [
+						{
+							value: 'Featured',
+							label: 'Featured',
+							checked: true,
+							active: true,
+							disabled: true,
+						},
+					],
+				},
+			]);
+		}
+	}, []);
 
 	if (filterOptions && makeName !== null && makeName !== undefined) {
 		tempFilters = filterOptions.map((i) =>
@@ -163,7 +184,6 @@ function Filter({
 				: i
 		);
 	}
-
 	return (
 		<React.Fragment>
 			<div className="flex justify-end items-center hover:cursor-pointer">
@@ -187,7 +207,7 @@ function Filter({
 					</div>
 					<div className="col-span-3">{children}</div>
 				</div>
-			</section>
+			</section>{' '}
 		</React.Fragment>
 	);
 }
