@@ -10,7 +10,7 @@ import Filter from '@/components/Filter';
 import NoMatch from '@/components/NoMatch';
 import { locationAtom } from '@/store/location';
 import filterAtom from '@/store/productFilter';
-import TListingFilter, { TListingReturnFilter } from '@/types/ListingFilter';
+import TListingFilter from '@/types/ListingFilter';
 import { metaTags } from '@/utils/constant';
 import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import { dehydrate, QueryClient } from '@tanstack/query-core';
@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 });
+			const data = await getFilteredListings({ ...filters, page: 1 }, true);
 			return data;
 		},
 	});
@@ -113,10 +113,13 @@ function Products({
 	} = useInfiniteQuery({
 		queryKey: ['filtered-listings', filterData],
 		queryFn: async ({ pageParam }) => {
-			const data = await getFilteredListings({
-				...filterData,
-				page: pageParam || 1,
-			});
+			const data = await getFilteredListings(
+				{
+					...filterData,
+					page: pageParam || 1,
+				},
+				true
+			);
 			return data;
 		},
 		getNextPageParam: (lastPage, allPages) => {
@@ -254,7 +257,7 @@ function Products({
 									}
 									className="bestDealCarousel h-full"
 								>
-									{data!.pages[0].data.slice(0, 5).map((items, index) => (
+									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
 											<BestDealsCard data={items} />
 										</SwiperSlide>
@@ -267,10 +270,12 @@ function Products({
 						{`Total Products (${
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								:  Math.max(0, data?.pages[0].totalCount - 5) || 0
+								: Math.max(0, data?.pages[0].totalCount - 5) || 0
 						})`}
 					</h4>
-					{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
+					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
+						<NoMatch />
+					)}
 					{(!data || !data.pages[0]) && isLoading && (
 						<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
 							{Array.from({ length: 12 }).map((_, idx) => (
@@ -289,13 +294,9 @@ function Products({
 											return (
 												<Fragment key={idx1}>
 													{page.data?.map((product, idx2) => {
-														if (idx1 === 0 && idx2 < 5) {
-															return null;
-														}
 														return (
 															<div key={idx2}>
 																<ProductCard data={product} />
-																{/* <ProductSkeletonCard /> */}
 															</div>
 														);
 													})}

@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 });
+			const data = await getFilteredListings({ ...filters, page: 1 }, true);
 			return data;
 		},
 	});
@@ -118,10 +118,13 @@ function Bestdealnearyou({
 	} = useInfiniteQuery({
 		queryKey: ['filtered-listings', debouncedFilterData],
 		queryFn: async ({ pageParam }) => {
-			const data = await getFilteredListings({
-				...filterData,
-				page: pageParam || 1,
-			});
+			const data = await getFilteredListings(
+				{
+					...filterData,
+					page: pageParam || 1,
+				},
+				true
+			);
 			return data;
 		},
 		getNextPageParam: (lastPage, allPages) => {
@@ -145,7 +148,6 @@ function Bestdealnearyou({
 	});
 
 	useEffect(() => {
-		console.log('Spark!', filters);
 		setFilterData({ ...filters, limit: 12, make: undefined });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -182,13 +184,13 @@ function Bestdealnearyou({
 									<Carousel
 										{...settings}
 										key={
-											data!.pages[0].data.length > 0
-												? data!.pages[0].data.length
+											data!.pages[0].data?.length > 0
+												? data!.pages[0].data?.length
 												: -1
 										}
 										className="bestDealCarousel h-full"
 									>
-										{data!.pages[0].data.slice(0, 5).map((items, index) => (
+										{data!.pages[0].bestDeals?.map((items, index) => (
 											<SwiperSlide key={index}>
 												<BestDealsCard data={items} />
 											</SwiperSlide>
@@ -204,10 +206,12 @@ function Bestdealnearyou({
 							{`Total Products (${
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									:  Math.max(0, data?.pages[0].totalCount - 5) || 0
+									: Math.max(0, data?.pages[0].totalCount) || 0
 							})`}
 						</h4>
-						{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
+						{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
+							<NoMatch />
+						)}
 						{(!data || !data.pages[0]) && isLoading && (
 							<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
 								{Array.from({ length: 12 }).map((_, idx) => (
@@ -225,13 +229,9 @@ function Bestdealnearyou({
 												return (
 													<React.Fragment key={idx1}>
 														{page.data?.map((product, idx2) => {
-															if (idx1 === 0 && idx2 < 5) {
-																return null;
-															}
 															return (
 																<div key={idx2}>
-																	<ProductCard data={product} prodLink />
-																	{/* <ProductSkeletonCard /> */}
+																	<ProductCard data={product} />
 																</div>
 															);
 														})}
