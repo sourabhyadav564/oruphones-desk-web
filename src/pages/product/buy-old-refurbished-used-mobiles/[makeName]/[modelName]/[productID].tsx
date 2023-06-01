@@ -183,7 +183,7 @@ function ProductDetails({
 						<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
 							{similarProducts && similarProducts.data.length > 0 ? (
 								similarProducts?.data.map((product: any, index: number) => (
-									<ProductCard key={index} data={product} prodLink />
+									<ProductCard key={index} data={product}/>
 								))
 							) : (
 								<div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">

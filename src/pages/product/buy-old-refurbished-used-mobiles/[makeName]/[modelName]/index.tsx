@@ -19,6 +19,7 @@ import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 type TPageProps = {
 	makeName: string;
@@ -100,6 +101,7 @@ function Products({
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
 	const [filterData, setFilterData] = useAtom(filterAtom);
+	const router = useRouter();
 
 	const {
 		isLoading,
@@ -198,9 +200,27 @@ function Products({
 
 	// update brand name in filter if changed
 	useEffect(() => {
-		if (filterData?.make && filterData.make[0] === makeName) return;
-		setFilterData({ ...filterData, make: [makeName] });
-	}, [makeName, setFilterData, filterData]);
+		console.log('route=>', router.query.makeName);
+		if (!router.query.makeName || !router.query.modelName) return;
+		let modelName = router.query.modelName as string;
+		let makeName = router.query.makeName as string;
+		makeName = makeName
+			.split(' ')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+		if (
+			filterData?.make?.[0] === makeName &&
+			filterData?.model?.[0] === modelName
+		)
+			return;
+		setFilterData({ ...filters, make: [makeName], model: [modelName] });
+	}, [
+		router.query.makeName,
+		router.query.modelName,
+		filterData,
+		filters,
+		setFilterData,
+	]);
 
 	return (
 		<>
@@ -274,7 +294,7 @@ function Products({
 														}
 														return (
 															<div key={idx2}>
-																<ProductCard data={product} prodLink />
+																<ProductCard data={product} />
 																{/* <ProductSkeletonCard /> */}
 															</div>
 														);
