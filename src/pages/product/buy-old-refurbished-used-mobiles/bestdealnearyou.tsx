@@ -177,7 +177,7 @@ function Bestdealnearyou({
 						}
 						defaultBrands={allMakes}
 					>
-						{(isLoading || data?.pages[0]) && (
+						{(isLoading || data?.pages[0]?.bestDeals) && (
 							<div className="w-full h-[21rem]">
 								{isLoading && <ProductSkeletonCard isBestDeal={true} />}
 								{data?.pages[0].bestDeals && (
