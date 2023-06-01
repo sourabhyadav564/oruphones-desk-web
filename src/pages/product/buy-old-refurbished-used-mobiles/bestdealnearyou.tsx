@@ -230,7 +230,7 @@ function Bestdealnearyou({
 															}
 															return (
 																<div key={idx2}>
-																	<ProductCard data={product} prodLink />
+																	<ProductCard data={product}  />
 																	{/* <ProductSkeletonCard /> */}
 																</div>
 															);
