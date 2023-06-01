@@ -23,10 +23,11 @@ import { metaTags } from '@/utils/constant';
 import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import getModels from '@/utils/fetchers/getModels';
 import { getCookie, setCookie } from 'cookies-next';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 type TPageProps = {
 	makeName: string;
@@ -105,6 +106,7 @@ function BrandPage({
 	const [title, setTitle] = useState<string>(makeName);
 	const [description, setDescription] = useState<string>('Description');
 	const [filterData, setFilterData] = useAtom(filterAtom);
+	const router = useRouter();
 
 	const {
 		isLoading,
@@ -203,10 +205,16 @@ function BrandPage({
 
 	// update brand name in filter if changed, (hydrate Atom doesnt work in rerenders, only in first render)
 	useEffect(() => {
+		console.log('route=>', router.query.makeName);
+		if (!router.query.makeName) return;
+		let makeName = router.query.makeName as string;
+		makeName = makeName
+			.split(' ')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
 		if (filterData?.make?.[0] === makeName) return;
 		setFilterData({ ...filters, make: [makeName] });
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [router.query.makeName, filterData, filters, setFilterData]);
 
 	return (
 		<>
@@ -227,6 +235,7 @@ function BrandPage({
 					makeName={makeName}
 					defaultBrands={[makeName]}
 				>
+					{JSON.stringify(filterData)}
 					{(isLoading || data?.pages[0]) && (
 						<div className="w-full h-[21rem]">
 							{isLoading && <ProductSkeletonCard isBestDeal={true} />}
@@ -266,6 +275,8 @@ function BrandPage({
 								: data?.pages[0].totalCount || 0
 						})`}
 					</h4>
+					{/* {JSON.stringify(makeName)} */}
+					{/* {JSON.stringify(models)} */}
 					{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
 
 					{(!data || !data.pages[0]) && isLoading && (
@@ -290,7 +301,7 @@ function BrandPage({
 														}
 														return (
 															<div key={idx2}>
-																<ProductCard data={product} prodLink />
+																<ProductCard data={product} />
 																{/* <ProductSkeletonCard /> */}
 															</div>
 														);

@@ -5,7 +5,7 @@ import VerifiedIcon from '@/components/VerifiedIcon';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Image from 'next/image';
 
-function ProductCard({ data, prodLink, setProducts = () => {} }) {
+function ProductCard({ data, setProducts = () => {} }) {
 	var type = ['old phone', 'used', 'refurbished'];
 	const soldout = ` buy ${type[Math.floor(Math.random() * type.length)]} ${
 		data?.marketingName
