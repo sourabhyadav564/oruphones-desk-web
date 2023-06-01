@@ -238,7 +238,6 @@ function BrandPage({
 					makeName={makeName}
 					defaultBrands={[makeName]}
 				>
-					{JSON.stringify(filterData)}
 					{(isLoading || data?.pages[0]) && (
 						<div className="w-full h-[21rem]">
 							{isLoading && <ProductSkeletonCard isBestDeal={true} />}
@@ -278,8 +277,6 @@ function BrandPage({
 								: Math.max(0, data?.pages[0].totalCount) || 0
 						})`}
 					</h4>
-					{/* {JSON.stringify(makeName)} */}
-					{/* {JSON.stringify(models)} */}
 					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
 						<NoMatch />
 					)}
