@@ -121,6 +121,7 @@ function ProductDetails({
 			queryKey: ['similar-products', productID],
 			queryFn: async () => {
 				const data = await getSimilarListings({
+					includeSelf: false,
 					listingId: productID as string,
 					limit: 20,
 					make: ['yes' as string],
