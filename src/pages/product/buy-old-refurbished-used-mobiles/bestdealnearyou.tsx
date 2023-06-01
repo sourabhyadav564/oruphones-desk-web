@@ -180,7 +180,7 @@ function Bestdealnearyou({
 						{(isLoading || data?.pages[0]) && (
 							<div className="w-full h-[21rem]">
 								{isLoading && <ProductSkeletonCard isBestDeal={true} />}
-								{data?.pages[0] && (
+								{data?.pages[0].bestDeals && (
 									<Carousel
 										{...settings}
 										key={
