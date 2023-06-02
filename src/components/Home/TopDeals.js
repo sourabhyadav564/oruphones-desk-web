@@ -20,7 +20,6 @@ function TopDeals({ bestDeals, location }) {
 			<div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-between  gap-8 py-4">
 				{bestDeals &&
 					bestDeals
-						.slice(0, 10)
 						.map((item, index) => (
 							<TopDealCard
 								key={index}

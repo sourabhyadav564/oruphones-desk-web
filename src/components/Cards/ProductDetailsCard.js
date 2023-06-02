@@ -33,7 +33,7 @@ import { useAtomValue } from 'jotai';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function ProductDetailsCard({ data, openFullImage, onDataContext }) {
+function ProductDetailsCard({ data, openFullImage, onDataContext, setProducts }) {
 	const leaderBoard = useAtomValue(leaderBoardAtom);
 	const dealsYouMayLike = useAtomValue(dealsYouMayLikeAtom);
 	const [performAction2, setPerformAction2] = useState(false);
@@ -41,7 +41,6 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 	const [openInfo, setOpenInfo] = useState(false);
 	const [openConditionInfoPopup, setConditionInfoPopup] = useState(false);
 	const [openWarrantyInfoPopup, setWarrantyInfoPopup] = useState(false);
-	const [details, setDetailsData] = useState([]);
 	const [
 		openRequestVerificationSuccessPopup,
 		setRequestVerificationSuccessPopup,
@@ -141,7 +140,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 								<ShareIcon data={data} width={16} height={16} />
 							</div>
 							<span className="pt-2 hover:scale-110 ">
-								<AddFav data={data} setProducts={setDeviceListingInfo} />
+								<AddFav data={data} setProducts={setProducts} />
 							</span>
 						</Fragment>
 					)}

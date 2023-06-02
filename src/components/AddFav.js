@@ -8,27 +8,12 @@ import OutlineHeart from '@/assets/heartoutline.svg';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function AddFav({ data, setProducts, ...rest }) {
+function AddFav({ data, setProducts }) {
 	const [showLoginPopup, setShowLoginPopup] = useState(false);
 	const [performAction, setPerformAction] = useState(false);
 
 	function handleFavoties() {
-		console.log('handling =>');
-		setProducts((prevState) => {
-			let tempVal;
-			if (Array.isArray(prevState)) {
-				let index = prevState.findIndex((i) => i.listingId === data.listingId);
-				tempVal = [...prevState];
-				tempVal[index] = { ...tempVal[index], favourite: !data.favourite };
-			} else {
-				tempVal = { ...prevState, favourite: !data.favourite };
-			}
-			return tempVal;
-		});
-		let payLoad = {
-			listingId: data.listingId,
-			userUniqueId: Cookies.get('userUniqueId') || 'Guest',
-		};
+		setProducts(data.listingId);
 		const addFavorite = async () => {
 			console.log('add');
 
@@ -40,7 +25,12 @@ function AddFav({ data, setProducts, ...rest }) {
 			} else {
 				localStorage.setItem('favoriteList', data.listingId);
 			}
-			const addFav = await Axios.addFavotie(payLoad);
+
+			const payLoad = {
+				listingId: data.listingId,
+				userUniqueId: Cookies.get('userUniqueId') || 'Guest',
+			};
+			await Axios.addFavotie(payLoad);
 		};
 		const removeFavorite = async () => {
 			console.log('remove');
@@ -51,7 +41,7 @@ function AddFav({ data, setProducts, ...rest }) {
 				favList = favList.filter((item) => item !== data.listingId);
 				localStorage.setItem('favoriteList', favList);
 			}
-			const removeFav = await Axios.removeFavotie(
+			await Axios.removeFavotie(
 				data.listingId,
 				Cookies.get('userUniqueId') || 'Guest'
 			);

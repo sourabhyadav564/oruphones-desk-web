@@ -6,7 +6,7 @@ import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function BestDealsCard({ data , setProducts = () => {} }) {
+function BestDealsCard({ data , setProducts }) {
 	const [imageError, setImageError] = useState(false);
 	return (
 		<div

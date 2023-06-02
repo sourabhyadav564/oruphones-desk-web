@@ -30,7 +30,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		getHomeBrands(),
 		getHomeListings(cookie, sliceLength),
 	]);
-	console.log('bestDeals', bestDeals);
 	return {
 		props: {
 			brands: brands || null,

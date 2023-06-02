@@ -26,7 +26,15 @@ function TopDealCard({ data }) {
 				{!(data?.isOtherVendor === 'Y') && (
 					<AddFav
 						data={data}
-						setProducts={setProducts}
+						setProducts={(listingId) =>
+							setProducts((prev) =>
+								prev.map((item) =>
+									item.listingId === listingId
+										? { ...item, favourite: !(item.favourite || false) }
+										: item
+								)
+							)
+						}
 						height={18}
 						width={18}
 					/>
