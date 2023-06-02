@@ -242,7 +242,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 
 						<div>
 							<p className="text-mediumFontSize font-Roboto-Semibold text-m-grey-1 lg:my-1.5 mt-4 ">
-								{' '}
+								{' '}88
 								{data?.marketingName}{' '}
 							</p>
 							<p className="flex items-center font-Roboto-Bold md:text-xl2FontSize text-xlFontSize -ml-1 text-m-grey-1">
