@@ -269,7 +269,7 @@ function Products({
 						{`Total Products (${
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								: Math.max(0, data?.pages[0].totalCount - 5) || 0
+								: Math.max(0, data?.pages[0].totalCount) || 0
 						})`}
 					</h4>
 					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
