@@ -10,12 +10,12 @@ import Image from 'next/image';
 
 const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
 	<div className="absolute z-10 top-14 left-2  bg-gray-200  rounded-full p-1 flex ">
-		<Image src={Chevronleft} width={10} height={10} alt="" {...rest} />
+		<Image src={Chevronleft} width={10} height={10}  {...rest} />
 	</div>
 );
 const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
 	<div className="absolute z-10 top-14 right-2  bg-gray-200 flex p-1 rounded-full">
-		<Image src={Chevronright} width={10} height={10} alt="" {...rest} />
+		<Image src={Chevronright} width={10} height={10}  {...rest} />
 	</div>
 );
 

@@ -234,7 +234,8 @@ function ProductDetails({
 							)}
 						</div>
 						{similarProducts &&
-							similarProducts.data.length > 0 &&
+							similarProducts.data.length > 20 &&
+							
 							make &&
 							model && (
 								<Link
