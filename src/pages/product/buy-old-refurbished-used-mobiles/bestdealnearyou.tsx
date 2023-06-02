@@ -281,8 +281,8 @@ function Bestdealnearyou({
 							</div>
 						)}
 						<h4 className="font-Roboto-Semibold text-xlFontSize opacity-50 mb-4">
-							{`Filter: ${JSON.stringify(filterData)}`}
-								<br />
+							{/* {`Filter: ${JSON.stringify(filterData)}`}
+								<br /> */}
 							{`Total Products (${
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0

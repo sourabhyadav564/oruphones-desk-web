@@ -288,10 +288,10 @@ const OtherSeller = ({
 						setPerformAction2(true);
 					} else if (data?.listingId == listingId && isOtherVendor == 'N') {
 						setThisPhonePopup(true);
-					} else if (data?.listingId != listingId) {
-						window.open(data?.vendorLink, '_blank');
 					} else {
-						window.open(data?.vendorLink, '_blank');
+						if (data?.vendorLink) {
+							window.open(data?.vendorLink, '_blank');
+						}
 					}
 				}}
 			>
@@ -353,9 +353,14 @@ const OtherSeller = ({
 					{' '}
 					{data.listingPrice && (
 						<span className="text-regularFontSize font-Roboto-Semibold text-m-grey-1 h-6 font-semibold flex items-center -ml-1">
-							<Image src={Rupee} width={20} height={20} />
+							<Image src={Rupee} width={20} height={20} alt="Rupee" />
 							{numberWithCommas(data.listingPrice)}{' '}
-							<Image src={GreaterThan} width={15} height={15} />
+							<Image
+								src={GreaterThan}
+								width={15}
+								height={15}
+								alt="Greater Than"
+							/>
 						</span>
 					)}{' '}
 				</div>{' '}
