@@ -77,10 +77,19 @@ const selectedVerificationRWAtom = atom(
 const selectedPriceRangeRWAtom = atom(
 	(get) => get(filterAtom)?.priceRange || [],
 	(get, set, update: number[]) => {
+		let computedPriceRange: any = structuredClone(update);
+		if (computedPriceRange && computedPriceRange.length > 0) {
+			if (computedPriceRange[0] === 0) {
+				computedPriceRange[0] = null;
+			}
+			if (computedPriceRange[1] === 0) {
+				computedPriceRange[1] = null;
+			}
+		}
 		set(filterAtom, (prev) => ({
 			...prev,
 			...(update?.length > 0
-				? { priceRange: update }
+				? { priceRange: computedPriceRange }
 				: { priceRange: undefined }),
 		}));
 	}

@@ -23,7 +23,7 @@ function PriceFilter({ options, router, priceRange, setPriceRange }) {
 				<input
 					type="number"
 					className="w-full rounded h-10 text-sm sm:h-8"
-					min={300}
+					min={0}
 					placeholder={0}
 					value={priceRange[0]}
 					// disabled={min === undefined ? false : true}
@@ -33,7 +33,7 @@ function PriceFilter({ options, router, priceRange, setPriceRange }) {
 				<input
 					type="number"
 					className="w-full rounded h-10 text-sm sm:h-8"
-					max={300}
+					max={999999}
 					placeholder={999999}
 					value={priceRange[1]}
 					// disabled={max === undefined ? false : true}
