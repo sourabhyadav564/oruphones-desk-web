@@ -5,14 +5,21 @@ import TListingFilter, {
 
 export default async function getFilteredListings(
 	filter: TListingFilter,
+	isNotionalBestDeals: boolean = false,
 	returnFilter?: TListingReturnFilter
-): Promise<{ data: TListingReturnFilter[]; totalCount: number }> {
+): Promise<{
+	data: TListingReturnFilter[];
+	totalCount: number;
+	bestDeals: TListingReturnFilter[] | undefined;
+}> {
 	const content = {
 		filter,
 		...(returnFilter && { returnFilter }),
 	};
 	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter`,
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter${
+			isNotionalBestDeals ? '?notionalFilter=true' : ''
+		}`,
 		{
 			method: 'POST',
 			headers: {

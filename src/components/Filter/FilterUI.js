@@ -18,7 +18,7 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 					const computed = optionObj?.options.map((i) => i.value);
 					setter(computed);
 				} else {
-					const computed = [...selected, value];
+					let computed = [...selected, value];
 					setter(computed);
 				}
 			} else {
@@ -35,6 +35,10 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 					setter(optionObj?.options.map((i) => i.value));
 				} else {
 					const computed = [...selected, value];
+
+					if (computed.length === optionObj?.options.length - 1) {
+						computed.push('all');
+					}
 					setter(computed);
 				}
 			} else {
@@ -42,6 +46,12 @@ function FilterUI({ optionObj, setter, selected, openPopup }) {
 					setter([]);
 				} else {
 					const computed = selected.filter((i) => i !== value);
+					if (
+						computed.length < optionObj?.options.length &&
+						computed.includes('all')
+					) {
+						computed.splice(computed.indexOf('all'), 1);
+					}
 					setter(computed);
 				}
 			}

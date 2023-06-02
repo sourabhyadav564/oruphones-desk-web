@@ -34,19 +34,19 @@ const menus = [
 		name: 'Apple',
 		options: [],
 		make: 'apple',
-		chlink: '/product/buy-old-refurbished-used-mobiles/apple',
+		chlink: '/product/buy-old-refurbished-used-mobiles/Apple',
 	},
 	{
 		name: 'Samsung',
 		options: [],
 		make: 'samsung',
-		chlink: '/product/buy-old-refurbished-used-mobiles/samsung',
+		chlink: '/product/buy-old-refurbished-used-mobiles/Samsung',
 	},
 	{
 		name: 'OnePlus',
 		options: [],
 		make: 'oneplus',
-		chlink: '/product/buy-old-refurbished-used-mobiles/oneplus',
+		chlink: '/product/buy-old-refurbished-used-mobiles/OnePlus',
 	},
 	{ name: 'Blog', href: 'https://www.oruphones.com/blog' },
 	{
@@ -72,7 +72,7 @@ function DesktopMenu() {
 			setauthenticated(false);
 		}
 		return () => {};
-	});
+	}, []);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -86,7 +86,7 @@ function DesktopMenu() {
 				router.push(ItemLink);
 			}
 		}, 1000);
-	}, [showLogin]);
+	}, [showLogin, ItemLink, router]);
 
 	return (
 		<nav
@@ -115,7 +115,11 @@ function DesktopMenu() {
 												open ? '' : 'text-opacity-90'
 											}text-m-white px-4 opacity-100 hover:opacity-60  font-light `}
 										>
-											<Link key={index} href={{ pathname: item.chlink }}>
+											<Link
+												key={index}
+												href={{ pathname: item.chlink }}
+												passHref
+											>
 												<span> {item.name} </span>
 											</Link>
 										</Popover.Button>

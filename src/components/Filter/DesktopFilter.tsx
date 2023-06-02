@@ -64,7 +64,7 @@ const selectedRamRWAtom = atom(
 	}
 );
 const selectedVerificationRWAtom = atom(
-	(get) => (get(filterAtom)?.verified ? ['verified'] : []),
+	(get) => (get(filterAtom)?.verified ? ['verified', 'all'] : []),
 	(get, set, update: string[]) => {
 		set(filterAtom, (prev) => ({
 			...prev,

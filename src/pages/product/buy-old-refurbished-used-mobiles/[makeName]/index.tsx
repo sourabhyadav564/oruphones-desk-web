@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 });
+			const data = await getFilteredListings({ ...filters, page: 1 }, true);
 			return data;
 		},
 	});
@@ -118,11 +118,13 @@ function BrandPage({
 	} = useInfiniteQuery({
 		queryKey: ['filtered-listings', filterData],
 		queryFn: async ({ pageParam }) => {
-			const data = await getFilteredListings({
-				...filterData,
-				page: pageParam || 1,
-			});
-			console.log(data)
+			const data = await getFilteredListings(
+				{
+					...filterData,
+					page: pageParam || 1,
+				},
+				true
+			);
 			return data;
 		
 		},
@@ -207,7 +209,6 @@ function BrandPage({
 
 	// update brand name in filter if changed, (hydrate Atom doesnt work in rerenders, only in first render)
 	useEffect(() => {
-		console.log('route=>', router.query.makeName);
 		if (!router.query.makeName) return;
 		let makeName = router.query.makeName as string;
 		makeName = makeName
@@ -237,11 +238,10 @@ function BrandPage({
 					makeName={makeName}
 					defaultBrands={[makeName]}
 				>
-					{JSON.stringify(filterData)}
-					{(isLoading || data?.pages[0]) && (
+					{(isLoading || data?.pages[0]?.bestDeals) && (
 						<div className="w-full h-[21rem]">
 							{isLoading && <ProductSkeletonCard isBestDeal={true} />}
-							{data?.pages[0] && (
+							{data?.pages[0].bestDeals && (
 								<Carousel
 									{...settings}
 									key={
@@ -251,7 +251,7 @@ function BrandPage({
 									}
 									className="bestDealCarousel h-full"
 								>
-									{data!.pages[0].data.slice(0, 5).map((items, index) => (
+									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
 											<BestDealsCard data={items} />
 										</SwiperSlide>
@@ -274,12 +274,12 @@ function BrandPage({
 						{`Total Products (${
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								:  Math.max(0, data?.pages[0].totalCount - 5) || 0
+								: Math.max(0, data?.pages[0].totalCount) || 0
 						})`}
 					</h4>
-					{/* {JSON.stringify(makeName)} */}
-					{/* {JSON.stringify(models)} */}
-					{(!data || !data.pages[0]) && !isLoading && <NoMatch />}
+					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
+						<NoMatch />
+					)}
 
 					{(!data || !data.pages[0]) && isLoading && (
 						<div className="grid md:grid-cols-3 grid-cols-2 m-auto md:pl-0 pl-4  justify-center gap-8 ">
@@ -298,13 +298,9 @@ function BrandPage({
 											return (
 												<React.Fragment key={idx1}>
 													{page.data?.map((product, idx2) => {
-														if (idx1 === 0 && idx2 < 5) {
-															return null;
-														}
 														return (
 															<div key={idx2}>
 																<ProductCard data={product} />
-																{/* <ProductSkeletonCard /> */}
 															</div>
 														);
 													})}

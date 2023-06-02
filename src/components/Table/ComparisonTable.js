@@ -45,8 +45,8 @@ function ComparisonTable({ data, listingId }) {
 		<div className="">
 			{data && data?.length > 0 && (
 				<div className="relative pt-3 lg:w-[80vw] w-full  overflow-x-scroll">
-					<table className=" w-full text-mediumFontSize text-left text-gray-500 dark:text-gray-400">
-						<thead className="uppercase text-white dark:bg-gray-700 dark:text-gray-400 font-Roboto-Semibold">
+					<table className=" w-full text-mediumFontSize text-left text-gray-500">
+						<thead className="uppercase text-whitefont-Roboto-Semibold">
 							<tr>
 								<th
 									scope="col"
@@ -128,8 +128,8 @@ function ComparisonTable({ data, listingId }) {
 										<tr
 											className={
 												listingId == item?.listingId
-													? ` bg-gray-100 border-b  dark:bg-gray-800 dark:border-gray-700 font-Roboto-Regular text-center`
-													: ` bg-white  border-b dark:bg-gray-800 dark:border-gray-700 overflow-x-scroll font-Roboto-Regular text-center `
+													? ` bg-gray-100 border-b font-Roboto-Regular text-center`
+													: ` bg-white  border-b overflow-x-scroll font-Roboto-Regular text-center `
 											}
 											key={index}
 										>
@@ -137,8 +137,8 @@ function ComparisonTable({ data, listingId }) {
 												scope="row"
 												className={
 													listingId == item?.listingId
-														? `bg-gray-100 sticky  left-0 top-0  px-6 py-4 font-medium hover:bg-gray-200 hover:text-black text-gray-400 whitespace-nowrap dark:text-white bg-gray drop-shadow-xl border-[1px]`
-														: `sticky left-0 top-0 px-6 py-4 font-medium text-gray-400 whitespace-nowrap dark:text-white bg-white drop-shadow-xl border-[1px]`
+														? `bg-gray-100 sticky  left-0 top-0  px-6 py-4 font-medium hover:bg-gray-200 hover:text-black text-gray-400 whitespace-nowrap bg-gray drop-shadow-xl border-[1px]`
+														: `sticky left-0 top-0 px-6 py-4 font-medium text-gray-400 whitespace-nowrap bg-white drop-shadow-xl border-[1px]`
 												}
 												onClick={() => {
 													if (Cookies.get('userUniqueId') == undefined) {
