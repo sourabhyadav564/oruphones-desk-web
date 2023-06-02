@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-function UserProfile({ children, className }) {
+function UserProfile({ children, className = '' }) {
 	const { userInfo, setUserInfo } = useContext(AppContext);
 	const [open, setOpen] = useState(false);
 	const { logout } = useContext(AuthContext);
@@ -24,7 +24,7 @@ function UserProfile({ children, className }) {
 	}, [userInfo]);
 
 	function handleChange(e) {
-		e.preventDefau;
+		e.preventDefault();
 		let data = new FormData();
 		data.append('image', e.target.files[0]);
 		Axios.uploadUserProfilePic(data, Cookies.get('userUniqueId')).then(

@@ -21,7 +21,7 @@ function Services() {
 				<div className="flex flex-col space-y-4 my-4 text-xlFontSize font-Roboto-Regular">
 					{servicesData && servicesData.length > 0 ? (
 						servicesData.map((item, index) => (
-							<div>
+							<div key={index}>
 								{index < 1 ? (
 									<div>
 										<a
