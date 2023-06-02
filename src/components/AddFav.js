@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import LoginPopup from './Popup/LoginPopup';
+import * as Axios from '@/api/axios';
 import OutlineHeartBlack from '@/assets/heart_black.svg';
 import FillHeart from '@/assets/heartfill.svg';
 import OutlineHeart from '@/assets/heartoutline.svg';
@@ -32,6 +33,11 @@ function AddFav({ data, setProducts }) {
 			} else {
 				localStorage.setItem('favoriteList', data.listingId);
 			}
+			const payLoad = {
+				listingId: data.listingId,
+				userUniqueId: Cookies.get('userUniqueId') || 'Guest',
+			};
+			await Axios.addFavotie(payLoad);
 		};
 		const removeFavorite = async () => {
 			let favList = localStorage.getItem('favoriteList');
@@ -40,10 +46,20 @@ function AddFav({ data, setProducts }) {
 				favList = favList.filter((item) => item !== data.listingId);
 				localStorage.setItem('favoriteList', favList);
 			}
+			await Axios.removeFavotie(
+				data.listingId,
+				Cookies.get('userUniqueId') || 'Guest'
+			);
 		};
-		data?.status == 'Active'
-			? removeFavorite()
-			: toast.warning('This device is sold out');
+		if (data.favourite) {
+			data?.status === 'Active'
+				? removeFavorite()
+				: toast.warning('This device is sold out');
+		} else {
+			data?.status === 'Active'
+				? addFavorite()
+				: toast.warning('This device is sold out');
+		}
 	}
 
 	useEffect(() => {

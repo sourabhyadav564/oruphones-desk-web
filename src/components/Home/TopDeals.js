@@ -24,9 +24,7 @@ function TopDeals({ bestDeals, location }) {
 						.map((item, index) => (
 							<TopDealCard
 								key={index}
-								prodLink
 								data={item}
-								setProducts={() => null}
 							/>
 						))}
 			</div>

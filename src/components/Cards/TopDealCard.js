@@ -2,12 +2,15 @@ import { useState } from 'react';
 import Rupee1 from '@/assets/rupee1.svg';
 import AddFav from '@/components/AddFav';
 import VerifiedIcon from '@/components/VerifiedIcon';
+import { topDealsAtom } from '@/store/topDeals';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
+import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function TopDealCard({ data, setProducts }) {
+function TopDealCard({ data }) {
 	const [imageError, setImageError] = useState(false);
+	const setProducts = useSetAtom(topDealsAtom);
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (
 			<Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}>

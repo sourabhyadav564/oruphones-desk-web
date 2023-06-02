@@ -30,11 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		getHomeBrands(),
 		getHomeListings(cookie, sliceLength),
 	]);
-	// cache this SSR response
-	// ctx.res.setHeader(
-	// 	'Cache-Control',
-	// 	'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
-	// );
+	console.log('bestDeals', bestDeals);
 	return {
 		props: {
 			brands: brands || null,
