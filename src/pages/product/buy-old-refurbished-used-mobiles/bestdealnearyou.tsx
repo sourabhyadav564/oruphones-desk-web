@@ -259,8 +259,8 @@ function Bestdealnearyou({
 									<Carousel
 										{...settings}
 										key={
-											data!.pages[0].data?.length > 0
-												? data!.pages[0].data?.length
+											data?.pages[0]?.data?.length > 0
+												? data?.pages[0]?.data?.length
 												: -1
 										}
 										className="bestDealCarousel h-full"

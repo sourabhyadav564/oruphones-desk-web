@@ -1,4 +1,8 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import {
+	useInfiniteQuery,
+	useMutation,
+	useQueryClient,
+} from '@tanstack/react-query';
 import { Fragment, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SwiperSlide } from 'swiper/react';
@@ -102,6 +106,7 @@ function Products({
 	const [description, setDescription] = useState<string>('Description');
 	const [filterData, setFilterData] = useAtom(filterAtom);
 	const router = useRouter();
+	const queryClient = useQueryClient();
 
 	const {
 		isLoading,
@@ -129,6 +134,75 @@ function Products({
 			}
 			const currentPage = allPages.length;
 			return currentPage + 1;
+		},
+	});
+	// mutate bestDeals data
+	const setBestFavDeal = useMutation({
+		mutationFn: async (paramData: string) => true,
+		onSuccess: (returnData, paramData: string) => {
+			console.log('paramData', paramData);
+			queryClient.setQueryData(
+				['filtered-listings', filterData],
+				(oldData: any) => {
+					return oldData
+						? {
+								...oldData,
+								pages: oldData.pages.map((page: any, idx: number) => {
+									if (idx === 0) {
+										return {
+											...page,
+											bestDeals: page.bestDeals.map((deal: any) => {
+												if (deal.listingId === paramData) {
+													return {
+														...deal,
+														favourite: !(deal.favourite || false),
+													};
+												}
+												return deal;
+											}),
+										};
+									}
+									return page;
+								}),
+						  }
+						: undefined;
+				}
+			);
+		},
+	});
+
+	// Mutate favourite data
+	const setFavDeal = useMutation({
+		mutationFn: async (paramData: { listingId: string; page: number }) =>
+			paramData,
+		onSuccess: (paramData: { listingId: string; page: number }) => {
+			queryClient.setQueryData(
+				['filtered-listings', filterData],
+				(oldData: any) => {
+					return oldData
+						? {
+								...oldData,
+								pages: oldData.pages.map((page: any, idx: number) => {
+									if (idx === paramData.page) {
+										return {
+											...page,
+											data: page.data.map((deal: any) => {
+												if (deal.listingId === paramData.listingId) {
+													return {
+														...deal,
+														favourite: !(deal.favourite || false),
+													};
+												}
+												return deal;
+											}),
+										};
+									}
+									return page;
+								}),
+						  }
+						: undefined;
+				}
+			);
 		},
 	});
 	const { ref } = useInView({
@@ -250,15 +324,18 @@ function Products({
 								<Carousel
 									{...settings}
 									key={
-										data!.pages[0].data.length > 0
-											? data!.pages[0].data.length
+										data?.pages[0]?.data?.length > 0
+											? data?.pages[0]?.data?.length
 											: -1
 									}
 									className="bestDealCarousel h-full"
 								>
 									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
-											<BestDealsCard data={items} />
+											<BestDealsCard
+												data={items}
+												setProducts={setBestFavDeal}
+											/>
 										</SwiperSlide>
 									))}
 								</Carousel>
@@ -295,7 +372,10 @@ function Products({
 													{page.data?.map((product, idx2) => {
 														return (
 															<div key={idx2}>
-																<ProductCard data={product} />
+																<ProductCard
+																	data={product}
+																	setProducts={setFavDeal}
+																/>
 															</div>
 														);
 													})}
