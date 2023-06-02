@@ -1,7 +1,5 @@
 import { Swiper } from 'swiper/react';
 import {
-	ArrowLeft,
-	ArrowRight,
 	Autoplay,
 	Navigation,
 	Pagination,

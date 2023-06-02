@@ -1,14 +1,9 @@
 import { SwiperSlide } from 'swiper/react';
 import ShopByModelCard from './Cards/ShopByModelCard';
 import Carousel from './Carousel2';
-import { getDefaultImage } from '@/utils/util';
 
 const settings = {
 	slidesPerView: 3,
-	navigation: {
-		dots: true,
-		arrows: true,
-	},
 	loop: false,
 };
 

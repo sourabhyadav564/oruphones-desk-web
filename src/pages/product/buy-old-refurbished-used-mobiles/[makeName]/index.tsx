@@ -18,7 +18,6 @@ import ShopByBrandSection from '@/components/ShopByBrandSection';
 import { locationAtom } from '@/store/location';
 import filterAtom from '@/store/productFilter';
 import TListingFilter, {
-	TListingReturnFilter,
 	Tmodel,
 } from '@/types/ListingFilter';
 import { metaTags } from '@/utils/constant';

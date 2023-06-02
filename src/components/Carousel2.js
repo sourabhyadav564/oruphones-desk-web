@@ -1,35 +1,23 @@
 import { Swiper } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper';
 import '@/node_modules/swiper/swiper-bundle.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
-import Chevronleft from '@/assets/chevronleft.svg';
-import Chevronright from '@/assets/chevronright.svg';
-import Image from 'next/image';
-
-const ArrowLeft = ({ className, currentSlide, slideCount, ...rest }) => (
-	<div className="absolute z-10 top-14 left-2  bg-gray-200  rounded-full p-1 flex ">
-		<Image src={Chevronleft} width={10} height={10}  {...rest} />
-	</div>
-);
-const ArrowRight = ({ className, currentSlide, slideCount, ...rest }) => (
-	<div className="absolute z-10 top-14 right-2  bg-gray-200 flex p-1 rounded-full">
-		<Image src={Chevronright} width={10} height={10}  {...rest} />
-	</div>
-);
 
 export default function Carousel2({ children, className, ...rest }) {
 	var settings = {
-		navigation: {
-			ArrowLeft,
-			ArrowRight,
-		},
 		...rest,
+		navigation: {
+			arrows: true,
+		},
+		modules: [Pagination, Navigation, Autoplay],
+		style: { marginLeft: '20px', marginRight: '20px'},
 	};
 	return (
 		<Swiper
-			className={`carousel ${className ? className : ''} z-0`}
+			className={`carousel2 ${className ? className : ''} z-0 w-full`}
 			{...settings}
 		>
 			{children}

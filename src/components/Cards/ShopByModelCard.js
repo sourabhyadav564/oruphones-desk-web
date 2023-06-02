@@ -15,7 +15,7 @@ function ShopByModelCard({
 	return (
 		<div>
 			<div
-				className="flex relative my-6 flex-col items-center justify-center hover:cursor-pointer"
+				className="flex relative my-6 flex-col items-center justify-center hover:cursor-pointer mx-[3rem]"
 				onClick={() =>
 					window.open(
 						makeLink
