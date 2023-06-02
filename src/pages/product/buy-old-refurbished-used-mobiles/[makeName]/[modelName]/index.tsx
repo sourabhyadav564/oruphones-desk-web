@@ -203,7 +203,6 @@ function Products({
 
 	// update brand name in filter if changed
 	useEffect(() => {
-		console.log('route=>', router.query.makeName);
 		if (!router.query.makeName || !router.query.modelName) return;
 		let modelName = router.query.modelName as string;
 		let makeName = router.query.makeName as string;

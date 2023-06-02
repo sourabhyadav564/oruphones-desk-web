@@ -208,7 +208,6 @@ function BrandPage({
 
 	// update brand name in filter if changed, (hydrate Atom doesnt work in rerenders, only in first render)
 	useEffect(() => {
-		console.log('route=>', router.query.makeName);
 		if (!router.query.makeName) return;
 		let makeName = router.query.makeName as string;
 		makeName = makeName
