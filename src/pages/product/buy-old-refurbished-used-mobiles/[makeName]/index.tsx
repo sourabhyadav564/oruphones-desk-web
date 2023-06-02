@@ -126,6 +126,7 @@ function BrandPage({
 				true
 			);
 			return data;
+		
 		},
 		getNextPageParam: (lastPage, allPages) => {
 			const currentRecordCount = allPages.length * (filterData.limit || 12);

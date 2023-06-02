@@ -8,11 +8,12 @@ import OutlineHeart from '@/assets/heartoutline.svg';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function AddFav({ data, setProducts }) {
+function AddFav({ data, setProducts, ...rest }) {
 	const [showLoginPopup, setShowLoginPopup] = useState(false);
 	const [performAction, setPerformAction] = useState(false);
 
 	function handleFavoties() {
+		console.log('handling =>');
 		setProducts((prevState) => {
 			let tempVal;
 			if (Array.isArray(prevState)) {
@@ -24,7 +25,13 @@ function AddFav({ data, setProducts }) {
 			}
 			return tempVal;
 		});
+		let payLoad = {
+			listingId: data.listingId,
+			userUniqueId: Cookies.get('userUniqueId') || 'Guest',
+		};
 		const addFavorite = async () => {
+			console.log('add');
+
 			let favList = localStorage.getItem('favoriteList');
 			if (favList) {
 				favList = favList.split(',');
@@ -33,30 +40,29 @@ function AddFav({ data, setProducts }) {
 			} else {
 				localStorage.setItem('favoriteList', data.listingId);
 			}
-			const payLoad = {
-				listingId: data.listingId,
-				userUniqueId: Cookies.get('userUniqueId') || 'Guest',
-			};
-			await Axios.addFavotie(payLoad);
+			const addFav = await Axios.addFavotie(payLoad);
 		};
 		const removeFavorite = async () => {
+			console.log('remove');
+
 			let favList = localStorage.getItem('favoriteList');
 			if (favList) {
 				favList = favList.split(',');
 				favList = favList.filter((item) => item !== data.listingId);
 				localStorage.setItem('favoriteList', favList);
 			}
-			await Axios.removeFavotie(
+			const removeFav = await Axios.removeFavotie(
 				data.listingId,
 				Cookies.get('userUniqueId') || 'Guest'
 			);
 		};
+
 		if (data.favourite) {
-			data?.status === 'Active'
+			data?.status == 'Active'
 				? removeFavorite()
 				: toast.warning('This device is sold out');
 		} else {
-			data?.status === 'Active'
+			data?.status == 'Active'
 				? addFavorite()
 				: toast.warning('This device is sold out');
 		}
@@ -84,8 +90,8 @@ function AddFav({ data, setProducts }) {
 						setPerformAction(true);
 						setShowLoginPopup(true);
 					}}
-					alt="Outline Heart Black"
 					className="hover:scale-110 "
+					alt="Outline Heart Black"
 				/>
 
 				<LoginPopup open={showLoginPopup} setOpen={setShowLoginPopup} />
@@ -106,8 +112,8 @@ function AddFav({ data, setProducts }) {
 				e.preventDefault();
 				handleFavoties(data);
 			}}
-			alt="Fill Heart"
 			className="hover:scale-110"
+			alt="Fill Heart"
 		/>
 	) : (
 		<Image
@@ -118,8 +124,8 @@ function AddFav({ data, setProducts }) {
 				e.preventDefault();
 				handleFavoties(data);
 			}}
-			alt="Outline Heart"
 			className="hover:scale-110 "
+			alt="Outline Heart"
 		/>
 	);
 }
