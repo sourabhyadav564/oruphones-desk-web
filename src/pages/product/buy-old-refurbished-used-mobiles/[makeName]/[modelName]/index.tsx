@@ -334,7 +334,7 @@ function Products({
 										<SwiperSlide key={index}>
 											<BestDealsCard
 												data={items}
-												setProducts={setBestFavDeal}
+												setProducts={setBestFavDeal.mutate}
 											/>
 										</SwiperSlide>
 									))}
@@ -374,7 +374,7 @@ function Products({
 															<div key={idx2}>
 																<ProductCard
 																	data={product}
-																	setProducts={setFavDeal}
+																	setProducts={setFavDeal.mutate}
 																/>
 															</div>
 														);

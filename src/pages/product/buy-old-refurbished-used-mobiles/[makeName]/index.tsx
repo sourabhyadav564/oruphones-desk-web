@@ -323,7 +323,7 @@ function BrandPage({
 								>
 									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
-											<BestDealsCard data={items} setProducts={setBestFavDeal} />
+											<BestDealsCard data={items} setProducts={setBestFavDeal.mutate} />
 										</SwiperSlide>
 									))}
 								</Carousel>
@@ -370,7 +370,7 @@ function BrandPage({
 													{page.data?.map((product, idx2) => {
 														return (
 															<div key={idx2}>
-																<ProductCard data={product} setProducts={setFavDeal} />
+																<ProductCard data={product} setProducts={setFavDeal.mutate} />
 															</div>
 														);
 													})}
