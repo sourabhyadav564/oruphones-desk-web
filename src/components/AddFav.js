@@ -47,7 +47,7 @@ function AddFav({ data, setProducts }) {
 			);
 		};
 
-		if (data.favourite) {
+		if (localStorage.getItem('favoriteList')?.includes(data?.listingId)) {
 			data?.status == 'Active'
 				? removeFavorite()
 				: toast.warning('This device is sold out');
