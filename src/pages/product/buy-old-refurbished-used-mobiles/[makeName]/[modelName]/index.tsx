@@ -374,7 +374,12 @@ function Products({
 															<div key={idx2}>
 																<ProductCard
 																	data={product}
-																	setProducts={setFavDeal.mutate}
+																	setProducts={(listingId: string) =>
+																		setFavDeal.mutate({
+																			listingId,
+																			page: idx1,
+																		})
+																	}
 																/>
 															</div>
 														);

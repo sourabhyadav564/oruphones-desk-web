@@ -17,9 +17,7 @@ import NoMatch from '@/components/NoMatch';
 import ShopByBrandSection from '@/components/ShopByBrandSection';
 import { locationAtom } from '@/store/location';
 import filterAtom from '@/store/productFilter';
-import TListingFilter, {
-	Tmodel,
-} from '@/types/ListingFilter';
+import TListingFilter, { Tmodel } from '@/types/ListingFilter';
 import { metaTags } from '@/utils/constant';
 import getFilteredListings from '@/utils/fetchers/filteredFetch';
 import getModels from '@/utils/fetchers/getModels';
@@ -323,7 +321,12 @@ function BrandPage({
 								>
 									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
-											<BestDealsCard data={items} setProducts={setBestFavDeal.mutate} />
+											<BestDealsCard
+												data={items}
+												setProducts={(listingId: string) =>
+													setBestFavDeal.mutate(listingId)
+												}
+											/>
 										</SwiperSlide>
 									))}
 								</Carousel>
@@ -370,7 +373,15 @@ function BrandPage({
 													{page.data?.map((product, idx2) => {
 														return (
 															<div key={idx2}>
-																<ProductCard data={product} setProducts={setFavDeal.mutate} />
+																<ProductCard
+																	data={product}
+																	setProducts={(listingId: string) =>
+																		setFavDeal.mutate({
+																			listingId,
+																			page: idx1,
+																		})
+																	}
+																/>
 															</div>
 														);
 													})}
