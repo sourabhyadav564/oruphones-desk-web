@@ -4,6 +4,7 @@ import Carousel from './Carousel2';
 
 const settings = {
 	slidesPerView: 3,
+	slidesPerGroup: 3,
 	loop: false,
 };
 

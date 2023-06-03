@@ -13,12 +13,13 @@ export default function Carousel2({ children, className, ...rest }) {
 			arrows: true,
 		},
 		modules: [Pagination, Navigation, Autoplay],
-		style: { marginLeft: '20px', marginRight: '20px'},
+		style: { marginLeft: '20px', marginRight: '20px' },
 	};
 	return (
 		<Swiper
 			className={`carousel2 ${className ? className : ''} z-0 w-full`}
 			{...settings}
+			slidesPerGroupAuto={true}
 		>
 			{children}
 		</Swiper>
