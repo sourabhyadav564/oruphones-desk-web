@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { Axios } from 'axios';
 import * as Axios from '@/api/axios';
 import ProductCard from '@/components/Cards/ProductCard';
 import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
@@ -9,38 +8,50 @@ import { numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function Index({ isFromEdit, brandsList }) {
+function Index({
+	isFromEdit,
+	brandsList,
+}: {
+	isFromEdit?: boolean;
+	brandsList: any[] | undefined;
+}) {
 	const [showpage, setShowpage] = useState(0);
 	const [makeRequired, setMakeRequired] = useState('');
 	const [makeRequired2, setMakeRequired2] = useState('');
 	const [makeOptions, setMakeOptions] = useState(brandsList);
 	const [makeOptions2, setMakeOptions2] = useState(brandsList);
-	const [modelOptions, setModelOptions] = useState([]);
-	const [modelOptions2, setModelOptions2] = useState([]);
-	const [colorAndStorageOption, setColorAndStorageOption] = useState([]);
-	const [colorAndStorageOption2, setColorAndStorageOption2] = useState([]);
-	const [make, setMake] = useState(null);
-	const [make2, setMake2] = useState(null);
-	const [marketingName, setmarketingName] = useState(null);
-	const [marketingName2, setmarketingName2] = useState(null);
-	const [storage, setStorage] = useState(null);
-	const [storage2, setStorage2] = useState(null);
-	const [deviceCondition, setDeviceCondition] = useState(null);
-	const [charger, setCharger] = useState('N');
-	const [headphone1, setHeadphone1] = useState('N');
-	const [originalBox1, setOriginalBox1] = useState('N');
+	const [modelOptions, setModelOptions] = useState<any[]>([]);
+	const [modelOptions2, setModelOptions2] = useState<any[]>([]);
+	const [colorAndStorageOption, setColorAndStorageOption] = useState<null | {
+		marketingname: string;
+		storage: string[];
+	}>(null);
+	const [colorAndStorageOption2, setColorAndStorageOption2] = useState<null | {
+		marketingname: string;
+		storage: string[];
+	}>(null);
+	const [make, setMake] = useState<null | string>(null);
+	const [make2, setMake2] = useState<null | string>(null);
+	const [marketingName, setmarketingName] = useState<null | string>(null);
+	const [marketingName2, setmarketingName2] = useState<null | string>(null);
+	const [storage, setStorage] = useState<null | string>(null);
+	const [storage2, setStorage2] = useState<null | string>(null);
+	const [deviceCondition, setDeviceCondition] = useState<null | string>(null);
+	const charger = 'N';
+	const headphone1 = 'N';
+	const originalBox1 = 'N';
 	const [leastSellingprice, setLeastSellingprice] = useState('');
 	const [maxsellingprice, setMaxsellingprice] = useState('');
 	const [marketingNameRequired, setMarketingNameRequired] = useState('');
 	const [marketingNameRequired2, setMarketingNameRequired2] = useState('');
 	const [storageRequired, setStorageRequired] = useState('');
 	const [storageRequired2, setStorageRequired2] = useState('');
-	const [getExternalSellerData, setGetExternalSellerData] = useState([]);
+	const [getExternalSellerData, setGetExternalSellerData] = useState<any[]>([]);
 	const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);
 	const conditionOption = ['Fair', 'Good', 'Excellent', 'Like New'];
 	const [active, setactive] = useState(false);
 	const [Index, setIndex] = useState(0);
-	const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState<any[]>([]);
 	const [PriceShow, setPriceShow] = useState(false);
 	const [PriceProduct, setPriceProduct] = useState(false);
 	const [loading, setLoading] = useState(true);
@@ -52,8 +63,8 @@ function Index({ isFromEdit, brandsList }) {
 		setStorage2(null);
 		setmarketingName(null);
 		setmarketingName2(null);
-		setColorAndStorageOption([]);
-		setColorAndStorageOption2([]);
+		setColorAndStorageOption(null);
+		setColorAndStorageOption2(null);
 	}, [make, make2]);
 
 	useEffect(() => {
@@ -66,6 +77,7 @@ function Index({ isFromEdit, brandsList }) {
 
 	useEffect(() => {
 		modelOptions2?.map((item) => {
+			console.log('color and storage option2 is set as: ', item);
 			if (item['marketingname'] == marketingName2) {
 				setColorAndStorageOption2(item);
 			}
@@ -84,7 +96,7 @@ function Index({ isFromEdit, brandsList }) {
 			);
 			let makeModelLists = data?.dataObject;
 			if (makeModelLists) {
-				makeModelLists.sort((a, b) => {
+				makeModelLists.sort((a: any, b: any) => {
 					return a.make.localeCompare(b.make);
 				});
 				setMakeOptions(makeModelLists);
@@ -98,18 +110,18 @@ function Index({ isFromEdit, brandsList }) {
 			deviceStorage: storage2?.split('/')[0],
 			deviceRam: storage2
 				?.toString()
-				.split('/')[1]
-				.toString()
-				.replace(/GB/g, ' GB')
+				?.split('/')[1]
+				?.toString()
+				?.replace(/GB/g, ' GB')
 				.replace(/RAM/, '')
 				.trim(),
 			make: make2,
 			marketingName: marketingName2,
 			deviceCondition: 'Like New',
 			warrantyPeriod: 'zero',
-			hasCharger: charger === 'Y',
-			hasEarphone: headphone1 === 'Y',
-			hasOriginalBox: originalBox1 === 'Y',
+			hasCharger: false,
+			hasEarphone: false,
+			hasOriginalBox: false,
 		};
 		if (make2 !== null && marketingName2 !== null && storage2 !== null) {
 			Axios.getExternalSellSourceData(payload).then((response) => {
@@ -118,7 +130,7 @@ function Index({ isFromEdit, brandsList }) {
 		}
 	}, [make2, marketingName2, storage2, charger, headphone1, originalBox1]);
 
-	const setSearchModelList2 = async (e) => {
+	const setSearchModelList2 = async (e: any) => {
 		const models = await Axios.fetchModelList(
 			Cookies.get('userUniqueId'),
 			Cookies.get('sessionId'),
@@ -126,14 +138,16 @@ function Index({ isFromEdit, brandsList }) {
 			e
 		);
 		if (models?.dataObject[0]?.models) {
-			const sortedModels = models.dataObject[0].models.sort((a, b) => {
-				return a.marketingname.localeCompare(b.marketingname);
-			});
+			const sortedModels = models.dataObject[0].models.sort(
+				(a: any, b: any) => {
+					return a.marketingname.localeCompare(b.marketingname);
+				}
+			);
 			setModelOptions2(sortedModels);
 		}
 	};
 
-	const setSearchModelList = async (e) => {
+	const setSearchModelList = async (e: any) => {
 		const models = await Axios.fetchModelList(
 			Cookies.get('userUniqueId'),
 			Cookies.get('sessionId'),
@@ -141,9 +155,11 @@ function Index({ isFromEdit, brandsList }) {
 			e
 		);
 		if (models?.dataObject[0]?.models) {
-			const sortedModels = models.dataObject[0].models.sort((a, b) => {
-				return a.marketingname.localeCompare(b.marketingname);
-			});
+			const sortedModels = models.dataObject[0].models.sort(
+				(a: any, b: any) => {
+					return a.marketingname.localeCompare(b.marketingname);
+				}
+			);
 			setModelOptions(sortedModels);
 		}
 	};
@@ -155,9 +171,9 @@ function Index({ isFromEdit, brandsList }) {
 			devicestorage: storage2?.split('/')[0],
 			deviceRam: storage2
 				?.toString()
-				.split('/')[1]
-				.toString()
-				.replace(/GB/g, ' GB')
+				?.split('/')[1]
+				?.toString()
+				?.replace(/GB/g, ' GB')
 				.replace(/RAM/, '')
 				.trim(),
 			earPhones: 'Y',
@@ -298,7 +314,7 @@ function Index({ isFromEdit, brandsList }) {
 											star="*"
 											labelName="Brand"
 											className={`${makeRequired} py-2`}
-											onFocus={(e) => {
+											onFocus={() => {
 												setMakeRequired('');
 											}}
 											required
@@ -308,7 +324,7 @@ function Index({ isFromEdit, brandsList }) {
 													: { label: make, value: make }
 											}
 											disabled={isFromEdit}
-											onChange={(e) => {
+											onChange={(e: any) => {
 												setMake(e.value);
 											}}
 											options={makeOptions?.map((item) => {
@@ -332,11 +348,11 @@ function Index({ isFromEdit, brandsList }) {
 											labelName="Model"
 											disabled={isFromEdit}
 											className={`${marketingNameRequired} py-2`}
-											onFocus={(e) => {
+											onFocus={() => {
 												setMarketingNameRequired('');
 												setSearchModelList2('');
 											}}
-											onChange={(e) => {
+											onChange={(e: any) => {
 												setmarketingName(e.value);
 											}}
 											options={modelOptions?.map((item) => {
@@ -345,7 +361,7 @@ function Index({ isFromEdit, brandsList }) {
 													value: item.marketingname,
 												};
 											})}
-											onInputChange={(e) => {
+											onInputChange={(e: any) => {
 												setSearchModelList(e);
 											}}
 										></Select>
@@ -366,10 +382,10 @@ function Index({ isFromEdit, brandsList }) {
 											labelName="Storage"
 											disabled={isFromEdit}
 											className={`${storageRequired} py-2`}
-											onFocus={(e) => {
+											onFocus={() => {
 												setStorageRequired('');
 											}}
-											onChange={(e) => {
+											onChange={(e: any) => {
 												setStorage(e.value);
 											}}
 											options={colorAndStorageOption?.storage?.map((item) => {
@@ -414,20 +430,17 @@ function Index({ isFromEdit, brandsList }) {
 											</div>
 											<div className="grid md:grid-cols-3 grid-cols-2  gap-4 mt-4">
 												{loading ? (
-													Array(3)
-														.fill()
-														.map((_, index) => (
-															<ProductSkeletonCard
-																key={index}
-																isTopSelling={true}
-															/>
-														))
+													Array.from({ length: 3 }).map((_, index) => (
+														<ProductSkeletonCard
+															key={index}
+															isTopSelling={true}
+														/>
+													))
 												) : !loading && products && products?.length > 0 ? (
 													products?.map((product, index) => (
 														<ProductCard
 															key={index}
 															data={product}
-															prodLink
 															setProducts={setProducts}
 														/>
 													))
@@ -456,11 +469,13 @@ function Index({ isFromEdit, brandsList }) {
 							<div className="px-8 gap-8 py-4">
 								<div>
 									<span className="px-4 py-4">
+										{JSON.stringify(colorAndStorageOption)}
+										{JSON.stringify(colorAndStorageOption2)}
 										<Select
 											star="*"
 											labelName="Brand"
 											className={`${makeRequired2} py-2`}
-											onFocus={(e) => {
+											onFocus={() => {
 												setMakeRequired2('');
 											}}
 											required
@@ -470,7 +485,7 @@ function Index({ isFromEdit, brandsList }) {
 													: { label: make2, value: make2 }
 											}
 											disabled={isFromEdit}
-											onChange={(e) => {
+											onChange={(e: any) => {
 												setMake2(e.value);
 											}}
 											options={makeOptions2?.map((item) => {
@@ -494,11 +509,11 @@ function Index({ isFromEdit, brandsList }) {
 											labelName="Model"
 											disabled={isFromEdit}
 											className={`${marketingNameRequired2} py-2`}
-											onFocus={(e) => {
+											onFocus={() => {
 												setMarketingNameRequired2('');
 												setSearchModelList2('');
 											}}
-											onChange={(e) => {
+											onChange={(e: any) => {
 												setmarketingName2(e.value);
 											}}
 											options={modelOptions2?.map((item) => {
@@ -507,7 +522,7 @@ function Index({ isFromEdit, brandsList }) {
 													value: item.marketingname,
 												};
 											})}
-											onInputChange={(e) => {
+											onInputChange={(e: any) => {
 												setSearchModelList2(e);
 											}}
 										></Select>
@@ -528,10 +543,10 @@ function Index({ isFromEdit, brandsList }) {
 											labelName="Storage Variant"
 											disabled={isFromEdit}
 											className={`${storageRequired2} py-2`}
-											onFocus={(e) => {
+											onFocus={() => {
 												setStorageRequired2('');
 											}}
-											onChange={(e) => {
+											onChange={(e: any) => {
 												setStorage2(e.value);
 											}}
 											options={colorAndStorageOption2?.storage?.map((item) => {
