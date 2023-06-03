@@ -232,9 +232,9 @@ function ProductDetails({
 									There are no similar products
 								</div>
 							)}
-						</div>
+						</div>z
 						{similarProducts &&
-							similarProducts.data.length > 20 &&
+							similarProducts.data.length > 19 &&
 							
 							make &&
 							model && (
