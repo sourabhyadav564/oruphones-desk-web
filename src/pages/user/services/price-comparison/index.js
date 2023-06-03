@@ -611,6 +611,8 @@ function Index({ isFromEdit, brandsList }) {
 																				src={items.externalSourceImage}
 																				alt={items.externalSourceName}
 																				style={{ height: 35, width: 70 }}
+																				height={35}
+																				width={70}
 																				className="object-contain"
 																			/>
 																		</div>
