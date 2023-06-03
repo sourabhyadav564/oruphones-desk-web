@@ -1,46 +1,57 @@
 {
-  "name": "oru-phones-web",
-  "homepage": ".",
-  "cacheDirectories": [
-    ".next/cache"
-  ],
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.4.2",
-    "@tailwindcss/forms": "^0.3.4",
-    "@tailwindcss/line-clamp": "^0.2.2",
-    "axios": "^0.24.0",
-    "html-react-parser": "^1.4.4",
-    "js-cookie": "^3.0.1",
-    "moment": "^2.29.3",
-    "next": "^12.0.7",
-    "node-html-parser": "^5.2.0",
-    "prop-types": "^15.8.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-geocode": "^0.2.3",
-    "react-loading-skeleton": "^3.1.0",
-    "react-parallax-tilt": "^1.7.100",
-    "react-select": "^5.2.1",
-    "react-slick": "^0.28.1",
-    "react-toastify": "^8.1.0",
-    "recoil": "^0.7.3",
-    "recoil-persist": "^4.2.0",
-    "swiper": "^8.4.5"
-  },
-  "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.141",
-    "autoprefixer": "^10.4.0",
-    "eslint": "7",
-    "eslint-config-next": "12.0.4",
-    "postcss": "^8.3.11",
-    "tailwindcss": "^2.2.19"
-  }
+	"name": "oru-phones-web",
+	"swcMinify": true,
+	"homepage": ".",
+	"cacheDirectories": [
+		".next/cache"
+	],
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"analyze": "cross-env ANALYZE=true next build"
+	},
+	"dependencies": {
+		"@headlessui/react": "^1.4.2",
+		"@tailwindcss/line-clamp": "^0.2.2",
+		"@tanstack/query-core": "^4.29.5",
+		"@tanstack/react-query": "^4.29.5",
+		"@tanstack/react-query-devtools": "^4.29.6",
+		"axios": "^1.4.0",
+		"cookies-next": "^2.1.1",
+		"dayjs": "^1.11.7",
+		"jotai": "^2.1.0",
+		"js-cookie": "^3.0.1",
+		"moment": "^2.29.3",
+		"next": "^12.0.7",
+		"next-seo": "^6.0.0",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-geocode": "^0.2.3",
+		"react-intersection-observer": "^9.4.3",
+		"react-loading-skeleton": "^3.1.0",
+		"react-select": "^5.2.1",
+		"react-toastify": "^8.1.0",
+		"sharp": "^0.32.1",
+		"swiper": "^8.4.5"
+	},
+	"devDependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "^4.0.0-beta.0",
+		"@next/bundle-analyzer": "^13.4.2",
+		"@swc/cli": "^0.1.55",
+		"@swc/core": "^1.2.141",
+		"@tailwindcss/forms": "^0.5.3",
+		"@types/node": "^20.1.1",
+		"@types/react": "^18.2.6",
+		"@types/react-geocode": "^0.2.1",
+		"autoprefixer": "^10.4.14",
+		"cross-env": "^7.0.3",
+		"eslint": "7",
+		"eslint-config-next": "12.0.4",
+		"postcss": "^8.4.23",
+		"tailwindcss": "^3.3.2",
+		"typescript": "^5.0.4"
+	}
 }

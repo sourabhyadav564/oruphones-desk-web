@@ -1,0 +1,18 @@
+{
+	"arrowParens": "always",
+	"bracketSpacing": true,
+	"endOfLine": "lf",
+	"singleQuote": true,
+	"useTabs": true,
+	"tabWidth": 2,
+	"importOrder": [
+		"react",
+		"<BUILTIN_MODULES>",
+		"<TYPES>",
+		"<THIRD_PARTY_MODULES>",
+		"../*",
+		"./*",
+		"@/*"
+	],
+	"importOrderTypeScriptVersion": "5.0.4"
+}
