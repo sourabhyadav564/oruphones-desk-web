@@ -6,6 +6,8 @@ import AuthContext from '@/context/AuthContext';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 
 function LoginOrProfileInMobileMenu() {
 	const router = useRouter();

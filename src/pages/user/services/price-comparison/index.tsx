@@ -469,8 +469,7 @@ function Index({
 							<div className="px-8 gap-8 py-4">
 								<div>
 									<span className="px-4 py-4">
-										{JSON.stringify(colorAndStorageOption)}
-										{JSON.stringify(colorAndStorageOption2)}
+									
 										<Select
 											star="*"
 											labelName="Brand"
