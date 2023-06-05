@@ -19,7 +19,7 @@ export default function Carousel2({ children, className, ...rest }) {
 		<Swiper
 			className={`carousel2 ${className ? className : ''} z-0 w-full`}
 			{...settings}
-			slidesPerGroupAuto={true}
+			grabCursor={true}
 		>
 			{children}
 		</Swiper>

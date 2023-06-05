@@ -1,8 +1,16 @@
 import React, { forwardRef } from 'react';
-import Select from 'react-select';
+import Select, { Props as SelectProps } from 'react-select';
+
+interface MySelectProps extends SelectProps {
+	name: string;
+	labelName?: string;
+	className?: string;
+	placeholder?: string;
+	[key: string]: any;
+}
 
 const customStyles = {
-	control: (base) => ({
+	control: (base: any) => ({
 		...base,
 		height: 35,
 		minHeight: 35,
@@ -12,8 +20,9 @@ const customStyles = {
 		boxShadow: '0 !important',
 	}),
 };
+
 const MySelect = forwardRef(function Component(
-	{ name, labelName, className, placeholder, ...rest },
+	{ name, labelName, className, placeholder, ...rest }: MySelectProps,
 	ref
 ) {
 	return (
@@ -29,7 +38,7 @@ const MySelect = forwardRef(function Component(
 				instanceId={labelName || name}
 				classNamePrefix="react-select"
 				placeholder={placeholder || 'Select'}
-				ref={ref}
+				ref={ref as any}
 			/>
 			<label
 				htmlFor={labelName || name}
