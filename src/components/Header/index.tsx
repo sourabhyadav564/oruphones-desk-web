@@ -6,6 +6,7 @@ import SellNowBtn from './SellNowBtn';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import MobileMenu from './MobileMenu'
 
 const DynamicLocationPopup = dynamic(
 	() => import('@/components/Popup/LocationPopup'),
@@ -53,7 +54,7 @@ function Header() {
 				</div>
 			</div>
 			<DesktopMenu />
-			{isOpen && <DynamicLocationPopup open={isOpen} setOpen={setIsOpen} />}
+			{isOpen && <MobileMenu isOpen={isOpen} />}
 		</header>
 	);
 }
