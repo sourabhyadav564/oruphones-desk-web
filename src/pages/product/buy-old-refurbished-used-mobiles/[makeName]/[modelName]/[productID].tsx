@@ -76,10 +76,6 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		queryKey: ['product-leaderboard', make, model],
 		queryFn: () => getLeaderboard({ listingId: productID as string }),
 	});
-	ctx.res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=43200, stale-while-revalidate=59' // cached for 12 hours, revalidate after 1 minute
-	);
 	return {
 		props: {
 			productID,
@@ -232,10 +228,10 @@ function ProductDetails({
 									There are no similar products
 								</div>
 							)}
-						</div>z
+						</div>
+						z
 						{similarProducts &&
 							similarProducts.data.length > 19 &&
-							
 							make &&
 							model && (
 								<Link
