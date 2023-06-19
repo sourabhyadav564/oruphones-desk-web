@@ -197,6 +197,8 @@ export function fetchTopsellingmodels(isLimited) {
 		API_ENDPOINT = BASE_URL + '/home/topselling/models';
 	}
 
+	console.log(API_ENDPOINT)
+
 	return Axios.get(API_ENDPOINT, DEFAULT_HEADER).then((response) => {
 		return response.data;
 	});

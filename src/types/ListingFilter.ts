@@ -82,6 +82,7 @@ export type TListingReturnFilter = {
 	vendorName?: string;
 	vendorImage?: string;
 	vendorLink?: string;
+	listingLocality? : string;
 };
 
 export type Tmodel = {

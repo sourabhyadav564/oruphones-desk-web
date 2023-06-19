@@ -11,6 +11,8 @@ function ProductCard({ data, setProducts}) {
 		data?.marketingName
 	} ${data?.deviceStorage} ${data?.deviceCondition} soldout`.toLowerCase();
 	const [imageError, setImageError] = useState(false);
+	const locality = data?.listingLocality ? data.listingLocality.substring(0, 8) : '';
+
 
 	return (
 		<div data-aos="fade-up" className="relative my-1">
@@ -124,7 +126,8 @@ function ProductCard({ data, setProducts}) {
 								</div>
 							</div>
 							<div className="justify-self-end flex justify-between pt-1 w-full uppercase font-Roboto-Light text-xsFontSize">
-								<span>{data?.listingLocation}</span>
+								<span>{locality +  data?.listingLocation   || 'India'}</span>
+
 								<span>{data?.listingDate}</span>
 							</div>
 						</div>
