@@ -19,22 +19,7 @@ type TListingFilter = {
 
 export type TListingFilterWithID = {
 	listingId: string;
-	listingLocation?: string;
-	page?: number;
-	make?: string[];
-	model?: string[];
-	condition?: string[];
-	storage?: string[];
-	warranty?: string[];
-	verified?: boolean;
-	priceRange?: number[];
-	limit?: number;
-	sort?: {
-		price?: number;
-		date?: number;
-	};
-	includeSelf?: boolean;
-};
+} & TListingFilter;
 
 export type TListingReturnFilter = {
 	listingId?: string;
@@ -82,6 +67,7 @@ export type TListingReturnFilter = {
 	vendorName?: string;
 	vendorImage?: string;
 	vendorLink?: string;
+	listingLocality? : string;
 };
 
 export type Tmodel = {

@@ -11,6 +11,8 @@ import Link from 'next/link';
 function TopDealCard({ data }) {
 	const [imageError, setImageError] = useState(false);
 	const setProducts = useSetAtom(topDealsAtom);
+	const locality = data?.listingLocality ? data.listingLocality.substring(0, 8) : '';
+
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (
 			<Link href={`/product/buy-old-refurbished-used-mobiles/bestdealnearyou`}>
@@ -155,7 +157,7 @@ function TopDealCard({ data }) {
 							</div>
 						</div>
 						<div className="flex justify-between pt-1 pb-2 text-xsFontSize opacity-100 h-2 w-full text-m-grey-2 font-Roboto-Light">
-							<span>{data?.listingLocation}</span>
+							<span>{locality +  data?.listingLocation}</span>
 							<span>{data?.listingDate}</span>
 						</div>
 					</div>
