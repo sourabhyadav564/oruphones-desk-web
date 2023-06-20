@@ -22,7 +22,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 			clearTimeout(timer);
 		}
 		return () => clearTimeout(timer);
-	});
+	},[seconds]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -37,10 +37,6 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 		const response = await Axios.otpValidate(formData);
 		if (response.status === 'SUCCESS' && response.reason === 'OTP validated') {
 			setOpen(false);
-			const payload = {
-				countryCode: '91',
-				mobileNumber: formData.mobile.split('-')[1],
-			};
 			Cookies.set('userUniqueId', response.dataObject.userUniqueId);
 			Cookies.set('mobileNumber', response.dataObject.mobileNumber);
 			setUserUniqueId(response.dataObject.userUniqueId);

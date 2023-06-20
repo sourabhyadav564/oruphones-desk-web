@@ -45,7 +45,7 @@ export default function MyApp({
 			}
 		};
 		loggedInCheck();
-	}, []);
+	}, [userSetter]);
 	return (
 		<>
 			<AuthProvider>
