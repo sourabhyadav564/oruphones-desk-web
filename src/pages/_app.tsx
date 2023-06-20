@@ -12,9 +12,12 @@ import {
 	QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'; // is not part of the build bundle, purely for Dev purposes
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SEO from '@/data/seoOptions';
-import { Provider } from 'jotai';
+import userAtom from '@/store/user';
+import isLoggedIn from '@/utils/fetchers/user/isLoggedIn';
+import { Provider, useSetAtom } from 'jotai';
+import { RESET } from 'jotai/utils';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 
@@ -32,6 +35,17 @@ export default function MyApp({
 	pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
 	const [queryClient] = useState(() => new QueryClient(queryClientOptions));
+	const userSetter = useSetAtom(userAtom);
+	useEffect(() => {
+		// Check if local user is valid
+		const loggedInCheck = async () => {
+			const result = await isLoggedIn();
+			if (!result.isLoggedIn) {
+				userSetter(RESET); // resets to null, as null is initial value
+			}
+		};
+		loggedInCheck();
+	}, []);
 	return (
 		<>
 			<AuthProvider>
