@@ -14,7 +14,6 @@ function LoginPopup({ open, setOpen, redirect }) {
 	const [openTermAndCondPopup, setOpenTermAndCondPopup] = useState(false);
 	const [isVerifyStep, setIsVerifyStep] = useState(false);
 	const inputRef = useRef();
-
 	const [formData, setFormData] = useState({ termsAndCondition: true });
 
 	useEffect(() => {

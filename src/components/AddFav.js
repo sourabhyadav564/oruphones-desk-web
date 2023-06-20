@@ -15,8 +15,6 @@ function AddFav({ data, setProducts }) {
 	function handleFavoties() {
 		setProducts(data.listingId);
 		const addFavorite = async () => {
-			console.log('add');
-
 			let favList = localStorage.getItem('favoriteList');
 			if (favList) {
 				favList = favList.split(',');
@@ -33,8 +31,6 @@ function AddFav({ data, setProducts }) {
 			await Axios.addFavotie(payLoad);
 		};
 		const removeFavorite = async () => {
-			console.log('remove');
-
 			let favList = localStorage.getItem('favoriteList');
 			if (favList) {
 				favList = favList.split(',');

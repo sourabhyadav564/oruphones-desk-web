@@ -102,6 +102,7 @@ function ProductDetailsCard({
 				clearInterval(interval);
 			}
 		}, 1000);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [showLoginPopup]);
 
 	useEffect(() => {

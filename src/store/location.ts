@@ -35,17 +35,13 @@ export const updateLocationLatLongAtom = atom(
 			location.coords.latitude,
 			location.coords.longitude
 		);
-		const address = res.results[0].formatted_address;
+		const address = res.results[0];
 		let city;
-		for (let i = 0; i < res.results[0].address_components.length; i++) {
-			for (
-				let j = 0;
-				j < res.results[0].address_components[i].types.length;
-				j++
-			) {
-				switch (res.results[0].address_components[i].types[j]) {
+		for (let i = 0; i < address.address_components.length; i++) {
+			for (let j = 0; j < address.address_components[i].types.length; j++) {
+				switch (address.address_components[i].types[j]) {
 					case 'locality':
-						city = res.results[0].address_components[i].long_name;
+						city = address.address_components[i].long_name;
 						break;
 				}
 			}

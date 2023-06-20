@@ -1,13 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RegUser from '@/assets/user1.svg';
 import Notifications from '@/components/Notifications';
-import LoginPopup from '@/components/Popup/LoginPopup';
 import AppContext from '@/context/ApplicationContext';
 import AuthContext from '@/context/AuthContext';
 import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+const DynamicLoginPopup = dynamic(() => import('@/components/Popup/LoginPopup'), {
+	ssr: false,
+});
 
 function LoginOrProfile() {
 	const router = useRouter();
@@ -152,7 +156,9 @@ function LoginOrProfile() {
 						</div>
 					</div>
 				</div>
-				<LoginPopup open={showLogin} setOpen={setShowLogin} />
+				{showLogin && (
+					<DynamicLoginPopup open={showLogin} setOpen={setShowLogin} />
+				)}
 			</React.Fragment>
 		);
 	}

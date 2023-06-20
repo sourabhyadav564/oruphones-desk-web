@@ -3,18 +3,9 @@ import DesktopMenu from './DesktopMenu';
 import LoginOrProfile from './LoginOrProfile';
 import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import MobileMenu from './MobileMenu'
-
-const DynamicLocationPopup = dynamic(
-	() => import('@/components/Popup/LocationPopup'),
-	{
-		ssr: false,
-		loading: () => <p>Loading...</p>,
-	}
-);
 function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
