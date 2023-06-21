@@ -11,6 +11,7 @@ function useUser() {
 	};
 	return {
 		user,
+		setUser,
 		isLoggedIn: !!user,
 		logout,
 	};

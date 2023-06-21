@@ -1,13 +1,13 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import VerifyOtpPopup from './VerifyOtpPopup';
-import * as Axios from '@/api/axios';
+import OTPs from '@/utils/fetchers/user/OTPs';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Modal from '.';
 
 const DynamicTermsAndCondition = dynamic(
 	() => import('./TermAndConditionPopup'),
-	{ ssr: false, loading: () => <p>Loading...</p> }
+	{ ssr: false }
 );
 
 function LoginPopup({ open, setOpen, redirect }) {
@@ -35,9 +35,13 @@ function LoginPopup({ open, setOpen, redirect }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const mobNumber = formData?.mobile?.split('-');
+		const countryCode = mobNumber && mobNumber[0];
 		const value = mobNumber && mobNumber[1];
 		if (value && value.length === 10) {
-			const response = await Axios.signUp(value);
+			const response = await OTPs.otpCreate({
+				countryCode: parseInt(countryCode),
+				mobileNumber: parseInt(value),
+			});
 			setIsVerifyStep(response?.status === 'SUCCESS');
 		} else {
 			inputRef.current.setCustomValidity('Please enter valid mobile number');
