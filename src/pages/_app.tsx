@@ -17,6 +17,7 @@ import SEO from '@/data/seoOptions';
 import userAtom from '@/store/user';
 import isLoggedIn from '@/utils/fetchers/user/isLoggedIn';
 import { Provider, useSetAtom } from 'jotai';
+import { DevTools } from 'jotai-devtools';
 import { RESET } from 'jotai/utils';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
@@ -52,8 +53,9 @@ export default function MyApp({
 				<ApplicationContext>
 					<QueryClientProvider client={queryClient}>
 						<Hydrate state={pageProps.dehydratedState}>
-							<ReactQueryDevtools />
+							<ReactQueryDevtools position="bottom-right" />
 							<Provider>
+								<DevTools theme="dark" />
 								<Header />
 								<DefaultSeo {...SEO} />
 								<Component {...pageProps} />

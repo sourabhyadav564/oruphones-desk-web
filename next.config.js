@@ -3,6 +3,9 @@ const backendURL = process.env.BACKEND_URL || 'http://localhost:5000';
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 });
+const withTranspileModules = require('next-transpile-modules')([
+	'jotai-devtools',
+]);
 const securityHeaders = [
 	{
 		key: 'X-DNS-Prefetch-Control',
@@ -29,7 +32,7 @@ const securityHeaders = [
 		value: 'same-origin',
 	},
 ];
-module.exports = withBundleAnalyzer({
+module.exports = withBundleAnalyzer(withTranspileModules({
 	reactStrictMode: true,
 	async redirects() {
 		return [
@@ -96,4 +99,4 @@ module.exports = withBundleAnalyzer({
 	experimental: {
 		scrollRestoration: true,
 	},
-});
+}));
