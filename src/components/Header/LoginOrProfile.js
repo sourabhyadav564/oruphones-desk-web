@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RegUser from '@/assets/user1.svg';
 import Notifications from '@/components/Notifications';
-import AppContext from '@/context/ApplicationContext';
-import AuthContext from '@/context/AuthContext';
 import useUser from '@/hooks/useUser';
 import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
@@ -20,21 +18,10 @@ const DynamicLoginPopup = dynamic(
 function LoginOrProfile() {
 	const router = useRouter();
 	const [showLogin, setShowLogin] = React.useState(false);
-	const [userAuthenticated, setUserAuthenticated] = useState(false);
 	const [performAction, setPerformAction] = useState(false);
-	const { logout } = useContext(AuthContext);
-	const { setUserInfo } = useContext(AppContext);
+	const { logout } = useUser();
 	const [ItemLink, setItemLink] = useState('');
 	const { isLoggedIn } = useUser();
-
-	useEffect(() => {
-		if (Cookies.get('userUniqueId') !== undefined) {
-			setUserAuthenticated(true);
-		} else {
-			setUserAuthenticated(false);
-		}
-		return () => {};
-	});
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -84,7 +71,6 @@ function LoginOrProfile() {
 									link="/"
 									onClick={() => {
 										logout();
-										setUserInfo();
 									}}
 								/>
 								<NavListItem text="Report a problem" link="/reportIssue" />

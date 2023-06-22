@@ -40,7 +40,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 			otp: parseInt(formData.otp),
 		});
 		if (response.status === 'SUCCESS' && response.reason === 'OTP validated') {
-			setUser({ mobileNumber: response.dataObject.mobileNumber });
+			setUser(response.user);
 			setOpen(false);
 			if (redirect !== undefined && redirect === false) {
 				setOpen(false);

@@ -71,7 +71,7 @@ function AddEditListing({
 	const [conditionResults, setConditionResults] = useState({});
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [show, setShow] = useState(false);
-	const { setCities, setUserInfo, setSearchLocation } = useContext(AppContext);
+	const { setSearchLocation } = useContext(AppContext);
 
 	useEffect(() => {
 		setMakeOptions(brandsList);

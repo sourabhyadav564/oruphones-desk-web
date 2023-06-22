@@ -1,3 +1,8 @@
 export default interface TUser {
-  username: string;
+	userName: string;
+	email: string;
+	profilePicPath: string;
+	city: string;
+	state: string;
+	mobileNumber: string;
 }

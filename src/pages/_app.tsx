@@ -3,7 +3,6 @@ import Header from '@/components/Header';
 import '@/styles/globals.css';
 import { ToastContainer } from 'react-toastify';
 import { ApplicationContext } from '@/context/ApplicationContext';
-import { AuthProvider } from '@/context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 import {
 	DehydratedState,
@@ -49,33 +48,31 @@ export default function MyApp({
 	}, [userSetter]);
 	return (
 		<>
-			<AuthProvider>
-				<ApplicationContext>
-					<QueryClientProvider client={queryClient}>
-						<Hydrate state={pageProps.dehydratedState}>
-							<ReactQueryDevtools position="bottom-right" />
-							<Provider>
-								<DevTools theme="dark" />
-								<Header />
-								<DefaultSeo {...SEO} />
-								<Component {...pageProps} />
-								<Footer />
-							</Provider>
-						</Hydrate>
-					</QueryClientProvider>
-				</ApplicationContext>
-				<ToastContainer
-					position="bottom-center"
-					autoClose={3000}
-					hideProgressBar={false}
-					newestOnTop={false}
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-				/>
-			</AuthProvider>
+			<ApplicationContext>
+				<QueryClientProvider client={queryClient}>
+					<Hydrate state={pageProps.dehydratedState}>
+						<ReactQueryDevtools position="bottom-right" />
+						<Provider>
+							<DevTools theme="dark" />
+							<Header />
+							<DefaultSeo {...SEO} />
+							<Component {...pageProps} />
+							<Footer />
+						</Provider>
+					</Hydrate>
+				</QueryClientProvider>
+			</ApplicationContext>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</>
 	);
 }

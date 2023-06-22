@@ -36,6 +36,13 @@ async function otpValidate({
 	dataObject: {
 		submitCountIncrement: number;
 		maxRetryCount: string;
+	};
+	user: {
+		userName: string;
+		email: string;
+		profilePicPath: string;
+		city: string;
+		state: string;
 		mobileNumber: number;
 	};
 }> {

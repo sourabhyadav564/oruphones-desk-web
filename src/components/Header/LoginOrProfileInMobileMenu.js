@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RegUser from '@/assets/user2.svg';
 import LoginPopup from '@/components/Popup/LoginPopup';
-import AppContext from '@/context/ApplicationContext';
-import AuthContext from '@/context/AuthContext';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useUser from '@/hooks/useUser';
 
 
 function LoginOrProfileInMobileMenu() {
@@ -14,8 +13,7 @@ function LoginOrProfileInMobileMenu() {
 	const [showLogin, setShowLogin] = React.useState(false);
 	const [userAuthenticated, setUserAuthenticated] = useState(false);
 	const [performAction, setPerformAction] = useState(false);
-	const { logout } = useContext(AuthContext);
-	const { setUserInfo } = useContext(AppContext);
+	const { logout } = useUser();
 	const [ItemLink, setItemLink] = useState('');
 
 	useEffect(() => {
@@ -77,7 +75,6 @@ function LoginOrProfileInMobileMenu() {
 										link="/"
 										onClick={() => {
 											logout();
-											setUserInfo();
 										}}
 									/>
 									<NavListItem text="Report a problem" link="/reportIssue" />

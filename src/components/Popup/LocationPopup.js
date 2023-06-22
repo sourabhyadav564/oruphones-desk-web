@@ -17,7 +17,6 @@ function LocationPopup({ open, setOpen }) {
 	const [citiesResponse2, setCitiesResponse2] = useState([]);
 	const [searchText, setSearchText] = useState('');
 	const selectedCity = useRef();
-	// const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
 	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
