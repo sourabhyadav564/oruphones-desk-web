@@ -3,15 +3,19 @@ import RegUser from '@/assets/user1.svg';
 import Notifications from '@/components/Notifications';
 import AppContext from '@/context/ApplicationContext';
 import AuthContext from '@/context/AuthContext';
+import useUser from '@/hooks/useUser';
 import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const DynamicLoginPopup = dynamic(() => import('@/components/Popup/LoginPopup'), {
-	ssr: false,
-});
+const DynamicLoginPopup = dynamic(
+	() => import('@/components/Popup/LoginPopup'),
+	{
+		ssr: false,
+	}
+);
 
 function LoginOrProfile() {
 	const router = useRouter();
@@ -21,6 +25,7 @@ function LoginOrProfile() {
 	const { logout } = useContext(AuthContext);
 	const { setUserInfo } = useContext(AppContext);
 	const [ItemLink, setItemLink] = useState('');
+	const { isLoggedIn } = useUser();
 
 	useEffect(() => {
 		if (Cookies.get('userUniqueId') !== undefined) {
@@ -46,7 +51,7 @@ function LoginOrProfile() {
 		}, 1000);
 	}, [showLogin]);
 
-	if (userAuthenticated) {
+	if (isLoggedIn) {
 		return (
 			<div className="flex space-x-1 items-center h-full w-20 mt-1 z-50">
 				<Notifications />

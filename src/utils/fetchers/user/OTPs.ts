@@ -16,6 +16,7 @@ async function otpCreate({
 				countryCode,
 				mobileNumber,
 			}),
+			credentials: 'include',
 		}
 	);
 	const data = await response.json();
@@ -50,6 +51,7 @@ async function otpValidate({
 				mobileNumber,
 				otp,
 			}),
+			credentials: 'include',
 		}
 	);
 	const data = await response.json();
