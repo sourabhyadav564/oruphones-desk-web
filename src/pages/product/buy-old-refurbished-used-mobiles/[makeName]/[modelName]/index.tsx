@@ -121,7 +121,10 @@ function Products({
 			const data = await getFilteredListings(
 				{
 					...filterData,
-					page: pageParam || 1,
+					page: pageParam ? pageParam.pageNum : 1,
+					...(pageParam && {
+						notionalIDs: pageParam.notionalIDs,
+					}),
 				},
 				true
 			);
@@ -133,7 +136,10 @@ function Products({
 				return undefined;
 			}
 			const currentPage = allPages.length;
-			return currentPage + 1;
+			return {
+				pageNum: currentPage + 1,
+				notionalIDs: allPages[0]?.bestDeals?.map((deal: any) => deal.listingId),
+			};
 		},
 	});
 	// mutate bestDeals data
@@ -312,7 +318,7 @@ function Products({
 					listingsCount={
 						isLoading || isFetchingNextPage || !data?.pages[0]
 							? 0
-							: Math.max(data?.pages[0].totalCount, 0) || 0
+							: Math.max(data?.pages[0]?.totalCount!, 0) || 0
 					}
 					makeName={makeName}
 					defaultBrands={[makeName]}
@@ -346,7 +352,7 @@ function Products({
 						{`Total Products (${
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								: Math.max(0, data?.pages[0].totalCount) || 0
+								: Math.max(0, data?.pages[0]?.totalCount!) || 0
 						})`}
 					</h4>
 					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (

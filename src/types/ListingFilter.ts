@@ -10,6 +10,7 @@ type TListingFilter = {
 	verified?: boolean;
 	priceRange?: number[];
 	limit?: number;
+	notionalIDs?: string[];
 	sort?: {
 		price?: number;
 		date?: number;

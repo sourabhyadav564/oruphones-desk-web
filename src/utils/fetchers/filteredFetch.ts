@@ -9,8 +9,8 @@ export default async function getFilteredListings(
 	returnFilter?: TListingReturnFilter
 ): Promise<{
 	data: TListingReturnFilter[];
-	totalCount: number;
-	bestDeals: TListingReturnFilter[] | undefined;
+	totalCount?: number;
+	bestDeals?: TListingReturnFilter[];
 }> {
 	const content = {
 		filter,
@@ -29,7 +29,17 @@ export default async function getFilteredListings(
 		}
 	);
 	const resp = await response.json();
-	return resp.data;
+	if (filter.page === 1) {
+		return {
+			data: resp.data.data,
+			bestDeals: resp.data.bestDeals,
+			totalCount: resp.data.totalCount,
+		};
+	} else {
+		return {
+			data: resp.data.data,
+		};
+	}
 }
 
 export async function getListingByID(
