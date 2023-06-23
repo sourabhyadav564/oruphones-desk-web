@@ -7,10 +7,12 @@ import Select from '@/components/Form/Select';
 import {
 	citiesAtom,
 	updateLocationAtom,
+	updateLocationIDandType,
 	updateLocationLatLongAtom,
 } from '@/store/location';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
+import { relative } from 'path';
 
 function LocationPopup({ open, setOpen }) {
 	const [citiesResponse, setCitiesResponse] = useState([]);
@@ -19,12 +21,21 @@ function LocationPopup({ open, setOpen }) {
 	const selectedCity = useRef();
 	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
+
+	const [, setLocationDet] = useAtom(updateLocationIDandType);
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 
 	const handleCityChange = (city) => {
 		setLocation(city);
 		setOpen(false);
 	};
+
+	
+	const handleCity = (e) => {
+		console.log(e)
+		setLocationDet(e.type,e.id)
+
+		};
 
 	const options = {
 		enableHighAccuracy: true,
@@ -146,12 +157,13 @@ function LocationPopup({ open, setOpen }) {
 											className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
 											onClick={handleNearme}
 										>
-											<Image src={CurrentLocation} width={28} height={28} />
+											<Image src={CurrentLocation} width={30} height={30} />
 										</div>
 										<div className="w-full">
 											<Select
 												onChange={(e) => {
 													handleCityChange(e.value);
+													handleCity(e)
 												}}
 												onInputChange={(e) => {
 													onLocChange(e);
@@ -160,7 +172,27 @@ function LocationPopup({ open, setOpen }) {
 												options={
 													citiesResponse2 &&
 													citiesResponse2?.map((items, index) => {
-														return { label: items.city, value: items.city };
+														return {
+															label: (
+																<div className="option-label">
+																	<span>{items.city}</span>
+																	<div className='flex justify-end'>
+
+																	<span
+																		className="border border-gray-400 p-[2px]"
+															            style={{
+																			fontSize : '10px',
+																		}}
+																	>
+																		{items.type}
+																	</span>
+																	</div>
+																</div>
+															),
+															value: items.city,
+															type: items.type,
+															id : items.id
+														};
 													})
 												}
 											></Select>

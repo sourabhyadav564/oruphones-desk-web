@@ -157,7 +157,7 @@ function TopDealCard({ data }) {
 							</div>
 						</div>
 						<div className="flex justify-between pt-1 pb-2 text-xsFontSize opacity-100 h-2 w-full text-m-grey-2 font-Roboto-Light">
-							<span>{locality +  data?.listingLocation}</span>
+							<span>{locality + data?.listingLocation}</span>
 							<span>{data?.listingDate}</span>
 						</div>
 					</div>

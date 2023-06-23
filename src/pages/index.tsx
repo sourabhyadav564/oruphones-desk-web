@@ -18,23 +18,39 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	
 	// check if cookie is present
-	let cookie = getCookie('location', ctx) as string;
-	if (!cookie) {
+	let locationId: number | undefined;
+
+	const locationIdCookie = getCookie('locationId', ctx);
+	let locationType = getCookie('locationType', ctx) as string;
+	if (typeof locationIdCookie === 'string') {
+		locationId = parseInt(locationIdCookie, 10);
+	} else {
+		// Handle the case when locationIdCookie is not a valid number
+		locationId = undefined;
+	}
+	if (!locationId) {
 		// set cookie to India
-		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
-		cookie = 'India';
+		setCookie('locationId', 2001152, { ...ctx, maxAge: 24 * 60 * 60 });
+		locationId = 2001152;
+	}
+
+	if(!locationType) {
+		setCookie('locationType', 'city', { ...ctx, maxAge: 24 * 60 * 60 });
+		locationType = 'city';
 	}
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
 		getHomeBrands(),
-		getHomeListings(cookie, sliceLength),
+		getHomeListings(locationId,locationType, sliceLength),
 	]);
 	return {
 		props: {
 			brands: brands || null,
 			bestDeals: bestDeals,
-			location: cookie,
+			locationId: locationId,
+			locationType : locationType
 		},
 	};
 };
