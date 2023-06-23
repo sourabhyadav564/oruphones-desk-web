@@ -6,7 +6,7 @@ import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function BestDealsCard({ data , setProducts }) {
+function BestDealsCard({ data }) {
 	const [imageError, setImageError] = useState(false);
 	return (
 		<div
@@ -24,7 +24,7 @@ function BestDealsCard({ data , setProducts }) {
 					{!(
 						data?.isOtherVendor === 'Y' &&
 						Cookies.get('userUniqueId') == undefined
-					) && <AddFav data={data} setProducts={setProducts} />}
+					) && <AddFav data={data} />}
 				</div>
 			</div>
 			<div className="flex justify-between items-center absolute">

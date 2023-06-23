@@ -142,75 +142,6 @@ function Products({
 			};
 		},
 	});
-	// mutate bestDeals data
-	const setBestFavDeal = useMutation({
-		mutationFn: async (paramData: string) => true,
-		onSuccess: (returnData, paramData: string) => {
-			console.log('paramData', paramData);
-			queryClient.setQueryData(
-				['filtered-listings', filterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === 0) {
-										return {
-											...page,
-											bestDeals: page.bestDeals.map((deal: any) => {
-												if (deal.listingId === paramData) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
-		},
-	});
-
-	// Mutate favourite data
-	const setFavDeal = useMutation({
-		mutationFn: async (paramData: { listingId: string; page: number }) =>
-			paramData,
-		onSuccess: (paramData: { listingId: string; page: number }) => {
-			queryClient.setQueryData(
-				['filtered-listings', filterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === paramData.page) {
-										return {
-											...page,
-											data: page.data.map((deal: any) => {
-												if (deal.listingId === paramData.listingId) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
-		},
-	});
 	const { ref } = useInView({
 		triggerOnce: false,
 		threshold: 0.45,
@@ -338,10 +269,7 @@ function Products({
 								>
 									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
-											<BestDealsCard
-												data={items}
-												setProducts={setBestFavDeal.mutate}
-											/>
+											<BestDealsCard data={items} />
 										</SwiperSlide>
 									))}
 								</Carousel>
@@ -378,15 +306,7 @@ function Products({
 													{page.data?.map((product, idx2) => {
 														return (
 															<div key={idx2}>
-																<ProductCard
-																	data={product}
-																	setProducts={(listingId: string) =>
-																		setFavDeal.mutate({
-																			listingId,
-																			page: idx1,
-																		})
-																	}
-																/>
+																<ProductCard data={product} />
 															</div>
 														);
 													})}

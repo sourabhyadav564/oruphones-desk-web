@@ -37,7 +37,6 @@ function ProductDetailsCard({
 	data,
 	openFullImage,
 	onDataContext,
-	setProducts,
 }) {
 	const leaderBoard = useAtomValue(leaderBoardAtom);
 	const dealsYouMayLike = useAtomValue(dealsYouMayLikeAtom);
@@ -147,7 +146,7 @@ function ProductDetailsCard({
 							</div>
 							<span className="pt-2 hover:scale-110 ">
 								{data.isOtherVendor === 'N' && (
-									<AddFav data={data} setProducts={setProducts} />
+									<AddFav data={data} />
 								)}
 							</span>
 						</Fragment>

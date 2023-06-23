@@ -1,7 +1,5 @@
 import {
 	useInfiniteQuery,
-	useMutation,
-	useQueryClient,
 } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -111,7 +109,6 @@ function Bestdealnearyou({
 	]);
 	const [filterData, setFilterData] = useAtom(filterAtom);
 	const debouncedFilterData = useDebounce(filterData, 400);
-	const queryClient = useQueryClient();
 
 	const {
 		isLoading,
@@ -145,76 +142,6 @@ function Bestdealnearyou({
 				pageNum: currentPage + 1,
 				notionalIDs: allPages[0]?.bestDeals?.map((deal: any) => deal.listingId),
 			};
-		},
-	});
-
-	// mutate bestDeals data
-	const setBestFavDeal = useMutation({
-		mutationFn: async (paramData: string) => true,
-		onSuccess: (returnData, paramData: string) => {
-			console.log('paramData', paramData);
-			queryClient.setQueryData(
-				['filtered-listings', debouncedFilterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === 0) {
-										return {
-											...page,
-											bestDeals: page.bestDeals.map((deal: any) => {
-												if (deal.listingId === paramData) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
-		},
-	});
-
-	// Mutate favourite data
-	const setFavDeal = useMutation({
-		mutationFn: async (paramData: { listingId: string; page: number }) =>
-			paramData,
-		onSuccess: (paramData: { listingId: string; page: number }) => {
-			queryClient.setQueryData(
-				['filtered-listings', debouncedFilterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === paramData.page) {
-										return {
-											...page,
-											data: page.data.map((deal: any) => {
-												if (deal.listingId === paramData.listingId) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
 		},
 	});
 
@@ -275,9 +202,6 @@ function Bestdealnearyou({
 											<SwiperSlide key={index}>
 												<BestDealsCard
 													data={items}
-													setProducts={(listingId: string) =>
-														setBestFavDeal.mutate(listingId)
-													}
 												/>
 											</SwiperSlide>
 										))}
@@ -319,12 +243,6 @@ function Bestdealnearyou({
 																<div key={idx2}>
 																	<ProductCard
 																		data={product}
-																		setProducts={(listingId: string) =>
-																			setFavDeal.mutate({
-																				listingId,
-																				page: idx1,
-																			})
-																		}
 																	/>
 																</div>
 															);

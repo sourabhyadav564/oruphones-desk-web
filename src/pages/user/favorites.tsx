@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import Loader from '@/components/Loader/Loader';
 import FavListingTile from '@/components/User/FavListingTile';
 import UserProfile from '@/components/User/UserProfile';
@@ -51,6 +52,11 @@ function Favorites() {
 			);
 		},
 	});
+
+	useEffect(() => {
+		console.log('I ran');
+		queryClient.invalidateQueries(['userListings', user?.userName!]);
+	}, [queryClient, user?.userName]);
 
 	return (
 		<>

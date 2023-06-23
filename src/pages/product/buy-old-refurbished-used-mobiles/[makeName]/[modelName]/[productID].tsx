@@ -113,20 +113,6 @@ function ProductDetails({
 			return data;
 		},
 	});
-	const productMutator = useMutation({
-		mutationFn: async () => true,
-		onSuccess: () => {
-			queryClient.setQueryData(
-				['product-listing', productID],
-				(prevData: any) => {
-					return {
-						...prevData,
-						favourite: !(prevData.favourite || false),
-					};
-				}
-			);
-		},
-	});
 	const { data: similarProducts, isLoading: similarProductsLoading } = useQuery(
 		{
 			queryKey: ['similar-products', productID],
@@ -144,28 +130,6 @@ function ProductDetails({
 			},
 		}
 	);
-	const similarProductsMutator = useMutation({
-		mutationFn: async (listingId: string) => listingId,
-		onSuccess: (listingId) => {
-			queryClient.setQueryData(
-				['similar-products', productID],
-				(prevData: any) => {
-					return {
-						...prevData,
-						data: prevData.data.map((item: any) => {
-							if (item.listingId === listingId) {
-								return {
-									...item,
-									favourite: !(item.favourite || false),
-								};
-							}
-							return item;
-						}),
-					};
-				}
-			);
-		},
-	});
 	const { data: dealsYouMayLike, isLoading: dealsYouMayLikeLoading } = useQuery(
 		{
 			queryKey: ['deals-you-may-like', productID],
@@ -204,7 +168,6 @@ function ProductDetails({
 							data={data}
 							openFullImage={() => setOpenImageFullView(true)}
 							onDataContext={setContextData}
-							setProducts={(listingId: string) => productMutator.mutate()}
 						/>
 					</div>
 					<div className="col-span-4">
@@ -217,11 +180,7 @@ function ProductDetails({
 						<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 mt-4">
 							{similarProducts && similarProducts.data.length > 0 ? (
 								similarProducts?.data.map((product: any, index: number) => (
-									<ProductCard
-										key={index}
-										data={product}
-										setProducts={similarProductsMutator.mutate}
-									/>
+									<ProductCard key={index} data={product} />
 								))
 							) : (
 								<div className="text-center font-Roboto-Light text-regularFontSize pt-2 col-span-4 h-20">
