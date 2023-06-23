@@ -448,7 +448,6 @@ function Index({
 															<ProductCard
 																key={index}
 																data={product}
-																setProducts={setProducts}
 															/>
 														))
 													) : (

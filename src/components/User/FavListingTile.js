@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import IconLabelValue from './IconLableValue';
-import * as Axios from '@/api/axios';
 import OutlineHeart from '@/assets/heartfill.svg';
 import Rupee from '@/assets/rupee1.svg';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function FavListingTile({ data, setProducts }) {

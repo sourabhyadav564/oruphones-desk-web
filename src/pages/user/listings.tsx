@@ -28,42 +28,61 @@ function Listings() {
 				<UserListingTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
 				<div className="lg:flex lg:flex-col grid grid-cols-2 gap-4 lg:space-y-4 px-4 my-4">
 					{currentTab === 0
-						? userListings &&
-						  userListings
-								.filter((item) => {
-									if (item.status === 'Active') {
-										return item;
-									}
-								})
-								.map((item, index) => (
-									<div key={index}>
-										<a>
-											<ProfileListingTile
-												data={item}
-												fromMyFav={undefined}
-												setProducts={undefined}
-											/>
-										</a>
-									</div>
-								))
-						: userListings &&
-						  userListings
-								.filter((item) => {
-									if (item.status === 'Paused' || item.status === 'InActive') {
-										return item;
-									}
-								})
-								.map((item, index) => (
-									<div key={index}>
-										<a>
-											<ProfileListingTile
-												data={item}
-												fromMyFav={undefined}
-												setProducts={undefined}
-											/>
-										</a>
-									</div>
-								))}
+						? userListings && (
+								<>
+									{userListings
+										.filter((item) => {
+											if (item.status === 'Active') {
+												return item;
+											}
+										})
+										.map((item, index) => (
+											<div key={index}>
+												<a>
+													<ProfileListingTile data={item} />
+												</a>
+											</div>
+										))}
+									{userListings.filter((item) => {
+										if (item.status === 'Active') {
+											return item;
+										}
+									}).length === 0 && (
+										<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
+											Active Listings Not Found
+										</div>
+									)}
+								</>
+						  )
+						: userListings && (
+								<>
+									{userListings
+										.filter((item) => {
+											if (
+												item.status === 'Paused' ||
+												item.status === 'InActive'
+											) {
+												return item;
+											}
+										})
+										.map((item, index) => (
+											<div key={index}>
+												<a>
+													<ProfileListingTile data={item} />
+												</a>
+											</div>
+										))}
+									{userListings.filter((item) => {
+										if (item.status !== 'Active') {
+											return item;
+										}
+									}).length === 0 && (
+										<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
+											Inactive listings Not Found
+										</div>
+									)}
+								</>
+						  )}
 
 					{isLoading && (
 						<div className="flex gap-4 col-span-2 h-60  items-center justify-center text-xlFontSize font-Roboto-Regular">

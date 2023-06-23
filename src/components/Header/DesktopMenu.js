@@ -96,7 +96,7 @@ function DesktopMenu() {
 				>{`${location}`}</span>
 			</span>
 			<span>
-				<Popover.Group className=" container hidden lg:flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
+				<Popover.Group className=" container flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
 					{menus.map((item, index) =>
 						item && item.options ? (
 							<Popover key={item.name}>
