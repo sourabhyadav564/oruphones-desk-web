@@ -1,55 +1,24 @@
-import { useContext, useEffect, useState } from 'react';
-import * as Axios from '@/api/axios';
-import AppContext from '@/context/ApplicationContext';
+import { useEffect, useState } from 'react';
 import useUser from '@/hooks/useUser';
-import Cookies from 'js-cookie';
+import { updateProfilePic } from '@/utils/fetchers/user/update';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 function UserProfile({ children, className = '' }) {
-	const { userInfo, setUserInfo } = useContext(AppContext);
-	const { logout } = useUser();
-	const [inputImage, setInputImage] = useState(
-		userInfo?.userdetails?.profilePicPath
-	);
+	const { user, logout, setUser } = useUser();
+	const authUserData = { name: user?.userName };
 
-	const authUserData = { name: userInfo?.userdetails?.userName };
-	useEffect(() => {
-		setInputImage(
-			userInfo?.userdetails?.profilePicPath ||
-				'https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg'
-		);
-	}, [userInfo]);
-
-	function handleChange(e) {
+	async function handleChange(e) {
 		e.preventDefault();
 		let data = new FormData();
 		data.append('image', e.target.files[0]);
-		Axios.uploadUserProfilePic(data, Cookies.get('userUniqueId')).then(
-			(response) => {
-				if (response?.status === 'SUCCESS') {
-					let payload = {
-						profilePicPath: response?.dataObject?.imagePath,
-						profileThumbnailPath: response?.dataObject?.thumbnailImagePath,
-						mobileNumber: Cookies.get('mobileNumber'),
-						userUniqueId: Cookies.get('userUniqueId'),
-					};
-
-					Axios.updateUserDetails(payload).then((res) => {
-						setInputImage(payload?.profilePicPath);
-
-						if (res?.status === 'SUCCESS') {
-							userInfo.userdetails = {
-								...userInfo.userdetails,
-								profilePicPath: res?.dataObject?.userdetails.profilePicPath,
-							};
-							setInputImage(res?.dataObject?.userdetails.profilePicPath);
-						}
-					});
-				}
-			}
-		);
+		const resp = await updateProfilePic(data);
+		console.log('image uploaded:', resp);
+		setUser({
+			...user,
+			profilePicPath: resp?.profilePicPath,
+		});
 	}
 
 	return (
@@ -65,7 +34,7 @@ function UserProfile({ children, className = '' }) {
 							>
 								<Image
 									src={
-										inputImage ||
+										user?.profilePicPath ||
 										'https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg'
 									}
 									loading="lazy"
@@ -73,7 +42,7 @@ function UserProfile({ children, className = '' }) {
 									priority={false}
 									unoptimized={false}
 									blurDataURL={
-										inputImage ||
+										user?.profilePicPath ||
 										'https://d1tl44nezj10jx.cloudfront.net/assets/profile.svg'
 									}
 									alt="ORU Account"
@@ -126,7 +95,6 @@ function UserProfile({ children, className = '' }) {
 						link="/"
 						onClick={() => {
 							logout();
-							setUserInfo();
 						}}
 					/>
 				</div>

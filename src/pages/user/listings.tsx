@@ -43,15 +43,16 @@ function Listings() {
 												</a>
 											</div>
 										))}
-									{userListings.filter((item) => {
-										if (item.status === 'Active') {
-											return item;
-										}
-									}).length === 0 && (
-										<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
-											Active Listings Not Found
-										</div>
-									)}
+									{!isLoading &&
+										userListings.filter((item) => {
+											if (item.status === 'Active') {
+												return item;
+											}
+										}).length === 0 && (
+											<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
+												Active Listings Not Found
+											</div>
+										)}
 								</>
 						  )
 						: userListings && (
@@ -72,15 +73,16 @@ function Listings() {
 												</a>
 											</div>
 										))}
-									{userListings.filter((item) => {
-										if (item.status !== 'Active') {
-											return item;
-										}
-									}).length === 0 && (
-										<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
-											Inactive listings Not Found
-										</div>
-									)}
+									{!isLoading &&
+										userListings.filter((item) => {
+											if (item.status !== 'Active') {
+												return item;
+											}
+										}).length === 0 && (
+											<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
+												Inactive listings Not Found
+											</div>
+										)}
 								</>
 						  )}
 
@@ -88,12 +90,6 @@ function Listings() {
 						<div className="flex gap-4 col-span-2 h-60  items-center justify-center text-xlFontSize font-Roboto-Regular">
 							<Loader />
 							Please wait, while we are fetching your listings...
-						</div>
-					)}
-
-					{!isLoading && userListings?.length == 0 && (
-						<div className="flex h-60 items-center justify-center text-xlFontSize font-Roboto-Regular">
-							Listings Not Found
 						</div>
 					)}
 				</div>

@@ -14,7 +14,7 @@ function Favorites() {
 	const queryClient = useQueryClient();
 
 	const { data: myFavList, isLoading } = useQuery({
-		queryKey: ['userListings', user?.userName],
+		queryKey: ['favListings', user?.userName],
 		queryFn: () => getListings(user?.favListings!),
 		enabled: !!user?.userName,
 	});
@@ -54,7 +54,6 @@ function Favorites() {
 	});
 
 	useEffect(() => {
-		console.log('I ran');
 		queryClient.invalidateQueries(['userListings', user?.userName!]);
 	}, [queryClient, user?.userName]);
 

@@ -25,3 +25,20 @@ export default async function update({
 	const data = await response.json();
 	return data;
 }
+
+export async function updateProfilePic(formData: FormData): Promise<{
+	reason: string;
+	status: string;
+	profilePicPath: string;
+}> {
+	const response = await fetch(
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/imageUpload?profilePic=true`,
+		{
+			method: 'POST',
+			body: formData,
+			credentials: 'include',
+		}
+	);
+	const resp = await response.json();
+	return resp;
+}

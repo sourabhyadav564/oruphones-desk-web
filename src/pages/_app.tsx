@@ -2,7 +2,6 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import '@/styles/globals.css';
 import { ToastContainer } from 'react-toastify';
-import { ApplicationContext } from '@/context/ApplicationContext';
 import 'react-toastify/dist/ReactToastify.css';
 import {
 	DehydratedState,
@@ -35,7 +34,6 @@ export default function MyApp({
 	const [queryClient] = useState(() => new QueryClient(queryClientOptions));
 	return (
 		<>
-			<ApplicationContext>
 				<QueryClientProvider client={queryClient}>
 					<Hydrate state={pageProps.dehydratedState}>
 						<ReactQueryDevtools position="bottom-right" />
@@ -49,7 +47,6 @@ export default function MyApp({
 						</Provider>
 					</Hydrate>
 				</QueryClientProvider>
-			</ApplicationContext>
 			<ToastContainer
 				position="bottom-center"
 				autoClose={3000}
