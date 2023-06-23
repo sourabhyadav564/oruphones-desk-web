@@ -32,13 +32,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 	if (!locationId) {
 		// set cookie to India
-		setCookie('locationId', 2001152, { ...ctx, maxAge: 24 * 60 * 60 });
-		locationId = 2001152;
+		setCookie('locationId', 4058659, { ...ctx, maxAge: 24 * 60 * 60 });
+		locationId = 4058659;
 	}
 
 	if(!locationType) {
-		setCookie('locationType', 'city', { ...ctx, maxAge: 24 * 60 * 60 });
-		locationType = 'city';
+		setCookie('locationType', 'City', { ...ctx, maxAge: 24 * 60 * 60 });
+		locationType = 'City';
 	}
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
