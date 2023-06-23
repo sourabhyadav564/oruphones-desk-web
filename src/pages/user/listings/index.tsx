@@ -1,34 +1,22 @@
-import { useEffect, useState } from 'react';
-import * as Axios from '@/api/axios';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import Loader from '@/components/Loader/Loader';
 import ProfileListingTile from '@/components/User/ProfileListingTile';
 import UserListingTab from '@/components/User/UserListingTab';
 import UserProfile from '@/components/User/UserProfile';
-import Cookies from 'js-cookie';
+import useUser from '@/hooks/useUser';
+import getListings from '@/utils/fetchers/getListings';
 import Head from 'next/head';
-import router from 'next/router';
 
 function Listings() {
 	const [currentTab, setCurrentTab] = useState(0);
-	const [userListings, setUserListing] = useState([]);
-	const [isLoading, setLoading] = useState(true);
+	const { isLoggedIn, user } = useUser();
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const fetchUserListings = await Axios.fetchUserListings(
-				Cookies.get('userUniqueId'),
-				Cookies.get('sessionId') || localStorage.getItem('sessionId')
-			);
-			console.log(fetchUserListings);
-			setUserListing(fetchUserListings?.dataObject);
-			setLoading(false);
-		};
-		if (Cookies.get('userUniqueId') !== undefined) {
-			fetchData();
-		} else {
-			router.push('/');
-		}
-	}, []);
+	const { data: userListings, isLoading } = useQuery({
+		queryKey: ['userListings', user?.userName],
+		queryFn: () => getListings(user?.userListings!),
+		enabled: !!user?.userName,
+	});
 
 	return (
 		<>
@@ -50,7 +38,11 @@ function Listings() {
 								.map((item, index) => (
 									<div key={index}>
 										<a>
-											<ProfileListingTile data={item} />
+											<ProfileListingTile
+												data={item}
+												fromMyFav={undefined}
+												setProducts={undefined}
+											/>
 										</a>
 									</div>
 								))
@@ -64,7 +56,11 @@ function Listings() {
 								.map((item, index) => (
 									<div key={index}>
 										<a>
-											<ProfileListingTile data={item} />
+											<ProfileListingTile
+												data={item}
+												fromMyFav={undefined}
+												setProducts={undefined}
+											/>
 										</a>
 									</div>
 								))}

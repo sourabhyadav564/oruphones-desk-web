@@ -1,6 +1,7 @@
 import { Popover } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import Location from '@/assets/location.svg';
+import useUser from '@/hooks/useUser';
 import readLocationAtom from '@/store/location';
 import { useAtom } from 'jotai';
 import Cookies from 'js-cookie';
@@ -59,20 +60,11 @@ const menus = [
 function DesktopMenu() {
 	const router = useRouter();
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const [authenticated, setauthenticated] = useState(false);
+	const { isLoggedIn } = useUser();
 	const [showLogin, setShowLogin] = useState(false);
 	const [ItemLink, setItemLink] = useState('');
 	const [performAction, setPerformAction] = useState(false);
 	const [location] = useAtom(readLocationAtom);
-
-	useEffect(() => {
-		if (Cookies.get('userUniqueId') !== undefined) {
-			setauthenticated(true);
-		} else {
-			setauthenticated(false);
-		}
-		return () => {};
-	}, []);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -133,7 +125,7 @@ function DesktopMenu() {
 						)
 					)}
 
-					{authenticated ? (
+					{isLoggedIn ? (
 						<div>
 							<div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
 								NEW

@@ -25,15 +25,7 @@ function FavListingTile({ data, setProducts }) {
 	}, []);
 
 	const handleFavoties = async () => {
-		setProducts((prevState) => {
-			Axios.removeFavotie(
-				data.listingId,
-				Cookies.get('userUniqueId') || 'Guest'
-			).then((response) => {
-				// console.log("removeFav RES", response);
-			});
-			return prevState.filter((i) => i.listingId !== data.listingId);
-		});
+		setProducts.mutate(data.listingId);
 	};
 
 	return (

@@ -4,6 +4,7 @@ import Input from '@/components/Form/Input';
 import UserProfile from '@/components/User/UserProfile';
 import useUser from '@/hooks/useUser';
 import update from '@/utils/fetchers/user/update';
+import Head from 'next/head';
 
 function Profile() {
 	const { user, setUser } = useUser();
@@ -32,90 +33,98 @@ function Profile() {
 	};
 
 	return (
-		<UserProfile className="mb-10">
-			<div className="px-12 py-4">
-				<h1 className="text-xl2FontSize font-Roboto-Semibold py-3">
-					{' '}
-					Profile Information{' '}
-				</h1>
-				<form
-					className="mt-4 grid md:grid-cols-2 grid-cols-1 gap-8 "
-					onSubmit={handleSubmit}
-				>
-					<Input
-						type="text"
-						maxLength="30"
-						name="username"
-						defaultValue={user?.userName}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-							setSaveChange(true);
-							setName(e.target.value);
-						}}
-						className={undefined}
-						inputClass={undefined}
-						prefix={undefined}
-						lableclass={undefined}
-						borderclass={undefined}
-						errorClass={undefined}
+		<>
+			<Head>
+				<title>Profile | OruPhones</title>
+				<meta
+					name="description"
+					content="OruPhones is a platform to buy and sell used phones"
+				/>
+			</Head>
+			<UserProfile className="mb-10">
+				<div className="px-12 py-4">
+					<h1 className="text-xl2FontSize font-Roboto-Semibold py-3">
+						{' '}
+						Profile Information{' '}
+					</h1>
+					<form
+						className="mt-4 grid md:grid-cols-2 grid-cols-1 gap-8 "
+						onSubmit={handleSubmit}
 					>
-						Name
-					</Input>
-					<span className="block" />
-					<Input
-						type="tel"
-						name="mobile"
-						defaultValue={user?.mobileNumber}
-						value={`+91 ${user?.mobileNumber}` || ''}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-							setSaveChange(true);
-							setMobileNumber(e.target.value);
-						}}
-						disabled
-						className={undefined}
-						inputClass={undefined}
-						prefix={undefined}
-						lableclass={undefined}
-						borderclass={undefined}
-						errorClass={undefined}
-					>
-						Mobile No
-					</Input>
-					<span className="block" />
-					<Input
-						type="email"
-						defaultValue={user?.email}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-							setSaveChange(true);
-							setEmail(e.target.value);
-						}}
-						name={undefined}
-						className={undefined}
-						inputClass={undefined}
-						prefix={undefined}
-						lableclass={undefined}
-						borderclass={undefined}
-						errorClass={undefined}
-					>
-						Email ID
-					</Input>
-					<span className="block" />
+						<Input
+							type="text"
+							maxLength="30"
+							name="username"
+							defaultValue={user?.userName}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+								setSaveChange(true);
+								setName(e.target.value);
+							}}
+							className={undefined}
+							inputClass={undefined}
+							prefix={undefined}
+							lableclass={undefined}
+							borderclass={undefined}
+							errorClass={undefined}
+						>
+							Name
+						</Input>
+						<span className="block" />
+						<Input
+							type="tel"
+							name="mobile"
+							defaultValue={user?.mobileNumber}
+							value={`+91 ${user?.mobileNumber}` || ''}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+								setSaveChange(true);
+								setMobileNumber(e.target.value);
+							}}
+							disabled
+							className={undefined}
+							inputClass={undefined}
+							prefix={undefined}
+							lableclass={undefined}
+							borderclass={undefined}
+							errorClass={undefined}
+						>
+							Mobile No
+						</Input>
+						<span className="block" />
+						<Input
+							type="email"
+							defaultValue={user?.email}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+								setSaveChange(true);
+								setEmail(e.target.value);
+							}}
+							name={undefined}
+							className={undefined}
+							inputClass={undefined}
+							prefix={undefined}
+							lableclass={undefined}
+							borderclass={undefined}
+							errorClass={undefined}
+						>
+							Email ID
+						</Input>
+						<span className="block" />
 
-					<div className="flex flex-row space-x-2">
-						{/* {(!userInfo?.userdetails?.associatedWith &&
+						<div className="flex flex-row space-x-2">
+							{/* {(!userInfo?.userdetails?.associatedWith &&
 							userInfo?.userdetails?.associatedWith == '') ||
 						userInfo?.userdetails?.associatedWith == undefined ? (
 							<Input
-								type="text"
-								defaultValue={userInfo?.userdetails?.associatedWith}
-								onChange={(e) => {
-									setOruMitraId(e.target.value);
-								}}
+							type="text"
+							defaultValue={userInfo?.userdetails?.associatedWith}
+							onChange={(e) => {
+								setOruMitraId(e.target.value);
+							}}
 							>
 								ORU-Mitra ID
-							</Input>
-						) : (
+								</Input>
+								) : (
 							<Input
-								type="text"
+							type="text"
 								defaultValue={userInfo?.userdetails?.associatedWith}
 								onChange={(e) => {
 									setOruMitraId(e.target.value);
@@ -126,42 +135,43 @@ function Profile() {
 							</Input>
 						)} */}
 
-						{/* {(!userInfo?.userdetails?.associatedWith &&
+							{/* {(!userInfo?.userdetails?.associatedWith &&
 							userInfo?.userdetails?.associatedWith == '') ||
 						userInfo?.userdetails?.associatedWith == undefined ? (
 							<button
-								className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
+							className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
 								onClick={()=>{}}
 								type="button"
-							>
+								>
 								Link
-							</button>
-						) : (
+								</button>
+								) : (
 							<button
-								className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
+							className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
 								onClick={()=>{}}
 								type="button"
-							>
+								>
 								Delink
-							</button>
-						)} */}
-					</div>
-					<span className="block"></span>
-					<div className=" grid  grid-cols-1 gap-8 ">
-						<button
-							type="submit"
-							className={` px-12 rounded text-white text-regularFontSize font-Roboto-Semibold uppercase py-2 
-								  bg-m-green disabled:bg-gray-1'
+								</button>
+							)} */}
+						</div>
+						<span className="block"></span>
+						<div className=" grid  grid-cols-1 gap-8 ">
+							<button
+								type="submit"
+								className={` px-12 rounded text-white text-regularFontSize font-Roboto-Semibold uppercase py-2 
+							bg-m-green disabled:bg-gray-1'
 							} hover:bg-m-green`}
-							disabled={!saveChange}
-						>
-							Save
-						</button>
-						<button></button>
-					</div>
-				</form>
-			</div>
-		</UserProfile>
+								disabled={!saveChange}
+							>
+								Save
+							</button>
+							<button></button>
+						</div>
+					</form>
+				</div>
+			</UserProfile>
+		</>
 	);
 }
 

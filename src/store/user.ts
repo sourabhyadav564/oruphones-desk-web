@@ -1,6 +1,6 @@
 import TUser from '@/types/User';
-import { atomWithStorage } from 'jotai/utils';
+import { atom } from 'jotai';
 
-const userAtom = atomWithStorage<TUser | null | undefined>('user', undefined);
+const userAtom = atom<Partial<TUser> | null | undefined>(undefined);
 
 export default userAtom;

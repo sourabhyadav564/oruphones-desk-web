@@ -5,4 +5,6 @@ export default interface TUser {
 	city: string;
 	state: string;
 	mobileNumber: string;
+	favListings: string[];
+	userListings: string[];
 }

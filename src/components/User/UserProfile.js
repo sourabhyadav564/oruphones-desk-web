@@ -1,16 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import * as Axios from '@/api/axios';
 import AppContext from '@/context/ApplicationContext';
+import useUser from '@/hooks/useUser';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useUser from '@/hooks/useUser';
-
 
 function UserProfile({ children, className = '' }) {
 	const { userInfo, setUserInfo } = useContext(AppContext);
-	const [open, setOpen] = useState(false);
 	const { logout } = useUser();
 	const [inputImage, setInputImage] = useState(
 		userInfo?.userdetails?.profilePicPath
@@ -64,7 +62,6 @@ function UserProfile({ children, className = '' }) {
 							<label
 								htmlFor="IMG"
 								className="block w-full h-full relative rounded-full"
-								onClick={() => setOpen(true)}
 							>
 								<Image
 									src={

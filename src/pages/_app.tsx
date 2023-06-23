@@ -11,13 +11,11 @@ import {
 	QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'; // is not part of the build bundle, purely for Dev purposes
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import UserInit from '@/context/UserInit';
 import SEO from '@/data/seoOptions';
-import userAtom from '@/store/user';
-import isLoggedIn from '@/utils/fetchers/user/isLoggedIn';
-import { Provider, useSetAtom } from 'jotai';
+import { Provider } from 'jotai';
 import { DevTools } from 'jotai-devtools';
-import { RESET } from 'jotai/utils';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 
@@ -35,17 +33,6 @@ export default function MyApp({
 	pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
 	const [queryClient] = useState(() => new QueryClient(queryClientOptions));
-	const userSetter = useSetAtom(userAtom);
-	useEffect(() => {
-		// Check if local user is valid
-		const loggedInCheck = async () => {
-			const result = await isLoggedIn();
-			if (!result.isLoggedIn) {
-				userSetter(RESET); // resets to null, as null is initial value
-			}
-		};
-		loggedInCheck();
-	}, [userSetter]);
 	return (
 		<>
 			<ApplicationContext>
@@ -53,6 +40,7 @@ export default function MyApp({
 					<Hydrate state={pageProps.dehydratedState}>
 						<ReactQueryDevtools position="bottom-right" />
 						<Provider>
+							<UserInit />
 							<DevTools theme="dark" />
 							<Header />
 							<DefaultSeo {...SEO} />
