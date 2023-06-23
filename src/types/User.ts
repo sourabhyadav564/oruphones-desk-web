@@ -7,4 +7,5 @@ export default interface TUser {
 	mobileNumber: string;
 	favListings: string[];
 	userListings: string[];
+	associatedWith: string;
 }

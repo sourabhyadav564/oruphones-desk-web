@@ -32,6 +32,21 @@ function Profile() {
 		}
 	};
 
+	const handleReferral = async (isLinking: boolean, referral?: string) => {
+		try {
+			await update({
+				isLinking,
+				...(referral && { referral }),
+			});
+			setUser({
+				...user!,
+			});
+			toast.success('Referral updated successfully');
+		} catch (error) {
+			toast.error("Couldn't update Referral");
+		}
+	};
+
 	return (
 		<>
 			<Head>
@@ -110,50 +125,62 @@ function Profile() {
 						<span className="block" />
 
 						<div className="flex flex-row space-x-2">
-							{/* {(!userInfo?.userdetails?.associatedWith &&
-							userInfo?.userdetails?.associatedWith == '') ||
-						userInfo?.userdetails?.associatedWith == undefined ? (
-							<Input
-							type="text"
-							defaultValue={userInfo?.userdetails?.associatedWith}
-							onChange={(e) => {
-								setOruMitraId(e.target.value);
-							}}
-							>
-								ORU-Mitra ID
+							{(!user?.associatedWith && user?.associatedWith == '') ||
+							user?.associatedWith == undefined ? (
+								<Input
+									type="text"
+									defaultValue={user?.associatedWith}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+										setOruMitraId(e.target.value);
+									}}
+									name={undefined}
+									className={undefined}
+									inputClass={undefined}
+									prefix={undefined}
+									lableclass={undefined}
+									borderclass={undefined}
+									errorClass={undefined}
+								>
+									ORU-Mitra ID
 								</Input>
-								) : (
-							<Input
-							type="text"
-								defaultValue={userInfo?.userdetails?.associatedWith}
-								onChange={(e) => {
-									setOruMitraId(e.target.value);
-								}}
-								disabled
-							>
-								ORU-Mitra ID
-							</Input>
-						)} */}
+							) : (
+								<Input
+									type="text"
+									defaultValue={user?.associatedWith}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+										setOruMitraId(e.target.value);
+									}}
+									disabled
+									name={undefined}
+									className={undefined}
+									inputClass={undefined}
+									prefix={undefined}
+									lableclass={undefined}
+									borderclass={undefined}
+									errorClass={undefined}
+								>
+									ORU-Mitra ID
+								</Input>
+							)}
 
-							{/* {(!userInfo?.userdetails?.associatedWith &&
-							userInfo?.userdetails?.associatedWith == '') ||
-						userInfo?.userdetails?.associatedWith == undefined ? (
-							<button
-							className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
-								onClick={()=>{}}
-								type="button"
+							{(!user?.associatedWith && user?.associatedWith == '') ||
+							user?.associatedWith == undefined ? (
+								<button
+									className="bg-m-green text-white px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
+									onClick={() => handleReferral(true, oruMitraId)}
+									type="button"
 								>
-								Link
+									Link
 								</button>
-								) : (
-							<button
-							className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
-								onClick={()=>{}}
-								type="button"
+							) : (
+								<button
+									className="text-m-green border border-m-green px-4 py-2 rounded-md font-Roboto-Semibold text-regularFontSize uppercase"
+									onClick={() => handleReferral(false)}
+									type="button"
 								>
-								Delink
+									Delink
 								</button>
-							)} */}
+							)}
 						</div>
 						<span className="block"></span>
 						<div className=" grid  grid-cols-1 gap-8 ">
