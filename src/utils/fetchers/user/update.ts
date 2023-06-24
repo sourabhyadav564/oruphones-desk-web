@@ -39,7 +39,7 @@ export async function updateProfilePic(formData: FormData): Promise<{
 	profilePicPath: string;
 }> {
 	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_SERVER_URL}/imageUpload?profilePic=true`,
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/imageUpload?type=profilePic`,
 		{
 			method: 'POST',
 			body: formData,
