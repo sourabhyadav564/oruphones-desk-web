@@ -29,6 +29,7 @@ import {
 	leaderBoardAtom,
 } from '@/pages/product/buy-old-refurbished-used-mobiles/[makeName]/[modelName]/[productID]';
 import { deviceConditionQuestion } from '@/utils/constant';
+import sendVerification from '@/utils/fetchers/sendVerification';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import { useAtomValue } from 'jotai';
 import Cookies from 'js-cookie';
@@ -90,11 +91,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			if (
-				showLoginPopup == false &&
-				performAction2 == true &&
-				isLoggedIn
-			) {
+			if (showLoginPopup == false && performAction2 == true && isLoggedIn) {
 				setRequestVerificationSuccessPopup(true);
 				clearInterval(interval);
 			}
@@ -105,12 +102,7 @@ function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 	useEffect(() => {
 		if (openRequestVerificationSuccessPopup) {
 			setListingid(data?.listingId);
-			Axios.sendverification(
-				listingid,
-				Cookies.get('userUniqueId') || 'Guest'
-			).then((response) => {
-				setResData(response);
-			});
+			sendVerification(listingid);
 		}
 	}, [openRequestVerificationSuccessPopup]);
 
