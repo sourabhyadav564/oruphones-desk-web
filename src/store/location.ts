@@ -19,12 +19,12 @@ export const updateLocationAtom = atom(
 	}
 );
 
-export const updateLocationIDandType = atom(
+export const updateLocationLatLong = atom(
 	null,
-	async (get, set, Type: string, Id: number) => {
-		setCookie('locationId', Id);
-		setCookie('locationType', Type);
-		set(topDealsQueryAtom, Id, Type);
+	async (get, set, longitude: number, latitude: number) => {
+		setCookie('longitude', longitude);
+		setCookie('locationType', latitude);
+		set(topDealsQueryAtom, longitude, latitude);
 	}
 );
 export const updateLocationLatLongAtom = atom(

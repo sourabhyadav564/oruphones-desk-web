@@ -18,39 +18,33 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	
 	// check if cookie is present
-	let locationId: number | undefined;
 
-	const locationIdCookie = getCookie('locationId', ctx);
-	let locationType = getCookie('locationType', ctx) as string;
-	if (typeof locationIdCookie === 'string') {
-		locationId = parseInt(locationIdCookie, 10);
-	} else {
-		// Handle the case when locationIdCookie is not a valid number
-		locationId = undefined;
-	}
-	if (!locationId) {
+	let longitude = Number(getCookie('longitude', ctx));
+	let latitude = Number(getCookie('latitude', ctx));
+	if (!latitude) {
 		// set cookie to India
-		setCookie('locationId', 4058659, { ...ctx, maxAge: 24 * 60 * 60 });
-		locationId = 4058659;
+		setCookie('latitude', 17.385044, { ...ctx, maxAge: 24 * 60 * 60 });
+		latitude = 17.385044;
 	}
 
-	if(!locationType) {
-		setCookie('locationType', 'City', { ...ctx, maxAge: 24 * 60 * 60 });
-		locationType = 'City';
+	if (!longitude) {
+		// set cookie to India
+		setCookie('longitude', 78.486671, { ...ctx, maxAge: 24 * 60 * 60 });
+		longitude = 78.486671;
 	}
+
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
 		getHomeBrands(),
-		getHomeListings(locationId,locationType, sliceLength),
+		getHomeListings(longitude, latitude, sliceLength),
 	]);
 	return {
 		props: {
 			brands: brands || null,
 			bestDeals: bestDeals,
-			locationId: locationId,
-			locationType : locationType
+			longitude: longitude,
+			latitude: latitude,
 		},
 	};
 };

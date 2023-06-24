@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { relative } from 'path';
 import * as Axios from '@/api/axios';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
@@ -7,12 +8,11 @@ import Select from '@/components/Form/Select';
 import {
 	citiesAtom,
 	updateLocationAtom,
-	updateLocationIDandType,
+	updateLocationLatLong,
 	updateLocationLatLongAtom,
 } from '@/store/location';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
-import { relative } from 'path';
 
 function LocationPopup({ open, setOpen }) {
 	const [citiesResponse, setCitiesResponse] = useState([]);
@@ -22,7 +22,7 @@ function LocationPopup({ open, setOpen }) {
 	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
 
-	const [, setLocationDet] = useAtom(updateLocationIDandType);
+	const [, setLocationDet] = useAtom(updateLocationLatLong);
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 
 	const handleCityChange = (city) => {
@@ -30,12 +30,12 @@ function LocationPopup({ open, setOpen }) {
 		setOpen(false);
 	};
 
-	
 	const handleCity = (e) => {
-		console.log(e)
-		setLocationDet(e.type,e.id)
-
-		};
+		setLocationDet(e.long, e.lat);
+	};
+	const handlelatlong = (long,lat) => {
+		setLocationDet(long,lat)
+	}
 
 	const options = {
 		enableHighAccuracy: true,
@@ -80,6 +80,7 @@ function LocationPopup({ open, setOpen }) {
 			const fetchData = async () => {
 				try {
 					const citiesResponse = await Axios.getGlobalCities(searchText);
+					console.log(citiesResponse);
 					setCitiesResponse(citiesResponse?.dataObject);
 					setCities(citiesResponse?.dataObject);
 				} catch (err) {
@@ -163,7 +164,7 @@ function LocationPopup({ open, setOpen }) {
 											<Select
 												onChange={(e) => {
 													handleCityChange(e.value);
-													handleCity(e)
+													handleCity(e);
 												}}
 												onInputChange={(e) => {
 													onLocChange(e);
@@ -176,22 +177,21 @@ function LocationPopup({ open, setOpen }) {
 															label: (
 																<div className="option-label">
 																	<span>{items.city}</span>
-																	<div className='flex justify-end'>
-
-																	<span
-																		className="border border-gray-400 p-[2px]"
-															            style={{
-																			fontSize : '10px',
-																		}}
-																	>
-																		{items.type}
-																	</span>
+																	<div className="flex justify-end">
+																		<span
+																			className="border border-gray-400 p-[2px]"
+																			style={{
+																				fontSize: '10px',
+																			}}
+																		>
+																			{items.type}
+																		</span>
 																	</div>
 																</div>
 															),
 															value: items.city,
-															type: items.type,
-															id : items.id
+															long: items.longitude,
+															lat: items.latitude,
 														};
 													})
 												}
@@ -219,8 +219,13 @@ function LocationPopup({ open, setOpen }) {
 														'border-m-green'
 													}`}
 													key={items.city}
-													onClick={() => handleCityChange(items.city)}
+													onClick={() => {
+														handleCityChange(items.city);
+														handlelatlong(items.longitude, items.latitude);
+													}}
 												>
+													
+
 													<div className="relative w-14 h-14 mx-auto ">
 														<Image
 															src={items.imgpath}
