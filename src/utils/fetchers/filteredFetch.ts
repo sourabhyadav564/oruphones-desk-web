@@ -26,6 +26,7 @@ export default async function getFilteredListings(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(content),
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();
@@ -58,6 +59,7 @@ export async function getListingByID(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(content),
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();
@@ -80,6 +82,7 @@ export async function getSimilarListings(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(content),
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();

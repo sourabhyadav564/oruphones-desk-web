@@ -14,6 +14,7 @@ export default async function getSimilarTable(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ filter }),
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();

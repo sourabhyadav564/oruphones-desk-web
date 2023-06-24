@@ -5,6 +5,7 @@ export default async function getHomeBrands() {
 			`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/master/brands`,
 			{
 				method: 'GET',
+				credentials: 'include',
 			}
 		);
 		const json = await res.json();

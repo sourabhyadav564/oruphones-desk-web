@@ -7,6 +7,7 @@ export default async function getModels(make: string, limit?: number) {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ make, count: limit }),
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();

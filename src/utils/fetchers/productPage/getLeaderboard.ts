@@ -14,6 +14,7 @@ export default async function getLeaderboard(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ filter: { listingId: filter.listingId } }),
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();

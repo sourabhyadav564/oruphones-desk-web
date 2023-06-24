@@ -6,6 +6,7 @@ export default async function getMakes() {
 			headers: {
 				'Content-Type': 'application/json',
 			},
+			credentials: 'include',
 		}
 	);
 	const resp = await response.json();

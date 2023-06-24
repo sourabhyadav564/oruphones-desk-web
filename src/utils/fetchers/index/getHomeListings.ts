@@ -1,4 +1,8 @@
-export default async function getHomeListings(longitude: number, latitude: number, count: number) {
+export default async function getHomeListings(
+	longitude: number,
+	latitude: number,
+	count: number
+) {
 	try {
 		//ping the api route with the location
 		const res = await fetch(
@@ -9,6 +13,7 @@ export default async function getHomeListings(longitude: number, latitude: numbe
 				headers: {
 					'Content-Type': 'application/json',
 				},
+				credentials: 'include',
 			}
 		);
 		const json = await res.json();

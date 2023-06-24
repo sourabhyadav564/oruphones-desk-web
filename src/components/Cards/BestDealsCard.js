@@ -3,11 +3,12 @@ import ChevronRight from '@/assets/chevronright.svg';
 import AddFav from '@/components/AddFav';
 import VerifiedIcon from '@/components/VerifiedIcon';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
+import useUser from '@/hooks/useUser';
 
 function BestDealsCard({ data }) {
 	const [imageError, setImageError] = useState(false);
+	const { isLoggedIn } = useUser();
 	return (
 		<div
 			className=" bg-white h-[300px] rounded-lg py-2 text-m-grey-2 mb-6 bg-gradient-to-l from-m-white to-m-green "
@@ -23,7 +24,7 @@ function BestDealsCard({ data }) {
 				<div>
 					{!(
 						data?.isOtherVendor === 'Y' &&
-						Cookies.get('userUniqueId') == undefined
+						!isLoggedIn
 					) && <AddFav data={data} />}
 				</div>
 			</div>

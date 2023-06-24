@@ -23,6 +23,7 @@ import ShareIcon from '@/components/ShareIcon';
 import ComparisonTable from '@/components/Table/ComparisonTable';
 import ComparisonTable2 from '@/components/Table/ComparisonTable2';
 import VerificationIcon from '@/components/VerificationIcon';
+import useUser from '@/hooks/useUser';
 import {
 	dealsYouMayLikeAtom,
 	leaderBoardAtom,
@@ -33,11 +34,7 @@ import { useAtomValue } from 'jotai';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function ProductDetailsCard({
-	data,
-	openFullImage,
-	onDataContext,
-}) {
+function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 	const leaderBoard = useAtomValue(leaderBoardAtom);
 	const dealsYouMayLike = useAtomValue(dealsYouMayLikeAtom);
 	const [performAction2, setPerformAction2] = useState(false);
@@ -58,6 +55,7 @@ function ProductDetailsCard({
 	const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
 	const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
 	const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
+	const { isLoggedIn } = useUser();
 
 	let filled =
 		data?.deviceCondition?.toLowerCase() == 'Like New'.toLowerCase()
@@ -95,7 +93,7 @@ function ProductDetailsCard({
 			if (
 				showLoginPopup == false &&
 				performAction2 == true &&
-				Cookies.get('userUniqueId') != undefined
+				isLoggedIn
 			) {
 				setRequestVerificationSuccessPopup(true);
 				clearInterval(interval);
@@ -117,7 +115,7 @@ function ProductDetailsCard({
 	}, [openRequestVerificationSuccessPopup]);
 
 	const handleClick = () => {
-		if (Cookies.get('userUniqueId') === undefined) {
+		if (!isLoggedIn) {
 			setPerformAction2(true);
 			setShowLoginPopup(true);
 		} else if (data?.verified) {
@@ -145,9 +143,7 @@ function ProductDetailsCard({
 								<ShareIcon data={data} width={16} height={16} />
 							</div>
 							<span className="pt-2 hover:scale-110 ">
-								{data.isOtherVendor === 'N' && (
-									<AddFav data={data} />
-								)}
+								{data.isOtherVendor === 'N' && <AddFav data={data} />}
 							</span>
 						</Fragment>
 					)}
