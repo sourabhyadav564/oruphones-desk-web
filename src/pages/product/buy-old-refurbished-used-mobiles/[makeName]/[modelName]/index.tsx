@@ -51,6 +51,8 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
 	let cookie = getCookie('location', ctx) as string;
+	let latitude = Number(getCookie('latitude', ctx)) ;
+	let longitude = Number(getCookie('longitude', ctx)) ;
 	if (!cookie) {
 		// set cookie to India
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
@@ -67,6 +69,8 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		make: [makeName as string],
 		model: [modelName as string],
 		listingLocation: cookie,
+		latitude : latitude,
+		longitude : longitude,
 		limit: 12,
 	};
 	const queryClient = new QueryClient();

@@ -1,6 +1,8 @@
 type TListingFilter = {
 	ram?: string[];
 	listingLocation?: string;
+	latitude? : number;
+	longitude? : number;
 	page?: number;
 	make?: string[];
 	model?: string[];
@@ -12,6 +14,7 @@ type TListingFilter = {
 	limit?: number;
 	notionalIDs?: string[];
 	sort?: {
+		latlong?: number;
 		price?: number;
 		date?: number;
 	};

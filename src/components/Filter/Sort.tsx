@@ -19,6 +19,8 @@ const sortsAtomRW = atom(
 				return 'Price - High to Low';
 			} else if (sort.date === -1) {
 				return 'Newest First';
+			} else if (sort.latlong === 1) {
+				return 'Distance';
 			}
 		}
 		return 'Featured';
@@ -28,6 +30,7 @@ const sortsAtomRW = atom(
 			| {
 					price?: number;
 					date?: number;
+					latlong? : number;
 			  }
 			| undefined;
 		switch (update) {
@@ -52,6 +55,11 @@ const sortsAtomRW = atom(
 					date: -1,
 				};
 				break;
+			}
+			case 'Distance': {
+				tempUpdate = {
+					latlong: 1,
+				};
 			}
 		}
 		set(filterAtom, (prev) => ({
