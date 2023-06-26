@@ -1,5 +1,4 @@
 import { TListingReturnFilter } from '../../types/ListingFilter';
-import TListingFilter from '@/types/ListingFilter';
 
 export default async function getListings(
 	listingIds: string[] | string

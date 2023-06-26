@@ -2,9 +2,7 @@ import { useState } from 'react';
 import Rupee1 from '@/assets/rupee1.svg';
 import AddFav from '@/components/AddFav';
 import VerifiedIcon from '@/components/VerifiedIcon';
-import { topDealsAtom } from '@/store/topDeals';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
-import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 

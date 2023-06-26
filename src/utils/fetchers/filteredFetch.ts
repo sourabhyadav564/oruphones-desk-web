@@ -2,10 +2,13 @@ import TListingFilter, {
 	TListingFilterWithID,
 	TListingReturnFilter,
 } from '@/types/ListingFilter';
+import SSRreq from '@/types/SSRreq';
+import SSRHeaders from '@/utils/ssrHeaders';
 
 export default async function getFilteredListings(
 	filter: TListingFilter,
 	isNotionalBestDeals: boolean = false,
+	req?: SSRreq,
 	returnFilter?: TListingReturnFilter
 ): Promise<{
 	data: TListingReturnFilter[];
@@ -22,9 +25,7 @@ export default async function getFilteredListings(
 		}`,
 		{
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			...SSRHeaders(req),
 			body: JSON.stringify(content),
 			credentials: 'include',
 		}
@@ -45,7 +46,8 @@ export default async function getFilteredListings(
 
 export async function getListingByID(
 	filter: TListingFilterWithID,
-	returnFilter?: TListingReturnFilter
+	returnFilter?: TListingReturnFilter,
+	req?: SSRreq
 ): Promise<TListingReturnFilter> {
 	const content = {
 		filter,
@@ -55,9 +57,7 @@ export async function getListingByID(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter`,
 		{
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			...SSRHeaders(req),
 			body: JSON.stringify(content),
 			credentials: 'include',
 		}
@@ -68,7 +68,8 @@ export async function getListingByID(
 
 export async function getSimilarListings(
 	filter: TListingFilterWithID,
-	returnFilter?: TListingReturnFilter
+	returnFilter?: TListingReturnFilter,
+	req?: SSRreq
 ): Promise<{ data: TListingReturnFilter[]; totalCount: number }> {
 	const content = {
 		filter,
@@ -78,9 +79,7 @@ export async function getSimilarListings(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter/getSimilar`,
 		{
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			...SSRHeaders(req),
 			body: JSON.stringify(content),
 			credentials: 'include',
 		}

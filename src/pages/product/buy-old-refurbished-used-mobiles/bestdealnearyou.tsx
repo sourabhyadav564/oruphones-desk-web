@@ -1,6 +1,4 @@
-import {
-	useInfiniteQuery,
-} from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SwiperSlide } from 'swiper/react';
@@ -78,11 +76,15 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 }, true);
+			const data = await getFilteredListings(
+				{ ...filters, page: 1 },
+				true,
+				ctx.req
+			);
 			return data;
 		},
 	});
-	const allMakes = await getMakes();
+	const allMakes = await getMakes(ctx.req);
 	// cache this SSR response
 	// ctx.res.setHeader(
 	// 	'Cache-Control',
@@ -200,9 +202,7 @@ function Bestdealnearyou({
 									>
 										{data?.pages[0].bestDeals?.map((items, index) => (
 											<SwiperSlide key={index}>
-												<BestDealsCard
-													data={items}
-												/>
+												<BestDealsCard data={items} />
 											</SwiperSlide>
 										))}
 									</Carousel>
@@ -241,9 +241,7 @@ function Bestdealnearyou({
 														{page.data?.map((product, idx2) => {
 															return (
 																<div key={idx2}>
-																	<ProductCard
-																		data={product}
-																	/>
+																	<ProductCard data={product} />
 																</div>
 															);
 														})}

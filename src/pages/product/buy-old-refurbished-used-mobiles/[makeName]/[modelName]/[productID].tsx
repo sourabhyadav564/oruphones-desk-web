@@ -66,7 +66,8 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 				{
 					listingId: productID as string,
 				},
-				returnFilter as any
+				returnFilter as any,
+				ctx.req
 			);
 			return data;
 		},
@@ -74,7 +75,7 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	const { make, model } = prod;
 	const productLeaderboard = await queryClient.fetchQuery({
 		queryKey: ['product-leaderboard', make, model],
-		queryFn: () => getLeaderboard({ listingId: productID as string }),
+		queryFn: () => getLeaderboard({ listingId: productID as string }, ctx.req),
 	});
 	return {
 		props: {

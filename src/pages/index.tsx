@@ -36,8 +36,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
-		getHomeBrands(),
-		getHomeListings(longitude, latitude, sliceLength),
+		getHomeBrands(ctx.req),
+		getHomeListings(longitude, latitude, sliceLength, ctx.req),
 	]);
 	return {
 		props: {

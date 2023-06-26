@@ -1,11 +1,12 @@
-export default async function getMakes() {
+import SSRreq from '@/types/SSRreq';
+import SSRHeaders from '@/utils/ssrHeaders';
+
+export default async function getMakes(req?: SSRreq) {
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/makes`,
 		{
 			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			...SSRHeaders(req),
 			credentials: 'include',
 		}
 	);

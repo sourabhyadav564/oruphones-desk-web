@@ -74,11 +74,11 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 }, true);
+			const data = await getFilteredListings({ ...filters, page: 1 }, true, ctx.req);
 			return data;
 		},
 	});
-	let models = await getModels(makeName, 20);
+	let models = await getModels(makeName, 20, ctx.req);
 	return {
 		props: {
 			makeName,

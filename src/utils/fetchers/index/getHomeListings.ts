@@ -1,7 +1,11 @@
+import SSRreq from '@/types/SSRreq';
+import SSRHeaders from '@/utils/ssrHeaders';
+
 export default async function getHomeListings(
 	longitude: number,
 	latitude: number,
-	count: number
+	count: number,
+	req?: SSRreq
 ) {
 	try {
 		//ping the api route with the location
@@ -10,10 +14,8 @@ export default async function getHomeListings(
 			{
 				method: 'POST',
 				body: JSON.stringify({ longitude, latitude, count }),
-				headers: {
-					'Content-Type': 'application/json',
-				},
 				credentials: 'include',
+				...SSRHeaders(req),
 			}
 		);
 		const json = await res.json();
