@@ -112,7 +112,7 @@ function DesktopMenu() {
 												href={{ pathname: item.chlink }}
 												passHref
 											>
-												<span> {item.name} </span>
+												<a> {item.name} </a>
 											</Link>
 										</Popover.Button>
 									</>
