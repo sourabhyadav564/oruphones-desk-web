@@ -5,9 +5,8 @@ import ProductSkeletonCard from '@/components/Cards/ProductSkeletonCard';
 import Select from '@/components/Form/Select';
 import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 import { numberWithCommas } from '@/utils/util';
-import Cookies from 'js-cookie';
-import Image from 'next/image';
 import Head from 'next/head';
+import Image from 'next/image';
 
 function Index({
 	isFromEdit,
@@ -87,14 +86,7 @@ function Index({
 
 	useEffect(() => {
 		(async () => {
-			const data = await Axios.fetchModelList(
-				Cookies.get('userUniqueId') || 'Guest',
-				Cookies.get('sessionId') != undefined
-					? Cookies.get('sessionId')
-					: localStorage.getItem('sessionId') || '',
-				'',
-				''
-			);
+			const data = await Axios.fetchModelList('Guest', '', '', '');
 			let makeModelLists = data?.dataObject;
 			if (makeModelLists) {
 				makeModelLists.sort((a: any, b: any) => {
@@ -133,8 +125,8 @@ function Index({
 
 	const setSearchModelList2 = async (e: any) => {
 		const models = await Axios.fetchModelList(
-			Cookies.get('userUniqueId'),
-			Cookies.get('sessionId'),
+			'',
+			'',
 			make2,
 			e
 		);
@@ -150,8 +142,8 @@ function Index({
 
 	const setSearchModelList = async (e: any) => {
 		const models = await Axios.fetchModelList(
-			Cookies.get('userUniqueId'),
-			Cookies.get('sessionId'),
+			'',
+			'',
 			make,
 			e
 		);
@@ -445,10 +437,7 @@ function Index({
 														))
 													) : !loading && products && products?.length > 0 ? (
 														products?.map((product, index) => (
-															<ProductCard
-																key={index}
-																data={product}
-															/>
+															<ProductCard key={index} data={product} />
 														))
 													) : (
 														<div>
