@@ -19,13 +19,9 @@ function TopDeals({ bestDeals, location }) {
 			/>
 			<div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-between  gap-8 py-4">
 				{bestDeals &&
-					bestDeals
-						.map((item, index) => (
-							<TopDealCard
-								key={index}
-								data={item}
-							/>
-						))}
+					bestDeals.map((item, index) => (
+						<TopDealCard key={index} data={item} />
+					))}
 			</div>
 			<div className="w-full md:w-1/4 m-auto p-4 drop-shadow-xl">
 				<TopDealCard data={{ name: 'show all' }} />

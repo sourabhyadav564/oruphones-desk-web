@@ -10,8 +10,9 @@ import Link from 'next/link';
 
 function TopDealCard({ data }) {
 	const [imageError, setImageError] = useState(false);
-	const setProducts = useSetAtom(topDealsAtom);
-	const locality = data?.listingLocality ? data.listingLocality.substring(0, 8) : '';
+	const locality = data?.listingLocality
+		? data.listingLocality.substring(0, 8)
+		: '';
 
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (
@@ -26,20 +27,7 @@ function TopDealCard({ data }) {
 		<div data-aos="flip-right" data-aos-duration="2000" className="relative">
 			<span className="flex justify-end pr-2 cursor-pointer ">
 				{!(data?.isOtherVendor === 'Y') && (
-					<AddFav
-						data={data}
-						setProducts={(listingId) =>
-							setProducts((prev) =>
-								prev.map((item) =>
-									item.listingId === listingId
-										? { ...item, favourite: !(item.favourite || false) }
-										: item
-								)
-							)
-						}
-						height={18}
-						width={18}
-					/>
+					<AddFav data={data} height={18} width={18} />
 				)}
 
 				{!(data?.isOtherVendor === 'N') && <div className="mt-7"></div>}
