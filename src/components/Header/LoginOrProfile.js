@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RegUser from '@/assets/user1.svg';
 import Notifications from '@/components/Notifications';
 import useUser from '@/hooks/useUser';
-import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,9 +18,8 @@ function LoginOrProfile() {
 	const router = useRouter();
 	const [showLogin, setShowLogin] = React.useState(false);
 	const [performAction, setPerformAction] = useState(false);
-	const { logout } = useUser();
+	const { logout, isLoggedIn } = useUser();
 	const [ItemLink, setItemLink] = useState('');
-	const { isLoggedIn } = useUser();
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -29,7 +27,7 @@ function LoginOrProfile() {
 				performAction == true &&
 				showLogin == false &&
 				ItemLink !== '' &&
-				Cookies.get('userUniqueId') !== undefined
+				isLoggedIn
 			) {
 				setPerformAction(false);
 				clearInterval(interval);

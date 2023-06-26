@@ -189,7 +189,6 @@ function ProductDetails({
 								</div>
 							)}
 						</div>
-						z
 						{similarProducts &&
 							similarProducts.data.length > 19 &&
 							make &&

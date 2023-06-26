@@ -32,7 +32,6 @@ import { deviceConditionQuestion } from '@/utils/constant';
 import sendVerification from '@/utils/fetchers/sendVerification';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import { useAtomValue } from 'jotai';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function ProductDetailsCard({ data, openFullImage, onDataContext }) {

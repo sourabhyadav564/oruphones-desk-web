@@ -13,7 +13,9 @@ export default async function getSimilarTable(
 		`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/filter/getSimilarPriceRange`,
 		{
 			method: 'POST',
-			...SSRHeaders(req),
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify({ filter }),
 			credentials: 'include',
 		}

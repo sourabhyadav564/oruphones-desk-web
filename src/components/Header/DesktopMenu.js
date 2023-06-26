@@ -4,7 +4,6 @@ import Location from '@/assets/location.svg';
 import useUser from '@/hooks/useUser';
 import readLocationAtom from '@/store/location';
 import { useAtom } from 'jotai';
-import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -63,7 +62,6 @@ function DesktopMenu() {
 	const { isLoggedIn } = useUser();
 	const [showLogin, setShowLogin] = useState(false);
 	const [ItemLink, setItemLink] = useState('');
-	const [performAction, setPerformAction] = useState(false);
 	const [location] = useAtom(readLocationAtom);
 
 	useEffect(() => {
@@ -71,9 +69,8 @@ function DesktopMenu() {
 			if (
 				showLogin == false &&
 				ItemLink !== '' &&
-				Cookies.get('userUniqueId') !== undefined
+				isLoggedIn
 			) {
-				setPerformAction(false);
 				clearInterval(interval);
 				router.push(ItemLink);
 			}
@@ -143,7 +140,6 @@ function DesktopMenu() {
 								text="Services"
 								onClick={() => {
 									setShowLogin(true);
-									setPerformAction(true);
 									setItemLink('/user/services');
 								}}
 							/>
