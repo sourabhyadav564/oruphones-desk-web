@@ -8,6 +8,11 @@ import { atomWithStorage } from 'jotai/utils';
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
 export const locationAtom = atomWithStorage<string>('location', 'India');
+export const cityAtom = atomWithStorage<string>('city', '');
+export const localityAtom = atomWithStorage<string>('locality', '');
+export const latitudeAtom = atomWithStorage<number>('latitude', 0);
+export const longitudeAtom = atomWithStorage<number>('longitude', 0);
+export const stateAtom = atomWithStorage<string>('state', '');
 const readLocationAtom = atom((get) => get(locationAtom));
 export const updateLocationAtom = atom(
 	null,
@@ -15,16 +20,33 @@ export const updateLocationAtom = atom(
 		setCookie('location', location);
 
 		set(filterAtom, { ...get(filterAtom), listingLocation: location });
-		set(locationAtom, location);
 	}
 );
 
-export const updateLocationLatLong = atom(
+export const updateNewLocationAtom = atom(
 	null,
-	async (get, set, longitude: number, latitude: number) => {
-		setCookie('longitude', longitude);
-		setCookie('latitude', latitude);
-		set(topDealsQueryAtom, longitude, latitude);
+	async (_get, set, locationObj: {
+		locality: string;
+		city: string;
+		state: string;
+		latitude: number;
+		longitude: number;
+		location : string;
+	}) => {
+		const { locality, city, state, latitude, longitude,location } = locationObj;
+		set(localityAtom, locality);
+		set(cityAtom, city);
+		set(locationAtom, location);
+		set(latitudeAtom, latitude);
+		set(longitudeAtom, longitude);
+		set(stateAtom, state)
+
+		setCookie('locality', locality);
+		setCookie('state', state)
+		setCookie('city', city);
+		setCookie('location', location);
+		setCookie('latitude', latitude.toString());
+		setCookie('longitude', longitude.toString());
 	}
 );
 export const updateLocationLatLongAtom = atom(

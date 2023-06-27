@@ -8,9 +8,10 @@ import Select from '@/components/Form/Select';
 import {
 	citiesAtom,
 	updateLocationAtom,
-	updateLocationLatLong,
 	updateLocationLatLongAtom,
+	updateNewLocationAtom,
 } from '@/store/location';
+import { fetchTopSearch, Search } from '@/utils/fetchers/location';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 
@@ -22,7 +23,7 @@ function LocationPopup({ open, setOpen }) {
 	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
 
-	const [, setLocationDet] = useAtom(updateLocationLatLong);
+	const [, setNewLocation] = useAtom(updateNewLocationAtom);
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 
 	const handleCityChange = (city) => {
@@ -30,12 +31,31 @@ function LocationPopup({ open, setOpen }) {
 		setOpen(false);
 	};
 
-	const handleCity = (e) => {
-		setLocationDet(e.long, e.lat);
+	const handleLocation = (items) => {
+		let locationObj = {
+			locality: items.locality,
+			city: items.city,
+			state: items.state,
+			latitude: items.latitude,
+			longitude: items.longitude,
+			location : items.location
+		};
+		console.log(locationObj)
+		setNewLocation(locationObj);
 	};
-	const handlelatlong = (long,lat) => {
-		setLocationDet(long,lat)
-	}
+
+	const handleLocation2 = (e) => {
+		let locationObj = {
+			locality: e.locality,
+			city: e.city,
+			state: e.state,
+			latitude: e.latitude,
+			longitude: e.longitude,
+			location : e.location
+		};
+		console.log(locationObj)
+		setNewLocation(locationObj);
+	};
 
 	const options = {
 		enableHighAccuracy: true,
@@ -49,18 +69,31 @@ function LocationPopup({ open, setOpen }) {
 	};
 
 	const onLocChange = async (e) => {
+		let searchText = e;
 		setSearchText(e);
-		const response = await Axios.getGlobalCities(e);
-		let india = response.dataObject.filter((item) => item.city === 'India');
-		let otherCities = response.dataObject.filter(
-			(item) => item.city !== 'India'
-		);
-		setCitiesResponse2(india.concat(otherCities));
+		const response = await Search(searchText);
+
+		setCitiesResponse2(response);
 	};
 
 	const onError = () => {
 		setLocation('India');
 	};
+
+	useEffect(() => {
+		async function getTopSearch() {
+			console.log('hi');
+			try {
+				const response = await fetchTopSearch();
+				console.log;
+				setCitiesResponse(response);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		getTopSearch();
+	}, []);
 
 	const handleNearme = async () => {
 		if (!('geolocation' in navigator)) {
@@ -72,26 +105,6 @@ function LocationPopup({ open, setOpen }) {
 		navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 	};
 
-	useEffect(() => {
-		if (cities) {
-			setCitiesResponse(cities);
-			setCities(cities);
-		} else {
-			const fetchData = async () => {
-				try {
-					const citiesResponse = await Axios.getGlobalCities(searchText);
-					console.log(citiesResponse);
-					setCitiesResponse(citiesResponse?.dataObject);
-					setCities(citiesResponse?.dataObject);
-				} catch (err) {
-					console.error(err);
-					setCities([]);
-				}
-			};
-			fetchData();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 	return (
 		<Transition.Root appear={true} show={open} as={Fragment}>
 			<Dialog
@@ -164,7 +177,7 @@ function LocationPopup({ open, setOpen }) {
 											<Select
 												onChange={(e) => {
 													handleCityChange(e.value);
-													handleCity(e);
+													handleLocation2(e);
 												}}
 												onInputChange={(e) => {
 													onLocChange(e);
@@ -176,7 +189,7 @@ function LocationPopup({ open, setOpen }) {
 														return {
 															label: (
 																<div className="option-label">
-																	<span>{items.city}</span>
+																	<span>{items.location}</span>
 																	<div className="flex justify-end">
 																		<span
 																			className="border border-gray-400 p-[2px]"
@@ -189,9 +202,13 @@ function LocationPopup({ open, setOpen }) {
 																	</div>
 																</div>
 															),
-															value: items.city,
-															long: items.longitude,
-															lat: items.latitude,
+															value: items.location,
+															location : items.location,
+															longitude: items.longitude,
+															latitude: items.latitude,
+															city: items.city,
+															state: items.state,
+															locality: items.locality,
 														};
 													})
 												}
@@ -210,35 +227,31 @@ function LocationPopup({ open, setOpen }) {
 							<div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 								<div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3  gap-2 text-center">
 									{citiesResponse &&
-										citiesResponse
-											.filter((item) => item.displayWithImage === '1')
-											.map((items) => (
-												<div
-													className={`border hover:cursor-pointer rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${
-														selectedCity.current === items.city &&
-														'border-m-green'
-													}`}
-													key={items.city}
-													onClick={() => {
-														handleCityChange(items.city);
-														handlelatlong(items.longitude, items.latitude);
-													}}
-												>
-													
-
-													<div className="relative w-14 h-14 mx-auto ">
-														<Image
-															src={items.imgpath}
-															alt="hyderabad"
-															layout="fill"
-															className="Object-contain"
-														/>
-													</div>
-													<span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">
-														{items.city}
-													</span>
+										citiesResponse.map((items) => (
+											<div
+												className={`border hover:cursor-pointer rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${
+													selectedCity.current === items.city &&
+													'border-m-green'
+												}`}
+												key={items.location}
+												onClick={() => {
+													handleCityChange(items.location);
+													handleLocation(items)
+												}}
+											>
+												<div className="relative w-14 h-14 mx-auto ">
+													<Image
+														src={items.imgPath}
+														alt="hyderabad"
+														layout="fill"
+														className="Object-contain"
+													/>
 												</div>
-											))}
+												<span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">
+													{items.location}
+												</span>
+											</div>
+										))}
 								</div>
 							</div>
 						</div>
