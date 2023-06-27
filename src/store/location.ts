@@ -13,7 +13,7 @@ export const updateLocationAtom = atom(
 	null,
 	async (get, set, location: string) => {
 		setCookie('location', location);
-		
+
 		set(filterAtom, { ...get(filterAtom), listingLocation: location });
 		set(locationAtom, location);
 	}
@@ -45,18 +45,25 @@ export const updateLocationLatLongAtom = atom(
 			location.coords.longitude
 		);
 		const address = res.results[0];
+		console.log(address);
 		let city;
+		let state;
 		for (let i = 0; i < address.address_components.length; i++) {
 			for (let j = 0; j < address.address_components[i].types.length; j++) {
 				switch (address.address_components[i].types[j]) {
 					case 'locality':
 						city = address.address_components[i].long_name;
 						break;
+
+					case 'administrative_area_level_1':
+						state = address.address_components[i].long_name;
+						break;
 				}
 			}
 		}
-		const noWhiteSpaceCity = city.replace(/\s/g, '');
-		set(updateLocationAtom, noWhiteSpaceCity);
+		const statewithcity = city.replace(/\s/g, '') + ',' + ' ' + state;
+
+		set(updateLocationAtom, statewithcity);
 	}
 );
 
