@@ -23,7 +23,7 @@ export const updateLocationLatLong = atom(
 	null,
 	async (get, set, longitude: number, latitude: number) => {
 		setCookie('longitude', longitude);
-		setCookie('locationType', latitude);
+		setCookie('latitude', latitude);
 		set(topDealsQueryAtom, longitude, latitude);
 	}
 );
