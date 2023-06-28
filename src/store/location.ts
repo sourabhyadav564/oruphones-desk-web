@@ -1,6 +1,5 @@
-import Geocode, { setLocationType } from 'react-geocode';
+import Geocode from 'react-geocode';
 import filterAtom from '@/store/productFilter';
-import { topDealsQueryAtom } from '@/store/topDeals';
 import { setCookie } from 'cookies-next';
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -18,7 +17,6 @@ export const updateLocationAtom = atom(
 	null,
 	async (get, set, location: string) => {
 		setCookie('location', location);
-
 		set(filterAtom, { ...get(filterAtom), listingLocation: location });
 	}
 );

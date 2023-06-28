@@ -1,12 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { relative } from 'path';
-import * as Axios from '@/api/axios';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
 import Select from '@/components/Form/Select';
+import useDebounce from '@/hooks/useDebounce';
 import {
-	citiesAtom,
 	updateLocationAtom,
 	updateLocationLatLongAtom,
 	updateNewLocationAtom,
@@ -14,13 +12,13 @@ import {
 import { fetchTopSearch, Search } from '@/utils/fetchers/location';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
 
 function LocationPopup({ open, setOpen }) {
 	const [citiesResponse, setCitiesResponse] = useState([]);
-	const [citiesResponse2, setCitiesResponse2] = useState([]);
 	const [searchText, setSearchText] = useState('');
+	const debouncedSearchText = useDebounce(searchText, 400);
 	const selectedCity = useRef();
-	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
 
 	const [, setNewLocation] = useAtom(updateNewLocationAtom);
@@ -38,9 +36,9 @@ function LocationPopup({ open, setOpen }) {
 			state: items.state,
 			latitude: items.latitude,
 			longitude: items.longitude,
-			location : items.location
+			location: items.location,
 		};
-		console.log(locationObj)
+		console.log(locationObj);
 		setNewLocation(locationObj);
 	};
 
@@ -51,9 +49,9 @@ function LocationPopup({ open, setOpen }) {
 			state: e.state,
 			latitude: e.latitude,
 			longitude: e.longitude,
-			location : e.location
+			location: e.location,
 		};
-		console.log(locationObj)
+		console.log(locationObj);
 		setNewLocation(locationObj);
 	};
 
@@ -71,9 +69,6 @@ function LocationPopup({ open, setOpen }) {
 	const onLocChange = async (e) => {
 		let searchText = e;
 		setSearchText(e);
-		const response = await Search(searchText);
-
-		setCitiesResponse2(response);
 	};
 
 	const onError = () => {
@@ -94,6 +89,14 @@ function LocationPopup({ open, setOpen }) {
 
 		getTopSearch();
 	}, []);
+
+	const { data: citiesResponse2 } = useQuery({
+		queryKey: ['Searchlocation', debouncedSearchText],
+		queryFn: async () => {
+			const resp = await Search(debouncedSearchText);
+			return resp;
+		},
+	});
 
 	const handleNearme = async () => {
 		if (!('geolocation' in navigator)) {
@@ -203,7 +206,7 @@ function LocationPopup({ open, setOpen }) {
 																</div>
 															),
 															value: items.location,
-															location : items.location,
+															location: items.location,
 															longitude: items.longitude,
 															latitude: items.latitude,
 															city: items.city,
@@ -236,7 +239,7 @@ function LocationPopup({ open, setOpen }) {
 												key={items.location}
 												onClick={() => {
 													handleCityChange(items.location);
-													handleLocation(items)
+													handleLocation(items);
 												}}
 											>
 												<div className="relative w-14 h-14 mx-auto ">
