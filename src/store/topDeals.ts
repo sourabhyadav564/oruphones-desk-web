@@ -5,13 +5,9 @@ import { atom } from 'jotai';
 export const topDealsAtom = atom<IDeal[] | null>(null);
 export const topDealsQueryAtom = atom(
 	null,
-	async (get, set, longitude: number, latitude: number) => {
+	async (get, set, locality: string, state: string, city: string) => {
 		const sliceLength = 10;
-		let bestDeals = await getHomeListings(
-			longitude,
-			latitude,
-			sliceLength
-		);
+		let bestDeals = await getHomeListings(locality, state, city, sliceLength);
 		set(topDealsAtom, bestDeals);
 	}
 );

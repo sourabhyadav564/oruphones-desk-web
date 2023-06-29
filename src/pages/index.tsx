@@ -18,33 +18,19 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	// check if cookie is present
-
-	let longitude = Number(getCookie('longitude', ctx));
-	let latitude = Number(getCookie('latitude', ctx));
-	if (!latitude) {
-		// set cookie to India
-		setCookie('latitude', 17.385044, { ...ctx, maxAge: 24 * 60 * 60 });
-		latitude = 17.385044;
-	}
-
-	if (!longitude) {
-		// set cookie to India
-		setCookie('longitude', 78.486671, { ...ctx, maxAge: 24 * 60 * 60 });
-		longitude = 78.486671;
-	}
+	let locality = (getCookie('locality', ctx) as string) || '';
+	let state = (getCookie('state', ctx) as string) || 'India';
+	let city = (getCookie('city', ctx) as string) || 'India';
 
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
 		getHomeBrands(ctx.req),
-		getHomeListings(longitude, latitude, sliceLength, ctx.req),
+		getHomeListings(locality, state, city, sliceLength, ctx.req),
 	]);
 	return {
 		props: {
 			brands: brands || null,
 			bestDeals: bestDeals,
-			longitude: longitude,
-			latitude: latitude,
 		},
 	};
 };

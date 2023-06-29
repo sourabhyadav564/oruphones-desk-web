@@ -2,8 +2,9 @@ import SSRreq from '@/types/SSRreq';
 import SSRHeaders from '@/utils/ssrHeaders';
 
 export default async function getHomeListings(
-	longitude: number,
-	latitude: number,
+	locality: string,
+	state: string,
+	city: string,
 	count: number,
 	req?: SSRreq
 ) {
@@ -13,7 +14,7 @@ export default async function getHomeListings(
 			`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/topSellingHome`,
 			{
 				method: 'POST',
-				body: JSON.stringify({ longitude, latitude, count }),
+				body: JSON.stringify({ locality,state,city, count }),
 				credentials: 'include',
 				...SSRHeaders(req),
 			}

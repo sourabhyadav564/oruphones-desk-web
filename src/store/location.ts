@@ -45,6 +45,7 @@ export const updateNewLocationAtom = atom(
 		set(latitudeAtom, latitude);
 		set(longitudeAtom, longitude);
 		set(stateAtom, state);
+		set(topDealsQueryAtom, locality,state,city)
 
 		setCookie('locality', locality);
 		setCookie('state', state);
