@@ -1,4 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { useQuery } from '@tanstack/react-query';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
@@ -7,12 +8,10 @@ import useDebounce from '@/hooks/useDebounce';
 import {
 	updateLocationAtom,
 	updateLocationLatLongAtom,
-	updateNewLocationAtom,
 } from '@/store/location';
 import { fetchTopSearch, Search } from '@/utils/fetchers/location';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
 
 function LocationPopup({ open, setOpen }) {
 	const [citiesResponse, setCitiesResponse] = useState([]);
@@ -21,13 +20,7 @@ function LocationPopup({ open, setOpen }) {
 	const selectedCity = useRef();
 	const [, setLocation] = useAtom(updateLocationAtom);
 
-	const [, setNewLocation] = useAtom(updateNewLocationAtom);
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
-
-	const handleCityChange = (city) => {
-		setLocation(city);
-		setOpen(false);
-	};
 
 	const handleLocation = (items) => {
 		let locationObj = {
@@ -39,7 +32,8 @@ function LocationPopup({ open, setOpen }) {
 			location: items.location,
 		};
 		console.log(locationObj);
-		setNewLocation(locationObj);
+		setLocation(locationObj);
+		setOpen(false);
 	};
 
 	const handleLocation2 = (e) => {
@@ -49,10 +43,11 @@ function LocationPopup({ open, setOpen }) {
 			state: e.state,
 			latitude: e.latitude,
 			longitude: e.longitude,
-			location: e.location,
+			location: e.value,
 		};
 		console.log(locationObj);
-		setNewLocation(locationObj);
+		setLocation(locationObj);
+		setOpen(false);
 	};
 
 	const options = {
@@ -179,7 +174,6 @@ function LocationPopup({ open, setOpen }) {
 										<div className="w-full">
 											<Select
 												onChange={(e) => {
-													handleCityChange(e.value);
 													handleLocation2(e);
 												}}
 												onInputChange={(e) => {
@@ -238,7 +232,6 @@ function LocationPopup({ open, setOpen }) {
 												}`}
 												key={items.location}
 												onClick={() => {
-													handleCityChange(items.location);
 													handleLocation(items);
 												}}
 											>

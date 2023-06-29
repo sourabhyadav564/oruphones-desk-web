@@ -46,8 +46,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
 	let cookie = getCookie('location', ctx) as string;
-	let latitude = Number(getCookie('latitude', ctx)) ;
-	let longitude = Number(getCookie('longitude', ctx)) ;
+	let latitude = Number(getCookie('latitude', ctx)) || 28.6139;
+	let longitude = Number(getCookie('longitude', ctx)) || 77.209;
+	let locality = (getCookie('locality', ctx) as string) || '';
+	let state = (getCookie('state', ctx) as string) || 'India';
+	let city = (getCookie('city', ctx) as string) || 'India';
+
 	if (!cookie) {
 		// set cookie to India
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
@@ -63,9 +67,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	};
 	let filters: TListingFilter = {
 		listingLocation: cookie,
-		latitude : latitude,
-		longitude : longitude,
+		latitude: latitude,
+		longitude: longitude,
 		limit: 12,
+		locality: locality,
+		state: state,
+		city: city,
 		...(verified && { verified: verified === 'true' }),
 		...(condition && { condition: [condition] }),
 		...(warranty && { warranty: [warranty] }),

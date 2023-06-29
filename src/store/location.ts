@@ -1,9 +1,9 @@
 import Geocode from 'react-geocode';
+import { topDealsQueryAtom } from './topDeals';
 import filterAtom from '@/store/productFilter';
 import { setCookie } from 'cookies-next';
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { topDealsQueryAtom } from './topDeals';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
@@ -16,16 +16,8 @@ export const stateAtom = atomWithStorage<string>('state', '');
 const readLocationAtom = atom((get) => get(locationAtom));
 export const updateLocationAtom = atom(
 	null,
-	async (get, set, location: string) => {
-		setCookie('location', location);
-		set(filterAtom, { ...get(filterAtom), listingLocation: location });
-	}
-);
-
-export const updateNewLocationAtom = atom(
-	null,
 	async (
-		_get,
+		get,
 		set,
 		locationObj: {
 			locality: string;
@@ -38,13 +30,15 @@ export const updateNewLocationAtom = atom(
 	) => {
 		const { locality, city, state, latitude, longitude, location } =
 			locationObj;
+		setCookie('location', location);
+		set(filterAtom, { ...get(filterAtom), listingLocation: location, locality: locality,state:state,city:city });
 		set(localityAtom, locality);
 		set(cityAtom, city);
 		set(locationAtom, location);
 		set(latitudeAtom, latitude);
 		set(longitudeAtom, longitude);
 		set(stateAtom, state);
-		set(topDealsQueryAtom, locality,state,city)
+		set(topDealsQueryAtom, locality, state, city);
 
 		setCookie('locality', locality);
 		setCookie('state', state);
@@ -54,6 +48,7 @@ export const updateNewLocationAtom = atom(
 		setCookie('longitude', longitude.toString());
 	}
 );
+
 export const updateLocationLatLongAtom = atom(
 	null,
 	async (
@@ -94,8 +89,8 @@ export const updateLocationLatLongAtom = atom(
 		}
 		const statewithcity = city.replace(/\s/g, '') + ',' + ' ' + state;
 
-		const lat = address.geometry.location.lat
-		const long =address.geometry.location.lng
+		const lat = address.geometry.location.lat;
+		const long = address.geometry.location.lng;
 
 		let locationObj = {
 			locality: locality,
@@ -106,8 +101,7 @@ export const updateLocationLatLongAtom = atom(
 			location: statewithcity,
 		};
 
-		set(updateLocationAtom, statewithcity);
-	set(updateNewLocationAtom, locationObj)
+		set(updateLocationAtom, locationObj);
 	}
 );
 

@@ -3,6 +3,9 @@ type TListingFilter = {
 	listingLocation?: string;
 	latitude? : number;
 	longitude? : number;
+	locality? : string;
+	state? : string;
+	city? : string;
 	page?: number;
 	make?: string[];
 	model?: string[];
