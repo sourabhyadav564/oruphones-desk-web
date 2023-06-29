@@ -44,6 +44,9 @@ async function otpValidate({
 		city: string;
 		state: string;
 		mobileNumber: number;
+		favListings: string[];
+		userListings: string[];
+		isAccountExpired: boolean;
 	};
 }> {
 	const response = await fetch(

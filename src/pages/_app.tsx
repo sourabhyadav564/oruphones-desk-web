@@ -34,19 +34,19 @@ export default function MyApp({
 	const [queryClient] = useState(() => new QueryClient(queryClientOptions));
 	return (
 		<>
-				<QueryClientProvider client={queryClient}>
-					<Hydrate state={pageProps.dehydratedState}>
-						<ReactQueryDevtools position="bottom-right" />
-						<Provider>
-							<UserInit />
-							<DevTools theme="dark" />
-							<Header />
-							<DefaultSeo {...SEO} />
-							<Component {...pageProps} />
-							<Footer />
-						</Provider>
-					</Hydrate>
-				</QueryClientProvider>
+			<QueryClientProvider client={queryClient}>
+				<Hydrate state={pageProps.dehydratedState}>
+					<ReactQueryDevtools position="bottom-right" />
+					<Provider>
+						<UserInit />
+						<DevTools theme="dark" />
+						<Header />
+						<DefaultSeo {...SEO} />
+						<Component {...pageProps} />
+						<Footer />
+					</Provider>
+				</Hydrate>
+			</QueryClientProvider>
 			<ToastContainer
 				position="bottom-center"
 				autoClose={3000}

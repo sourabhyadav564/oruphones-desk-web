@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import LoginPopup from './Popup/LoginPopup';
 import OutlineHeartBlack from '@/assets/heart_black.svg';
 import FillHeart from '@/assets/heartfill.svg';
 import OutlineHeart from '@/assets/heartoutline.svg';
@@ -9,6 +8,11 @@ import useUser from '@/hooks/useUser';
 import { TListingReturnFilter } from '@/types/ListingFilter';
 import toggleFav from '@/utils/fetchers/user/toggleFav';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const DynamicLoginPopup = dynamic(() => import('./Popup/LoginPopup'), {
+	ssr: false,
+});
 
 function AddFav({
 	data,
@@ -77,8 +81,7 @@ function AddFav({
 					className="hover:scale-110 "
 					alt="Outline Heart Black"
 				/>
-
-				<LoginPopup
+				<DynamicLoginPopup
 					open={showLoginPopup}
 					setOpen={setShowLoginPopup}
 					redirect={undefined}

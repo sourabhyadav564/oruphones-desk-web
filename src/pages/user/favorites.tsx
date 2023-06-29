@@ -20,7 +20,7 @@ function Favorites() {
 	});
 	// mutate is used to update the data in the cache
 	const setFavList = useMutation({
-		mutationKey: ['userListings', user?.userName],
+		mutationKey: ['favListings', user?.userName],
 		mutationFn: async (paramData: string) => {
 			await toggleFav({
 				isFav: false,
@@ -32,29 +32,29 @@ function Favorites() {
 			});
 		},
 		onMutate: async (paramData: string) => {
-			await queryClient.cancelQueries(['userListings', user?.userName!]);
+			await queryClient.cancelQueries(['favListings', user?.userName!]);
 			const previousData = queryClient.getQueryData([
-				'userListings',
+				'favListings',
 				user?.favListings!,
 			]);
 			queryClient.setQueryData(
-				['userListings', user?.userName!],
+				['favListings', user?.userName!],
 				(old: any) => {
-					return old.filter((item: any) => item.listingId !== paramData);
+					return old?.filter((item: any) => item.listingId !== paramData);
 				}
 			);
 			return { previousData };
 		},
 		onError: (error, paramData, ctx) => {
 			queryClient.setQueryData(
-				['userListings', user?.favListings!],
+				['favListings', user?.favListings!],
 				ctx?.previousData
 			);
 		},
 	});
 
 	useEffect(() => {
-		queryClient.invalidateQueries(['userListings', user?.userName!]);
+		queryClient.invalidateQueries(['favListings', user?.userName!]);
 	}, [queryClient, user?.userName]);
 
 	return (

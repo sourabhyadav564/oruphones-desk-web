@@ -8,4 +8,5 @@ export default interface TUser {
 	favListings: string[];
 	userListings: string[];
 	associatedWith: string;
+	isAccountExpired: boolean;
 }
