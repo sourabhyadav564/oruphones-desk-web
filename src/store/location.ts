@@ -3,6 +3,7 @@ import filterAtom from '@/store/productFilter';
 import { setCookie } from 'cookies-next';
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
+import { topDealsQueryAtom } from './topDeals';
 
 const GEOCODE_API_KEY = process.env.NEXT_PUBLIC_GEOCODE_API_KEY!;
 
