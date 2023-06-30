@@ -80,14 +80,14 @@ export const servicesData = [
 
 export const metaTags = {
 	HOME: {
-		title: 'Buy and Sell Phone Online | Used Phones | Refurbished Phones',
+		title: 'Buy and Sell Mobile Online - Quick and Hassle-Free | Oruphones',
 		description:
-			'Are you looking for a platform to sell my phone to trusted buyers? Do you want to buy second hand mobile for the best deal? ORUphones is the best option in India to buy and sell phone online.',
+			'Sell your mobile online quickly and hassle-free. Get the best price for your device by using our platform. Start selling your mobile online now and turn your old phone into cash.',
 	},
 	ABOUT_US: {
-		title: 'Know More About ORUphones | Buy and Sell Old Phone Online',
+		title: 'Buy and Sell Used Phones | Oruphones',
 		description:
-			'Do you want a trusted platform to buy and sell old phone online? Know more about ORUphones and understand how we work. We promise nothing but the best deal on every transaction.',
+			'Looking to buy or sell used phones? Explore our convenient and secure platform for buying and selling pre-owned phones. Find great deals and connect with trustworthy sellers. Start your transaction today.',
 	},
 	CONTACT_US: {
 		title: 'Contact Us | ORUphones',
@@ -95,9 +95,9 @@ export const metaTags = {
 			'Do you want the best deal on every to buy sell phone transactions online? Contact us today for more information and our list of trusted vendors.',
 	},
 	FAQ: {
-		title: 'Frequently Asked Questions (FAQ) | ORUphones',
+		title: 'Sell Mobile Online - Quick and Hassle-Free | Oruphones',
 		description:
-			'Are you wondering how ORUphoness deals with second hand mobile buy and sell transactions? Refer to the FAQ section to find out. We answer all your queries related to buyer and seller verification and payment.',
+			'Sell your mobile online quickly and hassle-free. Get the best price for your device by using our platform. Start selling your mobile online now and turn your old phone into cash.',
 	},
 	PRIVACY: {
 		title: 'Privacy Policy | ORUphones',
@@ -117,75 +117,168 @@ export const metaTags = {
 	},
 	BRANDS: {
 		title:
-			'Buy & Sell Old iPhone, Samsung, Google, OnePlus, OPPO Phones Online',
+			'Buy Refurbished Smartphones - Affordable Prices | Oruphones',
 		description:
-			'Buy and Sell Used iPhone, Samsung, Google, OnePlus, OPPO, Honor, Realme, Vivo Mobile Phones Online in India at best prices. Visit us today and get the best deal on All major Brands.',
+			'Looking for affordable refurbished smartphones? Explore our range of professionally refurbished devices, offering great value for money. Shop online now and find your perfect refurbished smartphone.',
+	},
+	ALCATEL: {
+		title: 'Affordable Refurbished Alcatel Smartphones | Oruphones',
+		description:
+			'Explore our wide range of affordable refurbished Alcatel smartphones. Find Alcatel devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	APPLE: {
-		title: 'Buy and Sell Iphone | Sell My Iphone | ORUphones',
+		title: 'Affordable Refurbished iPhone 13 Pro | Oruphones',
 		description:
-			'Are you looking for a website to sell my iPhone for the best deal? Buy and sell iPhone online with ORUphones and get the best offers from trusted vendors only.',
-	},
-	SAMSUNG: {
-		title: 'Buy and Sell Samsung Phone | Samsung Old Phone Sell | ORUphones',
-		description:
-			'Buy and sell Samsung phone online with ORUphones and get the best deal. Before you sell my Samsung phone, check ORUphones Samsung Brand page and find out all available models and their current resale value.',
-	},
-	XIAOMI: {
-		title: 'Buy and Sell MI Mobile Phone | Mi Mobile Online Sell | ORUphones',
-		description:
-			'ORUphones brings you the highest value sell offer on MI Mobile Sell. Now, get the highest cash payment from verified buyers on every Xiaomi Mobile Sell.',
-	},
-	GOOGLE: {
-		title: 'Buy and Sell Google Phone | Best Deal Guarantee | ORUphones',
-		description:
-			'Do you want to buy and sell Google phone at price higher than market value? ORUphones guarantees the best deal on every transaction.',
-	},
-	ONEPLUS: {
-		title:
-			'Buy and Sell OnePlus Phone Online | Best Value Guarantee | ORUphones',
-		description:
-			'Where can I buy and sell OnePlus phone online for the best value? ORUphones offers dream come true deals on every online transaction. We guarantee the best value on second hand mobile deals.',
-	},
-	OPPO: {
-		title: 'Buy and Sell Oppo Phone | Oppo Mobile Sell | ORUphones',
-		description:
-			'ORUphones brings the best opportunity to buy and sell OPPO phone online. Now, you can compare deals every time you buy and sell a phone online through us.',
-	},
-	HONOR: {
-		title: 'Buy and Sell Honor Phone | Honor Mobile Sell | ORUphones',
-		description:
-			'ORUphones promises authentic transactions when you buy and sell Honor Phone online with us. All our vendors are verified. We verify your mobile condition before initiating a deal.',
-	},
-	REALME: {
-		title: 'Buy and Sell Realme Phone | Realme Top Selling Mobile | ORUphones',
-		description:
-			'Do you want to buy and sell Realme phone online through ORUphones? List your phone with us before you check offers and initiate a transaction. We grade your phone before displaying it on our platform.',
-	},
-	VIVO: {
-		title: 'Buy and Sell Vivo Phone | Vivo Top Selling Mobile | ORUphones',
-		description:
-			'ORUphones offers the best deal on second hand mobiles in India. If you want to buy and sell Vivo phone at the guaranteed best price, visit our Vivo Brand Page to compare prices.',
-	},
-	NOKIA: {
-		title: 'Buy and Sell Old Nokia Mobile Phones | ORUphones',
-		description:
-			'ORUphones offers a list of verified used Nokia mobiles on our brand page. Compare the resale values online to buy and sell old Nokia mobile phone today!',
+			'Explore our wide range of affordable refurbished iPhone 13 Pro. Find an iPhone 13 Pro to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	ASUS: {
-		title: 'Buy and Sell Asus Mobile | Asus Mobile Selling Website India',
+		title: 'Affordable Refurbished Asus ROG Phone 3 | Oruphones',
 		description:
-			'Do you want to buy and sell Asus Phone at the best deal? With ORUphones second-hand verified mobile listing, the best deal is only one click away. Visit us to buy or sell today.',
+			'Explore our wide range of affordable refurbished Asus ROG Phone 3. Find an Asus ROG Phone 3 to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	BLACKBERRY: {
 		title: 'Buy and Sell Blackberry Mobile | Old Phone Gets a Good Value',
 		description:
 			'Do you want to buy and sell Blackberry mobile online? ORUphones is the online mobile reselling platform in India that offers great value for your old mobile.',
 	},
-	LENOVO: {
-		title: 'Buy and Sell Lenovo Phone | Top Selling Lenovo Mobiles',
+	GIONEE: {
+		title: 'Gionee Max Cheap Used Phones | Oruphones',
 		description:
-			'Do you want to buy and sell Lenovo Phone online with ORUphones? ORUphones mandates listing your mobile online on the brand page. We verify the mobile condition before displaying the model on our page.',
+			"Find the best deals on cheap used phones from Gionee Max. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	GOOGLE: {
+		title: 'Google Pixel Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Google Pixel. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	HONOR: {
+		title: 'Honor Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Honor. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	HTC: {
+		title: 'HTC Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from HTC. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	HUAWEI: {
+		title: 'Huawei Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Huawei. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	INFINIX: {
+		title: 'Infinix Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Infinix. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	INTEX: {
+		title: 'Intex Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Intex. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	KARBONN: {
+		title: 'Karbonn Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Karbonn. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	LAVA: {
+		title: 'Lava Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Lava. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	LENOVO: {
+		title: 'Lenovo Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from Lenovo. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	LG: {
+		title: 'LG Cheap Used Phones | Oruphones',
+		description:
+			"Find the best deals on cheap used phones from LG. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+	},
+	MEIZU: {
+		title: 'Find the Best Deals on Gently Used Meizu Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Meizu mobile phones. We offer a wide selection of Meizu used phones at affordable prices, and our customer service is second to none.',
+	},
+	MICROMAX: {
+		title:
+			'Find the Best Deals on Gently Used Micromax Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Micromax mobile phones. We offer a wide selection of Micromax used phones at affordable prices, and our customer service is second to none.',
+	},
+	MOTOROLA: {
+		title:
+			'Find the Best Deals on Gently Used Motorola Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Motorola mobile phones. We offer a wide selection of Motorola used phones at affordable prices, and our customer service is second to none.',
+	},
+	NOKIA: {
+		title: 'Find the Best Deals on Gently Used Nokia Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Nokia mobile phones. We offer a wide selection of Nokia used phones at affordable prices, and our customer service is second to none.',
+	},
+	NOTHING: {
+		title:
+			'Find the Best Deals on Gently Used Nothing Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Nothing mobile phones. We offer a wide selection of Nothing used phones at affordable prices, and our customer service is second to none.',
+	},
+	ONEPLUS: {
+		title:
+			'Find the Best Deals on Gently Used OnePlus Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used OnePlus mobile phones. We offer a wide selection of OnePlus used phones at affordable prices, and our customer service is second to none.',
+	},
+	OPPO: {
+		title: 'Find the Best Deals on Gently Used Oppo Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Oppo mobile phones. We offer a wide selection of Oppo used phones at affordable prices, and our customer service is second to none.',
+	},
+	PANASONIC: {
+		title:
+			'Find the Best Deals on Gently Used Panasonic Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Panasonic mobile phones. We offer a wide selection of Panasonic used phones at affordable prices, and our customer service is second to none.',
+	},
+	REALME: {
+		title:
+			'Find the Best Deals on Gently Used Realme Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Realme mobile phones. We offer a wide selection of Realme used phones at affordable prices, and our customer service is second to none.',
+	},
+	SAMSUNG: {
+		title:
+			'Find the Best Deals on Gently Used Samsung Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Samsung mobile phones. We offer a wide selection of Samsung used phones at affordable prices, and our customer service is second to none.',
+	},
+	SONY: {
+		title: 'Find the Best Deals on Gently Used Sony Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Sony mobile phones. We offer a wide selection of Sony used phones at affordable prices, and our customer service is second to none.',
+	},
+	TECNO: {
+		title:
+			'Find the Best Deals on Gently Used Techno Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Techno mobile phones. We offer a wide selection of Techno used phones at affordable prices, and our customer service is second to none.',
+	},
+	VIVO: {
+		title: 'Find the Best Deals on Gently Used Vivo Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Vivo mobile phones. We offer a wide selection of Vivo used phones at affordable prices, and our customer service is second to none.',
+	},
+	XIAOMI: {
+		title:
+			'Find the Best Deals on Gently Used Xiaomi Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used Xiaomi mobile phones. We offer a wide selection of Xiaomi used phones at affordable prices, and our customer service is second to none.',
+	},
+	ZTE: {
+		title: 'Find the Best Deals on Gently Used ZTE Mobile Phones | Oruphones',
+		description:
+			'This is your one-stop shop for gently used ZTE mobile phones. We offer a wide selection of ZTE used phones at affordable prices, and our customer service is second to none.',
 	},
 };
 

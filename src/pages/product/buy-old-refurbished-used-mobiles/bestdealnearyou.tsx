@@ -20,6 +20,7 @@ import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const settings = {
 	slidesPerView: 1,
@@ -173,19 +174,30 @@ function Bestdealnearyou({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const router = useRouter();
+	const { query } = router;
+
+	let title = 'Get the Best Deals on Used Phones';
+	let description =
+		"Discover the best deals on used phones at our online store. We offer a wide selection of affordable and reliable pre-owned devices. Don't miss out on the opportunity to save while getting a quality phone.";
+
+	if (query.condition === 'Like New') {
+		title = 'Get the Best Deals on Used Phones';
+		description =
+			"Discover the best deals on used phones at our online store. We offer a wide selection of affordable like new devices. Don't miss out on the opportunity to save while getting a quality phone.";
+	}
+
+	if (query.verified === 'true') {
+		title = 'Get the Best Deals on Used Phones';
+		description =
+			"Discover the best deals on used phones at our online store. We offer a wide selection of affordable and verified devices. Don't miss out on the opportunity to save while getting a quality phone.";
+	}
+
 	return (
 		<>
 			<Head>
-				<title>{`Oruphones Search`}</title>
-				<meta
-					name="description"
-					content={`Search page for all the best deals in every possible brand!`}
-				/>
-				<meta property="og:title" content={`Oruphones Search`} />
-				<meta
-					property="og:description"
-					content={`Search page for all the best deals in every possible brand!`}
-				/>
+				<title>{title}</title>
+				<meta name="description" content={description} />
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">Best Deal Near You Page</h1>

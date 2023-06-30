@@ -220,6 +220,70 @@ function Products({
 				setTitle(metaTags.BLACKBERRY.title);
 				setDescription(metaTags.BLACKBERRY.description);
 				break;
+			case 'alcatel':
+				setTitle(metaTags.ALCATEL.title);
+				setDescription(metaTags.ALCATEL.description);
+				break;
+			case 'gionee':
+				setTitle(metaTags.GIONEE.title);
+				setDescription(metaTags.GIONEE.description);
+				break;
+			case 'htc':
+				setTitle(metaTags.HTC.title);
+				setDescription(metaTags.HTC.description);
+				break;
+			case 'huawei':
+				setTitle(metaTags.HUAWEI.title);
+				setDescription(metaTags.HUAWEI.description);
+				break;
+			case 'infinix':
+				setTitle(metaTags.INFINIX.title);
+				setDescription(metaTags.INFINIX.description);
+				break;
+			case 'intex':
+				setTitle(metaTags.INTEX.title);
+				setDescription(metaTags.INTEX.description);
+				break;
+			case 'karbonn':
+				setTitle(metaTags.KARBONN.title);
+				setDescription(metaTags.KARBONN.description);
+				break;
+			case 'lava':
+				setTitle(metaTags.LAVA.title);
+				setDescription(metaTags.LAVA.description);
+				break;
+			case 'lg':
+				setTitle(metaTags.LG.title);
+				setDescription(metaTags.LG.description);
+				break;
+			case 'meizu':
+				setTitle(metaTags.MEIZU.title);
+				setDescription(metaTags.MEIZU.description);
+				break;
+			case 'micromax':
+				setTitle(metaTags.MICROMAX.title);
+				setDescription(metaTags.MICROMAX.description);
+				break;
+			case 'motorola':
+				setTitle(metaTags.MOTOROLA.title);
+				setDescription(metaTags.MOTOROLA.description);
+				break;
+			case 'panasonic':
+				setTitle(metaTags.PANASONIC.title);
+				setDescription(metaTags.PANASONIC.description);
+				break;
+			case 'tecno':
+				setTitle(metaTags.TECNO.title);
+				setDescription(metaTags.TECNO.description);
+				break;
+			case 'vivo':
+				setTitle(metaTags.VIVO.title);
+				setDescription(metaTags.VIVO.description);
+				break;
+			case 'xiaomi':
+				setTitle(metaTags.XIAOMI.title);
+				setDescription(metaTags.XIAOMI.description);
+				break;
 			default:
 				setTitle(metaTags.BRANDS.title);
 				setDescription(metaTags.BRANDS.description);

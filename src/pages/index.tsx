@@ -21,6 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	let locality = (getCookie('locality', ctx) as string) || '';
 	let state = (getCookie('state', ctx) as string) || 'India';
 	let city = (getCookie('city', ctx) as string) || 'India';
+	let location = (getCookie('location', ctx) as string) || 'India';
 
 	const sliceLength = 10;
 	const [brands, bestDeals] = await Promise.all([
@@ -31,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		props: {
 			brands: brands || null,
 			bestDeals: bestDeals,
+			location : location
 		},
 	};
 };
