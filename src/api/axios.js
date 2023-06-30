@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import Cookies from 'js-cookie';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL + '/api/v1';
 
@@ -74,23 +73,6 @@ export function fetchBrands() {
 			// console.log(err);
 		}
 	);
-}
-export async function gradePhone(reportID, sessionID, userUniqueId, getMine) {
-	headers = {
-		...headers,
-		eventName: 'GRADE_PHONE',
-		userUniqueId: 0,
-		sessionId: sessionID || '',
-	};
-	const DEFAULT_HEADER = { headers: { ...headers } };
-	let API_ENDPOINT;
-	if (getMine && Cookies.get('userUniqueId')) {
-		API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}&userUniqueId=${userUniqueId}&getMine=${getMine}`;
-	} else {
-		API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}`;
-	}
-	const response = await Axios.get(API_ENDPOINT, DEFAULT_HEADER);
-	return response.data;
 }
 
 export function fetchMenuItems() {
