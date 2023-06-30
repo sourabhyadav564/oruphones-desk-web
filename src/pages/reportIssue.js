@@ -108,7 +108,7 @@ function Report_a_problem() {
 					phone: Phone,
 					description,
 					modelName: marketingName,
-					ScheduleCall,
+					scheduleCall: ScheduleCall,
 					issueType: issue,
 				})
 					.then(() => {

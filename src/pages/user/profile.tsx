@@ -25,6 +25,9 @@ function Profile() {
 			await update(payload);
 			setUser({
 				...user!,
+				...(name && { userName: name }),
+				...(email && { email }),
+				...(mobileNumber && { mobileNumber: mobileNumber }),
 			});
 			toast.success('Profile updated successfully');
 		} catch (error) {
@@ -40,6 +43,9 @@ function Profile() {
 			});
 			setUser({
 				...user!,
+				...(isLinking
+					? { associatedWith: referral }
+					: { associatedWith: undefined }),
 			});
 			toast.success('Referral updated successfully');
 		} catch (error) {
