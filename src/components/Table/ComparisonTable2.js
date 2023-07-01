@@ -9,9 +9,9 @@ import SellerWarrantyInfo from '@/components/Popup/SellerWarrantyInfo';
 import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
 import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
 import WarrantyInfo from '@/components/Popup/WarrantyInfo';
+import useUser from '@/hooks/useUser';
 import { getDefaultImage } from '@/utils/util';
 import Image from 'next/image';
-import useUser from '@/hooks/useUser';
 
 function ComparisonTable2(data, listingId) {
 	const [productData, setProductData] = useState([]);
@@ -26,7 +26,7 @@ function ComparisonTable2(data, listingId) {
 	const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
 	const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
 	const [openConditionInfo, setOpenConditionInfo] = useState(false);
-	const {isLoggedIn} = useUser();
+	const { isLoggedIn } = useUser();
 
 	let filled =
 		data?.deviceCondition?.toLowerCase() == 'Like New'.toLowerCase()
@@ -115,7 +115,7 @@ function ComparisonTable2(data, listingId) {
 									onClick={() => {
 										if (!isLoggedIn) {
 											setProductLink(
-												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`
+												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`
 											);
 											setopenLoginPopup(true);
 										} else if (
@@ -125,14 +125,14 @@ function ComparisonTable2(data, listingId) {
 											setThisPhonePopup(true);
 										} else if (thisPhoneListingId != item?.listingId) {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										} else if (item?.isOtherVendor == 'Y' && item?.vendorLink) {
 											window.open(item?.vendorLink, '_blank');
 										} else {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										}
@@ -166,7 +166,7 @@ function ComparisonTable2(data, listingId) {
 									onClick={() => {
 										if (!isLoggedIn) {
 											setProductLink(
-												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`
+												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`
 											);
 											setopenLoginPopup(true);
 										} else if (
@@ -176,14 +176,14 @@ function ComparisonTable2(data, listingId) {
 											setThisPhonePopup(true);
 										} else if (thisPhoneListingId != item?.listingId) {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										} else if (item?.isOtherVendor == 'Y' && item?.vendorLink) {
 											window.open(item?.vendorLink, '_blank');
 										} else {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										}

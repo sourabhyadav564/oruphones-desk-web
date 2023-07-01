@@ -80,7 +80,7 @@ function BestDealsCard({ data }) {
 												data?.marketingName.split(' ')[0]
 											}/${data?.marketingName}/${
 												data?.listingId
-											}?isOtherVendor=${data?.isOtherVendor}`,
+											}`,
 											'_blank'
 										)
 									}
