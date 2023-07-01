@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import ProductCard from '@/components/Cards/ProductCard';
 import ProductDetailsCard from '@/components/Cards/ProductDetailsCard';
