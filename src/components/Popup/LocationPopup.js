@@ -63,7 +63,13 @@ function LocationPopup({ open, setOpen }) {
 
 	const onLocChange = async (e) => {
 		let searchText = e;
-		setSearchText(e);
+		console.log("searchtext" + e)
+		if(searchText === '' ){
+			console.log("text" + "" + e)
+		}
+		else {
+			setSearchText(e);
+		}
 	};
 
 	const onError = () => {
