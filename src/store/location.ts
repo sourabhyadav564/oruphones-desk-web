@@ -80,7 +80,7 @@ export const updateLocationLatLongAtom = atom(
 		let state = locationfromlatlong.dataObject[0].name;
 		let locality = locationfromlatlong.dataObject[2].name;
 
-		const statewithcity = city.replace(/\s/g, '') + ',' + ' ' + state;
+		const localitywithcity = locality + "," + " " +city;
 
 		let locationObj = {
 			locality: locality,
@@ -88,7 +88,7 @@ export const updateLocationLatLongAtom = atom(
 			state: state,
 			latitude: parseFloat(location.coords.latitude),
 			longitude: parseFloat(location.coords.longitude),
-			location: statewithcity,
+			location: localitywithcity,
 		};
 
 		set(updateLocationAtom, locationObj);
