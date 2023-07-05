@@ -1,10 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { useQuery } from '@tanstack/react-query';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import Selectbar from '../Form/Selectbar';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
-import Select from '@/components/Form/Select';
-import useDebounce from '@/hooks/useDebounce';
 import {
 	updateLocationAtom,
 	updateLocationLatLongAtom,
@@ -15,8 +13,9 @@ import Image from 'next/image';
 
 function LocationPopup({ open, setOpen }) {
 	const [citiesResponse, setCitiesResponse] = useState([]);
-	const [searchText, setSearchText] = useState('');
-	const debouncedSearchText = useDebounce(searchText, 400);
+	const [recentSearch, setRecentSearch] = useState(
+		JSON.parse(localStorage.getItem('pastLocSearches')) || []
+	);
 	const selectedCity = useRef();
 	const [, setLocation] = useAtom(updateLocationAtom);
 
@@ -32,24 +31,25 @@ function LocationPopup({ open, setOpen }) {
 			location: items.location,
 		};
 		console.log(locationObj);
+		let pastSearch = [];
+
+		if (localStorage.getItem('pastLocSearches')) {
+			pastSearch = JSON.parse(localStorage.getItem('pastLocSearches'));
+		}
+
+		if (pastSearch.length >= 5) {
+			pastSearch.shift();
+			recentSearch.slice(1);
+		}
+
+		if (!pastSearch.some((loc) => loc.location === items.location)) {
+			pastSearch.push(items);
+			setRecentSearch((prevArray) => [...prevArray, items]);
+			localStorage.setItem('pastLocSearches', JSON.stringify(pastSearch));
+		}
 		setLocation(locationObj);
 		setOpen(false);
 	};
-
-	const handleLocation2 = (e) => {
-		let locationObj = {
-			locality: e.locality,
-			city: e.city,
-			state: e.state,
-			latitude: e.latitude,
-			longitude: e.longitude,
-			location: e.value,
-		};
-		console.log(locationObj);
-		setLocation(locationObj);
-		setOpen(false);
-	};
-
 	const options = {
 		enableHighAccuracy: true,
 		timeout: 5000,
@@ -59,18 +59,7 @@ function LocationPopup({ open, setOpen }) {
 	const onSuccess = async (location) => {
 		await setLatLong(location);
 		setOpen(false);
-	};
-
-	const onLocChange = async (e) => {
-		let searchText = e;
-		console.log("searchtext" + e)
-		if(searchText === '' ){
-			console.log("text" + "" + e)
-		}
-		else {
-			setSearchText(e);
-		}
-	};
+	}
 
 	const onError = () => {
 		setLocation('India');
@@ -78,10 +67,8 @@ function LocationPopup({ open, setOpen }) {
 
 	useEffect(() => {
 		async function getTopSearch() {
-			console.log('hi');
 			try {
 				const response = await fetchTopSearch();
-				console.log;
 				setCitiesResponse(response);
 			} catch (error) {
 				console.error(error);
@@ -90,14 +77,6 @@ function LocationPopup({ open, setOpen }) {
 
 		getTopSearch();
 	}, []);
-
-	const { data: citiesResponse2 } = useQuery({
-		queryKey: ['Searchlocation', debouncedSearchText],
-		queryFn: async () => {
-			const resp = await Search(debouncedSearchText);
-			return resp;
-		},
-	});
 
 	const handleNearme = async () => {
 		if (!('geolocation' in navigator)) {
@@ -178,44 +157,7 @@ function LocationPopup({ open, setOpen }) {
 											<Image src={CurrentLocation} width={30} height={30} />
 										</div>
 										<div className="w-full">
-											<Select
-												onChange={(e) => {
-													handleLocation2(e);
-												}}
-												onInputChange={(e) => {
-													onLocChange(e);
-												}}
-												ref={selectedCity}
-												options={
-													citiesResponse2 &&
-													citiesResponse2?.map((items, index) => {
-														return {
-															label: (
-																<div className="option-label">
-																	<span>{items.location}</span>
-																	<div className="flex justify-end">
-																		<span
-																			className="border border-gray-400 p-[2px]"
-																			style={{
-																				fontSize: '10px',
-																			}}
-																		>
-																			{items.type}
-																		</span>
-																	</div>
-																</div>
-															),
-															value: items.location,
-															location: items.location,
-															longitude: items.longitude,
-															latitude: items.latitude,
-															city: items.city,
-															state: items.state,
-															locality: items.locality,
-														};
-													})
-												}
-											></Select>
+											<Selectbar setOpen={setOpen} />
 										</div>
 									</div>
 									<span className="my-5 block text-m-grey-1 text-xlFontSize font-Roboto-Light">

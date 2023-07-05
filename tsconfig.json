@@ -31,6 +31,6 @@
 		"**/*.tsx",
 		"src/**/*.ts",
 		"src/**/*.tsx"
-, "src/components/Popup/LocationPopup.js", "src/utils/fetchers/location.ts"	],
+, "src/components/Popup/LocationPopup.js", "src/utils/fetchers/location.ts", "src/components/Form/Selectbar.tsx"	],
 	"exclude": ["node_modules"]
 }
