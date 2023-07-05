@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import IconLabelValue from './IconLableValue';
-import * as Axios from '@/api/axios';
 import OutlineHeart from '@/assets/heartfill.svg';
 import Rupee from '@/assets/rupee1.svg';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function FavListingTile({ data, setProducts }) {
@@ -25,15 +23,7 @@ function FavListingTile({ data, setProducts }) {
 	}, []);
 
 	const handleFavoties = async () => {
-		setProducts((prevState) => {
-			Axios.removeFavotie(
-				data.listingId,
-				Cookies.get('userUniqueId') || 'Guest'
-			).then((response) => {
-				// console.log("removeFav RES", response);
-			});
-			return prevState.filter((i) => i.listingId !== data.listingId);
-		});
+		setProducts.mutate(data.listingId);
 	};
 
 	return (

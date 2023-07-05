@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DesktopMenu from './DesktopMenu';
 import LoginOrProfile from './LoginOrProfile';
 import SearchBar from './SearchBar';
 import SellNowBtn from './SellNowBtn';
 import Image from 'next/image';
 import Link from 'next/link';
-import MobileMenu from './MobileMenu'
+
 function Header() {
-	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<header>
 			<div className=" container lg:w-10/12 w-full h-16 bg-m-white bg-no-repeat  flex justify-center items-center opacity-100 px-0 py-0 ">
@@ -23,67 +22,18 @@ function Header() {
 						/>
 					</a>
 				</Link>
-				<div className="hidden sm:flex  justify-center mx-12 flex-1 text-sm">
+				<div className="flex justify-center mx-12 flex-1 text-sm">
 					<SearchBar />
 				</div>
 
-				<div className="hidden lg:flex  space-x-2 flex-shrink-0 text-sm">
+				<div className="flex space-x-2 flex-shrink-0 text-sm">
 					<SellNowBtn />
 					<LoginOrProfile />
 				</div>
-				<div className="-mr-1 sm:mr-2 px-4 flex lg:hidden w-16 justify-end ml-auto">
-					<button
-						onClick={() => setIsOpen(!isOpen)}
-						type="button"
-						className="bg-m-green inline-flex items-center justify-center h-full p-2 rounded-md text-m-white hover:bg-green-700 focus:outline-none"
-						aria-controls="mobile-menu"
-						aria-expanded="false"
-					>
-						<span className="sr-only">Open main menu</span>
-						{!isOpen ? <OpenIcon /> : <CloseIcon />}
-					</button>
-				</div>
 			</div>
 			<DesktopMenu />
-			{isOpen && <MobileMenu isOpen={isOpen} />}
 		</header>
 	);
 }
 
 export default Header;
-
-const OpenIcon = () => (
-	<svg
-		className="block h-6 w-7"
-		xmlns="http://www.w3.org/2000/svg"
-		fill="none"
-		viewBox="0 0 24 24"
-		stroke="currentColor"
-		aria-hidden="true"
-	>
-		<path
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			strokeWidth="2"
-			d="M4 6h16M4 12h16M4 18h16"
-		/>
-	</svg>
-);
-
-const CloseIcon = () => (
-	<svg
-		className="block h-6 w-7"
-		xmlns="http://www.w3.org/2000/svg"
-		fill="none"
-		viewBox="0 0 24 24"
-		stroke="currentColor"
-		aria-hidden="true"
-	>
-		<path
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			strokeWidth="2"
-			d="M6 18L18 6M6 6l12 12"
-		/>
-	</svg>
-);

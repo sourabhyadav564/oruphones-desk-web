@@ -1,31 +1,652 @@
-<xml version="1.0" encoding="UTF-8">
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <url>
-            <loc>https://www.oruphones.com</loc>
-            <loc>https://www.oruphones.com/brands </loc>
-            <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/apple</loc>
-            <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/samsung</loc>
-            <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/xiaomi</loc>
-            <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/bestdealnearyou</loc>
-            <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2013%20Pro%20Max</loc>
-            <loc>https://www.oruphones.com/product/models</loc>
-            <loc>https://www.oruphones.com/shopby/category/verified</loc>
-            <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/searchBar</loc>
-            <loc>https://www.oruphones.com/services</loc>
-            <loc>https://www.oruphones.com/login</loc>
-            <loc>https://www.oruphones.com/user/profile</loc>
-            <loc>https://www.oruphones.com/user/notification</loc>
-            <loc>https://www.oruphones.com/user/listings</loc>
-            <loc>https://www.oruphones.com/user/favourites</loc>
-            <loc>https://www.oruphones.com/about-us </loc>
-            <loc>https://www.oruphones.com/contact-us </loc>
-            <loc>https://www.oruphones.com/faq </loc>
-            <loc>https://www.oruphones.com/privacy-policy </loc>
-            <loc>https://www.oruphones.com/services </loc>
-            <loc>https://www.oruphones.com/terms-condition </loc>
-            <loc>https://www.oruphones.com/blog </loc>
-            <loc>https://play.google.com/store/apps/details?id=com.oruphones.oru</loc>
-            <loc>https://apps.apple.com/dk/app/oruphones/id1629378420</loc>    
-        </url>
-    </urlset>
-</xml>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.oruphones.com/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/reportIssue</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/apple</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/samsung</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/xiaomi</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/vivo</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/oneplus</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/oppo</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/motorola</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/realme</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/google</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/nothing</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/nokia</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/asus</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/infinix</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/brands</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/bestdealnearyou</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/models</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/bestdealnearyou?verified=true</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/bestdealnearyou?condition=Like+New</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/privacy-policy</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/terms</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/faq</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/about-us</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/contact-us</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/services</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=819/chatgpt-and-the-future-of-ai/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=category/techguide/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=category/technews/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=812/android-antivirus-applications-things-to-keep-in-mind/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=category/android/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=category/smartphone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=808/three-ways-oruphones-help-you-discover-the-best-price-for-your-mobile-phone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=category/iphone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=804/verified-used-phones-a-pocket-smart-choice/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=800/is-it-safe-to-buy-a-second-hand-mobile-through-oruphones/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2023/04/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2023/03/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2023/02/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2022/10/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2022/09/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2022/08/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=date/2022/07/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=tag/iphone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=tag/refurbished/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=tag/top-accessories/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/sell-old-refurbished-used-mobiles/add</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/micromax</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/htc</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/huawei</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/lenovo</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/lg</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/honor</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/panasonic</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/sony</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/zte</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/alcatel</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/gionee</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/karbonn</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/lava</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/tecno</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/meizu</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/intex</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2011</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2013</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2012</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%207</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%20X</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%20XR</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2012%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2013%20Pro%20Max</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2011%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2013%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%20XS</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2014%20Pro%20Max</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2011%20Pro%20Max</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%208</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2012%20Pro%20Max</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2014%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%207%20Plus</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2012%20mini</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%206</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%206s</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2014</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Xiaomi/Xiaomi%20Redmi%20Note%208%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%207T</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%20XS%20Max</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Samsung/Samsung%20Galaxy%20S22%20Ultra%205G</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%208%20Plus</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Xiaomi/Xiaomi%20Redmi%20Note%208</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%209R</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Samsung/Samsung%20Galaxy%20Z%20Fold3%205G</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%20SE%20(2020)</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Apple/Apple%20iPhone%2014%20Plus</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%20Nord</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Vivo/vivo%20V25%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Oppo/Oppo%20F21%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Xiaomi/Xiaomi%20Redmi%20Note%205%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%20Nord%202%205G</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Xiaomi/Xiaomi%20Redmi%20Note%207%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%207</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Vivo/vivo%20V23%205G</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Samsung/Samsung%20Galaxy%20Z%20Fold4</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%207%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Realme/Realme%208</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%206</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Xiaomi/Xiaomi%20Redmi%20Note%2010S</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%206T</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Samsung/Samsung%20Galaxy%20A13</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/OnePlus/OnePlus%209%20Pro</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Samsung/Samsung%20Galaxy%20S21%20Ultra%205G</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Samsung/Samsung%20Galaxy%20S9</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/Vivo/vivo%20Y21</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/product/buy-old-refurbished-used-mobiles/bestdealnearyou?condition=Like%20New</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=790/buy-oruphones-verified-used-phones-in-india/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=763/top-features-of-oruphones-that-you-should-know/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=748/benefits-of-using-oruphones-app-for-selling-your-old-mobile-phone-online/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=733/buy-the-best-refurbished-phones-this-diwali/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=722/buy-the-best-phones-at-best-prices-during-online-sales/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=601/all-about-how-to-choose-the-best-refurbished-mobile-phone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=570/how-to-transfer-contacts-from-android-to-iphone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=556/how-to-transfer-data-from-android-to-iphone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=545/top-3-methods-to-back-up-your-iphone/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.09</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=337/the-top-5-must-have-smartphone-accessories/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.07</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=248/a-buyers-guide-to-used-mobile-phones/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.05</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=245/fake-iphone-check-top-8-ways-to-find-if-the-iphone-being-sold-is-fake/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://www.oruphones.com/blog/?p=160/planning-to-buy-a-used-phone-know-the-pros-and-cons/</loc>
+  <lastmod>2023-06-24T09:29:09+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+
+
+</urlset>

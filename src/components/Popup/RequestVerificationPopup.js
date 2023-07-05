@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Modal2 from './Model2';
 import RequestVerificationSuccessPopup from './RequestVerificationSuccessPopup';
-import * as Axios from '@/api/axios';
 import Alert from '@/assets/alert.svg';
-import Cookies from 'js-cookie';
+import sendVerification from '@/utils/fetchers/sendVerification';
 import Image from 'next/image';
+import useUser from '@/hooks/useUser';
 
 function RequestVerificationPopup({
 	open,
@@ -16,13 +16,11 @@ function RequestVerificationPopup({
 }) {
 	const [resData, setResData] = useState([]);
 	const [listingid, setListingid] = useState(data?.listingId);
+	const {isLoggedIn} = useUser();
 	const requestVerification = async () => {
 		setOpen(false);
 		setListingid(data?.listingId);
-		await Axios.sendverification(
-			listingid,
-			Cookies.get('userUniqueId') || 'Guest'
-		).then((response) => {
+		await sendVerification(listingid).then((response) => {
 			setResData(response);
 			setOpen(false);
 			setRequestVerificationSuccessPopup(true);
@@ -46,7 +44,7 @@ function RequestVerificationPopup({
 					<button
 						className="border  bg-m-green  px-4 py-2 rounded text-white uppercase font-Roboto-Medium"
 						onClick={() => {
-							if (Cookies.get('userUniqueId') === undefined) {
+							if (!isLoggedIn) {
 								setPerformAction2(true);
 								setShowLoginPopup(true);
 							} else {

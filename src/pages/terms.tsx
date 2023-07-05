@@ -6,10 +6,12 @@ function Termscondition() {
 	return (
 		<>
 			<Head>
-				<title>{metaTags.TERMS_CONDITIONS.title}</title>
+				<title>{'Terms and Conditions | ORUphones'}</title>
 				<meta
 					name="description"
-					content={metaTags.TERMS_CONDITIONS.description}
+					content={
+						' Oruphones has certain terms of conditions clearly outlined for our customers to ensure that there is a clearly defined relationship. These are listed here in order for you to clearly know Oruphones policies.'
+					}
 				/>
 				<meta property="og:title" content={metaTags.TERMS_CONDITIONS.title} />
 				<meta

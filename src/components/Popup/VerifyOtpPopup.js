@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import * as Axios from '@/api/axios';
-import AppContext from '@/context/ApplicationContext';
-import AuthContext from '@/context/AuthContext';
-import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
+import useUser from '@/hooks/useUser';
+import OTPs from '@/utils/fetchers/user/OTPs';
 import Image from 'next/image';
 
 function VerifyOtpPopup({ setOpen, data, redirect }) {
@@ -10,8 +8,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 	const [resentOTP, setResentOTP] = useState(false);
 	const [error, setError] = useState(false);
 	const [seconds, setSeconds] = useState(30);
-	const { setUserUniqueId } = useContext(AuthContext);
-	const { setUserLogged } = useContext(AppContext);
+	const { setUser } = useUser();
 
 	useEffect(() => {
 		let timer = null;
@@ -22,7 +19,7 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 			clearTimeout(timer);
 		}
 		return () => clearTimeout(timer);
-	});
+	}, [seconds]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -34,27 +31,33 @@ function VerifyOtpPopup({ setOpen, data, redirect }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await Axios.otpValidate(formData);
+		const mobNumber = formData?.mobile?.split('-');
+		const countryCode = mobNumber && mobNumber[0];
+		const value = mobNumber && mobNumber[1];
+		const response = await OTPs.otpValidate({
+			countryCode: parseInt(countryCode),
+			mobileNumber: parseInt(value),
+			otp: parseInt(formData.otp),
+		});
 		if (response.status === 'SUCCESS' && response.reason === 'OTP validated') {
+			setUser(response.user);
 			setOpen(false);
-			const payload = {
-				countryCode: '91',
-				mobileNumber: formData.mobile.split('-')[1],
-			};
-			Cookies.set('userUniqueId', response.dataObject.userUniqueId);
-			Cookies.set('mobileNumber', response.dataObject.mobileNumber);
-			setUserUniqueId(response.dataObject.userUniqueId);
 			if (redirect !== undefined && redirect === false) {
 				setOpen(false);
 			}
-			setUserLogged(true);
 		} else {
 			setError(true);
 		}
 	};
 
 	const otpResend = async () => {
-		const resendResponse = await Axios.signUp(formData.mobile.split('-')[1]);
+		const mobNumber = formData?.mobile?.split('-');
+		const countryCode = mobNumber && mobNumber[0];
+		const value = mobNumber && mobNumber[1];
+		const resendResponse = await OTPs.otpCreate({
+			countryCode: parseInt(countryCode),
+			mobileNumber: parseInt(value),
+		});
 		if (resendResponse.status === 'SUCCESS') {
 			setSeconds(30);
 			setResentOTP(false);

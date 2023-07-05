@@ -1,8 +1,4 @@
-import {
-	useInfiniteQuery,
-	useMutation,
-	useQueryClient,
-} from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SwiperSlide } from 'swiper/react';
@@ -24,6 +20,7 @@ import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const settings = {
 	slidesPerView: 1,
@@ -50,6 +47,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
 	let cookie = getCookie('location', ctx) as string;
+	let latitude = Number(getCookie('latitude', ctx)) || 28.6139;
+	let longitude = Number(getCookie('longitude', ctx)) || 77.209;
+	let locality = (getCookie('locality', ctx) as string) || '';
+	let state = (getCookie('state', ctx) as string) || 'India';
+	let city = (getCookie('city', ctx) as string) || 'India';
+
 	if (!cookie) {
 		// set cookie to India
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
@@ -65,7 +68,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	};
 	let filters: TListingFilter = {
 		listingLocation: cookie,
+		latitude: latitude,
+		longitude: longitude,
 		limit: 12,
+		locality: locality,
+		state: state,
+		city: city,
 		...(verified && { verified: verified === 'true' }),
 		...(condition && { condition: [condition] }),
 		...(warranty && { warranty: [warranty] }),
@@ -80,11 +88,15 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 }, true);
+			const data = await getFilteredListings(
+				{ ...filters, page: 1 },
+				true,
+				ctx.req
+			);
 			return data;
 		},
 	});
-	const allMakes = await getMakes();
+	const allMakes = await getMakes(ctx.req);
 	// cache this SSR response
 	// ctx.res.setHeader(
 	// 	'Cache-Control',
@@ -111,7 +123,6 @@ function Bestdealnearyou({
 	]);
 	const [filterData, setFilterData] = useAtom(filterAtom);
 	const debouncedFilterData = useDebounce(filterData, 400);
-	const queryClient = useQueryClient();
 
 	const {
 		isLoading,
@@ -126,7 +137,10 @@ function Bestdealnearyou({
 			const data = await getFilteredListings(
 				{
 					...filterData,
-					page: pageParam || 1,
+					page: pageParam ? pageParam.pageNum : 1,
+					...(pageParam && {
+						notionalIDs: pageParam.notionalIDs,
+					}),
 				},
 				true
 			);
@@ -138,77 +152,10 @@ function Bestdealnearyou({
 				return undefined;
 			}
 			const currentPage = allPages.length;
-			return currentPage + 1;
-		},
-	});
-
-	// mutate bestDeals data
-	const setBestFavDeal = useMutation({
-		mutationFn: async (paramData: string) => true,
-		onSuccess: (returnData, paramData: string) => {
-			console.log('paramData', paramData);
-			queryClient.setQueryData(
-				['filtered-listings', debouncedFilterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === 0) {
-										return {
-											...page,
-											bestDeals: page.bestDeals.map((deal: any) => {
-												if (deal.listingId === paramData) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
-		},
-	});
-
-	// Mutate favourite data
-	const setFavDeal = useMutation({
-		mutationFn: async (paramData: { listingId: string; page: number }) =>
-			paramData,
-		onSuccess: (paramData: { listingId: string; page: number }) => {
-			queryClient.setQueryData(
-				['filtered-listings', debouncedFilterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === paramData.page) {
-										return {
-											...page,
-											data: page.data.map((deal: any) => {
-												if (deal.listingId === paramData.listingId) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
+			return {
+				pageNum: currentPage + 1,
+				notionalIDs: allPages[0]?.bestDeals?.map((deal: any) => deal.listingId),
+			};
 		},
 	});
 
@@ -227,19 +174,30 @@ function Bestdealnearyou({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const router = useRouter();
+	const { query } = router;
+
+	let title = 'Get the Best Deals on Used Phones';
+	let description =
+		"Discover the best deals on used phones at our online store. We offer a wide selection of affordable and reliable pre-owned devices. Don't miss out on the opportunity to save while getting a quality phone.";
+
+	if (query.condition === 'Like New') {
+		title = 'Get the Best Deals on Used Phones';
+		description =
+			"Discover the best deals on used phones at our online store. We offer a wide selection of affordable like new devices. Don't miss out on the opportunity to save while getting a quality phone.";
+	}
+
+	if (query.verified === 'true') {
+		title = 'Get the Best Deals on Used Phones';
+		description =
+			"Discover the best deals on used phones at our online store. We offer a wide selection of affordable and verified devices. Don't miss out on the opportunity to save while getting a quality phone.";
+	}
+
 	return (
 		<>
 			<Head>
-				<title>{`Oruphones Search`}</title>
-				<meta
-					name="description"
-					content={`Search page for all the best deals in every possible brand!`}
-				/>
-				<meta property="og:title" content={`Oruphones Search`} />
-				<meta
-					property="og:description"
-					content={`Search page for all the best deals in every possible brand!`}
-				/>
+				<title>{title}</title>
+				<meta name="description" content={description} />
 			</Head>
 			<main className="container py-4">
 				<h1 className="sr-only">Best Deal Near You Page</h1>
@@ -248,7 +206,7 @@ function Bestdealnearyou({
 						listingsCount={
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								: Math.max(data?.pages[0].totalCount, 0) || 0
+								: Math.max(data?.pages[0]?.totalCount!, 0) || 0
 						}
 						defaultBrands={allMakes}
 					>
@@ -267,12 +225,7 @@ function Bestdealnearyou({
 									>
 										{data?.pages[0].bestDeals?.map((items, index) => (
 											<SwiperSlide key={index}>
-												<BestDealsCard
-													data={items}
-													setProducts={(listingId: string) =>
-														setBestFavDeal.mutate(listingId)
-													}
-												/>
+												<BestDealsCard data={items} />
 											</SwiperSlide>
 										))}
 									</Carousel>
@@ -286,7 +239,7 @@ function Bestdealnearyou({
 							{`Total Products (${
 								isLoading || isFetchingNextPage || !data?.pages[0]
 									? 0
-									: Math.max(0, data?.pages[0].totalCount) || 0
+									: Math.max(0, data?.pages[0]?.totalCount!) || 0
 							})`}
 						</h4>
 						{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
@@ -311,15 +264,7 @@ function Bestdealnearyou({
 														{page.data?.map((product, idx2) => {
 															return (
 																<div key={idx2}>
-																	<ProductCard
-																		data={product}
-																		setProducts={(listingId: string) =>
-																			setFavDeal.mutate({
-																				listingId,
-																				page: idx1,
-																			})
-																		}
-																	/>
+																	<ProductCard data={product} />
 																</div>
 															);
 														})}

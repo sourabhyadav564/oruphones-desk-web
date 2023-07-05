@@ -1,6 +1,5 @@
 import {
 	useInfiniteQuery,
-	useMutation,
 	useQueryClient,
 } from '@tanstack/react-query';
 import { Fragment, useEffect, useState } from 'react';
@@ -51,6 +50,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
 	let cookie = getCookie('location', ctx) as string;
+	let latitude = Number(getCookie('latitude', ctx)) || 28.6139;
+	let longitude = Number(getCookie('longitude', ctx)) || 77.209;
+	let locality = (getCookie('locality', ctx) as string) || '';
+	let state = (getCookie('state', ctx) as string) || 'India';
+	let city = (getCookie('city', ctx) as string) || 'India';
+
 	if (!cookie) {
 		// set cookie to India
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
@@ -67,13 +72,22 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 		make: [makeName as string],
 		model: [modelName as string],
 		listingLocation: cookie,
+		latitude: latitude,
+		longitude: longitude,
+		locality: locality,
+		state: state,
+		city: city,
 		limit: 12,
 	};
 	const queryClient = new QueryClient();
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 }, true);
+			const data = await getFilteredListings(
+				{ ...filters, page: 1 },
+				true,
+				ctx.req
+			);
 			return data;
 		},
 	});
@@ -121,7 +135,10 @@ function Products({
 			const data = await getFilteredListings(
 				{
 					...filterData,
-					page: pageParam || 1,
+					page: pageParam ? pageParam.pageNum : 1,
+					...(pageParam && {
+						notionalIDs: pageParam.notionalIDs,
+					}),
 				},
 				true
 			);
@@ -133,76 +150,10 @@ function Products({
 				return undefined;
 			}
 			const currentPage = allPages.length;
-			return currentPage + 1;
-		},
-	});
-	// mutate bestDeals data
-	const setBestFavDeal = useMutation({
-		mutationFn: async (paramData: string) => true,
-		onSuccess: (returnData, paramData: string) => {
-			console.log('paramData', paramData);
-			queryClient.setQueryData(
-				['filtered-listings', filterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === 0) {
-										return {
-											...page,
-											bestDeals: page.bestDeals.map((deal: any) => {
-												if (deal.listingId === paramData) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
-		},
-	});
-
-	// Mutate favourite data
-	const setFavDeal = useMutation({
-		mutationFn: async (paramData: { listingId: string; page: number }) =>
-			paramData,
-		onSuccess: (paramData: { listingId: string; page: number }) => {
-			queryClient.setQueryData(
-				['filtered-listings', filterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === paramData.page) {
-										return {
-											...page,
-											data: page.data.map((deal: any) => {
-												if (deal.listingId === paramData.listingId) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
+			return {
+				pageNum: currentPage + 1,
+				notionalIDs: allPages[0]?.bestDeals?.map((deal: any) => deal.listingId),
+			};
 		},
 	});
 	const { ref } = useInView({
@@ -268,6 +219,70 @@ function Products({
 				setTitle(metaTags.BLACKBERRY.title);
 				setDescription(metaTags.BLACKBERRY.description);
 				break;
+			case 'alcatel':
+				setTitle(metaTags.ALCATEL.title);
+				setDescription(metaTags.ALCATEL.description);
+				break;
+			case 'gionee':
+				setTitle(metaTags.GIONEE.title);
+				setDescription(metaTags.GIONEE.description);
+				break;
+			case 'htc':
+				setTitle(metaTags.HTC.title);
+				setDescription(metaTags.HTC.description);
+				break;
+			case 'huawei':
+				setTitle(metaTags.HUAWEI.title);
+				setDescription(metaTags.HUAWEI.description);
+				break;
+			case 'infinix':
+				setTitle(metaTags.INFINIX.title);
+				setDescription(metaTags.INFINIX.description);
+				break;
+			case 'intex':
+				setTitle(metaTags.INTEX.title);
+				setDescription(metaTags.INTEX.description);
+				break;
+			case 'karbonn':
+				setTitle(metaTags.KARBONN.title);
+				setDescription(metaTags.KARBONN.description);
+				break;
+			case 'lava':
+				setTitle(metaTags.LAVA.title);
+				setDescription(metaTags.LAVA.description);
+				break;
+			case 'lg':
+				setTitle(metaTags.LG.title);
+				setDescription(metaTags.LG.description);
+				break;
+			case 'meizu':
+				setTitle(metaTags.MEIZU.title);
+				setDescription(metaTags.MEIZU.description);
+				break;
+			case 'micromax':
+				setTitle(metaTags.MICROMAX.title);
+				setDescription(metaTags.MICROMAX.description);
+				break;
+			case 'motorola':
+				setTitle(metaTags.MOTOROLA.title);
+				setDescription(metaTags.MOTOROLA.description);
+				break;
+			case 'panasonic':
+				setTitle(metaTags.PANASONIC.title);
+				setDescription(metaTags.PANASONIC.description);
+				break;
+			case 'tecno':
+				setTitle(metaTags.TECNO.title);
+				setDescription(metaTags.TECNO.description);
+				break;
+			case 'vivo':
+				setTitle(metaTags.VIVO.title);
+				setDescription(metaTags.VIVO.description);
+				break;
+			case 'xiaomi':
+				setTitle(metaTags.XIAOMI.title);
+				setDescription(metaTags.XIAOMI.description);
+				break;
 			default:
 				setTitle(metaTags.BRANDS.title);
 				setDescription(metaTags.BRANDS.description);
@@ -312,7 +327,7 @@ function Products({
 					listingsCount={
 						isLoading || isFetchingNextPage || !data?.pages[0]
 							? 0
-							: Math.max(data?.pages[0].totalCount, 0) || 0
+							: Math.max(data?.pages[0]?.totalCount!, 0) || 0
 					}
 					makeName={makeName}
 					defaultBrands={[makeName]}
@@ -332,10 +347,7 @@ function Products({
 								>
 									{data!.pages[0].bestDeals?.map((items, index) => (
 										<SwiperSlide key={index}>
-											<BestDealsCard
-												data={items}
-												setProducts={setBestFavDeal.mutate}
-											/>
+											<BestDealsCard data={items} />
 										</SwiperSlide>
 									))}
 								</Carousel>
@@ -346,7 +358,7 @@ function Products({
 						{`Total Products (${
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								: Math.max(0, data?.pages[0].totalCount) || 0
+								: Math.max(0, data?.pages[0]?.totalCount!) || 0
 						})`}
 					</h4>
 					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
@@ -372,15 +384,7 @@ function Products({
 													{page.data?.map((product, idx2) => {
 														return (
 															<div key={idx2}>
-																<ProductCard
-																	data={product}
-																	setProducts={(listingId: string) =>
-																		setFavDeal.mutate({
-																			listingId,
-																			page: idx1,
-																		})
-																	}
-																/>
+																<ProductCard data={product} />
 															</div>
 														);
 													})}
