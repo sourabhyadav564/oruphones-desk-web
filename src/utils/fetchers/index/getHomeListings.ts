@@ -14,7 +14,11 @@ export default async function getHomeListings(
 			`${process.env.NEXT_PUBLIC_SERVER_URL}/listing/topSellingHome`,
 			{
 				method: 'POST',
-				body: JSON.stringify({ locality,state,city, count }),
+				body: JSON.stringify({ count,
+					...(city && city!=='' ? {city} : {}),
+					...(state && state!=='' ? {state} : {}),
+					...(locality && locality!=='' ? {locality} : {}),
+				}),
 				credentials: 'include',
 				...SSRHeaders(req),
 			}
