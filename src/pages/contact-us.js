@@ -6,7 +6,7 @@ import TextArea from '@/components/Form/TextArea';
 import { metaTags } from '@/utils/constant';
 import Head from 'next/head';
 
-function contactUS() {
+function ContactUS() {
 	const [name, setName] = useState();
 	const [email, setEmail] = useState();
 	const [mobile, setMobile] = useState();
@@ -168,4 +168,4 @@ function contactUS() {
 	);
 }
 
-export default contactUS;
+export default ContactUS;

@@ -1,6 +1,5 @@
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import IconLabelValue from './IconLableValue';
-import * as Axios from '@/api/axios';
 import Rupee from '@/assets/rupee1.svg';
 import Activatenow from '@/components/Header/ActivateNow';
 import Verifynow from '@/components/Header/VerifyNow';
@@ -8,13 +7,10 @@ import AppDownloadPopup from '@/components/Popup/AppDownloadPopup';
 import UnVerifiedIcon from '@/components/UnVerifiedIcon';
 import VerifiedIcon from '@/components/VerifiedIcon';
 import { numberWithCommas } from '@/utils/util';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
-function ProfileListingTile({ data, fromMyFav, setProducts }) {
-	const router = useRouter();
+function ProfileListingTile({ data }) {
 	const [frontImagePath, setFrontImagePath] = useState();
 	const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);
 
@@ -36,22 +32,7 @@ function ProfileListingTile({ data, fromMyFav, setProducts }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const handleActivateClick = (e) => {
-		let payload = {
-			listingId: data?.listingId,
-			userUniqueId: Cookies.get('userUniqueId') || 'Guest',
-		};
-		const fetchData = async () => {
-			const activeListedDevice = await Axios.activeListedDevice(payload);
-			if (activeListedDevice.status === 'SUCCESS') {
-				setOpenActivatePopup(true);
-			}
-		};
-		fetchData();
-	};
-
 	function uploadPhotos() {
-		// router.push(`/sell-old-refurbished-used-mobiles/edit/${data?.listingId}`);
 	}
 
 	return (

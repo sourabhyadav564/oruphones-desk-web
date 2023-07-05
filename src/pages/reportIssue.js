@@ -3,14 +3,13 @@ import { toast } from 'react-toastify';
 import * as Axios from '@/api/axios';
 import Input from '@/components/Form/Input';
 import MySelect from '@/components/Form/Select';
-import Select from '@/components/Form/Select';
 import ReportIssuePopup from '@/components/Popup/ReportIssuePopup';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.css';
+import useUser from '@/hooks/useUser';
+import reportIssue from '@/utils/fetchers/reportIssue';
+import Head from 'next/head';
 
 function Report_a_problem() {
-	const router = useRouter();
 	const [make, setMake] = useState(null);
 	const [makeOptions, setMakeOptions] = useState([]);
 	const [marketingName, setmarketingName] = useState(null);
@@ -22,60 +21,45 @@ function Report_a_problem() {
 	const [Email, setEmail] = useState('');
 	const [Phone, setPhone] = useState('');
 	const [callTime, setCallTime] = useState('');
-	const [reportData, setReportData] = useState(null);
 	const [check, setCheck] = useState(false);
 	const [description, setDescription] = useState('');
 	const [ScheduleCall, setScheduleCall] = useState(false);
-	const [required, setRequired] = useState(false);
 	const [openReportIssuePopup, setOpenReportIssuePopup] = useState(false);
+	const { user, isLoggedIn } = useUser();
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			Axios.getUserProfile('91', Cookies.get('mobileNumber')).then(
-				(response) => {
-					console.log('response : ', response?.dataObject?.userdetails);
-					setName(response?.dataObject?.userdetails?.userName);
-					setEmail(response?.dataObject?.userdetails?.email);
-					setPhone(response?.dataObject?.userdetails?.mobileNumber);
-				}
-			);
-			clearInterval(interval);
-		}, 0);
-	}, []);
+		setName(user?.userName);
+		setEmail(user?.email);
+		setPhone(user?.mobileNumber);
+	}, [user]);
 
-	useEffect(async () => {
-		if (make) {
-			const models = await Axios.fetchModelList(
-				Cookies.get('userUniqueId'),
-				Cookies.get('sessionId'),
-				make,
-				''
-			);
-			if (models?.dataObject[0]?.models) {
-				const sortedModels = models.dataObject[0].models.sort((a, b) => {
-					return a.marketingname.localeCompare(b.marketingname);
-				});
-				setModelOptions(sortedModels);
+	useEffect(() => {
+		const whatever = async () => {
+			if (make) {
+				const models = await Axios.fetchModelList('Guest', '', make, '');
+				if (models?.dataObject[0]?.models) {
+					const sortedModels = models.dataObject[0].models.sort((a, b) => {
+						return a.marketingname.localeCompare(b.marketingname);
+					});
+					setModelOptions(sortedModels);
+				}
 			}
-		}
+		};
+		whatever();
 	}, [make]);
 
-	useEffect(async () => {
-		const data = await Axios.fetchModelList(
-			Cookies.get('userUniqueId') || 'Guest',
-			Cookies.get('sessionId') != undefined
-				? Cookies.get('sessionId')
-				: localStorage.getItem('sessionId') || '',
-			'',
-			''
-		);
-		let makeModelLists = data?.dataObject;
-		if (makeModelLists) {
-			makeModelLists.sort((a, b) => {
-				return a.make.localeCompare(b.make);
-			});
-			setMakeOptions(makeModelLists);
-		}
+	useEffect(() => {
+		const whatever = async () => {
+			const data = await Axios.fetchModelList('Guest', '', '', '');
+			let makeModelLists = data?.dataObject;
+			if (makeModelLists) {
+				makeModelLists.sort((a, b) => {
+					return a.make.localeCompare(b.make);
+				});
+				setMakeOptions(makeModelLists);
+			}
+		};
+		whatever();
 	}, []);
 
 	useEffect(() => {
@@ -90,7 +74,7 @@ function Report_a_problem() {
 		'Verification Issue',
 		'Listing Issue',
 		'Service Issue',
-		'Funcationality Issue',
+		'Functionality Issue',
 		'Other',
 	];
 
@@ -118,35 +102,26 @@ function Report_a_problem() {
 			storage
 		) {
 			if (validateEmail(Email)) {
-				Axios.ReportIssue(
-					Name,
-					Email,
-					Phone,
-					issue,
-					marketingName,
+				reportIssue({
+					name: Name,
+					email: Email,
+					phone: Phone,
 					description,
-					storage,
-					ScheduleCall,
-					callTime,
-					Cookies.get('sessionId')
-				)
-					.then((res) => {
-						setReportData(res);
-						// toast.warning("You reported successfully!!");
-						// router.back()
+					modelName: marketingName,
+					scheduleCall: ScheduleCall,
+					issueType: issue,
+				})
+					.then(() => {
 						setMake(null);
 						setmarketingName(null);
 						setStorage(null);
-						setName('');
-						setEmail('');
-						setPhone('');
 						setCallTime('');
 						setCheck(false);
 						setDescription('');
 						setScheduleCall(false);
 						setOpenReportIssuePopup(true);
 					})
-					.catch((err) => {
+					.catch(() => {
 						toast.error('Please fill all the fields in the report.', {
 							toastId: '020',
 							position: toast.POSITION.TOP_CENTER,
@@ -161,17 +136,16 @@ function Report_a_problem() {
 		}
 	};
 
-	const requiredFields = () => {
-		if (!required) {
-			toast.warning('Please fill Issue Type.', {
-				toastId: '019',
-				position: toast.POSITION.TOP_CENTER,
-			});
-		}
-	};
-
 	return (
 		<Fragment>
+			<Head>
+				<title> Need Assistance? Report an Issue to Oruphones - Contact Us Now</title>
+				<meta
+					name="description"
+					content="Report an issue or provide feedback to Oruhones customer support. We are here to assist you. Contact us today."
+				/>
+		
+			</Head>
 			<div className="container my-8">
 				<div className="grid md:grid-cols-2 grid-cols-1 gap-4 my-4">
 					<MySelect
@@ -227,7 +201,6 @@ function Report_a_problem() {
 						labelName="Issue Type"
 						onChange={(e) => {
 							setIssue(e.value);
-							setRequired(true);
 						}}
 						options={issueTypeOption?.map((item) => {
 							return { label: item, value: item };

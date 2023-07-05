@@ -2,16 +2,15 @@ import { useState } from 'react';
 import Rupee1 from '@/assets/rupee1.svg';
 import AddFav from '@/components/AddFav';
 import VerifiedIcon from '@/components/VerifiedIcon';
-import { topDealsAtom } from '@/store/topDeals';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
-import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 
 function TopDealCard({ data }) {
 	const [imageError, setImageError] = useState(false);
-	const setProducts = useSetAtom(topDealsAtom);
-	const locality = data?.listingLocality ? data.listingLocality.substring(0, 8) : '';
+	const locality = data?.listingLocality
+		? data.listingLocality.substring(0, 8)
+		: '';
 
 	if (data?.name?.toLowerCase().includes('all')) {
 		return (
@@ -26,20 +25,7 @@ function TopDealCard({ data }) {
 		<div data-aos="flip-right" data-aos-duration="2000" className="relative">
 			<span className="flex justify-end pr-2 cursor-pointer ">
 				{!(data?.isOtherVendor === 'Y') && (
-					<AddFav
-						data={data}
-						setProducts={(listingId) =>
-							setProducts((prev) =>
-								prev.map((item) =>
-									item.listingId === listingId
-										? { ...item, favourite: !(item.favourite || false) }
-										: item
-								)
-							)
-						}
-						height={18}
-						width={18}
-					/>
+					<AddFav data={data} height={18} width={18} />
 				)}
 
 				{!(data?.isOtherVendor === 'N') && <div className="mt-7"></div>}
@@ -157,7 +143,7 @@ function TopDealCard({ data }) {
 							</div>
 						</div>
 						<div className="flex justify-between pt-1 pb-2 text-xsFontSize opacity-100 h-2 w-full text-m-grey-2 font-Roboto-Light">
-							<span>{locality +  data?.listingLocation}</span>
+							<span>{locality + data?.listingLocation}</span>
 							<span>{data?.listingDate}</span>
 						</div>
 					</div>

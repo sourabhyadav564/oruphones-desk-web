@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import Cookies from 'js-cookie';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL + '/api/v1';
 
@@ -7,16 +6,9 @@ let headers = {
 	'Content-Type': 'application/json',
 	srcFrom: 'Desktop Web',
 	eventName: 'NA',
-	userUniqueId: Cookies.get('userUniqueId')
-		? Cookies.get('userUniqueId')
-		: 'Guest',
-	sessionId:
-		typeof window !== 'undefined'
-			? localStorage.getItem('sessionId')
-			: Cookies.get('sessionId') || '',
 	deviceplatform: 'Desktop Web',
 	location:
-		typeof window !== 'undefined' ? localStorage.getItem('usedLocation') : '',
+		typeof window !== 'undefined' ? localStorage.getItem('location') : '',
 };
 
 // const MULTIPART_HEADER = { headers: { "Content-Type": "multipart/form-data" } };
@@ -27,26 +19,6 @@ Axios.interceptors.request.use(
 	},
 	(err) => {
 		return Promise.reject(err);
-	}
-);
-
-Axios.interceptors.response.use(
-	async (response) => {
-		if (response?.data?.status === 'SESSION_INVALID') {
-			headers = { ...headers, eventName: 'NA' };
-			const API_ENDPOINT = BASE_URL + '/api/auth/sessionid';
-			const result = await Axios.get(API_ENDPOINT, { headers: { ...headers } });
-
-			if (typeof window !== 'undefined') {
-				localStorage.setItem('sessionId', result?.data?.dataObject?.sessionId);
-			}
-			Cookies.set('sessionId', result?.data?.dataObject?.sessionId);
-			window.location.reload();
-		}
-		return response;
-	},
-	async (error) => {
-		return Promise.reject(error);
 	}
 );
 
@@ -101,23 +73,6 @@ export function fetchBrands() {
 			// console.log(err);
 		}
 	);
-}
-export async function gradePhone(reportID, sessionID, userUniqueId, getMine) {
-	headers = {
-		...headers,
-		eventName: 'GRADE_PHONE',
-		userUniqueId: 0,
-		sessionId: sessionID || '',
-	};
-	const DEFAULT_HEADER = { headers: { ...headers } };
-	let API_ENDPOINT;
-	if (getMine && Cookies.get('userUniqueId')) {
-		API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}&userUniqueId=${userUniqueId}&getMine=${getMine}`;
-	} else {
-		API_ENDPOINT = `${BASE_URL}/cscglobal/checkReport?reportId=ORU-${reportID}`;
-	}
-	const response = await Axios.get(API_ENDPOINT, DEFAULT_HEADER);
-	return response.data;
 }
 
 export function fetchMenuItems() {

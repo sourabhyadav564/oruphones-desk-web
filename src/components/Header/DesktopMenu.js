@@ -1,9 +1,9 @@
 import { Popover } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import Location from '@/assets/location.svg';
+import useUser from '@/hooks/useUser';
 import readLocationAtom from '@/store/location';
 import { useAtom } from 'jotai';
-import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -59,29 +59,18 @@ const menus = [
 function DesktopMenu() {
 	const router = useRouter();
 	const [openLocationPopup, setOpenLocationPopup] = useState(false);
-	const [authenticated, setauthenticated] = useState(false);
+	const { isLoggedIn } = useUser();
 	const [showLogin, setShowLogin] = useState(false);
 	const [ItemLink, setItemLink] = useState('');
-	const [performAction, setPerformAction] = useState(false);
 	const [location] = useAtom(readLocationAtom);
-
-	useEffect(() => {
-		if (Cookies.get('userUniqueId') !== undefined) {
-			setauthenticated(true);
-		} else {
-			setauthenticated(false);
-		}
-		return () => {};
-	}, []);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (
 				showLogin == false &&
 				ItemLink !== '' &&
-				Cookies.get('userUniqueId') !== undefined
+				isLoggedIn
 			) {
-				setPerformAction(false);
 				clearInterval(interval);
 				router.push(ItemLink);
 			}
@@ -104,7 +93,7 @@ function DesktopMenu() {
 				>{`${location}`}</span>
 			</span>
 			<span>
-				<Popover.Group className=" container hidden lg:flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
+				<Popover.Group className=" container flex items-center pt-[7px] text-mediumFontSize font-Roboto-Light justify-end text-m-white pr-40">
 					{menus.map((item, index) =>
 						item && item.options ? (
 							<Popover key={item.name}>
@@ -120,7 +109,7 @@ function DesktopMenu() {
 												href={{ pathname: item.chlink }}
 												passHref
 											>
-												<span> {item.name} </span>
+												<a> {item.name} </a>
 											</Link>
 										</Popover.Button>
 									</>
@@ -133,7 +122,7 @@ function DesktopMenu() {
 						)
 					)}
 
-					{authenticated ? (
+					{isLoggedIn ? (
 						<div>
 							<div className="animate-pulse absolute  ml-14 -mt-2  bg-red-600 text-right rounded items-center px-1 text-xs2FontSize   text-white">
 								NEW
@@ -151,7 +140,6 @@ function DesktopMenu() {
 								text="Services"
 								onClick={() => {
 									setShowLogin(true);
-									setPerformAction(true);
 									setItemLink('/user/services');
 								}}
 							/>

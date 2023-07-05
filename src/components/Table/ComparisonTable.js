@@ -5,8 +5,8 @@ import LoginPopup from '@/components/Popup/LoginPopup';
 import SellerWarrantyInfo from '@/components/Popup/SellerWarrantyInfo';
 import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
 import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
+import useUser from '@/hooks/useUser';
 import { numberWithCommas } from '@/utils/util';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function ComparisonTable({ data, listingId }) {
@@ -17,13 +17,14 @@ function ComparisonTable({ data, listingId }) {
 	const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
 	const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
 	const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
+	const { isLoggedIn } = useUser();
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (
 				openLoginPopup == false &&
 				performAction2 == true &&
-				Cookies.get('userUniqueId') !== undefined &&
+				isLoggedIn &&
 				data?.vendorLink !== '' &&
 				vendorLink !== ''
 			) {
@@ -32,7 +33,7 @@ function ComparisonTable({ data, listingId }) {
 			} else if (
 				openLoginPopup == false &&
 				performAction2 == true &&
-				Cookies.get('userUniqueId') !== undefined &&
+				isLoggedIn &&
 				vendorLink == ''
 			) {
 				setThisPhonePopup(true);
@@ -141,7 +142,7 @@ function ComparisonTable({ data, listingId }) {
 														: `sticky left-0 top-0 px-6 py-4 font-medium text-gray-400 whitespace-nowrap bg-white drop-shadow-xl border-[1px]`
 												}
 												onClick={() => {
-													if (Cookies.get('userUniqueId') == undefined) {
+													if (!isLoggedIn) {
 														setOpenLoginPopup(true);
 														setProductLink(item?.vendorLink);
 														setperformAction2(true);

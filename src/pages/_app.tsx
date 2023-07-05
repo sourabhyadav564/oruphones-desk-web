@@ -2,8 +2,6 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import '@/styles/globals.css';
 import { ToastContainer } from 'react-toastify';
-import { ApplicationContext } from '@/context/ApplicationContext';
-import { AuthProvider } from '@/context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 import {
 	DehydratedState,
@@ -13,8 +11,10 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'; // is not part of the build bundle, purely for Dev purposes
 import { useState } from 'react';
+import UserInit from '@/context/UserInit';
 import SEO from '@/data/seoOptions';
 import { Provider } from 'jotai';
+import { DevTools } from 'jotai-devtools';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 
@@ -34,32 +34,30 @@ export default function MyApp({
 	const [queryClient] = useState(() => new QueryClient(queryClientOptions));
 	return (
 		<>
-			<AuthProvider>
-				<ApplicationContext>
-					<QueryClientProvider client={queryClient}>
-						<Hydrate state={pageProps.dehydratedState}>
-							<ReactQueryDevtools />
-							<Provider>
-								<Header />
-								<DefaultSeo {...SEO} />
-								<Component {...pageProps} />
-								<Footer />
-							</Provider>
-						</Hydrate>
-					</QueryClientProvider>
-				</ApplicationContext>
-				<ToastContainer
-					position="bottom-center"
-					autoClose={3000}
-					hideProgressBar={false}
-					newestOnTop={false}
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-				/>
-			</AuthProvider>
+			<QueryClientProvider client={queryClient}>
+				<Hydrate state={pageProps.dehydratedState}>
+					<ReactQueryDevtools position="bottom-right" />
+					<Provider>
+						<UserInit />
+						<DevTools theme="dark" />
+						<Header />
+						<DefaultSeo {...SEO} />
+						<Component {...pageProps} />
+						<Footer />
+					</Provider>
+				</Hydrate>
+			</QueryClientProvider>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</>
 	);
 }

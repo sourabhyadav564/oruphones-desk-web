@@ -1,32 +1,55 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import * as Axios from '@/api/axios';
+import Selectbar from '../Form/Selectbar';
 import Close from '@/assets/cross.svg';
 import CurrentLocation from '@/assets/currentlocation.svg';
-import Select from '@/components/Form/Select';
 import {
-	citiesAtom,
 	updateLocationAtom,
 	updateLocationLatLongAtom,
 } from '@/store/location';
+import { fetchTopSearch, Search } from '@/utils/fetchers/location';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 
 function LocationPopup({ open, setOpen }) {
 	const [citiesResponse, setCitiesResponse] = useState([]);
-	const [citiesResponse2, setCitiesResponse2] = useState([]);
-	const [searchText, setSearchText] = useState('');
+	const [recentSearch, setRecentSearch] = useState(
+		JSON.parse(localStorage.getItem('pastLocSearches')) || []
+	);
 	const selectedCity = useRef();
-	// const { userInfo, setCities, setSearchLocation } = useContext(AppContext);
-	const [cities, setCities] = useAtom(citiesAtom);
 	const [, setLocation] = useAtom(updateLocationAtom);
+
 	const [, setLatLong] = useAtom(updateLocationLatLongAtom);
 
-	const handleCityChange = (city) => {
-		setLocation(city);
+	const handleLocation = (items) => {
+		let locationObj = {
+			locality: items.locality,
+			city: items.city,
+			state: items.state,
+			latitude: items.latitude,
+			longitude: items.longitude,
+			location: items.location,
+		};
+		console.log(locationObj);
+		let pastSearch = [];
+
+		if (localStorage.getItem('pastLocSearches')) {
+			pastSearch = JSON.parse(localStorage.getItem('pastLocSearches'));
+		}
+
+		if (pastSearch.length >= 5) {
+			pastSearch.shift();
+			recentSearch.slice(1);
+		}
+
+		if (!pastSearch.some((loc) => loc.location === items.location)) {
+			pastSearch.push(items);
+			setRecentSearch((prevArray) => [...prevArray, items]);
+			localStorage.setItem('pastLocSearches', JSON.stringify(pastSearch));
+		}
+		setLocation(locationObj);
 		setOpen(false);
 	};
-
 	const options = {
 		enableHighAccuracy: true,
 		timeout: 5000,
@@ -36,21 +59,24 @@ function LocationPopup({ open, setOpen }) {
 	const onSuccess = async (location) => {
 		await setLatLong(location);
 		setOpen(false);
-	};
-
-	const onLocChange = async (e) => {
-		setSearchText(e);
-		const response = await Axios.getGlobalCities(e);
-		let india = response.dataObject.filter((item) => item.city === 'India');
-		let otherCities = response.dataObject.filter(
-			(item) => item.city !== 'India'
-		);
-		setCitiesResponse2(india.concat(otherCities));
-	};
+	}
 
 	const onError = () => {
 		setLocation('India');
 	};
+
+	useEffect(() => {
+		async function getTopSearch() {
+			try {
+				const response = await fetchTopSearch();
+				setCitiesResponse(response);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		getTopSearch();
+	}, []);
 
 	const handleNearme = async () => {
 		if (!('geolocation' in navigator)) {
@@ -62,25 +88,6 @@ function LocationPopup({ open, setOpen }) {
 		navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 	};
 
-	useEffect(() => {
-		if (cities) {
-			setCitiesResponse(cities);
-			setCities(cities);
-		} else {
-			const fetchData = async () => {
-				try {
-					const citiesResponse = await Axios.getGlobalCities(searchText);
-					setCitiesResponse(citiesResponse?.dataObject);
-					setCities(citiesResponse?.dataObject);
-				} catch (err) {
-					console.error(err);
-					setCities([]);
-				}
-			};
-			fetchData();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 	return (
 		<Transition.Root appear={true} show={open} as={Fragment}>
 			<Dialog
@@ -147,24 +154,10 @@ function LocationPopup({ open, setOpen }) {
 											className="h-full z-50 w-16 bg-gray-200 rounded-l-lg inline-flex justify-center items-center hover:cursor-pointer"
 											onClick={handleNearme}
 										>
-											<Image src={CurrentLocation} width={28} height={28} />
+											<Image src={CurrentLocation} width={30} height={30} />
 										</div>
 										<div className="w-full">
-											<Select
-												onChange={(e) => {
-													handleCityChange(e.value);
-												}}
-												onInputChange={(e) => {
-													onLocChange(e);
-												}}
-												ref={selectedCity}
-												options={
-													citiesResponse2 &&
-													citiesResponse2?.map((items, index) => {
-														return { label: items.city, value: items.city };
-													})
-												}
-											></Select>
+											<Selectbar setOpen={setOpen} />
 										</div>
 									</div>
 									<span className="my-5 block text-m-grey-1 text-xlFontSize font-Roboto-Light">
@@ -179,30 +172,30 @@ function LocationPopup({ open, setOpen }) {
 							<div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 								<div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3  gap-2 text-center">
 									{citiesResponse &&
-										citiesResponse
-											.filter((item) => item.displayWithImage === '1')
-											.map((items) => (
-												<div
-													className={`border hover:cursor-pointer rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${
-														selectedCity.current === items.city &&
-														'border-m-green'
-													}`}
-													key={items.city}
-													onClick={() => handleCityChange(items.city)}
-												>
-													<div className="relative w-14 h-14 mx-auto ">
-														<Image
-															src={items.imgpath}
-															alt="hyderabad"
-															layout="fill"
-															className="Object-contain"
-														/>
-													</div>
-													<span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">
-														{items.city}
-													</span>
+										citiesResponse.map((items) => (
+											<div
+												className={`border hover:cursor-pointer rounded px-0 py-3 font-Roboto-Regular text-xl2FontSize ${
+													selectedCity.current === items.city &&
+													'border-m-green'
+												}`}
+												key={items.location}
+												onClick={() => {
+													handleLocation(items);
+												}}
+											>
+												<div className="relative w-14 h-14 mx-auto ">
+													<Image
+														src={items.imgPath}
+														alt="hyderabad"
+														layout="fill"
+														className="Object-contain"
+													/>
 												</div>
-											))}
+												<span className="block capitalize text-m-grey-1 mt-2 text-sm px-2 w-full">
+													{items.location}
+												</span>
+											</div>
+										))}
 								</div>
 							</div>
 						</div>

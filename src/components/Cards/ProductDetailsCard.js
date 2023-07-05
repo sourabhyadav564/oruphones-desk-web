@@ -23,22 +23,18 @@ import ShareIcon from '@/components/ShareIcon';
 import ComparisonTable from '@/components/Table/ComparisonTable';
 import ComparisonTable2 from '@/components/Table/ComparisonTable2';
 import VerificationIcon from '@/components/VerificationIcon';
+import useUser from '@/hooks/useUser';
 import {
 	dealsYouMayLikeAtom,
 	leaderBoardAtom,
 } from '@/pages/product/buy-old-refurbished-used-mobiles/[makeName]/[modelName]/[productID]';
 import { deviceConditionQuestion } from '@/utils/constant';
+import sendVerification from '@/utils/fetchers/sendVerification';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import { useAtomValue } from 'jotai';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 
-function ProductDetailsCard({
-	data,
-	openFullImage,
-	onDataContext,
-	setProducts,
-}) {
+function ProductDetailsCard({ data, openFullImage, onDataContext }) {
 	const leaderBoard = useAtomValue(leaderBoardAtom);
 	const dealsYouMayLike = useAtomValue(dealsYouMayLikeAtom);
 	const [performAction2, setPerformAction2] = useState(false);
@@ -59,6 +55,7 @@ function ProductDetailsCard({
 	const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
 	const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
 	const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
+	const { isLoggedIn } = useUser();
 
 	let filled =
 		data?.deviceCondition?.toLowerCase() == 'Like New'.toLowerCase()
@@ -93,31 +90,23 @@ function ProductDetailsCard({
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			if (
-				showLoginPopup == false &&
-				performAction2 == true &&
-				Cookies.get('userUniqueId') != undefined
-			) {
+			if (showLoginPopup == false && performAction2 == true && isLoggedIn) {
 				setRequestVerificationSuccessPopup(true);
 				clearInterval(interval);
 			}
 		}, 1000);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [showLoginPopup]);
 
 	useEffect(() => {
 		if (openRequestVerificationSuccessPopup) {
 			setListingid(data?.listingId);
-			Axios.sendverification(
-				listingid,
-				Cookies.get('userUniqueId') || 'Guest'
-			).then((response) => {
-				setResData(response);
-			});
+			sendVerification(listingid);
 		}
 	}, [openRequestVerificationSuccessPopup]);
 
 	const handleClick = () => {
-		if (Cookies.get('userUniqueId') === undefined) {
+		if (!isLoggedIn) {
 			setPerformAction2(true);
 			setShowLoginPopup(true);
 		} else if (data?.verified) {
@@ -145,9 +134,7 @@ function ProductDetailsCard({
 								<ShareIcon data={data} width={16} height={16} />
 							</div>
 							<span className="pt-2 hover:scale-110 ">
-								{data.isOtherVendor === 'N' && (
-									<AddFav data={data} setProducts={setProducts} />
-								)}
+								{data.isOtherVendor === 'N' && <AddFav data={data} />}
 							</span>
 						</Fragment>
 					)}

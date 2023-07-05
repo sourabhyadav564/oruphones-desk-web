@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import AppDownloadPopup from './Popup/AppDownloadPopup';
-import {
-	deleteNotification,
-	getAllNotificationByUserd,
-	markAsRead,
-} from '@/api/axios';
 import Notification from '@/assets/notification.svg';
 import Trash from '@/assets/trash.svg';
-import Cookies from 'js-cookie';
+import getNotifications, {
+	modifyNotifs,
+} from '@/utils/fetchers/user/notifications';
 import Image from 'next/image';
 import router from 'next/router';
 
@@ -16,13 +13,8 @@ export default function Notifications() {
 	const [showNotification, setShowNotification] = useState(false);
 	const [openAppDownload, setOpenAppDownload] = useState(false);
 	const [notifications, setNotifications] = useState(0);
-	const [unreadNotificationsCount, setUnreadNotificationsCount] = useState();
 
 	useEffect(() => {
-		getAllNotificationByUserd(Cookies.get('userUniqueId')).then((response) => {
-			setNotifications(response?.dataObject?.notifications);
-			setUnreadNotificationsCount(response?.dataObject?.unReadCount);
-		});
 		const checkIfClickedOutside = (e) => {
 			if (innerRef.current && !innerRef.current.contains(e.target)) {
 				setShowNotification(false);
@@ -35,14 +27,17 @@ export default function Notifications() {
 	}, []);
 
 	useEffect(() => {
-		if (showNotification) {
-			getAllNotificationByUserd(Cookies.get('userUniqueId')).then(
-				(response) => {
-					setNotifications(response?.dataObject?.notifications);
-					setUnreadNotificationsCount(response?.dataObject?.unReadCount);
+		const whatever = async () => {
+			if (showNotification) {
+				try {
+					const notifs = await getNotifications();
+					setNotifications(notifs);
+				} catch (e) {
+					console.log(e);
 				}
-			);
-		}
+			}
+		};
+		whatever();
 	}, [showNotification]);
 
 	function redirectTo(data) {
@@ -59,7 +54,7 @@ export default function Notifications() {
 
 	function makeNotificationAsRead(data) {
 		if (data?.isUnRead === 0) {
-			markAsRead(data?.notificationId);
+			modifyNotifs(data?.notificationId, 'read');
 		}
 	}
 
@@ -72,6 +67,7 @@ export default function Notifications() {
 					height={30}
 					className="hover:bg-gray-200 hover:rounded-full cursor-pointer "
 					onClick={() => setShowNotification((prev) => !prev)}
+					alt="ORUphones notification"
 				/>
 				{
 					<span className="absolute -top-1 ml-5 bg-yellow2 w-6 text-xs2FontSize text-m-green font-Roboto-Bold rounded-full flex items-center justify-center">
@@ -163,10 +159,7 @@ const NotificationsItem = ({
 							notifications.filter((item) => item.notificationId !== id),
 							notifications?.length - 1
 						);
-						deleteNotification(id, Cookies.get('userUniqueId')).then(
-							(response) => {},
-							(error) => {}
-						);
+						modifyNotifs(id, 'delete');
 					}}
 				>
 					<div className=" hover:rounded-full hover:shadow-md p-0.5 hover:bg-opacity-20">

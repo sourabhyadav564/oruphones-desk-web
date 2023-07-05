@@ -5,7 +5,7 @@ import VerifiedIcon from '@/components/VerifiedIcon';
 import { getDefaultImage, numberWithCommas } from '@/utils/util';
 import Image from 'next/image';
 
-function ProductCard({ data, setProducts}) {
+function ProductCard({ data }) {
 	var type = ['old phone', 'used', 'refurbished'];
 	const soldout = ` buy ${type[Math.floor(Math.random() * type.length)]} ${
 		data?.marketingName
@@ -20,7 +20,6 @@ function ProductCard({ data, setProducts}) {
 				{!(data?.isOtherVendor === 'Y') && (
 					<AddFav
 						data={data}
-						setProducts={setProducts}
 						height={18}
 						width={18}
 					/>

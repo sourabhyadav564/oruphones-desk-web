@@ -1,31 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RegUser from '@/assets/user1.svg';
 import Notifications from '@/components/Notifications';
-import LoginPopup from '@/components/Popup/LoginPopup';
-import AppContext from '@/context/ApplicationContext';
-import AuthContext from '@/context/AuthContext';
-import Cookies from 'js-cookie';
+import useUser from '@/hooks/useUser';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+const DynamicLoginPopup = dynamic(
+	() => import('@/components/Popup/LoginPopup'),
+	{
+		ssr: false,
+	}
+);
+
 function LoginOrProfile() {
 	const router = useRouter();
 	const [showLogin, setShowLogin] = React.useState(false);
-	const [userAuthenticated, setUserAuthenticated] = useState(false);
 	const [performAction, setPerformAction] = useState(false);
-	const { logout } = useContext(AuthContext);
-	const { setUserInfo } = useContext(AppContext);
+	const { logout, isLoggedIn } = useUser();
 	const [ItemLink, setItemLink] = useState('');
-
-	useEffect(() => {
-		if (Cookies.get('userUniqueId') !== undefined) {
-			setUserAuthenticated(true);
-		} else {
-			setUserAuthenticated(false);
-		}
-		return () => {};
-	});
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -33,7 +27,7 @@ function LoginOrProfile() {
 				performAction == true &&
 				showLogin == false &&
 				ItemLink !== '' &&
-				Cookies.get('userUniqueId') !== undefined
+				isLoggedIn
 			) {
 				setPerformAction(false);
 				clearInterval(interval);
@@ -42,7 +36,7 @@ function LoginOrProfile() {
 		}, 1000);
 	}, [showLogin]);
 
-	if (userAuthenticated) {
+	if (isLoggedIn) {
 		return (
 			<div className="flex space-x-1 items-center h-full w-20 mt-1 z-50">
 				<Notifications />
@@ -75,7 +69,6 @@ function LoginOrProfile() {
 									link="/"
 									onClick={() => {
 										logout();
-										setUserInfo();
 									}}
 								/>
 								<NavListItem text="Report a problem" link="/reportIssue" />
@@ -152,7 +145,9 @@ function LoginOrProfile() {
 						</div>
 					</div>
 				</div>
-				<LoginPopup open={showLogin} setOpen={setShowLogin} />
+				{showLogin && (
+					<DynamicLoginPopup open={showLogin} setOpen={setShowLogin} />
+				)}
 			</React.Fragment>
 		);
 	}

@@ -49,6 +49,7 @@ export default function Model2({ open, setOpen, children, title }) {
 									width={28}
 									height={28}
 									onClick={() => setOpen(false)}
+									alt="Image"
 								/>
 							</div>
 							<div

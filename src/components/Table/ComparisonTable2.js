@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InfoCircle from '@/assets/infocircle2.svg';
 import Location from '@/assets/location2.svg';
-import Star from '@/assets/star1.svg';
-import FillStar from '@/assets/star2.svg';
 import UserProfile from '@/assets/user1.svg';
 import BrandWarrantyInfo from '@/components/Popup/BrandWarrantyInfo';
 import ConditionInfoPopup from '@/components/Popup/ConditionInfoPopup';
@@ -11,25 +9,24 @@ import SellerWarrantyInfo from '@/components/Popup/SellerWarrantyInfo';
 import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
 import VerifiedInfoPopup from '@/components/Popup/VerifiedInfoPopup';
 import WarrantyInfo from '@/components/Popup/WarrantyInfo';
+import useUser from '@/hooks/useUser';
 import { getDefaultImage } from '@/utils/util';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 function ComparisonTable2(data, listingId) {
 	const [productData, setProductData] = useState([]);
 	const [thisPhoneListingId, setThisPhoneListingId] = useState(listingId);
-	const [thisdealopen, setThisdealOpen] = useState(false);
 	const [openLoginPopup, setopenLoginPopup] = useState(false);
 	const [performAction2, setperformAction2] = useState(false);
 	const [imageError, setImageError] = useState(false);
 	const [thisPhonePopup, setThisPhonePopup] = useState(false);
-	const [performAction1, setperformAction1] = useState(false);
 	const [productLink, setProductLink] = useState('');
 	const [openWarrantyInfo, setOpenWarrantyInfo] = useState(false);
 	const [opensellerWarrantyInfo, setOpensellerWarrantyInfo] = useState(false);
 	const [opensbrandWarrantyInfo, setOpenbrandWarrantyInfo] = useState(false);
 	const [openVerificationInfo, setOpenVerificationInfo] = useState(false);
 	const [openConditionInfo, setOpenConditionInfo] = useState(false);
+	const { isLoggedIn } = useUser();
 
 	let filled =
 		data?.deviceCondition?.toLowerCase() == 'Like New'.toLowerCase()
@@ -85,7 +82,7 @@ function ComparisonTable2(data, listingId) {
 			if (
 				openLoginPopup == false &&
 				performAction2 == true &&
-				Cookies.get('userUniqueId') !== undefined &&
+				isLoggedIn &&
 				data?.productLink !== '' &&
 				productLink !== ''
 			) {
@@ -95,9 +92,8 @@ function ComparisonTable2(data, listingId) {
 				openLoginPopup == false &&
 				performAction2 == true &&
 				productLink == '' &&
-				Cookies.get('userUniqueId') !== undefined
+				isLoggedIn
 			) {
-				setThisdealOpen(true);
 				clearInterval(interval);
 			}
 		}, 1000);
@@ -117,12 +113,11 @@ function ComparisonTable2(data, listingId) {
 									className="px-6 py-3 text-center cursor-pointer"
 									key={index}
 									onClick={() => {
-										if (Cookies.get('userUniqueId') == undefined) {
+										if (!isLoggedIn) {
 											setProductLink(
-												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`
+												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`
 											);
 											setopenLoginPopup(true);
-											setperformAction1(true);
 										} else if (
 											thisPhoneListingId == item?.listingId &&
 											item?.isOtherVendor == 'N'
@@ -130,14 +125,14 @@ function ComparisonTable2(data, listingId) {
 											setThisPhonePopup(true);
 										} else if (thisPhoneListingId != item?.listingId) {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										} else if (item?.isOtherVendor == 'Y' && item?.vendorLink) {
 											window.open(item?.vendorLink, '_blank');
 										} else {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										}
@@ -169,12 +164,11 @@ function ComparisonTable2(data, listingId) {
 									className="px-6 py-3 min-w-[13vw] bg-m-green-1 border-[1px] border-r-gray hover:opacity-90 text-center cursor-pointer"
 									key={index}
 									onClick={() => {
-										if (Cookies.get('userUniqueId') == undefined) {
+										if (!isLoggedIn) {
 											setProductLink(
-												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`
+												`www.oruphones.com/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`
 											);
 											setopenLoginPopup(true);
-											setperformAction1(true);
 										} else if (
 											thisPhoneListingId == item?.listingId &&
 											item?.isOtherVendor == 'N'
@@ -182,14 +176,14 @@ function ComparisonTable2(data, listingId) {
 											setThisPhonePopup(true);
 										} else if (thisPhoneListingId != item?.listingId) {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										} else if (item?.isOtherVendor == 'Y' && item?.vendorLink) {
 											window.open(item?.vendorLink, '_blank');
 										} else {
 											window.open(
-												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}?isOtherVendor=${item?.isOtherVendor}`,
+												`/product/buy-old-refurbished-used-mobiles/${item.make}/${item?.marketingName}/${item?.listingId}`,
 												'_blank'
 											);
 										}

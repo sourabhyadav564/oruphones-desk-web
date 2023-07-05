@@ -5,10 +5,10 @@ import Banner_2 from '@/assets/banner_web_2.png';
 import Banner_3 from '@/assets/banner_web_3.png';
 import CarouselWithPagination from '@/components/CarouselWithPagination';
 import LoginPopup from '@/components/Popup/LoginPopup';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useUser from '@/hooks/useUser';
 
 const settings = {
 	slidesPerView: 1,
@@ -49,17 +49,13 @@ const slides = [
 
 const TopCarousel = () => {
 	const router = useRouter();
-	const [loadingState, setLoadingState] = useState(false);
 	const [openLoginPopup, setOpenLoginPopup] = useState(false);
 	const [performAction, setPerformAction] = useState(false);
 	const [showAppDownloadPopup, setShowAppDownloadPopup] = useState(false);
-
-	useEffect(() => {
-		setLoadingState(false);
-	}, [router.pathname]);
+	const {user, isLoggedIn} = useUser();
 
 	const handleClick = () => {
-		if (Cookies.get('userUniqueId') == undefined) {
+		if (!isLoggedIn) {
 			setOpenLoginPopup(true);
 			setPerformAction(true);
 		} else {
@@ -71,13 +67,13 @@ const TopCarousel = () => {
 			if (
 				openLoginPopup == false &&
 				performAction == true &&
-				Cookies.get('userUniqueId') != undefined
+				isLoggedIn
 			) {
 				clearInterval(interval);
 				router.push('/user/services/price-comparison');
 			}
 		}, 1000);
-	}, [openLoginPopup, performAction, router]);
+	}, [isLoggedIn, openLoginPopup, performAction, router]);
 	return (
 		<section>
 			<CarouselWithPagination {...settings}>

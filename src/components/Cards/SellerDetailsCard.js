@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import * as Axios from '@/api/axios';
 import GreaterThan from '@/assets/greaterthan.svg';
 import Rupee from '@/assets/rupee1.svg';
 import RegUser from '@/assets/user1.svg';
@@ -9,10 +8,13 @@ import RequestVerificationPopup from '@/components/Popup/RequestVerificationPopu
 import RequestVerificationSuccessPopup from '@/components/Popup/RequestVerificationSuccessPopup';
 import ThisPhonePopup from '@/components/Popup/ThisPhonePopup';
 import { leaderBoardAtom } from '@/pages/product/buy-old-refurbished-used-mobiles/[makeName]/[modelName]/[productID]';
+import getSellerNumber from '@/utils/fetchers/getSellerNumber';
+import sendVerification from '@/utils/fetchers/sendVerification';
 import { numberWithCommas } from '@/utils/util';
 import { useAtomValue } from 'jotai';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
+import useUser from '@/hooks/useUser';
+import isLoggedIn from '@/utils/fetchers/user/isLoggedIn';
 
 function SellerDetailsCard({ data, comparisontableid }) {
 	const leaderBoard = useAtomValue(leaderBoardAtom);
@@ -31,22 +33,18 @@ function SellerDetailsCard({ data, comparisontableid }) {
 		setOpenRequestVerificationSuccessPopup,
 	] = useState(false);
 	const [resData, setResData] = useState([]);
-	const [listingid, setListingid] = useState(data?.listingId);
+	const {isLoggedIn} = useUser();
 
 	useEffect(() => {
 		if (openRequestVerificationPopup) {
-			setListingid(data?.listingId);
-			Axios.sendverification(
-				listingid,
-				Cookies.get('userUniqueId') || 'Guest'
-			).then((response) => {
+			sendVerification(data?.listingId).then((response) => {
 				setResData(response);
 			});
 		}
 	}, [openRequestVerificationPopup]);
 
 	const handleClick = () => {
-		if (Cookies.get('userUniqueId') === undefined) {
+		if (!isLoggedIn) {
 			setPerformAction(true);
 			setShowLoginPopup(true);
 		} else if (data?.verified) {
@@ -64,7 +62,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
 		if (
 			showLoginPopup == false &&
 			performAction == true &&
-			Cookies.get('userUniqueId') !== undefined &&
+			isLoggedIn &&
 			data?.isOtherVendor !== 'Y'
 		) {
 			if (data?.verified) {
@@ -76,7 +74,7 @@ function SellerDetailsCard({ data, comparisontableid }) {
 		if (
 			showLoginPopup == false &&
 			performAction == true &&
-			Cookies.get('userUniqueId') !== undefined &&
+			isLoggedIn &&
 			data?.isOtherVendor === 'Y'
 		) {
 			openSellerWebSite(data?.vendorLink);
@@ -87,14 +85,14 @@ function SellerDetailsCard({ data, comparisontableid }) {
 		if (
 			showLoginPopup == false &&
 			performAction2 == true &&
-			Cookies.get('userUniqueId') !== undefined &&
+			isLoggedIn &&
 			productLink != ''
 		) {
 			openSellerWebSite(productLink);
 		} else if (
 			showLoginPopup == false &&
 			performAction2 == true &&
-			Cookies.get('userUniqueId') !== undefined &&
+			isLoggedIn &&
 			productLink == ''
 		) {
 			setThisPhonePopup(true);
@@ -103,20 +101,17 @@ function SellerDetailsCard({ data, comparisontableid }) {
 	useEffect(() => {
 		if (
 			!(data?.isOtherVendor === 'Y') &&
-			Cookies.get('userUniqueId') !== undefined &&
+			isLoggedIn &&
 			showNumber
 		) {
-			Axios.fetchSellerMobileNumber(
-				data?.listingId,
-				Cookies.get('userUniqueId')
-			).then((response) => {
-				setContactSellerMobileNumber(response?.dataObject?.mobileNumber);
+			getSellerNumber(data?.listingId).then((response) => {
+				setContactSellerMobileNumber(response);
 			});
 		}
 	}, [showNumber]);
 
 	const openSellerWebSite = (e) => {
-		if (Cookies.get('userUniqueId') === undefined) {
+		if (!isLoggedIn) {
 			setShowLoginPopup(true);
 			setPerformAction(true);
 		} else {
@@ -282,7 +277,7 @@ const OtherSeller = ({
 				className="my-1 py-1 px-4 flex justify-between flex-shrink-0 shadow-sm rounded-xl hover:cursor-pointer"
 				style={{ background: '#EFEFEF' }}
 				onClick={() => {
-					if (Cookies.get('userUniqueId') == undefined) {
+					if (!isLoggedIn) {
 						setShowLoginPopup(true);
 						setProductLink(data?.vendorLink);
 						setPerformAction2(true);

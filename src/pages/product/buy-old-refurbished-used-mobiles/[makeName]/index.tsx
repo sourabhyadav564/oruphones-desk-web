@@ -2,7 +2,6 @@ import {
 	dehydrate,
 	QueryClient,
 	useInfiniteQuery,
-	useMutation,
 	useQueryClient,
 } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
@@ -54,6 +53,12 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	ctx
 ) => {
 	let cookie = getCookie('location', ctx) as string;
+	let latitude = Number(getCookie('latitude', ctx)) || 28.6139 ;
+	let longitude = Number(getCookie('longitude', ctx)) || 77.2090 ;
+	let locality = (getCookie('locality', ctx) as string) || '';
+	let state = (getCookie('state', ctx) as string) || 'India';
+	let city = (getCookie('city', ctx) as string) || 'India';
+ 
 	if (!cookie) {
 		// set cookie to India
 		setCookie('location', 'India', { ...ctx, maxAge: 24 * 60 * 60 });
@@ -68,17 +73,22 @@ export const getServerSideProps: GetServerSideProps<TPageProps> = async (
 	let filters: TListingFilter = {
 		make: [makeName as string],
 		listingLocation: cookie,
+		latitude : latitude,
+		longitude : longitude,
+		locality : locality,
+		state : state,
+		city : city,
 		limit: 12,
 	};
 	const queryClient = new QueryClient();
 	let infiniteDeals = await queryClient.fetchInfiniteQuery({
 		queryKey: ['filtered-listings', filters],
 		queryFn: async () => {
-			const data = await getFilteredListings({ ...filters, page: 1 }, true);
+			const data = await getFilteredListings({ ...filters, page: 1 }, true, ctx.req);
 			return data;
 		},
 	});
-	let models = await getModels(makeName, 20);
+	let models = await getModels(makeName, 20, ctx.req);
 	return {
 		props: {
 			makeName,
@@ -121,7 +131,10 @@ function BrandPage({
 			const data = await getFilteredListings(
 				{
 					...filterData,
-					page: pageParam || 1,
+					page: pageParam ? pageParam.pageNum : 1,
+					...(pageParam && {
+						notionalIDs: pageParam.notionalIDs,
+					}),
 				},
 				true
 			);
@@ -133,76 +146,10 @@ function BrandPage({
 				return undefined;
 			}
 			const currentPage = allPages.length;
-			return currentPage + 1;
-		},
-	});
-	// mutate bestDeals data
-	const setBestFavDeal = useMutation({
-		mutationFn: async (paramData: string) => true,
-		onSuccess: (returnData, paramData: string) => {
-			console.log('paramData', paramData);
-			queryClient.setQueryData(
-				['filtered-listings', filterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === 0) {
-										return {
-											...page,
-											bestDeals: page.bestDeals.map((deal: any) => {
-												if (deal.listingId === paramData) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
-		},
-	});
-
-	// Mutate favourite data
-	const setFavDeal = useMutation({
-		mutationFn: async (paramData: { listingId: string; page: number }) =>
-			paramData,
-		onSuccess: (paramData: { listingId: string; page: number }) => {
-			queryClient.setQueryData(
-				['filtered-listings', filterData],
-				(oldData: any) => {
-					return oldData
-						? {
-								...oldData,
-								pages: oldData.pages.map((page: any, idx: number) => {
-									if (idx === paramData.page) {
-										return {
-											...page,
-											data: page.data.map((deal: any) => {
-												if (deal.listingId === paramData.listingId) {
-													return {
-														...deal,
-														favourite: !(deal.favourite || false),
-													};
-												}
-												return deal;
-											}),
-										};
-									}
-									return page;
-								}),
-						  }
-						: undefined;
-				}
-			);
+			return {
+				pageNum: currentPage + 1,
+				notionalIDs: allPages[0]?.bestDeals?.map((deal: any) => deal.listingId),
+			};
 		},
 	});
 	const { ref } = useInView({
@@ -301,7 +248,7 @@ function BrandPage({
 					listingsCount={
 						isLoading || isFetchingNextPage || !data?.pages[0]
 							? 0
-							: Math.max(data?.pages[0].totalCount, 0) || 0
+							: Math.max(data?.pages[0]?.totalCount!, 0) || 0
 					}
 					makeName={makeName}
 					defaultBrands={[makeName]}
@@ -323,9 +270,6 @@ function BrandPage({
 										<SwiperSlide key={index}>
 											<BestDealsCard
 												data={items}
-												setProducts={(listingId: string) =>
-													setBestFavDeal.mutate(listingId)
-												}
 											/>
 										</SwiperSlide>
 									))}
@@ -347,7 +291,7 @@ function BrandPage({
 						{`Total Products (${
 							isLoading || isFetchingNextPage || !data?.pages[0]
 								? 0
-								: Math.max(0, data?.pages[0].totalCount) || 0
+								: Math.max(0, data?.pages[0]?.totalCount!) || 0
 						})`}
 					</h4>
 					{(!data || !data.pages[0] || !data.pages[0].data) && !isLoading && (
@@ -375,12 +319,6 @@ function BrandPage({
 															<div key={idx2}>
 																<ProductCard
 																	data={product}
-																	setProducts={(listingId: string) =>
-																		setFavDeal.mutate({
-																			listingId,
-																			page: idx1,
-																		})
-																	}
 																/>
 															</div>
 														);
