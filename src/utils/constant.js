@@ -116,8 +116,7 @@ export const metaTags = {
 			'Are you planning to sell old phone? The Phone Bazaar offers the best trade-in value when you sell used phone online in India. Compare prices on our website for the best value.',
 	},
 	BRANDS: {
-		title:
-			'Buy Refurbished Smartphones - Affordable Prices | Oruphones',
+		title: 'Buy Refurbished Smartphones - Affordable Prices | Oruphones',
 		description:
 			'Looking for affordable refurbished smartphones? Explore our range of professionally refurbished devices, offering great value for money. Shop online now and find your perfect refurbished smartphone.',
 	},
@@ -182,104 +181,96 @@ export const metaTags = {
 			"Find the best deals on cheap used phones from Karbonn. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
 	},
 	LAVA: {
-		title: 'Lava Cheap Used Phones | Oruphones',
+		title: 'Affordable Refurbished Lava Smartphones | Oruphones',
 		description:
-			"Find the best deals on cheap used phones from Lava. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+			'Explore our wide range of affordable refurbished Lava smartphones. Find Lava devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	LENOVO: {
-		title: 'Lenovo Cheap Used Phones | Oruphones',
+		title: 'Affordable Refurbished Lenovo Smartphones | Oruphones',
 		description:
-			"Find the best deals on cheap used phones from Lenovo. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+			'Explore our wide range of affordable refurbished Lenovo smartphones. Find Lenovo devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	LG: {
-		title: 'LG Cheap Used Phones | Oruphones',
+		title: 'Affordable Refurbished LG Smartphones | Oruphones',
 		description:
-			"Find the best deals on cheap used phones from LG. We have a wide selection of phones to choose from, so you're sure to find the perfect one for your needs.",
+			'Explore our wide range of affordable refurbished LG smartphones. Find LG devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	MEIZU: {
-		title: 'Find the Best Deals on Gently Used Meizu Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Meizu Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Meizu mobile phones. We offer a wide selection of Meizu used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Meizu smartphones. Find Meizu devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	MICROMAX: {
-		title:
-			'Find the Best Deals on Gently Used Micromax Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Micromax Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Micromax mobile phones. We offer a wide selection of Micromax used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Micromax smartphones. Find Micromax devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	MOTOROLA: {
-		title:
-			'Find the Best Deals on Gently Used Motorola Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Motorola Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Motorola mobile phones. We offer a wide selection of Motorola used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Motorola smartphones. Find Motorola devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	NOKIA: {
-		title: 'Find the Best Deals on Gently Used Nokia Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Nokia Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Nokia mobile phones. We offer a wide selection of Nokia used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Nokia smartphones. Find Nokia devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	NOTHING: {
-		title:
-			'Find the Best Deals on Gently Used Nothing Mobile Phones | Oruphones',
+		title: 'Buy and Sell Used Nothing Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Nothing mobile phones. We offer a wide selection of Nothing used phones at affordable prices, and our customer service is second to none.',
+			'Discover great deals on used Nothing phones at Oruphones. Buy and sell with confidence on Indias First C2C Marketplace.',
 	},
 	ONEPLUS: {
-		title:
-			'Find the Best Deals on Gently Used OnePlus Mobile Phones | Oruphones',
+		title: 'Buy and Sell Used OnePlus Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used OnePlus mobile phones. We offer a wide selection of OnePlus used phones at affordable prices, and our customer service is second to none.',
+			'Discover great deals on used OnePlus phones at Oruphones. Buy and sell with confidence on Indias First C2C Marketplace.',
 	},
 	OPPO: {
-		title: 'Find the Best Deals on Gently Used Oppo Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Oppo Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Oppo mobile phones. We offer a wide selection of Oppo used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Oppo smartphones. Find Oppo devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	PANASONIC: {
-		title:
-			'Find the Best Deals on Gently Used Panasonic Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Panasonic Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Panasonic mobile phones. We offer a wide selection of Panasonic used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Panasonic smartphones. Find Panasonic devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	REALME: {
-		title:
-			'Find the Best Deals on Gently Used Realme Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Realme Smartphones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Realme mobile phones. We offer a wide selection of Realme used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Realme smartphones. Find Realme devices to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	SAMSUNG: {
-		title:
-			'Find the Best Deals on Gently Used Samsung Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Samsung Galaxy Devices | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Samsung mobile phones. We offer a wide selection of Samsung used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Samsung Galaxy devices. Find Samsung phones to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	SONY: {
-		title: 'Find the Best Deals on Gently Used Sony Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Sony Xperia Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Sony mobile phones. We offer a wide selection of Sony used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Sony Xperia phones. Find a Sony Xperia phone to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	TECNO: {
-		title:
-			'Find the Best Deals on Gently Used Techno Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Tecno Mobile Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Techno mobile phones. We offer a wide selection of Techno used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Tecno mobile phones. Find a Tecno phone to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	VIVO: {
-		title: 'Find the Best Deals on Gently Used Vivo Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Vivo Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Vivo mobile phones. We offer a wide selection of Vivo used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Vivo phones. Find a Vivo phone to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	XIAOMI: {
-		title:
-			'Find the Best Deals on Gently Used Xiaomi Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished Xiaomi Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used Xiaomi mobile phones. We offer a wide selection of Xiaomi used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished Xiaomi phones. Find a Xiaomi phone to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
 	ZTE: {
-		title: 'Find the Best Deals on Gently Used ZTE Mobile Phones | Oruphones',
+		title: 'Affordable Refurbished ZTE Mobile Phones | Oruphones',
 		description:
-			'This is your one-stop shop for gently used ZTE mobile phones. We offer a wide selection of ZTE used phones at affordable prices, and our customer service is second to none.',
+			'Explore our wide range of affordable refurbished ZTE mobile phones. Find a ZTE phone to fit your needs and budget. Start your transaction today for a great mobile experience.',
 	},
+
 };
 
 export const deviceConditionQuestion = [

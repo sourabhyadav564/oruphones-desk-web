@@ -139,21 +139,12 @@ function Report_a_problem() {
 	return (
 		<Fragment>
 			<Head>
-				<title>Report a Problem | OruPhones</title>
+				<title> Need Assistance? Report an Issue to Oruphones - Contact Us Now</title>
 				<meta
 					name="description"
-					content="Report a problem with your phone or the website"
+					content="Report an issue or provide feedback to Oruhones customer support. We are here to assist you. Contact us today."
 				/>
-				<meta
-					name="og:title"
-					property="og:title"
-					content="Report a Problem | OruPhones"
-				/>
-				<meta
-					name="og:description"
-					property="og:description"
-					content="Report a problem with your phone or the website"
-				/>
+		
 			</Head>
 			<div className="container my-8">
 				<div className="grid md:grid-cols-2 grid-cols-1 gap-4 my-4">

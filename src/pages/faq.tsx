@@ -6,11 +6,24 @@ import Image from 'next/image';
 function faq() {
 	return (
 		<>
-			<Head>
-				<title>{metaTags.FAQ.title}</title>
-				<meta name="description" content={metaTags.FAQ.description} />
-				<meta property="og:title" content={metaTags.FAQ.title} />
-				<meta property="og:description" content={metaTags.FAQ.description} />
+		<Head>
+				<title>{'Resolve queries about Second-Hand Mobile Devices with Oruphones l Oruphones'}</title>
+				<meta
+					name="description"
+					content={
+						'FAQs on Second-hand Mobile Devices, Refurbished Smartphones, and Affordable Used Mobiles. Oruphones is here to help you make wise decisions for your next purchase.'
+					}
+				/>
+				<meta
+					property="og:title"
+					content={'Frequently Asked Questions (FAQ) | ORUphones'}
+				/>
+				<meta
+					property="og:description"
+					content={
+						'Are you wondering how ORUphoness deals with second hand mobile buy and sell transactions? Refer to the FAQ section to find out. We answer all your queries related to buyer and seller verification and payment.'
+					}
+				/>
 			</Head>
 			<main className="container my-8">
 				<section

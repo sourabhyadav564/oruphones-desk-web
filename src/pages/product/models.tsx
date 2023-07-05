@@ -23,10 +23,10 @@ function AllModels({
 	return (
 		<>
 			<Head>
-				<title>Best Selling Models | Oruphones</title>
+				<title>Buy Refurbished Smartphones - Affordable Prices | Oruphones</title>
 				<meta
 					name="description"
-					content="Buy Best Selling Models of Refurbished, Used and Second Hand Mobile Phones Online in India. Get the best deals on all top selling models of refurbished mobiles."
+					content="Buy used mobile phones online at Oruphones and save big on Refurbished Smartphones. Find the perfect device for your needs and shop with confidence."
 				/>
 				<meta
 					name="keywords"
